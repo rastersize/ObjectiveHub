@@ -1,0 +1,1106 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		9C26F98C146B208D001A5385 /* All Libraries */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 9C26F98D146B208D001A5385 /* Build configuration list for PBXAggregateTarget "All Libraries" */;
+			buildPhases = (
+			);
+			dependencies = (
+				9C26F9A9146B2402001A5385 /* PBXTargetDependency */,
+				9C26F9AB146B2402001A5385 /* PBXTargetDependency */,
+			);
+			name = "All Libraries";
+			productName = "All Libraries";
+		};
+		9C26FA0A146B3950001A5385 /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 9C26FA0B146B3950001A5385 /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+				9C26FA0E146B3958001A5385 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		9C26F939146B2069001A5385 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F938146B2069001A5385 /* Cocoa.framework */; };
+		9C26F943146B2069001A5385 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F941146B2069001A5385 /* InfoPlist.strings */; };
+		9C26F94F146B2069001A5385 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F94E146B2069001A5385 /* SenTestingKit.framework */; };
+		9C26F950146B2069001A5385 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F938146B2069001A5385 /* Cocoa.framework */; };
+		9C26F953146B2069001A5385 /* ObjectiveHub-Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F935146B2069001A5385 /* ObjectiveHub-Mac.framework */; };
+		9C26F959146B2069001A5385 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F957146B2069001A5385 /* InfoPlist.strings */; };
+		9C26F95C146B2069001A5385 /* ObjectiveHub_MacTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F95B146B2069001A5385 /* ObjectiveHub_MacTests.m */; };
+		9C26F969146B207A001A5385 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F968146B207A001A5385 /* Foundation.framework */; };
+		9C26F976146B207A001A5385 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F94E146B2069001A5385 /* SenTestingKit.framework */; };
+		9C26F978146B207A001A5385 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F977146B207A001A5385 /* UIKit.framework */; };
+		9C26F979146B207A001A5385 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F968146B207A001A5385 /* Foundation.framework */; };
+		9C26F97C146B207A001A5385 /* libObjectiveHub-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F967146B207A001A5385 /* libObjectiveHub-iOS.a */; };
+		9C26F982146B207A001A5385 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F980146B207A001A5385 /* InfoPlist.strings */; };
+		9C26F985146B207A001A5385 /* ObjectiveHub_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F984146B207A001A5385 /* ObjectiveHub_iOSTests.m */; };
+		9C26F9B2146B2424001A5385 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9AE146B2424001A5385 /* JSONKit.h */; };
+		9C26F9B3146B2424001A5385 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9AE146B2424001A5385 /* JSONKit.h */; };
+		9C26F9B4146B2424001A5385 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9AF146B2424001A5385 /* JSONKit.m */; };
+		9C26F9B5146B2424001A5385 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9AF146B2424001A5385 /* JSONKit.m */; };
+		9C26F9D5146B2979001A5385 /* AFHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C0146B2979001A5385 /* AFHTTPClient.h */; };
+		9C26F9D6146B2979001A5385 /* AFHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C0146B2979001A5385 /* AFHTTPClient.h */; };
+		9C26F9D7146B2979001A5385 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C1146B2979001A5385 /* AFHTTPClient.m */; };
+		9C26F9D8146B2979001A5385 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C1146B2979001A5385 /* AFHTTPClient.m */; };
+		9C26F9D9146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C2146B2979001A5385 /* AFHTTPRequestOperation.h */; };
+		9C26F9DA146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C2146B2979001A5385 /* AFHTTPRequestOperation.h */; };
+		9C26F9DB146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; };
+		9C26F9DC146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; };
+		9C26F9DD146B2979001A5385 /* AFImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C4146B2979001A5385 /* AFImageCache.h */; };
+		9C26F9DE146B2979001A5385 /* AFImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C4146B2979001A5385 /* AFImageCache.h */; };
+		9C26F9DF146B2979001A5385 /* AFImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C5146B2979001A5385 /* AFImageCache.m */; };
+		9C26F9E0146B2979001A5385 /* AFImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C5146B2979001A5385 /* AFImageCache.m */; };
+		9C26F9E1146B2979001A5385 /* AFImageRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C6146B2979001A5385 /* AFImageRequestOperation.h */; };
+		9C26F9E2146B2979001A5385 /* AFImageRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C6146B2979001A5385 /* AFImageRequestOperation.h */; };
+		9C26F9E3146B2979001A5385 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */; };
+		9C26F9E4146B2979001A5385 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */; };
+		9C26F9E5146B2979001A5385 /* AFJSONRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C8146B2979001A5385 /* AFJSONRequestOperation.h */; };
+		9C26F9E6146B2979001A5385 /* AFJSONRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C8146B2979001A5385 /* AFJSONRequestOperation.h */; };
+		9C26F9E7146B2979001A5385 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C9146B2979001A5385 /* AFJSONRequestOperation.m */; };
+		9C26F9E8146B2979001A5385 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C9146B2979001A5385 /* AFJSONRequestOperation.m */; };
+		9C26F9E9146B2979001A5385 /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CA146B2979001A5385 /* AFNetworkActivityIndicatorManager.h */; };
+		9C26F9EA146B2979001A5385 /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CA146B2979001A5385 /* AFNetworkActivityIndicatorManager.h */; };
+		9C26F9EB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m */; };
+		9C26F9EC146B2979001A5385 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m */; };
+		9C26F9ED146B2979001A5385 /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CC146B2979001A5385 /* AFNetworking.h */; };
+		9C26F9EE146B2979001A5385 /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CC146B2979001A5385 /* AFNetworking.h */; };
+		9C26F9EF146B2979001A5385 /* AFPropertyListRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CD146B2979001A5385 /* AFPropertyListRequestOperation.h */; };
+		9C26F9F0146B2979001A5385 /* AFPropertyListRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CD146B2979001A5385 /* AFPropertyListRequestOperation.h */; };
+		9C26F9F1146B2979001A5385 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CE146B2979001A5385 /* AFPropertyListRequestOperation.m */; };
+		9C26F9F2146B2979001A5385 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CE146B2979001A5385 /* AFPropertyListRequestOperation.m */; };
+		9C26F9F3146B2979001A5385 /* AFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CF146B2979001A5385 /* AFURLConnectionOperation.h */; };
+		9C26F9F4146B2979001A5385 /* AFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CF146B2979001A5385 /* AFURLConnectionOperation.h */; };
+		9C26F9F5146B2979001A5385 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D0146B2979001A5385 /* AFURLConnectionOperation.m */; };
+		9C26F9F6146B2979001A5385 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D0146B2979001A5385 /* AFURLConnectionOperation.m */; };
+		9C26F9F7146B2979001A5385 /* AFXMLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9D1146B2979001A5385 /* AFXMLRequestOperation.h */; };
+		9C26F9F8146B2979001A5385 /* AFXMLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9D1146B2979001A5385 /* AFXMLRequestOperation.h */; };
+		9C26F9F9146B2979001A5385 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D2146B2979001A5385 /* AFXMLRequestOperation.m */; };
+		9C26F9FA146B2979001A5385 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D2146B2979001A5385 /* AFXMLRequestOperation.m */; };
+		9C26F9FB146B2979001A5385 /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9D3146B2979001A5385 /* UIImageView+AFNetworking.h */; };
+		9C26F9FC146B2979001A5385 /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9D3146B2979001A5385 /* UIImageView+AFNetworking.h */; };
+		9C26F9FD146B2979001A5385 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D4146B2979001A5385 /* UIImageView+AFNetworking.m */; };
+		9C26F9FE146B2979001A5385 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D4146B2979001A5385 /* UIImageView+AFNetworking.m */; };
+		9C26FA03146B2DEF001A5385 /* ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26FA01146B2DEF001A5385 /* ObjectiveHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C26FA04146B2DEF001A5385 /* ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26FA01146B2DEF001A5385 /* ObjectiveHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C26FA05146B2DEF001A5385 /* ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26FA02146B2DEF001A5385 /* ObjectiveHub.m */; };
+		9C26FA06146B2DEF001A5385 /* ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26FA02146B2DEF001A5385 /* ObjectiveHub.m */; };
+		9C26FA07146B2DEF001A5385 /* ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26FA02146B2DEF001A5385 /* ObjectiveHub.m */; };
+		9C26FA08146B2DEF001A5385 /* ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26FA02146B2DEF001A5385 /* ObjectiveHub.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9C26F951146B2069001A5385 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C26F929146B1B74001A5385 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C26F934146B2069001A5385;
+			remoteInfo = "ObjectiveHub-Mac";
+		};
+		9C26F97A146B207A001A5385 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C26F929146B1B74001A5385 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C26F966146B207A001A5385;
+			remoteInfo = "ObjectiveHub-iOS";
+		};
+		9C26F9A8146B2402001A5385 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C26F929146B1B74001A5385 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C26F934146B2069001A5385;
+			remoteInfo = "ObjectiveHub-Mac";
+		};
+		9C26F9AA146B2402001A5385 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C26F929146B1B74001A5385 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C26F966146B207A001A5385;
+			remoteInfo = "ObjectiveHub-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		9C26F935146B2069001A5385 /* ObjectiveHub-Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "ObjectiveHub-Mac.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C26F938146B2069001A5385 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		9C26F93B146B2069001A5385 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		9C26F93C146B2069001A5385 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9C26F93D146B2069001A5385 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9C26F940146B2069001A5385 /* ObjectiveHub-Mac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveHub-Mac-Info.plist"; sourceTree = "<group>"; };
+		9C26F942146B2069001A5385 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9C26F944146B2069001A5385 /* ObjectiveHub-Mac-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveHub-Mac-Prefix.pch"; sourceTree = "<group>"; };
+		9C26F94D146B2069001A5385 /* ObjectiveHub-MacTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ObjectiveHub-MacTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C26F94E146B2069001A5385 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		9C26F956146B2069001A5385 /* ObjectiveHub-MacTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveHub-MacTests-Info.plist"; sourceTree = "<group>"; };
+		9C26F958146B2069001A5385 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9C26F95A146B2069001A5385 /* ObjectiveHub_MacTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveHub_MacTests.h; sourceTree = "<group>"; };
+		9C26F95B146B2069001A5385 /* ObjectiveHub_MacTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveHub_MacTests.m; sourceTree = "<group>"; };
+		9C26F967146B207A001A5385 /* libObjectiveHub-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libObjectiveHub-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C26F968146B207A001A5385 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9C26F96C146B207A001A5385 /* ObjectiveHub-iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveHub-iOS-Prefix.pch"; sourceTree = "<group>"; };
+		9C26F975146B207A001A5385 /* ObjectiveHub-iOSTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ObjectiveHub-iOSTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C26F977146B207A001A5385 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		9C26F97F146B207A001A5385 /* ObjectiveHub-iOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveHub-iOSTests-Info.plist"; sourceTree = "<group>"; };
+		9C26F981146B207A001A5385 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9C26F983146B207A001A5385 /* ObjectiveHub_iOSTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveHub_iOSTests.h; sourceTree = "<group>"; };
+		9C26F984146B207A001A5385 /* ObjectiveHub_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveHub_iOSTests.m; sourceTree = "<group>"; };
+		9C26F9AD146B2424001A5385 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		9C26F9AE146B2424001A5385 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		9C26F9AF146B2424001A5385 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		9C26F9B0146B2424001A5385 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		9C26F9C0146B2979001A5385 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
+		9C26F9C1146B2979001A5385 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
+		9C26F9C2146B2979001A5385 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		9C26F9C4146B2979001A5385 /* AFImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageCache.h; sourceTree = "<group>"; };
+		9C26F9C5146B2979001A5385 /* AFImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageCache.m; sourceTree = "<group>"; };
+		9C26F9C6146B2979001A5385 /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageRequestOperation.h; sourceTree = "<group>"; };
+		9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageRequestOperation.m; sourceTree = "<group>"; };
+		9C26F9C8146B2979001A5385 /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONRequestOperation.h; sourceTree = "<group>"; };
+		9C26F9C9146B2979001A5385 /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFJSONRequestOperation.m; sourceTree = "<group>"; };
+		9C26F9CA146B2979001A5385 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		9C26F9CB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		9C26F9CC146B2979001A5385 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		9C26F9CD146B2979001A5385 /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
+		9C26F9CE146B2979001A5385 /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPropertyListRequestOperation.m; sourceTree = "<group>"; };
+		9C26F9CF146B2979001A5385 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		9C26F9D0146B2979001A5385 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		9C26F9D1146B2979001A5385 /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFXMLRequestOperation.h; sourceTree = "<group>"; };
+		9C26F9D2146B2979001A5385 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
+		9C26F9D3146B2979001A5385 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		9C26F9D4146B2979001A5385 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		9C26FA01146B2DEF001A5385 /* ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveHub.h; sourceTree = "<group>"; };
+		9C26FA02146B2DEF001A5385 /* ObjectiveHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectiveHub.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9C26F931146B2069001A5385 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C26F939146B2069001A5385 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C26F949146B2069001A5385 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C26F94F146B2069001A5385 /* SenTestingKit.framework in Frameworks */,
+				9C26F950146B2069001A5385 /* Cocoa.framework in Frameworks */,
+				9C26F953146B2069001A5385 /* ObjectiveHub-Mac.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C26F964146B207A001A5385 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C26F969146B207A001A5385 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C26F971146B207A001A5385 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C26F976146B207A001A5385 /* SenTestingKit.framework in Frameworks */,
+				9C26F978146B207A001A5385 /* UIKit.framework in Frameworks */,
+				9C26F979146B207A001A5385 /* Foundation.framework in Frameworks */,
+				9C26F97C146B207A001A5385 /* libObjectiveHub-iOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9C26F927146B1B74001A5385 = {
+			isa = PBXGroup;
+			children = (
+				9C26F996146B20C7001A5385 /* Shared */,
+				9C26F995146B20C0001A5385 /* iOS */,
+				9C26F994146B20B9001A5385 /* Mac */,
+				9C26F9A7146B23D9001A5385 /* Vendor */,
+				9C26F937146B2069001A5385 /* Frameworks */,
+				9C26F936146B2069001A5385 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9C26F936146B2069001A5385 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F935146B2069001A5385 /* ObjectiveHub-Mac.framework */,
+				9C26F94D146B2069001A5385 /* ObjectiveHub-MacTests.octest */,
+				9C26F967146B207A001A5385 /* libObjectiveHub-iOS.a */,
+				9C26F975146B207A001A5385 /* ObjectiveHub-iOSTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9C26F937146B2069001A5385 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F938146B2069001A5385 /* Cocoa.framework */,
+				9C26F94E146B2069001A5385 /* SenTestingKit.framework */,
+				9C26F968146B207A001A5385 /* Foundation.framework */,
+				9C26F977146B207A001A5385 /* UIKit.framework */,
+				9C26F93A146B2069001A5385 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9C26F93A146B2069001A5385 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F93B146B2069001A5385 /* AppKit.framework */,
+				9C26F93C146B2069001A5385 /* CoreData.framework */,
+				9C26F93D146B2069001A5385 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		9C26F93E146B2069001A5385 /* ObjectiveHub Mac */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F93F146B2069001A5385 /* Supporting Files */,
+			);
+			name = "ObjectiveHub Mac";
+			path = "ObjectiveHub-Mac";
+			sourceTree = "<group>";
+		};
+		9C26F93F146B2069001A5385 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F940146B2069001A5385 /* ObjectiveHub-Mac-Info.plist */,
+				9C26F941146B2069001A5385 /* InfoPlist.strings */,
+				9C26F944146B2069001A5385 /* ObjectiveHub-Mac-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9C26F954146B2069001A5385 /* Mac Tests */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F95A146B2069001A5385 /* ObjectiveHub_MacTests.h */,
+				9C26F95B146B2069001A5385 /* ObjectiveHub_MacTests.m */,
+				9C26F955146B2069001A5385 /* Supporting Files */,
+			);
+			name = "Mac Tests";
+			path = "ObjectiveHub-MacTests";
+			sourceTree = "<group>";
+		};
+		9C26F955146B2069001A5385 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F956146B2069001A5385 /* ObjectiveHub-MacTests-Info.plist */,
+				9C26F957146B2069001A5385 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9C26F96A146B207A001A5385 /* ObjectiveHub iOS */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F96B146B207A001A5385 /* Supporting Files */,
+			);
+			name = "ObjectiveHub iOS";
+			path = "ObjectiveHub-iOS";
+			sourceTree = "<group>";
+		};
+		9C26F96B146B207A001A5385 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F96C146B207A001A5385 /* ObjectiveHub-iOS-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9C26F97D146B207A001A5385 /* iOS Tests */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F983146B207A001A5385 /* ObjectiveHub_iOSTests.h */,
+				9C26F984146B207A001A5385 /* ObjectiveHub_iOSTests.m */,
+				9C26F97E146B207A001A5385 /* Supporting Files */,
+			);
+			name = "iOS Tests";
+			path = "ObjectiveHub-iOSTests";
+			sourceTree = "<group>";
+		};
+		9C26F97E146B207A001A5385 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F97F146B207A001A5385 /* ObjectiveHub-iOSTests-Info.plist */,
+				9C26F980146B207A001A5385 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9C26F994146B20B9001A5385 /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F93E146B2069001A5385 /* ObjectiveHub Mac */,
+				9C26F954146B2069001A5385 /* Mac Tests */,
+			);
+			name = Mac;
+			sourceTree = "<group>";
+		};
+		9C26F995146B20C0001A5385 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F96A146B207A001A5385 /* ObjectiveHub iOS */,
+				9C26F97D146B207A001A5385 /* iOS Tests */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		9C26F996146B20C7001A5385 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				9C26FA09146B2E1E001A5385 /* Models */,
+				9C26FA01146B2DEF001A5385 /* ObjectiveHub.h */,
+				9C26FA02146B2DEF001A5385 /* ObjectiveHub.m */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		9C26F9A7146B23D9001A5385 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F9BF146B2979001A5385 /* AFNetworking */,
+				9C26F9AC146B2424001A5385 /* JSONKit */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		9C26F9AC146B2424001A5385 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F9AD146B2424001A5385 /* CHANGELOG.md */,
+				9C26F9AE146B2424001A5385 /* JSONKit.h */,
+				9C26F9AF146B2424001A5385 /* JSONKit.m */,
+				9C26F9B0146B2424001A5385 /* README.md */,
+			);
+			path = JSONKit;
+			sourceTree = "<group>";
+		};
+		9C26F9BF146B2979001A5385 /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				9C26F9C0146B2979001A5385 /* AFHTTPClient.h */,
+				9C26F9C1146B2979001A5385 /* AFHTTPClient.m */,
+				9C26F9C2146B2979001A5385 /* AFHTTPRequestOperation.h */,
+				9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */,
+				9C26F9C4146B2979001A5385 /* AFImageCache.h */,
+				9C26F9C5146B2979001A5385 /* AFImageCache.m */,
+				9C26F9C6146B2979001A5385 /* AFImageRequestOperation.h */,
+				9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */,
+				9C26F9C8146B2979001A5385 /* AFJSONRequestOperation.h */,
+				9C26F9C9146B2979001A5385 /* AFJSONRequestOperation.m */,
+				9C26F9CA146B2979001A5385 /* AFNetworkActivityIndicatorManager.h */,
+				9C26F9CB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m */,
+				9C26F9CC146B2979001A5385 /* AFNetworking.h */,
+				9C26F9CD146B2979001A5385 /* AFPropertyListRequestOperation.h */,
+				9C26F9CE146B2979001A5385 /* AFPropertyListRequestOperation.m */,
+				9C26F9CF146B2979001A5385 /* AFURLConnectionOperation.h */,
+				9C26F9D0146B2979001A5385 /* AFURLConnectionOperation.m */,
+				9C26F9D1146B2979001A5385 /* AFXMLRequestOperation.h */,
+				9C26F9D2146B2979001A5385 /* AFXMLRequestOperation.m */,
+				9C26F9D3146B2979001A5385 /* UIImageView+AFNetworking.h */,
+				9C26F9D4146B2979001A5385 /* UIImageView+AFNetworking.m */,
+			);
+			name = AFNetworking;
+			path = AFNetworking/AFNetworking;
+			sourceTree = "<group>";
+		};
+		9C26FA09146B2E1E001A5385 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		9C26F932146B2069001A5385 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C26FA03146B2DEF001A5385 /* ObjectiveHub.h in Headers */,
+				9C26F9B2146B2424001A5385 /* JSONKit.h in Headers */,
+				9C26F9D5146B2979001A5385 /* AFHTTPClient.h in Headers */,
+				9C26F9D9146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */,
+				9C26F9DD146B2979001A5385 /* AFImageCache.h in Headers */,
+				9C26F9E1146B2979001A5385 /* AFImageRequestOperation.h in Headers */,
+				9C26F9E5146B2979001A5385 /* AFJSONRequestOperation.h in Headers */,
+				9C26F9E9146B2979001A5385 /* AFNetworkActivityIndicatorManager.h in Headers */,
+				9C26F9ED146B2979001A5385 /* AFNetworking.h in Headers */,
+				9C26F9EF146B2979001A5385 /* AFPropertyListRequestOperation.h in Headers */,
+				9C26F9F3146B2979001A5385 /* AFURLConnectionOperation.h in Headers */,
+				9C26F9F7146B2979001A5385 /* AFXMLRequestOperation.h in Headers */,
+				9C26F9FB146B2979001A5385 /* UIImageView+AFNetworking.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C26F965146B207A001A5385 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C26FA04146B2DEF001A5385 /* ObjectiveHub.h in Headers */,
+				9C26F9B3146B2424001A5385 /* JSONKit.h in Headers */,
+				9C26F9D6146B2979001A5385 /* AFHTTPClient.h in Headers */,
+				9C26F9DA146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */,
+				9C26F9DE146B2979001A5385 /* AFImageCache.h in Headers */,
+				9C26F9E2146B2979001A5385 /* AFImageRequestOperation.h in Headers */,
+				9C26F9E6146B2979001A5385 /* AFJSONRequestOperation.h in Headers */,
+				9C26F9EA146B2979001A5385 /* AFNetworkActivityIndicatorManager.h in Headers */,
+				9C26F9EE146B2979001A5385 /* AFNetworking.h in Headers */,
+				9C26F9F0146B2979001A5385 /* AFPropertyListRequestOperation.h in Headers */,
+				9C26F9F4146B2979001A5385 /* AFURLConnectionOperation.h in Headers */,
+				9C26F9F8146B2979001A5385 /* AFXMLRequestOperation.h in Headers */,
+				9C26F9FC146B2979001A5385 /* UIImageView+AFNetworking.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		9C26F934146B2069001A5385 /* ObjectiveHub-Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C26F95D146B2069001A5385 /* Build configuration list for PBXNativeTarget "ObjectiveHub-Mac" */;
+			buildPhases = (
+				9C26F930146B2069001A5385 /* Sources */,
+				9C26F931146B2069001A5385 /* Frameworks */,
+				9C26F932146B2069001A5385 /* Headers */,
+				9C26F933146B2069001A5385 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ObjectiveHub-Mac";
+			productName = "ObjectiveHub-Mac";
+			productReference = 9C26F935146B2069001A5385 /* ObjectiveHub-Mac.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		9C26F94C146B2069001A5385 /* ObjectiveHub-MacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C26F960146B2069001A5385 /* Build configuration list for PBXNativeTarget "ObjectiveHub-MacTests" */;
+			buildPhases = (
+				9C26F948146B2069001A5385 /* Sources */,
+				9C26F949146B2069001A5385 /* Frameworks */,
+				9C26F94A146B2069001A5385 /* Resources */,
+				9C26F94B146B2069001A5385 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C26F952146B2069001A5385 /* PBXTargetDependency */,
+			);
+			name = "ObjectiveHub-MacTests";
+			productName = "ObjectiveHub-MacTests";
+			productReference = 9C26F94D146B2069001A5385 /* ObjectiveHub-MacTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+		9C26F966146B207A001A5385 /* ObjectiveHub-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C26F986146B207A001A5385 /* Build configuration list for PBXNativeTarget "ObjectiveHub-iOS" */;
+			buildPhases = (
+				9C26F963146B207A001A5385 /* Sources */,
+				9C26F964146B207A001A5385 /* Frameworks */,
+				9C26F965146B207A001A5385 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ObjectiveHub-iOS";
+			productName = "ObjectiveHub-iOS";
+			productReference = 9C26F967146B207A001A5385 /* libObjectiveHub-iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		9C26F974146B207A001A5385 /* ObjectiveHub-iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C26F989146B207A001A5385 /* Build configuration list for PBXNativeTarget "ObjectiveHub-iOSTests" */;
+			buildPhases = (
+				9C26F970146B207A001A5385 /* Sources */,
+				9C26F971146B207A001A5385 /* Frameworks */,
+				9C26F972146B207A001A5385 /* Resources */,
+				9C26F973146B207A001A5385 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C26F97B146B207A001A5385 /* PBXTargetDependency */,
+			);
+			name = "ObjectiveHub-iOSTests";
+			productName = "ObjectiveHub-iOSTests";
+			productReference = 9C26F975146B207A001A5385 /* ObjectiveHub-iOSTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9C26F929146B1B74001A5385 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Fruit is Good";
+			};
+			buildConfigurationList = 9C26F92C146B1B74001A5385 /* Build configuration list for PBXProject "ObjectiveHub" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9C26F927146B1B74001A5385;
+			productRefGroup = 9C26F936146B2069001A5385 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9C26F98C146B208D001A5385 /* All Libraries */,
+				9C26FA0A146B3950001A5385 /* Documentation */,
+				9C26F934146B2069001A5385 /* ObjectiveHub-Mac */,
+				9C26F94C146B2069001A5385 /* ObjectiveHub-MacTests */,
+				9C26F966146B207A001A5385 /* ObjectiveHub-iOS */,
+				9C26F974146B207A001A5385 /* ObjectiveHub-iOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9C26F933146B2069001A5385 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C26F943146B2069001A5385 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C26F94A146B2069001A5385 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C26F959146B2069001A5385 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C26F972146B207A001A5385 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C26F982146B207A001A5385 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9C26F94B146B2069001A5385 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		9C26F973146B207A001A5385 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		9C26FA0E146B3958001A5385 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# \n# Generates API documentation with the help of appledoc.\n# Generates both HTML code and a DocSet (which *can* be installed into Xcode).\n#\n# Copyright (c) 2011 Fruit is Good. All rights reserved.\n#\n\nAPI_DOCS_DIR=`pwd`\"/Documentation\"\n\n\necho \"API documentation generation target (v1)\"\necho \"Will save generated documentation into \\\"${API_DOCS_DIR}\\\"\"\necho \"Removing old API documentation\"\nrm -r \"${API_DOCS_DIR}/html\" 2> /dev/null\nrm -r \"${API_DOCS_DIR}/docset\" 2> /dev/null\n\n\nHEADER_DIRECTORIES=\"ObjectiveHub-Mac ObjectiveHub-iOS Shared\"\necho \"Finding header files in:\"\necho ${HEADER_DIRECTORIES}\nHEADER_FILES=`find ${HEADER_DIRECTORIES} -name '*.h'`\necho \"Will generate API documentation based on:\"\necho ${HEADER_FILES}\n\n\necho \"Generating API documentation into \\\"${API_DOCS_DIR}\\\"\"\n/usr/local/bin/appledoc \\\n--verbose 6 \\\n--output ${API_DOCS_DIR} \\\n--project-name \"ObjectiveHub\" \\\n--project-version ${LIBRARY_VERSION} \\\n--project-company \"Fruit is Good\" \\\n--company-id \"com.fruitisgood\" \\\n--create-html \\\n--keep-intermediate-files \\\n--no-install-docset \\\n${HEADER_FILES}\n\n\necho \"Done!\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9C26F930146B2069001A5385 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C26F9B4146B2424001A5385 /* JSONKit.m in Sources */,
+				9C26F9D7146B2979001A5385 /* AFHTTPClient.m in Sources */,
+				9C26F9DB146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */,
+				9C26F9DF146B2979001A5385 /* AFImageCache.m in Sources */,
+				9C26F9E3146B2979001A5385 /* AFImageRequestOperation.m in Sources */,
+				9C26F9E7146B2979001A5385 /* AFJSONRequestOperation.m in Sources */,
+				9C26F9EB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				9C26F9F1146B2979001A5385 /* AFPropertyListRequestOperation.m in Sources */,
+				9C26F9F5146B2979001A5385 /* AFURLConnectionOperation.m in Sources */,
+				9C26F9F9146B2979001A5385 /* AFXMLRequestOperation.m in Sources */,
+				9C26F9FD146B2979001A5385 /* UIImageView+AFNetworking.m in Sources */,
+				9C26FA05146B2DEF001A5385 /* ObjectiveHub.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C26F948146B2069001A5385 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C26F95C146B2069001A5385 /* ObjectiveHub_MacTests.m in Sources */,
+				9C26FA06146B2DEF001A5385 /* ObjectiveHub.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C26F963146B207A001A5385 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C26F9B5146B2424001A5385 /* JSONKit.m in Sources */,
+				9C26F9D8146B2979001A5385 /* AFHTTPClient.m in Sources */,
+				9C26F9DC146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */,
+				9C26F9E0146B2979001A5385 /* AFImageCache.m in Sources */,
+				9C26F9E4146B2979001A5385 /* AFImageRequestOperation.m in Sources */,
+				9C26F9E8146B2979001A5385 /* AFJSONRequestOperation.m in Sources */,
+				9C26F9EC146B2979001A5385 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				9C26F9F2146B2979001A5385 /* AFPropertyListRequestOperation.m in Sources */,
+				9C26F9F6146B2979001A5385 /* AFURLConnectionOperation.m in Sources */,
+				9C26F9FA146B2979001A5385 /* AFXMLRequestOperation.m in Sources */,
+				9C26F9FE146B2979001A5385 /* UIImageView+AFNetworking.m in Sources */,
+				9C26FA07146B2DEF001A5385 /* ObjectiveHub.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C26F970146B207A001A5385 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C26F985146B207A001A5385 /* ObjectiveHub_iOSTests.m in Sources */,
+				9C26FA08146B2DEF001A5385 /* ObjectiveHub.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9C26F952146B2069001A5385 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C26F934146B2069001A5385 /* ObjectiveHub-Mac */;
+			targetProxy = 9C26F951146B2069001A5385 /* PBXContainerItemProxy */;
+		};
+		9C26F97B146B207A001A5385 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C26F966146B207A001A5385 /* ObjectiveHub-iOS */;
+			targetProxy = 9C26F97A146B207A001A5385 /* PBXContainerItemProxy */;
+		};
+		9C26F9A9146B2402001A5385 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C26F934146B2069001A5385 /* ObjectiveHub-Mac */;
+			targetProxy = 9C26F9A8146B2402001A5385 /* PBXContainerItemProxy */;
+		};
+		9C26F9AB146B2402001A5385 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C26F966146B207A001A5385 /* ObjectiveHub-iOS */;
+			targetProxy = 9C26F9AA146B2402001A5385 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9C26F941146B2069001A5385 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9C26F942146B2069001A5385 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9C26F957146B2069001A5385 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9C26F958146B2069001A5385 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9C26F980146B207A001A5385 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9C26F981146B207A001A5385 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9C26F92E146B1B74001A5385 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+			};
+			name = Debug;
+		};
+		9C26F92F146B1B74001A5385 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+			};
+			name = Release;
+		};
+		9C26F95E146B2069001A5385 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectiveHub-Mac/ObjectiveHub-Mac-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "ObjectiveHub-Mac/ObjectiveHub-Mac-Info.plist";
+				INSTALL_PATH = "@loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		9C26F95F146B2069001A5385 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectiveHub-Mac/ObjectiveHub-Mac-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "ObjectiveHub-Mac/ObjectiveHub-Mac-Info.plist";
+				INSTALL_PATH = "@loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		9C26F961146B2069001A5385 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectiveHub-Mac/ObjectiveHub-Mac-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "ObjectiveHub-MacTests/ObjectiveHub-MacTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		9C26F962146B2069001A5385 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectiveHub-Mac/ObjectiveHub-Mac-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "ObjectiveHub-MacTests/ObjectiveHub-MacTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		9C26F987146B207A001A5385 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/ObjectiveHub_iOS.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectiveHub-iOS/ObjectiveHub-iOS-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		9C26F988146B207A001A5385 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/ObjectiveHub_iOS.dst;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectiveHub-iOS/ObjectiveHub-iOS-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9C26F98A146B207A001A5385 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectiveHub-iOS/ObjectiveHub-iOS-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "ObjectiveHub-iOSTests/ObjectiveHub-iOSTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		9C26F98B146B207A001A5385 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectiveHub-iOS/ObjectiveHub-iOS-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "ObjectiveHub-iOSTests/ObjectiveHub-iOSTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		9C26F98E146B208D001A5385 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9C26F98F146B208D001A5385 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		9C26FA0C146B3950001A5385 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_VERSION = 0.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9C26FA0D146B3950001A5385 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				LIBRARY_VERSION = 0.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9C26F92C146B1B74001A5385 /* Build configuration list for PBXProject "ObjectiveHub" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C26F92E146B1B74001A5385 /* Debug */,
+				9C26F92F146B1B74001A5385 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9C26F95D146B2069001A5385 /* Build configuration list for PBXNativeTarget "ObjectiveHub-Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C26F95E146B2069001A5385 /* Debug */,
+				9C26F95F146B2069001A5385 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9C26F960146B2069001A5385 /* Build configuration list for PBXNativeTarget "ObjectiveHub-MacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C26F961146B2069001A5385 /* Debug */,
+				9C26F962146B2069001A5385 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9C26F986146B207A001A5385 /* Build configuration list for PBXNativeTarget "ObjectiveHub-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C26F987146B207A001A5385 /* Debug */,
+				9C26F988146B207A001A5385 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9C26F989146B207A001A5385 /* Build configuration list for PBXNativeTarget "ObjectiveHub-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C26F98A146B207A001A5385 /* Debug */,
+				9C26F98B146B207A001A5385 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9C26F98D146B208D001A5385 /* Build configuration list for PBXAggregateTarget "All Libraries" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C26F98E146B208D001A5385 /* Debug */,
+				9C26F98F146B208D001A5385 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9C26FA0B146B3950001A5385 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C26FA0C146B3950001A5385 /* Debug */,
+				9C26FA0D146B3950001A5385 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9C26F929146B1B74001A5385 /* Project object */;
+}
