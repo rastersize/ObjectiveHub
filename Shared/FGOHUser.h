@@ -69,17 +69,17 @@
 /**
  * The login username of the user.
  */
-@property (readonly) NSString *login;
+@property (readonly, copy) NSString *login;
 
 /**
  * The avatar URL of the user.
  */
-@property (readonly) NSURL *avatarUrl;
+@property (readonly, strong) NSURL *avatarUrl;
 
 /**
  * The HTML URL of the user.
  */
-@property (readonly) NSURL *htmlUrl;
+@property (readonly, strong) NSURL *htmlUrl;
 
 /**
  * Wheter the user is hireable or not.
@@ -141,12 +141,12 @@
 /**
  * The time and date when the user created his or her account.
  */
-@property (readonly) NSDate *createdAt;
+@property (readonly, strong) NSDate *createdAt;
 
 /**
  * The users account type.
  */
-@property (readonly) NSString *type;
+@property (readonly, copy) NSString *type;
 
 /**
  * The amount of disk space the user have used up. 
@@ -162,7 +162,7 @@
  * @warning *Important:* If the instance does not represent an authenticated
  * user this will be `nil`.
  */
-@property (readonly) FGOHPlan *plan;
+@property (readonly, strong) FGOHPlan *plan;
 
 
 #pragma mark - Personal Information
@@ -170,32 +170,32 @@
 /**
  * The name of the user.
  */
-@property (readonly) NSString *name;
+@property (readonly, copy) NSString *name;
 
 /**
  * The company the user is associated with.
  */
-@property (readonly) NSString *company;
+@property (readonly, copy) NSString *company;
 
 /**
  * The email address of the user.
  */
-@property (readonly) NSString *email;
+@property (readonly, copy) NSString *email;
 
 /**
  * The biography of the user.
  */
-@property (readonly) NSString *biography;
+@property (readonly, copy) NSString *biography;
 
 /**
  * The location of the user.
  */
-@property (readonly) NSString *location;
+@property (readonly, copy) NSString *location;
 
 /**
  * The URL of the users blog or website.
  */
-@property (readonly) NSURL *blog;
+@property (readonly, strong) NSURL *blog;
 
 
 @end

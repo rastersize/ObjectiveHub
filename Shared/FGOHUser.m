@@ -104,24 +104,6 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 	return self;
 }
 
-- (void)dealloc
-{
-    [_name release];
-	[_company release];
-	[_email release];
-	[_biography release];
-	[_location release];
-	[_blog release];
-	[_login release];
-	[_htmlUrl release];
-	[_avatarUrl release];
-	[_createdAt release];
-	[_type release];
-	[_plan release];
-	
-	[super dealloc];
-}
-
 
 #pragma mark - Transform Between Instance Variables and Dictionary
 - (NSDictionary *)encodeAsDictionary
@@ -192,13 +174,13 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 	_location = [location copy];
 	
 	NSURL *blogUrl = [dictionary valueForKey:kFGOHUserDictionaryBlogKey];
-	_blog = [blogUrl retain];
+	_blog = blogUrl;
 	
 	NSURL *avatarUrl = [dictionary valueForKey:kFGOHUserDictionaryAvatarUrlKey];
-	_avatarUrl = [avatarUrl retain];
+	_avatarUrl = avatarUrl;
 	
 	NSDate *createdAt = [dictionary valueForKey:kFGOHUserDictionaryCreatedAtKey];
-	_createdAt = [createdAt retain];
+	_createdAt = createdAt;
 	
 	NSString *type = [dictionary valueForKey:kFGOHUserDictionaryTypeKey];
 	_type = [type copy];
@@ -241,8 +223,7 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 	
 	NSDictionary *planDict = [dictionary valueForKey:kFGOHUserDictionaryPlanKey];
 	FGOHPlan *plan = [[FGOHPlan alloc] initWithDictionary:planDict];
-	_plan = [plan retain];
-	[plan release];
+	_plan = plan;
 }
 
 

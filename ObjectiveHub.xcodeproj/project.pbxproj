@@ -49,50 +49,50 @@
 		9C26F985146B207A001A5385 /* ObjectiveHub_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F984146B207A001A5385 /* ObjectiveHub_iOSTests.m */; };
 		9C26F9B2146B2424001A5385 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9AE146B2424001A5385 /* JSONKit.h */; };
 		9C26F9B3146B2424001A5385 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9AE146B2424001A5385 /* JSONKit.h */; };
-		9C26F9B4146B2424001A5385 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9AF146B2424001A5385 /* JSONKit.m */; };
-		9C26F9B5146B2424001A5385 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9AF146B2424001A5385 /* JSONKit.m */; };
+		9C26F9B4146B2424001A5385 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9AF146B2424001A5385 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9B5146B2424001A5385 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9AF146B2424001A5385 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9D5146B2979001A5385 /* AFHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C0146B2979001A5385 /* AFHTTPClient.h */; };
 		9C26F9D6146B2979001A5385 /* AFHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C0146B2979001A5385 /* AFHTTPClient.h */; };
-		9C26F9D7146B2979001A5385 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C1146B2979001A5385 /* AFHTTPClient.m */; };
-		9C26F9D8146B2979001A5385 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C1146B2979001A5385 /* AFHTTPClient.m */; };
+		9C26F9D7146B2979001A5385 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C1146B2979001A5385 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9D8146B2979001A5385 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C1146B2979001A5385 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9D9146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C2146B2979001A5385 /* AFHTTPRequestOperation.h */; };
 		9C26F9DA146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C2146B2979001A5385 /* AFHTTPRequestOperation.h */; };
-		9C26F9DB146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; };
-		9C26F9DC146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; };
+		9C26F9DB146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9DC146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9DD146B2979001A5385 /* AFImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C4146B2979001A5385 /* AFImageCache.h */; };
 		9C26F9DE146B2979001A5385 /* AFImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C4146B2979001A5385 /* AFImageCache.h */; };
-		9C26F9DF146B2979001A5385 /* AFImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C5146B2979001A5385 /* AFImageCache.m */; };
-		9C26F9E0146B2979001A5385 /* AFImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C5146B2979001A5385 /* AFImageCache.m */; };
+		9C26F9DF146B2979001A5385 /* AFImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C5146B2979001A5385 /* AFImageCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9E0146B2979001A5385 /* AFImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C5146B2979001A5385 /* AFImageCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9E1146B2979001A5385 /* AFImageRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C6146B2979001A5385 /* AFImageRequestOperation.h */; };
 		9C26F9E2146B2979001A5385 /* AFImageRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C6146B2979001A5385 /* AFImageRequestOperation.h */; };
-		9C26F9E3146B2979001A5385 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */; };
-		9C26F9E4146B2979001A5385 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */; };
+		9C26F9E3146B2979001A5385 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9E4146B2979001A5385 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9E5146B2979001A5385 /* AFJSONRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C8146B2979001A5385 /* AFJSONRequestOperation.h */; };
 		9C26F9E6146B2979001A5385 /* AFJSONRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C8146B2979001A5385 /* AFJSONRequestOperation.h */; };
-		9C26F9E7146B2979001A5385 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C9146B2979001A5385 /* AFJSONRequestOperation.m */; };
-		9C26F9E8146B2979001A5385 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C9146B2979001A5385 /* AFJSONRequestOperation.m */; };
+		9C26F9E7146B2979001A5385 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C9146B2979001A5385 /* AFJSONRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9E8146B2979001A5385 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C9146B2979001A5385 /* AFJSONRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9E9146B2979001A5385 /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CA146B2979001A5385 /* AFNetworkActivityIndicatorManager.h */; };
 		9C26F9EA146B2979001A5385 /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CA146B2979001A5385 /* AFNetworkActivityIndicatorManager.h */; };
-		9C26F9EB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m */; };
-		9C26F9EC146B2979001A5385 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m */; };
+		9C26F9EB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9EC146B2979001A5385 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9ED146B2979001A5385 /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CC146B2979001A5385 /* AFNetworking.h */; };
 		9C26F9EE146B2979001A5385 /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CC146B2979001A5385 /* AFNetworking.h */; };
 		9C26F9EF146B2979001A5385 /* AFPropertyListRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CD146B2979001A5385 /* AFPropertyListRequestOperation.h */; };
 		9C26F9F0146B2979001A5385 /* AFPropertyListRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CD146B2979001A5385 /* AFPropertyListRequestOperation.h */; };
-		9C26F9F1146B2979001A5385 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CE146B2979001A5385 /* AFPropertyListRequestOperation.m */; };
-		9C26F9F2146B2979001A5385 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CE146B2979001A5385 /* AFPropertyListRequestOperation.m */; };
+		9C26F9F1146B2979001A5385 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CE146B2979001A5385 /* AFPropertyListRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9F2146B2979001A5385 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CE146B2979001A5385 /* AFPropertyListRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9F3146B2979001A5385 /* AFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CF146B2979001A5385 /* AFURLConnectionOperation.h */; };
 		9C26F9F4146B2979001A5385 /* AFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CF146B2979001A5385 /* AFURLConnectionOperation.h */; };
-		9C26F9F5146B2979001A5385 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D0146B2979001A5385 /* AFURLConnectionOperation.m */; };
-		9C26F9F6146B2979001A5385 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D0146B2979001A5385 /* AFURLConnectionOperation.m */; };
+		9C26F9F5146B2979001A5385 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D0146B2979001A5385 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9F6146B2979001A5385 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D0146B2979001A5385 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9F7146B2979001A5385 /* AFXMLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9D1146B2979001A5385 /* AFXMLRequestOperation.h */; };
 		9C26F9F8146B2979001A5385 /* AFXMLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9D1146B2979001A5385 /* AFXMLRequestOperation.h */; };
-		9C26F9F9146B2979001A5385 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D2146B2979001A5385 /* AFXMLRequestOperation.m */; };
-		9C26F9FA146B2979001A5385 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D2146B2979001A5385 /* AFXMLRequestOperation.m */; };
+		9C26F9F9146B2979001A5385 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D2146B2979001A5385 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9FA146B2979001A5385 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D2146B2979001A5385 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9FB146B2979001A5385 /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9D3146B2979001A5385 /* UIImageView+AFNetworking.h */; };
 		9C26F9FC146B2979001A5385 /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9D3146B2979001A5385 /* UIImageView+AFNetworking.h */; };
-		9C26F9FD146B2979001A5385 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D4146B2979001A5385 /* UIImageView+AFNetworking.m */; };
-		9C26F9FE146B2979001A5385 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D4146B2979001A5385 /* UIImageView+AFNetworking.m */; };
+		9C26F9FD146B2979001A5385 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D4146B2979001A5385 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9FE146B2979001A5385 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D4146B2979001A5385 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26FA03146B2DEF001A5385 /* ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26FA01146B2DEF001A5385 /* ObjectiveHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C26FA04146B2DEF001A5385 /* ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26FA01146B2DEF001A5385 /* ObjectiveHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C26FA05146B2DEF001A5385 /* ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26FA02146B2DEF001A5385 /* ObjectiveHub.m */; };
@@ -688,7 +688,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# \n# Generates API documentation with the help of appledoc.\n# Generates both HTML code and a DocSet (which *can* be installed into Xcode).\n#\n# Copyright (c) 2011 Fruit is Good. All rights reserved.\n#\n\nAPI_DOCS_DIR=`pwd`\"/Documentation\"\n\n\necho \"API documentation generation target (v1)\"\necho \"Will save generated documentation into \\\"${API_DOCS_DIR}\\\"\"\necho \"Removing old API documentation\"\nrm -r \"${API_DOCS_DIR}/html\" 2> /dev/null\nrm -r \"${API_DOCS_DIR}/docset\" 2> /dev/null\n\n\nHEADER_DIRECTORIES=\"ObjectiveHub-Mac ObjectiveHub-iOS Shared\"\necho \"Finding header files in:\"\necho ${HEADER_DIRECTORIES}\nHEADER_FILES=`find ${HEADER_DIRECTORIES} -name '*.h'`\necho \"Will generate API documentation based on:\"\necho ${HEADER_FILES}\n\n\necho \"Generating API documentation into \\\"${API_DOCS_DIR}\\\"\"\n/usr/local/bin/appledoc \\\n--verbose 6 \\\n--output ${API_DOCS_DIR} \\\n--project-name \"ObjectiveHub\" \\\n--project-version ${LIBRARY_VERSION} \\\n--project-company \"Fruit is Good\" \\\n--company-id \"com.fruitisgood\" \\\n--create-html \\\n--keep-intermediate-files \\\n--no-install-docset \\\n${HEADER_FILES}\n\n\necho \"Done!\"\n";
+			shellScript = "# \n# Generates API documentation with the help of appledoc.\n# Generates both HTML code and a DocSet (which *can* be installed into Xcode).\n#\n# Copyright (c) 2011 Fruit is Good. All rights reserved.\n#\n\nAPI_DOCS_DIR=`pwd`\"/Documentation\"\n\n\necho \"API documentation generation target (v1)\"\necho \"Will save generated documentation into \\\"${API_DOCS_DIR}\\\"\"\necho \"Removing old API documentation\"\nrm -r \"${API_DOCS_DIR}/html\" 2> /dev/null\nrm -r \"${API_DOCS_DIR}/docset\" 2> /dev/null\n\n\nHEADER_DIRECTORIES=\"ObjectiveHub-Mac ObjectiveHub-iOS Shared\"\necho \"Finding header files in:\"\necho ${HEADER_DIRECTORIES}\nHEADER_FILES=`find ${HEADER_DIRECTORIES} -name '*.h' | grep -v Private`\necho \"Will generate API documentation based on:\"\necho ${HEADER_FILES}\n\n\necho \"Generating API documentation into \\\"${API_DOCS_DIR}\\\"\"\n/usr/local/bin/appledoc \\\n--verbose 6 \\\n--output ${API_DOCS_DIR} \\\n--project-name \"ObjectiveHub\" \\\n--project-version \"${LIBRARY_VERSION}\" \\\n--project-company \"Fruit is Good\" \\\n--company-id \"com.fruitisgood\" \\\n--create-html \\\n--keep-intermediate-files \\\n--no-install-docset \\\n${HEADER_FILES}\n\necho \"Done!\"\n";
 		};
 		9C2F3E80146F426900C44A82 /* Warn About TODO/FIXME Tags */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -837,6 +837,7 @@
 		9C26F92E146B1B74001A5385 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 			};
@@ -845,6 +846,7 @@
 		9C26F92F146B1B74001A5385 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 			};

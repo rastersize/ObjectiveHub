@@ -36,7 +36,7 @@
 #import "JSONKit.h"
 
 
-#pragma mark - Constants
+#pragma mark Constants
 /// The base URI for the GitHub API
 NSString *const kObjectiveHubGitHubAPIURI	= @"https://api.github.com";
 
@@ -67,14 +67,6 @@ NSString *const kObjectiveHubDateFormat		= @"YYYY-MM-DDTHH:MM:SSZ";
 	}
 	
 	return self;
-}
-
-- (void)dealloc
-{
-	[_username release];
-	[_password release];
-
-	[super dealloc];
 }
 
 - (id)initWithUsername:(NSString *)username password:(NSString *)password

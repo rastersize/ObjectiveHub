@@ -44,7 +44,7 @@
 /**
  * The name of the plan.
  */
-@property (readonly) NSString *name;
+@property (readonly, copy) NSString *name;
 
 
 #pragma mark - Limitations
