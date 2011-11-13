@@ -34,12 +34,21 @@
 
 //#import <ObjectiveHub/FGOHUser.h>
 
-#pragma mark Constants
+#pragma mark Forward Class Declarations
+@class FGOHUser, FGOHPlan;
+
+
+#pragma mark - Constants
 /// The default default items per page.
 #define kObjectiveHubDefaultItemsPerPage				30
 
 /// The default rate limit of API requests, where zero (0) means automatic.
 #define kObjectiveHubDefaultRateLimit					0
+
+
+#pragma mark - ObjectiveHub Block Types
+typedef void (^FGOBUserSuccessBlock)(FGOHUser *user);
+typedef void (^FGOBUserFailureBlock)(NSError *error);
 
 
 #pragma mark - ObjectiveHub Interface
@@ -129,6 +138,88 @@
 @property (assign) NSUInteger rateLimit;
 
 
+#pragma mark - Getting and Updating Users
+/** @name Getting and Updating Users */
+/**
+ * Get a single specific user by their login.
+ *
+ * @param login The login of the sought user.
+ * @param successBlock The block which is called upon success. 
+ * @param failureBlock The block which is called upon failure.
+ *
+ * @see authenticatedUser:success:failure:
+ */
+- (void)userWithLogin:(NSString *)login success:(FGOBUserSuccessBlock)successBlock failure:(FGOBUserFailureBlock)failureBlock;
+
+/**
+ * Get the currently authenticated user.
+ *
+ * If either one of the properties username or password is not set the failiur
+ * block will be called immediately.
+ *
+ * @param successBlock The block which is called upon success. 
+ * @param failureBlock The block which is called upon failure.
+ *
+ * @see userWithLogin:success:failure:
+ */
+- (void)authenticatedUser:(FGOBUserSuccessBlock)successBlock failure:(FGOBUserFailureBlock)failureBlock;
+
+/**
+ * Update the currently authenticated user with the contents of the given
+ * dictionary.
+ *
+ * Each of the available keys are optional and if omitted the value will not be
+ * changed. The possible actions that can be performed as well as the
+ * corresponding key and value type is listed in the table below.
+ *
+ * <table>
+ *   <tr>
+ *     <th></th>
+ *     <th style="text-align: left">Dictionary Key</th>
+ *     <th style="text-align: left">Value Type</th>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Change name:</th>
+ *     <td><code>kFGOHUserDictionaryNameKey</code></td>
+ *     <td><code>NSString</code></td>
+ *   </tr>
+ *   <tr>
+ *     <th  style="text-align: right">Change email address:</th>
+ *     <td><code>kFGOHUserDictionaryEmailKey</code></td>
+ *     <td><code>NSString</code></td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Change blog URL:</th>
+ *     <td><code>kFGOHUserDictionaryBlogKey</code></td>
+ *     <td><code>NSURL</code></td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Change company name:</th>
+ *     <td><code>kFGOHUserDictionaryCompanyKey</code></td>
+ *     <td><code>NSString</code></td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Change location string:</th>
+ *     <td><code>kFGOHUserDictionaryLocationKey</code></td>
+ *     <td><code>NSString</code></td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Change hireable status:</th>
+ *     <td><code>kFGOHUserDictionaryHireableKey</code></td>
+ *     <td>Boolean inside a <code>NSNumber</code></td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Change biography text:</th>
+ *     <td><code>kFGOHUserDictionaryBioKey</code></td>
+ *     <td><code>NSString</code></td>
+ *   </tr>
+ * </table>
+ *
+ * @param dictionary A dictionary containing values for the pre-defined keys.
+ * @param successBlock The block which is called upon success.
+ * @param failureBlock The block which is called upon failure.
+ */
+- (void)updateAuthenticatedUserWithDictionary:(NSDictionary *)dictionary success:(FGOBUserSuccessBlock)successBlock failure:(FGOBUserFailureBlock)failureBlock;
 
 
 @end
