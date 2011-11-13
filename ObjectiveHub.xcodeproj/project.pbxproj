@@ -525,6 +525,7 @@
 				9C26F931146B2069001A5385 /* Frameworks */,
 				9C26F932146B2069001A5385 /* Headers */,
 				9C26F933146B2069001A5385 /* Resources */,
+				9C2F3E80146F426900C44A82 /* Warn About TODO/FIXME Tags */,
 			);
 			buildRules = (
 			);
@@ -561,6 +562,7 @@
 				9C26F963146B207A001A5385 /* Sources */,
 				9C26F964146B207A001A5385 /* Frameworks */,
 				9C26F965146B207A001A5385 /* Headers */,
+				9C2F3E81146F436400C44A82 /* Warn About TODO/FIXME Tags */,
 			);
 			buildRules = (
 			);
@@ -687,6 +689,34 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# \n# Generates API documentation with the help of appledoc.\n# Generates both HTML code and a DocSet (which *can* be installed into Xcode).\n#\n# Copyright (c) 2011 Fruit is Good. All rights reserved.\n#\n\nAPI_DOCS_DIR=`pwd`\"/Documentation\"\n\n\necho \"API documentation generation target (v1)\"\necho \"Will save generated documentation into \\\"${API_DOCS_DIR}\\\"\"\necho \"Removing old API documentation\"\nrm -r \"${API_DOCS_DIR}/html\" 2> /dev/null\nrm -r \"${API_DOCS_DIR}/docset\" 2> /dev/null\n\n\nHEADER_DIRECTORIES=\"ObjectiveHub-Mac ObjectiveHub-iOS Shared\"\necho \"Finding header files in:\"\necho ${HEADER_DIRECTORIES}\nHEADER_FILES=`find ${HEADER_DIRECTORIES} -name '*.h'`\necho \"Will generate API documentation based on:\"\necho ${HEADER_FILES}\n\n\necho \"Generating API documentation into \\\"${API_DOCS_DIR}\\\"\"\n/usr/local/bin/appledoc \\\n--verbose 6 \\\n--output ${API_DOCS_DIR} \\\n--project-name \"ObjectiveHub\" \\\n--project-version ${LIBRARY_VERSION} \\\n--project-company \"Fruit is Good\" \\\n--company-id \"com.fruitisgood\" \\\n--create-html \\\n--keep-intermediate-files \\\n--no-install-docset \\\n${HEADER_FILES}\n\n\necho \"Done!\"\n";
+		};
+		9C2F3E80146F426900C44A82 /* Warn About TODO/FIXME Tags */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Warn About TODO/FIXME Tags";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "KEYWORDS=\"TODO.*:|FIXME.*:|\\?\\?\\?.*:|\\!\\!\\!.*:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.mm\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\" | grep -v Vendor\n";
+		};
+		9C2F3E81146F436400C44A82 /* Warn About TODO/FIXME Tags */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Warn About TODO/FIXME Tags";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "KEYWORDS=\"TODO.*:|FIXME.*:|\\?\\?\\?.*:|\\!\\!\\!.*:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.mm\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\" | grep -v Vendor\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1103,6 +1133,7 @@
 				9C26F95F146B2069001A5385 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9C26F960146B2069001A5385 /* Build configuration list for PBXNativeTarget "ObjectiveHub-MacTests" */ = {
 			isa = XCConfigurationList;
@@ -1111,6 +1142,7 @@
 				9C26F962146B2069001A5385 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9C26F986146B207A001A5385 /* Build configuration list for PBXNativeTarget "ObjectiveHub-iOS" */ = {
 			isa = XCConfigurationList;
@@ -1119,6 +1151,7 @@
 				9C26F988146B207A001A5385 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9C26F989146B207A001A5385 /* Build configuration list for PBXNativeTarget "ObjectiveHub-iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -1127,6 +1160,7 @@
 				9C26F98B146B207A001A5385 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9C26F98D146B208D001A5385 /* Build configuration list for PBXAggregateTarget "All Libraries" */ = {
 			isa = XCConfigurationList;
@@ -1135,6 +1169,7 @@
 				9C26F98F146B208D001A5385 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9C26FA0B146B3950001A5385 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
 			isa = XCConfigurationList;
@@ -1143,6 +1178,7 @@
 				9C26FA0D146B3950001A5385 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
