@@ -45,6 +45,8 @@ extern NSString *const kFGOHUserDictionaryLoginKey;
 extern NSString *const kFGOHUserDictionaryIdKey;
 /// Dictionary key for the avatar URL value.
 extern NSString *const kFGOHUserDictionaryAvatarUrlKey;
+/// Dictionary key for the avatar URL value.
+extern NSString *const kFGOHUserDictionaryGravatarIdKey;
 /// Dictionary key for the API URL value.
 extern NSString *const kFGOHUserDictionaryUrlKey;
 /// Dictionary key for the name value.
@@ -247,7 +249,7 @@ extern NSString *const kFGOHUserDictionaryPlanKey;
 /**
  * The URL of the users blog or website.
  */
-@property (readonly, strong) NSURL *blog;
+@property (readonly, strong) NSURL *blogUrl;
 
 
 #pragma mark - Identifying and Comparing Users

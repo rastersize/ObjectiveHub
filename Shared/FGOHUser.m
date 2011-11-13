@@ -39,6 +39,7 @@
 NSString *const kFGOHUserDictionaryLoginKey				= @"login";
 NSString *const kFGOHUserDictionaryIdKey				= @"id";
 NSString *const kFGOHUserDictionaryAvatarUrlKey			= @"avatar_url";
+NSString *const kFGOHUserDictionaryGravatarIdKey		= @"gravatar_id";
 NSString *const kFGOHUserDictionaryUrlKey				= @"url";
 NSString *const kFGOHUserDictionaryNameKey				= @"name";
 NSString *const kFGOHUserDictionaryCompanyKey			= @"company";
@@ -72,7 +73,7 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 @synthesize email = _email;
 @synthesize biography = _biography;
 @synthesize location = _location;
-@synthesize blog = _blog;
+@synthesize blogUrl = _blogUrl;
 @synthesize authenticated = _authenticated;
 @synthesize identifier = _identifier;
 @synthesize login = _login;
@@ -130,7 +131,7 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 								self.email,						kFGOHUserDictionaryEmailKey,
 								self.biography,					kFGOHUserDictionaryBioKey,
 								self.location,					kFGOHUserDictionaryLocationKey,
-								self.blog,						kFGOHUserDictionaryBlogKey,
+								self.blogUrl,					kFGOHUserDictionaryBlogKey,
 								self.avatarUrl,					kFGOHUserDictionaryAvatarUrlKey,
 								self.htmlUrl,					kFGOHUserDictionaryHtmlUrlKey,
 								self.createdAt,					kFGOHUserDictionaryCreatedAtKey,
@@ -173,27 +174,33 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 	NSString *location = [dictionary valueForKey:kFGOHUserDictionaryLocationKey];
 	_location = [location copy];
 	
-	NSURL *blogUrl = [dictionary valueForKey:kFGOHUserDictionaryBlogKey];
-	_blog = blogUrl;
-	
-	NSURL *avatarUrl = [dictionary valueForKey:kFGOHUserDictionaryAvatarUrlKey];
-	_avatarUrl = avatarUrl;
-	
-	NSDate *createdAt = [dictionary valueForKey:kFGOHUserDictionaryCreatedAtKey];
-	_createdAt = createdAt;
-	
 	NSString *type = [dictionary valueForKey:kFGOHUserDictionaryTypeKey];
 	_type = [type copy];
 	
-	NSNumber *identifier = [dictionary valueForKey:kFGOHUserDictionaryIdKey];
-	_identifier = [identifier unsignedIntegerValue];
 	
+	//--//
+	_blogUrl	= [dictionary valueForKey:kFGOHUserDictionaryBlogKey];
+	_avatarUrl	= [dictionary valueForKey:kFGOHUserDictionaryAvatarUrlKey];
+	_htmlUrl	= [dictionary valueForKey:kFGOHUserDictionaryHtmlUrlKey];
+	
+	
+	//--//
+	// TODO: Parse the created at date.
+	NSDate *createdAt = [dictionary valueForKey:kFGOHUserDictionaryCreatedAtKey];
+	_createdAt = createdAt;
+	
+	//--//
 	NSNumber *authenticated = [dictionary valueForKey:kFGOHUserDictionaryAuthenticatedKey];
 	_authenticated = [authenticated boolValue];
 	
 	NSNumber *hireable = [dictionary valueForKey:kFGOHUserDictionaryHireableKey];
 	_hireable = [hireable boolValue];
 	
+
+	//--//
+	NSNumber *identifier = [dictionary valueForKey:kFGOHUserDictionaryIdKey];
+	_identifier = [identifier unsignedIntegerValue];
+
 	NSNumber *publicRepos = [dictionary valueForKey:kFGOHUserDictionaryPublicReposKey];
 	_numberOfPublicRepositories = [publicRepos unsignedIntegerValue];
 	
@@ -221,9 +228,12 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 	NSNumber *diskUsage = [dictionary valueForKey:kFGOHUserDictionaryDiskUsageKey];
 	_diskUsage = [diskUsage unsignedIntegerValue];
 	
+
+	//--//
 	NSDictionary *planDict = [dictionary valueForKey:kFGOHUserDictionaryPlanKey];
-	FGOHPlan *plan = [[FGOHPlan alloc] initWithDictionary:planDict];
-	_plan = plan;
+	if (planDict) {
+		_plan = [[FGOHPlan alloc] initWithDictionary:planDict];
+	}
 }
 
 
