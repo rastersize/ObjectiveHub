@@ -37,6 +37,8 @@
 /** @name Dictionary Keys */
 /// Internal dictionary key for the authenticated value.
 extern NSString *const kFGOHUserDictionaryAuthenticatedKey;
+/// Internal dictionary key for the API URL value.
+extern NSString *const kFGOHUserDictionaryApiUrlKey;
 
 
 #pragma mark - FGOHUser Private Interface

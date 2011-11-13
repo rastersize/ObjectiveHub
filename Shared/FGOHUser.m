@@ -61,7 +61,16 @@ NSString *const kFGOHUserDictionaryPrivateGistsKey		= @"private_gists";
 NSString *const kFGOHUserDictionaryDiskUsageKey			= @"disk_usage";
 NSString *const kFGOHUserDictionaryCollaboratorsKey		= @"collaborators";
 NSString *const kFGOHUserDictionaryPlanKey				= @"plan";
+
 NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
+NSString *const kFGOHUserDictionaryApiUrlKey			= @"url";
+
+
+@interface FGOHUser ()
+
+@property (strong) NSURL *apiResourceUrl;
+
+@end
 
 
 #pragma mark - FGOHUser Implementation
@@ -92,6 +101,8 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 @synthesize type = _type;
 @synthesize diskUsage = _diskUsage;
 @synthesize plan = _plan;
+
+@synthesize apiResourceUrl = _apiResourceUrl;
 
 
 #pragma mark - Initializing an FGOHUser Instance
@@ -125,6 +136,7 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 	
 	
 	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+								self.apiResourceUrl,			kFGOHUserDictionaryApiUrlKey,
 								self.login,						kFGOHUserDictionaryLoginKey,
 								self.name,						kFGOHUserDictionaryNameKey,
 								self.company,					kFGOHUserDictionaryCompanyKey,
@@ -179,9 +191,10 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 	
 	
 	//--//
-	_blogUrl	= [dictionary valueForKey:kFGOHUserDictionaryBlogKey];
-	_avatarUrl	= [dictionary valueForKey:kFGOHUserDictionaryAvatarUrlKey];
-	_htmlUrl	= [dictionary valueForKey:kFGOHUserDictionaryHtmlUrlKey];
+	_apiResourceUrl	= [dictionary valueForKey:kFGOHUserDictionaryApiUrlKey];
+	_blogUrl		= [dictionary valueForKey:kFGOHUserDictionaryBlogKey];
+	_avatarUrl		= [dictionary valueForKey:kFGOHUserDictionaryAvatarUrlKey];
+	_htmlUrl		= [dictionary valueForKey:kFGOHUserDictionaryHtmlUrlKey];
 	
 	
 	//--//
@@ -196,11 +209,11 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 	NSNumber *hireable = [dictionary valueForKey:kFGOHUserDictionaryHireableKey];
 	_hireable = [hireable boolValue];
 	
-
+	
 	//--//
 	NSNumber *identifier = [dictionary valueForKey:kFGOHUserDictionaryIdKey];
 	_identifier = [identifier unsignedIntegerValue];
-
+	
 	NSNumber *publicRepos = [dictionary valueForKey:kFGOHUserDictionaryPublicReposKey];
 	_numberOfPublicRepositories = [publicRepos unsignedIntegerValue];
 	
@@ -228,7 +241,7 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 	NSNumber *diskUsage = [dictionary valueForKey:kFGOHUserDictionaryDiskUsageKey];
 	_diskUsage = [diskUsage unsignedIntegerValue];
 	
-
+	
 	//--//
 	NSDictionary *planDict = [dictionary valueForKey:kFGOHUserDictionaryPlanKey];
 	if (planDict) {
@@ -289,8 +302,8 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 
 #pragma mark - Describing a User Object
 - (NSString *)description
-{
-	return [NSString stringWithFormat:@"<%@: %p { id = %d, login = %@ }>", [self class], self, self.identifier, self.login];
+{	
+	return [NSString stringWithFormat:@"<%@: %p { id = %d, login = %@, resource = %@ }>", [self class], self, self.identifier, self.login, self.apiResourceUrl];
 }
 
 
