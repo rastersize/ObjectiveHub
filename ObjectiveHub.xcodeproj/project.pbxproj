@@ -111,6 +111,14 @@
 		9C2F3E8B146F5F7D00C44A82 /* FGOHPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F3E87146F5F7D00C44A82 /* FGOHPlan.m */; };
 		9C2F3E8D146F5FC000C44A82 /* FGOHPlanPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E8C146F5FC000C44A82 /* FGOHPlanPrivate.h */; };
 		9C2F3E8E146F5FC000C44A82 /* FGOHPlanPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E8C146F5FC000C44A82 /* FGOHPlanPrivate.h */; };
+		9C5D2D541470281A0064F02A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F938146B2069001A5385 /* Cocoa.framework */; };
+		9C5D2D5A1470281A0064F02A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C5D2D581470281A0064F02A /* InfoPlist.strings */; };
+		9C5D2D5C1470281A0064F02A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5D2D5B1470281A0064F02A /* main.m */; };
+		9C5D2D601470281A0064F02A /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 9C5D2D5E1470281A0064F02A /* Credits.rtf */; };
+		9C5D2D631470281A0064F02A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5D2D621470281A0064F02A /* AppDelegate.m */; };
+		9C5D2D661470281B0064F02A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C5D2D641470281B0064F02A /* MainMenu.xib */; };
+		9C5D2D6D147028290064F02A /* ObjectiveHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F935146B2069001A5385 /* ObjectiveHub.framework */; };
+		9C5D2D6F147029410064F02A /* ObjectiveHub.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F935146B2069001A5385 /* ObjectiveHub.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,7 +150,28 @@
 			remoteGlobalIDString = 9C26F966146B207A001A5385;
 			remoteInfo = "ObjectiveHub-iOS";
 		};
+		9C5D2D6B147028220064F02A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C26F929146B1B74001A5385 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C26F934146B2069001A5385;
+			remoteInfo = "ObjectiveHub-Mac";
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9C5D2D6E1470292A0064F02A /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9C5D2D6F147029410064F02A /* ObjectiveHub.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9C26F935146B2069001A5385 /* ObjectiveHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +230,16 @@
 		9C2F3E86146F5F7D00C44A82 /* FGOHPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGOHPlan.h; sourceTree = "<group>"; };
 		9C2F3E87146F5F7D00C44A82 /* FGOHPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGOHPlan.m; sourceTree = "<group>"; };
 		9C2F3E8C146F5FC000C44A82 /* FGOHPlanPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGOHPlanPrivate.h; sourceTree = "<group>"; };
+		9C5D2D521470281A0064F02A /* ObjectiveHub Test App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ObjectiveHub Test App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C5D2D571470281A0064F02A /* ObjectiveHub Test App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveHub Test App-Info.plist"; sourceTree = "<group>"; };
+		9C5D2D591470281A0064F02A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9C5D2D5B1470281A0064F02A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9C5D2D5D1470281A0064F02A /* ObjectiveHub Test App-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveHub Test App-Prefix.pch"; sourceTree = "<group>"; };
+		9C5D2D5F1470281A0064F02A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		9C5D2D611470281A0064F02A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9C5D2D621470281A0064F02A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9C5D2D651470281B0064F02A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		9C5D2D70147029E10064F02A /* FGOHTestAppUserCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGOHTestAppUserCredentials.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +280,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9C5D2D4F1470281A0064F02A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C5D2D6D147028290064F02A /* ObjectiveHub.framework in Frameworks */,
+				9C5D2D541470281A0064F02A /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -250,6 +298,7 @@
 				9C26F996146B20C7001A5385 /* Shared */,
 				9C26F995146B20C0001A5385 /* iOS */,
 				9C26F994146B20B9001A5385 /* Mac */,
+				9C5D2D551470281A0064F02A /* ObjectiveHub Test App */,
 				9C26F9A7146B23D9001A5385 /* Vendor */,
 				9C26F937146B2069001A5385 /* Frameworks */,
 				9C26F936146B2069001A5385 /* Products */,
@@ -263,6 +312,7 @@
 				9C26F94D146B2069001A5385 /* ObjectiveHub-MacTests.octest */,
 				9C26F967146B207A001A5385 /* libObjectiveHub.a */,
 				9C26F975146B207A001A5385 /* ObjectiveHub-iOSTests.octest */,
+				9C5D2D521470281A0064F02A /* ObjectiveHub Test App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -463,6 +513,30 @@
 			name = "Private Model Interfaces";
 			sourceTree = "<group>";
 		};
+		9C5D2D551470281A0064F02A /* ObjectiveHub Test App */ = {
+			isa = PBXGroup;
+			children = (
+				9C5D2D70147029E10064F02A /* FGOHTestAppUserCredentials.h */,
+				9C5D2D611470281A0064F02A /* AppDelegate.h */,
+				9C5D2D621470281A0064F02A /* AppDelegate.m */,
+				9C5D2D641470281B0064F02A /* MainMenu.xib */,
+				9C5D2D561470281A0064F02A /* Supporting Files */,
+			);
+			path = "ObjectiveHub Test App";
+			sourceTree = "<group>";
+		};
+		9C5D2D561470281A0064F02A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9C5D2D571470281A0064F02A /* ObjectiveHub Test App-Info.plist */,
+				9C5D2D581470281A0064F02A /* InfoPlist.strings */,
+				9C5D2D5B1470281A0064F02A /* main.m */,
+				9C5D2D5D1470281A0064F02A /* ObjectiveHub Test App-Prefix.pch */,
+				9C5D2D5E1470281A0064F02A /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -592,6 +666,25 @@
 			productReference = 9C26F975146B207A001A5385 /* ObjectiveHub-iOSTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
+		9C5D2D511470281A0064F02A /* ObjectiveHub Test App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9C5D2D691470281B0064F02A /* Build configuration list for PBXNativeTarget "ObjectiveHub Test App" */;
+			buildPhases = (
+				9C5D2D4E1470281A0064F02A /* Sources */,
+				9C5D2D4F1470281A0064F02A /* Frameworks */,
+				9C5D2D501470281A0064F02A /* Resources */,
+				9C5D2D6E1470292A0064F02A /* Copy Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9C5D2D6C147028220064F02A /* PBXTargetDependency */,
+			);
+			name = "ObjectiveHub Test App";
+			productName = "ObjectiveHub Test App";
+			productReference = 9C5D2D521470281A0064F02A /* ObjectiveHub Test App.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -619,6 +712,7 @@
 				9C26F94C146B2069001A5385 /* ObjectiveHub-MacTests */,
 				9C26F966146B207A001A5385 /* ObjectiveHub-iOS */,
 				9C26F974146B207A001A5385 /* ObjectiveHub-iOSTests */,
+				9C5D2D511470281A0064F02A /* ObjectiveHub Test App */,
 			);
 		};
 /* End PBXProject section */
@@ -645,6 +739,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C26F982146B207A001A5385 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9C5D2D501470281A0064F02A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C5D2D5A1470281A0064F02A /* InfoPlist.strings in Resources */,
+				9C5D2D601470281A0064F02A /* Credits.rtf in Resources */,
+				9C5D2D661470281B0064F02A /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -781,6 +885,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9C5D2D4E1470281A0064F02A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9C5D2D5C1470281A0064F02A /* main.m in Sources */,
+				9C5D2D631470281A0064F02A /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -803,6 +916,11 @@
 			isa = PBXTargetDependency;
 			target = 9C26F966146B207A001A5385 /* ObjectiveHub-iOS */;
 			targetProxy = 9C26F9AA146B2402001A5385 /* PBXContainerItemProxy */;
+		};
+		9C5D2D6C147028220064F02A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C26F934146B2069001A5385 /* ObjectiveHub-Mac */;
+			targetProxy = 9C5D2D6B147028220064F02A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -829,6 +947,30 @@
 				9C26F981146B207A001A5385 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9C5D2D581470281A0064F02A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9C5D2D591470281A0064F02A /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9C5D2D5E1470281A0064F02A /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9C5D2D5F1470281A0064F02A /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		9C5D2D641470281B0064F02A /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9C5D2D651470281B0064F02A /* en */,
+			);
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1116,6 +1258,61 @@
 			};
 			name = Release;
 		};
+		9C5D2D671470281B0064F02A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectiveHub Test App/ObjectiveHub Test App-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "ObjectiveHub Test App/ObjectiveHub Test App-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9C5D2D681470281B0064F02A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectiveHub Test App/ObjectiveHub Test App-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "ObjectiveHub Test App/ObjectiveHub Test App-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1181,6 +1378,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		9C5D2D691470281B0064F02A /* Build configuration list for PBXNativeTarget "ObjectiveHub Test App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C5D2D671470281B0064F02A /* Debug */,
+				9C5D2D681470281B0064F02A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
