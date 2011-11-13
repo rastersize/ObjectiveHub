@@ -103,6 +103,13 @@ NSString *const kObjectiveHubUserAgent				= @"ObjectiveHub v0.1";
 }
 
 
+#pragma mark - Describing a User Object
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"<%@: %p { github API URI = %@, username is set = %@, password is set = %@ }>", [self class], self, kObjectiveHubGitHubAPIURIString, (self.username ? @"YES" : @"NO"), (self.password ? @"YES" : @"NO")];
+}
+
+
 #pragma mark - Configuration Options
 - (NSUInteger)defaultItemsPerPage
 {
