@@ -62,6 +62,13 @@ NSString *const kFGOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 	return self;
 }
 
+- (void)dealloc
+{
+	[_name release];
+	
+	[super dealloc];
+}
+
 
 #pragma mark - Transform Between Instance Variables and Dictionary
 - (NSDictionary *)encodeAsDictionary

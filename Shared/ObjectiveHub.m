@@ -69,6 +69,14 @@ NSString *const kObjectiveHubDateFormat		= @"YYYY-MM-DDTHH:MM:SSZ";
 	return self;
 }
 
+- (void)dealloc
+{
+	[_username release];
+	[_password release];
+
+	[super dealloc];
+}
+
 - (id)initWithUsername:(NSString *)username password:(NSString *)password
 {
 	self = [self init];

@@ -104,6 +104,24 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 	return self;
 }
 
+- (void)dealloc
+{
+    [_name release];
+	[_company release];
+	[_email release];
+	[_biography release];
+	[_location release];
+	[_blog release];
+	[_login release];
+	[_htmlUrl release];
+	[_avatarUrl release];
+	[_createdAt release];
+	[_type release];
+	[_plan release];
+	
+	[super dealloc];
+}
+
 
 #pragma mark - Transform Between Instance Variables and Dictionary
 - (NSDictionary *)encodeAsDictionary
