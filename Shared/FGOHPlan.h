@@ -64,4 +64,27 @@
  */
 @property (readonly) NSUInteger privateRepositories;
 
+
+#pragma mark - Identifying and Comparing Plans
+/** @name Identifying and Comparing Plans */
+/**
+ * Returns a Boolean value that indicates whether a given plan is equal to the
+ * receiver.
+ *
+ * @param aUser The plan with which to compare the reciever.
+ * @return `YES` if _aPlan_ is equivalent to the reciever, otherwise `NO`.
+ */
+- (BOOL)isEqualToPlan:(FGOHPlan *)aPlan;
+
+/**
+ * Returns an unsigned integer that can be used as a has table address.
+ *
+ * If two user objects are equal (as determined by the isEqualToPlan: method),
+ * they will have the same hash value.
+ *
+ * @return An unsigned integer that can be used as a has table address.
+ */
+- (NSUInteger)hash;
+
+
 @end

@@ -96,6 +96,44 @@ NSString *const kFGOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 }
 
 
+#pragma mark - Identifying and Comparing Plans
+- (BOOL)isEqual:(id)other
+{
+	if (other == self) {
+		return YES;
+	}
+	if (!other || ![other isKindOfClass:[self class]]) {
+		return NO;
+	}
+	return [self isEqualToPlan:other];
+}
+
+- (BOOL)isEqualToPlan:(FGOHPlan *)aPlan
+{
+	if (aPlan == self) {
+		return YES;
+	}
+	
+	return ([aPlan.name isEqualToString:self.name] &&
+			aPlan.space == self.space &&
+			aPlan.collaborators == self.collaborators &&
+			aPlan.privateRepositories == self.privateRepositories);
+}
+
+- (NSUInteger)hash
+{
+	NSUInteger prime = 31;
+	NSUInteger hash = 1;
+	
+	hash = [self.name hash];
+	hash = prime * hash + self.space;
+	hash = prime * hash + self.collaborators;
+	hash = prime * hash + self.privateRepositories;
+	
+	return hash;
+}
+
+
 #pragma mark - NSCopying Method
 - (id)copyWithZone:(NSZone *)zone
 {
