@@ -157,4 +157,11 @@ NSString *const kFGOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 }
 
 
+#pragma mark - Describing a User Object
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"<%@: %p { name = %@ }>", [self class], self, self.name];
+}
+
+
 @end
