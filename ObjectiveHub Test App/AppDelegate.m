@@ -10,8 +10,12 @@
 
 #import <ObjectiveHub/ObjectiveHub.h>
 #import <ObjectiveHub/FGOHUser.h>
+#import "FGOHUserPrivate.h"
 
 #import "FGOHTestAppUserCredentials.h"
+
+
+#define BoolToString(b) (b) ? @"YES" : @"NO"
 
 
 @implementation AppDelegate
@@ -21,8 +25,15 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
 	ObjectiveHub *hub = [[ObjectiveHub alloc] initWithUsername:FGOHTestAppUsername password:FGOHTestAppPassword];
+	NSLog(@"hub: %@", hub);
 	
-	NSLog(@"");
+	[hub userWithLogin:@"schacon"
+			   success:^(FGOHUser *user) {
+				   NSLog(@"user: %@", user);
+			   }
+			   failure:^(NSError *error) {
+				   NSLog(@"failure: %@", error);
+			   }];
 }
 
 @end
