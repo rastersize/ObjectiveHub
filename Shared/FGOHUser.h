@@ -37,6 +37,58 @@
 @class FGOHPlan;
 
 
+#pragma mark Dictionary Keys
+/** @name Dictionary Keys */
+/// Dictionary key for the login value.
+extern NSString *const kFGOHUserDictionaryLoginKey;
+/// Dictionary key for the id value.
+extern NSString *const kFGOHUserDictionaryIdKey;
+/// Dictionary key for the avatar URL value.
+extern NSString *const kFGOHUserDictionaryAvatarUrlKey;
+/// Dictionary key for the API URL value.
+extern NSString *const kFGOHUserDictionaryUrlKey;
+/// Dictionary key for the name value.
+extern NSString *const kFGOHUserDictionaryNameKey;
+/// Dictionary key for the company value.
+extern NSString *const kFGOHUserDictionaryCompanyKey;
+/// Dictionary key for the blog URL value.
+extern NSString *const kFGOHUserDictionaryBlogKey;
+/// Dictionary key for the location value.
+extern NSString *const kFGOHUserDictionaryLocationKey;
+/// Dictionary key for the email value.
+extern NSString *const kFGOHUserDictionaryEmailKey;
+/// Dictionary key for the hireable value.
+extern NSString *const kFGOHUserDictionaryHireableKey;
+/// Dictionary key for the biography value.
+extern NSString *const kFGOHUserDictionaryBioKey;
+/// Dictionary key for the number of public repositories value.
+extern NSString *const kFGOHUserDictionaryPublicReposKey;
+/// Dictionary key for the number of public gists value.
+extern NSString *const kFGOHUserDictionaryPublicGistsKey;
+/// Dictionary key for the number of followers value.
+extern NSString *const kFGOHUserDictionaryFollowersKey;
+/// Dictionary key for the number of people the user is following value.
+extern NSString *const kFGOHUserDictionaryFollowingKey;
+/// Dictionary key for the HTML URL value.
+extern NSString *const kFGOHUserDictionaryHtmlUrlKey;
+/// Dictionary key for the created at value.
+extern NSString *const kFGOHUserDictionaryCreatedAtKey;
+/// Dictionary key for the user type value.
+extern NSString *const kFGOHUserDictionaryTypeKey;
+/// Dictionary key for the total number of private repositories value.
+extern NSString *const kFGOHUserDictionaryTotalPrivateReposKey;
+/// Dictionary key for the total number of owned private repositories value.
+extern NSString *const kFGOHUserDictionaryOwnedPrivateReposKey;
+/// Dictionary key for the number of private gists value.
+extern NSString *const kFGOHUserDictionaryPrivateGistsKey;
+/// Dictionary key for the total disk usage value.
+extern NSString *const kFGOHUserDictionaryDiskUsageKey;
+/// Dictionary key for the number of collaborators value.
+extern NSString *const kFGOHUserDictionaryCollaboratorsKey;
+/// Dictionary key for the plan value.
+extern NSString *const kFGOHUserDictionaryPlanKey;
+
+
 #pragma mark - FGOHUser Interface
 /**
  * An immutable class containing information about a single GitHub user.
