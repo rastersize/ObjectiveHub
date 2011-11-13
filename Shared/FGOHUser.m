@@ -276,4 +276,12 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 	[aCoder encodeObject:dictionary forKey:@"dictionary"];
 }
 
+
+#pragma mark - Describing a User Object
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"<%@: %p { id = %d, login = %@ }>", [self class], self, self.identifier, self.login];
+}
+
+
 @end
