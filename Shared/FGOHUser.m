@@ -227,12 +227,39 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 }
 
 
+#pragma mark - Identifying and Comparing Users
+- (BOOL)isEqual:(id)other
+{
+	if (other == self) {
+		return YES;
+	}
+	if (!other || ![other isKindOfClass:[self class]]) {
+		return NO;
+	}
+	return [self isEqualToUser:other];
+}
+
+- (BOOL)isEqualToUser:(FGOHUser *)aUser
+{
+	if (aUser == self) {
+		return YES;
+	}
+	
+	return (aUser.identifier == self.identifier);
+}
+
+- (NSUInteger)hash
+{
+	return self.identifier;
+}
+
+
 #pragma mark - NSCopying Method
 - (id)copyWithZone:(NSZone *)zone
 {
 	// Simply return a retained pointer to this instance as the class is
 	// immutable.
-	return [self retain];
+	return self;
 }
 
 

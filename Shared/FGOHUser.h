@@ -198,4 +198,31 @@
 @property (readonly, strong) NSURL *blog;
 
 
+#pragma mark - Identifying and Comparing Users
+/** @name Identifying and Comparing Users */
+/**
+ * Returns a Boolean value that indicates whether a given user is equal to the
+ * receiver.
+ *
+ * As the user identifier integer uniquely identifies a GitHub the receiver and
+ * _aUser_ is determined to be equal if their identifiers are equal. They are
+ * also equal if the receiver and the _aUser_ instances are the same instance.
+ *
+ * @param aUser The user with which to compare the reciever.
+ * @return `YES` if _aUser_ is equivalent to the reciever, otherwise `NO`.
+ */
+- (BOOL)isEqualToUser:(FGOHUser *)aUser;
+
+/**
+ * Returns an unsigned integer that can be used as a has table address.
+ *
+ * If two user objects are equal (as determined by the isEqualToUser: method),
+ * they will have the same hash value. Currently this is equivalent with
+ * the identifier since it represents an unique GitHub user.
+ *
+ * @return An unsigned integer that can be used as a has table address.
+ */
+- (NSUInteger)hash;
+
+
 @end
