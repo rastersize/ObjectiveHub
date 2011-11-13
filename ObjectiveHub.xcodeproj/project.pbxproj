@@ -37,14 +37,14 @@
 		9C26F943146B2069001A5385 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F941146B2069001A5385 /* InfoPlist.strings */; };
 		9C26F94F146B2069001A5385 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F94E146B2069001A5385 /* SenTestingKit.framework */; };
 		9C26F950146B2069001A5385 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F938146B2069001A5385 /* Cocoa.framework */; };
-		9C26F953146B2069001A5385 /* ObjectiveHub-Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F935146B2069001A5385 /* ObjectiveHub-Mac.framework */; };
+		9C26F953146B2069001A5385 /* ObjectiveHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F935146B2069001A5385 /* ObjectiveHub.framework */; };
 		9C26F959146B2069001A5385 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F957146B2069001A5385 /* InfoPlist.strings */; };
 		9C26F95C146B2069001A5385 /* ObjectiveHub_MacTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F95B146B2069001A5385 /* ObjectiveHub_MacTests.m */; };
 		9C26F969146B207A001A5385 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F968146B207A001A5385 /* Foundation.framework */; };
 		9C26F976146B207A001A5385 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F94E146B2069001A5385 /* SenTestingKit.framework */; };
 		9C26F978146B207A001A5385 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F977146B207A001A5385 /* UIKit.framework */; };
 		9C26F979146B207A001A5385 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F968146B207A001A5385 /* Foundation.framework */; };
-		9C26F97C146B207A001A5385 /* libObjectiveHub-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F967146B207A001A5385 /* libObjectiveHub-iOS.a */; };
+		9C26F97C146B207A001A5385 /* libObjectiveHub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F967146B207A001A5385 /* libObjectiveHub.a */; };
 		9C26F982146B207A001A5385 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F980146B207A001A5385 /* InfoPlist.strings */; };
 		9C26F985146B207A001A5385 /* ObjectiveHub_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F984146B207A001A5385 /* ObjectiveHub_iOSTests.m */; };
 		9C26F9B2146B2424001A5385 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9AE146B2424001A5385 /* JSONKit.h */; };
@@ -145,7 +145,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9C26F935146B2069001A5385 /* ObjectiveHub-Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "ObjectiveHub-Mac.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C26F935146B2069001A5385 /* ObjectiveHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C26F938146B2069001A5385 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9C26F93B146B2069001A5385 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		9C26F93C146B2069001A5385 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -159,7 +159,7 @@
 		9C26F958146B2069001A5385 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9C26F95A146B2069001A5385 /* ObjectiveHub_MacTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveHub_MacTests.h; sourceTree = "<group>"; };
 		9C26F95B146B2069001A5385 /* ObjectiveHub_MacTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveHub_MacTests.m; sourceTree = "<group>"; };
-		9C26F967146B207A001A5385 /* libObjectiveHub-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libObjectiveHub-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C26F967146B207A001A5385 /* libObjectiveHub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjectiveHub.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C26F968146B207A001A5385 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9C26F96C146B207A001A5385 /* ObjectiveHub-iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveHub-iOS-Prefix.pch"; sourceTree = "<group>"; };
 		9C26F975146B207A001A5385 /* ObjectiveHub-iOSTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ObjectiveHub-iOSTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,7 +218,7 @@
 			files = (
 				9C26F94F146B2069001A5385 /* SenTestingKit.framework in Frameworks */,
 				9C26F950146B2069001A5385 /* Cocoa.framework in Frameworks */,
-				9C26F953146B2069001A5385 /* ObjectiveHub-Mac.framework in Frameworks */,
+				9C26F953146B2069001A5385 /* ObjectiveHub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,7 +237,7 @@
 				9C26F976146B207A001A5385 /* SenTestingKit.framework in Frameworks */,
 				9C26F978146B207A001A5385 /* UIKit.framework in Frameworks */,
 				9C26F979146B207A001A5385 /* Foundation.framework in Frameworks */,
-				9C26F97C146B207A001A5385 /* libObjectiveHub-iOS.a in Frameworks */,
+				9C26F97C146B207A001A5385 /* libObjectiveHub.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,9 +259,9 @@
 		9C26F936146B2069001A5385 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9C26F935146B2069001A5385 /* ObjectiveHub-Mac.framework */,
+				9C26F935146B2069001A5385 /* ObjectiveHub.framework */,
 				9C26F94D146B2069001A5385 /* ObjectiveHub-MacTests.octest */,
-				9C26F967146B207A001A5385 /* libObjectiveHub-iOS.a */,
+				9C26F967146B207A001A5385 /* libObjectiveHub.a */,
 				9C26F975146B207A001A5385 /* ObjectiveHub-iOSTests.octest */,
 			);
 			name = Products;
@@ -533,7 +533,7 @@
 			);
 			name = "ObjectiveHub-Mac";
 			productName = "ObjectiveHub-Mac";
-			productReference = 9C26F935146B2069001A5385 /* ObjectiveHub-Mac.framework */;
+			productReference = 9C26F935146B2069001A5385 /* ObjectiveHub.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		9C26F94C146B2069001A5385 /* ObjectiveHub-MacTests */ = {
@@ -570,7 +570,7 @@
 			);
 			name = "ObjectiveHub-iOS";
 			productName = "ObjectiveHub-iOS";
-			productReference = 9C26F967146B207A001A5385 /* libObjectiveHub-iOS.a */;
+			productReference = 9C26F967146B207A001A5385 /* libObjectiveHub.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		9C26F974146B207A001A5385 /* ObjectiveHub-iOSTests */ = {
@@ -881,7 +881,7 @@
 				INSTALL_PATH = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ObjectiveHub;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
@@ -910,7 +910,7 @@
 				INFOPLIST_FILE = "ObjectiveHub-Mac/ObjectiveHub-Mac-Info.plist";
 				INSTALL_PATH = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ObjectiveHub;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
@@ -997,7 +997,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ObjectiveHub;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1020,7 +1020,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = ObjectiveHub;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
