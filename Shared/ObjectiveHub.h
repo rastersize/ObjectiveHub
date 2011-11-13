@@ -60,10 +60,23 @@
 #pragma mark - Initializing ObjectiveHub
 /** @name Initializing ObjectiveHub */
 /**
+ * Initializes and returns an `ObjectiveHub` instance that uses the default
+ * settings.
+ *
+ * @warning *Important:* To get data which requires authentication you must set
+ * the username and password properties after calling the init method.
+ * Alternatively you can use the initialization method
+ * initWithUsername:password: instead which will do it for you.
+ *
+ * @return An `ObjectiveHub` instance initialized with the default values.
+ */
+- (id)init;
+
+/**
  * Initializes and returns an `ObjectiveHub` instance that uses the given
  * username and password for authentication with GitHub.
  *
- * @warning *Important* The
+ * @warning *Important:* The
  * [basic authentication](http://developer.github.com/v3/#authentication) method
  * is used as this is what GitHub recommend that desktop applications use.
  *
