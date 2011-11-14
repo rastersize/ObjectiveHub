@@ -62,7 +62,7 @@ typedef void (^FGOBUserFailureBlock)(NSError *error);
  * That is you might have a different limit than the default. But for the sake
  * of all of us be nice towards the service.
  *
- * @TODO: We should only require a password when GitHub requires us to authenticate else we should not store it (so that we do not expose the user to unnecessary risks. 
+ * @TODO: We should only require a password when GitHub requires us to authenticate else we should not store it (so that we do not expose the user to unnecessary risks. That is, if the user of the library wants this and it is possible.
  */
 @interface ObjectiveHub : NSObject
 
@@ -143,9 +143,14 @@ typedef void (^FGOBUserFailureBlock)(NSError *error);
 /**
  * Get a single specific user by their login.
  *
+ * @warning *Important:* The success and failure blocks are both optional but if
+ * neither is given no request will be performed.
+ *
  * @param login The login of the sought user.
- * @param successBlock The block which is called upon success. 
- * @param failureBlock The block which is called upon failure.
+ * @param successBlock The block which is called upon success. The parameter may
+ * be set to NULL in which case nothing will be done upon success.
+ * @param failureBlock The block which is called upon failure. The parameter may
+ * be set to NULL in which case nothing will be done upon failure.
  *
  * @see authenticatedUser:success:failure:
  */
@@ -154,11 +159,16 @@ typedef void (^FGOBUserFailureBlock)(NSError *error);
 /**
  * Get the currently authenticated user.
  *
- * If either one of the properties username or password is not set the failiur
+ * If either one of the properties username or password is not set the failure
  * block will be called immediately.
  *
- * @param successBlock The block which is called upon success. 
- * @param failureBlock The block which is called upon failure.
+ * @warning *Important:* The success and failure blocks are both optional but if
+ * neither is given no request will be performed.
+ *
+ * @param successBlock The block which is called upon success. The parameter may
+ * be set to NULL in which case nothing will be done upon success.
+ * @param failureBlock The block which is called upon failure. The parameter may
+ * be set to NULL in which case nothing will be done upon failure.
  *
  * @see userWithLogin:success:failure:
  */
@@ -215,9 +225,14 @@ typedef void (^FGOBUserFailureBlock)(NSError *error);
  *   </tr>
  * </table>
  *
+ * @warning *Important:* The success and failure blocks are both optional but if
+ * neither is given no request will be performed.
+ *
  * @param dictionary A dictionary containing values for the pre-defined keys.
- * @param successBlock The block which is called upon success.
- * @param failureBlock The block which is called upon failure.
+ * @param successBlock The block which is called upon success. The parameter may
+ * be set to NULL in which case nothing will be done upon success.
+ * @param failureBlock The block which is called upon failure. The parameter may
+ * be set to NULL in which case nothing will be done upon failure.
  */
 - (void)updateAuthenticatedUserWithDictionary:(NSDictionary *)dictionary success:(FGOBUserSuccessBlock)successBlock failure:(FGOBUserFailureBlock)failureBlock;
 
