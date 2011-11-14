@@ -161,6 +161,20 @@
 			remoteGlobalIDString = 9C26F934146B2069001A5385;
 			remoteInfo = "ObjectiveHub-Mac";
 		};
+		9C76FA2B1471CD6A0076954A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C26F929146B1B74001A5385 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C26FA0A146B3950001A5385;
+			remoteInfo = Documentation;
+		};
+		9C76FA2E1471DA830076954A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C26F929146B1B74001A5385 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C26FA0A146B3950001A5385;
+			remoteInfo = Documentation;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -614,6 +628,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9C76FA2C1471CD6A0076954A /* PBXTargetDependency */,
 			);
 			name = "ObjectiveHub-Mac";
 			productName = "ObjectiveHub-Mac";
@@ -651,6 +666,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9C76FA2F1471DA830076954A /* PBXTargetDependency */,
 			);
 			name = "ObjectiveHub-iOS";
 			productName = "ObjectiveHub-iOS";
@@ -933,6 +949,16 @@
 			isa = PBXTargetDependency;
 			target = 9C26F934146B2069001A5385 /* ObjectiveHub-Mac */;
 			targetProxy = 9C5D2D6B147028220064F02A /* PBXContainerItemProxy */;
+		};
+		9C76FA2C1471CD6A0076954A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C26FA0A146B3950001A5385 /* Documentation */;
+			targetProxy = 9C76FA2B1471CD6A0076954A /* PBXContainerItemProxy */;
+		};
+		9C76FA2F1471DA830076954A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C26FA0A146B3950001A5385 /* Documentation */;
+			targetProxy = 9C76FA2E1471DA830076954A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1400,6 +1426,7 @@
 				9C5D2D681470281B0064F02A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
