@@ -41,16 +41,28 @@
 
 #pragma mark Constants
 /// The base URI for the GitHub API
-NSString *const kObjectiveHubGitHubAPIURIString		= @"https://api.github.com";
-
-/// The GitHub API accept mime type.
-NSString *const kObjectiveHubGitHubAPIAcceptMime	= @"application/vnd.github.beta+json";
+NSString *const kFGOHGitHubBaseAPIURIString	= @"https://api.github.com";
 
 /// A date format string for the ISO 8601 format
-NSString *const kObjectiveHubDateFormat				= @"YYYY-MM-DDTHH:MM:SSZ";
+NSString *const kFGOHDateFormat				= @"YYYY-MM-DDTHH:MM:SSZ";
 
 /// ObjectiveHub User Agent string
-NSString *const kObjectiveHubUserAgent				= @"ObjectiveHub v0.1";
+NSString *const kFGOHUserAgent				= @"ObjectiveHub v0.1";
+
+#pragma mark - GitHub Mime Types
+/// Mime type for getting the default type of data as JSON.
+NSString *const kFGOHGitHubMimeGenericJSON	= @"application/vnd.github.beta+json";
+/// Mime type for getting the raw data as JSON.
+NSString *const kFGOHGitHubMimeRawJSON		= @"application/vnd.github.beta.raw+json";
+/// Mime type for getting the text only representation of the data, as JSON.
+NSString *const kFGOHGitHubMimeTextInJSON	= @"application/vnd.github.beta.text+json";
+/// Mime type for getting the resource rendered as HTML as JSON.
+NSString *const kFGOHGitHubMimeHtmlInJSON	= @"application/vnd.github.beta.html+json";
+/// Mime type for getting raw, text and html versions of a resource in the same
+/// response as JSON.
+NSString *const kFGOHGitHubMimeFullInJSON	= @"application/vnd.github.beta.full+json";
+/// Mime type for getting raw blob data (**not** wrapped in a JSON object).
+NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 
 
 #pragma mark - ObjectiveHub Private Interface
@@ -82,9 +94,9 @@ NSString *const kObjectiveHubUserAgent				= @"ObjectiveHub v0.1";
 		_defaultItemsPerPage	= kObjectiveHubDefaultItemsPerPage;
 		_rateLimit				= kObjectiveHubDefaultRateLimit;
 		
-		_client					= [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kObjectiveHubGitHubAPIURIString]];
+		_client					= [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kFGOHGitHubBaseAPIURIString]];
 		[_client registerHTTPOperationClass:[AFJSONRequestOperation class]];
-		[_client setDefaultHeader:@"Accept" value:kObjectiveHubGitHubAPIAcceptMime];
+		[_client setDefaultHeader:@"Accept" value:kFGOHGitHubMimeGenericJSON];
 		//[_client setDefaultHeader:@"User-Agent" value:kObjectiveHubUserAgent];
 	}
 	
@@ -106,7 +118,7 @@ NSString *const kObjectiveHubUserAgent				= @"ObjectiveHub v0.1";
 #pragma mark - Describing a User Object
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"<%@: %p { github API URI = %@, username is set = %@, password is set = %@ }>", [self class], self, kObjectiveHubGitHubAPIURIString, (self.username ? @"YES" : @"NO"), (self.password ? @"YES" : @"NO")];
+	return [NSString stringWithFormat:@"<%@: %p { github API URI = %@, username is set = %@, password is set = %@ }>", [self class], self, kFGOHGitHubBaseAPIURIString, (self.username ? @"YES" : @"NO"), (self.password ? @"YES" : @"NO")];
 }
 
 
@@ -130,7 +142,9 @@ NSString *const kObjectiveHubUserAgent				= @"ObjectiveHub v0.1";
 #pragma mark - Getting and Updating Users
 - (void)userWithLogin:(NSString *)login success:(FGOBUserSuccessBlock)successBlock failure:(FGOBUserFailureBlock)failureBlock
 {
-	NSAssert(login, @"Invalid argument 'login' must be set");
+	if (!login) {
+		[NSException raise:NSInvalidArgumentException format:@"The login argument is not set."];
+	}
 	
 	NSString *getPath = [NSString stringWithFormat:@"/users/%@", login];
 	NSLog(@"%@", _client);
@@ -138,14 +152,19 @@ NSString *const kObjectiveHubUserAgent				= @"ObjectiveHub v0.1";
 	[self.client getPath:getPath
 			  parameters:nil
 				 success:^(__unused AFHTTPRequestOperation *operation, id responseObject) {
-					 NSDictionary *userDict = [responseObject objectFromJSONData];
-					 NSLog(@"org dict: %@", userDict);
+					 NSDictionary *userDict = responseObject;
+					 NSLog(@"userDict: %@", userDict);
 					 FGOHUser *user = [[FGOHUser alloc] initWithDictionary:userDict];
-					 NSLog(@"object dict: %@", [user encodeAsDictionary]);
-					 successBlock(user);
+					 if (successBlock) {
+						 successBlock(user);
+					 }
 				 }
 				 failure:^(__unused AFHTTPRequestOperation *operation, NSError *error) {
-					 failureBlock(error);
+					 NSLog(@"%@", [operation.response allHeaderFields]);
+					 NSLog(@"%@", [operation.responseData objectFromJSONData]);
+					 if (failureBlock) {
+						 failureBlock(error);
+					 }
 				 }];
 }
 
