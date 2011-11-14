@@ -39,7 +39,6 @@
 NSString *const kFGOHUserDictionaryLoginKey				= @"login";
 NSString *const kFGOHUserDictionaryIdKey				= @"id";
 NSString *const kFGOHUserDictionaryAvatarUrlKey			= @"avatar_url";
-NSString *const kFGOHUserDictionaryGravatarIdKey		= @"gravatar_id";
 NSString *const kFGOHUserDictionaryUrlKey				= @"url";
 NSString *const kFGOHUserDictionaryNameKey				= @"name";
 NSString *const kFGOHUserDictionaryCompanyKey			= @"company";
