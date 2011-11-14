@@ -792,7 +792,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# \n# Generates API documentation with the help of appledoc.\n# Generates both HTML code and a DocSet (which *can* be installed into Xcode).\n#\n# Copyright (c) 2011 Fruit is Good. All rights reserved.\n#\n\nAPI_DOCS_DIR=`pwd`\"/Documentation\"\n\n\necho \"API documentation generation target (v1)\"\necho \"Will save generated documentation into \\\"${API_DOCS_DIR}\\\"\"\necho \"Removing old API documentation\"\nrm -r \"${API_DOCS_DIR}/html\" 2> /dev/null\nrm -r \"${API_DOCS_DIR}/docset\" 2> /dev/null\n\n\nHEADER_DIRECTORIES=\"ObjectiveHub-Mac ObjectiveHub-iOS Shared\"\necho \"Finding header files in:\"\necho ${HEADER_DIRECTORIES}\nHEADER_FILES=`find ${HEADER_DIRECTORIES} -name '*.h' | grep -v Private`\necho \"Will generate API documentation based on:\"\necho ${HEADER_FILES}\n\n\necho \"Generating API documentation into \\\"${API_DOCS_DIR}\\\"\"\n/usr/local/bin/appledoc \\\n--verbose 6 \\\n--output ${API_DOCS_DIR} \\\n--project-name \"ObjectiveHub\" \\\n--project-version \"${LIBRARY_VERSION}\" \\\n--project-company \"Fruit is Good\" \\\n--company-id \"com.fruitisgood\" \\\n--create-html \\\n--keep-intermediate-files \\\n--no-install-docset \\\n${HEADER_FILES}\n\necho \"Done!\"\n";
+			shellScript = "# \n# Generates API documentation with the help of appledoc.\n# Generates both HTML code and a DocSet (which *can* be installed into Xcode).\n#\n# Copyright (c) 2011 Fruit is Good. All rights reserved.\n#\n\n#                            Output dir:        Search dirs (space separated list):\n./Scripts/GenerateAPIDocs.sh \"Documentation\"    \"ObjectiveHub-Mac ObjectiveHub-iOS Shared\"\n";
 		};
 		9C2F3E80146F426900C44A82 /* Warn About TODO/FIXME Tags */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1245,6 +1245,7 @@
 		9C26FA0C146B3950001A5385 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DOCS_LIBRARY_VERSION = head;
 				LIBRARY_VERSION = 0.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1253,6 +1254,7 @@
 		9C26FA0D146B3950001A5385 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DOCS_LIBRARY_VERSION = "${LIBRARY_VERSION}";
 				LIBRARY_VERSION = 0.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
