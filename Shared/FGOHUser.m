@@ -37,9 +37,8 @@
 
 #pragma mark Dictionary Keys
 NSString *const kFGOHUserDictionaryLoginKey				= @"login";
-NSString *const kFGOHUserDictionaryIdKey				= @"id";
-NSString *const kFGOHUserDictionaryAvatarUrlKey			= @"avatar_url";
-NSString *const kFGOHUserDictionaryUrlKey				= @"url";
+NSString *const kFGOHUserDictionaryIDKey				= @"id";
+NSString *const kFGOHUserDictionaryAvatarURLKey			= @"avatar_url";
 NSString *const kFGOHUserDictionaryNameKey				= @"name";
 NSString *const kFGOHUserDictionaryCompanyKey			= @"company";
 NSString *const kFGOHUserDictionaryBlogKey				= @"blog";
@@ -51,7 +50,7 @@ NSString *const kFGOHUserDictionaryPublicReposKey		= @"public_repos";
 NSString *const kFGOHUserDictionaryPublicGistsKey		= @"public_gists";
 NSString *const kFGOHUserDictionaryFollowersKey			= @"followers";
 NSString *const kFGOHUserDictionaryFollowingKey			= @"following";
-NSString *const kFGOHUserDictionaryHtmlUrlKey			= @"html_url";
+NSString *const kFGOHUserDictionaryHTMLURLKey			= @"html_url";
 NSString *const kFGOHUserDictionaryCreatedAtKey			= @"created_at";
 NSString *const kFGOHUserDictionaryTypeKey				= @"type";
 NSString *const kFGOHUserDictionaryTotalPrivateReposKey	= @"total_private_repos";
@@ -62,7 +61,7 @@ NSString *const kFGOHUserDictionaryCollaboratorsKey		= @"collaborators";
 NSString *const kFGOHUserDictionaryPlanKey				= @"plan";
 
 NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
-NSString *const kFGOHUserDictionaryApiUrlKey			= @"url";
+NSString *const kFGOHUserDictionaryAPIURLKey			= @"url";
 
 
 @interface FGOHUser ()
@@ -135,7 +134,7 @@ NSString *const kFGOHUserDictionaryApiUrlKey			= @"url";
 	
 	
 	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-								self.apiResourceUrl,			kFGOHUserDictionaryApiUrlKey,
+								self.apiResourceUrl,			kFGOHUserDictionaryAPIURLKey,
 								self.login,						kFGOHUserDictionaryLoginKey,
 								self.name,						kFGOHUserDictionaryNameKey,
 								self.company,					kFGOHUserDictionaryCompanyKey,
@@ -143,11 +142,11 @@ NSString *const kFGOHUserDictionaryApiUrlKey			= @"url";
 								self.biography,					kFGOHUserDictionaryBioKey,
 								self.location,					kFGOHUserDictionaryLocationKey,
 								self.blogUrl,					kFGOHUserDictionaryBlogKey,
-								self.avatarUrl,					kFGOHUserDictionaryAvatarUrlKey,
-								self.htmlUrl,					kFGOHUserDictionaryHtmlUrlKey,
+								self.avatarUrl,					kFGOHUserDictionaryAvatarURLKey,
+								self.htmlUrl,					kFGOHUserDictionaryHTMLURLKey,
 								self.createdAt,					kFGOHUserDictionaryCreatedAtKey,
 								self.type,						kFGOHUserDictionaryTypeKey,
-								identifierNumber,				kFGOHUserDictionaryIdKey,
+								identifierNumber,				kFGOHUserDictionaryIDKey,
 								authenticatedNumber,			kFGOHUserDictionaryAuthenticatedKey,
 								hireableNumber,					kFGOHUserDictionaryHireableKey,
 								publicRepositoriesNumber,		kFGOHUserDictionaryPublicReposKey,
@@ -190,10 +189,10 @@ NSString *const kFGOHUserDictionaryApiUrlKey			= @"url";
 	
 	
 	//--//
-	_apiResourceUrl	= [dictionary valueForKey:kFGOHUserDictionaryApiUrlKey];
+	_apiResourceUrl	= [dictionary valueForKey:kFGOHUserDictionaryAPIURLKey];
 	_blogUrl		= [dictionary valueForKey:kFGOHUserDictionaryBlogKey];
-	_avatarUrl		= [dictionary valueForKey:kFGOHUserDictionaryAvatarUrlKey];
-	_htmlUrl		= [dictionary valueForKey:kFGOHUserDictionaryHtmlUrlKey];
+	_avatarUrl		= [dictionary valueForKey:kFGOHUserDictionaryAvatarURLKey];
+	_htmlUrl		= [dictionary valueForKey:kFGOHUserDictionaryHTMLURLKey];
 	
 	
 	//--//
@@ -210,7 +209,7 @@ NSString *const kFGOHUserDictionaryApiUrlKey			= @"url";
 	
 	
 	//--//
-	NSNumber *identifier = [dictionary valueForKey:kFGOHUserDictionaryIdKey];
+	NSNumber *identifier = [dictionary valueForKey:kFGOHUserDictionaryIDKey];
 	_identifier = [identifier unsignedIntegerValue];
 	
 	NSNumber *publicRepos = [dictionary valueForKey:kFGOHUserDictionaryPublicReposKey];

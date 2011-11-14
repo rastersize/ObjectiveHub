@@ -35,7 +35,7 @@
 
 #pragma mark FGOHError User Info Dictionary Default Keys
 /// User info dictionary key to get the HTTP headers the error was created from.
-extern NSString *const kFGOHErrorUserInfoHttpHeadersKey;
+extern NSString *const kFGOHErrorUserInfoHTTPHeadersKey;
 /// User info dictionary key to get the response data.
 extern NSString *const kFGOHErrorUserInfoResponseDataKey;
 
@@ -96,7 +96,7 @@ typedef NSInteger FGOHErrorCodeType;
  * @return An `FGOHError` instance initialized with the given http headers,
  * status and response body.
  */
-- (id)initWithHTTPHeaders:(NSDictionary *)httpHeaders httpStatus:(NSInteger)httpStatus responseBody:(NSData *)responseBody;
+- (id)initWithHTTPHeaders:(NSDictionary *)httpHeaders HTTPStatus:(NSInteger)httpStatus responseBody:(NSData *)responseBody;
 
 
 #pragma mark - HTTP Headers
@@ -107,7 +107,7 @@ typedef NSInteger FGOHErrorCodeType;
  * This is the same as getting the value for the key
  * `kFGOHErrorUserInfoHttpHeadersKey` in the userInfo dictionary.
  */
-@property (readonly, strong) NSDictionary *httpHeaders;
+@property (readonly, strong) NSDictionary *HTTPHeaders;
 
 
 #pragma mark - Response Data

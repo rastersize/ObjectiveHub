@@ -35,7 +35,7 @@
 
 
 #pragma mark FGOHError User Info Dictionary Default Keys
-NSString *const kFGOHErrorUserInfoHttpHeadersKey			= @"httpHeaders";
+NSString *const kFGOHErrorUserInfoHTTPHeadersKey			= @"httpHeaders";
 NSString *const kFGOHErrorUserInfoResponseDataKey			= @"responseData";
 
 
@@ -47,10 +47,10 @@ NSString *const kFGOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
 @implementation FGOHError
 
 #pragma mark - Initializing an FGOHError Instance
-- (id)initWithHTTPHeaders:(NSDictionary *)httpHeaders httpStatus:(NSInteger)httpStatus responseBody:(NSData *)responseBody
+- (id)initWithHTTPHeaders:(NSDictionary *)httpHeaders HTTPStatus:(NSInteger)httpStatus responseBody:(NSData *)responseBody
 {
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-							  httpHeaders,	kFGOHErrorUserInfoHttpHeadersKey,
+							  httpHeaders,	kFGOHErrorUserInfoHTTPHeadersKey,
 							  responseBody,	kFGOHErrorUserInfoResponseDataKey,
 							  nil];
 	
@@ -60,9 +60,9 @@ NSString *const kFGOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
 
 
 #pragma mark - HTTP Headers
-- (NSDictionary *)httpHeaders
+- (NSDictionary *)HTTPHeaders
 {
-	return [[self userInfo] objectForKey:kFGOHErrorUserInfoHttpHeadersKey];
+	return [[self userInfo] objectForKey:kFGOHErrorUserInfoHTTPHeadersKey];
 }
 
 

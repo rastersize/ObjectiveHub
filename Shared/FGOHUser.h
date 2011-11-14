@@ -42,11 +42,9 @@
 /// Dictionary key for the login value.
 extern NSString *const kFGOHUserDictionaryLoginKey;
 /// Dictionary key for the id value.
-extern NSString *const kFGOHUserDictionaryIdKey;
+extern NSString *const kFGOHUserDictionaryIDKey;
 /// Dictionary key for the avatar URL value.
-extern NSString *const kFGOHUserDictionaryAvatarUrlKey;
-/// Dictionary key for the API URL value.
-extern NSString *const kFGOHUserDictionaryUrlKey;
+extern NSString *const kFGOHUserDictionaryAvatarURLKey;
 /// Dictionary key for the name value.
 extern NSString *const kFGOHUserDictionaryNameKey;
 /// Dictionary key for the company value.
@@ -70,7 +68,7 @@ extern NSString *const kFGOHUserDictionaryFollowersKey;
 /// Dictionary key for the number of people the user is following value.
 extern NSString *const kFGOHUserDictionaryFollowingKey;
 /// Dictionary key for the HTML URL value.
-extern NSString *const kFGOHUserDictionaryHtmlUrlKey;
+extern NSString *const kFGOHUserDictionaryHTMLURLKey;
 /// Dictionary key for the created at value.
 extern NSString *const kFGOHUserDictionaryCreatedAtKey;
 /// Dictionary key for the user type value.
