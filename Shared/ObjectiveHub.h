@@ -35,7 +35,7 @@
 //#import <ObjectiveHub/FGOHUser.h>
 
 #pragma mark Forward Class Declarations
-@class FGOHUser, FGOHPlan;
+@class FGOHUser, FGOHPlan, FGOHError;
 
 
 #pragma mark - Constants
@@ -48,7 +48,7 @@
 
 #pragma mark - ObjectiveHub Block Types
 typedef void (^FGOBUserSuccessBlock)(FGOHUser *user);
-typedef void (^FGOBUserFailureBlock)(NSError *error);
+typedef void (^FGOBUserFailureBlock)(FGOHError *error);
 
 
 #pragma mark - ObjectiveHub Interface

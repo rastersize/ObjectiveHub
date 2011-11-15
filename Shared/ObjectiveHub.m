@@ -35,6 +35,8 @@
 #import "AFNetworking.h"
 #import "JSONKit.h"
 
+#import "FGOHError.h"
+
 #import "FGOHUser.h"
 #import "FGOHUserPrivate.h"
 
@@ -159,11 +161,15 @@ NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 						 successBlock(user);
 					 }
 				 }
-				 failure:^(__unused AFHTTPRequestOperation *operation, NSError *error) {
-					 NSLog(@"%@", [operation.response allHeaderFields]);
-					 NSLog(@"%@", [operation.responseData objectFromJSONData]);
+				 failure:^(AFHTTPRequestOperation *operation, __unused NSError *error) {
+					 NSDictionary *httpHeaders = [operation.response allHeaderFields];
+					 NSInteger httpStatus = [operation.response statusCode];
+					 NSData *responseData = [operation responseData];
+					 
+					 NSError *ohError = [[FGOHError alloc] initWithHTTPHeaders:httpHeaders HTTPStatus:httpStatus responseBody:responseData];
+					 
 					 if (failureBlock) {
-						 failureBlock(error);
+						 failureBlock(ohError);
 					 }
 				 }];
 }
