@@ -75,7 +75,7 @@
  * space, number of maximum collaborators and maximum number of private
  * repositories are equal.
  *
- * @param aUser The plan with which to compare the reciever.
+ * @param aPlan The plan with which to compare the reciever.
  * @return `YES` if _aPlan_ is equivalent to the reciever, otherwise `NO`.
  */
 - (BOOL)isEqualToPlan:(FGOHPlan *)aPlan;

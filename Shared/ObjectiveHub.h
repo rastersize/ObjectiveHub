@@ -152,7 +152,7 @@ typedef void (^FGOBUserFailureBlock)(NSError *error);
  * @param failureBlock The block which is called upon failure. The parameter may
  * be set to NULL in which case nothing will be done upon failure.
  *
- * @see authenticatedUser:success:failure:
+ * @see authenticatedUser:failure:
  */
 - (void)userWithLogin:(NSString *)login success:(FGOBUserSuccessBlock)successBlock failure:(FGOBUserFailureBlock)failureBlock;
 
