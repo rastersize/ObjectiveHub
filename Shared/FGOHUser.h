@@ -45,6 +45,8 @@ extern NSString *const kFGOHUserDictionaryLoginKey;
 extern NSString *const kFGOHUserDictionaryIDKey;
 /// Dictionary key for the avatar URL value.
 extern NSString *const kFGOHUserDictionaryAvatarURLKey;
+/// Dictionary key for the gravatar ID value.
+extern NSString *const kFGOHUserDictionaryGravatarIDKey;
 /// Dictionary key for the name value.
 extern NSString *const kFGOHUserDictionaryNameKey;
 /// Dictionary key for the company value.
@@ -125,6 +127,13 @@ extern NSString *const kFGOHUserDictionaryPlanKey;
  * The avatar URL of the user.
  */
 @property (readonly, strong) NSURL *avatarUrl;
+
+/**
+ * The gravatar ID of the user.
+ *
+ * @see [Gravatar](http://gravatar.com/)
+ */
+@property (readonly, copy) NSString *gravatarId;
 
 /**
  * The HTML URL of the user.

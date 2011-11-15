@@ -39,6 +39,7 @@
 NSString *const kFGOHUserDictionaryLoginKey				= @"login";
 NSString *const kFGOHUserDictionaryIDKey				= @"id";
 NSString *const kFGOHUserDictionaryAvatarURLKey			= @"avatar_url";
+NSString *const kFGOHUserDictionaryGravatarIDKey		= @"gravatar_id";
 NSString *const kFGOHUserDictionaryNameKey				= @"name";
 NSString *const kFGOHUserDictionaryCompanyKey			= @"company";
 NSString *const kFGOHUserDictionaryBlogKey				= @"blog";
@@ -85,6 +86,7 @@ NSString *const kFGOHUserDictionaryAPIURLKey			= @"url";
 @synthesize identifier = _identifier;
 @synthesize login = _login;
 @synthesize avatarUrl = _avatarUrl;
+@synthesize gravatarId = _gravatarId;
 @synthesize htmlUrl = _htmlUrl;
 @synthesize hireable = _hireable;
 @synthesize numberOfPublicRepositories = _numberOfPublicRepositories;
@@ -143,6 +145,7 @@ NSString *const kFGOHUserDictionaryAPIURLKey			= @"url";
 								self.location,					kFGOHUserDictionaryLocationKey,
 								self.blogUrl,					kFGOHUserDictionaryBlogKey,
 								self.avatarUrl,					kFGOHUserDictionaryAvatarURLKey,
+								self.gravatarId,				kFGOHUserDictionaryGravatarIDKey,
 								self.htmlUrl,					kFGOHUserDictionaryHTMLURLKey,
 								self.createdAt,					kFGOHUserDictionaryCreatedAtKey,
 								self.type,						kFGOHUserDictionaryTypeKey,
@@ -187,6 +190,8 @@ NSString *const kFGOHUserDictionaryAPIURLKey			= @"url";
 	NSString *type = [dictionary valueForKey:kFGOHUserDictionaryTypeKey];
 	_type = [type copy];
 	
+	NSString *gravatarId = [dictionary valueForKey:kFGOHUserDictionaryGravatarIDKey];
+	_gravatarId = [gravatarId copy];
 	
 	//--//
 	_apiResourceUrl	= [dictionary valueForKey:kFGOHUserDictionaryAPIURLKey];
