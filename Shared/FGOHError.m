@@ -81,5 +81,18 @@ NSString *const kFGOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
 }
 
 
+#pragma mark - Describing a User Object
+- (NSString *)description
+{
+	id body = nil;
+	if (!(body = [self parsedResponseBody])) {
+		body = self.responseBody;
+	}
+	
+	
+	return [NSString stringWithFormat:@"<%@: %p { code = %d, headers = %@, body = %@ }>", [self class], self, self.code, self.HTTPHeaders, body];
+}
+
+
 @end
 
