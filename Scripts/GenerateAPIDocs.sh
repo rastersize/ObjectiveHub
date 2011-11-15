@@ -6,6 +6,7 @@
 #
 
 API_DOCS_DIR=`pwd`"/${1}"
+DOC_GUIDES_DIR=`pwd`"/${1}/Guides"
 
 echo "API documentation generation script (v2)"
 echo "Will save generated documentation into \"${API_DOCS_DIR}\""
@@ -30,7 +31,7 @@ echo "Generating API documentation into \"${API_DOCS_DIR}\" for version \"${DOCS
 --project-name "ObjectiveHub" \
 --project-company "Fruit is Good" \
 --company-id "com.fruitisgood" \
+--index-desc "${API_DOCS_DIR}/Index.markdown" \
 ${HEADER_FILES}
-#--project-company-url "https://github.com/rastersize/DATX02-11-1" \
 
 echo "Done!"
