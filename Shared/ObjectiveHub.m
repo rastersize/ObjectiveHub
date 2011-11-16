@@ -31,6 +31,7 @@
 //
 
 #import "ObjectiveHub.h"
+#import "FGOHLibraryVersion.h"
 
 #import "AFNetworking.h"
 #import "JSONKit.h"
@@ -48,8 +49,8 @@ NSString *const kFGOHGitHubBaseAPIURIString	= @"https://api.github.com";
 /// A date format string for the ISO 8601 format
 NSString *const kFGOHDateFormat				= @"YYYY-MM-DDTHH:MM:SSZ";
 
-/// ObjectiveHub User Agent string
-NSString *const kFGOHUserAgent				= @"ObjectiveHub v0.1";
+/// ObjectiveHub User Agent Format String
+NSString *const kFGOHUserAgentFormat		= @"ObjectiveHub/%@";
 
 #pragma mark - GitHub Mime Types
 /// Mime type for getting the default type of data as JSON.
@@ -107,7 +108,7 @@ NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 		_client					= [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kFGOHGitHubBaseAPIURIString]];
 		[_client registerHTTPOperationClass:[AFJSONRequestOperation class]];
 		[_client setDefaultHeader:@"Accept" value:kFGOHGitHubMimeGenericJSON];
-		//[_client setDefaultHeader:@"User-Agent" value:kObjectiveHubUserAgent];
+		[_client setDefaultHeader:@"User-Agent" value:[NSString stringWithFormat:kFGOHUserAgentFormat, kFGOHLibraryVersion]];
 	}
 	
 	return self;
