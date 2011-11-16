@@ -1,1 +1,2 @@
-Here you can find the API reference for ObjectiveHub you can also find [usage guides](http://) are looking for usage guides please see 
+This is the API reference document for the  [ObjectiveHub library](http://libobjectivehub.com/). If you are wondering were to start or how to use some part of the library please see the [usage guides](http://libobjectivehub.com/documentation/).
+ 
