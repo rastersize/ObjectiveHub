@@ -57,9 +57,9 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
 
 #pragma mark - ObjectiveHub Interface
 /**
- * Objective-C class for comunicating with GitHub.
+ * Objective-C class for comunicating with GitHub asynchronously using blocks.
  *
- * Currently version 3 of the GitHub API is used internally.
+ * Currently version 3 of the GitHub API is supported.
  *
  * The framework will handle the rate limiting of GitHub automatically but you
  * tell the framework that you app has been whitelisted by GitHub if needed.
