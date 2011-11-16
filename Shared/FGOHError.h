@@ -136,6 +136,8 @@ typedef NSInteger FGOHErrorCodeType;
  * the data could not be properly parsed (that is it is probably some binary
  * data and best accessed via the responseBody method).
  *
+ * @bug TODO: We need to parse the body even more and standardize the content.
+ *
  * @see responseBody
  */
 @property (readonly, strong) id parsedResponseBody;

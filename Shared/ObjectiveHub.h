@@ -46,19 +46,13 @@
 #define kObjectiveHubDefaultRateLimit					0
 
 
-#pragma mark - ObjectiveHub Block Types
-/**
- * The type of blocks called when a user request was succesful.
- *
- * @param user The resulting user object.
- */
-typedef void (^FGOBUserSuccessBlock)(FGOHUser *user);
+#pragma mark - ObjectiveHub Generic Block Types
 /**
  * The type of blocks called when a user request failed.
  *
  * @param error The error encountered.
  */
-typedef void (^FGOBUserFailureBlock)(FGOHError *error);
+typedef void (^FGOHFailureBlock)(FGOHError *error);
 
 
 #pragma mark - ObjectiveHub Interface
@@ -151,38 +145,44 @@ typedef void (^FGOBUserFailureBlock)(FGOHError *error);
 #pragma mark - Getting and Updating Users
 /** @name Getting and Updating Users */
 /**
- * Get a single specific user by their login.
+ * Get information about a single specific user by their login.
  *
- * @warning *Important:* The success and failure blocks are both optional but if
- * neither is given no request will be performed.
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed.
  *
  * @param login The login of the sought user.
- * @param successBlock The block which is called upon success. The parameter may
- * be set to NULL in which case nothing will be done upon success.
- * @param failureBlock The block which is called upon failure. The parameter may
- * be set to NULL in which case nothing will be done upon failure.
+ * @param successBlock The block which is called upon success with the user
+ * information. The parameter may be set to `NULL` in which case nothing will be
+ * done upon success.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
  *
- * @see authenticatedUser:failure:
+ * @see user:failure:
  */
-- (void)userWithLogin:(NSString *)login success:(FGOBUserSuccessBlock)successBlock failure:(FGOBUserFailureBlock)failureBlock;
+- (void)userWithLogin:(NSString *)login success:(void (^)(FGOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock;
 
 /**
- * Get the currently authenticated user.
+ * Get information about the currently authenticated user.
  *
  * If either one of the properties username or password is not set the failure
  * block will be called immediately.
  *
- * @warning *Important:* The success and failure blocks are both optional but if
- * neither is given no request will be performed.
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed.
  *
- * @param successBlock The block which is called upon success. The parameter may
- * be set to NULL in which case nothing will be done upon success.
- * @param failureBlock The block which is called upon failure. The parameter may
- * be set to NULL in which case nothing will be done upon failure.
+ * @warning *Note:* This method requires the user to be authenticated.
+ *
+ * @param successBlock The block which is called upon success with the user
+ * information. The parameter may be set to `NULL` in which case nothing will be
+ * done upon success.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
  *
  * @see userWithLogin:success:failure:
  */
-- (void)authenticatedUser:(FGOBUserSuccessBlock)successBlock failure:(FGOBUserFailureBlock)failureBlock;
+- (void)user:(void (^)(FGOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock;
 
 /**
  * Update the currently authenticated user with the contents of the given
@@ -235,16 +235,24 @@ typedef void (^FGOBUserFailureBlock)(FGOHError *error);
  *   </tr>
  * </table>
  *
- * @warning *Important:* The success and failure blocks are both optional but if
- * neither is given no request will be performed.
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed.
+ *
+ * @warning *Note:* This method requires the user to be authenticated.
  *
  * @param dictionary A dictionary containing values for the pre-defined keys.
- * @param successBlock The block which is called upon success. The parameter may
- * be set to NULL in which case nothing will be done upon success.
- * @param failureBlock The block which is called upon failure. The parameter may
- * be set to NULL in which case nothing will be done upon failure.
+ * @param successBlock The block which is called upon success with a dictionary
+ * of the changed values. The parameter may be set to `NULL` in which case
+ * nothing will be done upon success.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ *
+ * @todo Must add a way to update a FGOHUser object with these values.
  */
-- (void)updateAuthenticatedUserWithDictionary:(NSDictionary *)dictionary success:(FGOBUserSuccessBlock)successBlock failure:(FGOBUserFailureBlock)failureBlock;
+- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(NSDictionary *updatedUserInfoDict))successBlock failure:(FGOHFailureBlock)failureBlock;
+
+ */
 
 
 @end

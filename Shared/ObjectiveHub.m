@@ -183,7 +183,7 @@ NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 
 
 #pragma mark - Getting and Updating Users
-- (void)userWithLogin:(NSString *)login success:(FGOBUserSuccessBlock)successBlock failure:(FGOBUserFailureBlock)failureBlock
+- (void)userWithLogin:(NSString *)login success:(void (^)(FGOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock
 {
 	if (!login) {
 		[NSException raise:NSInvalidArgumentException format:@"The login argument is not set."];
@@ -211,34 +211,13 @@ NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 				 }];
 }
 
-- (void)authenticatedUser:(FGOBUserSuccessBlock)successBlock failure:(FGOBUserFailureBlock)failureBlock
+- (void)user:(void (^)(FGOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock
 {
-	if (!successBlock && !failureBlock) {
-		return;
-	}
 	if (!self.username || !self.password) {
 		[NSException raise:NSInternalInconsistencyException format:@"Username or password not set."];
 	}
 	
-	NSString *getPath = [[NSString alloc] initWithFormat:@"/user"];
-	
-	[self.client getPath:getPath
-			  parameters:nil
-				 success:^(__unused AFHTTPRequestOperation *operation, id responseObject) {
-					 if (successBlock) {
-						 NSMutableDictionary *userDict = [NSMutableDictionary dictionaryWithDictionary:[self responseDictionaryFromResponseBody:responseObject]];
-						 [userDict setObject:[NSNumber numberWithBool:YES] forKey:kFGOHUserDictionaryAuthenticatedKey];
-						 FGOHUser *user = [[FGOHUser alloc] initWithDictionary:userDict];
-						 
-						 successBlock(user);
-					 }
-				 }
-				 failure:^(AFHTTPRequestOperation *operation, __unused NSError *error) {
-					 if (failureBlock) {
-						 FGOHError *ohError = [self errorFromFailedOperation:operation];
-						 failureBlock(ohError);
-					 }
-				 }];
+	return [self userWithLogin:self.username success:successBlock failure:failureBlock];
 }
 
 
