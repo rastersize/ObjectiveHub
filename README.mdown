@@ -7,7 +7,7 @@ The development speed and growth of ObjectiveHub is bound by the rate of the doc
 _To be written when you can actually use something._
 
 ## Documentation ##
-[ObjectiveHub documentation](http://fruitisgood.com/ObjectiveHub/documentation).
+[ObjectiveHub documentation](http://libobjectivehub.com/documentation).
 
 ## ObjectiveHub contributors ##
 You can help improve the documentation, code quality and feature list. Either by contributing directly to the project, [filing bug reports](https://github.com/fruitisgood/ObjectiveHub) or by donating to keep the development going. It is all greatly appreciated!
@@ -18,9 +18,12 @@ You can help improve the documentation, code quality and feature list. Either by
   
   ![Image of Aron Cedercrantz (rastersize)](https://secure.gravatar.com/avatar/2f21aac393665a85428eab10c2bdbe79?s=140)
 
-### Generous Donations Have Been Made By the Following People ###
+### Generous donations have been made by the following people ###
 
-- None yet, be the first!
+- None yet, [be the first](#)!
+
+## Misc information ##
+The project use [semantic versioning](http://semver.org/) and the git repository is maintained using [git flow](https://github.com/nvie/gitflow).
 
 
 ## License ##
