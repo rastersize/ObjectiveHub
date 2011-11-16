@@ -252,7 +252,58 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
  */
 - (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(NSDictionary *updatedUserInfoDict))successBlock failure:(FGOHFailureBlock)failureBlock;
 
+/**
+ * Get all email addresses of the currently authenticated user.
+ *
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed.
+ *
+ * @warning *Important* This method requires the user to be authenticated.
+ *
+ * @param successBlock The block which is called upon success with an array of
+ * email addresses associated with the user. The parameter may be set to `NULL`
+ * in which case nothing will be done upon success.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
  */
+- (void)userEmails:(void (^)(NSArray *emails))successBlock failure:(FGOHFailureBlock)failureBlock;
+
+/**
+ * Add new email addresses of the currently authenticated user.
+ *
+ * The success and failure blocks are both optional and the task **will** be
+ * carried even if you set both to `NULL`.
+ *
+ * @warning *Important* This method requires the user to be authenticated.
+ *
+ * @param emails An array of email addresses to add to the currently
+ * authenticated user.
+ * @param successBlock The block which is called upon success with an array of
+ * email addresses associated with the user. The parameter may be set to `NULL`
+ * in which case nothing will be done upon success.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ */
+- (void)addUserEmails:(NSArray *)emails success:(void (^)(NSArray *emails))successBlock failure:(FGOHFailureBlock)failureBlock;
+
+/**
+ * Delete the given email addresses from the currently authenticated user.
+ *
+ * The success and failure blocks are both optional and the task **will** be
+ * carried even if you set both to `NULL`.
+ *
+ * @param emails An array of email addresses to delete from the currently
+ * authenticated user.
+ * @param successBlock The block which is called upon success with an array of
+ * email addresses associated with the user. The parameter may be set to `NULL`
+ * in which case nothing will be done upon success.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ */
+- (void)deleteUserEmails:(NSArray *)emails success:(void (^)(NSArray *emails))successBlock failure:(FGOHFailureBlock)failureBlock;
 
 
 @end
