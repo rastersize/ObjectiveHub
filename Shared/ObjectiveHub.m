@@ -68,6 +68,10 @@ NSString *const kFGOHGitHubMimeFullInJSON	= @"application/vnd.github.beta.full+j
 NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 
 
+#pragma mark - ObjectiveHub Generic Block Types
+typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSError *error);
+
+
 #pragma mark - ObjectiveHub Private Interface
 @interface ObjectiveHub ()
 
@@ -75,11 +79,12 @@ NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 /// The HTTP client used to communicate with GitHub internally.
 @property (readonly, strong) AFHTTPClient *client;
 
-/// Parse the response body if needed.
-- (NSDictionary *)responseDictionaryFromResponseBody:(id)responseBody;
-
 /// Create an error from a failed request operation.
 - (FGOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation;
+
+#pragma mark - Standard Blocks
+/// The standard failure block.
+- (FGOHInternalFailureBlock)standardFailureBlock:(FGOHFailureBlock)failureBlock;
 
 @end
 
@@ -153,24 +158,19 @@ NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 }
 
 
-#pragma mark - Response Helpers
-- (NSDictionary *)responseDictionaryFromResponseBody:(id)responseBody
+#pragma mark - Standard Block
+- (FGOHInternalFailureBlock)standardFailureBlock:(FGOHFailureBlock)failureBlock
 {
-	NSDictionary *resultDictionary = nil;
-	
-	if ([responseBody isKindOfClass:[NSDictionary class]]) {
-		resultDictionary = responseBody;
-	} else if ([responseBody isKindOfClass:[NSData class]]) {
-		resultDictionary = [responseBody objectFromJSONData];
-	} else if ([responseBody isKindOfClass:[NSString class]]) {
-		resultDictionary = [NSDictionary dictionaryWithObject:responseBody forKey:@"string"];
-	} else if ([responseBody isKindOfClass:[NSString class]]) {
-		resultDictionary =[NSDictionary dictionaryWithObject:responseBody forKey:@"array"];
-	}
-	
-	return resultDictionary;
+	return ^(AFHTTPRequestOperation *operation, __unused NSError *error) {
+		if (failureBlock) {
+			FGOHError *ohError = [self errorFromFailedOperation:operation];
+			failureBlock(ohError);
+		}
+	};
 }
 
+
+#pragma mark - Response Helpers
 - (FGOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation
 {
 	NSDictionary *httpHeaders = [operation.response allHeaderFields];
@@ -192,24 +192,19 @@ NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 	if (!successBlock && !failureBlock) {
 		return;
 	}
-	
+
 	NSString *getPath = [[NSString alloc] initWithFormat:@"/users/%@", login];
 	
 	[self.client getPath:getPath
 			  parameters:nil
 				 success:^(__unused AFHTTPRequestOperation *operation, id responseObject) {
  					 if (successBlock) {
-						 NSDictionary *userDict = [self responseDictionaryFromResponseBody:responseObject];
+						 NSDictionary *userDict = [responseObject objectFromJSONData];
 						 FGOHUser *user = [[FGOHUser alloc] initWithDictionary:userDict];
 						 successBlock(user);
 					 }
 				 }
-				 failure:^(AFHTTPRequestOperation *operation, __unused NSError *error) {
-					 if (failureBlock) {
-						 FGOHError *ohError = [self errorFromFailedOperation:operation];
-						 failureBlock(ohError);
-					 }
-				 }];
+				 failure:[self standardFailureBlock:failureBlock]];
 }
 
 - (void)user:(void (^)(FGOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock
