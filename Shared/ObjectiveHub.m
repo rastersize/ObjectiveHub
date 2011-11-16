@@ -70,7 +70,15 @@ NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 #pragma mark - ObjectiveHub Private Interface
 @interface ObjectiveHub ()
 
+
+/// The HTTP client used to communicate with GitHub internally.
 @property (readonly, strong) AFHTTPClient *client;
+
+/// Parse the response body if needed.
+- (NSDictionary *)responseDictionaryFromResponseBody:(id)responseBody;
+
+/// Create an error from a failed request operation.
+- (FGOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation;
 
 @end
 
@@ -111,6 +119,9 @@ NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 	if (self) {
 		_username = [username copy];
 		_password = [password copy];
+		
+		// TODO: This need to to be reset if the username or password is set during the lifetime of the object.
+		[_client setAuthorizationHeaderWithUsername:_username password:_password];
 	}
 	
 	return self;
@@ -141,33 +152,90 @@ NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 }
 
 
+#pragma mark - Response Helpers
+- (NSDictionary *)responseDictionaryFromResponseBody:(id)responseBody
+{
+	NSDictionary *resultDictionary = nil;
+	
+	if ([responseBody isKindOfClass:[NSDictionary class]]) {
+		resultDictionary = responseBody;
+	} else if ([responseBody isKindOfClass:[NSData class]]) {
+		resultDictionary = [responseBody objectFromJSONData];
+	} else if ([responseBody isKindOfClass:[NSString class]]) {
+		resultDictionary = [NSDictionary dictionaryWithObject:responseBody forKey:@"string"];
+	} else if ([responseBody isKindOfClass:[NSString class]]) {
+		resultDictionary =[NSDictionary dictionaryWithObject:responseBody forKey:@"array"];
+	}
+	
+	return resultDictionary;
+}
+
+- (FGOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation
+{
+	NSDictionary *httpHeaders = [operation.response allHeaderFields];
+	NSInteger httpStatus = [operation.response statusCode];
+	NSData *responseData = [operation responseData];
+	
+	FGOHError *ohError = [[FGOHError alloc] initWithHTTPHeaders:httpHeaders HTTPStatus:httpStatus responseBody:responseData];
+	
+	return ohError;
+}
+
+
 #pragma mark - Getting and Updating Users
 - (void)userWithLogin:(NSString *)login success:(FGOBUserSuccessBlock)successBlock failure:(FGOBUserFailureBlock)failureBlock
 {
 	if (!login) {
 		[NSException raise:NSInvalidArgumentException format:@"The login argument is not set."];
 	}
+	if (!successBlock && !failureBlock) {
+		return;
+	}
 	
-	NSString *getPath = [NSString stringWithFormat:@"/users/%@", login];
+	NSString *getPath = [[NSString alloc] initWithFormat:@"/users/%@", login];
 	
 	[self.client getPath:getPath
 			  parameters:nil
 				 success:^(__unused AFHTTPRequestOperation *operation, id responseObject) {
-					 NSDictionary *userDict = responseObject;
-					 NSLog(@"userDict: %@", userDict);
-					 FGOHUser *user = [[FGOHUser alloc] initWithDictionary:userDict];
-					 if (successBlock) {
+ 					 if (successBlock) {
+						 NSDictionary *userDict = [self responseDictionaryFromResponseBody:responseObject];
+						 FGOHUser *user = [[FGOHUser alloc] initWithDictionary:userDict];
 						 successBlock(user);
 					 }
 				 }
 				 failure:^(AFHTTPRequestOperation *operation, __unused NSError *error) {
-					 NSDictionary *httpHeaders = [operation.response allHeaderFields];
-					 NSInteger httpStatus = [operation.response statusCode];
-					 NSData *responseData = [operation responseData];
-					 
-					 FGOHError *ohError = [[FGOHError alloc] initWithHTTPHeaders:httpHeaders HTTPStatus:httpStatus responseBody:responseData];
-					 
 					 if (failureBlock) {
+						 FGOHError *ohError = [self errorFromFailedOperation:operation];
+						 failureBlock(ohError);
+					 }
+				 }];
+}
+
+- (void)authenticatedUser:(FGOBUserSuccessBlock)successBlock failure:(FGOBUserFailureBlock)failureBlock
+{
+	if (!successBlock && !failureBlock) {
+		return;
+	}
+	if (!self.username || !self.password) {
+		[NSException raise:NSInternalInconsistencyException format:@"Username or password not set."];
+	}
+	
+	NSString *getPath = [[NSString alloc] initWithFormat:@"/user"];
+	
+	[self.client getPath:getPath
+			  parameters:nil
+				 success:^(__unused AFHTTPRequestOperation *operation, id responseObject) {
+					 if (successBlock) {
+						 NSMutableDictionary *userDict = [NSMutableDictionary dictionaryWithDictionary:[self responseDictionaryFromResponseBody:responseObject]];
+						 [userDict setObject:[NSNumber numberWithBool:YES] forKey:kFGOHUserDictionaryAuthenticatedKey];
+						 FGOHUser *user = [[FGOHUser alloc] initWithDictionary:userDict];
+						 
+						 successBlock(user);
+					 }
+				 }
+				 failure:^(AFHTTPRequestOperation *operation, __unused NSError *error) {
+					 if (failureBlock) {
+						 FGOHError *ohError = [self errorFromFailedOperation:operation];
 						 failureBlock(ohError);
 					 }
 				 }];

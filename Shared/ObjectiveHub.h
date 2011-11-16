@@ -47,7 +47,17 @@
 
 
 #pragma mark - ObjectiveHub Block Types
+/**
+ * The type of blocks called when a user request was succesful.
+ *
+ * @param user The resulting user object.
+ */
 typedef void (^FGOBUserSuccessBlock)(FGOHUser *user);
+/**
+ * The type of blocks called when a user request failed.
+ *
+ * @param error The error encountered.
+ */
 typedef void (^FGOBUserFailureBlock)(FGOHError *error);
 
 

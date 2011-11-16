@@ -306,7 +306,7 @@ NSString *const kFGOHUserDictionaryAPIURLKey			= @"url";
 #pragma mark - Describing a User Object
 - (NSString *)description
 {	
-	return [NSString stringWithFormat:@"<%@: %p { id = %d, login = %@, resource = %@ }>", [self class], self, self.identifier, self.login, self.apiResourceUrl];
+	return [NSString stringWithFormat:@"<%@: %p { id = %d, login = %@, resource = %@, is authed = %@ }>", [self class], self, self.identifier, self.login, self.apiResourceUrl, (self.isAuthenticated ? @"YES" : @"NO")];
 }
 
 
