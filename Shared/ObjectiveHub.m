@@ -149,7 +149,6 @@ NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 	}
 	
 	NSString *getPath = [NSString stringWithFormat:@"/users/%@", login];
-	NSLog(@"%@", _client);
 	
 	[self.client getPath:getPath
 			  parameters:nil
@@ -166,7 +165,7 @@ NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 					 NSInteger httpStatus = [operation.response statusCode];
 					 NSData *responseData = [operation responseData];
 					 
-					 NSError *ohError = [[FGOHError alloc] initWithHTTPHeaders:httpHeaders HTTPStatus:httpStatus responseBody:responseData];
+					 FGOHError *ohError = [[FGOHError alloc] initWithHTTPHeaders:httpHeaders HTTPStatus:httpStatus responseBody:responseData];
 					 
 					 if (failureBlock) {
 						 failureBlock(ohError);
