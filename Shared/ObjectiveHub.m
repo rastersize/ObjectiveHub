@@ -72,6 +72,8 @@ NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 /// The relative path for a user with login.
 /// Takes one string with the login name.
 NSString *const kFGOHUserPathFormat			= @"/users/%@";
+/// The relative path for the authenticated users emails.
+NSString *const kFGOHUserEmailsPathFormat	= @"/user/emails";
 
 
 #pragma mark - ObjectiveHub Generic Block Types
@@ -221,6 +223,25 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	}
 	
 	return [self userWithLogin:self.username success:successBlock failure:failureBlock];
+}
+
+- (void)userEmails:(void (^)(NSArray *))successBlock failure:(FGOHFailureBlock)failureBlock
+{
+	if (!successBlock && !failureBlock) {
+		return;
+	}
+
+	NSString *getPath = kFGOHUserEmailsPathFormat;
+
+	[self.client getPath:getPath
+			  parameters:nil
+				 success:^(__unused AFHTTPRequestOperation *operation, id responseObject) {
+					 if (successBlock) {
+						 NSArray *emails = [responseObject objectFromJSONData];
+						 successBlock(emails);
+					 }
+				 }
+				 failure:[self standardFailureBlock:failureBlock]];
 }
 
 
