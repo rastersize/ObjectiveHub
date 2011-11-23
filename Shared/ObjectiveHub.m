@@ -68,6 +68,12 @@ NSString *const kFGOHGitHubMimeFullInJSON	= @"application/vnd.github.beta.full+j
 NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 
 
+#pragma mark - GitHub Relative API Path Formats
+/// The relative path for a user with login.
+/// Takes one string with the login name.
+NSString *const kFGOHUserPathFormat			= @"/users/%@";
+
+
 #pragma mark - ObjectiveHub Generic Block Types
 typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSError *error);
 
@@ -194,7 +200,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		return;
 	}
 
-	NSString *getPath = [[NSString alloc] initWithFormat:@"/users/%@", login];
+	NSString *getPath = [[NSString alloc] initWithFormat:kFGOHUserPathFormat, login];
 	
 	[self.client getPath:getPath
 			  parameters:nil
