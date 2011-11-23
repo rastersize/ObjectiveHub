@@ -111,7 +111,8 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		_rateLimit				= kObjectiveHubDefaultRateLimit;
 		
 		_client					= [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kFGOHGitHubBaseAPIURIString]];
-		[_client registerHTTPOperationClass:[AFJSONRequestOperation class]];
+		[_client registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+		[_client setParameterEncoding:AFJSONParameterEncoding];
 		[_client setDefaultHeader:@"Accept" value:kFGOHGitHubMimeGenericJSON];
 		[_client setDefaultHeader:@"User-Agent" value:[NSString stringWithFormat:kFGOHUserAgentFormat, kFGOHLibraryVersion]];
 	}
