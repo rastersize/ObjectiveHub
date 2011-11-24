@@ -68,12 +68,14 @@ NSString *const kFGOHGitHubMimeFullInJSON	= @"application/vnd.github.beta.full+j
 NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 
 
-#pragma mark - GitHub Relative API Path Formats
+#pragma mark - GitHub Relative API Path (Formats)
 /// The relative path for a user with login.
 /// Takes one string with the login name.
-NSString *const kFGOHUserPathFormat			= @"/users/%@";
+NSString *const kFGOHUserPathFormat					= @"/users/%@";
+/// The relative path for an authenticated user.
+NSString *const kFGOHUserAuthenticatedPath			= @"/user";
 /// The relative path for the authenticated users emails.
-NSString *const kFGOHUserEmailsPathFormat	= @"/user/emails";
+NSString *const kFGOHUserEmailsPath					= @"/user/emails";
 
 
 #pragma mark - ObjectiveHub Generic Block Types
