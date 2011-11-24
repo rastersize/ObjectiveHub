@@ -8,8 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class ObjectiveHub;
+
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (readonly, strong) ObjectiveHub *hub;
 
 @end
