@@ -66,8 +66,10 @@ enum {
 	kFGOHErrorCodeNotFound						= 404,
 	/// Error code if the method used was not allowed.
 	kFGOHErrorCodeMethodNotAllowed				= 405,
-	/// Error code if the 
+	/// Error code if the request data was not correct.
 	kFGOHErrorCodeUnprocessableEntity			= 422,
+	/// Error code if the rate limit has been reached.
+	kFGOHErrorCodeTooManyRequests				= 429,
 	
 	#pragma mark |- Server Errors
 	/* @name Server Errors */
