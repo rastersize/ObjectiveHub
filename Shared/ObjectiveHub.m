@@ -256,24 +256,17 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 #pragma mark - Getting and Updating Users
 - (void)userWithLogin:(NSString *)login success:(void (^)(FGOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock
 {
-	if (!login) {
-		[NSException raise:NSInvalidArgumentException format:@"The login argument is not set."];
-	}
 	if (!successBlock && !failureBlock) {
 		return;
 	}
+	if (!login) {
+		[NSException raise:NSInvalidArgumentException format:@"The login argument is not set."];
+	}
 
 	NSString *getPath = [[NSString alloc] initWithFormat:kFGOHUserPathFormat, login];
-	
 	[self.client getPath:getPath
 			  parameters:nil
-				 success:^(__unused AFHTTPRequestOperation *operation, id responseObject) {
- 					 if (successBlock) {
-						 NSDictionary *userDict = [responseObject objectFromJSONData];
-						 FGOHUser *user = [[FGOHUser alloc] initWithDictionary:userDict];
-						 successBlock(user);
-					 }
-				 }
+				 success:[self standardUserSuccessBlock:successBlock]
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
