@@ -219,7 +219,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 				NSDictionary *userDict = [responseObject objectFromJSONData];
 				user = [[FGOHUser alloc] initWithDictionary:userDict];
 			}
-
+			
 			successBlock(user);
 		}
 	};
@@ -233,7 +233,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 			if (responseObject && [responseObject length] > 0) {
 				emails = [responseObject objectFromJSONData];
 			}
-
+			
 			successBlock(emails);
 		}
 	};
@@ -280,11 +280,11 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 }
 
 - (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(FGOHUser *))successBlock failure:(FGOHFailureBlock)failureBlock
-{
+{	
 	if (!self.username || !self.password) {
 		[NSException raise:NSInternalInconsistencyException format:@"Username or password not set."];
 	}
-
+	
 	NSString *patchPath = kFGOHUserAuthenticatedPath;
 	[self.client patchPath:patchPath
 				parameters:dictionary
@@ -297,19 +297,39 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	if (!successBlock && !failureBlock) {
 		return;
 	}
-
-	NSString *getPath = kFGOHUserEmailsPathFormat;
-
+	
+	NSString *getPath = kFGOHUserEmailsPath;
+	
 	[self.client getPath:getPath
 			  parameters:nil
-				 success:^(__unused AFHTTPRequestOperation *operation, id responseObject) {
-					 if (successBlock) {
-						 NSArray *emails = [responseObject objectFromJSONData];
-						 successBlock(emails);
-					 }
-				 }
+				 success:[self standardUserEmailSuccessBlock:successBlock]
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
+- (void)addUserEmails:(NSArray *)emails success:(void (^)(NSArray *))successBlock failure:(FGOHFailureBlock)failureBlock
+{
+	if (!emails) {
+		return;
+	}
+	
+	NSString *postPath = kFGOHUserEmailsPath;
+	[self.client postPath:postPath
+			   parameters:emails
+				  success:[self standardUserEmailSuccessBlock:successBlock]
+				  failure:[self standardFailureBlock:failureBlock]];
+}
+
+- (void)deleteUserEmails:(NSArray *)emails success:(void (^)(void))successBlock failure:(FGOHFailureBlock)failureBlock
+{
+	if (!emails) {
+		return;
+	}
+	
+	NSString *deletePath = kFGOHUserEmailsPath;
+	[self.client deletePath:deletePath
+				 parameters:emails
+					success:[self standardSuccessBlockWithNoData:successBlock]
+					failure:[self standardFailureBlock:failureBlock]];
+}
 
 @end
