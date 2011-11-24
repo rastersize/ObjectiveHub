@@ -260,6 +260,9 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
  */
 - (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(FGOHUser *updatedUser))successBlock failure:(FGOHFailureBlock)failureBlock;
 
+
+#pragma mark - Getting and Modyfing User Emails
+/** @name Getting and Modyfing Users */
 /**
  * Get all email addresses of the currently authenticated user.
  *
