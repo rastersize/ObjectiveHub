@@ -77,6 +77,9 @@ NSString *const kFGOHUserEmailsPathFormat	= @"/user/emails";
 
 
 #pragma mark - ObjectiveHub Generic Block Types
+/// Block type for succesful requests.
+typedef void (^FGOHInternalSuccessBlock)(AFHTTPRequestOperation *operation, id responseObject);
+/// Block type for failed requests.
 typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSError *error);
 
 
@@ -84,15 +87,33 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 @interface ObjectiveHub ()
 
 
+#pragma mark - HTTP Client
 /// The HTTP client used to communicate with GitHub internally.
 @property (readonly, strong) AFHTTPClient *client;
 
+
+#pragma mark - Creating Errors
 /// Create an error from a failed request operation.
 - (FGOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation;
 
+
 #pragma mark - Standard Blocks
+#pragma mark |- Standard Error Block
 /// The standard failure block.
+///
 - (FGOHInternalFailureBlock)standardFailureBlock:(FGOHFailureBlock)failureBlock;
+
+#pragma mark |- Standard Success Blocks
+/// The standard success block for requests which return no data.
+- (FGOHInternalSuccessBlock)standardSuccessBlockWithNoData:(void (^)(void))successBlock;
+
+/// The standard success block for requests returning a user.
+- (FGOHInternalSuccessBlock)standardUserSuccessBlock:(void (^)(FGOHUser *user))successBlock;
+
+/// The standard success block for requests returning an array of email
+/// addresses.
+- (FGOHInternalSuccessBlock)standardUserEmailSuccessBlock:(void (^)(NSArray *emails))successBlock;
+
 
 @end
 
@@ -167,13 +188,51 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 }
 
 
-#pragma mark - Standard Block
+#pragma mark - Standard Blocks
 - (FGOHInternalFailureBlock)standardFailureBlock:(FGOHFailureBlock)failureBlock
 {
 	return ^(AFHTTPRequestOperation *operation, __unused NSError *error) {
 		if (failureBlock) {
 			FGOHError *ohError = [self errorFromFailedOperation:operation];
 			failureBlock(ohError);
+		}
+	};
+}
+
+- (FGOHInternalSuccessBlock)standardSuccessBlockWithNoData:(void (^)(void))successBlock
+{
+	return ^(__unused AFHTTPRequestOperation *operation, __unused id responseObject) {
+		if (successBlock) {
+			successBlock();
+		}
+	};
+}
+
+- (FGOHInternalSuccessBlock)standardUserSuccessBlock:(void (^)(FGOHUser *user))successBlock
+{
+	return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
+		if (successBlock) {
+			FGOHUser *user = nil;
+			if (responseObject && [responseObject length] > 0) {
+				NSDictionary *userDict = [responseObject objectFromJSONData];
+				user = [[FGOHUser alloc] initWithDictionary:userDict];
+			}
+
+			successBlock(user);
+		}
+	};
+}
+
+- (FGOHInternalSuccessBlock)standardUserEmailSuccessBlock:(void (^)(NSArray *emails))successBlock
+{
+	return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
+		if (successBlock) {
+			NSArray *emails = nil;
+			if (responseObject && [responseObject length] > 0) {
+				emails = [responseObject objectFromJSONData];
+			}
+
+			successBlock(emails);
 		}
 	};
 }
