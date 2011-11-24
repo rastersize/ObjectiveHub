@@ -271,6 +271,10 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
  * @param successBlock The block which is called upon success with an array of
  * email addresses associated with the user. The parameter may be set to `NULL`
  * in which case nothing will be done upon success.
+ *
+ * The successBlock takes one argument:
+ * _emails_ The email addresses associated with the authenticated user, can be
+ * `nil` if no email addresses are associated with the user.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
@@ -281,7 +285,7 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
  * Add new email addresses of the currently authenticated user.
  *
  * The success and failure blocks are both optional and the task **will** be
- * carried even if you set both to `NULL`.
+ * carried out even if you set both to `NULL`.
  *
  * @warning *Important* This method requires the user to be authenticated.
  *
@@ -290,6 +294,10 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
  * @param successBlock The block which is called upon success with an array of
  * email addresses associated with the user. The parameter may be set to `NULL`
  * in which case nothing will be done upon success.
+ *
+ * The successBlock takes one argument:
+ * _emails_ The email addresses associated with the authenticated user, can be
+ * `nil` if no email addresses are associated with the user.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
@@ -300,7 +308,7 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
  * Delete the given email addresses from the currently authenticated user.
  *
  * The success and failure blocks are both optional and the task **will** be
- * carried even if you set both to `NULL`.
+ * carried out even if you set both to `NULL`.
  *
  * @param emails An array of email addresses to delete from the currently
  * authenticated user.
@@ -311,7 +319,7 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  */
-- (void)deleteUserEmails:(NSArray *)emails success:(void (^)(NSArray *emails))successBlock failure:(FGOHFailureBlock)failureBlock;
+- (void)deleteUserEmails:(NSArray *)emails success:(void (^)(void))successBlock failure:(FGOHFailureBlock)failureBlock;
 
 
 @end
