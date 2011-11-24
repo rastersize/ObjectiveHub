@@ -247,16 +247,18 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
  * @warning *Note:* This method requires the user to be authenticated.
  *
  * @param dictionary A dictionary containing values for the pre-defined keys.
- * @param successBlock The block which is called upon success with a dictionary
- * of the changed values. The parameter may be set to `NULL` in which case
- * nothing will be done upon success.
+ * @param successBlock The block which is called upon success with the updated
+ * user information. The parameter may be set to `NULL` in which case nothing
+ * will be done upon success.
+ *
+ * The successBlock takes one argument:
+ * _user_ The user object for the authenticated user, can be `nil` if no user
+ * data was in the response from GitHub but no error was reported.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
- *
- * @todo Must add a way to update a FGOHUser object with these values.
  */
-- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(NSDictionary *updatedUserInfoDict))successBlock failure:(FGOHFailureBlock)failureBlock;
+- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(FGOHUser *updatedUser))successBlock failure:(FGOHFailureBlock)failureBlock;
 
 /**
  * Get all email addresses of the currently authenticated user.
