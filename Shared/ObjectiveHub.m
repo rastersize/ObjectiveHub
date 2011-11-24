@@ -279,6 +279,19 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	return [self userWithLogin:self.username success:successBlock failure:failureBlock];
 }
 
+- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(FGOHUser *))successBlock failure:(FGOHFailureBlock)failureBlock
+{
+	if (!self.username || !self.password) {
+		[NSException raise:NSInternalInconsistencyException format:@"Username or password not set."];
+	}
+
+	NSString *patchPath = kFGOHUserAuthenticatedPath;
+	[self.client patchPath:patchPath
+				parameters:dictionary
+				   success:[self standardUserSuccessBlock:successBlock]
+				   failure:[self standardFailureBlock:failureBlock]];
+}
+
 - (void)userEmails:(void (^)(NSArray *))successBlock failure:(FGOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
