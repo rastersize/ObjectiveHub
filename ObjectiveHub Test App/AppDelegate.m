@@ -20,9 +20,6 @@
 
 #define BoolToString(b) (b) ? @"YES" : @"NO"
 
-#define TEST_APP_TEST_ADD_USER_EMAILS		1
-
-
 @implementation AppDelegate
 
 @synthesize window = _window;
@@ -54,11 +51,34 @@
 		NSLog(@"authed user failure: %@", error);
 	}];
 	
-	// Should succeed.
-	[self.hub userWithLogin:FGOHTestAppUsername success:^(FGOHUser *user) {
-		NSLog(@"authed user: %@", user);
+	// Should succeed:
+	NSDictionary *updateUserDefaultDict = [NSDictionary dictionaryWithObjectsAndKeys:
+										   [[NSDate date] description], kFGOHUserDictionaryNameKey,
+										   @"test@example.com", kFGOHUserDictionaryEmailKey,
+										   @"http://example.com/", kFGOHUserDictionaryBlogKey,
+										   @"Example", kFGOHUserDictionaryCompanyKey,
+										   @"localhost", kFGOHUserDictionaryLocationKey,
+										   [NSNumber numberWithBool:NO], kFGOHUserDictionaryHireableKey,
+										   @"No bio", kFGOHUserDictionaryBioKey,
+										   nil];
+	NSDictionary *updateUserDict = [NSDictionary dictionaryWithObjectsAndKeys:
+									[[NSDate date] description], kFGOHUserDictionaryNameKey,
+									@"github@example.com", kFGOHUserDictionaryEmailKey,
+									@"http://example.org/blog", kFGOHUserDictionaryBlogKey,
+									@"Example Corp", kFGOHUserDictionaryCompanyKey,
+									@"California", kFGOHUserDictionaryLocationKey,
+									[NSNumber numberWithBool:YES], kFGOHUserDictionaryHireableKey,
+									@"Test user biography", kFGOHUserDictionaryBioKey,
+									nil];
+	[self.hub updateUserWithDictionary:updateUserDict success:^(FGOHUser *updatedUser) {
+		NSLog(@"update user: %@ (location: %@)", updatedUser, updatedUser.location);
+		[self.hub updateUserWithDictionary:updateUserDefaultDict success:^(FGOHUser *updatedUser) {
+			NSLog(@"update user to default: %@ (location: %@)", updatedUser, updatedUser.location);
+		} failure:^(FGOHError *error) {
+			NSLog(@"update user to default failure: %@", error);
+		}];
 	} failure:^(FGOHError *error) {
-		NSLog(@"authed user failure: %@", error);
+		NSLog(@"update user failure: %@", error);
 	}];
 	
 	// Should succeed:
@@ -69,7 +89,6 @@
 	}];
 	
 	// Should succeed:
-#if TEST_APP_TEST_ADD_USER_EMAILS
 	NSArray *addEmails = [[NSArray alloc] initWithObjects:@"test2@fruitisgood.com", @"test3@fruitisgood.com", nil];
 	__weak ObjectiveHub *weakHub = self.hub;
 	[self.hub addUserEmails:addEmails success:^(NSArray *emails) {
@@ -80,9 +99,6 @@
 	} failure:^(FGOHError *error) {
 		NSLog(@"add emails failure: %@", error);
 	}];
-#endif
-	
-	
 }
 
 @end
