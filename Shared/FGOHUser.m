@@ -207,7 +207,7 @@ NSString *const kFGOHUserDictionaryAPIURLKey			= @"url";
 	
 	//--//
 	NSNumber *authenticated = [dictionary valueForKey:kFGOHUserDictionaryAuthenticatedKey];
-	_authenticated = [authenticated boolValue];
+	_authenticated = [authenticated boolValue] || ([dictionary valueForKey:kFGOHUserDictionaryTotalPrivateReposKey] != nil);
 	
 	NSNumber *hireable = [dictionary valueForKey:kFGOHUserDictionaryHireableKey];
 	_hireable = [hireable boolValue];
