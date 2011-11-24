@@ -138,11 +138,13 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
  *
  * @warning *Note* setting the rate limit to zero (`0`) will make the framework
  * manage the rate limiting automatically.
+ *
+ * @todo Implement this.
  */
 @property (assign) NSUInteger rateLimit;
 
 
-#pragma mark - Getting and Updating Users
+#pragma mark - Getting and Modyfing Users
 /** @name Getting and Updating Users */
 /**
  * Get information about a single specific user by their login.
@@ -176,6 +178,10 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
  * @param successBlock The block which is called upon success with the user
  * information. The parameter may be set to `NULL` in which case nothing will be
  * done upon success.
+ *
+ * The successBlock takes one argument:
+ * _user_ The user object for the authenticated user, can be `nil` if no user
+ * data was in the response from GitHub but no error was reported.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
@@ -235,8 +241,8 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
  *   </tr>
  * </table>
  *
- * The success and failure blocks are both optional but if neither is given no
- * request will be performed.
+ * The success and failure blocks are both optional and the task **will** be
+ * carried out even if you set both to `NULL`.
  *
  * @warning *Note:* This method requires the user to be authenticated.
  *
