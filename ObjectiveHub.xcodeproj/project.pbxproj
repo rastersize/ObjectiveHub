@@ -125,6 +125,10 @@
 		9CE663421470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663431470929500D8A95F /* CDOHError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE663401470929500D8A95F /* CDOHError.m */; };
 		9CE663441470929500D8A95F /* CDOHError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE663401470929500D8A95F /* CDOHError.m */; };
+		9CF962AE147FC01B00F52A98 /* CDOHRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CF962AC147FC01B00F52A98 /* CDOHRepository.h */; };
+		9CF962AF147FC01B00F52A98 /* CDOHRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CF962AC147FC01B00F52A98 /* CDOHRepository.h */; };
+		9CF962B0147FC01B00F52A98 /* CDOHRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF962AD147FC01B00F52A98 /* CDOHRepository.m */; };
+		9CF962B1147FC01B00F52A98 /* CDOHRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF962AD147FC01B00F52A98 /* CDOHRepository.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,6 +253,8 @@
 		9C5D2D70147029E10064F02A /* CDOHTestAppUserCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHTestAppUserCredentials.h; sourceTree = "<group>"; };
 		9CE6633F1470929500D8A95F /* CDOHError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHError.h; sourceTree = "<group>"; };
 		9CE663401470929500D8A95F /* CDOHError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHError.m; sourceTree = "<group>"; };
+		9CF962AC147FC01B00F52A98 /* CDOHRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHRepository.h; sourceTree = "<group>"; };
+		9CF962AD147FC01B00F52A98 /* CDOHRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHRepository.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -506,12 +512,14 @@
 			isa = PBXGroup;
 			children = (
 				9C2F3E82146F44E000C44A82 /* Private Model Interfaces */,
+				9CE6633F1470929500D8A95F /* CDOHError.h */,
+				9CE663401470929500D8A95F /* CDOHError.m */,
 				9C2F3E79146F3F2000C44A82 /* CDOHUser.h */,
 				9C2F3E7A146F3F2000C44A82 /* CDOHUser.m */,
 				9C2F3E86146F5F7D00C44A82 /* CDOHPlan.h */,
 				9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */,
-				9CE6633F1470929500D8A95F /* CDOHError.h */,
-				9CE663401470929500D8A95F /* CDOHError.m */,
+				9CF962AC147FC01B00F52A98 /* CDOHRepository.h */,
+				9CF962AD147FC01B00F52A98 /* CDOHRepository.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -575,6 +583,7 @@
 				9C2F3E84146F464200C44A82 /* CDOHUserPrivate.h in Headers */,
 				9C2F3E8D146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */,
 				9C47C5511473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
+				9CF962AE147FC01B00F52A98 /* CDOHRepository.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,6 +610,7 @@
 				9C2F3E85146F464200C44A82 /* CDOHUserPrivate.h in Headers */,
 				9C2F3E8E146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */,
 				9C47C5521473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
+				9CF962AF147FC01B00F52A98 /* CDOHRepository.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -860,6 +870,7 @@
 				9C2F3E7D146F3F2000C44A82 /* CDOHUser.m in Sources */,
 				9C2F3E8A146F5F7D00C44A82 /* CDOHPlan.m in Sources */,
 				9CE663431470929500D8A95F /* CDOHError.m in Sources */,
+				9CF962B0147FC01B00F52A98 /* CDOHRepository.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -891,6 +902,7 @@
 				9C2F3E7E146F3F2000C44A82 /* CDOHUser.m in Sources */,
 				9C2F3E8B146F5F7D00C44A82 /* CDOHPlan.m in Sources */,
 				9CE663441470929500D8A95F /* CDOHError.m in Sources */,
+				9CF962B1147FC01B00F52A98 /* CDOHRepository.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
