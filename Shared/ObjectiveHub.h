@@ -38,7 +38,7 @@
 
 
 #pragma mark Forward Class Declarations
-@class CDOHUser, CDOHPlan, FGOHError;
+@class CDOHUser, CDOHPlan, CDOHError;
 
 
 #pragma mark - Constants
@@ -55,7 +55,7 @@
  *
  * @param error The error encountered.
  */
-typedef void (^FGOHFailureBlock)(FGOHError *error);
+typedef void (^FGOHFailureBlock)(CDOHError *error);
 
 
 #pragma mark - ObjectiveHub Interface

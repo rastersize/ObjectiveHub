@@ -85,7 +85,7 @@ typedef NSInteger FGOHErrorCodeType;
  * Extension of the standard NSError whith helper methods to deal with the HTTP
  * errors returned by GitHub.
  */
-@interface FGOHError : NSError
+@interface CDOHError : NSError
 
 #pragma mark - Initializing an FGOHError Instance
 /** @name Initializing an FGOHError Instance */

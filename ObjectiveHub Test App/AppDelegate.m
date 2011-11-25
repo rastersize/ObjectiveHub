@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 
 #import <ObjectiveHub/ObjectiveHub.h>
-#import <ObjectiveHub/FGOHError.h>
+#import <ObjectiveHub/CDOHError.h>
 #import <ObjectiveHub/CDOHUser.h>
 
 
@@ -34,21 +34,21 @@
 	// Should fail:
 	[self.hub userWithLogin:@"schaconadad" success:^(CDOHUser *user) {
 		NSLog(@"user 1: %@", user);
-	} failure:^(FGOHError *error) {
+	} failure:^(CDOHError *error) {
 		NSLog(@"user 1 failure: %@", error);
 	}];
 	
 	// Should succeed:
 	[self.hub userWithLogin:@"schacon" success:^(CDOHUser *user) {
 		NSLog(@"user 2: %@", user);
-	} failure:^(FGOHError *error) {
+	} failure:^(CDOHError *error) {
 		NSLog(@"user 2 failure: %@", error);
 	}];
 	
 	// Should succeed.
 	[self.hub userWithLogin:FGOHTestAppUsername success:^(CDOHUser *user) {
 		NSLog(@"authed user: %@", user);
-	} failure:^(FGOHError *error) {
+	} failure:^(CDOHError *error) {
 		NSLog(@"authed user failure: %@", error);
 	}];
 	
@@ -75,17 +75,17 @@
 		NSLog(@"update user: %@ (location: %@)", updatedUser, updatedUser.location);
 		[self.hub updateUserWithDictionary:updateUserDefaultDict success:^(CDOHUser *updatedUser) {
 			NSLog(@"update user to default: %@ (location: %@)", updatedUser, updatedUser.location);
-		} failure:^(FGOHError *error) {
+		} failure:^(CDOHError *error) {
 			NSLog(@"update user to default failure: %@", error);
 		}];
-	} failure:^(FGOHError *error) {
+	} failure:^(CDOHError *error) {
 		NSLog(@"update user failure: %@", error);
 	}];
 	
 	// Should succeed:
 	[self.hub userEmails:^(NSArray *emails) {
 		NSLog(@"emails: %@", emails);
-	} failure:^(FGOHError *error) {
+	} failure:^(CDOHError *error) {
 		NSLog(@"emails failure: %@", error);
 	}];
 	
@@ -96,8 +96,8 @@
 		NSLog(@"add emails: %@", emails);
 		[weakHub deleteUserEmails:addEmails
 						  success:^{ NSLog(@"deleted the emails: %@", addEmails); }
-						  failure:^(FGOHError *error) { NSLog(@"delete emails failure: %@", addEmails); }];
-	} failure:^(FGOHError *error) {
+						  failure:^(CDOHError *error) { NSLog(@"delete emails failure: %@", addEmails); }];
+	} failure:^(CDOHError *error) {
 		NSLog(@"add emails failure: %@", error);
 	}];
 }

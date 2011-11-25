@@ -36,7 +36,7 @@
 #import "AFNetworking.h"
 #import "JSONKit.h"
 
-#import "FGOHError.h"
+#import "CDOHError.h"
 
 #import "CDOHUser.h"
 #import "CDOHUserPrivate.h"
@@ -96,7 +96,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 
 #pragma mark - Creating Errors
 /// Create an error from a failed request operation.
-- (FGOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation;
+- (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation;
 
 
 #pragma mark - Standard Blocks
@@ -195,7 +195,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 {
 	return ^(AFHTTPRequestOperation *operation, __unused NSError *error) {
 		if (failureBlock) {
-			FGOHError *ohError = [self errorFromFailedOperation:operation];
+			CDOHError *ohError = [self errorFromFailedOperation:operation];
 			failureBlock(ohError);
 		}
 	};
@@ -241,13 +241,13 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 
 
 #pragma mark - Response Helpers
-- (FGOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation
+- (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation
 {
 	NSDictionary *httpHeaders = [operation.response allHeaderFields];
 	NSInteger httpStatus = [operation.response statusCode];
 	NSData *responseData = [operation responseData];
 	
-	FGOHError *ohError = [[FGOHError alloc] initWithHTTPHeaders:httpHeaders HTTPStatus:httpStatus responseBody:responseData];
+	CDOHError *ohError = [[CDOHError alloc] initWithHTTPHeaders:httpHeaders HTTPStatus:httpStatus responseBody:responseData];
 	
 	return ohError;
 }

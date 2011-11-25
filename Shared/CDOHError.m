@@ -30,7 +30,7 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-#import "FGOHError.h"
+#import "CDOHError.h"
 #import "JSONKit.h"
 
 
@@ -44,7 +44,7 @@ NSString *const kFGOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
 
 
 #pragma mark - FGOHError Implementation
-@implementation FGOHError
+@implementation CDOHError
 
 #pragma mark - Initializing an FGOHError Instance
 - (id)initWithHTTPHeaders:(NSDictionary *)httpHeaders HTTPStatus:(NSInteger)httpStatus responseBody:(NSData *)responseBody
