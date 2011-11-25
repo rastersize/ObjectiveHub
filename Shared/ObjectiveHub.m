@@ -103,7 +103,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 #pragma mark |- Standard Error Block
 /// The standard failure block.
 ///
-- (CDOHInternalFailureBlock)standardFailureBlock:(FGOHFailureBlock)failureBlock;
+- (CDOHInternalFailureBlock)standardFailureBlock:(CDOHFailureBlock)failureBlock;
 
 #pragma mark |- Standard Success Blocks
 /// The standard success block for requests which return no data.
@@ -191,7 +191,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 
 
 #pragma mark - Standard Blocks
-- (CDOHInternalFailureBlock)standardFailureBlock:(FGOHFailureBlock)failureBlock
+- (CDOHInternalFailureBlock)standardFailureBlock:(CDOHFailureBlock)failureBlock
 {
 	return ^(AFHTTPRequestOperation *operation, __unused NSError *error) {
 		if (failureBlock) {
@@ -254,7 +254,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 
 
 #pragma mark - Getting and Updating Users
-- (void)userWithLogin:(NSString *)login success:(void (^)(CDOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock
+- (void)userWithLogin:(NSString *)login success:(void (^)(CDOHUser *user))successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
 		return;
@@ -270,7 +270,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)user:(void (^)(CDOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock
+- (void)user:(void (^)(CDOHUser *user))successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!self.username || !self.password) {
 		[NSException raise:NSInternalInconsistencyException format:@"Username or password not set."];
@@ -279,7 +279,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	return [self userWithLogin:self.username success:successBlock failure:failureBlock];
 }
 
-- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(CDOHUser *))successBlock failure:(FGOHFailureBlock)failureBlock
+- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(CDOHUser *))successBlock failure:(CDOHFailureBlock)failureBlock
 {	
 	if (!self.username || !self.password) {
 		[NSException raise:NSInternalInconsistencyException format:@"Username or password not set."];
@@ -292,7 +292,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 				   failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)userEmails:(void (^)(NSArray *))successBlock failure:(FGOHFailureBlock)failureBlock
+- (void)userEmails:(void (^)(NSArray *))successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
 		return;
@@ -305,7 +305,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)addUserEmails:(NSArray *)emails success:(void (^)(NSArray *))successBlock failure:(FGOHFailureBlock)failureBlock
+- (void)addUserEmails:(NSArray *)emails success:(void (^)(NSArray *))successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!emails) {
 		return;
@@ -318,7 +318,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 				  failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)deleteUserEmails:(NSArray *)emails success:(void (^)(void))successBlock failure:(FGOHFailureBlock)failureBlock
+- (void)deleteUserEmails:(NSArray *)emails success:(void (^)(void))successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!emails) {
 		return;

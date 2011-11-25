@@ -41,7 +41,7 @@ NSString *const kCDOHPlanDictionaryCollaboratorsKey			= @"collaborators";
 NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 
 
-#pragma mark - FGOPlan Implementation
+#pragma mark - CDOHPlan Implementation
 @implementation CDOHPlan
 
 #pragma mark - Synthesizing

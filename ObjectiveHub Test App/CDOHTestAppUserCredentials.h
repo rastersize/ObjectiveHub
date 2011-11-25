@@ -33,7 +33,7 @@
 #ifndef ObjectiveHub_CDOHTestAppUserCredentials_h
 #define ObjectiveHub_CDOHTestAppUserCredentials_h
 
-#define FGOHTestAppUsername				@"_user_"
-#define FGOHTestAppPassword				@"_pass_"
+#define CDOHTestAppUsername				@"_user_"
+#define CDOHTestAppPassword				@"_pass_"
 
 #endif

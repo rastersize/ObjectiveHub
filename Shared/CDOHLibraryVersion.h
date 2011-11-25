@@ -1,5 +1,5 @@
 //
-//  FGOHLibraryVersion.h
+//  CDOHLibraryVersion.h
 //  ObjectiveHub
 //
 //  Copyright 2011 Aron Cedercrantz. All rights reserved.

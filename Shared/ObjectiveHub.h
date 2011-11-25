@@ -55,7 +55,7 @@
  *
  * @param error The error encountered.
  */
-typedef void (^FGOHFailureBlock)(CDOHError *error);
+typedef void (^CDOHFailureBlock)(CDOHError *error);
 
 
 #pragma mark - ObjectiveHub Interface
@@ -165,7 +165,7 @@ typedef void (^FGOHFailureBlock)(CDOHError *error);
  *
  * @see user:failure:
  */
-- (void)userWithLogin:(NSString *)login success:(void (^)(CDOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock;
+- (void)userWithLogin:(NSString *)login success:(void (^)(CDOHUser *user))successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get information about the currently authenticated user.
@@ -191,7 +191,7 @@ typedef void (^FGOHFailureBlock)(CDOHError *error);
  *
  * @see userWithLogin:success:failure:
  */
-- (void)user:(void (^)(CDOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock;
+- (void)user:(void (^)(CDOHUser *user))successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Update the currently authenticated user with the contents of the given
@@ -261,7 +261,7 @@ typedef void (^FGOHFailureBlock)(CDOHError *error);
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  */
-- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(CDOHUser *updatedUser))successBlock failure:(FGOHFailureBlock)failureBlock;
+- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(CDOHUser *updatedUser))successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - Getting and Modyfing User Emails
@@ -285,7 +285,7 @@ typedef void (^FGOHFailureBlock)(CDOHError *error);
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  */
-- (void)userEmails:(void (^)(NSArray *emails))successBlock failure:(FGOHFailureBlock)failureBlock;
+- (void)userEmails:(void (^)(NSArray *emails))successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Add new email addresses of the currently authenticated user.
@@ -308,7 +308,7 @@ typedef void (^FGOHFailureBlock)(CDOHError *error);
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  */
-- (void)addUserEmails:(NSArray *)emails success:(void (^)(NSArray *emails))successBlock failure:(FGOHFailureBlock)failureBlock;
+- (void)addUserEmails:(NSArray *)emails success:(void (^)(NSArray *emails))successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Delete the given email addresses from the currently authenticated user.
@@ -325,7 +325,7 @@ typedef void (^FGOHFailureBlock)(CDOHError *error);
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  */
-- (void)deleteUserEmails:(NSArray *)emails success:(void (^)(void))successBlock failure:(FGOHFailureBlock)failureBlock;
+- (void)deleteUserEmails:(NSArray *)emails success:(void (^)(void))successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - Getting Watched and Watching Repositories

@@ -28,7 +28,7 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-	_hub = [[ObjectiveHub alloc] initWithUsername:FGOHTestAppUsername password:FGOHTestAppPassword];
+	_hub = [[ObjectiveHub alloc] initWithUsername:CDOHTestAppUsername password:CDOHTestAppPassword];
 	NSLog(@"hub: %@", self.hub);
 	
 	// Should fail:
@@ -46,7 +46,7 @@
 	}];
 	
 	// Should succeed.
-	[self.hub userWithLogin:FGOHTestAppUsername success:^(CDOHUser *user) {
+	[self.hub userWithLogin:CDOHTestAppUsername success:^(CDOHUser *user) {
 		NSLog(@"authed user: %@", user);
 	} failure:^(CDOHError *error) {
 		NSLog(@"authed user failure: %@", error);
