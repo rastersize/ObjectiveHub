@@ -1,5 +1,5 @@
 //
-//  FGOHPlan.m
+//  CDOHPlan.m
 //  ObjectiveHub
 //
 //  Copyright 2011 Aron Cedercrantz. All rights reserved.
@@ -35,10 +35,10 @@
 
 
 #pragma mark Dictionary Keys
-NSString *const kFGOHPlanDictionaryNameKey					= @"name";
-NSString *const kFGOHPlanDictionarySpaceKey					= @"space";
-NSString *const kFGOHPlanDictionaryCollaboratorsKey			= @"collaborators";
-NSString *const kFGOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
+NSString *const kCDOHPlanDictionaryNameKey					= @"name";
+NSString *const kCDOHPlanDictionarySpaceKey					= @"space";
+NSString *const kCDOHPlanDictionaryCollaboratorsKey			= @"collaborators";
+NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 
 
 #pragma mark - FGOPlan Implementation
@@ -51,7 +51,7 @@ NSString *const kFGOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 @synthesize privateRepositories = _privateRepositories;
 
 
-#pragma mark - Initializing an FGOHPlan Instance
+#pragma mark - Initializing an CDOHPlan Instance
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
 	self = [super init];
@@ -71,10 +71,10 @@ NSString *const kFGOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 	NSNumber *privateReposNumber	= [NSNumber numberWithUnsignedInteger:self.privateRepositories];
 	
 	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-								self.name,				kFGOHPlanDictionaryNameKey,
-								spaceNumber,			kFGOHPlanDictionarySpaceKey,
-								collaboratorsNumber,	kFGOHPlanDictionaryCollaboratorsKey,
-								privateReposNumber,		kFGOHPlanDictionaryPrivateRepositoriesKey,
+								self.name,				kCDOHPlanDictionaryNameKey,
+								spaceNumber,			kCDOHPlanDictionarySpaceKey,
+								collaboratorsNumber,	kCDOHPlanDictionaryCollaboratorsKey,
+								privateReposNumber,		kCDOHPlanDictionaryPrivateRepositoriesKey,
 								nil];
 	
 	return dictionary;
@@ -82,16 +82,16 @@ NSString *const kFGOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 
 - (void)setupUsingDictionary:(NSDictionary *)dictionary
 {
-	NSString *name = [dictionary valueForKey:kFGOHPlanDictionaryNameKey];
+	NSString *name = [dictionary valueForKey:kCDOHPlanDictionaryNameKey];
 	_name = [name copy];
 	
-	NSNumber *space = [dictionary valueForKey:kFGOHPlanDictionarySpaceKey];
+	NSNumber *space = [dictionary valueForKey:kCDOHPlanDictionarySpaceKey];
 	_space = [space unsignedIntegerValue];
 	
-	NSNumber *collaborators = [dictionary valueForKey:kFGOHPlanDictionaryCollaboratorsKey];
+	NSNumber *collaborators = [dictionary valueForKey:kCDOHPlanDictionaryCollaboratorsKey];
 	_collaborators = [collaborators unsignedIntegerValue];
 	
-	NSNumber *privateRepos = [dictionary valueForKey:kFGOHPlanDictionaryPrivateRepositoriesKey];
+	NSNumber *privateRepos = [dictionary valueForKey:kCDOHPlanDictionaryPrivateRepositoriesKey];
 	_privateRepositories = [privateRepos unsignedIntegerValue];
 }
 

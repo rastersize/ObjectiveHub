@@ -1,5 +1,5 @@
 //
-//  FGOHPlanPrivate.h
+//  CDOHPlanPrivate.h
 //  ObjectiveHub
 //
 //  Copyright 2011 Aron Cedercrantz. All rights reserved.
@@ -37,30 +37,30 @@
 
 #pragma mark Dictionary Keys
 /// Dictionary key for the name value.
-extern NSString *const kFGOHPlanDictionaryNameKey;
+extern NSString *const kCDOHPlanDictionaryNameKey;
 /// Dictionary key for the name value.
-extern NSString *const kFGOHPlanDictionarySpaceKey;
+extern NSString *const kCDOHPlanDictionarySpaceKey;
 /// Dictionary key for the name value.
-extern NSString *const kFGOHPlanDictionaryCollaboratorsKey;
+extern NSString *const kCDOHPlanDictionaryCollaboratorsKey;
 /// Dictionary key for the name value.
-extern NSString *const kFGOHPlanDictionaryPrivateRepositoriesKey;
+extern NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey;
 
 
-#pragma mark - FGOHPlan Private Interface
+#pragma mark - CDOHPlan Private Interface
 /**
- * Private FGOHPlan additions.
+ * Private CDOHPlan additions.
  */
 @interface CDOHPlan ()
 
 
-#pragma mark - Initializing an FGOHPlan Instance
-/** @name Initializing an FGOHPlan Instance */
+#pragma mark - Initializing an CDOHPlan Instance
+/** @name Initializing an CDOHPlan Instance */
 /**
- * Initializes and returns an `FGOHPlan` instance intialized with the values of
+ * Initializes and returns an `CDOHPlan` instance intialized with the values of
  * the given dictionary.
  *
  * @param dictionary A dictionary containing user information.
- * @return An `FGOHPlan` instance initialized with the given dictionary.
+ * @return An `CDOHPlan` instance initialized with the given dictionary.
  * @private
  */
 - (id)initWithDictionary:(NSDictionary *)dictionary;

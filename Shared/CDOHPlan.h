@@ -1,5 +1,5 @@
 //
-//  FGOHPlan.h
+//  CDOHPlan.h
 //  ObjectiveHub
 //
 //  Copyright 2011 Aron Cedercrantz. All rights reserved.
@@ -33,7 +33,7 @@
 #import <Foundation/Foundation.h>
 
 
-#pragma mark FGOHPlan Interface
+#pragma mark CDOHPlan Interface
 /**
  * A GitHub plan and the restrictions it impose on the user.
  */
