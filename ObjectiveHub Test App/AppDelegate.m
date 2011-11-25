@@ -11,7 +11,7 @@
 #import <ObjectiveHub/ObjectiveHub.h>
 #import <ObjectiveHub/FGOHError.h>
 
-#import <ObjectiveHub/FGOHUser.h>
+#import <ObjectiveHub/CDOHUser.h>
 
 #import "FGOHUserPrivate.h"
 
@@ -31,21 +31,21 @@
 	NSLog(@"hub: %@", self.hub);
 	
 	// Should fail:
-	[self.hub userWithLogin:@"schaconadad" success:^(FGOHUser *user) {
+	[self.hub userWithLogin:@"schaconadad" success:^(CDOHUser *user) {
 		NSLog(@"user 1: %@", user);
 	} failure:^(FGOHError *error) {
 		NSLog(@"user 1 failure: %@", error);
 	}];
 	
 	// Should succeed:
-	[self.hub userWithLogin:@"schacon" success:^(FGOHUser *user) {
+	[self.hub userWithLogin:@"schacon" success:^(CDOHUser *user) {
 		NSLog(@"user 2: %@", user);
 	} failure:^(FGOHError *error) {
 		NSLog(@"user 2 failure: %@", error);
 	}];
 	
 	// Should succeed.
-	[self.hub userWithLogin:FGOHTestAppUsername success:^(FGOHUser *user) {
+	[self.hub userWithLogin:FGOHTestAppUsername success:^(CDOHUser *user) {
 		NSLog(@"authed user: %@", user);
 	} failure:^(FGOHError *error) {
 		NSLog(@"authed user failure: %@", error);
@@ -70,9 +70,9 @@
 									[NSNumber numberWithBool:YES], kFGOHUserDictionaryHireableKey,
 									@"Test user biography", kFGOHUserDictionaryBioKey,
 									nil];
-	[self.hub updateUserWithDictionary:updateUserDict success:^(FGOHUser *updatedUser) {
+	[self.hub updateUserWithDictionary:updateUserDict success:^(CDOHUser *updatedUser) {
 		NSLog(@"update user: %@ (location: %@)", updatedUser, updatedUser.location);
-		[self.hub updateUserWithDictionary:updateUserDefaultDict success:^(FGOHUser *updatedUser) {
+		[self.hub updateUserWithDictionary:updateUserDefaultDict success:^(CDOHUser *updatedUser) {
 			NSLog(@"update user to default: %@ (location: %@)", updatedUser, updatedUser.location);
 		} failure:^(FGOHError *error) {
 			NSLog(@"update user to default failure: %@", error);

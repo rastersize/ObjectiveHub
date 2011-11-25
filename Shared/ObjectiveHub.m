@@ -38,7 +38,7 @@
 
 #import "FGOHError.h"
 
-#import "FGOHUser.h"
+#import "CDOHUser.h"
 #import "FGOHUserPrivate.h"
 
 
@@ -110,7 +110,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 - (FGOHInternalSuccessBlock)standardSuccessBlockWithNoData:(void (^)(void))successBlock;
 
 /// The standard success block for requests returning a user.
-- (FGOHInternalSuccessBlock)standardUserSuccessBlock:(void (^)(FGOHUser *user))successBlock;
+- (FGOHInternalSuccessBlock)standardUserSuccessBlock:(void (^)(CDOHUser *user))successBlock;
 
 /// The standard success block for requests returning an array of email
 /// addresses.
@@ -210,14 +210,14 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	};
 }
 
-- (FGOHInternalSuccessBlock)standardUserSuccessBlock:(void (^)(FGOHUser *user))successBlock
+- (FGOHInternalSuccessBlock)standardUserSuccessBlock:(void (^)(CDOHUser *user))successBlock
 {
 	return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
 		if (successBlock) {
-			FGOHUser *user = nil;
+			CDOHUser *user = nil;
 			if (responseObject && [responseObject length] > 0) {
 				NSDictionary *userDict = [responseObject objectFromJSONData];
-				user = [[FGOHUser alloc] initWithDictionary:userDict];
+				user = [[CDOHUser alloc] initWithDictionary:userDict];
 			}
 			
 			successBlock(user);
@@ -254,7 +254,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 
 
 #pragma mark - Getting and Updating Users
-- (void)userWithLogin:(NSString *)login success:(void (^)(FGOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock
+- (void)userWithLogin:(NSString *)login success:(void (^)(CDOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
 		return;
@@ -270,7 +270,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)user:(void (^)(FGOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock
+- (void)user:(void (^)(CDOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock
 {
 	if (!self.username || !self.password) {
 		[NSException raise:NSInternalInconsistencyException format:@"Username or password not set."];
@@ -279,7 +279,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	return [self userWithLogin:self.username success:successBlock failure:failureBlock];
 }
 
-- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(FGOHUser *))successBlock failure:(FGOHFailureBlock)failureBlock
+- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(CDOHUser *))successBlock failure:(FGOHFailureBlock)failureBlock
 {	
 	if (!self.username || !self.password) {
 		[NSException raise:NSInternalInconsistencyException format:@"Username or password not set."];

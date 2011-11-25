@@ -30,7 +30,7 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-#import "FGOHUser.h"
+#import "CDOHUser.h"
 #import "FGOHUserPrivate.h"
 #import "FGOHPlanPrivate.h"
 
@@ -65,7 +65,7 @@ NSString *const kFGOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 NSString *const kFGOHUserDictionaryAPIURLKey			= @"url";
 
 
-@interface FGOHUser ()
+@interface CDOHUser ()
 
 @property (strong) NSURL *apiResourceUrl;
 
@@ -73,7 +73,7 @@ NSString *const kFGOHUserDictionaryAPIURLKey			= @"url";
 
 
 #pragma mark - FGOHUser Implementation
-@implementation FGOHUser
+@implementation CDOHUser
 
 #pragma mark - Synthesizing
 @synthesize name = _name;
@@ -265,7 +265,7 @@ NSString *const kFGOHUserDictionaryAPIURLKey			= @"url";
 	return [self isEqualToUser:other];
 }
 
-- (BOOL)isEqualToUser:(FGOHUser *)aUser
+- (BOOL)isEqualToUser:(CDOHUser *)aUser
 {
 	if (aUser == self) {
 		return YES;

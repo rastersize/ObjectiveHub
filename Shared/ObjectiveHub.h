@@ -35,7 +35,7 @@
 //#import <ObjectiveHub/FGOHUser.h>
 
 #pragma mark Forward Class Declarations
-@class FGOHUser, FGOHPlan, FGOHError;
+@class CDOHUser, FGOHPlan, FGOHError;
 
 
 #pragma mark - Constants
@@ -162,7 +162,7 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
  *
  * @see user:failure:
  */
-- (void)userWithLogin:(NSString *)login success:(void (^)(FGOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock;
+- (void)userWithLogin:(NSString *)login success:(void (^)(CDOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock;
 
 /**
  * Get information about the currently authenticated user.
@@ -188,7 +188,7 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
  *
  * @see userWithLogin:success:failure:
  */
-- (void)user:(void (^)(FGOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock;
+- (void)user:(void (^)(CDOHUser *user))successBlock failure:(FGOHFailureBlock)failureBlock;
 
 /**
  * Update the currently authenticated user with the contents of the given
@@ -258,7 +258,7 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  */
-- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(FGOHUser *updatedUser))successBlock failure:(FGOHFailureBlock)failureBlock;
+- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(CDOHUser *updatedUser))successBlock failure:(FGOHFailureBlock)failureBlock;
 
 
 #pragma mark - Getting and Modyfing User Emails

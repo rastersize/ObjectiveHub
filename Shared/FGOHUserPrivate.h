@@ -45,7 +45,7 @@ extern NSString *const kFGOHUserDictionaryAPIURLKey;
 /**
  * Private FGOHUser additions.
  */
-@interface FGOHUser ()
+@interface CDOHUser ()
 
 
 #pragma mark - Initializing an FGOHUser Instance

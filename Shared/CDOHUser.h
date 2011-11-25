@@ -104,7 +104,7 @@ extern NSString *const kFGOHUserDictionaryPlanKey;
  * - collaborators
  * - plan
  */
-@interface FGOHUser : NSObject <NSCopying, NSCoding>
+@interface CDOHUser : NSObject <NSCopying, NSCoding>
 
 #pragma mark - Meta Information
 /** @name GitHub Information */
@@ -270,7 +270,7 @@ extern NSString *const kFGOHUserDictionaryPlanKey;
  * @param aUser The user with which to compare the reciever.
  * @return `YES` if _aUser_ is equivalent to the reciever, otherwise `NO`.
  */
-- (BOOL)isEqualToUser:(FGOHUser *)aUser;
+- (BOOL)isEqualToUser:(CDOHUser *)aUser;
 
 /**
  * Returns an unsigned integer that can be used as a has table address.
