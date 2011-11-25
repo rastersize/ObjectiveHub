@@ -1,5 +1,5 @@
 //
-//  FGOHError.h
+//  CDOHError.h
 //  ObjectiveHub
 //
 //  Copyright 2011 Aron Cedercrantz. All rights reserved.
@@ -33,16 +33,16 @@
 #import <Foundation/Foundation.h>
 
 
-#pragma mark FGOHError User Info Dictionary Default Keys
+#pragma mark CDOHError User Info Dictionary Default Keys
 /// User info dictionary key to get the HTTP headers the error was created from.
-extern NSString *const kFGOHErrorUserInfoHTTPHeadersKey;
+extern NSString *const kCDOHErrorUserInfoHTTPHeadersKey;
 /// User info dictionary key to get the response data.
-extern NSString *const kFGOHErrorUserInfoResponseDataKey;
+extern NSString *const kCDOHErrorUserInfoResponseDataKey;
 
 
 #pragma mark - ObjectiveHub Error Domain
 /// The error domain for errors created by ObjectiveHub.
-extern NSString *const kFGOHErrorDomain;
+extern NSString *const kCDOHErrorDomain;
 
 
 #pragma mark - ObjectiveHub Error Codes
@@ -51,46 +51,46 @@ extern NSString *const kFGOHErrorDomain;
 /// [List of HTTP status codes](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
 /// on Wikipedia as well as GitHubs developer site.
 enum {
-	kFGOHErrorCodeUnknown						= -1,
+	kCDOHErrorCodeUnknown						= -1,
 	
 	#pragma mark |- Client Errors
 	/* @name Client Errors */
 	/// Error code for malformed requests.
-	kFGOHErrorCodeBadRequest					= 400,
+	kCDOHErrorCodeBadRequest					= 400,
 	/// Error code for request which require authentication which failed.
-	kFGOHErrorCodeUnauthorized					= 401,
+	kCDOHErrorCodeUnauthorized					= 401,
 	/// Error code for when the request was legal but the server refuse to serve
 	/// it. Authentication will make no difference.
-	kFGOHErrorCodeForbidden						= 403,
+	kCDOHErrorCodeForbidden						= 403,
 	/// Error code if the sought resource did not exist.
-	kFGOHErrorCodeNotFound						= 404,
+	kCDOHErrorCodeNotFound						= 404,
 	/// Error code if the method used was not allowed.
-	kFGOHErrorCodeMethodNotAllowed				= 405,
+	kCDOHErrorCodeMethodNotAllowed				= 405,
 	/// Error code if the request data was not correct.
-	kFGOHErrorCodeUnprocessableEntity			= 422,
+	kCDOHErrorCodeUnprocessableEntity			= 422,
 	/// Error code if the rate limit has been reached.
-	kFGOHErrorCodeTooManyRequests				= 429,
+	kCDOHErrorCodeTooManyRequests				= 429,
 	
 	#pragma mark |- Server Errors
 	/* @name Server Errors */
 	/// Error code for when a generic server error occured.
-	kFGOHErrorCodeInternalServerError			= 500,
+	kCDOHErrorCodeInternalServerError			= 500,
 };
 /// The error code type for ObjectiveHub error codes.
-typedef NSInteger FGOHErrorCodeType;
+typedef NSInteger CDOHErrorCodeType;
 
 
-#pragma mark - FGOHError Interface
+#pragma mark - CDOHError Interface
 /**
  * Extension of the standard NSError whith helper methods to deal with the HTTP
  * errors returned by GitHub.
  */
 @interface CDOHError : NSError
 
-#pragma mark - Initializing an FGOHError Instance
-/** @name Initializing an FGOHError Instance */
+#pragma mark - Initializing an CDOHError Instance
+/** @name Initializing an CDOHError Instance */
 /**
- * Initializes and returns an `FGOHError` instance intialized with the values of
+ * Initializes and returns an `CDOHError` instance intialized with the values of
  * the given _httpHeaders_ dictionary, the status code specified by _httpStatus_
  * as well as the _body_ data.
  *
@@ -99,7 +99,7 @@ typedef NSInteger FGOHErrorCodeType;
  * @param httpHeaders A dictionary containing the HTTP response headers.
  * @param httpStatus An integer which containing the HTTP status code.
  * @param responseBody The response body data.
- * @return An `FGOHError` instance initialized with the given http headers,
+ * @return An `CDOHError` instance initialized with the given http headers,
  * status and response body.
  */
 - (id)initWithHTTPHeaders:(NSDictionary *)httpHeaders HTTPStatus:(NSInteger)httpStatus responseBody:(NSData *)responseBody;
@@ -111,7 +111,7 @@ typedef NSInteger FGOHErrorCodeType;
  * A convenience method for retrieving the HTTP headers dictionary object.
  *
  * This is the same as getting the value for the key
- * `kFGOHErrorUserInfoHttpHeadersKey` in the userInfo dictionary.
+ * `kCDOHErrorUserInfoHttpHeadersKey` in the userInfo dictionary.
  */
 @property (readonly, strong) NSDictionary *HTTPHeaders;
 
@@ -122,7 +122,7 @@ typedef NSInteger FGOHErrorCodeType;
  * A convenience method for retrieving the response body data object.
  *
  * This is the same as getting the value for the key
- * `kFGOHErrorUserInfoResponseData` in the userInfo dictionary.
+ * `kCDOHErrorUserInfoResponseData` in the userInfo dictionary.
  *
  * @see parsedResponseBody
  */

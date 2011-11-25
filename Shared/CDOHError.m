@@ -1,5 +1,5 @@
 //
-//  FGOHError.m
+//  CDOHError.m
 //  ObjectiveHub
 //
 //  Copyright 2011 Aron Cedercrantz. All rights reserved.
@@ -34,27 +34,27 @@
 #import "JSONKit.h"
 
 
-#pragma mark FGOHError User Info Dictionary Default Keys
-NSString *const kFGOHErrorUserInfoHTTPHeadersKey			= @"httpHeaders";
-NSString *const kFGOHErrorUserInfoResponseDataKey			= @"responseData";
+#pragma mark CDOHError User Info Dictionary Default Keys
+NSString *const kCDOHErrorUserInfoHTTPHeadersKey			= @"httpHeaders";
+NSString *const kCDOHErrorUserInfoResponseDataKey			= @"responseData";
 
 
 #pragma mark - ObjectiveHub Error Domain
-NSString *const kFGOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
+NSString *const kCDOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
 
 
-#pragma mark - FGOHError Implementation
+#pragma mark - CDOHError Implementation
 @implementation CDOHError
 
-#pragma mark - Initializing an FGOHError Instance
+#pragma mark - Initializing an CDOHError Instance
 - (id)initWithHTTPHeaders:(NSDictionary *)httpHeaders HTTPStatus:(NSInteger)httpStatus responseBody:(NSData *)responseBody
 {
 	NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-							  httpHeaders,	kFGOHErrorUserInfoHTTPHeadersKey,
-							  responseBody,	kFGOHErrorUserInfoResponseDataKey,
+							  httpHeaders,	kCDOHErrorUserInfoHTTPHeadersKey,
+							  responseBody,	kCDOHErrorUserInfoResponseDataKey,
 							  nil];
 	
-	self = [self initWithDomain:kFGOHErrorDomain code:httpStatus userInfo:userInfo];
+	self = [self initWithDomain:kCDOHErrorDomain code:httpStatus userInfo:userInfo];
 	return self;
 }
 
@@ -62,14 +62,14 @@ NSString *const kFGOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
 #pragma mark - HTTP Headers
 - (NSDictionary *)HTTPHeaders
 {
-	return [[self userInfo] objectForKey:kFGOHErrorUserInfoHTTPHeadersKey];
+	return [[self userInfo] objectForKey:kCDOHErrorUserInfoHTTPHeadersKey];
 }
 
 
 #pragma mark - Response Data
 - (NSData *)responseBody
 {
-	return [[self userInfo] objectForKey:kFGOHErrorUserInfoResponseDataKey];
+	return [[self userInfo] objectForKey:kCDOHErrorUserInfoResponseDataKey];
 }
 
 - (id)parsedResponseBody
