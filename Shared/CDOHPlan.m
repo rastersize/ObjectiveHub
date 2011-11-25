@@ -30,7 +30,7 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-#import "FGOHPlan.h"
+#import "CDOHPlan.h"
 #import "FGOHPlanPrivate.h"
 
 
@@ -42,7 +42,7 @@ NSString *const kFGOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 
 
 #pragma mark - FGOPlan Implementation
-@implementation FGOHPlan
+@implementation CDOHPlan
 
 #pragma mark - Synthesizing
 @synthesize name = _name;
@@ -108,7 +108,7 @@ NSString *const kFGOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 	return [self isEqualToPlan:other];
 }
 
-- (BOOL)isEqualToPlan:(FGOHPlan *)aPlan
+- (BOOL)isEqualToPlan:(CDOHPlan *)aPlan
 {
 	if (aPlan == self) {
 		return YES;

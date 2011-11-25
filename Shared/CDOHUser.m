@@ -248,7 +248,7 @@ NSString *const kFGOHUserDictionaryAPIURLKey			= @"url";
 	//--//
 	NSDictionary *planDict = [dictionary valueForKey:kFGOHUserDictionaryPlanKey];
 	if (planDict) {
-		_plan = [[FGOHPlan alloc] initWithDictionary:planDict];
+		_plan = [[CDOHPlan alloc] initWithDictionary:planDict];
 	}
 }
 

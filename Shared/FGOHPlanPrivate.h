@@ -32,7 +32,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FGOHPlan.h"
+#import "CDOHPlan.h"
 
 
 #pragma mark Dictionary Keys
@@ -50,7 +50,7 @@ extern NSString *const kFGOHPlanDictionaryPrivateRepositoriesKey;
 /**
  * Private FGOHPlan additions.
  */
-@interface FGOHPlan ()
+@interface CDOHPlan ()
 
 
 #pragma mark - Initializing an FGOHPlan Instance

@@ -35,7 +35,7 @@
 //#import <ObjectiveHub/FGOHUser.h>
 
 #pragma mark Forward Class Declarations
-@class CDOHUser, FGOHPlan, FGOHError;
+@class CDOHUser, CDOHPlan, FGOHError;
 
 
 #pragma mark - Constants

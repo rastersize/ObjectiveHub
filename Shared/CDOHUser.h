@@ -34,7 +34,7 @@
 
 
 #pragma mark Forward Class Declarations
-@class FGOHPlan;
+@class CDOHPlan;
 
 
 #pragma mark Dictionary Keys
@@ -221,7 +221,7 @@ extern NSString *const kFGOHUserDictionaryPlanKey;
  * @warning *Important:* If the instance does not represent an authenticated
  * user this will be `nil`.
  */
-@property (readonly, strong) FGOHPlan *plan;
+@property (readonly, strong) CDOHPlan *plan;
 
 
 #pragma mark - Personal Information

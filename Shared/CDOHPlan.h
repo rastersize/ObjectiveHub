@@ -37,7 +37,7 @@
 /**
  * A GitHub plan and the restrictions it impose on the user.
  */
-@interface FGOHPlan : NSObject <NSCopying, NSCoding>
+@interface CDOHPlan : NSObject <NSCopying, NSCoding>
 
 #pragma mark - Metadata
 /** @name Plan Metadata */
@@ -78,7 +78,7 @@
  * @param aPlan The plan with which to compare the reciever.
  * @return `YES` if _aPlan_ is equivalent to the reciever, otherwise `NO`.
  */
-- (BOOL)isEqualToPlan:(FGOHPlan *)aPlan;
+- (BOOL)isEqualToPlan:(CDOHPlan *)aPlan;
 
 /**
  * Returns an unsigned integer that can be used as a has table address.

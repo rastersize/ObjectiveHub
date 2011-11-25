@@ -105,10 +105,10 @@
 		9C2F3E7E146F3F2000C44A82 /* CDOHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F3E7A146F3F2000C44A82 /* CDOHUser.m */; };
 		9C2F3E84146F464200C44A82 /* FGOHUserPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E83146F464200C44A82 /* FGOHUserPrivate.h */; };
 		9C2F3E85146F464200C44A82 /* FGOHUserPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E83146F464200C44A82 /* FGOHUserPrivate.h */; };
-		9C2F3E88146F5F7D00C44A82 /* FGOHPlan.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E86146F5F7D00C44A82 /* FGOHPlan.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9C2F3E89146F5F7D00C44A82 /* FGOHPlan.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E86146F5F7D00C44A82 /* FGOHPlan.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9C2F3E8A146F5F7D00C44A82 /* FGOHPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F3E87146F5F7D00C44A82 /* FGOHPlan.m */; };
-		9C2F3E8B146F5F7D00C44A82 /* FGOHPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F3E87146F5F7D00C44A82 /* FGOHPlan.m */; };
+		9C2F3E88146F5F7D00C44A82 /* CDOHPlan.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E86146F5F7D00C44A82 /* CDOHPlan.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2F3E89146F5F7D00C44A82 /* CDOHPlan.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E86146F5F7D00C44A82 /* CDOHPlan.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2F3E8A146F5F7D00C44A82 /* CDOHPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */; };
+		9C2F3E8B146F5F7D00C44A82 /* CDOHPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */; };
 		9C2F3E8D146F5FC000C44A82 /* FGOHPlanPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E8C146F5FC000C44A82 /* FGOHPlanPrivate.h */; };
 		9C2F3E8E146F5FC000C44A82 /* FGOHPlanPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E8C146F5FC000C44A82 /* FGOHPlanPrivate.h */; };
 		9C47C5511473E9C90026BD6D /* FGOHLibraryVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C47C5501473E9C90026BD6D /* FGOHLibraryVersion.h */; };
@@ -233,8 +233,8 @@
 		9C2F3E79146F3F2000C44A82 /* CDOHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHUser.h; sourceTree = "<group>"; };
 		9C2F3E7A146F3F2000C44A82 /* CDOHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHUser.m; sourceTree = "<group>"; };
 		9C2F3E83146F464200C44A82 /* FGOHUserPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGOHUserPrivate.h; sourceTree = "<group>"; };
-		9C2F3E86146F5F7D00C44A82 /* FGOHPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGOHPlan.h; sourceTree = "<group>"; };
-		9C2F3E87146F5F7D00C44A82 /* FGOHPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FGOHPlan.m; sourceTree = "<group>"; };
+		9C2F3E86146F5F7D00C44A82 /* CDOHPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHPlan.h; sourceTree = "<group>"; };
+		9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHPlan.m; sourceTree = "<group>"; };
 		9C2F3E8C146F5FC000C44A82 /* FGOHPlanPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGOHPlanPrivate.h; sourceTree = "<group>"; };
 		9C47C5501473E9C90026BD6D /* FGOHLibraryVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGOHLibraryVersion.h; sourceTree = "<group>"; };
 		9C5D2D521470281A0064F02A /* ObjectiveHub Test App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ObjectiveHub Test App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -508,8 +508,8 @@
 				9C2F3E82146F44E000C44A82 /* Private Model Interfaces */,
 				9C2F3E79146F3F2000C44A82 /* CDOHUser.h */,
 				9C2F3E7A146F3F2000C44A82 /* CDOHUser.m */,
-				9C2F3E86146F5F7D00C44A82 /* FGOHPlan.h */,
-				9C2F3E87146F5F7D00C44A82 /* FGOHPlan.m */,
+				9C2F3E86146F5F7D00C44A82 /* CDOHPlan.h */,
+				9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */,
 				9CE6633F1470929500D8A95F /* FGOHError.h */,
 				9CE663401470929500D8A95F /* FGOHError.m */,
 			);
@@ -559,7 +559,7 @@
 				9C26FA03146B2DEF001A5385 /* ObjectiveHub.h in Headers */,
 				9CE663411470929500D8A95F /* FGOHError.h in Headers */,
 				9C2F3E7B146F3F2000C44A82 /* CDOHUser.h in Headers */,
-				9C2F3E88146F5F7D00C44A82 /* FGOHPlan.h in Headers */,
+				9C2F3E88146F5F7D00C44A82 /* CDOHPlan.h in Headers */,
 				9C26F9B2146B2424001A5385 /* JSONKit.h in Headers */,
 				9C26F9D5146B2979001A5385 /* AFHTTPClient.h in Headers */,
 				9C26F9D9146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */,
@@ -585,7 +585,7 @@
 				9C26FA04146B2DEF001A5385 /* ObjectiveHub.h in Headers */,
 				9CE663421470929500D8A95F /* FGOHError.h in Headers */,
 				9C2F3E7C146F3F2000C44A82 /* CDOHUser.h in Headers */,
-				9C2F3E89146F5F7D00C44A82 /* FGOHPlan.h in Headers */,
+				9C2F3E89146F5F7D00C44A82 /* CDOHPlan.h in Headers */,
 				9C26F9B3146B2424001A5385 /* JSONKit.h in Headers */,
 				9C26F9D6146B2979001A5385 /* AFHTTPClient.h in Headers */,
 				9C26F9DA146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */,
@@ -858,7 +858,7 @@
 				9C26F9FD146B2979001A5385 /* UIImageView+AFNetworking.m in Sources */,
 				9C26FA05146B2DEF001A5385 /* ObjectiveHub.m in Sources */,
 				9C2F3E7D146F3F2000C44A82 /* CDOHUser.m in Sources */,
-				9C2F3E8A146F5F7D00C44A82 /* FGOHPlan.m in Sources */,
+				9C2F3E8A146F5F7D00C44A82 /* CDOHPlan.m in Sources */,
 				9CE663431470929500D8A95F /* FGOHError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -889,7 +889,7 @@
 				9C26F9FE146B2979001A5385 /* UIImageView+AFNetworking.m in Sources */,
 				9C26FA07146B2DEF001A5385 /* ObjectiveHub.m in Sources */,
 				9C2F3E7E146F3F2000C44A82 /* CDOHUser.m in Sources */,
-				9C2F3E8B146F5F7D00C44A82 /* FGOHPlan.m in Sources */,
+				9C2F3E8B146F5F7D00C44A82 /* CDOHPlan.m in Sources */,
 				9CE663441470929500D8A95F /* FGOHError.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
