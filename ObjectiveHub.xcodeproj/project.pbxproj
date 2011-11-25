@@ -708,7 +708,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0420;
-				ORGANIZATIONNAME = "Fruit is Good";
+				ORGANIZATIONNAME = "Aron Cedercrantz";
 			};
 			buildConfigurationList = 9C26F92C146B1B74001A5385 /* Build configuration list for PBXProject "ObjectiveHub" */;
 			compatibilityVersion = "Xcode 3.2";
