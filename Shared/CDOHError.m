@@ -75,7 +75,10 @@ NSString *const kCDOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
 - (id)parsedResponseBody
 {
 	// TODO: Verify that JSONKit returns nil if the NSData object couldn't be converted from JSON.
-	id parsed = [self.responseBody objectFromJSONData];
+	id parsed = nil;
+	if (self.responseBody && [self.responseBody length] > 0) {
+		parsed = [self.responseBody objectFromJSONData];
+	}
 	
 	return parsed;
 }
