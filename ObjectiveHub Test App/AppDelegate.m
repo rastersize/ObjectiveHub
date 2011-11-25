@@ -54,22 +54,22 @@
 	
 	// Should succeed:
 	NSDictionary *updateUserDefaultDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										   [[NSDate date] description], kFGOHUserDictionaryNameKey,
-										   @"test@example.com", kFGOHUserDictionaryEmailKey,
-										   @"http://example.com/", kFGOHUserDictionaryBlogKey,
-										   @"Example", kFGOHUserDictionaryCompanyKey,
-										   @"localhost", kFGOHUserDictionaryLocationKey,
-										   [NSNumber numberWithBool:NO], kFGOHUserDictionaryHireableKey,
-										   @"No bio", kFGOHUserDictionaryBioKey,
+										   [[NSDate date] description], kCDOHUserDictionaryNameKey,
+										   @"test@example.com", kCDOHUserDictionaryEmailKey,
+										   @"http://example.com/", kCDOHUserDictionaryBlogKey,
+										   @"Example", kCDOHUserDictionaryCompanyKey,
+										   @"localhost", kCDOHUserDictionaryLocationKey,
+										   [NSNumber numberWithBool:NO], kCDOHUserDictionaryHireableKey,
+										   @"No bio", kCDOHUserDictionaryBioKey,
 										   nil];
 	NSDictionary *updateUserDict = [NSDictionary dictionaryWithObjectsAndKeys:
-									[[NSDate date] description], kFGOHUserDictionaryNameKey,
-									@"github@example.com", kFGOHUserDictionaryEmailKey,
-									@"http://example.org/blog", kFGOHUserDictionaryBlogKey,
-									@"Example Corp", kFGOHUserDictionaryCompanyKey,
-									@"California", kFGOHUserDictionaryLocationKey,
-									[NSNumber numberWithBool:YES], kFGOHUserDictionaryHireableKey,
-									@"Test user biography", kFGOHUserDictionaryBioKey,
+									[[NSDate date] description], kCDOHUserDictionaryNameKey,
+									@"github@example.com", kCDOHUserDictionaryEmailKey,
+									@"http://example.org/blog", kCDOHUserDictionaryBlogKey,
+									@"Example Corp", kCDOHUserDictionaryCompanyKey,
+									@"California", kCDOHUserDictionaryLocationKey,
+									[NSNumber numberWithBool:YES], kCDOHUserDictionaryHireableKey,
+									@"Test user biography", kCDOHUserDictionaryBioKey,
 									nil];
 	[self.hub updateUserWithDictionary:updateUserDict success:^(CDOHUser *updatedUser) {
 		NSLog(@"update user: %@ (location: %@)", updatedUser, updatedUser.location);

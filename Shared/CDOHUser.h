@@ -1,5 +1,5 @@
 //
-//  FGOHUser.h
+//  CDOHUser.h
 //  ObjectiveHub
 //
 //  Copyright 2011 Aron Cedercrantz. All rights reserved.
@@ -40,56 +40,56 @@
 #pragma mark Dictionary Keys
 /** @name Dictionary Keys */
 /// Dictionary key for the login value.
-extern NSString *const kFGOHUserDictionaryLoginKey;
+extern NSString *const kCDOHUserDictionaryLoginKey;
 /// Dictionary key for the id value.
-extern NSString *const kFGOHUserDictionaryIDKey;
+extern NSString *const kCDOHUserDictionaryIDKey;
 /// Dictionary key for the avatar URL value.
-extern NSString *const kFGOHUserDictionaryAvatarURLKey;
+extern NSString *const kCDOHUserDictionaryAvatarURLKey;
 /// Dictionary key for the gravatar ID value.
-extern NSString *const kFGOHUserDictionaryGravatarIDKey;
+extern NSString *const kCDOHUserDictionaryGravatarIDKey;
 /// Dictionary key for the name value.
-extern NSString *const kFGOHUserDictionaryNameKey;
+extern NSString *const kCDOHUserDictionaryNameKey;
 /// Dictionary key for the company value.
-extern NSString *const kFGOHUserDictionaryCompanyKey;
+extern NSString *const kCDOHUserDictionaryCompanyKey;
 /// Dictionary key for the blog URL value.
-extern NSString *const kFGOHUserDictionaryBlogKey;
+extern NSString *const kCDOHUserDictionaryBlogKey;
 /// Dictionary key for the location value.
-extern NSString *const kFGOHUserDictionaryLocationKey;
+extern NSString *const kCDOHUserDictionaryLocationKey;
 /// Dictionary key for the email value.
-extern NSString *const kFGOHUserDictionaryEmailKey;
+extern NSString *const kCDOHUserDictionaryEmailKey;
 /// Dictionary key for the hireable value.
-extern NSString *const kFGOHUserDictionaryHireableKey;
+extern NSString *const kCDOHUserDictionaryHireableKey;
 /// Dictionary key for the biography value.
-extern NSString *const kFGOHUserDictionaryBioKey;
+extern NSString *const kCDOHUserDictionaryBioKey;
 /// Dictionary key for the number of public repositories value.
-extern NSString *const kFGOHUserDictionaryPublicReposKey;
+extern NSString *const kCDOHUserDictionaryPublicReposKey;
 /// Dictionary key for the number of public gists value.
-extern NSString *const kFGOHUserDictionaryPublicGistsKey;
+extern NSString *const kCDOHUserDictionaryPublicGistsKey;
 /// Dictionary key for the number of followers value.
-extern NSString *const kFGOHUserDictionaryFollowersKey;
+extern NSString *const kCDOHUserDictionaryFollowersKey;
 /// Dictionary key for the number of people the user is following value.
-extern NSString *const kFGOHUserDictionaryFollowingKey;
+extern NSString *const kCDOHUserDictionaryFollowingKey;
 /// Dictionary key for the HTML URL value.
-extern NSString *const kFGOHUserDictionaryHTMLURLKey;
+extern NSString *const kCDOHUserDictionaryHTMLURLKey;
 /// Dictionary key for the created at value.
-extern NSString *const kFGOHUserDictionaryCreatedAtKey;
+extern NSString *const kCDOHUserDictionaryCreatedAtKey;
 /// Dictionary key for the user type value.
-extern NSString *const kFGOHUserDictionaryTypeKey;
+extern NSString *const kCDOHUserDictionaryTypeKey;
 /// Dictionary key for the total number of private repositories value.
-extern NSString *const kFGOHUserDictionaryTotalPrivateReposKey;
+extern NSString *const kCDOHUserDictionaryTotalPrivateReposKey;
 /// Dictionary key for the total number of owned private repositories value.
-extern NSString *const kFGOHUserDictionaryOwnedPrivateReposKey;
+extern NSString *const kCDOHUserDictionaryOwnedPrivateReposKey;
 /// Dictionary key for the number of private gists value.
-extern NSString *const kFGOHUserDictionaryPrivateGistsKey;
+extern NSString *const kCDOHUserDictionaryPrivateGistsKey;
 /// Dictionary key for the total disk usage value.
-extern NSString *const kFGOHUserDictionaryDiskUsageKey;
+extern NSString *const kCDOHUserDictionaryDiskUsageKey;
 /// Dictionary key for the number of collaborators value.
-extern NSString *const kFGOHUserDictionaryCollaboratorsKey;
+extern NSString *const kCDOHUserDictionaryCollaboratorsKey;
 /// Dictionary key for the plan value.
-extern NSString *const kFGOHUserDictionaryPlanKey;
+extern NSString *const kCDOHUserDictionaryPlanKey;
 
 
-#pragma mark - FGOHUser Interface
+#pragma mark - CDOHUser Interface
 /**
  * An immutable class containing information about a single GitHub user.
  *

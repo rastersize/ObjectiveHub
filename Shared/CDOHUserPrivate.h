@@ -1,5 +1,5 @@
 //
-//  FGOHUserPrivate.h
+//  CDOHUserPrivate.h
 //  ObjectiveHub
 //
 //  Copyright 2011 Aron Cedercrantz. All rights reserved.
@@ -36,26 +36,26 @@
 #pragma mark Dictionary Keys
 /** @name Dictionary Keys */
 /// Internal dictionary key for the authenticated value.
-extern NSString *const kFGOHUserDictionaryAuthenticatedKey;
+extern NSString *const kCDOHUserDictionaryAuthenticatedKey;
 /// Internal dictionary key for the API URL value.
-extern NSString *const kFGOHUserDictionaryAPIURLKey;
+extern NSString *const kCDOHUserDictionaryAPIURLKey;
 
 
-#pragma mark - FGOHUser Private Interface
+#pragma mark - CDOHUser Private Interface
 /**
- * Private FGOHUser additions.
+ * Private CDOHUser additions.
  */
 @interface CDOHUser ()
 
 
-#pragma mark - Initializing an FGOHUser Instance
-/** @name Initializing an FGOHUser Instance */
+#pragma mark - Initializing an CDOHUser Instance
+/** @name Initializing an CDOHUser Instance */
 /**
- * Initializes and returns an `FGOHUser` instance intialized with the values of
+ * Initializes and returns an `CDOHUser` instance intialized with the values of
  * the given dictionary.
  *
  * @param dictionary A dictionary containing user information.
- * @return An `FGOHUser` instance initialized with the given dictionary.
+ * @return An `CDOHUser` instance initialized with the given dictionary.
  * @private
  */
 - (id)initWithDictionary:(NSDictionary *)dictionary;

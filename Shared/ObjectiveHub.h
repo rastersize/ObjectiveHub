@@ -209,37 +209,37 @@ typedef void (^FGOHFailureBlock)(CDOHError *error);
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Change name:</th>
- *     <td><code>kFGOHUserDictionaryNameKey</code></td>
+ *     <td><code>kCDOHUserDictionaryNameKey</code></td>
  *     <td><code>NSString</code></td>
  *   </tr>
  *   <tr>
  *     <th  style="text-align: right">Change email address:</th>
- *     <td><code>kFGOHUserDictionaryEmailKey</code></td>
+ *     <td><code>kCDOHUserDictionaryEmailKey</code></td>
  *     <td><code>NSString</code></td>
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Change blog URL:</th>
- *     <td><code>kFGOHUserDictionaryBlogKey</code></td>
+ *     <td><code>kCDOHUserDictionaryBlogKey</code></td>
  *     <td><code>NSURL</code></td>
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Change company name:</th>
- *     <td><code>kFGOHUserDictionaryCompanyKey</code></td>
+ *     <td><code>kCDOHUserDictionaryCompanyKey</code></td>
  *     <td><code>NSString</code></td>
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Change location string:</th>
- *     <td><code>kFGOHUserDictionaryLocationKey</code></td>
+ *     <td><code>kCDOHUserDictionaryLocationKey</code></td>
  *     <td><code>NSString</code></td>
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Change hireable status:</th>
- *     <td><code>kFGOHUserDictionaryHireableKey</code></td>
+ *     <td><code>kCDOHUserDictionaryHireableKey</code></td>
  *     <td>Boolean inside a <code>NSNumber</code></td>
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Change biography text:</th>
- *     <td><code>kFGOHUserDictionaryBioKey</code></td>
+ *     <td><code>kCDOHUserDictionaryBioKey</code></td>
  *     <td><code>NSString</code></td>
  *   </tr>
  * </table>
