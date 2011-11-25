@@ -111,8 +111,8 @@
 		9C2F3E8B146F5F7D00C44A82 /* CDOHPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */; };
 		9C2F3E8D146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */; };
 		9C2F3E8E146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */; };
-		9C47C5511473E9C90026BD6D /* FGOHLibraryVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C47C5501473E9C90026BD6D /* FGOHLibraryVersion.h */; };
-		9C47C5521473E9C90026BD6D /* FGOHLibraryVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C47C5501473E9C90026BD6D /* FGOHLibraryVersion.h */; };
+		9C47C5511473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C47C5501473E9C90026BD6D /* CDOHLibraryVersion.h */; };
+		9C47C5521473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C47C5501473E9C90026BD6D /* CDOHLibraryVersion.h */; };
 		9C5D2D541470281A0064F02A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F938146B2069001A5385 /* Cocoa.framework */; };
 		9C5D2D5A1470281A0064F02A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C5D2D581470281A0064F02A /* InfoPlist.strings */; };
 		9C5D2D5C1470281A0064F02A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5D2D5B1470281A0064F02A /* main.m */; };
@@ -236,7 +236,7 @@
 		9C2F3E86146F5F7D00C44A82 /* CDOHPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHPlan.h; sourceTree = "<group>"; };
 		9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHPlan.m; sourceTree = "<group>"; };
 		9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHPlanPrivate.h; sourceTree = "<group>"; };
-		9C47C5501473E9C90026BD6D /* FGOHLibraryVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGOHLibraryVersion.h; sourceTree = "<group>"; };
+		9C47C5501473E9C90026BD6D /* CDOHLibraryVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHLibraryVersion.h; sourceTree = "<group>"; };
 		9C5D2D521470281A0064F02A /* ObjectiveHub Test App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ObjectiveHub Test App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C5D2D571470281A0064F02A /* ObjectiveHub Test App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveHub Test App-Info.plist"; sourceTree = "<group>"; };
 		9C5D2D591470281A0064F02A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -448,7 +448,7 @@
 				9C26FA09146B2E1E001A5385 /* Models */,
 				9C26FA01146B2DEF001A5385 /* ObjectiveHub.h */,
 				9C26FA02146B2DEF001A5385 /* ObjectiveHub.m */,
-				9C47C5501473E9C90026BD6D /* FGOHLibraryVersion.h */,
+				9C47C5501473E9C90026BD6D /* CDOHLibraryVersion.h */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -574,7 +574,7 @@
 				9C26F9FB146B2979001A5385 /* UIImageView+AFNetworking.h in Headers */,
 				9C2F3E84146F464200C44A82 /* CDOHUserPrivate.h in Headers */,
 				9C2F3E8D146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */,
-				9C47C5511473E9C90026BD6D /* FGOHLibraryVersion.h in Headers */,
+				9C47C5511473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -600,7 +600,7 @@
 				9C26F9FC146B2979001A5385 /* UIImageView+AFNetworking.h in Headers */,
 				9C2F3E85146F464200C44A82 /* CDOHUserPrivate.h in Headers */,
 				9C2F3E8E146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */,
-				9C47C5521473E9C90026BD6D /* FGOHLibraryVersion.h in Headers */,
+				9C47C5521473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

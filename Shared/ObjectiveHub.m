@@ -31,7 +31,7 @@
 //
 
 #import "ObjectiveHub.h"
-#import "FGOHLibraryVersion.h"
+#import "CDOHLibraryVersion.h"
 
 #import "AFNetworking.h"
 #import "JSONKit.h"
@@ -145,7 +145,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		[_client registerHTTPOperationClass:[AFHTTPRequestOperation class]];
 		[_client setParameterEncoding:AFJSONParameterEncoding];
 		[_client setDefaultHeader:@"Accept" value:kFGOHGitHubMimeGenericJSON];
-		[_client setDefaultHeader:@"User-Agent" value:[NSString stringWithFormat:kFGOHUserAgentFormat, kFGOHLibraryVersion]];
+		[_client setDefaultHeader:@"User-Agent" value:[NSString stringWithFormat:kFGOHUserAgentFormat, kCDOHLibraryVersion]];
 	}
 	
 	return self;

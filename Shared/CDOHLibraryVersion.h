@@ -38,6 +38,6 @@
  * This should be `head` when on the `develop` branch and then set to a specific
  * version string of the format `x.y.z` when creating a release version
  */
-#define kFGOHLibraryVersion				@"head"
+#define kCDOHLibraryVersion				@"head"
 
 #endif//OBJECTIVE_HUB_LIBRARY_VERSION_HEADER_H
