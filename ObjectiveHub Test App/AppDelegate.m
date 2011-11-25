@@ -15,7 +15,7 @@
 
 #pragma mark - Private Imports
 #import "CDOHUserPrivate.h"
-#import "FGOHTestAppUserCredentials.h"
+#import "CDOHTestAppUserCredentials.h"
 
 
 #define BoolToString(b) (b) ? @"YES" : @"NO"

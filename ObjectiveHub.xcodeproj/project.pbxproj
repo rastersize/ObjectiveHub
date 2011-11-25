@@ -246,7 +246,7 @@
 		9C5D2D611470281A0064F02A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9C5D2D621470281A0064F02A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9C5D2D651470281B0064F02A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		9C5D2D70147029E10064F02A /* FGOHTestAppUserCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FGOHTestAppUserCredentials.h; sourceTree = "<group>"; };
+		9C5D2D70147029E10064F02A /* CDOHTestAppUserCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHTestAppUserCredentials.h; sourceTree = "<group>"; };
 		9CE6633F1470929500D8A95F /* CDOHError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHError.h; sourceTree = "<group>"; };
 		9CE663401470929500D8A95F /* CDOHError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHError.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -528,7 +528,7 @@
 		9C5D2D551470281A0064F02A /* ObjectiveHub Test App */ = {
 			isa = PBXGroup;
 			children = (
-				9C5D2D70147029E10064F02A /* FGOHTestAppUserCredentials.h */,
+				9C5D2D70147029E10064F02A /* CDOHTestAppUserCredentials.h */,
 				9C5D2D611470281A0064F02A /* AppDelegate.h */,
 				9C5D2D621470281A0064F02A /* AppDelegate.m */,
 				9C5D2D641470281B0064F02A /* MainMenu.xib */,

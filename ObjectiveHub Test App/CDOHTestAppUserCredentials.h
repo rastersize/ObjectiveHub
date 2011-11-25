@@ -1,5 +1,5 @@
 //
-//  FGOHTestAppUserCredentials.h
+//  CDOHTestAppUserCredentials.h
 //  ObjectiveHub
 //
 //  Copyright 2011 Aron Cedercrantz. All rights reserved.
@@ -30,8 +30,8 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-#ifndef ObjectiveHub_FGOHTestAppUserCredentials_h
-#define ObjectiveHub_FGOHTestAppUserCredentials_h
+#ifndef ObjectiveHub_CDOHTestAppUserCredentials_h
+#define ObjectiveHub_CDOHTestAppUserCredentials_h
 
 #define FGOHTestAppUsername				@"_user_"
 #define FGOHTestAppPassword				@"_pass_"
