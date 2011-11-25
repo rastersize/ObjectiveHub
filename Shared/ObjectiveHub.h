@@ -43,10 +43,10 @@
 
 #pragma mark - Constants
 /// The default default items per page.
-#define kObjectiveHubDefaultItemsPerPage				30
+#define kCDOHDefaultItemsPerPage				30
 
 /// The default rate limit of API requests, where zero (0) means automatic.
-#define kObjectiveHubDefaultRateLimit					0
+#define kCDOHDefaultRateLimit					0
 
 
 #pragma mark - ObjectiveHub Generic Block Types

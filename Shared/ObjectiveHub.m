@@ -44,45 +44,45 @@
 
 #pragma mark Constants
 /// The base URI for the GitHub API
-NSString *const kFGOHGitHubBaseAPIURIString	= @"https://api.github.com";
+NSString *const kCDOHGitHubBaseAPIURIString	= @"https://api.github.com";
 
 /// A date format string for the ISO 8601 format
-NSString *const kFGOHDateFormat				= @"YYYY-MM-DDTHH:MM:SSZ";
+NSString *const kCDOHDateFormat				= @"YYYY-MM-DDTHH:MM:SSZ";
 
 /// ObjectiveHub User Agent Format String
-NSString *const kFGOHUserAgentFormat		= @"ObjectiveHub/%@";
+NSString *const kCDOHUserAgentFormat		= @"ObjectiveHub/%@";
 
 #pragma mark - GitHub Mime Types
 /// Mime type for getting the default type of data as JSON.
-NSString *const kFGOHGitHubMimeGenericJSON	= @"application/vnd.github.beta+json";
+NSString *const kCDOHGitHubMimeGenericJSON	= @"application/vnd.github.beta+json";
 /// Mime type for getting the raw data as JSON.
-NSString *const kFGOHGitHubMimeRawJSON		= @"application/vnd.github.beta.raw+json";
+NSString *const kCDOHGitHubMimeRawJSON		= @"application/vnd.github.beta.raw+json";
 /// Mime type for getting the text only representation of the data, as JSON.
-NSString *const kFGOHGitHubMimeTextInJSON	= @"application/vnd.github.beta.text+json";
+NSString *const kCDOHGitHubMimeTextInJSON	= @"application/vnd.github.beta.text+json";
 /// Mime type for getting the resource rendered as HTML as JSON.
-NSString *const kFGOHGitHubMimeHtmlInJSON	= @"application/vnd.github.beta.html+json";
+NSString *const kCDOHGitHubMimeHtmlInJSON	= @"application/vnd.github.beta.html+json";
 /// Mime type for getting raw, text and html versions of a resource in the same
 /// response as JSON.
-NSString *const kFGOHGitHubMimeFullInJSON	= @"application/vnd.github.beta.full+json";
+NSString *const kCDOHGitHubMimeFullInJSON	= @"application/vnd.github.beta.full+json";
 /// Mime type for getting raw blob data (**not** wrapped in a JSON object).
-NSString *const kFGOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
+NSString *const kCDOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 
 
 #pragma mark - GitHub Relative API Path (Formats)
 /// The relative path for a user with login.
 /// Takes one string with the login name.
-NSString *const kFGOHUserPathFormat					= @"/users/%@";
+NSString *const kCDOHUserPathFormat					= @"/users/%@";
 /// The relative path for an authenticated user.
-NSString *const kFGOHUserAuthenticatedPath			= @"/user";
+NSString *const kCDOHUserAuthenticatedPath			= @"/user";
 /// The relative path for the authenticated users emails.
-NSString *const kFGOHUserEmailsPath					= @"/user/emails";
+NSString *const kCDOHUserEmailsPath					= @"/user/emails";
 
 
 #pragma mark - ObjectiveHub Generic Block Types
 /// Block type for succesful requests.
-typedef void (^FGOHInternalSuccessBlock)(AFHTTPRequestOperation *operation, id responseObject);
+typedef void (^CDOHInternalSuccessBlock)(AFHTTPRequestOperation *operation, id responseObject);
 /// Block type for failed requests.
-typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSError *error);
+typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSError *error);
 
 
 #pragma mark - ObjectiveHub Private Interface
@@ -103,18 +103,18 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 #pragma mark |- Standard Error Block
 /// The standard failure block.
 ///
-- (FGOHInternalFailureBlock)standardFailureBlock:(FGOHFailureBlock)failureBlock;
+- (CDOHInternalFailureBlock)standardFailureBlock:(FGOHFailureBlock)failureBlock;
 
 #pragma mark |- Standard Success Blocks
 /// The standard success block for requests which return no data.
-- (FGOHInternalSuccessBlock)standardSuccessBlockWithNoData:(void (^)(void))successBlock;
+- (CDOHInternalSuccessBlock)standardSuccessBlockWithNoData:(void (^)(void))successBlock;
 
 /// The standard success block for requests returning a user.
-- (FGOHInternalSuccessBlock)standardUserSuccessBlock:(void (^)(CDOHUser *user))successBlock;
+- (CDOHInternalSuccessBlock)standardUserSuccessBlock:(void (^)(CDOHUser *user))successBlock;
 
 /// The standard success block for requests returning an array of email
 /// addresses.
-- (FGOHInternalSuccessBlock)standardUserEmailSuccessBlock:(void (^)(NSArray *emails))successBlock;
+- (CDOHInternalSuccessBlock)standardUserEmailSuccessBlock:(void (^)(NSArray *emails))successBlock;
 
 
 @end
@@ -138,14 +138,14 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 {
 	self = [super init];
 	if (self) {
-		_defaultItemsPerPage	= kObjectiveHubDefaultItemsPerPage;
-		_rateLimit				= kObjectiveHubDefaultRateLimit;
+		_defaultItemsPerPage	= kCDOHDefaultItemsPerPage;
+		_rateLimit				= kCDOHDefaultRateLimit;
 		
-		_client					= [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kFGOHGitHubBaseAPIURIString]];
+		_client					= [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kCDOHGitHubBaseAPIURIString]];
 		[_client registerHTTPOperationClass:[AFHTTPRequestOperation class]];
 		[_client setParameterEncoding:AFJSONParameterEncoding];
-		[_client setDefaultHeader:@"Accept" value:kFGOHGitHubMimeGenericJSON];
-		[_client setDefaultHeader:@"User-Agent" value:[NSString stringWithFormat:kFGOHUserAgentFormat, kCDOHLibraryVersion]];
+		[_client setDefaultHeader:@"Accept" value:kCDOHGitHubMimeGenericJSON];
+		[_client setDefaultHeader:@"User-Agent" value:[NSString stringWithFormat:kCDOHUserAgentFormat, kCDOHLibraryVersion]];
 	}
 	
 	return self;
@@ -169,7 +169,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 #pragma mark - Describing a User Object
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"<%@: %p { github API URI = %@, username is set = %@, password is set = %@ }>", [self class], self, kFGOHGitHubBaseAPIURIString, (self.username ? @"YES" : @"NO"), (self.password ? @"YES" : @"NO")];
+	return [NSString stringWithFormat:@"<%@: %p { github API URI = %@, username is set = %@, password is set = %@ }>", [self class], self, kCDOHGitHubBaseAPIURIString, (self.username ? @"YES" : @"NO"), (self.password ? @"YES" : @"NO")];
 }
 
 
@@ -191,7 +191,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 
 
 #pragma mark - Standard Blocks
-- (FGOHInternalFailureBlock)standardFailureBlock:(FGOHFailureBlock)failureBlock
+- (CDOHInternalFailureBlock)standardFailureBlock:(FGOHFailureBlock)failureBlock
 {
 	return ^(AFHTTPRequestOperation *operation, __unused NSError *error) {
 		if (failureBlock) {
@@ -201,7 +201,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	};
 }
 
-- (FGOHInternalSuccessBlock)standardSuccessBlockWithNoData:(void (^)(void))successBlock
+- (CDOHInternalSuccessBlock)standardSuccessBlockWithNoData:(void (^)(void))successBlock
 {
 	return ^(__unused AFHTTPRequestOperation *operation, __unused id responseObject) {
 		if (successBlock) {
@@ -210,7 +210,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	};
 }
 
-- (FGOHInternalSuccessBlock)standardUserSuccessBlock:(void (^)(CDOHUser *user))successBlock
+- (CDOHInternalSuccessBlock)standardUserSuccessBlock:(void (^)(CDOHUser *user))successBlock
 {
 	return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
 		if (successBlock) {
@@ -225,7 +225,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	};
 }
 
-- (FGOHInternalSuccessBlock)standardUserEmailSuccessBlock:(void (^)(NSArray *emails))successBlock
+- (CDOHInternalSuccessBlock)standardUserEmailSuccessBlock:(void (^)(NSArray *emails))successBlock
 {
 	return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
 		if (successBlock) {
@@ -263,7 +263,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		[NSException raise:NSInvalidArgumentException format:@"The login argument is not set."];
 	}
 
-	NSString *getPath = [[NSString alloc] initWithFormat:kFGOHUserPathFormat, login];
+	NSString *getPath = [[NSString alloc] initWithFormat:kCDOHUserPathFormat, login];
 	[self.client getPath:getPath
 			  parameters:nil
 				 success:[self standardUserSuccessBlock:successBlock]
@@ -285,7 +285,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		[NSException raise:NSInternalInconsistencyException format:@"Username or password not set."];
 	}
 	
-	NSString *patchPath = kFGOHUserAuthenticatedPath;
+	NSString *patchPath = kCDOHUserAuthenticatedPath;
 	[self.client patchPath:patchPath
 				parameters:dictionary
 				   success:[self standardUserSuccessBlock:successBlock]
@@ -298,8 +298,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		return;
 	}
 	
-	NSString *getPath = kFGOHUserEmailsPath;
-	
+	NSString *getPath = kCDOHUserEmailsPath;
 	[self.client getPath:getPath
 			  parameters:nil
 				 success:[self standardUserEmailSuccessBlock:successBlock]
@@ -312,7 +311,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		return;
 	}
 	
-	NSString *postPath = kFGOHUserEmailsPath;
+	NSString *postPath = kCDOHUserEmailsPath;
 	[self.client postPath:postPath
 			   parameters:emails
 				  success:[self standardUserEmailSuccessBlock:successBlock]
@@ -325,7 +324,7 @@ typedef void (^FGOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		return;
 	}
 	
-	NSString *deletePath = kFGOHUserEmailsPath;
+	NSString *deletePath = kCDOHUserEmailsPath;
 	[self.client deletePath:deletePath
 				 parameters:emails
 					success:[self standardSuccessBlockWithNoData:successBlock]
