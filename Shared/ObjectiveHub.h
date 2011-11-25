@@ -325,4 +325,10 @@ typedef void (^FGOHFailureBlock)(FGOHError *error);
 - (void)deleteUserEmails:(NSArray *)emails success:(void (^)(void))successBlock failure:(FGOHFailureBlock)failureBlock;
 
 
+#pragma mark - Getting Watched and Watching Repositories
+/** @name Getting Watched and Watching Repositories */
+
+
+
+
 @end
