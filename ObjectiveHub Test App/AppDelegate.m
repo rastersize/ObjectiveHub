@@ -10,15 +10,16 @@
 
 #import <ObjectiveHub/ObjectiveHub.h>
 #import <ObjectiveHub/FGOHError.h>
-
 #import <ObjectiveHub/CDOHUser.h>
 
-#import "FGOHUserPrivate.h"
 
+#pragma mark - Private Imports
+#import "CDOHUserPrivate.h"
 #import "FGOHTestAppUserCredentials.h"
 
 
 #define BoolToString(b) (b) ? @"YES" : @"NO"
+
 
 @implementation AppDelegate
 

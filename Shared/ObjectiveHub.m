@@ -39,7 +39,7 @@
 #import "FGOHError.h"
 
 #import "CDOHUser.h"
-#import "FGOHUserPrivate.h"
+#import "CDOHUserPrivate.h"
 
 
 #pragma mark Constants

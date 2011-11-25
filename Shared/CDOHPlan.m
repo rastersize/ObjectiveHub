@@ -31,7 +31,7 @@
 //
 
 #import "CDOHPlan.h"
-#import "FGOHPlanPrivate.h"
+#import "CDOHPlanPrivate.h"
 
 
 #pragma mark Dictionary Keys
