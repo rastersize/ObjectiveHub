@@ -625,7 +625,6 @@
 				9C26F931146B2069001A5385 /* Frameworks */,
 				9C26F932146B2069001A5385 /* Headers */,
 				9C26F933146B2069001A5385 /* Resources */,
-				9C2F3E80146F426900C44A82 /* Warn About TODO/FIXME Tags */,
 			);
 			buildRules = (
 			);
@@ -662,7 +661,6 @@
 				9C26F963146B207A001A5385 /* Sources */,
 				9C26F964146B207A001A5385 /* Frameworks */,
 				9C26F965146B207A001A5385 /* Headers */,
-				9C2F3E81146F436400C44A82 /* Warn About TODO/FIXME Tags */,
 			);
 			buildRules = (
 			);
@@ -819,34 +817,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# \n# Generates API documentation with the help of appledoc.\n# Generates both HTML code and a DocSet (which *can* be installed into Xcode).\n#\n# Copyright (c) 2011 Fruit is Good. All rights reserved.\n#\n\n#                            Output dir:        Search dirs (space separated list):           The version\n./Scripts/GenerateAPIDocs.sh \"Documentation\"    \"ObjectiveHub-Mac ObjectiveHub-iOS Shared\"    \"${DOCS_LIBRARY_VERSION}\"\n";
-		};
-		9C2F3E80146F426900C44A82 /* Warn About TODO/FIXME Tags */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Warn About TODO/FIXME Tags";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "KEYWORDS=\"TODO.*:|FIXME.*:|\\?\\?\\?.*:|\\!\\!\\!.*:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.mm\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\" | grep -v Vendor\n";
-		};
-		9C2F3E81146F436400C44A82 /* Warn About TODO/FIXME Tags */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Warn About TODO/FIXME Tags";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "KEYWORDS=\"TODO.*:|FIXME.*:|\\?\\?\\?.*:|\\!\\!\\!.*:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.mm\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\" | grep -v Vendor\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
