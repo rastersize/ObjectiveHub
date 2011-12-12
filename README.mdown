@@ -1,10 +1,17 @@
 # ObjectiveHub #
-An Objective-C library for version 3 of the GitHub API, for iOS and Mac OS X.
+An Objective-C (ARC) library for version 3 of the GitHub API, for iOS 4.2+ and Mac OS X 10.6+.
 
 The development speed and growth of ObjectiveHub is bound by the rate of the documentation. That is O(documentation), just like [nimbus](http://jverkoey.github.com/nimbus/).
 
 ## Getting started ##
+### Usage ###
+#### iOS ####
 _To be written when you can actually use something._
+#### Mac OS X ####
+_To be written when you can actually use something._
+
+### Requirements ###
+Requires iOS 4.2+ or Mac OS X 10.6 during runtime and Xcode 4.2+ (and as such Mac OS X 10.7) to build.
 
 ## Documentation ##
 [ObjectiveHub documentation](http://libobjectivehub.com/documentation).
@@ -15,7 +22,6 @@ You can help improve the documentation, code quality and feature list. Either by
 ### Source code contributors (alphabetical by last name) ###
 
 - **Aron Cedercrantz**, [rastersize](https://github.com/rastersize)
-  
   ![Image of Aron Cedercrantz (rastersize)](https://secure.gravatar.com/avatar/2f21aac393665a85428eab10c2bdbe79?s=140)
 
 ### Generous donations have been made by the following people ###
