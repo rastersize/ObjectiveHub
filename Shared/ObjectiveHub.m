@@ -94,6 +94,11 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 @property (readonly, strong) AFHTTPClient *client;
 
 
+#pragma mark - JSON Decoder
+/// The JSON decoder object used for decoding JSON strings.
+@property (readonly, strong) JSONDecoder *JSONDecoder;
+
+
 #pragma mark - Creating Errors
 /// Create an error from a failed request operation.
 - (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation;
@@ -131,6 +136,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 @synthesize rateLimit = _rateLimit;
 
 @synthesize client = _client;
+@synthesize JSONDecoder = _jsonDecoder;
 
 
 #pragma mark - Initializing ObjectiveHub
@@ -146,6 +152,8 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		[_client setParameterEncoding:AFJSONParameterEncoding];
 		[_client setDefaultHeader:@"Accept" value:kCDOHGitHubMimeGenericJSON];
 		[_client setDefaultHeader:@"User-Agent" value:[NSString stringWithFormat:kCDOHUserAgentFormat, kCDOHLibraryVersion]];
+
+		_jsonDecoder			= [[JSONDecoder alloc] initWithParseOptions:JKParseOptionStrict];
 	}
 	
 	return self;
@@ -216,7 +224,8 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		if (successBlock) {
 			CDOHUser *user = nil;
 			if (responseObject && [responseObject length] > 0) {
-				NSDictionary *userDict = [responseObject objectFromJSONData];
+				NSDictionary *userDict = [self.JSONDecoder objectWithData:responseObject];
+#warning TODO: Should the library call the failure block instead here as the library can not understand the returrend data (wrong format)?
 				user = [[CDOHUser alloc] initWithDictionary:userDict];
 			}
 			
@@ -231,7 +240,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		if (successBlock) {
 			NSArray *emails = nil;
 			if (responseObject && [responseObject length] > 0) {
-				emails = [responseObject objectFromJSONData];
+				emails = [self.JSONDecoder objectWithData:responseObject];
 			}
 			
 			successBlock(emails);
