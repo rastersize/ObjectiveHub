@@ -38,4 +38,4 @@ The project use [semantic versioning](http://semver.org/) and the git repository
 
 
 ## License ##
-The project is licensed under the "Simplified BSD license" (2-clause), for the exact terms please see the [LICENSE file](https://github.com/fruitisgood/ObjectiveHub/blob/develop/LICENSE).
+The project is licensed under the "Simplified BSD license" (2-clause), for the exact terms please see the [LICENSE file](https://github.com/rastersize/ObjectiveHub/blob/develop/LICENSE).
