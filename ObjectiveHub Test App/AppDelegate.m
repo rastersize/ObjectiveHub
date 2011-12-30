@@ -26,7 +26,7 @@
 @synthesize window = _window;
 @synthesize hub = _hub;
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification
+- (void)applicationDidFinishLaunching:(NSNotification *)__unused aNotification
 {
 	_hub = [[ObjectiveHub alloc] initWithUsername:CDOHTestAppUsername password:CDOHTestAppPassword];
 	NSLog(@"hub: %@", self.hub);
