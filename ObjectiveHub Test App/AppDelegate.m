@@ -73,8 +73,8 @@
 									nil];
 	[self.hub updateUserWithDictionary:updateUserDict success:^(CDOHUser *updatedUser) {
 		NSLog(@"update user: %@ (location: %@)", updatedUser, updatedUser.location);
-		[self.hub updateUserWithDictionary:updateUserDefaultDict success:^(CDOHUser *updatedUser) {
-			NSLog(@"update user to default: %@ (location: %@)", updatedUser, updatedUser.location);
+		[self.hub updateUserWithDictionary:updateUserDefaultDict success:^(CDOHUser *innerUpdatedUser) {
+			NSLog(@"update user to default: %@ (location: %@)", innerUpdatedUser, innerUpdatedUser.location);
 		} failure:^(CDOHError *error) {
 			NSLog(@"update user to default failure: %@", error);
 		}];
