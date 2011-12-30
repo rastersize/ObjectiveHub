@@ -32,6 +32,6 @@
 
 #import <SenTestingKit/SenTestingKit.h>
 
-@interface ObjectiveHub_MacTests : SenTestCase
+@interface ObjectiveHub_Tests : SenTestCase
 
 @end

@@ -36,17 +36,13 @@
 		9C26F939146B2069001A5385 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F938146B2069001A5385 /* Cocoa.framework */; };
 		9C26F943146B2069001A5385 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F941146B2069001A5385 /* InfoPlist.strings */; };
 		9C26F94F146B2069001A5385 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F94E146B2069001A5385 /* SenTestingKit.framework */; };
-		9C26F950146B2069001A5385 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F938146B2069001A5385 /* Cocoa.framework */; };
 		9C26F953146B2069001A5385 /* ObjectiveHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F935146B2069001A5385 /* ObjectiveHub.framework */; };
 		9C26F959146B2069001A5385 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F957146B2069001A5385 /* InfoPlist.strings */; };
-		9C26F95C146B2069001A5385 /* ObjectiveHub_MacTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F95B146B2069001A5385 /* ObjectiveHub_MacTests.m */; };
+		9C26F95C146B2069001A5385 /* ObjectiveHub_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F95B146B2069001A5385 /* ObjectiveHub_Tests.m */; };
 		9C26F969146B207A001A5385 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F968146B207A001A5385 /* Foundation.framework */; };
 		9C26F976146B207A001A5385 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F94E146B2069001A5385 /* SenTestingKit.framework */; };
-		9C26F978146B207A001A5385 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F977146B207A001A5385 /* UIKit.framework */; };
 		9C26F979146B207A001A5385 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F968146B207A001A5385 /* Foundation.framework */; };
 		9C26F97C146B207A001A5385 /* libObjectiveHub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F967146B207A001A5385 /* libObjectiveHub.a */; };
-		9C26F982146B207A001A5385 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F980146B207A001A5385 /* InfoPlist.strings */; };
-		9C26F985146B207A001A5385 /* ObjectiveHub_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F984146B207A001A5385 /* ObjectiveHub_iOSTests.m */; };
 		9C26F9B2146B2424001A5385 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9AE146B2424001A5385 /* JSONKit.h */; };
 		9C26F9B3146B2424001A5385 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9AE146B2424001A5385 /* JSONKit.h */; };
 		9C26F9B4146B2424001A5385 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9AF146B2424001A5385 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -121,6 +117,8 @@
 		9C5D2D661470281B0064F02A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C5D2D641470281B0064F02A /* MainMenu.xib */; };
 		9C5D2D6D147028290064F02A /* ObjectiveHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F935146B2069001A5385 /* ObjectiveHub.framework */; };
 		9C5D2D6F147029410064F02A /* ObjectiveHub.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F935146B2069001A5385 /* ObjectiveHub.framework */; };
+		9C99909514AE708F00DFDD3B /* ObjectiveHub_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F95B146B2069001A5385 /* ObjectiveHub_Tests.m */; };
+		9C99909714AE70F100DFDD3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C99909614AE70F100DFDD3B /* Foundation.framework */; };
 		9CE663411470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663421470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663431470929500D8A95F /* CDOHError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE663401470929500D8A95F /* CDOHError.m */; };
@@ -196,17 +194,13 @@
 		9C26F94E146B2069001A5385 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		9C26F956146B2069001A5385 /* ObjectiveHub-MacTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveHub-MacTests-Info.plist"; sourceTree = "<group>"; };
 		9C26F958146B2069001A5385 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9C26F95A146B2069001A5385 /* ObjectiveHub_MacTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveHub_MacTests.h; sourceTree = "<group>"; };
-		9C26F95B146B2069001A5385 /* ObjectiveHub_MacTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveHub_MacTests.m; sourceTree = "<group>"; };
+		9C26F95A146B2069001A5385 /* ObjectiveHub_Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveHub_Tests.h; sourceTree = "<group>"; };
+		9C26F95B146B2069001A5385 /* ObjectiveHub_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveHub_Tests.m; sourceTree = "<group>"; };
 		9C26F967146B207A001A5385 /* libObjectiveHub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjectiveHub.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C26F968146B207A001A5385 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9C26F96C146B207A001A5385 /* ObjectiveHub-iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveHub-iOS-Prefix.pch"; sourceTree = "<group>"; };
 		9C26F975146B207A001A5385 /* ObjectiveHub-iOSTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ObjectiveHub-iOSTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C26F977146B207A001A5385 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		9C26F97F146B207A001A5385 /* ObjectiveHub-iOSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveHub-iOSTests-Info.plist"; sourceTree = "<group>"; };
-		9C26F981146B207A001A5385 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9C26F983146B207A001A5385 /* ObjectiveHub_iOSTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveHub_iOSTests.h; sourceTree = "<group>"; };
-		9C26F984146B207A001A5385 /* ObjectiveHub_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveHub_iOSTests.m; sourceTree = "<group>"; };
 		9C26F9AD146B2424001A5385 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		9C26F9AE146B2424001A5385 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		9C26F9AF146B2424001A5385 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
@@ -251,6 +245,7 @@
 		9C5D2D621470281A0064F02A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9C5D2D651470281B0064F02A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		9C5D2D70147029E10064F02A /* CDOHTestAppUserCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHTestAppUserCredentials.h; sourceTree = "<group>"; };
+		9C99909614AE70F100DFDD3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		9CE6633F1470929500D8A95F /* CDOHError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHError.h; sourceTree = "<group>"; };
 		9CE663401470929500D8A95F /* CDOHError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHError.m; sourceTree = "<group>"; };
 		9CF962AC147FC01B00F52A98 /* CDOHRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHRepository.h; sourceTree = "<group>"; };
@@ -270,8 +265,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C99909714AE70F100DFDD3B /* Foundation.framework in Frameworks */,
 				9C26F94F146B2069001A5385 /* SenTestingKit.framework in Frameworks */,
-				9C26F950146B2069001A5385 /* Cocoa.framework in Frameworks */,
 				9C26F953146B2069001A5385 /* ObjectiveHub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,7 +284,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C26F976146B207A001A5385 /* SenTestingKit.framework in Frameworks */,
-				9C26F978146B207A001A5385 /* UIKit.framework in Frameworks */,
 				9C26F979146B207A001A5385 /* Foundation.framework in Frameworks */,
 				9C26F97C146B207A001A5385 /* libObjectiveHub.a in Frameworks */,
 			);
@@ -310,9 +304,11 @@
 		9C26F927146B1B74001A5385 = {
 			isa = PBXGroup;
 			children = (
+				9C99909614AE70F100DFDD3B /* Foundation.framework */,
 				9C26F996146B20C7001A5385 /* Shared */,
-				9C26F995146B20C0001A5385 /* iOS */,
-				9C26F994146B20B9001A5385 /* Mac */,
+				9C26F96A146B207A001A5385 /* ObjectiveHub iOS Specifics */,
+				9C26F93E146B2069001A5385 /* ObjectiveHub Mac Specifics */,
+				9C26F954146B2069001A5385 /* Unit Tests */,
 				9C5D2D551470281A0064F02A /* ObjectiveHub Test App */,
 				9C26F9A7146B23D9001A5385 /* Vendor */,
 				9C26F937146B2069001A5385 /* Frameworks */,
@@ -354,12 +350,12 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		9C26F93E146B2069001A5385 /* ObjectiveHub Mac */ = {
+		9C26F93E146B2069001A5385 /* ObjectiveHub Mac Specifics */ = {
 			isa = PBXGroup;
 			children = (
 				9C26F93F146B2069001A5385 /* Supporting Files */,
 			);
-			name = "ObjectiveHub Mac";
+			name = "ObjectiveHub Mac Specifics";
 			path = "ObjectiveHub-Mac";
 			sourceTree = "<group>";
 		};
@@ -373,14 +369,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		9C26F954146B2069001A5385 /* Mac Tests */ = {
+		9C26F954146B2069001A5385 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
-				9C26F95A146B2069001A5385 /* ObjectiveHub_MacTests.h */,
-				9C26F95B146B2069001A5385 /* ObjectiveHub_MacTests.m */,
+				9C26F95A146B2069001A5385 /* ObjectiveHub_Tests.h */,
+				9C26F95B146B2069001A5385 /* ObjectiveHub_Tests.m */,
 				9C26F955146B2069001A5385 /* Supporting Files */,
 			);
-			name = "Mac Tests";
+			name = "Unit Tests";
 			path = "ObjectiveHub-MacTests";
 			sourceTree = "<group>";
 		};
@@ -393,12 +389,12 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		9C26F96A146B207A001A5385 /* ObjectiveHub iOS */ = {
+		9C26F96A146B207A001A5385 /* ObjectiveHub iOS Specifics */ = {
 			isa = PBXGroup;
 			children = (
 				9C26F96B146B207A001A5385 /* Supporting Files */,
 			);
-			name = "ObjectiveHub iOS";
+			name = "ObjectiveHub iOS Specifics";
 			path = "ObjectiveHub-iOS";
 			sourceTree = "<group>";
 		};
@@ -408,44 +404,6 @@
 				9C26F96C146B207A001A5385 /* ObjectiveHub-iOS-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		9C26F97D146B207A001A5385 /* iOS Tests */ = {
-			isa = PBXGroup;
-			children = (
-				9C26F983146B207A001A5385 /* ObjectiveHub_iOSTests.h */,
-				9C26F984146B207A001A5385 /* ObjectiveHub_iOSTests.m */,
-				9C26F97E146B207A001A5385 /* Supporting Files */,
-			);
-			name = "iOS Tests";
-			path = "ObjectiveHub-iOSTests";
-			sourceTree = "<group>";
-		};
-		9C26F97E146B207A001A5385 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				9C26F97F146B207A001A5385 /* ObjectiveHub-iOSTests-Info.plist */,
-				9C26F980146B207A001A5385 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		9C26F994146B20B9001A5385 /* Mac */ = {
-			isa = PBXGroup;
-			children = (
-				9C26F93E146B2069001A5385 /* ObjectiveHub Mac */,
-				9C26F954146B2069001A5385 /* Mac Tests */,
-			);
-			name = Mac;
-			sourceTree = "<group>";
-		};
-		9C26F995146B20C0001A5385 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				9C26F96A146B207A001A5385 /* ObjectiveHub iOS */,
-				9C26F97D146B207A001A5385 /* iOS Tests */,
-			);
-			name = iOS;
 			sourceTree = "<group>";
 		};
 		9C26F996146B20C7001A5385 /* Shared */ = {
@@ -762,7 +720,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C26F982146B207A001A5385 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,7 +805,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C26F95C146B2069001A5385 /* ObjectiveHub_MacTests.m in Sources */,
+				9C26F95C146B2069001A5385 /* ObjectiveHub_Tests.m in Sources */,
 				9C26FA06146B2DEF001A5385 /* ObjectiveHub.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -880,8 +837,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C26F985146B207A001A5385 /* ObjectiveHub_iOSTests.m in Sources */,
 				9C26FA08146B2DEF001A5385 /* ObjectiveHub.m in Sources */,
+				9C99909514AE708F00DFDD3B /* ObjectiveHub_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -937,14 +894,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				9C26F958146B2069001A5385 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		9C26F980146B207A001A5385 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9C26F981146B207A001A5385 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

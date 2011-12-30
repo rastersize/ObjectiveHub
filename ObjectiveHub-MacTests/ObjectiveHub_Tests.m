@@ -6,10 +6,10 @@
 //  Copyright (c) 2011 Icomera. All rights reserved.
 //
 
-#import "ObjectiveHub_MacTests.h"
+#import "ObjectiveHub_Tests.h"
 #import "ObjectiveHub.h"
 
-@implementation ObjectiveHub_MacTests
+@implementation ObjectiveHub_Tests
 
 - (void)setUp
 {
