@@ -281,7 +281,7 @@ NSString *const kCDOHUserDictionaryAPIURLKey			= @"url";
 
 
 #pragma mark - NSCopying Method
-- (id)copyWithZone:(NSZone *)zone
+- (id)copyWithZone:(NSZone *)__unused zone
 {
 	// Simply return a retained pointer to this instance as the class is
 	// immutable.
