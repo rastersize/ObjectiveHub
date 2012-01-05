@@ -399,9 +399,9 @@
 		9C26F954146B2069001A5385 /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
+				9C26F955146B2069001A5385 /* Supporting Files */,
 				9C26F95A146B2069001A5385 /* ObjectiveHub_Tests.h */,
 				9C26F95B146B2069001A5385 /* ObjectiveHub_Tests.m */,
-				9C26F955146B2069001A5385 /* Supporting Files */,
 			);
 			name = "Unit Tests";
 			path = "ObjectiveHub-MacTests";

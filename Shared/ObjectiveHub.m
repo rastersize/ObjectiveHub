@@ -124,7 +124,7 @@ NSString *const kCDOHResponseHeaderLinkSeparatorKey;
 		_name = [name copy];
 		_url = url;
 	}
-
+	
 	return self;
 }
 
@@ -320,11 +320,11 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		if (successBlock) {
 			NSArray *users = nil;
 			NSDictionary *responseInfo = nil;
-
+			
 			if (responseObject && [responseObject length] > 0) {
 				NSArray *userDicts = [self.JSONDecoder objectWithData:responseObject];
 //TODO: Should the library call the failure block instead here as the library can not understand the returrend data (wrong format)?
-
+				
 				if ([userDicts isKindOfClass:[NSArray class]]) {
 					CDOHUser *user = nil;
 					NSMutableArray *mutableUsers = [[NSMutableArray alloc] initWithCapacity:[userDicts count]];
@@ -333,9 +333,9 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 						[mutableUsers addObject:user];
 					}
 					users = mutableUsers;
-
+					
 					responseInfo = [self responseDictionaryFromOperation:operation];
-
+					
 					successBlock(users, responseInfo);
 				} else {
 					[NSException raise:NSInternalInconsistencyException format:@"The using app should be notified that the response was incorrect so that we can gracefully handle the problem."];
@@ -365,12 +365,12 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		if (successBlock) {
 			if (responseObject && [responseObject length] > 0) {
 				NSDictionary *repoDict = [self.JSONDecoder objectWithData:responseObject];
-
+				
 				if ([repoDict isKindOfClass:[NSDictionary class]]) {
 					CDOHRepository *repo = [[CDOHRepository alloc] initWithDictionary:repoDict];
-
+					
 					NSDictionary *responseInfo = [self responseDictionaryFromOperation:operation];
-
+					
 					successBlock(repo, responseInfo);
 				} else {
 					[NSException raise:NSInternalInconsistencyException format:@"The using app should be notified that the response was incorrect so that we can gracefully handle the problem."];
@@ -396,17 +396,17 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 - (NSDictionary *)responseDictionaryFromOperation:(AFHTTPRequestOperation *)operation
 {
 	NSDictionary *allHeaders = [[operation response] allHeaderFields];
-
+	
 	id rateLimitLimit		= [allHeaders objectForKey:kCDOHResponseHeaderXRateLimitLimitKey];
 	id rateLimitRemaining	= [allHeaders objectForKey:kCDOHResponseHeaderXRateLimitRemainingKey];
 	id location				= [allHeaders objectForKey:kCDOHResponseHeaderLocationKey];
 	id link					= [allHeaders objectForKey:kCDOHResponseHeaderLinkKey];
-
+	
 	rateLimitLimit			= (rateLimitLimit		? rateLimitLimit		: [NSNull null]);
 	rateLimitRemaining		= (rateLimitRemaining	? rateLimitRemaining	: [NSNull null]);
 	location				= (location				? location				: [NSNull null]);
 
-
+	
 #if DEBUG
 	NSLog(@"link: %@", link);
 #endif
@@ -414,20 +414,20 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 //	if (link && [link length] > 0) {
 		/*NSScanner *linkScanner = [[NSScanner alloc] initWithString:link];
 		links = [[NSMutableArray alloc] init];
-
+		
 		while (![linkScanner isAtEnd]) {
 			NSString *linkUrlString = nil;
 			NSString *linkName = nil;
 			NSURL *linkUrl = nil;
-
+			
 			[linkScanner scanUpToString:@"<" intoString:NULL];
 			[linkScanner scanUpToString:@">" intoString:&linkUrlString];
 			[linkScanner scanUpToString:@"rel=\"" intoString:NULL];
 			[linkScanner scanUpToString:@"\"" intoString:&linkName];
-
+			
 			if ([linkUrlString length] > 0 && [linkName length] > 0) {
 				linkUrl = [[NSURL alloc] initWithString:linkUrlString];
-
+				
 				CDOHLinkRelationshipHeader *linkRel = [[CDOHLinkRelationshipHeader alloc] initWithName:linkName URL:linkUrl];
 				[links addObject:linkRel];
 			}
@@ -435,14 +435,14 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 //	} else {
 		links = [NSNull null];
 //	}
-
+					  
 	NSDictionary *responseInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
 								  rateLimitLimit,		kCDOHResponseHeaderXRateLimitLimitKey,
 								  rateLimitRemaining,	kCDOHResponseHeaderXRateLimitRemainingKey,
 								  links,				kCDOHResponseHeaderLinkKey,
 								  location,				kCDOHResponseHeaderLocationKey,
 								  nil];
-
+	
 	return responseInfo;
 }
 
@@ -454,7 +454,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		return;
 	}
 	if (!login) {
-		[NSException raise:NSInvalidArgumentException format:@"The login argument is not set."];
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"login"];
 	}
 
 	NSString *getPath = [[NSString alloc] initWithFormat:kCDOHUserPathFormat, login];
@@ -466,19 +466,11 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 
 - (void)user:(void (^)(CDOHUser *user))successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	if (!self.username || !self.password) {
-		[NSException raise:NSInternalInconsistencyException format:@"Username or password not set."];
-	}
-	
 	return [self userWithLogin:self.username success:successBlock failure:failureBlock];
 }
 
 - (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(CDOHUser *))successBlock failure:(CDOHFailureBlock)failureBlock
-{	
-	if (!self.username || !self.password) {
-		[NSException raise:NSInternalInconsistencyException format:@"Username or password not set."];
-	}
-	
+{
 	NSString *patchPath = kCDOHUserAuthenticatedPath;
 	[self.client patchPath:patchPath
 				parameters:dictionary
@@ -504,7 +496,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 - (void)addUserEmails:(NSArray *)emails success:(void (^)(NSArray *))successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!emails) {
-		return;
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"emails"];
 	}
 	
 	NSString *postPath = kCDOHUserEmailsPath;
@@ -517,7 +509,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 - (void)deleteUserEmails:(NSArray *)emails success:(void (^)(void))successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!emails) {
-		return;
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"emails"];
 	}
 	
 	NSString *deletePath = kCDOHUserEmailsPath;
@@ -537,8 +529,8 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	if (!repositoryName || !repositoryOwner) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repositoryName", @"repositoryOwner"];
 	}
-
-
+	
+	
 	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryWatchersPath, repositoryOwner, repositoryName];
 	[self.client getPath:watchersPath
 			  parameters:nil
