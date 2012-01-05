@@ -130,6 +130,8 @@ NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
+	[super encodeWithCoder:aCoder];
+	
 	NSNumber *spaceNumber			= [NSNumber numberWithUnsignedInteger:self.space];
 	NSNumber *collaboratorsNumber	= [NSNumber numberWithUnsignedInteger:self.collaborators];
 	NSNumber *privateReposNumber	= [NSNumber numberWithUnsignedInteger:self.privateRepositories];

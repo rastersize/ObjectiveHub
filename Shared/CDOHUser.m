@@ -249,6 +249,8 @@ NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
+	[super encodeWithCoder:coder];
+
 	NSNumber *identifierNumber					= [NSNumber numberWithUnsignedInteger:self.identifier];
 	NSNumber *publicRepositoriesNumber			= [NSNumber numberWithUnsignedInteger:self.numberOfPublicRepositories];
 	NSNumber *publicGistsNumber					= [NSNumber numberWithUnsignedInteger:self.numberOfPublicGists];
