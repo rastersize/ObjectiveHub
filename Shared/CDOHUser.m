@@ -100,7 +100,7 @@ NSString *const kCDOHUserDictionaryBioKey				= @"bio";
 {
 	[super encodeWithCoder:coder];
 
-	NSNumber *hireableNumber	= [NSNumber numberWithBool:self.hireable];
+	NSNumber *hireableNumber	= [NSNumber numberWithBool:_hireable];
 	NSDictionary *dictionary	= [NSDictionary dictionaryWithObjectsAndKeys:
 								   _biography,		kCDOHUserDictionaryBioKey,
 								   hireableNumber,	kCDOHUserDictionaryHireableKey,

@@ -34,11 +34,7 @@
 #import "CDOHAbstractUser.h"
 
 
-#pragma mark Forward Class Declarations
-@class CDOHPlan;
-
-
-#pragma mark - CDOHUser Interface
+#pragma mark CDOHUser Interface
 /**
  * An immutable class containing information about a single "normal" GitHub
  * user, i.e. not an organization.
