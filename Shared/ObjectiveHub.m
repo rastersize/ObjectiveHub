@@ -183,6 +183,9 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 /// addresses.
 - (CDOHInternalSuccessBlock)standardUserEmailSuccessBlock:(void (^)(NSArray *emails))successBlock;
 
+/// The standard success block for requests returning an array of users.
+- (CDOHInternalSuccessBlock)standardUserListSuccessBlock:(void (^)(NSArray *users, NSDictionary *responseInfo))successBlock;
+
 
 @end
 
@@ -292,6 +295,37 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 			}
 			
 			successBlock(user);
+		}
+	};
+}
+
+- (CDOHInternalSuccessBlock)standardUserListSuccessBlock:(void (^)(NSArray *users, NSDictionary *responseInfo))successBlock
+{
+	return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
+		if (successBlock) {
+			NSArray *users = nil;
+			NSDictionary *responseInfo = nil;
+
+			if (responseObject && [responseObject length] > 0) {
+				NSArray *userDicts = [self.JSONDecoder objectWithData:responseObject];
+//TODO: Should the library call the failure block instead here as the library can not understand the returrend data (wrong format)?
+
+				if ([userDicts isKindOfClass:[NSArray class]]) {
+					CDOHUser *user = nil;
+					NSMutableArray *mutableUsers = [[NSMutableArray alloc] initWithCapacity:[userDicts count]];
+					for (NSDictionary *userDict in userDicts) {
+						user = [[CDOHUser alloc] initWithDictionary:userDict];
+						[mutableUsers addObject:user];
+					}
+					users = mutableUsers;
+
+					responseInfo = [self responseDictionaryFromOperation:operation];
+
+					successBlock(users, responseInfo);
+				} else {
+					[NSException raise:NSInternalInconsistencyException format:@"The using app should be notified that the response was incorrect so that we can gracefully handle the problem."];
+				}
+			}
 		}
 	};
 }
