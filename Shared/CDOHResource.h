@@ -45,11 +45,11 @@
 #pragma mark - Initializing a CDOHResource Instance
 /** @name Initializing an CDOHPlan Instance */
 /**
- * Initializes and returns an `CDOHPlan` instance intialized with the values of
- * the given dictionary.
+ * Initializes and returns an `CDOHResource` instance intialized with the
+ * values of the given dictionary.
  *
  * @param dictionary A dictionary containing user information.
- * @return An `CDOHPlan` instance initialized with the given dictionary.
+ * @return A `CDOHResource` instance initialized with the given dictionary.
  */
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
