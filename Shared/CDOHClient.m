@@ -39,8 +39,6 @@
 #import "CDOHError.h"
 
 #import "CDOHUser.h"
-#import "CDOHUserPrivate.h"
-
 #import "CDOHRepository.h"
 
 
