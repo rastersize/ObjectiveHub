@@ -56,43 +56,20 @@ NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 {
 	self = [super init];
 	if (self) {
-		[self setupUsingDictionary:dictionary];
+		NSString *name = [dictionary valueForKey:kCDOHPlanDictionaryNameKey];
+		_name = [name copy];
+		
+		NSNumber *space = [dictionary valueForKey:kCDOHPlanDictionarySpaceKey];
+		_space = [space unsignedIntegerValue];
+		
+		NSNumber *collaborators = [dictionary valueForKey:kCDOHPlanDictionaryCollaboratorsKey];
+		_collaborators = [collaborators unsignedIntegerValue];
+		
+		NSNumber *privateRepos = [dictionary valueForKey:kCDOHPlanDictionaryPrivateRepositoriesKey];
+		_privateRepositories = [privateRepos unsignedIntegerValue];
 	}
 	
 	return self;
-}
-
-
-#pragma mark - Transform Between Instance Variables and Dictionary
-- (NSDictionary *)encodeAsDictionary
-{
-	NSNumber *spaceNumber			= [NSNumber numberWithUnsignedInteger:self.space];
-	NSNumber *collaboratorsNumber	= [NSNumber numberWithUnsignedInteger:self.collaborators];
-	NSNumber *privateReposNumber	= [NSNumber numberWithUnsignedInteger:self.privateRepositories];
-	
-	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-								self.name,				kCDOHPlanDictionaryNameKey,
-								spaceNumber,			kCDOHPlanDictionarySpaceKey,
-								collaboratorsNumber,	kCDOHPlanDictionaryCollaboratorsKey,
-								privateReposNumber,		kCDOHPlanDictionaryPrivateRepositoriesKey,
-								nil];
-	
-	return dictionary;
-}
-
-- (void)setupUsingDictionary:(NSDictionary *)dictionary
-{
-	NSString *name = [dictionary valueForKey:kCDOHPlanDictionaryNameKey];
-	_name = [name copy];
-	
-	NSNumber *space = [dictionary valueForKey:kCDOHPlanDictionarySpaceKey];
-	_space = [space unsignedIntegerValue];
-	
-	NSNumber *collaborators = [dictionary valueForKey:kCDOHPlanDictionaryCollaboratorsKey];
-	_collaborators = [collaborators unsignedIntegerValue];
-	
-	NSNumber *privateRepos = [dictionary valueForKey:kCDOHPlanDictionaryPrivateRepositoriesKey];
-	_privateRepositories = [privateRepos unsignedIntegerValue];
 }
 
 
@@ -146,14 +123,25 @@ NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 #pragma mark - NSCoding Methods
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-	NSDictionary *dictionary = [aDecoder decodeObjectForKey:@"dictionary"];
-	return [self initWithDictionary:dictionary];
+	NSDictionary *dictionary = [aDecoder decodeObjectForKey:@"CDOHPlanPropertiesDictionary"];
+	self = [self initWithDictionary:dictionary];
+	return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-	NSDictionary *dictionary = [self encodeAsDictionary];
-	[aCoder encodeObject:dictionary forKey:@"dictionary"];
+	NSNumber *spaceNumber			= [NSNumber numberWithUnsignedInteger:self.space];
+	NSNumber *collaboratorsNumber	= [NSNumber numberWithUnsignedInteger:self.collaborators];
+	NSNumber *privateReposNumber	= [NSNumber numberWithUnsignedInteger:self.privateRepositories];
+	
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+								self.name,				kCDOHPlanDictionaryNameKey,
+								spaceNumber,			kCDOHPlanDictionarySpaceKey,
+								collaboratorsNumber,	kCDOHPlanDictionaryCollaboratorsKey,
+								privateReposNumber,		kCDOHPlanDictionaryPrivateRepositoriesKey,
+								nil];
+	
+	[aCoder encodeObject:dictionary forKey:@"CDOHPlanPropertiesDictionary"];
 }
 
 

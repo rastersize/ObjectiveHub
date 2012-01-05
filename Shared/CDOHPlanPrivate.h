@@ -51,37 +51,4 @@ extern NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey;
  * Private CDOHPlan additions.
  */
 @interface CDOHPlan ()
-
-
-#pragma mark - Initializing an CDOHPlan Instance
-/** @name Initializing an CDOHPlan Instance */
-/**
- * Initializes and returns an `CDOHPlan` instance intialized with the values of
- * the given dictionary.
- *
- * @param dictionary A dictionary containing user information.
- * @return An `CDOHPlan` instance initialized with the given dictionary.
- * @private
- */
-- (id)initWithDictionary:(NSDictionary *)dictionary;
-
-
-#pragma mark - Transform Between Instance Variables and Dictionary
-/**
- * Encode instance as a dictionary.
- *
- * @return The instance variables encoded into a dictionary.
- * @private
- */
-- (NSDictionary *)encodeAsDictionary;
-
-/**
- * Setup the instance variables using the values in the dictionary.
- *
- * @param dictionary The dictionary containing the values which the instance
- * variables should be set to.
- * @private
- */
-- (void)setupUsingDictionary:(NSDictionary *)dictionary;
-
 @end
