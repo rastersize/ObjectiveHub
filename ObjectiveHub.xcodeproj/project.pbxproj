@@ -146,6 +146,8 @@
 		9CA5FAA614B6320000F2CD13 /* NSDate+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAA314B6320000F2CD13 /* NSDate+ObjectiveHub.h */; };
 		9CA5FAA714B6320000F2CD13 /* NSDate+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FAA414B6320000F2CD13 /* NSDate+ObjectiveHub.m */; };
 		9CA5FAA814B6320000F2CD13 /* NSDate+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FAA414B6320000F2CD13 /* NSDate+ObjectiveHub.m */; };
+		9CA5FAAA14B6382C00F2CD13 /* CDOHRepositoryPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAA914B6382C00F2CD13 /* CDOHRepositoryPrivate.h */; };
+		9CA5FAAB14B6382C00F2CD13 /* CDOHRepositoryPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAA914B6382C00F2CD13 /* CDOHRepositoryPrivate.h */; };
 		9CE663411470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663421470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663431470929500D8A95F /* CDOHError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE663401470929500D8A95F /* CDOHError.m */; };
@@ -306,6 +308,7 @@
 		9CA5FAA014B6304600F2CD13 /* CDOHCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHCommon.h; sourceTree = "<group>"; };
 		9CA5FAA314B6320000F2CD13 /* NSDate+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ObjectiveHub.h"; sourceTree = "<group>"; };
 		9CA5FAA414B6320000F2CD13 /* NSDate+ObjectiveHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ObjectiveHub.m"; sourceTree = "<group>"; };
+		9CA5FAA914B6382C00F2CD13 /* CDOHRepositoryPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHRepositoryPrivate.h; sourceTree = "<group>"; };
 		9CE6633F1470929500D8A95F /* CDOHError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHError.h; sourceTree = "<group>"; };
 		9CE663401470929500D8A95F /* CDOHError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHError.m; sourceTree = "<group>"; };
 		9CF962AC147FC01B00F52A98 /* CDOHRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHRepository.h; sourceTree = "<group>"; };
@@ -547,6 +550,7 @@
 				9C2F3E83146F464200C44A82 /* CDOHUserPrivate.h */,
 				9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */,
 				9C613A9F14B60CEC0067B6B6 /* CDOHResourcePrivate.h */,
+				9CA5FAA914B6382C00F2CD13 /* CDOHRepositoryPrivate.h */,
 			);
 			name = "Private Model Interfaces";
 			sourceTree = "<group>";
@@ -654,6 +658,7 @@
 				9C47C5511473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
 				9C99909A14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */,
 				9C613AA014B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */,
+				9CA5FAAA14B6382C00F2CD13 /* CDOHRepositoryPrivate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +694,7 @@
 				9CA5FA9714B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */,
 				9CA5FA9D14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.h in Headers */,
 				9CA5FAA614B6320000F2CD13 /* NSDate+ObjectiveHub.h in Headers */,
+				9CA5FAAB14B6382C00F2CD13 /* CDOHRepositoryPrivate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
