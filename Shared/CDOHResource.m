@@ -33,9 +33,19 @@
 #import "CDOHResource.h"
 #import "CDOHResourcePrivate.h"
 
+#import "NSString+ObjectiveHub.h"
+
 
 #pragma mark NSCoding and GitHub JSON Keys
 NSString *const kCDOHResourceAPIResourceURLKey =  @"url";
+
+
+@interface CDOHResource ()
+
+#pragma mark - Decoding Dictionary Objects
+- (id)decodeObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey block:(void (^)(id objFromDict, id *retObj))block;
+
+@end
 
 
 #pragma mark - CDOHResource Implementation
@@ -54,6 +64,43 @@ NSString *const kCDOHResourceAPIResourceURLKey =  @"url";
 	}
 	
 	return self;
+}
+
+
+#pragma mark - Decoding Dictionary Objects
+- (id)resourceObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey ofClass:(Class)ofClass
+{
+	return [self decodeObjectFromDictionary:dictionary usingKey:usingKey block:^(id objFromDict, id *retObj) {
+		if ([objFromDict isKindOfClass:ofClass]) {
+			*retObj = [objFromDict copy];
+		} else if ([objFromDict isKindOfClass:[NSDictionary class]]) {
+			*retObj = [[ofClass alloc] initWithDictionary:objFromDict];
+		}
+	}];
+}
+
+- (NSDate *)dateObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey
+{
+	return [self decodeObjectFromDictionary:dictionary usingKey:usingKey block:^(id objFromDict, id *retObj) {
+		if ([objFromDict isKindOfClass:[NSDate class]]) {
+			*retObj = [objFromDict copy];
+		} else if ([objFromDict isKindOfClass:[NSString class]]) {
+			NSDate *parsedDateString = [objFromDict dateRFC3339Formatted];
+			*retObj = parsedDateString;
+		}
+	}];
+}
+
+- (id)decodeObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey block:(void (^)(id objFromDict, id *retObj))block
+{
+	id retObj = nil;
+	id objFromDict = [dictionary objectForKey:usingKey];
+	
+	if (objFromDict) {
+		block(objFromDict, &retObj);
+	}
+	
+	return retObj;
 }
 
 

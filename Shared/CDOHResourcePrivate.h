@@ -54,4 +54,45 @@ extern NSString *const kCDOHResourceAPIResourceURLKey;
  */
 @property (strong, readonly) NSURL *_APIResourceURL;
 
+
+#pragma mark - Decoding Dictionary Objects
+/** @name Decoding Dictionary Objects */
+/**
+ * Returns the object in the given _dictionary_ for the given _key_.
+ *
+ * If the object for the given key is not of the given class _ofClass_ but
+ * instead a `NSDictionary` object we will initialize a new object of the class
+ * and return it. In the case where the type of the object is not recognized or
+ * is `nil`, `nil` is returned.
+ *
+ * _ofClass_ must be a subclass of CDOHResource.
+ *
+ * @param dictionary The dictionary to get the object from for the key
+ * _usingKey_.
+ * @param usingKey The key to get the object from the given dictionary.
+ * @param ofClass The class to instanciate using the object for the given key if
+ * the object is a `NSDictionary`.
+ * @return The decoded object or `nil`.
+ */
+- (id)resourceObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey ofClass:(Class)ofClass;
+
+
+/** @name Decoding Dictionary Objects */
+/**
+ * Returns the date object in the given _dictionary_ for the given _key_.
+ *
+ * If the object for the given key is not a `NSDate` object but instead a
+ * `NSString` object we will try to parse it by assuming it is an RFC 3339
+ * formatted date string and return it. In the case where the type of the object
+ * is not recognized, we could not parse the string or it is `nil` we return
+ * `nil`.
+ *
+ * @param dictionary The dictionary to get the object from for the key
+ * _usingKey_.
+ * @param usingKey The key to get the object from the given dictionary.
+ * @param ofClass The class to instanciate using the object for the given key if
+ * the object is a `NSDictionary`.
+ */
+- (NSDate *)dateObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey;
+
 @end
