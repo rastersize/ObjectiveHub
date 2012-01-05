@@ -38,7 +38,7 @@
 		} failure:^(CDOHError *error) {
 			NSLog(@"user 1 failure: %@", error);
 		}];
-	});*/
+	});
 	
 	// Should succeed:
 	dispatch_async(queue, ^{
@@ -48,7 +48,7 @@
 			NSLog(@"user 2 failure: %@", error);
 		}];
 	});
-	/*
+	
 	// Should succeed.
 	dispatch_async(queue, ^{
 		[self.hub userWithLogin:CDOHTestAppUsername success:^(CDOHUser *user) {
@@ -57,7 +57,7 @@
 			NSLog(@"authed user failure: %@", error);
 		}];
 	});
-	
+	 
 	// Should succeed:
 	NSDictionary *updateUserDefaultDict = [NSDictionary dictionaryWithObjectsAndKeys:
 										   [[NSDate date] description], kCDOHUserDictionaryNameKey,

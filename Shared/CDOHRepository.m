@@ -32,9 +32,11 @@
 
 #import "CDOHRepository.h"
 #import "CDOHRepositoryPrivate.h"
+#import "CDOHResourcePrivate.h"
 
 #import "CDOHUser.h"
 
+#import "NSString+ObjectiveHub.h"
 
 #pragma mark NSCoding and GitHub JSON Keys
 //FIXME: These will soon be change from *_url to *_links
@@ -102,7 +104,45 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 {
 	self = [super initWithDictionary:dictionary];
 	if (self) {
+		_htmlUrl = [dictionary objectForKey:kCDOHRepositoryHtmlUrlKey];
+		_cloneUrl = [dictionary objectForKey:kCDOHRepositoryCloneUrlKey];
+		_gitUrl = [dictionary objectForKey:kCDOHRepositoryGitUrlKey];
+		_sshUrl = [dictionary objectForKey:kCDOHRepositorySshUrlKey];
+		_svnUrl = [dictionary objectForKey:kCDOHRepositorySvnUrlKey];
+		_name = [[dictionary objectForKey:kCDOHRepositoryNameKey] copy];
+		_repositoryDescription = [[dictionary objectForKey:kCDOHRepositoryDescriptionKey] copy];
+		_homepage = [dictionary objectForKey:kCDOHRepositoryHomepageKey];
+		_languages = [[dictionary objectForKey:kCDOHRepositoryLanguageKey] copy];
+		_defaultBranch = [[dictionary objectForKey:kCDOHRepositoryDefaultBranchKey] copy];
 		
+		_owner = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHUser class]];
+		//FIXME: Change to CDOHOrganization class when implemented
+		_organization = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHResource class]];
+		_parentRepository = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
+		_sourceRepository = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
+		
+		_pushedAt = [self dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryPushedAtKey];
+		_createdAt = [self dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryCreatedAtKey];
+		
+		NSNumber *privateNum = [dictionary objectForKey:kCDOHRepositoryPrivateKey];
+		_private = [privateNum boolValue];
+		NSNumber *forkNum = [dictionary objectForKey:kCDOHRepositoryForkKey];
+		_fork = [forkNum boolValue];
+		NSNumber *hasWikiNum = [dictionary objectForKey:kCDOHRepositoryHasWikiKey];
+		_hasWiki = [hasWikiNum boolValue];
+		NSNumber *hasIssuesNum = [dictionary objectForKey:kCDOHRepositoryHasIssuesKey];
+		_hasIssues = [hasIssuesNum boolValue];
+		NSNumber *hasDownloadsNum = [dictionary objectForKey:kCDOHRepositoryHasDownloadsKey];
+		_hasDownloads = [hasDownloadsNum boolValue];
+		
+		NSNumber *forksNum = [dictionary objectForKey:kCDOHRepositoryForksKey];
+		_forks = [forksNum unsignedIntegerValue];
+		NSNumber *watchersNum = [dictionary objectForKey:kCDOHRepositoryWatchersKey];
+		_watchers = [watchersNum unsignedIntegerValue];
+		NSNumber *sizeNum = [dictionary objectForKey:kCDOHRepositorySizeKey];
+		_size = [sizeNum unsignedIntegerValue];
+		NSNumber *openIssuesNum = [dictionary objectForKey:kCDOHRepositoryOpenIssuesKey];
+		_openIssues = [openIssuesNum unsignedIntegerValue];
 	}
 	
 	return self;
