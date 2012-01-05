@@ -31,10 +31,16 @@
 //
 
 #import "CDOHRepository.h"
+#import "CDOHRepositoryPrivate.h"
+
+#import "CDOHUser.h"
 
 
+
+#pragma mark - CDOHRepository Implementation
 @implementation CDOHRepository
 
+#pragma mark - Synthesization
 @synthesize HTMLURL = _htmlUrl;
 @synthesize cloneURL = _cloneUrl;
 @synthesize gitURL = _gitUrl;
@@ -62,7 +68,7 @@
 @synthesize hasDownloads = _hasDownloads;
 
 
-#pragma mark - Initial
+#pragma mark - Initializing an CDOHRepository Instance
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
 	self = [super initWithDictionary:dictionary];
@@ -72,5 +78,42 @@
 	
 	return self;
 }
+
+#pragma mark - Identifying and Comparing Users
+- (BOOL)isEqual:(id)object
+{
+	if (object == self) {
+		return YES;
+	}
+	if (!object || ![object isKindOfClass:[self class]]) {
+		return NO;
+	}
+
+	return [self isEqualToRepository:object];
+}
+
+- (BOOL)isEqualToRepository:(CDOHRepository *)aRepository
+{
+	if (aRepository == self) {
+		return YES;
+	}
+
+	return ([_owner isEqualTo:aRepository.owner] &&
+			[_name isEqualToString:aRepository.name] /*&&
+			[_organization isEqual:aRepository.organization]*/);
+}
+
+- (NSUInteger)hash
+{
+	NSUInteger prime = 31;
+	NSUInteger hash = 1;
+
+	hash = prime * hash + [_owner hash];
+	hash = prime * hash + [_name hash];
+//	hash = prime * hash + [_organization hash];
+
+	return hash;
+}
+
 
 @end
