@@ -336,7 +336,49 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
 
 #pragma mark - Getting Watched and Watching Repositories
 /** @name Getting Watched and Watching Repositories */
+/**
+ * Get all users watching a specific repository.
+ *
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed.
+ *
+ * @param repositoryName The name of the repository.
+ * @param repositoryOwner The name of the owner of the given repository
+ * _repositoryName_.
+ * @param successBlock The block which is called upon success with an array of
+ * users watching a repository. The parameter may be set to `NULL` in which case
+ * nothing will be done upon success.
+ *
+ * The successBlock takes one argument:
+ * _watchers_ An array of users who watch the repository given by
+ * _repositoryName_ and owned by _repositoryOwner_, can be `nil` if no one is
+ * watching the repository.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ */
+- (void)watchersOfRepository:(NSString *)repositoryName repositoryOwner:(NSString *)repositoryOwner success:(void (^)(NSArray *watchers, NSDictionary *responseInfo))successBlock failure:(CDOHFailureBlock)failureBlock;
 
+/**
+ * Get all repositories watched by a specific user.
+ *
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed.
+ *
+ * @param login The login of the user for which the array of watched
+ * repositories should be fetched.
+ * @param successBlock The block which is called upon success with an array of
+ * email addresses associated with the user. The parameter may be set to `NULL`
+ * in which case nothing will be done upon success.
+ *
+ * The successBlock takes one argument:
+ * _watchers_ An array of repositories watched by the given user with the login
+ * _login_, can be `nil` if the user is not watching any repositories.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ */
+//- (void)repositoriesWatchedByUser:(NSString *)login success:(void (^)(NSArray *watchedRepositories))successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 

@@ -41,6 +41,7 @@
 #import "CDOHUser.h"
 #import "CDOHUserPrivate.h"
 
+#import "CDOHRepository.h"
 
 
 #pragma mark Helper Macros
@@ -143,6 +144,11 @@ NSString *const kCDOHUserPathFormat					= @"/users/%@";
 NSString *const kCDOHUserAuthenticatedPath			= @"/user";
 /// The relative path for the authenticated users emails.
 NSString *const kCDOHUserEmailsPath					= @"/user/emails";
+/// The relative path for the watchers of a repository.
+/// Takes two strings;
+/// - the first is the username of the repository owner,
+/// - the second is the name of the repository.
+NSString *const kCDOHRepositoryWatchersPath			= @"/repos/%@/%@/watchers";
 
 
 #pragma mark - ObjectiveHub Generic Block Types
@@ -519,6 +525,25 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 				 parameters:emails
 					success:[self standardSuccessBlockWithNoData:successBlock]
 					failure:[self standardFailureBlock:failureBlock]];
+}
+
+
+#pragma mark - Getting Watched and Watching Repositories
+- (void)watchersOfRepository:(NSString *)repositoryName repositoryOwner:(NSString *)repositoryOwner success:(void (^)(NSArray *, NSDictionary *))successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (!successBlock && !failureBlock) {
+		return;
+	}
+	if (!repositoryName || !repositoryOwner) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repositoryName", @"repositoryOwner"];
+	}
+
+
+	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryWatchersPath, repositoryOwner, repositoryName];
+	[self.client getPath:watchersPath
+			  parameters:nil
+				 success:[self standardUserListSuccessBlock:successBlock]
+				 failure:[self standardFailureBlock:failureBlock]];
 }
 
 @end
