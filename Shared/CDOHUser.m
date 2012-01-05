@@ -227,15 +227,6 @@ NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 }
 
 
-#pragma mark - NSCopying Method
-- (id)copyWithZone:(NSZone *)__unused zone
-{
-	// Simply return a retained pointer to this instance as the class is
-	// immutable.
-	return self;
-}
-
-
 #pragma mark - NSCoding Methods
 - (id)initWithCoder:(NSCoder *)decoder
 {
@@ -250,7 +241,7 @@ NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 - (void)encodeWithCoder:(NSCoder *)coder
 {
 	[super encodeWithCoder:coder];
-
+	
 	NSNumber *identifierNumber					= [NSNumber numberWithUnsignedInteger:self.identifier];
 	NSNumber *publicRepositoriesNumber			= [NSNumber numberWithUnsignedInteger:self.numberOfPublicRepositories];
 	NSNumber *publicGistsNumber					= [NSNumber numberWithUnsignedInteger:self.numberOfPublicGists];
