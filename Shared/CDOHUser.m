@@ -35,6 +35,8 @@
 #import "CDOHPlanPrivate.h"
 #import "CDOHResourcePrivate.h"
 
+#import "NSString+ObjectiveHub.h"
+
 
 #pragma mark Dictionary Keys
 NSString *const kCDOHUserDictionaryLoginKey				= @"login";
@@ -145,14 +147,8 @@ NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 			if ([createdAtObj isKindOfClass:[NSDate class]]) {
 				_createdAt = createdAtObj;
 			} else if ([createdAtObj isKindOfClass:[NSString class]]) {
-				// TODO: Parse the created at date.
-				NSLog(@"Not yet implemented 2008-01-14T04:33:35Z -> NSDate");
-			} else {
-#if DEBUG
-				NSAssert(NO, @"Unkown representation of 'created at', skipping.");
-#else
-				NSLog(@"Unkown representation of 'created at', skipping.");
-#endif
+				NSDate *parsedCreatedAt = [createdAtObj dateRFC3339Formatted];
+				_createdAt = parsedCreatedAt;
 			}
 		}
 		
@@ -203,12 +199,6 @@ NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 				_plan = planObj;
 			} else if ([planObj isKindOfClass:[NSDictionary class]]) {
 				_plan = [[CDOHPlan alloc] initWithDictionary:planObj];
-			} else {
-#if DEBUG
-				NSAssert(NO, @"Unkown representation of 'created at', skipping.");
-#else
-				NSLog(@"Unkown representation of 'created at', skipping.");
-#endif
 			}
 		}
 	}

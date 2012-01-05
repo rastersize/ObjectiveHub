@@ -38,7 +38,7 @@
 		} failure:^(CDOHError *error) {
 			NSLog(@"user 1 failure: %@", error);
 		}];
-	});
+	});*/
 	
 	// Should succeed:
 	dispatch_async(queue, ^{
@@ -48,7 +48,7 @@
 			NSLog(@"user 2 failure: %@", error);
 		}];
 	});
-	
+	/*
 	// Should succeed.
 	dispatch_async(queue, ^{
 		[self.hub userWithLogin:CDOHTestAppUsername success:^(CDOHUser *user) {
@@ -120,7 +120,7 @@
 		} failure:^(CDOHError *error) {
 			NSLog(@"repo watchers failed: %@", error);
 		}];
-	});*/
+	});
 	
 	// Should yield an enormouse amount of people
 	dispatch_async(queue, ^{
@@ -132,7 +132,6 @@
 		}];
 	});
 	
-	dispatch_resume(queue);
 	[self.hub userWithLogin:nil success:^(CDOHUser *user) {
 		NSLog(@"should not be called, user: %@", user);
 	} failure:^(CDOHError *error) {
@@ -148,7 +147,10 @@
 		didThrowException = YES;
 		NSLog(@"%@", e);
 	}
-	NSLog(@"didThrowExeption: %@", didThrowException ? @"YES" : @"NO");
+	NSLog(@"didThrowExeption: %@", didThrowException ? @"YES" : @"NO");*/
+	
+	
+	dispatch_resume(queue);
 }
 
 @end
