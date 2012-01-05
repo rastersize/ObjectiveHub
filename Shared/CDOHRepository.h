@@ -154,7 +154,7 @@
 /**
  * The master branch of the repository.
  */
-@property (copy, readonly) NSString *masterBranch;
+@property (copy, readonly) NSString *defaultBranch;
 
 
 #pragma mark - Issues
