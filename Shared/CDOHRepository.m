@@ -36,6 +36,35 @@
 #import "CDOHUser.h"
 
 
+#pragma mark NSCoding and GitHub JSON Keys
+//FIXME: These will soon be change from *_url to *_links
+NSString *const kCDOHRepositoryHtmlUrlKey			= @"html_url";
+NSString *const kCDOHRepositoryCloneUrlKey			= @"clone_url";
+NSString *const kCDOHRepositoryGitUrlKey			= @"git_url";
+NSString *const kCDOHRepositorySshUrlKey			= @"ssh_url";
+NSString *const kCDOHRepositorySvnUrlKey			= @"svn_url";
+NSString *const kCDOHRepositoryOwnerKey				= @"owner";
+NSString *const kCDOHRepositoryNameKey				= @"name";
+NSString *const kCDOHRepositoryDescriptionKey		= @"description";
+NSString *const kCDOHRepositoryHomepageKey			= @"homepage";
+NSString *const kCDOHRepositoryLanguageKey			= @"language";
+NSString *const kCDOHRepositoryPrivateKey			= @"private";
+NSString *const kCDOHRepositoryWatchersKey			= @"watchers";
+NSString *const kCDOHRepositorySizeKey				= @"size";
+//FIXME: This will soon be changed to default_branch:
+NSString *const kCDOHRepositoryDefaultBranchKey		= @"master_branch";
+NSString *const kCDOHRepositoryOpenIssuesKey		= @"open_issues";
+NSString *const kCDOHRepositoryHasIssuesKey			= @"has_issues";
+NSString *const kCDOHRepositoryPushedAtKey			= @"pushed_at";
+NSString *const kCDOHRepositoryCreatedAtKey			= @"created_at";
+NSString *const kCDOHRepositoryOrganizationKey		= @"organization";
+NSString *const kCDOHRepositoryForkKey				= @"fork";
+NSString *const kCDOHRepositoryForksKey				= @"forks";
+NSString *const kCDOHRepositoryParentRepositoryKey	= @"parent";
+NSString *const kCDOHRepositorySourceRepositoryKey	= @"source";
+NSString *const kCDOHRepositoryHasWikiKey			= @"has_wiki";
+NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
+
 
 #pragma mark - CDOHRepository Implementation
 @implementation CDOHRepository
