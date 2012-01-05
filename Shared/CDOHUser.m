@@ -140,18 +140,20 @@ NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 		
 		
 		//--//
-		// TODO: Parse the created at date.
 		id createdAtObj = [dictionary valueForKey:kCDOHUserDictionaryCreatedAtKey];
-		if ([createdAtObj isKindOfClass:[NSDate class]]) {
-			_createdAt = createdAtObj;
-		} else if ([createdAtObj isKindOfClass:[NSString class]]) {
-			NSLog(@"Not yet implemented 2008-01-14T04:33:35Z -> NSDate");
-		} else {
+		if (createdAtObj) {
+			if ([createdAtObj isKindOfClass:[NSDate class]]) {
+				_createdAt = createdAtObj;
+			} else if ([createdAtObj isKindOfClass:[NSString class]]) {
+				// TODO: Parse the created at date.
+				NSLog(@"Not yet implemented 2008-01-14T04:33:35Z -> NSDate");
+			} else {
 #if DEBUG
-			NSAssert(NO, @"Unkown representation of 'created at', skipping.");
+				NSAssert(NO, @"Unkown representation of 'created at', skipping.");
 #else
-			NSLog(@"Unkown representation of 'created at', skipping.");
+				NSLog(@"Unkown representation of 'created at', skipping.");
 #endif
+			}
 		}
 		
 		//--//
@@ -165,7 +167,7 @@ NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 		//--//
 		NSNumber *identifier = [dictionary valueForKey:kCDOHUserDictionaryIDKey];
 		_identifier = [identifier unsignedIntegerValue];
-		
+
 		NSNumber *publicRepos = [dictionary valueForKey:kCDOHUserDictionaryPublicReposKey];
 		_numberOfPublicRepositories = [publicRepos unsignedIntegerValue];
 		

@@ -123,7 +123,7 @@
 	});*/
 	
 	// Should yield an enormouse amount of people
-	/*dispatch_async(queue, ^{
+	dispatch_async(queue, ^{
 		[self.hub watchersOfRepository:@"bootstrap" repositoryOwner:@"twitter" success:^(NSArray *watchers, NSDictionary *responseDict) {
 			NSLog(@"repo watchers: %@", watchers);
 			NSLog(@"repo response dict: %@", responseDict);
@@ -132,7 +132,7 @@
 		}];
 	});
 	
-	dispatch_resume(queue);*/
+	dispatch_resume(queue);
 	[self.hub userWithLogin:nil success:^(CDOHUser *user) {
 		NSLog(@"should not be called, user: %@", user);
 	} failure:^(CDOHError *error) {
