@@ -119,8 +119,8 @@
 		9C5D2D6F147029410064F02A /* ObjectiveHub.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F935146B2069001A5385 /* ObjectiveHub.framework */; };
 		9C613A9314B601C70067B6B6 /* ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9214B601C70067B6B6 /* ObjectiveHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C613A9414B601C70067B6B6 /* ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9214B601C70067B6B6 /* ObjectiveHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9C613A9B14B60C370067B6B6 /* CDOHResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9914B60C370067B6B6 /* CDOHResource.h */; };
-		9C613A9C14B60C370067B6B6 /* CDOHResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9914B60C370067B6B6 /* CDOHResource.h */; };
+		9C613A9B14B60C370067B6B6 /* CDOHResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9914B60C370067B6B6 /* CDOHResource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C613A9C14B60C370067B6B6 /* CDOHResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9914B60C370067B6B6 /* CDOHResource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C613A9D14B60C370067B6B6 /* CDOHResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C613A9A14B60C370067B6B6 /* CDOHResource.m */; };
 		9C613A9E14B60C370067B6B6 /* CDOHResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C613A9A14B60C370067B6B6 /* CDOHResource.m */; };
 		9C613AA014B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9F14B60CEC0067B6B6 /* CDOHResourcePrivate.h */; };
@@ -595,6 +595,7 @@
 				9CE663411470929500D8A95F /* CDOHError.h in Headers */,
 				9C2F3E7B146F3F2000C44A82 /* CDOHUser.h in Headers */,
 				9C2F3E88146F5F7D00C44A82 /* CDOHPlan.h in Headers */,
+				9C613A9B14B60C370067B6B6 /* CDOHResource.h in Headers */,
 				9CF962AE147FC01B00F52A98 /* CDOHRepository.h in Headers */,
 				9C26F9B2146B2424001A5385 /* JSONKit.h in Headers */,
 				9C26F9D5146B2979001A5385 /* AFHTTPClient.h in Headers */,
@@ -612,7 +613,6 @@
 				9C2F3E8D146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */,
 				9C47C5511473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
 				9C99909A14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */,
-				9C613A9B14B60C370067B6B6 /* CDOHResource.h in Headers */,
 				9C613AA014B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -626,6 +626,7 @@
 				9CE663421470929500D8A95F /* CDOHError.h in Headers */,
 				9C2F3E7C146F3F2000C44A82 /* CDOHUser.h in Headers */,
 				9C2F3E89146F5F7D00C44A82 /* CDOHPlan.h in Headers */,
+				9C613A9C14B60C370067B6B6 /* CDOHResource.h in Headers */,
 				9CF962AF147FC01B00F52A98 /* CDOHRepository.h in Headers */,
 				9C26F9B3146B2424001A5385 /* JSONKit.h in Headers */,
 				9C26F9D6146B2979001A5385 /* AFHTTPClient.h in Headers */,
@@ -643,7 +644,6 @@
 				9C2F3E8E146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */,
 				9C47C5521473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
 				9C99909B14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */,
-				9C613A9C14B60C370067B6B6 /* CDOHResource.h in Headers */,
 				9C613AA114B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
