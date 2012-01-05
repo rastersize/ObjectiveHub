@@ -100,7 +100,7 @@
 /**
  * The repository description.
  */
-@property (copy, readonly) NSString *description;
+@property (copy, readonly) NSString *repositoryDescription;
 
 /**
  * The homepage of the repository.
