@@ -38,8 +38,6 @@
 extern NSString *const kCDOHErrorUserInfoHTTPHeadersKey;
 /// User info dictionary key to get the response data.
 extern NSString *const kCDOHErrorUserInfoResponseDataKey;
-/// User info dictionary key to get the array of invalid arguments.
-extern NSString *const kCDOHErrorInvalidArgumentsKey;
 
 
 #pragma mark - ObjectiveHub Error Domain
@@ -84,13 +82,6 @@ enum {
 	/* @name ObjectiveHub Errors */
 	/// All ObjectiveHub errors are numbered after this.
 	kCDOHErrorCodeFrameworkErrors				= 10000,
-	
-	#pragma mark |- Invalid Argument Errors
-	/* @name Framework Client Errors */
-	/// The arguments supplied were invalid.
-	kCDOHErrorCodeInvalidArgument				= 10400,
-	/// The arguments supplied were nil where they were not allowed to be nil.
-	kCDOHErrorCodeInvalidNilArgument			= 10401,
 };
 /// The error code type for ObjectiveHub error codes.
 typedef NSInteger CDOHErrorCodeType;
@@ -119,17 +110,6 @@ typedef NSInteger CDOHErrorCodeType;
  * status and response body.
  */
 - (id)initWithHTTPHeaders:(NSDictionary *)httpHeaders HTTPStatus:(NSInteger)httpStatus responseBody:(NSData *)responseBody;
-
-/**
- * Initializes and returns an `CDOHError` instance intialized with the given
- * error code and array of arguments which was invalid.
- *
- * @param code The error code for the type of invalid argument.
- * @param arguments The arguments which were invalid for the reason stated by
- * the error type code.
- * @return An `CDOHError`initialized with the given code and arguments.
- */
-- (id)initWithInvalidArgument:(CDOHErrorCodeType)code arguments:(NSArray *)arguments;
 
 
 #pragma mark - HTTP Headers
