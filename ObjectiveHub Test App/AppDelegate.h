@@ -8,11 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-@class ObjectiveHub;
+@class CDOHClient;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
-@property (readonly, strong) ObjectiveHub *hub;
+@property (readonly, strong) CDOHClient *hub;
 
 @end

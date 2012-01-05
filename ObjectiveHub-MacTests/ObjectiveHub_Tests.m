@@ -7,7 +7,7 @@
 //
 
 #import "ObjectiveHub_Tests.h"
-#import "ObjectiveHub.h"
+#import "CDOHClient.h"
 
 @implementation ObjectiveHub_Tests
 
@@ -30,7 +30,7 @@
 	NSString *username = @"testUser";
 	NSString *password = @"testPassword";
 	
-	ObjectiveHub *objHub = [[ObjectiveHub alloc] initWithUsername:username password:password];
+	CDOHClient *objHub = [[CDOHClient alloc] initWithUsername:username password:password];
 	
 	STAssertNotNil(objHub, @"ObjectiveHub instance objHub should not return nil");
 	STAssertTrue(objHub.username == username, @"objHub.username should be equal to username");
