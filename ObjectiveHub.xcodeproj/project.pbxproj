@@ -13,6 +13,9 @@
 			buildPhases = (
 			);
 			dependencies = (
+				9C99909E14AE7A0600DFDD3B /* PBXTargetDependency */,
+				9C9990A014AE7A0600DFDD3B /* PBXTargetDependency */,
+				9C9990A214AE7A0600DFDD3B /* PBXTargetDependency */,
 				9C26F9A9146B2402001A5385 /* PBXTargetDependency */,
 				9C26F9AB146B2402001A5385 /* PBXTargetDependency */,
 			);
@@ -33,13 +36,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		9C26F939146B2069001A5385 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F938146B2069001A5385 /* Cocoa.framework */; };
 		9C26F943146B2069001A5385 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F941146B2069001A5385 /* InfoPlist.strings */; };
 		9C26F94F146B2069001A5385 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F94E146B2069001A5385 /* SenTestingKit.framework */; };
 		9C26F953146B2069001A5385 /* ObjectiveHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F935146B2069001A5385 /* ObjectiveHub.framework */; };
 		9C26F959146B2069001A5385 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F957146B2069001A5385 /* InfoPlist.strings */; };
 		9C26F95C146B2069001A5385 /* ObjectiveHub_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F95B146B2069001A5385 /* ObjectiveHub_Tests.m */; };
-		9C26F969146B207A001A5385 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F968146B207A001A5385 /* Foundation.framework */; };
 		9C26F976146B207A001A5385 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F94E146B2069001A5385 /* SenTestingKit.framework */; };
 		9C26F979146B207A001A5385 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F968146B207A001A5385 /* Foundation.framework */; };
 		9C26F97C146B207A001A5385 /* libObjectiveHub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F967146B207A001A5385 /* libObjectiveHub.a */; };
@@ -53,7 +54,7 @@
 		9C26F9D8146B2979001A5385 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C1146B2979001A5385 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9D9146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C2146B2979001A5385 /* AFHTTPRequestOperation.h */; };
 		9C26F9DA146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C2146B2979001A5385 /* AFHTTPRequestOperation.h */; };
-		9C26F9DB146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9DB146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unused-parameter"; }; };
 		9C26F9DC146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9DD146B2979001A5385 /* AFImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C4146B2979001A5385 /* AFImageCache.h */; };
 		9C26F9DE146B2979001A5385 /* AFImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C4146B2979001A5385 /* AFImageCache.h */; };
@@ -61,7 +62,7 @@
 		9C26F9E0146B2979001A5385 /* AFImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C5146B2979001A5385 /* AFImageCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9E1146B2979001A5385 /* AFImageRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C6146B2979001A5385 /* AFImageRequestOperation.h */; };
 		9C26F9E2146B2979001A5385 /* AFImageRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C6146B2979001A5385 /* AFImageRequestOperation.h */; };
-		9C26F9E3146B2979001A5385 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9E3146B2979001A5385 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unused-parameter"; }; };
 		9C26F9E4146B2979001A5385 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9E5146B2979001A5385 /* AFJSONRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C8146B2979001A5385 /* AFJSONRequestOperation.h */; };
 		9C26F9E6146B2979001A5385 /* AFJSONRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C8146B2979001A5385 /* AFJSONRequestOperation.h */; };
@@ -109,7 +110,6 @@
 		9C2F3E8E146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */; };
 		9C47C5511473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C47C5501473E9C90026BD6D /* CDOHLibraryVersion.h */; };
 		9C47C5521473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C47C5501473E9C90026BD6D /* CDOHLibraryVersion.h */; };
-		9C5D2D541470281A0064F02A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F938146B2069001A5385 /* Cocoa.framework */; };
 		9C5D2D5A1470281A0064F02A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C5D2D581470281A0064F02A /* InfoPlist.strings */; };
 		9C5D2D5C1470281A0064F02A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C5D2D5B1470281A0064F02A /* main.m */; };
 		9C5D2D601470281A0064F02A /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 9C5D2D5E1470281A0064F02A /* Credits.rtf */; };
@@ -119,12 +119,17 @@
 		9C5D2D6F147029410064F02A /* ObjectiveHub.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F935146B2069001A5385 /* ObjectiveHub.framework */; };
 		9C99909514AE708F00DFDD3B /* ObjectiveHub_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F95B146B2069001A5385 /* ObjectiveHub_Tests.m */; };
 		9C99909714AE70F100DFDD3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C99909614AE70F100DFDD3B /* Foundation.framework */; };
+		9C99909A14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */; };
+		9C99909B14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */; };
+		9C9990A514AE7B0900DFDD3B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9990A314AE7AEE00DFDD3B /* Cocoa.framework */; };
+		9C9990A714AE7B1600DFDD3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9990A614AE7B1600DFDD3B /* UIKit.framework */; };
+		9C9990A814AE7B4A00DFDD3B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9990A314AE7AEE00DFDD3B /* Cocoa.framework */; };
 		9CE663411470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663421470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663431470929500D8A95F /* CDOHError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE663401470929500D8A95F /* CDOHError.m */; };
 		9CE663441470929500D8A95F /* CDOHError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE663401470929500D8A95F /* CDOHError.m */; };
-		9CF962AE147FC01B00F52A98 /* CDOHRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CF962AC147FC01B00F52A98 /* CDOHRepository.h */; };
-		9CF962AF147FC01B00F52A98 /* CDOHRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CF962AC147FC01B00F52A98 /* CDOHRepository.h */; };
+		9CF962AE147FC01B00F52A98 /* CDOHRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CF962AC147FC01B00F52A98 /* CDOHRepository.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9CF962AF147FC01B00F52A98 /* CDOHRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CF962AC147FC01B00F52A98 /* CDOHRepository.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CF962B0147FC01B00F52A98 /* CDOHRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF962AD147FC01B00F52A98 /* CDOHRepository.m */; };
 		9CF962B1147FC01B00F52A98 /* CDOHRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CF962AD147FC01B00F52A98 /* CDOHRepository.m */; };
 /* End PBXBuildFile section */
@@ -165,6 +170,27 @@
 			remoteGlobalIDString = 9C26F934146B2069001A5385;
 			remoteInfo = "ObjectiveHub-Mac";
 		};
+		9C99909D14AE7A0600DFDD3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C26F929146B1B74001A5385 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C26FA0A146B3950001A5385;
+			remoteInfo = Documentation;
+		};
+		9C99909F14AE7A0600DFDD3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C26F929146B1B74001A5385 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C26F94C146B2069001A5385;
+			remoteInfo = "ObjectiveHub-MacTests";
+		};
+		9C9990A114AE7A0600DFDD3B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C26F929146B1B74001A5385 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C26F974146B207A001A5385;
+			remoteInfo = "ObjectiveHub-iOSTests";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -183,7 +209,6 @@
 
 /* Begin PBXFileReference section */
 		9C26F935146B2069001A5385 /* ObjectiveHub.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveHub.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9C26F938146B2069001A5385 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9C26F93B146B2069001A5385 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		9C26F93C146B2069001A5385 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9C26F93D146B2069001A5385 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -200,7 +225,6 @@
 		9C26F968146B207A001A5385 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9C26F96C146B207A001A5385 /* ObjectiveHub-iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveHub-iOS-Prefix.pch"; sourceTree = "<group>"; };
 		9C26F975146B207A001A5385 /* ObjectiveHub-iOSTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ObjectiveHub-iOSTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9C26F977146B207A001A5385 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		9C26F9AD146B2424001A5385 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		9C26F9AE146B2424001A5385 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		9C26F9AF146B2424001A5385 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
@@ -246,6 +270,9 @@
 		9C5D2D651470281B0064F02A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		9C5D2D70147029E10064F02A /* CDOHTestAppUserCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHTestAppUserCredentials.h; sourceTree = "<group>"; };
 		9C99909614AE70F100DFDD3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONUtilities.h; sourceTree = "<group>"; };
+		9C9990A314AE7AEE00DFDD3B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		9C9990A614AE7B1600DFDD3B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		9CE6633F1470929500D8A95F /* CDOHError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHError.h; sourceTree = "<group>"; };
 		9CE663401470929500D8A95F /* CDOHError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHError.m; sourceTree = "<group>"; };
 		9CF962AC147FC01B00F52A98 /* CDOHRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHRepository.h; sourceTree = "<group>"; };
@@ -257,7 +284,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C26F939146B2069001A5385 /* Cocoa.framework in Frameworks */,
+				9C9990A514AE7B0900DFDD3B /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,7 +302,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C26F969146B207A001A5385 /* Foundation.framework in Frameworks */,
+				9C9990A714AE7B1600DFDD3B /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,8 +320,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C9990A814AE7B4A00DFDD3B /* Cocoa.framework in Frameworks */,
 				9C5D2D6D147028290064F02A /* ObjectiveHub.framework in Frameworks */,
-				9C5D2D541470281A0064F02A /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +331,6 @@
 		9C26F927146B1B74001A5385 = {
 			isa = PBXGroup;
 			children = (
-				9C99909614AE70F100DFDD3B /* Foundation.framework */,
 				9C26F996146B20C7001A5385 /* Shared */,
 				9C26F96A146B207A001A5385 /* ObjectiveHub iOS Specifics */,
 				9C26F93E146B2069001A5385 /* ObjectiveHub Mac Specifics */,
@@ -331,10 +357,11 @@
 		9C26F937146B2069001A5385 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9C26F938146B2069001A5385 /* Cocoa.framework */,
+				9C9990A614AE7B1600DFDD3B /* UIKit.framework */,
+				9C9990A314AE7AEE00DFDD3B /* Cocoa.framework */,
+				9C99909614AE70F100DFDD3B /* Foundation.framework */,
 				9C26F94E146B2069001A5385 /* SenTestingKit.framework */,
 				9C26F968146B207A001A5385 /* Foundation.framework */,
-				9C26F977146B207A001A5385 /* UIKit.framework */,
 				9C26F93A146B2069001A5385 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -450,6 +477,7 @@
 				9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */,
 				9C26F9C8146B2979001A5385 /* AFJSONRequestOperation.h */,
 				9C26F9C9146B2979001A5385 /* AFJSONRequestOperation.m */,
+				9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */,
 				9C26F9CA146B2979001A5385 /* AFNetworkActivityIndicatorManager.h */,
 				9C26F9CB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m */,
 				9C26F9CC146B2979001A5385 /* AFNetworking.h */,
@@ -526,6 +554,7 @@
 				9CE663411470929500D8A95F /* CDOHError.h in Headers */,
 				9C2F3E7B146F3F2000C44A82 /* CDOHUser.h in Headers */,
 				9C2F3E88146F5F7D00C44A82 /* CDOHPlan.h in Headers */,
+				9CF962AE147FC01B00F52A98 /* CDOHRepository.h in Headers */,
 				9C26F9B2146B2424001A5385 /* JSONKit.h in Headers */,
 				9C26F9D5146B2979001A5385 /* AFHTTPClient.h in Headers */,
 				9C26F9D9146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */,
@@ -541,7 +570,7 @@
 				9C2F3E84146F464200C44A82 /* CDOHUserPrivate.h in Headers */,
 				9C2F3E8D146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */,
 				9C47C5511473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
-				9CF962AE147FC01B00F52A98 /* CDOHRepository.h in Headers */,
+				9C99909A14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,6 +582,7 @@
 				9CE663421470929500D8A95F /* CDOHError.h in Headers */,
 				9C2F3E7C146F3F2000C44A82 /* CDOHUser.h in Headers */,
 				9C2F3E89146F5F7D00C44A82 /* CDOHPlan.h in Headers */,
+				9CF962AF147FC01B00F52A98 /* CDOHRepository.h in Headers */,
 				9C26F9B3146B2424001A5385 /* JSONKit.h in Headers */,
 				9C26F9D6146B2979001A5385 /* AFHTTPClient.h in Headers */,
 				9C26F9DA146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */,
@@ -568,7 +598,7 @@
 				9C2F3E85146F464200C44A82 /* CDOHUserPrivate.h in Headers */,
 				9C2F3E8E146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */,
 				9C47C5521473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
-				9CF962AF147FC01B00F52A98 /* CDOHRepository.h in Headers */,
+				9C99909B14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -879,6 +909,21 @@
 			target = 9C26F934146B2069001A5385 /* ObjectiveHub-Mac */;
 			targetProxy = 9C5D2D6B147028220064F02A /* PBXContainerItemProxy */;
 		};
+		9C99909E14AE7A0600DFDD3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C26FA0A146B3950001A5385 /* Documentation */;
+			targetProxy = 9C99909D14AE7A0600DFDD3B /* PBXContainerItemProxy */;
+		};
+		9C9990A014AE7A0600DFDD3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C26F94C146B2069001A5385 /* ObjectiveHub-MacTests */;
+			targetProxy = 9C99909F14AE7A0600DFDD3B /* PBXContainerItemProxy */;
+		};
+		9C9990A214AE7A0600DFDD3B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C26F974146B207A001A5385 /* ObjectiveHub-iOSTests */;
+			targetProxy = 9C9990A114AE7A0600DFDD3B /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -936,7 +981,7 @@
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
@@ -955,7 +1000,7 @@
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
@@ -989,7 +1034,7 @@
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1024,7 +1069,7 @@
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
