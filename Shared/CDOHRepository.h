@@ -44,8 +44,6 @@
  */
 @interface CDOHRepository : CDOHResource
 
-- (id)initWithDictionary:(NSDictionary *)dictionary;
-
 #pragma mark - Repository URLs
 /** @name Repository URLs */
 /**
