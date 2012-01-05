@@ -31,62 +31,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CDOHResource.h"
 
 
 #pragma mark Forward Class Declarations
 @class CDOHPlan;
-
-
-#pragma mark Dictionary Keys
-/** @name Dictionary Keys */
-/// Dictionary key for the login value.
-extern NSString *const kCDOHUserDictionaryLoginKey;
-/// Dictionary key for the id value.
-extern NSString *const kCDOHUserDictionaryIDKey;
-/// Dictionary key for the avatar URL value.
-extern NSString *const kCDOHUserDictionaryAvatarURLKey;
-/// Dictionary key for the gravatar ID value.
-extern NSString *const kCDOHUserDictionaryGravatarIDKey;
-/// Dictionary key for the name value.
-extern NSString *const kCDOHUserDictionaryNameKey;
-/// Dictionary key for the company value.
-extern NSString *const kCDOHUserDictionaryCompanyKey;
-/// Dictionary key for the blog URL value.
-extern NSString *const kCDOHUserDictionaryBlogKey;
-/// Dictionary key for the location value.
-extern NSString *const kCDOHUserDictionaryLocationKey;
-/// Dictionary key for the email value.
-extern NSString *const kCDOHUserDictionaryEmailKey;
-/// Dictionary key for the hireable value.
-extern NSString *const kCDOHUserDictionaryHireableKey;
-/// Dictionary key for the biography value.
-extern NSString *const kCDOHUserDictionaryBioKey;
-/// Dictionary key for the number of public repositories value.
-extern NSString *const kCDOHUserDictionaryPublicReposKey;
-/// Dictionary key for the number of public gists value.
-extern NSString *const kCDOHUserDictionaryPublicGistsKey;
-/// Dictionary key for the number of followers value.
-extern NSString *const kCDOHUserDictionaryFollowersKey;
-/// Dictionary key for the number of people the user is following value.
-extern NSString *const kCDOHUserDictionaryFollowingKey;
-/// Dictionary key for the HTML URL value.
-extern NSString *const kCDOHUserDictionaryHTMLURLKey;
-/// Dictionary key for the created at value.
-extern NSString *const kCDOHUserDictionaryCreatedAtKey;
-/// Dictionary key for the user type value.
-extern NSString *const kCDOHUserDictionaryTypeKey;
-/// Dictionary key for the total number of private repositories value.
-extern NSString *const kCDOHUserDictionaryTotalPrivateReposKey;
-/// Dictionary key for the total number of owned private repositories value.
-extern NSString *const kCDOHUserDictionaryOwnedPrivateReposKey;
-/// Dictionary key for the number of private gists value.
-extern NSString *const kCDOHUserDictionaryPrivateGistsKey;
-/// Dictionary key for the total disk usage value.
-extern NSString *const kCDOHUserDictionaryDiskUsageKey;
-/// Dictionary key for the number of collaborators value.
-extern NSString *const kCDOHUserDictionaryCollaboratorsKey;
-/// Dictionary key for the plan value.
-extern NSString *const kCDOHUserDictionaryPlanKey;
 
 
 #pragma mark - CDOHUser Interface
@@ -104,7 +53,7 @@ extern NSString *const kCDOHUserDictionaryPlanKey;
  * - collaborators
  * - plan
  */
-@interface CDOHUser : NSObject <NSCopying, NSCoding>
+@interface CDOHUser : CDOHResource
 
 #pragma mark - Meta Information
 /** @name GitHub Information */

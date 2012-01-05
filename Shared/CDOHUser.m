@@ -33,6 +33,7 @@
 #import "CDOHUser.h"
 #import "CDOHUserPrivate.h"
 #import "CDOHPlanPrivate.h"
+#import "CDOHResourcePrivate.h"
 
 
 #pragma mark Dictionary Keys
@@ -62,14 +63,14 @@ NSString *const kCDOHUserDictionaryCollaboratorsKey		= @"collaborators";
 NSString *const kCDOHUserDictionaryPlanKey				= @"plan";
 
 NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
-NSString *const kCDOHUserDictionaryAPIURLKey			= @"url";
 
 
+#pragma mark - CDOHUser Private Interface
 @interface CDOHUser ()
 
-@property (strong) NSURL *apiResourceUrl;
 
 @end
+
 
 
 #pragma mark - CDOHUser Implementation
@@ -102,154 +103,115 @@ NSString *const kCDOHUserDictionaryAPIURLKey			= @"url";
 @synthesize diskUsage = _diskUsage;
 @synthesize plan = _plan;
 
-@synthesize apiResourceUrl = _apiResourceUrl;
-
 
 #pragma mark - Initializing an CDOHUser Instance
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
-	self = [super init];
+	self = [super initWithDictionary:dictionary];
 	if (self) {
-		[self setupUsingDictionary:dictionary];
+		NSString *login = [dictionary valueForKey:kCDOHUserDictionaryLoginKey];
+		_login = [login copy];
+		
+		NSString *name = [dictionary valueForKey:kCDOHUserDictionaryNameKey];
+		_name = [name copy];
+		
+		NSString *company = [dictionary valueForKey:kCDOHUserDictionaryCompanyKey];
+		_company = [company copy];
+		
+		NSString *email = [dictionary valueForKey:kCDOHUserDictionaryEmailKey];
+		_email = [email copy];
+		
+		NSString *bio = [dictionary valueForKey:kCDOHUserDictionaryBioKey];
+		_biography = [bio copy];
+		
+		NSString *location = [dictionary valueForKey:kCDOHUserDictionaryLocationKey];
+		_location = [location copy];
+		
+		NSString *type = [dictionary valueForKey:kCDOHUserDictionaryTypeKey];
+		_type = [type copy];
+		
+		NSString *gravatarId = [dictionary valueForKey:kCDOHUserDictionaryGravatarIDKey];
+		_gravatarId = [gravatarId copy];
+		
+		//--//
+		_blogUrl		= [dictionary valueForKey:kCDOHUserDictionaryBlogKey];
+		_avatarUrl		= [dictionary valueForKey:kCDOHUserDictionaryAvatarURLKey];
+		_htmlUrl		= [dictionary valueForKey:kCDOHUserDictionaryHTMLURLKey];
+		
+		
+		//--//
+		// TODO: Parse the created at date.
+		id createdAtObj = [dictionary valueForKey:kCDOHUserDictionaryCreatedAtKey];
+		if ([createdAtObj isKindOfClass:[NSDate class]]) {
+			_createdAt = createdAtObj;
+		} else if ([createdAtObj isKindOfClass:[NSString class]]) {
+			NSLog(@"Not yet implemented 2008-01-14T04:33:35Z -> NSDate");
+		} else {
+#if DEBUG
+			NSAssert(NO, @"Unkown representation of 'created at', skipping.");
+#else
+			NSLog(@"Unkown representation of 'created at', skipping.");
+#endif
+		}
+		
+		//--//
+		NSNumber *authenticated = [dictionary valueForKey:kCDOHUserDictionaryAuthenticatedKey];
+		_authenticated = [authenticated boolValue] || ([dictionary valueForKey:kCDOHUserDictionaryTotalPrivateReposKey] != nil);
+		
+		NSNumber *hireable = [dictionary valueForKey:kCDOHUserDictionaryHireableKey];
+		_hireable = [hireable boolValue];
+		
+		
+		//--//
+		NSNumber *identifier = [dictionary valueForKey:kCDOHUserDictionaryIDKey];
+		_identifier = [identifier unsignedIntegerValue];
+		
+		NSNumber *publicRepos = [dictionary valueForKey:kCDOHUserDictionaryPublicReposKey];
+		_numberOfPublicRepositories = [publicRepos unsignedIntegerValue];
+		
+		NSNumber *privateRepos = [dictionary valueForKey:kCDOHUserDictionaryTotalPrivateReposKey];
+		_numberOfPrivateRepositories = [privateRepos unsignedIntegerValue];
+		
+		NSNumber *ownedRepos = [dictionary valueForKey:kCDOHUserDictionaryOwnedPrivateReposKey];
+		_numberOfOwnedPrivateRepositories = [ownedRepos unsignedIntegerValue];
+		
+		NSNumber *publicGists = [dictionary valueForKey:kCDOHUserDictionaryPublicGistsKey];
+		_numberOfPublicGists = [publicGists unsignedIntegerValue];
+		
+		NSNumber *privateGists = [dictionary valueForKey:kCDOHUserDictionaryPrivateGistsKey];
+		_numberOfPrivateGists = [privateGists unsignedIntegerValue];
+		
+		NSNumber *followers = [dictionary valueForKey:kCDOHUserDictionaryFollowersKey];
+		_followers = [followers unsignedIntegerValue];
+		
+		NSNumber *following = [dictionary valueForKey:kCDOHUserDictionaryFollowingKey];
+		_following = [following unsignedIntegerValue];
+		
+		NSNumber *collaborators = [dictionary valueForKey:kCDOHUserDictionaryCollaboratorsKey];
+		_collaborators = [collaborators unsignedIntegerValue];
+		
+		NSNumber *diskUsage = [dictionary valueForKey:kCDOHUserDictionaryDiskUsageKey];
+		_diskUsage = [diskUsage unsignedIntegerValue];
+		
+		
+		//--//
+		id planObj = [dictionary valueForKey:kCDOHUserDictionaryPlanKey];
+		if (planObj) {
+			if ([planObj isKindOfClass:[CDOHPlan class]]) {
+				_plan = planObj;
+			} else if ([planObj isKindOfClass:[NSDictionary class]]) {
+				_plan = [[CDOHPlan alloc] initWithDictionary:planObj];
+			} else {
+#if DEBUG
+				NSAssert(NO, @"Unkown representation of 'created at', skipping.");
+#else
+				NSLog(@"Unkown representation of 'created at', skipping.");
+#endif
+			}
+		}
 	}
 	
 	return self;
-}
-
-
-#pragma mark - Transform Between Instance Variables and Dictionary
-- (NSDictionary *)encodeAsDictionary
-{
-	NSNumber *identifierNumber					= [NSNumber numberWithUnsignedInteger:self.identifier];
-	NSNumber *authenticatedNumber				= [NSNumber numberWithBool:self.isAuthenticated];
-	NSNumber *hireableNumber					= [NSNumber numberWithBool:self.hireable];
-	NSNumber *publicRepositoriesNumber			= [NSNumber numberWithUnsignedInteger:self.numberOfPublicRepositories];
-	NSNumber *publicGistsNumber					= [NSNumber numberWithUnsignedInteger:self.numberOfPublicGists];
-	NSNumber *privateRepositoriesNumber			= [NSNumber numberWithUnsignedInteger:self.numberOfPrivateRepositories];
-	NSNumber *privateOwnedRepositoriesNumber	= [NSNumber numberWithUnsignedInteger:self.numberOfOwnedPrivateRepositories];
-	NSNumber *privateGistsNumber				= [NSNumber numberWithUnsignedInteger:self.numberOfPrivateGists];
-	NSNumber *followersNumber					= [NSNumber numberWithUnsignedInteger:self.followers];
-	NSNumber *followingNumber					= [NSNumber numberWithUnsignedInteger:self.following];
-	NSNumber *collaboratorsNumber				= [NSNumber numberWithUnsignedInteger:self.collaborators];
-	NSNumber *diskUsageNumber					= [NSNumber numberWithUnsignedInteger:self.diskUsage];
-	NSDictionary *planDictionary				= [self.plan encodeAsDictionary];
-	
-	
-	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-								self.apiResourceUrl,			kCDOHUserDictionaryAPIURLKey,
-								self.login,						kCDOHUserDictionaryLoginKey,
-								self.name,						kCDOHUserDictionaryNameKey,
-								self.company,					kCDOHUserDictionaryCompanyKey,
-								self.email,						kCDOHUserDictionaryEmailKey,
-								self.biography,					kCDOHUserDictionaryBioKey,
-								self.location,					kCDOHUserDictionaryLocationKey,
-								self.blogUrl,					kCDOHUserDictionaryBlogKey,
-								self.avatarUrl,					kCDOHUserDictionaryAvatarURLKey,
-								self.gravatarId,				kCDOHUserDictionaryGravatarIDKey,
-								self.htmlUrl,					kCDOHUserDictionaryHTMLURLKey,
-								self.createdAt,					kCDOHUserDictionaryCreatedAtKey,
-								self.type,						kCDOHUserDictionaryTypeKey,
-								identifierNumber,				kCDOHUserDictionaryIDKey,
-								authenticatedNumber,			kCDOHUserDictionaryAuthenticatedKey,
-								hireableNumber,					kCDOHUserDictionaryHireableKey,
-								publicRepositoriesNumber,		kCDOHUserDictionaryPublicReposKey,
-								publicGistsNumber,				kCDOHUserDictionaryPublicGistsKey,
-								privateRepositoriesNumber,		kCDOHUserDictionaryTotalPrivateReposKey,
-								privateOwnedRepositoriesNumber,	kCDOHUserDictionaryOwnedPrivateReposKey,
-								privateGistsNumber,				kCDOHUserDictionaryPrivateGistsKey,
-								followersNumber,				kCDOHUserDictionaryFollowersKey,
-								followingNumber,				kCDOHUserDictionaryFollowingKey,
-								collaboratorsNumber,			kCDOHUserDictionaryCollaboratorsKey,
-								diskUsageNumber,				kCDOHUserDictionaryDiskUsageKey,
-								planDictionary,					kCDOHUserDictionaryPlanKey,
-								nil];
-	
-	return dictionary;
-}
-
-- (void)setupUsingDictionary:(NSDictionary *)dictionary
-{
-	NSString *login = [dictionary valueForKey:kCDOHUserDictionaryLoginKey];
-	_login = [login copy];
-	
-	NSString *name = [dictionary valueForKey:kCDOHUserDictionaryNameKey];
-	_name = [name copy];
-	
-	NSString *company = [dictionary valueForKey:kCDOHUserDictionaryCompanyKey];
-	_company = [company copy];
-	
-	NSString *email = [dictionary valueForKey:kCDOHUserDictionaryEmailKey];
-	_email = [email copy];
-	
-	NSString *bio = [dictionary valueForKey:kCDOHUserDictionaryBioKey];
-	_biography = [bio copy];
-	
-	NSString *location = [dictionary valueForKey:kCDOHUserDictionaryLocationKey];
-	_location = [location copy];
-	
-	NSString *type = [dictionary valueForKey:kCDOHUserDictionaryTypeKey];
-	_type = [type copy];
-	
-	NSString *gravatarId = [dictionary valueForKey:kCDOHUserDictionaryGravatarIDKey];
-	_gravatarId = [gravatarId copy];
-	
-	//--//
-	_apiResourceUrl	= [dictionary valueForKey:kCDOHUserDictionaryAPIURLKey];
-	_blogUrl		= [dictionary valueForKey:kCDOHUserDictionaryBlogKey];
-	_avatarUrl		= [dictionary valueForKey:kCDOHUserDictionaryAvatarURLKey];
-	_htmlUrl		= [dictionary valueForKey:kCDOHUserDictionaryHTMLURLKey];
-	
-	
-	//--//
-	// TODO: Parse the created at date.
-	NSDate *createdAt = [dictionary valueForKey:kCDOHUserDictionaryCreatedAtKey];
-	_createdAt = createdAt;
-	
-	//--//
-	NSNumber *authenticated = [dictionary valueForKey:kCDOHUserDictionaryAuthenticatedKey];
-	_authenticated = [authenticated boolValue] || ([dictionary valueForKey:kCDOHUserDictionaryTotalPrivateReposKey] != nil);
-	
-	NSNumber *hireable = [dictionary valueForKey:kCDOHUserDictionaryHireableKey];
-	_hireable = [hireable boolValue];
-	
-	
-	//--//
-	NSNumber *identifier = [dictionary valueForKey:kCDOHUserDictionaryIDKey];
-	_identifier = [identifier unsignedIntegerValue];
-	
-	NSNumber *publicRepos = [dictionary valueForKey:kCDOHUserDictionaryPublicReposKey];
-	_numberOfPublicRepositories = [publicRepos unsignedIntegerValue];
-	
-	NSNumber *privateRepos = [dictionary valueForKey:kCDOHUserDictionaryTotalPrivateReposKey];
-	_numberOfPrivateRepositories = [privateRepos unsignedIntegerValue];
-	
-	NSNumber *ownedRepos = [dictionary valueForKey:kCDOHUserDictionaryOwnedPrivateReposKey];
-	_numberOfOwnedPrivateRepositories = [ownedRepos unsignedIntegerValue];
-	
-	NSNumber *publicGists = [dictionary valueForKey:kCDOHUserDictionaryPublicGistsKey];
-	_numberOfPublicGists = [publicGists unsignedIntegerValue];
-	
-	NSNumber *privateGists = [dictionary valueForKey:kCDOHUserDictionaryPrivateGistsKey];
-	_numberOfPrivateGists = [privateGists unsignedIntegerValue];
-	
-	NSNumber *followers = [dictionary valueForKey:kCDOHUserDictionaryFollowersKey];
-	_followers = [followers unsignedIntegerValue];
-	
-	NSNumber *following = [dictionary valueForKey:kCDOHUserDictionaryFollowingKey];
-	_following = [following unsignedIntegerValue];
-	
-	NSNumber *collaborators = [dictionary valueForKey:kCDOHUserDictionaryCollaboratorsKey];
-	_collaborators = [collaborators unsignedIntegerValue];
-	
-	NSNumber *diskUsage = [dictionary valueForKey:kCDOHUserDictionaryDiskUsageKey];
-	_diskUsage = [diskUsage unsignedIntegerValue];
-	
-	
-	//--//
-	NSDictionary *planDict = [dictionary valueForKey:kCDOHUserDictionaryPlanKey];
-	if (planDict) {
-		_plan = [[CDOHPlan alloc] initWithDictionary:planDict];
-	}
 }
 
 
@@ -290,23 +252,74 @@ NSString *const kCDOHUserDictionaryAPIURLKey			= @"url";
 
 
 #pragma mark - NSCoding Methods
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (id)initWithCoder:(NSCoder *)decoder
 {
-	NSDictionary *dictionary = [aDecoder decodeObjectForKey:@"dictionary"];
-	return [self initWithDictionary:dictionary];
+	self = [super initWithCoder:decoder];
+	
+	NSDictionary *dictionary = [decoder decodeObjectForKey:@"CDOHUserPropertiesDictionary"];
+	self = [self initWithDictionary:dictionary];
+	
+	return self;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
+- (void)encodeWithCoder:(NSCoder *)coder
 {
-	NSDictionary *dictionary = [self encodeAsDictionary];
-	[aCoder encodeObject:dictionary forKey:@"dictionary"];
+	NSNumber *identifierNumber					= [NSNumber numberWithUnsignedInteger:self.identifier];
+	NSNumber *publicRepositoriesNumber			= [NSNumber numberWithUnsignedInteger:self.numberOfPublicRepositories];
+	NSNumber *publicGistsNumber					= [NSNumber numberWithUnsignedInteger:self.numberOfPublicGists];
+	NSNumber *privateRepositoriesNumber			= [NSNumber numberWithUnsignedInteger:self.numberOfPrivateRepositories];
+	NSNumber *privateOwnedRepositoriesNumber	= [NSNumber numberWithUnsignedInteger:self.numberOfOwnedPrivateRepositories];
+	NSNumber *privateGistsNumber				= [NSNumber numberWithUnsignedInteger:self.numberOfPrivateGists];
+	NSNumber *followersNumber					= [NSNumber numberWithUnsignedInteger:self.followers];
+	NSNumber *followingNumber					= [NSNumber numberWithUnsignedInteger:self.following];
+	NSNumber *collaboratorsNumber				= [NSNumber numberWithUnsignedInteger:self.collaborators];
+	NSNumber *diskUsageNumber					= [NSNumber numberWithUnsignedInteger:self.diskUsage];
+	
+	NSNumber *authenticatedNumber				= [NSNumber numberWithBool:self.isAuthenticated];
+	NSNumber *hireableNumber					= [NSNumber numberWithBool:self.hireable];
+	
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+								_login,							kCDOHUserDictionaryLoginKey,
+								_name,							kCDOHUserDictionaryNameKey,
+								_company,						kCDOHUserDictionaryCompanyKey,
+								_email,							kCDOHUserDictionaryEmailKey,
+								_biography,						kCDOHUserDictionaryBioKey,
+								_location,						kCDOHUserDictionaryLocationKey,
+								_blogUrl,						kCDOHUserDictionaryBlogKey,
+								_avatarUrl,						kCDOHUserDictionaryAvatarURLKey,
+								_gravatarId,					kCDOHUserDictionaryGravatarIDKey,
+								_htmlUrl,						kCDOHUserDictionaryHTMLURLKey,
+								_createdAt,						kCDOHUserDictionaryCreatedAtKey,
+								_type,							kCDOHUserDictionaryTypeKey,
+								_plan,							kCDOHUserDictionaryPlanKey,
+								identifierNumber,				kCDOHUserDictionaryIDKey,
+								authenticatedNumber,			kCDOHUserDictionaryAuthenticatedKey,
+								hireableNumber,					kCDOHUserDictionaryHireableKey,
+								publicRepositoriesNumber,		kCDOHUserDictionaryPublicReposKey,
+								publicGistsNumber,				kCDOHUserDictionaryPublicGistsKey,
+								privateRepositoriesNumber,		kCDOHUserDictionaryTotalPrivateReposKey,
+								privateOwnedRepositoriesNumber,	kCDOHUserDictionaryOwnedPrivateReposKey,
+								privateGistsNumber,				kCDOHUserDictionaryPrivateGistsKey,
+								followersNumber,				kCDOHUserDictionaryFollowersKey,
+								followingNumber,				kCDOHUserDictionaryFollowingKey,
+								collaboratorsNumber,			kCDOHUserDictionaryCollaboratorsKey,
+								diskUsageNumber,				kCDOHUserDictionaryDiskUsageKey,
+								nil];
+	
+	[coder encodeObject:dictionary forKey:@"CDOHUserPropertiesDictionary"];
 }
 
 
 #pragma mark - Describing a User Object
 - (NSString *)description
 {	
-	return [NSString stringWithFormat:@"<%@: %p { id = %d, login = %@, resource = %@, is authed = %@ }>", [self class], self, self.identifier, self.login, self.apiResourceUrl, (self.isAuthenticated ? @"YES" : @"NO")];
+	return [NSString stringWithFormat:@"<%@: %p { id = %d, login = %@, resource = %@, is authed = %@ }>",
+			[self class],
+			self,
+			self.identifier,
+			self.login,
+			self._APIResourceURL,
+			(self.isAuthenticated ? @"YES" : @"NO")];
 }
 
 
