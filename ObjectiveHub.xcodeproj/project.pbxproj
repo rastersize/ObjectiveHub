@@ -154,6 +154,10 @@
 		9CA5FAB114B6607400F2CD13 /* CDOHAbstractUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FAAD14B6607300F2CD13 /* CDOHAbstractUser.m */; };
 		9CA5FAB314B6653200F2CD13 /* CDOHAbstractUserPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAB214B6653200F2CD13 /* CDOHAbstractUserPrivate.h */; };
 		9CA5FAB414B6653200F2CD13 /* CDOHAbstractUserPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAB214B6653200F2CD13 /* CDOHAbstractUserPrivate.h */; };
+		9CA5FAB714B668DB00F2CD13 /* CDOHOrganization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAB514B668DB00F2CD13 /* CDOHOrganization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9CA5FAB814B668DB00F2CD13 /* CDOHOrganization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAB514B668DB00F2CD13 /* CDOHOrganization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9CA5FAB914B668DB00F2CD13 /* CDOHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FAB614B668DB00F2CD13 /* CDOHOrganization.m */; };
+		9CA5FABA14B668DB00F2CD13 /* CDOHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FAB614B668DB00F2CD13 /* CDOHOrganization.m */; };
 		9CE663411470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663421470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663431470929500D8A95F /* CDOHError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE663401470929500D8A95F /* CDOHError.m */; };
@@ -318,6 +322,8 @@
 		9CA5FAAC14B6607300F2CD13 /* CDOHAbstractUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHAbstractUser.h; sourceTree = "<group>"; };
 		9CA5FAAD14B6607300F2CD13 /* CDOHAbstractUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHAbstractUser.m; sourceTree = "<group>"; };
 		9CA5FAB214B6653200F2CD13 /* CDOHAbstractUserPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHAbstractUserPrivate.h; sourceTree = "<group>"; };
+		9CA5FAB514B668DB00F2CD13 /* CDOHOrganization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHOrganization.h; sourceTree = "<group>"; };
+		9CA5FAB614B668DB00F2CD13 /* CDOHOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHOrganization.m; sourceTree = "<group>"; };
 		9CE6633F1470929500D8A95F /* CDOHError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHError.h; sourceTree = "<group>"; };
 		9CE663401470929500D8A95F /* CDOHError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHError.m; sourceTree = "<group>"; };
 		9CF962AC147FC01B00F52A98 /* CDOHRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHRepository.h; sourceTree = "<group>"; };
@@ -614,6 +620,8 @@
 				9CA5FAAD14B6607300F2CD13 /* CDOHAbstractUser.m */,
 				9C2F3E79146F3F2000C44A82 /* CDOHUser.h */,
 				9C2F3E7A146F3F2000C44A82 /* CDOHUser.m */,
+				9CA5FAB514B668DB00F2CD13 /* CDOHOrganization.h */,
+				9CA5FAB614B668DB00F2CD13 /* CDOHOrganization.m */,
 				9C2F3E86146F5F7D00C44A82 /* CDOHPlan.h */,
 				9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */,
 				9CF962AC147FC01B00F52A98 /* CDOHRepository.h */,
@@ -649,6 +657,7 @@
 				9CA5FAAE14B6607300F2CD13 /* CDOHAbstractUser.h in Headers */,
 				9C2F3E88146F5F7D00C44A82 /* CDOHPlan.h in Headers */,
 				9C613A9B14B60C370067B6B6 /* CDOHResource.h in Headers */,
+				9CA5FAB714B668DB00F2CD13 /* CDOHOrganization.h in Headers */,
 				9CF962AE147FC01B00F52A98 /* CDOHRepository.h in Headers */,
 				9CA5FAA114B6304600F2CD13 /* CDOHCommon.h in Headers */,
 				9C26F9B2146B2424001A5385 /* JSONKit.h in Headers */,
@@ -685,6 +694,7 @@
 				9C26FA04146B2DEF001A5385 /* CDOHClient.h in Headers */,
 				9CE663421470929500D8A95F /* CDOHError.h in Headers */,
 				9C2F3E7C146F3F2000C44A82 /* CDOHUser.h in Headers */,
+				9CA5FAB814B668DB00F2CD13 /* CDOHOrganization.h in Headers */,
 				9C2F3E89146F5F7D00C44A82 /* CDOHPlan.h in Headers */,
 				9C613A9C14B60C370067B6B6 /* CDOHResource.h in Headers */,
 				9CF962AF147FC01B00F52A98 /* CDOHRepository.h in Headers */,
@@ -945,6 +955,7 @@
 				9CA5FA9E14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.m in Sources */,
 				9CA5FAA714B6320000F2CD13 /* NSDate+ObjectiveHub.m in Sources */,
 				9CA5FAB014B6607300F2CD13 /* CDOHAbstractUser.m in Sources */,
+				9CA5FAB914B668DB00F2CD13 /* CDOHOrganization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -982,6 +993,7 @@
 				9CA5FA9F14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.m in Sources */,
 				9CA5FAA814B6320000F2CD13 /* NSDate+ObjectiveHub.m in Sources */,
 				9CA5FAB114B6607400F2CD13 /* CDOHAbstractUser.m in Sources */,
+				9CA5FABA14B668DB00F2CD13 /* CDOHOrganization.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
