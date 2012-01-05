@@ -79,6 +79,15 @@
 	return self;
 }
 
+
+#pragma mark - NSCoding Methods
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+	NSDictionary *dict = [aDecoder decodeObjectForKey:@"CDOHRepositoryPropertiesDictionary"];
+	self = [self initWithDictionary:dict];
+	return self;
+}
+
 #pragma mark - Identifying and Comparing Users
 - (BOOL)isEqual:(id)object
 {
