@@ -117,6 +117,54 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 	return self;
 }
 
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+	[super encodeWithCoder:aCoder];
+	
+	NSNumber *privateNum = [[NSNumber alloc] initWithBool:_private];
+	NSNumber *forkNum = [[NSNumber alloc] initWithBool:_fork];
+	NSNumber *hasWikiNum = [[NSNumber alloc] initWithBool:_hasWiki];
+	NSNumber *hasIssuesNum = [[NSNumber alloc] initWithBool:_hasIssues];
+	NSNumber *hasDownloadsNum = [[NSNumber alloc] initWithBool:_hasDownloads];
+	
+	NSNumber *forksNum = [[NSNumber alloc] initWithUnsignedInteger:_forks];
+	NSNumber *watchersNum = [[NSNumber alloc] initWithUnsignedInteger:_watchers];
+	NSNumber *sizeNum = [[NSNumber alloc] initWithUnsignedInteger:_size];
+	NSNumber *openIssuesNum = [[NSNumber alloc] initWithUnsignedInteger:_openIssues];
+	
+	
+	NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
+						   _htmlUrl,				kCDOHRepositoryHtmlUrlKey,
+						   _cloneUrl,				kCDOHRepositoryCloneUrlKey,
+						   _gitUrl,					kCDOHRepositoryGitUrlKey,
+						   _sshUrl,					kCDOHRepositorySshUrlKey,
+						   _svnUrl,					kCDOHRepositorySvnUrlKey,
+						   _owner,					kCDOHRepositoryOwnerKey,
+						   _name,					kCDOHRepositoryNameKey,
+						   _repositoryDescription,	kCDOHRepositoryDescriptionKey,
+						   _homepage,				kCDOHRepositoryHomepageKey,
+						   _languages,				kCDOHRepositoryLanguageKey,
+						   privateNum,				kCDOHRepositoryPrivateKey,
+						   watchersNum,				kCDOHRepositoryWatchersKey,
+						   sizeNum,					kCDOHRepositorySizeKey,
+						   _defaultBranch,			kCDOHRepositoryDefaultBranchKey,
+						   openIssuesNum,			kCDOHRepositoryOpenIssuesKey,
+						   hasIssuesNum,			kCDOHRepositoryHasIssuesKey,
+						   _pushedAt,				kCDOHRepositoryPushedAtKey,
+						   _createdAt,				kCDOHRepositoryCreatedAtKey,
+						   _organization,			kCDOHRepositoryOrganizationKey,
+						   forkNum,					kCDOHRepositoryForkKey,
+						   forksNum,				kCDOHRepositoryForksKey,
+						   _parentRepository,		kCDOHRepositoryParentRepositoryKey,
+						   _sourceRepository,		kCDOHRepositorySourceRepositoryKey,
+						   hasWikiNum,				kCDOHRepositoryHasWikiKey,
+						   hasDownloadsNum,			kCDOHRepositoryHasDownloadsKey,
+						   nil];
+	
+	[aCoder encodeObject:dict forKey:@"CDOHRepositoryPropertiesDictionary"];
+}
+
+
 #pragma mark - Identifying and Comparing Users
 - (BOOL)isEqual:(id)object
 {
@@ -126,7 +174,7 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 	if (!object || ![object isKindOfClass:[self class]]) {
 		return NO;
 	}
-
+	
 	return [self isEqualToRepository:object];
 }
 
@@ -135,7 +183,7 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 	if (aRepository == self) {
 		return YES;
 	}
-
+	
 	return ([_owner isEqualTo:aRepository.owner] &&
 			[_name isEqualToString:aRepository.name] /*&&
 			[_organization isEqual:aRepository.organization]*/);
@@ -145,11 +193,11 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 {
 	NSUInteger prime = 31;
 	NSUInteger hash = 1;
-
+	
 	hash = prime + [_owner hash];
 	hash = prime * hash + [_name hash];
 //	hash = prime * hash + [_organization hash];
-
+	
 	return hash;
 }
 
