@@ -473,6 +473,8 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 				   failure:[self standardFailureBlock:failureBlock]];
 }
 
+
+#pragma mark - Getting and Modyfing User Emails
 - (void)userEmails:(void (^)(NSArray *))successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {

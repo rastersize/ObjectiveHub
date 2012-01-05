@@ -37,6 +37,7 @@
 #pragma mark CDOHError User Info Dictionary Default Keys
 NSString *const kCDOHErrorUserInfoHTTPHeadersKey			= @"httpHeaders";
 NSString *const kCDOHErrorUserInfoResponseDataKey			= @"responseData";
+NSString *const kCDOHErrorInvalidArgumentsKey				= @"invalidArguments";
 
 
 #pragma mark - ObjectiveHub Error Domain
@@ -55,6 +56,14 @@ NSString *const kCDOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
 							  nil];
 	
 	self = [self initWithDomain:kCDOHErrorDomain code:httpStatus userInfo:userInfo];
+	return self;
+}
+
+- (id)initWithInvalidArgument:(CDOHErrorCodeType)code arguments:(NSArray *)arguments
+{
+	NSDictionary *userInfo = [NSDictionary dictionaryWithObject:arguments forKey:kCDOHErrorInvalidArgumentsKey];
+	
+	self = [self initWithDomain:kCDOHErrorDomain code:code userInfo:userInfo];
 	return self;
 }
 
@@ -87,13 +96,66 @@ NSString *const kCDOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
 #pragma mark - Describing a User Object
 - (NSString *)description
 {
-	id body = nil;
-	if (!(body = [self parsedResponseBody])) {
-		body = self.responseBody;
+	NSString *descriptionFormat = [NSString stringWithFormat:@"<%@: %p { code = %d, %s }>", [self class], self, self.code, "%@"];
+	NSString *varDescs = nil;
+	
+	if (self.code >= kCDOHErrorCodeFrameworkErrors) {
+		varDescs = [NSString stringWithFormat:@"arguments = %@", [self.userInfo objectForKey:kCDOHErrorInvalidArgumentsKey]];
+	} else {
+		id body = nil;
+		if (!(body = [self parsedResponseBody])) {
+			body = self.responseBody;
+		}
+	
+		varDescs = [NSString stringWithFormat:@"headers = %@, body = %@", self.code, self.HTTPHeaders, body];
 	}
 	
+	NSString *description = [NSString stringWithFormat:descriptionFormat, varDescs];
+	return description;
+}
+
+
+#pragma mark - Remedy
+- (NSString *)localizedFailureReason
+{
+	NSString *localizedFailureReason = nil;
 	
-	return [NSString stringWithFormat:@"<%@: %p { code = %d, headers = %@, body = %@ }>", [self class], self, self.code, self.HTTPHeaders, body];
+	//TODO: Add strings files with localization data for this!
+	switch (self.code) {
+		case kCDOHErrorCodeInvalidArgument:
+			localizedFailureReason = NSLocalizedString(@"One or more of the supplied arguments were invalid", @"Invalid argument supplied error message");
+			break;
+		case kCDOHErrorCodeInvalidNilArgument:
+			localizedFailureReason = NSLocalizedString(@"One or more arguments which may not be nil were nil", @"Invalid nil argument supplied error message");
+			break;
+			
+		default:
+			localizedFailureReason = [super localizedFailureReason];
+			break;
+	}
+	
+	return localizedFailureReason;
+}
+
+- (NSString *)localizedRecoverySuggestion
+{
+	NSString *localizedRecoverySuggestion = nil;
+	
+	//TODO: Add strings files with localization data for this!
+	switch (self.code) {
+		case kCDOHErrorCodeInvalidArgument:
+			localizedRecoverySuggestion = NSLocalizedString(@"Correct the invalid arguments", @"Invalid argument supplied error message");
+			break;
+		case kCDOHErrorCodeInvalidNilArgument:
+			localizedRecoverySuggestion = NSLocalizedString(@"Correct the arguments which were nil", @"Invalid nil argument supplied error message");
+			break;
+			
+		default:
+			localizedRecoverySuggestion = [super localizedRecoverySuggestion];
+			break;
+	}
+	
+	return localizedRecoverySuggestion;
 }
 
 
