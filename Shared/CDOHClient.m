@@ -1,5 +1,5 @@
 //
-//  ObjectiveHub.m
+//  CDOHClient.m
 //  ObjectiveHub
 //
 //  Copyright 2011 Aron Cedercrantz. All rights reserved.
@@ -30,7 +30,7 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-#import "ObjectiveHub.h"
+#import "CDOHClient.h"
 #import "CDOHLibraryVersion.h"
 
 #import "AFNetworking.h"
@@ -159,7 +159,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 
 
 #pragma mark - ObjectiveHub Private Interface
-@interface ObjectiveHub ()
+@interface CDOHClient ()
 
 
 #pragma mark - HTTP Client
@@ -207,7 +207,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 
 
 #pragma mark - ObjectiveHub Implementation
-@implementation ObjectiveHub
+@implementation CDOHClient
 
 #pragma mark - Synthesizing
 @synthesize username = _username;
