@@ -135,15 +135,7 @@ NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 		
 		
 		//--//
-		id createdAtObj = [dictionary valueForKey:kCDOHUserDictionaryCreatedAtKey];
-		if (createdAtObj) {
-			if ([createdAtObj isKindOfClass:[NSDate class]]) {
-				_createdAt = createdAtObj;
-			} else if ([createdAtObj isKindOfClass:[NSString class]]) {
-				NSDate *parsedCreatedAt = [createdAtObj dateRFC3339Formatted];
-				_createdAt = parsedCreatedAt;
-			}
-		}
+		_createdAt = [self dateObjectFromDictionary:dictionary usingKey:kCDOHUserDictionaryCreatedAtKey];
 		
 		//--//
 		NSNumber *authenticated = [dictionary valueForKey:kCDOHUserDictionaryAuthenticatedKey];
@@ -186,14 +178,7 @@ NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 		
 		
 		//--//
-		id planObj = [dictionary valueForKey:kCDOHUserDictionaryPlanKey];
-		if (planObj) {
-			if ([planObj isKindOfClass:[CDOHPlan class]]) {
-				_plan = planObj;
-			} else if ([planObj isKindOfClass:[NSDictionary class]]) {
-				_plan = [[CDOHPlan alloc] initWithDictionary:planObj];
-			}
-		}
+		_plan = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHUserDictionaryPlanKey ofClass:[CDOHPlan class]];
 	}
 	
 	return self;
