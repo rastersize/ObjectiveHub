@@ -186,6 +186,8 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 /// The standard success block for requests returning an array of users.
 - (CDOHInternalSuccessBlock)standardUserListSuccessBlock:(void (^)(NSArray *users, NSDictionary *responseInfo))successBlock;
 
+- (CDOHInternalSuccessBlock)standardRepositorySuccessBlock:(void (^)(CDOHRepository * repository, NSDictionary *responseInfo))successBlock;
+
 
 @end
 
@@ -340,6 +342,27 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 			}
 			
 			successBlock(emails);
+		}
+	};
+}
+
+- (CDOHInternalSuccessBlock)standardRepositorySuccessBlock:(void (^)(CDOHRepository *, NSDictionary *))successBlock
+{
+	return ^(AFHTTPRequestOperation *operation, id responseObject) {
+		if (successBlock) {
+			if (responseObject && [responseObject length] > 0) {
+				NSDictionary *repoDict = [self.JSONDecoder objectWithData:responseObject];
+
+				if ([repoDict isKindOfClass:[NSDictionary class]]) {
+					CDOHRepository *repo = [[CDOHRepository alloc] initWithDictionary:repoDict];
+
+					NSDictionary *responseInfo = [self responseDictionaryFromOperation:operation];
+
+					successBlock(repo, responseInfo);
+				} else {
+					[NSException raise:NSInternalInconsistencyException format:@"The using app should be notified that the response was incorrect so that we can gracefully handle the problem."];
+				}
+			}
 		}
 	};
 }
