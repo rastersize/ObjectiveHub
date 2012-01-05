@@ -31,13 +31,14 @@
 //
 
 
-// Client
-#import <ObjectiveHub/CDOHClient.h>
-
 // Custom errors
 #import <ObjectiveHub/CDOHError.h>
 
 // Models
+#import <ObjectiveHub/CDOHResource.h>
 #import <ObjectiveHub/CDOHUser.h>
 #import <ObjectiveHub/CDOHPlan.h>
 #import <ObjectiveHub/CDOHRepository.h>
+
+// Client
+#import <ObjectiveHub/CDOHClient.h>
