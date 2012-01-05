@@ -119,6 +119,12 @@
 		9C5D2D6F147029410064F02A /* ObjectiveHub.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F935146B2069001A5385 /* ObjectiveHub.framework */; };
 		9C613A9314B601C70067B6B6 /* ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9214B601C70067B6B6 /* ObjectiveHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C613A9414B601C70067B6B6 /* ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9214B601C70067B6B6 /* ObjectiveHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C613A9B14B60C370067B6B6 /* CDOHResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9914B60C370067B6B6 /* CDOHResource.h */; };
+		9C613A9C14B60C370067B6B6 /* CDOHResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9914B60C370067B6B6 /* CDOHResource.h */; };
+		9C613A9D14B60C370067B6B6 /* CDOHResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C613A9A14B60C370067B6B6 /* CDOHResource.m */; };
+		9C613A9E14B60C370067B6B6 /* CDOHResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C613A9A14B60C370067B6B6 /* CDOHResource.m */; };
+		9C613AA014B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9F14B60CEC0067B6B6 /* CDOHResourcePrivate.h */; };
+		9C613AA114B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9F14B60CEC0067B6B6 /* CDOHResourcePrivate.h */; };
 		9C99909514AE708F00DFDD3B /* ObjectiveHub_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F95B146B2069001A5385 /* ObjectiveHub_Tests.m */; };
 		9C99909714AE70F100DFDD3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C99909614AE70F100DFDD3B /* Foundation.framework */; };
 		9C99909A14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */; };
@@ -272,6 +278,9 @@
 		9C5D2D651470281B0064F02A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		9C5D2D70147029E10064F02A /* CDOHTestAppUserCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHTestAppUserCredentials.h; sourceTree = "<group>"; };
 		9C613A9214B601C70067B6B6 /* ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveHub.h; sourceTree = "<group>"; };
+		9C613A9914B60C370067B6B6 /* CDOHResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHResource.h; sourceTree = "<group>"; };
+		9C613A9A14B60C370067B6B6 /* CDOHResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHResource.m; sourceTree = "<group>"; };
+		9C613A9F14B60CEC0067B6B6 /* CDOHResourcePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHResourcePrivate.h; sourceTree = "<group>"; };
 		9C99909614AE70F100DFDD3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONUtilities.h; sourceTree = "<group>"; };
 		9C9990A314AE7AEE00DFDD3B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
@@ -501,14 +510,11 @@
 			isa = PBXGroup;
 			children = (
 				9C2F3E82146F44E000C44A82 /* Private Model Interfaces */,
+				9C613AA214B60DF10067B6B6 /* Resources */,
+				9C613A9914B60C370067B6B6 /* CDOHResource.h */,
+				9C613A9A14B60C370067B6B6 /* CDOHResource.m */,
 				9CE6633F1470929500D8A95F /* CDOHError.h */,
 				9CE663401470929500D8A95F /* CDOHError.m */,
-				9C2F3E79146F3F2000C44A82 /* CDOHUser.h */,
-				9C2F3E7A146F3F2000C44A82 /* CDOHUser.m */,
-				9C2F3E86146F5F7D00C44A82 /* CDOHPlan.h */,
-				9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */,
-				9CF962AC147FC01B00F52A98 /* CDOHRepository.h */,
-				9CF962AD147FC01B00F52A98 /* CDOHRepository.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -518,6 +524,7 @@
 			children = (
 				9C2F3E83146F464200C44A82 /* CDOHUserPrivate.h */,
 				9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */,
+				9C613A9F14B60CEC0067B6B6 /* CDOHResourcePrivate.h */,
 			);
 			name = "Private Model Interfaces";
 			sourceTree = "<group>";
@@ -563,6 +570,19 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
+		9C613AA214B60DF10067B6B6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9C2F3E79146F3F2000C44A82 /* CDOHUser.h */,
+				9C2F3E7A146F3F2000C44A82 /* CDOHUser.m */,
+				9C2F3E86146F5F7D00C44A82 /* CDOHPlan.h */,
+				9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */,
+				9CF962AC147FC01B00F52A98 /* CDOHRepository.h */,
+				9CF962AD147FC01B00F52A98 /* CDOHRepository.m */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -592,6 +612,8 @@
 				9C2F3E8D146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */,
 				9C47C5511473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
 				9C99909A14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */,
+				9C613A9B14B60C370067B6B6 /* CDOHResource.h in Headers */,
+				9C613AA014B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,6 +643,8 @@
 				9C2F3E8E146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */,
 				9C47C5521473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
 				9C99909B14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */,
+				9C613A9C14B60C370067B6B6 /* CDOHResource.h in Headers */,
+				9C613AA114B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -850,6 +874,7 @@
 				9C2F3E8A146F5F7D00C44A82 /* CDOHPlan.m in Sources */,
 				9CE663431470929500D8A95F /* CDOHError.m in Sources */,
 				9CF962B0147FC01B00F52A98 /* CDOHRepository.m in Sources */,
+				9C613A9D14B60C370067B6B6 /* CDOHResource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -882,6 +907,7 @@
 				9C2F3E8B146F5F7D00C44A82 /* CDOHPlan.m in Sources */,
 				9CE663441470929500D8A95F /* CDOHError.m in Sources */,
 				9CF962B1147FC01B00F52A98 /* CDOHRepository.m in Sources */,
+				9C613A9E14B60C370067B6B6 /* CDOHResource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
