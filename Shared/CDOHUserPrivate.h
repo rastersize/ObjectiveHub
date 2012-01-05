@@ -86,10 +86,3 @@ extern NSString *const kCDOHUserDictionaryCollaboratorsKey;
 /// Dictionary key for the plan value.
 extern NSString *const kCDOHUserDictionaryPlanKey;
 
-
-#pragma mark - CDOHUser Private Interface
-/**
- * Private CDOHUser additions.
- */
-@interface CDOHUser ()
-@end

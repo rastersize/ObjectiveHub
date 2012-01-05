@@ -35,7 +35,7 @@
 #import "CDOHPlan.h"
 
 
-#pragma mark Dictionary Keys
+#pragma mark NSCoding and GitHub JSON Keys
 /// Dictionary key for the name value.
 extern NSString *const kCDOHPlanDictionaryNameKey;
 /// Dictionary key for the name value.
@@ -44,11 +44,3 @@ extern NSString *const kCDOHPlanDictionarySpaceKey;
 extern NSString *const kCDOHPlanDictionaryCollaboratorsKey;
 /// Dictionary key for the name value.
 extern NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey;
-
-
-#pragma mark - CDOHPlan Private Interface
-/**
- * Private CDOHPlan additions.
- */
-@interface CDOHPlan ()
-@end

@@ -33,6 +33,8 @@
 #import "CDOHResource.h"
 #import "CDOHResourcePrivate.h"
 
+
+#pragma mark NSCoding and GitHub JSON Keys
 NSString *const kCDOHResourceAPIResourceURLKey =  @"url";
 
 

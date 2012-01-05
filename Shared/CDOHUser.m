@@ -38,7 +38,7 @@
 #import "NSString+ObjectiveHub.h"
 
 
-#pragma mark Dictionary Keys
+#pragma mark NSCoding and GitHub JSON Keys
 NSString *const kCDOHUserDictionaryLoginKey				= @"login";
 NSString *const kCDOHUserDictionaryIDKey				= @"id";
 NSString *const kCDOHUserDictionaryAvatarURLKey			= @"avatar_url";
@@ -67,18 +67,11 @@ NSString *const kCDOHUserDictionaryPlanKey				= @"plan";
 NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 
 
-#pragma mark - CDOHUser Private Interface
-@interface CDOHUser ()
-
-
-@end
-
-
 
 #pragma mark - CDOHUser Implementation
 @implementation CDOHUser
 
-#pragma mark - Synthesizing
+#pragma mark - Synthesization
 @synthesize name = _name;
 @synthesize company = _company;
 @synthesize email = _email;

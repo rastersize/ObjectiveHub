@@ -33,7 +33,7 @@
 #import <Foundation/Foundation.h>
 
 
-#pragma mark Constants
+#pragma mark NSCoding and GitHub JSON Keys
 /// The API resource URL NSCoding and GitHub JSON key.
 extern NSString *const kCDOHResourceAPIResourceURLKey;
 
