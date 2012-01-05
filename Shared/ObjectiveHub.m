@@ -68,6 +68,56 @@ NSString *const kCDOHGitHubMimeFullInJSON	= @"application/vnd.github.beta.full+j
 NSString *const kCDOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 
 
+
+#pragma mark - HTTP Link Relationship Header Keys
+///
+NSString *const kCDOHResponseHeaderLinkNextKey;
+///
+NSString *const kCDOHResponseHeaderLinkLastKey;
+///
+NSString *const kCDOHResponseHeaderLinkSeparatorKey;
+
+/// Wrapper class of relationship link header objects.
+@interface CDOHLinkRelationshipHeader : NSObject
+
+/// Inititate the link relationship.
+- (id)initWithName:(NSString *)name URL:(NSURL *)url;
+
+/// The name of the relationship.
+/// Can be one of;
+/// - kCDOHResponseHeaderLinkNextKey,
+/// - kCDOHResponseHeaderLinkLastKey.
+@property (copy, readonly) NSString *name;
+
+/// The URL the relationship points to.
+@property (strong, readonly) NSURL *URL;
+
+@end
+
+@implementation CDOHLinkRelationshipHeader
+
+@synthesize name = _name;
+@synthesize URL = _url;
+
+- (id)initWithName:(NSString *)name URL:(NSURL *)url
+{
+	self = [super init];
+	if (self) {
+		_name = [name copy];
+		_url = url;
+	}
+
+	return self;
+}
+
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"<CDOHLinkRelationshipHeader: name = %@; URL = %@;>", _name, _url];
+}
+
+@end
+
+
 #pragma mark - GitHub Relative API Path (Formats)
 /// The relative path for a user with login.
 /// Takes one string with the login name.

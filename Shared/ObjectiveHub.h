@@ -58,6 +58,12 @@
 typedef void (^CDOHFailureBlock)(CDOHError *error);
 
 
+NSString *const kCDOHResponseInfoNextPageKey;
+NSString *const kCDOHResponseInfoLastPageKey;
+NSString *const kCDOHResponseInfoRateLimitKey;
+NSString *const kCDOHResponseInfoRateLimitRemainingKey;
+
+
 #pragma mark - ObjectiveHub Interface
 /**
  * Objective-C class for comunicating with GitHub asynchronously using blocks.
