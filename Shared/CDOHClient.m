@@ -42,13 +42,7 @@
 #import "CDOHRepository.h"
 
 
-#pragma mark Helper Macros
-#ifndef FGNSStringFromBOOL
-#define FGNSStringFromBOOL(b) ((b) ? @"YES" : @"NO")
-#endif
-
-
-#pragma mark - Constants
+#pragma mark Constants
 /// The base URI for the GitHub API
 NSString *const kCDOHGitHubBaseAPIURIString	= @"https://api.github.com";
 
