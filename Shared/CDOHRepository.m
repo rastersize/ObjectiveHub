@@ -108,12 +108,22 @@
 	NSUInteger prime = 31;
 	NSUInteger hash = 1;
 
-	hash = prime * hash + [_owner hash];
+	hash = prime + [_owner hash];
 	hash = prime * hash + [_name hash];
 //	hash = prime * hash + [_organization hash];
 
 	return hash;
 }
 
+
+#pragma mark - Describing a User Object
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"<%@: %p { %@/%@ }>",
+			[self class],
+			self,
+			self.owner.name,
+			self.name];
+}
 
 @end
