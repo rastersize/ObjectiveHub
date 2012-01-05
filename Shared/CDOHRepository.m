@@ -55,6 +55,7 @@
 @synthesize createdAt = _createdAt;
 @synthesize organization = _organization;
 @synthesize fork = _fork;
+@synthesize forks = _forks;
 @synthesize parentRepository = _parentRepository;
 @synthesize sourceRepository = _sourceRepository;
 @synthesize hasWiki = _hasWiki;

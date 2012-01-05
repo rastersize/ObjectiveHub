@@ -176,6 +176,11 @@
 @property (assign, readonly, getter = isFork) BOOL fork;
 
 /**
+ * Total number of forks.
+ */
+@property (assign, readonly) NSUInteger forks;
+
+/**
  * The parent repository.
  *
  * Will be `nil` if repository is not a fork, i.e. fork returns `NO`.
