@@ -68,6 +68,16 @@ NSString *const kCDOHGitHubMimeFullInJSON	= @"application/vnd.github.beta.full+j
 NSString *const kCDOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
 
 
+#pragma mark - HTTP Header Response Keys
+///
+NSString *const kCDOHResponseHeaderXRateLimitLimitKey		= @"X-RateLimit-Limit";
+///
+NSString *const kCDOHResponseHeaderXRateLimitRemainingKey	= @"X-RateLimit-Remaining";
+///
+NSString *const kCDOHResponseHeaderLocationKey				= @"Location";
+///
+NSString *const kCDOHResponseHeaderLinkKey					= @"Link";
+
 
 #pragma mark - HTTP Link Relationship Header Keys
 ///
@@ -149,10 +159,12 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 @property (readonly, strong) JSONDecoder *JSONDecoder;
 
 
-#pragma mark - Creating Errors
+#pragma mark - Response Helpers
 /// Create an error from a failed request operation.
 - (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation;
 
+/// Create a respone dictionary from an response.
+- (NSDictionary *)responseDictionaryFromOperation:(AFHTTPRequestOperation *)operation;
 
 #pragma mark - Standard Blocks
 #pragma mark |- Standard Error Block
@@ -275,7 +287,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 			CDOHUser *user = nil;
 			if (responseObject && [responseObject length] > 0) {
 				NSDictionary *userDict = [self.JSONDecoder objectWithData:responseObject];
-#warning TODO: Should the library call the failure block instead here as the library can not understand the returrend data (wrong format)?
+//TODO: Should the library call the failure block instead here as the library can not understand the returrend data (wrong format)?
 				user = [[CDOHUser alloc] initWithDictionary:userDict];
 			}
 			
@@ -309,6 +321,59 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	CDOHError *ohError = [[CDOHError alloc] initWithHTTPHeaders:httpHeaders HTTPStatus:httpStatus responseBody:responseData];
 	
 	return ohError;
+}
+
+- (NSDictionary *)responseDictionaryFromOperation:(AFHTTPRequestOperation *)operation
+{
+	NSDictionary *allHeaders = [[operation response] allHeaderFields];
+
+	id rateLimitLimit		= [allHeaders objectForKey:kCDOHResponseHeaderXRateLimitLimitKey];
+	id rateLimitRemaining	= [allHeaders objectForKey:kCDOHResponseHeaderXRateLimitRemainingKey];
+	id location				= [allHeaders objectForKey:kCDOHResponseHeaderLocationKey];
+	id link					= [allHeaders objectForKey:kCDOHResponseHeaderLinkKey];
+
+	rateLimitLimit			= (rateLimitLimit		? rateLimitLimit		: [NSNull null]);
+	rateLimitRemaining		= (rateLimitRemaining	? rateLimitRemaining	: [NSNull null]);
+	location				= (location				? location				: [NSNull null]);
+
+
+#if DEBUG
+	NSLog(@"link: %@", link);
+#endif
+	id links = nil;
+//	if (link && [link length] > 0) {
+		/*NSScanner *linkScanner = [[NSScanner alloc] initWithString:link];
+		links = [[NSMutableArray alloc] init];
+
+		while (![linkScanner isAtEnd]) {
+			NSString *linkUrlString = nil;
+			NSString *linkName = nil;
+			NSURL *linkUrl = nil;
+
+			[linkScanner scanUpToString:@"<" intoString:NULL];
+			[linkScanner scanUpToString:@">" intoString:&linkUrlString];
+			[linkScanner scanUpToString:@"rel=\"" intoString:NULL];
+			[linkScanner scanUpToString:@"\"" intoString:&linkName];
+
+			if ([linkUrlString length] > 0 && [linkName length] > 0) {
+				linkUrl = [[NSURL alloc] initWithString:linkUrlString];
+
+				CDOHLinkRelationshipHeader *linkRel = [[CDOHLinkRelationshipHeader alloc] initWithName:linkName URL:linkUrl];
+				[links addObject:linkRel];
+			}
+		}*/
+//	} else {
+		links = [NSNull null];
+//	}
+
+	NSDictionary *responseInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
+								  rateLimitLimit,		kCDOHResponseHeaderXRateLimitLimitKey,
+								  rateLimitRemaining,	kCDOHResponseHeaderXRateLimitRemainingKey,
+								  links,				kCDOHResponseHeaderLinkKey,
+								  location,				kCDOHResponseHeaderLocationKey,
+								  nil];
+
+	return responseInfo;
 }
 
 
