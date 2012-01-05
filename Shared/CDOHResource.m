@@ -57,6 +57,34 @@ NSString *const kCDOHResourceAPIResourceURLKey =  @"url";
 }
 
 
+#pragma mark - Identifying and Comparing Users
+- (BOOL)isEqual:(id)other
+{
+	if (other == self) {
+		return YES;
+	}
+	if (!other || ![other isKindOfClass:[self class]]) {
+		return NO;
+	}
+	return [self isEqualToResource:other];
+}
+
+- (BOOL)isEqualToResource:(CDOHResource *)aResource
+{
+	if (aResource == self) {
+		return YES;
+	}
+	
+	return ([self._APIResourceURL isEqual:aResource._APIResourceURL]);
+}
+
+- (NSUInteger)hash
+{
+	// We add "137" so that we do not have the same hash as just the URL.
+	return [self._APIResourceURL hash] + 137;
+}
+
+
 #pragma mark - NSCoding Methods
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {	

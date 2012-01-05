@@ -53,4 +53,26 @@
  */
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
+
+#pragma mark - Identifying and Comparing Resources
+/** @name Identifying and Comparing Resources */
+/**
+ * Returns a Boolean value that indicates whether a given resource is equal to
+ * the receiver.
+ *
+ * @param aResource The resource with which to compare the reciever.
+ * @return `YES` if _aResource_ is equivalent to the reciever, otherwise `NO`.
+ */
+- (BOOL)isEqualToResource:(CDOHResource *)aResource;
+
+/**
+ * Returns an unsigned integer that can be used as a has table address.
+ *
+ * If two resource objects are equal (as determined by the isEqualToResource:
+ * method), they will have the same hash value.
+ *
+ * @return An unsigned integer that can be used as a has table address.
+ */
+- (NSUInteger)hash;
+
 @end
