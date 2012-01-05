@@ -7,7 +7,18 @@
 //
 
 #import "NSString+ObjectiveHub.h"
+#import "NSDateFormatter+CDOHRFC3339.h"
+#import "CDOHCommon.h"
 
+
+CDOH_FIX_CATEGORY_BUG(NSString_ObjectiveHub);
 @implementation NSString (ObjectiveHub)
+
+- (NSDate *)dateRFC3339Formatted
+{
+	NSDateFormatter *rfc3339DateFormatter = [NSDateFormatter rfc3339DateFormatter];
+	NSDate *date = [rfc3339DateFormatter dateFromString:self];
+	return date;
+}
 
 @end

@@ -132,6 +132,10 @@
 		9C9990A514AE7B0900DFDD3B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9990A314AE7AEE00DFDD3B /* Cocoa.framework */; };
 		9C9990A714AE7B1600DFDD3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9990A614AE7B1600DFDD3B /* UIKit.framework */; };
 		9C9990A814AE7B4A00DFDD3B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9990A314AE7AEE00DFDD3B /* Cocoa.framework */; };
+		9CA5FA9614B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FA9414B62E3700F2CD13 /* NSString+ObjectiveHub.h */; settings = {ATTRIBUTES = (); }; };
+		9CA5FA9714B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FA9414B62E3700F2CD13 /* NSString+ObjectiveHub.h */; };
+		9CA5FA9814B62E3700F2CD13 /* NSString+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FA9514B62E3700F2CD13 /* NSString+ObjectiveHub.m */; };
+		9CA5FA9914B62E3700F2CD13 /* NSString+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FA9514B62E3700F2CD13 /* NSString+ObjectiveHub.m */; };
 		9CA5FA9C14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FA9A14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.h */; settings = {ATTRIBUTES = (); }; };
 		9CA5FA9D14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FA9A14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.h */; };
 		9CA5FA9E14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FA9B14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.m */; };
@@ -295,6 +299,8 @@
 		9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONUtilities.h; sourceTree = "<group>"; };
 		9C9990A314AE7AEE00DFDD3B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		9C9990A614AE7B1600DFDD3B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		9CA5FA9414B62E3700F2CD13 /* NSString+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ObjectiveHub.h"; sourceTree = "<group>"; };
+		9CA5FA9514B62E3700F2CD13 /* NSString+ObjectiveHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ObjectiveHub.m"; sourceTree = "<group>"; };
 		9CA5FA9A14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDateFormatter+CDOHRFC3339.h"; sourceTree = "<group>"; };
 		9CA5FA9B14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDateFormatter+CDOHRFC3339.m"; sourceTree = "<group>"; };
 		9CA5FAA014B6304600F2CD13 /* CDOHCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHCommon.h; sourceTree = "<group>"; };
@@ -605,6 +611,8 @@
 			children = (
 				9CA5FA9A14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.h */,
 				9CA5FA9B14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.m */,
+				9CA5FA9414B62E3700F2CD13 /* NSString+ObjectiveHub.h */,
+				9CA5FA9514B62E3700F2CD13 /* NSString+ObjectiveHub.m */,
 				9CA5FAA314B6320000F2CD13 /* NSDate+ObjectiveHub.h */,
 				9CA5FAA414B6320000F2CD13 /* NSDate+ObjectiveHub.m */,
 			);
@@ -627,6 +635,7 @@
 				9CF962AE147FC01B00F52A98 /* CDOHRepository.h in Headers */,
 				9CA5FAA114B6304600F2CD13 /* CDOHCommon.h in Headers */,
 				9C26F9B2146B2424001A5385 /* JSONKit.h in Headers */,
+				9CA5FA9614B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */,
 				9CA5FA9C14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.h in Headers */,
 				9CA5FAA514B6320000F2CD13 /* NSDate+ObjectiveHub.h in Headers */,
 				9C26F9D5146B2979001A5385 /* AFHTTPClient.h in Headers */,
@@ -677,6 +686,7 @@
 				9C47C5521473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
 				9C99909B14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */,
 				9C613AA114B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */,
+				9CA5FA9714B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */,
 				9CA5FA9D14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.h in Headers */,
 				9CA5FAA614B6320000F2CD13 /* NSDate+ObjectiveHub.h in Headers */,
 			);
@@ -909,6 +919,7 @@
 				9CE663431470929500D8A95F /* CDOHError.m in Sources */,
 				9CF962B0147FC01B00F52A98 /* CDOHRepository.m in Sources */,
 				9C613A9D14B60C370067B6B6 /* CDOHResource.m in Sources */,
+				9CA5FA9814B62E3700F2CD13 /* NSString+ObjectiveHub.m in Sources */,
 				9CA5FA9E14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.m in Sources */,
 				9CA5FAA714B6320000F2CD13 /* NSDate+ObjectiveHub.m in Sources */,
 			);
@@ -944,6 +955,7 @@
 				9CE663441470929500D8A95F /* CDOHError.m in Sources */,
 				9CF962B1147FC01B00F52A98 /* CDOHRepository.m in Sources */,
 				9C613A9E14B60C370067B6B6 /* CDOHResource.m in Sources */,
+				9CA5FA9914B62E3700F2CD13 /* NSString+ObjectiveHub.m in Sources */,
 				9CA5FA9F14B62EC300F2CD13 /* NSDateFormatter+CDOHRFC3339.m in Sources */,
 				9CA5FAA814B6320000F2CD13 /* NSDate+ObjectiveHub.m in Sources */,
 			);
