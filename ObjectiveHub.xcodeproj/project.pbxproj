@@ -400,7 +400,7 @@
 		9C26F927146B1B74001A5385 = {
 			isa = PBXGroup;
 			children = (
-				9C26F996146B20C7001A5385 /* Shared */,
+				9C26F996146B20C7001A5385 /* ObjectiveHub */,
 				9C26F96A146B207A001A5385 /* ObjectiveHub iOS Specifics */,
 				9C26F93E146B2069001A5385 /* ObjectiveHub Mac Specifics */,
 				9C26F954146B2069001A5385 /* Unit Tests */,
@@ -502,7 +502,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		9C26F996146B20C7001A5385 /* Shared */ = {
+		9C26F996146B20C7001A5385 /* ObjectiveHub */ = {
 			isa = PBXGroup;
 			children = (
 				9C26FA09146B2E1E001A5385 /* Models */,
@@ -511,7 +511,7 @@
 				9C613A9114B601A30067B6B6 /* Misc */,
 				9C613A9214B601C70067B6B6 /* ObjectiveHub.h */,
 			);
-			path = Shared;
+			path = ObjectiveHub;
 			sourceTree = "<group>";
 		};
 		9C26F9A7146B23D9001A5385 /* Vendor */ = {
