@@ -39,7 +39,7 @@
 
 
 #pragma mark Forward Class Declarations
-@class CDOHUser, CDOHPlan, CDOHError;
+@class CDOHUser, CDOHPlan, CDOHError, CDOHResponse;
 
 
 #pragma mark - Constants
@@ -62,10 +62,16 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  *
  * Currently version 3 of the GitHub API is supported.
  *
- * The framework will handle the rate limiting of GitHub automatically but you
- * tell the framework that you app has been whitelisted by GitHub if needed.
- * That is you might have a different limit than the default. But for the sake
- * of all of us be nice towards the service.
+ * **Blocks**
+ *
+ * - _Failure blocks_ takes exactly one argument, the error (CDOHError) which
+ * was encounterred.
+ * - _Success blocks_ takes exactly one argument, the response (CDOHResponse)
+ * recieved from GitHub. The `resource` property models the resouce provided by
+ * GitHub. More information is available through this object, such as if the
+ * response is paginated and how many pages exists. The response object also
+ * makes it easy to get more pages via its `-loadNextPage`, `-loadPreviousPage`
+ * and `-loadPages:`.
  *
  * @TODO: We should only require a password when GitHub requires us to authenticate else we should not store it (so that we do not expose the user to unnecessary risks. That is, if the user of the library wants this and it is possible.
  */
@@ -359,19 +365,18 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  *
  * @param login The login of the user for which the array of watched
  * repositories should be fetched.
+ * @param pages The pages to get. May be `nil`, in which case the first page
+ * will be loaded.
  * @param successBlock The block which is called upon success with an array of
  * email addresses associated with the user. The parameter may be set to `NULL`
  * in which case nothing will be done upon success.
- *
- * The successBlock takes one argument:
- * _watchers_ An array of repositories watched by the given user with the login
- * _login_, can be `nil` if the user is not watching any repositories.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
+ *
+ * @see CDOHResponse
  */
-//- (void)repositoriesWatchedByUser:(NSString *)login success:(void (^)(NSArray *watchedRepositories))successBlock failure:(CDOHFailureBlock)failureBlock;
-
+- (void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 @end

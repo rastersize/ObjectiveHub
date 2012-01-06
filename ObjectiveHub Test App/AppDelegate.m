@@ -41,13 +41,13 @@
 	});*/
 	
 	// Should succeed:
-	dispatch_async(queue, ^{
+	/*dispatch_async(queue, ^{
 		[self.hub userWithLogin:@"schacon" success:^(CDOHUser *user) {
 			NSLog(@"user 2: %@", user);
 		} failure:^(CDOHError *error) {
 			NSLog(@"user 2 failure: %@", error);
 		}];
-	});
+	});*/
 	/*
 	// Should succeed.
 	dispatch_async(queue, ^{
@@ -149,6 +149,25 @@
 	}
 	NSLog(@"didThrowExeption: %@", didThrowException ? @"YES" : @"NO");*/
 	
+	dispatch_async(queue, ^{
+		[self.hub repositoriesWatchedByUser:@"rastersize" pages:nil success:^(CDOHResponse *response) {
+			NSLog(@"%@", response);
+			NSLog(@"%@", response.resource);
+			NSLog(@"paginated: %d", response.isPaginated);
+			NSLog(@"page: %lu", response.page);
+			NSLog(@"hasNextPage: %d", response.hasNextPage);
+			NSLog(@"nextPage: %lu", response.nextPage);
+			NSLog(@"hasPreviousPage: %d", response.hasPreviousPage);
+			NSLog(@"previousPage: %lu", response.previousPage);
+			NSLog(@"lastPage: %lu", response.lastPage);
+			
+			if (response.nextPage == 2) {
+				[response loadNextPage];
+			}
+		} failure:^(CDOHError *error) {
+			NSLog(@"repos watched by error: %@", error);
+		}];
+	});
 	
 	dispatch_resume(queue);
 }

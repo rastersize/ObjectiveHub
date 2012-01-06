@@ -38,6 +38,8 @@
 
 #import "CDOHError.h"
 #import "CDOHLinkRelationshipHeader.h"
+#import "CDOHResponse.h"
+#import "CDOHResponsePrivate.h"
 
 #import "CDOHUser.h"
 #import "CDOHRepository.h"
@@ -82,7 +84,8 @@ NSString *const kCDOHResponseHeaderLinkKey					= @"Link";
 
 #pragma mark - GitHub Relative API Path (Formats)
 /// The relative path for a user with login.
-/// Takes one string with the login name.
+/// Takes one string;
+/// - the login name of the user.
 NSString *const kCDOHUserPathFormat					= @"/users/%@";
 /// The relative path for an authenticated user.
 NSString *const kCDOHUserAuthenticatedPath			= @"/user";
@@ -93,6 +96,10 @@ NSString *const kCDOHUserEmailsPath					= @"/user/emails";
 /// - the first is the username of the repository owner,
 /// - the second is the name of the repository.
 NSString *const kCDOHRepositoryWatchersPath			= @"/repos/%@/%@/watchers";
+/// The relative path for repositories watched by a user.
+/// Takes one string;
+/// - the login name of the user.
+NSString *const kCDOHWatchedRepositoriesByUserPath	= @"/users/%@/watched";
 
 
 #pragma mark - ObjectiveHub Generic Block Types
@@ -100,6 +107,10 @@ NSString *const kCDOHRepositoryWatchersPath			= @"/repos/%@/%@/watchers";
 typedef void (^CDOHInternalSuccessBlock)(AFHTTPRequestOperation *operation, id responseObject);
 /// Block type for failed requests.
 typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSError *error);
+
+
+#pragma mark - Macro to Create Argument Arrays
+#define CDOHArrayOfArguments(...) [[NSArray alloc] initWithObjects: __VA_ARGS__, nil]
 
 
 #pragma mark - ObjectiveHub Private Interface
@@ -141,10 +152,13 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 - (CDOHInternalSuccessBlock)standardUserEmailSuccessBlock:(void (^)(NSArray *emails))successBlock;
 
 /// The standard success block for requests returning an array of users.
-- (CDOHInternalSuccessBlock)standardUserListSuccessBlock:(void (^)(NSArray *users, NSDictionary *responseInfo))successBlock;
+- (CDOHInternalSuccessBlock)standardUserArraySuccessBlock:(void (^)(NSArray *users, NSDictionary *responseInfo))successBlock;
 
+/// The standard success block for requests returning a repository.
 - (CDOHInternalSuccessBlock)standardRepositorySuccessBlock:(void (^)(CDOHRepository * repository, NSDictionary *responseInfo))successBlock;
 
+/// The standard success block for requests returning an array of repositories.
+- (CDOHInternalSuccessBlock)standardRepositoryArraySuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments;
 
 @end
 
@@ -258,7 +272,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	};
 }
 
-- (CDOHInternalSuccessBlock)standardUserListSuccessBlock:(void (^)(NSArray *users, NSDictionary *responseInfo))successBlock
+- (CDOHInternalSuccessBlock)standardUserArraySuccessBlock:(void (^)(NSArray *users, NSDictionary *responseInfo))successBlock
 {
 	return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
 		if (successBlock) {
@@ -273,8 +287,10 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 					CDOHUser *user = nil;
 					NSMutableArray *mutableUsers = [[NSMutableArray alloc] initWithCapacity:[userDicts count]];
 					for (NSDictionary *userDict in userDicts) {
-						user = [[CDOHUser alloc] initWithDictionary:userDict];
-						[mutableUsers addObject:user];
+						if ([userDict isKindOfClass:[NSDictionary class]]) {
+							user = [[CDOHUser alloc] initWithDictionary:userDict];
+							[mutableUsers addObject:user];
+						}
 					}
 					users = mutableUsers;
 					
@@ -324,6 +340,51 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	};
 }
 
+- (CDOHInternalSuccessBlock)standardRepositoryArraySuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
+{
+	return ^(AFHTTPRequestOperation *operation, id responseObject) {
+		if (successBlock) {
+			if (responseObject && [responseObject length] > 0) {
+				id repoDicts = [self.JSONDecoder objectWithData:responseObject];
+				
+				if ([repoDicts isKindOfClass:[NSArray class]]) {
+					NSMutableArray *reposArray = [[NSMutableArray alloc] initWithCapacity:[repoDicts count]];
+					
+					for (id repoDict in repoDicts) {
+						if ([repoDict isKindOfClass:[NSDictionary class]]) {
+							CDOHRepository *repo = [[CDOHRepository alloc] initWithDictionary:repoDict];
+							[reposArray addObject:repo];
+						}
+					}
+					
+					NSDictionary *responseInfoDict = [self responseDictionaryFromOperation:operation];
+					NSArray *links = [responseInfoDict objectForKey:kCDOHResponseHeaderLinkKey];
+					
+					CDOHResponse *response = [[CDOHResponse alloc] initWithResource:reposArray
+																			 target:self
+																			 action:action
+																	   successBlock:successBlock failureBlock:failureBlock
+																			  links:links
+																		  arguments:arguments];
+					successBlock(response);
+				} else if (failureBlock) {
+					NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
+											  operation, @"operation",
+											  responseObject, kCDOHErrorUserInfoResponseDataKey,
+											  nil];
+					CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code:kCDOHErrorCodeResponseObjectNotOfExpectedType userInfo:userInfo];
+					failureBlock(error);
+				}
+			} else if (failureBlock) {
+				NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
+										  operation, @"operation", nil];
+				CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code:kCDOHErrorCodeResponseObjectEmpty userInfo:userInfo];
+				failureBlock(error);
+			}
+		}
+	};
+}
+
 
 #pragma mark - Response Helpers
 - (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation
@@ -344,42 +405,42 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	id rateLimitLimit		= [allHeaders objectForKey:kCDOHResponseHeaderXRateLimitLimitKey];
 	id rateLimitRemaining	= [allHeaders objectForKey:kCDOHResponseHeaderXRateLimitRemainingKey];
 	id location				= [allHeaders objectForKey:kCDOHResponseHeaderLocationKey];
-	id link					= [allHeaders objectForKey:kCDOHResponseHeaderLinkKey];
+	NSString *link			= [allHeaders objectForKey:kCDOHResponseHeaderLinkKey];
 	
 	rateLimitLimit			= (rateLimitLimit		? rateLimitLimit		: [NSNull null]);
 	rateLimitRemaining		= (rateLimitRemaining	? rateLimitRemaining	: [NSNull null]);
 	location				= (location				? location				: [NSNull null]);
 
-	
-#if DEBUG
-	NSLog(@"link: %@", link);
-#endif
 	id links = nil;
-//	if (link && [link length] > 0) {
-		/*NSScanner *linkScanner = [[NSScanner alloc] initWithString:link];
-		links = [[NSMutableArray alloc] init];
+	if ([link length] > 0) {
+		NSArray *linkComps = [link componentsSeparatedByString:kCDOHResponseHeaderLinkSeparatorKey];
+		links = [[NSMutableArray alloc] initWithCapacity:[linkComps count]];
 		
-		while (![linkScanner isAtEnd]) {
-			NSString *linkUrlString = nil;
-			NSString *linkName = nil;
-			NSURL *linkUrl = nil;
+		// Link format: 
+		// <https://api.github.com/resource?page=10>; rel="__name__"
+		for (NSString *singleLink in linkComps) {
+			NSArray *singleLinkComp = [singleLink componentsSeparatedByString:@">; rel=\""];
 			
-			[linkScanner scanUpToString:@"<" intoString:NULL];
-			[linkScanner scanUpToString:@">" intoString:&linkUrlString];
-			[linkScanner scanUpToString:@"rel=\"" intoString:NULL];
-			[linkScanner scanUpToString:@"\"" intoString:&linkName];
-			
-			if ([linkUrlString length] > 0 && [linkName length] > 0) {
-				linkUrl = [[NSURL alloc] initWithString:linkUrlString];
+			if ([singleLinkComp count] == 2) {
+				NSString *linkUrlString = [singleLinkComp objectAtIndex:0];
+				linkUrlString = [linkUrlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+				NSString *linkName = [singleLinkComp objectAtIndex:1];
+				linkName = [linkName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 				
-				CDOHLinkRelationshipHeader *linkRel = [[CDOHLinkRelationshipHeader alloc] initWithName:linkName URL:linkUrl];
-				[links addObject:linkRel];
+				if ([linkUrlString length] > 2 && [linkName length] > 2) {
+					linkUrlString = [linkUrlString substringFromIndex:1];
+					NSURL *linkUrl = [[NSURL alloc] initWithString:linkUrlString];
+					linkName = [linkName substringToIndex:[linkName length] - 1];
+					
+					CDOHLinkRelationshipHeader *linkRel = [[CDOHLinkRelationshipHeader alloc] initWithName:linkName URL:linkUrl];
+					[links addObject:linkRel];
+				}
 			}
-		}*/
-//	} else {
+		}
+	} else {
 		links = [NSNull null];
-//	}
-					  
+	}
+	
 	NSDictionary *responseInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
 								  rateLimitLimit,		kCDOHResponseHeaderXRateLimitLimitKey,
 								  rateLimitRemaining,	kCDOHResponseHeaderXRateLimitRemainingKey,
@@ -474,12 +535,38 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repositoryName", @"repositoryOwner"];
 	}
 	
-	
 	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryWatchersPath, repositoryOwner, repositoryName];
 	[self.client getPath:watchersPath
 			  parameters:nil
-				 success:[self standardUserListSuccessBlock:successBlock]
+				 success:[self standardUserArraySuccessBlock:successBlock]
 				 failure:[self standardFailureBlock:failureBlock]];
+}
+
+- (void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (!successBlock && !failureBlock) {
+		return;
+	}
+	if (!login) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"login"];
+	}
+	
+	if ([pages count] == 0) {
+		pages = [[NSIndexSet alloc] initWithIndex:1];
+	}
+	
+	NSString *watchedReposPath = [[NSString alloc] initWithFormat:kCDOHWatchedRepositoriesByUserPath, login];
+	[pages enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *__unused stop) {
+		NSNumber *pageIdx = [[NSNumber alloc] initWithUnsignedInteger:idx];
+		NSDictionary *paramDict = [[NSDictionary alloc] initWithObjectsAndKeys:pageIdx, @"page", nil];
+		
+		NSLog(@"%@, %@", login, pageIdx);
+		
+		[self.client getPath:watchedReposPath
+				  parameters:paramDict
+					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(login)]
+					 failure:[self standardFailureBlock:failureBlock]];
+	}];
 }
 
 @end

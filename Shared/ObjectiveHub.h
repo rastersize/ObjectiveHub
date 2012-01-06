@@ -43,3 +43,4 @@
 
 // Client
 #import <ObjectiveHub/CDOHClient.h>
+#import <ObjectiveHub/CDOHResponse.h>
