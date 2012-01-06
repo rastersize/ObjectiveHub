@@ -37,6 +37,7 @@
 #import "JSONKit.h"
 
 #import "CDOHError.h"
+#import "CDOHLinkRelationshipHeader.h"
 
 #import "CDOHUser.h"
 #import "CDOHRepository.h"
@@ -77,55 +78,6 @@ NSString *const kCDOHResponseHeaderXRateLimitRemainingKey	= @"X-RateLimit-Remain
 NSString *const kCDOHResponseHeaderLocationKey				= @"Location";
 ///
 NSString *const kCDOHResponseHeaderLinkKey					= @"Link";
-
-
-#pragma mark - HTTP Link Relationship Header Keys
-///
-NSString *const kCDOHResponseHeaderLinkNextKey;
-///
-NSString *const kCDOHResponseHeaderLinkLastKey;
-///
-NSString *const kCDOHResponseHeaderLinkSeparatorKey;
-
-/// Wrapper class of relationship link header objects.
-@interface CDOHLinkRelationshipHeader : NSObject
-
-/// Inititate the link relationship.
-- (id)initWithName:(NSString *)name URL:(NSURL *)url;
-
-/// The name of the relationship.
-/// Can be one of;
-/// - kCDOHResponseHeaderLinkNextKey,
-/// - kCDOHResponseHeaderLinkLastKey.
-@property (copy, readonly) NSString *name;
-
-/// The URL the relationship points to.
-@property (strong, readonly) NSURL *URL;
-
-@end
-
-@implementation CDOHLinkRelationshipHeader
-
-@synthesize name = _name;
-@synthesize URL = _url;
-
-- (id)initWithName:(NSString *)name URL:(NSURL *)url
-{
-	self = [super init];
-	if (self) {
-		_name = [name copy];
-		_url = url;
-	}
-	
-	return self;
-}
-
-- (NSString *)description
-{
-	return [NSString stringWithFormat:@"<CDOHLinkRelationshipHeader: name = %@; URL = %@;>", _name, _url];
-}
-
-@end
 
 
 #pragma mark - GitHub Relative API Path (Formats)
