@@ -3,12 +3,9 @@ An Objective-C (ARC enabled) library for version 3 of the GitHub API, for iOS 4.
 
 The development speed and growth of ObjectiveHub is bound by the rate of the documentation. That is O(documentation), just like [nimbus](http://jverkoey.github.com/nimbus/).
 
-## Getting started ##
-### Usage ###
-#### iOS ####
-_To be written when you can actually use something._
-#### Mac OS X ####
-_To be written when you can actually use something._
+## Getting Started ##
+Please see the [[getting started]] wiki page.
+
 
 ### Requirements ###
 Requires iOS 4.2+ or Mac OS X 10.6 during runtime and Xcode 4.2+ (and as such Mac OS X 10.7) to build.
