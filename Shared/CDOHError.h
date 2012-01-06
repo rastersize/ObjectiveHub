@@ -52,36 +52,42 @@ extern NSString *const kCDOHErrorDomain;
 /// on Wikipedia as well as GitHubs developer site.
 enum {
 	/// Unkown error.
-	kCDOHErrorCodeUnknown						= -1,
+	kCDOHErrorCodeUnknown							= -1,
 	
 	#pragma mark |- Client Errors
-	/* @name Client Errors */
+	/** @name Client Errors */
 	/// Error code for malformed requests.
-	kCDOHErrorCodeBadRequest					= 400,
+	kCDOHErrorCodeBadRequest						= 400,
 	/// Error code for request which require authentication which failed.
-	kCDOHErrorCodeUnauthorized					= 401,
+	kCDOHErrorCodeUnauthorized						= 401,
 	/// Error code for when the request was legal but the server refuse to serve
 	/// it. Authentication will make no difference.
-	kCDOHErrorCodeForbidden						= 403,
+	kCDOHErrorCodeForbidden							= 403,
 	/// Error code if the sought resource did not exist.
-	kCDOHErrorCodeNotFound						= 404,
+	kCDOHErrorCodeNotFound							= 404,
 	/// Error code if the method used was not allowed.
-	kCDOHErrorCodeMethodNotAllowed				= 405,
+	kCDOHErrorCodeMethodNotAllowed					= 405,
 	/// Error code if the request data was not correct.
-	kCDOHErrorCodeUnprocessableEntity			= 422,
+	kCDOHErrorCodeUnprocessableEntity				= 422,
 	/// Error code if the rate limit has been reached.
-	kCDOHErrorCodeTooManyRequests				= 429,
+	kCDOHErrorCodeTooManyRequests					= 429,
 	
 	#pragma mark |- Server Errors
-	/* @name Server Errors */
+	/** @name Server Errors */
 	/// Error code for when a generic server error occured.
-	kCDOHErrorCodeInternalServerError			= 500,
+	kCDOHErrorCodeInternalServerError				= 500,
 	
 	#pragma mark
 	#pragma mark |- Framework Errors
-	/* @name ObjectiveHub Errors */
+	/** @name ObjectiveHub Errors */
 	/// All ObjectiveHub errors are numbered after this.
-	kCDOHErrorCodeFrameworkErrors				= 10000,
+	kCDOHErrorCodeFrameworkErrors					= 10000,
+	
+	#pragma mark |- Framework Internal Errors
+	/** @name Framework Internal Errors */
+	/// The respone object was empty.
+	kCDOHErrorCodeResponseObjectEmpty				= 10500,
+	kCDOHErrorCodeResponseObjectNotOfExpectedType	= 10501,
 };
 /// The error code type for ObjectiveHub error codes.
 typedef NSInteger CDOHErrorCodeType;
