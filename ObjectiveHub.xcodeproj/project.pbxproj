@@ -162,6 +162,8 @@
 		9CA5FACB14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAC814B67B8B00F2CD13 /* CDOHLinkRelationshipHeader.h */; };
 		9CA5FACC14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FAC914B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.m */; };
 		9CA5FACD14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FAC914B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.m */; };
+		9CA5FADB14B6AB1F00F2CD13 /* CDOHResponsBlockTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FADA14B6AB1F00F2CD13 /* CDOHResponsBlockTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9CA5FADC14B6AB1F00F2CD13 /* CDOHResponsBlockTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FADA14B6AB1F00F2CD13 /* CDOHResponsBlockTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663411470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663421470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663431470929500D8A95F /* CDOHError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE663401470929500D8A95F /* CDOHError.m */; };
@@ -330,6 +332,7 @@
 		9CA5FAB614B668DB00F2CD13 /* CDOHOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHOrganization.m; sourceTree = "<group>"; };
 		9CA5FAC814B67B8B00F2CD13 /* CDOHLinkRelationshipHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHLinkRelationshipHeader.h; sourceTree = "<group>"; };
 		9CA5FAC914B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHLinkRelationshipHeader.m; sourceTree = "<group>"; };
+		9CA5FADA14B6AB1F00F2CD13 /* CDOHResponsBlockTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHResponsBlockTypes.h; sourceTree = "<group>"; };
 		9CE6633F1470929500D8A95F /* CDOHError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHError.h; sourceTree = "<group>"; };
 		9CE663401470929500D8A95F /* CDOHError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHError.m; sourceTree = "<group>"; };
 		9CF962AC147FC01B00F52A98 /* CDOHRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHRepository.h; sourceTree = "<group>"; };
@@ -617,6 +620,7 @@
 			children = (
 				9C47C5501473E9C90026BD6D /* CDOHLibraryVersion.h */,
 				9CA5FAA014B6304600F2CD13 /* CDOHCommon.h */,
+				9CA5FADA14B6AB1F00F2CD13 /* CDOHResponsBlockTypes.h */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -663,6 +667,7 @@
 				9CE663411470929500D8A95F /* CDOHError.h in Headers */,
 				9C2F3E7B146F3F2000C44A82 /* CDOHUser.h in Headers */,
 				9CA5FAAE14B6607300F2CD13 /* CDOHAbstractUser.h in Headers */,
+				9CA5FADB14B6AB1F00F2CD13 /* CDOHResponsBlockTypes.h in Headers */,
 				9C2F3E88146F5F7D00C44A82 /* CDOHPlan.h in Headers */,
 				9C613A9B14B60C370067B6B6 /* CDOHResource.h in Headers */,
 				9CA5FAB714B668DB00F2CD13 /* CDOHOrganization.h in Headers */,
@@ -707,6 +712,7 @@
 				9C2F3E89146F5F7D00C44A82 /* CDOHPlan.h in Headers */,
 				9C613A9C14B60C370067B6B6 /* CDOHResource.h in Headers */,
 				9CF962AF147FC01B00F52A98 /* CDOHRepository.h in Headers */,
+				9CA5FADC14B6AB1F00F2CD13 /* CDOHResponsBlockTypes.h in Headers */,
 				9CA5FAA214B6304600F2CD13 /* CDOHCommon.h in Headers */,
 				9C26F9B3146B2424001A5385 /* JSONKit.h in Headers */,
 				9C26F9D6146B2979001A5385 /* AFHTTPClient.h in Headers */,

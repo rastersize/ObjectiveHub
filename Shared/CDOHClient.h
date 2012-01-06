@@ -33,6 +33,8 @@
 #import <Foundation/Foundation.h>
 
 
+#import "CDOHCommon.h"
+
 // TODO: Fix so that we can import all headers into this file.
 // TODO: Break out the class ObjectiveHub to CDOHClient and just use this file to import all the public headers of the library.
 
@@ -47,15 +49,6 @@
 
 /// The default rate limit of API requests, where zero (0) means automatic.
 #define kCDOHDefaultRateLimit					0
-
-
-#pragma mark - ObjectiveHub Generic Block Types
-/**
- * The type of blocks called when a user request failed.
- *
- * @param error The error encountered.
- */
-typedef void (^CDOHFailureBlock)(CDOHError *error);
 
 
 NSString *const kCDOHResponseInfoNextPageKey;

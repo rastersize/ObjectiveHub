@@ -1,5 +1,5 @@
 //
-//  CDOHLibraryVersion.h
+//  CDOHResponsBlockTypes.h
 //  ObjectiveHub
 //
 //  Copyright 2011 Aron Cedercrantz. All rights reserved.
@@ -30,18 +30,37 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
+#import <Foundation/Foundation.h>
 
-#pragma mark - Category Bug Fix Macro
+
+#pragma mark Forward Class Declarations
+@class CDOHError;
+@class CDOHResponse;
+
+
+#pragma mark - ObjectiveHub Generic Block Types
 /**
- * Force a category to be loaded when an app starts up.
+ * The type of blocks called when a user request failed.
  *
- * Add this macro before each category implementation, so we don't have to use
- * -all_load or -force_load to load object files from static libraries that only contain
- * categories and no classes.
- * See http://developer.apple.com/library/mac/#qa/qa2006/qa1490.html for more info.
- *
- * Macro from the Numbis project at https://github.com/jverkoey/nimbus/.
+ * @param error The error encountered.
  */
-#define CDOH_FIX_CATEGORY_BUG(name) @interface CDOH_FIX_CATEGORY_BUG_##name @end \
-@implementation CDOH_FIX_CATEGORY_BUG_##name @end
+typedef void (^CDOHFailureBlock)(CDOHError *error);
+
+/**
+ * The type of blocks called when a user request succeeded and contains a
+ * response.
+ *
+ * The sought object will be available at `response.resource`. If the response
+ * is paginated the response parameter will let you find this out as well as
+ * load more pages.
+ *
+ * @param response The response from the service. Is of the type CDOHResponse.
+ */
+typedef void (^CDOHResponseBlock)(CDOHResponse *response);
+
+/**
+ * The type of blocks called when a user request succeeded but does not contain
+ * a response.
+ */
+typedef void (^CDOHNoResponseBlock)(void);
 
