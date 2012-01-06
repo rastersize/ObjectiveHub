@@ -35,6 +35,7 @@
 #import "CDOHResourcePrivate.h"
 
 #import "CDOHUser.h"
+#import "CDOHOrganization.h"
 
 #import "NSString+ObjectiveHub.h"
 
@@ -225,8 +226,8 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 	}
 	
 	return ([_owner isEqualTo:aRepository.owner] &&
-			[_name isEqualToString:aRepository.name] /*&&
-			[_organization isEqual:aRepository.organization]*/);
+			[_name isEqualToString:aRepository.name] &&
+			[_organization isEqual:aRepository.organization]);
 }
 
 - (NSUInteger)hash
@@ -236,7 +237,7 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 	
 	hash = prime + [_owner hash];
 	hash = prime * hash + [_name hash];
-//	hash = prime * hash + [_organization hash];
+	hash = prime * hash + [_organization hash];
 	
 	return hash;
 }
@@ -248,7 +249,7 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 	return [NSString stringWithFormat:@"<%@: %p { %@/%@ }>",
 			[self class],
 			self,
-			self.owner.name,
+			self.owner.login,
 			self.name];
 }
 
