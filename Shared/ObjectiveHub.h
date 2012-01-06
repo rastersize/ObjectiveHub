@@ -33,6 +33,7 @@
 
 // Custom errors
 #import <ObjectiveHub/CDOHError.h>
+#import <ObjectiveHub/CDOHResponsBlockTypes.h>
 
 // Models
 #import <ObjectiveHub/CDOHResource.h>

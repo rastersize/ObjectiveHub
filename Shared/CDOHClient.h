@@ -31,9 +31,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <ObjectiveHub/CDOHResponsBlockTypes.h>
 
-
-#import "CDOHCommon.h"
 
 // TODO: Fix so that we can import all headers into this file.
 // TODO: Break out the class ObjectiveHub to CDOHClient and just use this file to import all the public headers of the library.
