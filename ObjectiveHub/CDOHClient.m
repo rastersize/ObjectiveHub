@@ -701,20 +701,28 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Getting Watched and Watching Repositories
-- (void)watchersOfRepository:(NSString *)repositoryName repositoryOwner:(NSString *)repositoryOwner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)watchersOfRepository:(NSString *)repository owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
 		return;
 	}
-	if (!repositoryName || !repositoryOwner) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repositoryName", @"repositoryOwner"];
+	if (!repository || !owner) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
 	}
 	
-	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryWatchersPath, repositoryOwner, repositoryName];
-	[self.client getPath:watchersPath
-			  parameters:nil
-				 success:[self standardUserArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repositoryName, repositoryOwner)]
-				 failure:[self standardFailureBlock:failureBlock]];
+	if ([pages count] == 0) {
+		pages = [[NSIndexSet alloc] initWithIndex:1];
+	}
+
+	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryWatchersPath, owner, repository];
+	[pages enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *__unused stop) {
+		NSDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
+
+		[self.client getPath:watchersPath
+				  parameters:paramDict
+					 success:[self standardUserArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repository, owner)]
+					 failure:[self standardFailureBlock:failureBlock]];
+	}];
 }
 
 - (void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock

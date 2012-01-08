@@ -352,8 +352,8 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  *
- * @param repositoryName The name of the repository.
- * @param repositoryOwner The name of the owner of the given repository
+ * @param repository The name of the repository.
+ * @param owner The name of the owner of the given repository
  * _repositoryName_.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
@@ -369,7 +369,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * @see CDOHResponse
  * @see CDOHUser
  */
-- (void)watchersOfRepository:(NSString *)repositoryName repositoryOwner:(NSString *)repositoryOwner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)watchersOfRepository:(NSString *)repository owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all repositories watched by a specific user.
