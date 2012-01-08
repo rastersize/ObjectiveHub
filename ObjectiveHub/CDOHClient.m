@@ -110,6 +110,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 
 
 #pragma mark - Macro to Create Argument Arrays
+/// Creates an NSArray object of the objects passed into it.
 #define CDOHArrayOfArguments(...) [[NSArray alloc] initWithObjects: __VA_ARGS__, nil]
 
 
@@ -125,6 +126,11 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 #pragma mark - JSON Decoder
 /// The JSON decoder object used for decoding JSON strings.
 @property (readonly, strong) JSONDecoder *JSONDecoder;
+
+
+#pragma mark - Request Helpers
+/// Creates the standard request parameter dictionary.
+- (NSMutableDictionary *)standardRequestParameterDictionaryForPage:(NSUInteger)page;
 
 
 #pragma mark - Response Helpers
@@ -392,6 +398,27 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 }
 
 
+#pragma mark - Request Helpers
+- (NSMutableDictionary *)standardRequestParameterDictionaryForPage:(NSUInteger)page
+{
+	// Make room for page and perPage and some extra for custom stuff
+	NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithCapacity:4];
+	
+	if (page != 0) {
+		NSNumber *pageIdx = [[NSNumber alloc] initWithUnsignedInteger:page];
+		[dict setObject:pageIdx forKey:@"page"];
+	}
+	
+	NSUInteger perPage = self.itemsPerPage;
+	if (perPage != 0) {
+		NSNumber *perPageIdx = [[NSNumber alloc] initWithUnsignedInteger:perPage];
+		[dict setObject:perPageIdx forKey:@"per_page"];
+	}
+	
+	return dict;
+}
+
+
 #pragma mark - Response Helpers
 - (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation
 {
@@ -571,10 +598,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	
 	NSString *watchedReposPath = [[NSString alloc] initWithFormat:kCDOHWatchedRepositoriesByUserPath, login];
 	[pages enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *__unused stop) {
-		NSNumber *pageIdx = [[NSNumber alloc] initWithUnsignedInteger:idx];
-		NSDictionary *paramDict = [[NSDictionary alloc] initWithObjectsAndKeys:pageIdx, @"page", nil];
-		
-		NSLog(@"%@, %@", login, pageIdx);
+		NSDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
 		
 		[self.client getPath:watchedReposPath
 				  parameters:paramDict
