@@ -52,9 +52,5 @@
 			 arguments:(NSArray *)arguments;
 
 
-
-#pragma mark - 
-- (NSUInteger)pageFromLink:(CDOHLinkRelationshipHeader *)link;
-
 @end
 

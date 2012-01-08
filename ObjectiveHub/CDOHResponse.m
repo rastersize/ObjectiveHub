@@ -85,10 +85,10 @@
 				}
 			}
 			
-			_lastPage = [self pageFromLink:lastLink];
+			_lastPage = [lastLink pageNumber];
 			_paginated = (_lastPage > 0);
 			
-			_nextPage = [self pageFromLink:nextLink];
+			_nextPage = [nextLink pageNumber];
 			_page = _nextPage <= 1 ? 1 : _nextPage - 1;
 			_previousPage = _page <= 1 ? 1 : _page - 1;
 			
@@ -96,7 +96,8 @@
 			_hasPreviousPage = (_previousPage >= 1 && _previousPage < _page);
 		}
 		
-		
+		// If response is paginated we need this to be able to perform the
+		// request again. Otherwise there is no need to perform it again.
 		if (_paginated) {
 			_successBlock = [successBlock copy];
 			_failureBlock = [failureBlock copy];
@@ -169,24 +170,5 @@
 	}
 }
 
-
-#pragma mark - Page From Link
-- (NSUInteger)pageFromLink:(CDOHLinkRelationshipHeader *)link
-{
-	NSUInteger page = 0;
-	NSArray *paramComponents = [[[link URL] query] componentsSeparatedByString:@"&"];
-	
-	for (NSString *paramStr in paramComponents) {
-		NSArray *paramPair = [paramStr componentsSeparatedByString:@"="];
-		if ([paramPair count] == 2) {
-			NSString *key = [paramPair objectAtIndex:0];
-			if ([key isEqualToString:@"page"]) {
-				page = [[paramPair objectAtIndex:1] integerValue];
-			}
-		}
-	}
-	
-	return page;
-}
 
 @end
