@@ -122,9 +122,9 @@
 #pragma mark - Statistics
 /** @name Statistics */
 /**
- * The languages used in the project.
+ * The primary language used in the project.
  */
-@property (strong, readonly) NSArray *languages;
+@property (strong, readonly) NSString *language;
 
 /**
  * The number of watchers of the project.

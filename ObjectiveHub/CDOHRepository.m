@@ -82,7 +82,7 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 @synthesize name = _name;
 @synthesize repositoryDescription = _repositoryDescription;
 @synthesize homepage = _homepage;
-@synthesize languages = _languages;
+@synthesize language = _language;
 @synthesize private = _private;
 @synthesize watchers = _watchers;
 @synthesize size = _size;
@@ -113,7 +113,7 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 		_name = [[dictionary objectForKey:kCDOHRepositoryNameKey] copy];
 		_repositoryDescription = [[dictionary objectForKey:kCDOHRepositoryDescriptionKey] copy];
 		_homepage = [dictionary objectForKey:kCDOHRepositoryHomepageKey];
-		_languages = [[dictionary objectForKey:kCDOHRepositoryLanguageKey] copy];
+		_language = [[dictionary objectForKey:kCDOHRepositoryLanguageKey] copy];
 		_defaultBranch = [[dictionary objectForKey:kCDOHRepositoryDefaultBranchKey] copy];
 		
 		_owner = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHUser class]];
@@ -184,7 +184,7 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 						   _name,					kCDOHRepositoryNameKey,
 						   _repositoryDescription,	kCDOHRepositoryDescriptionKey,
 						   _homepage,				kCDOHRepositoryHomepageKey,
-						   _languages,				kCDOHRepositoryLanguageKey,
+						   _language,				kCDOHRepositoryLanguageKey,
 						   privateNum,				kCDOHRepositoryPrivateKey,
 						   watchersNum,				kCDOHRepositoryWatchersKey,
 						   sizeNum,					kCDOHRepositorySizeKey,
