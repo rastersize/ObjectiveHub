@@ -44,7 +44,7 @@
 
 #pragma mark - Constants
 /// The default default items per page.
-#define kCDOHDefaultItemsPerPage				30
+#define kCDOHDefaultItemsPerPage				0
 
 /// The default rate limit of API requests, where zero (0) means automatic.
 #define kCDOHDefaultRateLimit					0
@@ -132,13 +132,14 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
 /**
  * The default items per page size for requests that return multiple items.
  *
- * The default value is 30 items per page, this can be customized on a per
- * request basis if needed.
+ * The default is to let GitHub decide how many items per page should be
+ * returned.
  *
- * @warning *Note* Valid range is between 1 to 100 (the upper limit is a
+ * @warning *Note* Valid range is between 0 to 100 (the upper limit is a
  * [restriction from GitHub](http://developer.github.com/v3/#pagination)).
+ * Where 0 (zero) means that we will use GitHub’s default value.
  */
-@property (assign) NSUInteger defaultItemsPerPage;
+@property (assign) NSUInteger itemsPerPage;
 
 /**
  * The API request rate limit.

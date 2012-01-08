@@ -170,7 +170,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 #pragma mark - Synthesizing
 @synthesize username = _username;
 @synthesize password = _password;
-@synthesize defaultItemsPerPage = _defaultItemsPerPage;
+@synthesize itemsPerPage = _itemsPerPage;
 @synthesize rateLimit = _rateLimit;
 
 @synthesize client = _client;
@@ -182,7 +182,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 {
 	self = [super init];
 	if (self) {
-		_defaultItemsPerPage	= kCDOHDefaultItemsPerPage;
+		_itemsPerPage			= kCDOHDefaultItemsPerPage;
 		_rateLimit				= kCDOHDefaultRateLimit;
 		
 		_client					= [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kCDOHGitHubBaseAPIURIString]];
@@ -220,19 +220,20 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 
 
 #pragma mark - Configuration Options
-- (NSUInteger)defaultItemsPerPage
+- (NSUInteger)itemsPerPage
 {
-	return _defaultItemsPerPage;
+	return _itemsPerPage;
 }
 
-- (void)setDefaultItemsPerPage:(NSUInteger)defaultItemsPerPage
+- (void)setItemsPerPage:(NSUInteger)itemsPerPage
 {
-	NSAssert(defaultItemsPerPage >= 1 && defaultItemsPerPage <= 100,
-			 @"The defaultItemsPerPage must be between (including) 1 and 100");
-	
-	if (_defaultItemsPerPage != defaultItemsPerPage) {
-		_defaultItemsPerPage = defaultItemsPerPage;
+	// Make sure "itemsPerPage" is in the range 0-100.
+	if (itemsPerPage > 100) {
+		[NSException raise:NSInvalidArgumentException format:@"itemsPerPage must in the range (including) 0 and 100"];
+		return;
 	}
+
+	_itemsPerPage = itemsPerPage;
 }
 
 
