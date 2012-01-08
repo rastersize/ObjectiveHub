@@ -134,6 +134,11 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 /// Create a respone dictionary from an response.
 - (NSDictionary *)responseDictionaryFromOperation:(AFHTTPRequestOperation *)operation;
 
+/// Create a CDOHLinkRelationshipHeader object from a link string.
+/// The link string should be of the following format:
+/// `<https://api.github.com/resource?page=3&per_page=100>; rel="next"`
+- (CDOHLinkRelationshipHeader *)linkRelationshipFromLinkString:(NSString *)linkString;
+
 #pragma mark - Standard Blocks
 #pragma mark |- Standard Error Block
 /// The standard failure block.
@@ -232,7 +237,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		[NSException raise:NSInvalidArgumentException format:@"itemsPerPage must in the range (including) 0 and 100"];
 		return;
 	}
-
+	
 	_itemsPerPage = itemsPerPage;
 }
 
@@ -420,23 +425,8 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 		// Link format: 
 		// <https://api.github.com/resource?page=10>; rel="__name__"
 		for (NSString *singleLink in linkComps) {
-			NSArray *singleLinkComp = [singleLink componentsSeparatedByString:@">; rel=\""];
-			
-			if ([singleLinkComp count] == 2) {
-				NSString *linkUrlString = [singleLinkComp objectAtIndex:0];
-				linkUrlString = [linkUrlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-				NSString *linkName = [singleLinkComp objectAtIndex:1];
-				linkName = [linkName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-				
-				if ([linkUrlString length] > 2 && [linkName length] > 2) {
-					linkUrlString = [linkUrlString substringFromIndex:1];
-					NSURL *linkUrl = [[NSURL alloc] initWithString:linkUrlString];
-					linkName = [linkName substringToIndex:[linkName length] - 1];
-					
-					CDOHLinkRelationshipHeader *linkRel = [[CDOHLinkRelationshipHeader alloc] initWithName:linkName URL:linkUrl];
-					[links addObject:linkRel];
-				}
-			}
+			CDOHLinkRelationshipHeader *linkRel = [self linkRelationshipFromLinkString:singleLink];
+			[links addObject:linkRel];
 		}
 	} else {
 		links = [NSNull null];
@@ -450,6 +440,29 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 								  nil];
 	
 	return responseInfo;
+}
+
+- (CDOHLinkRelationshipHeader *)linkRelationshipFromLinkString:(NSString *)linkString
+{
+	CDOHLinkRelationshipHeader *link = nil;
+	NSArray *singleLinkComp = [linkString componentsSeparatedByString:@">; rel=\""];
+	
+	if ([singleLinkComp count] == 2) {
+		NSString *linkUrlString = [singleLinkComp objectAtIndex:0];
+		linkUrlString = [linkUrlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		NSString *linkName = [singleLinkComp objectAtIndex:1];
+		linkName = [linkName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		
+		if ([linkUrlString length] > 2 && [linkName length] > 2) {
+			linkUrlString = [linkUrlString substringFromIndex:1];
+			NSURL *linkUrl = [[NSURL alloc] initWithString:linkUrlString];
+			linkName = [linkName substringToIndex:[linkName length] - 1];
+			
+			link = [[CDOHLinkRelationshipHeader alloc] initWithName:linkName URL:linkUrl];
+		}
+	}
+	
+	return link;
 }
 
 
