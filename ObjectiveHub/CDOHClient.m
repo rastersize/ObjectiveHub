@@ -234,7 +234,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 {
 	// Make sure "itemsPerPage" is in the range 0-100.
 	if (itemsPerPage > 100) {
-		[NSException raise:NSInvalidArgumentException format:@"itemsPerPage must in the range (including) 0 and 100"];
+		[NSException raise:NSInvalidArgumentException format:@"itemsPerPage must be in the range (including) 0 and 100"];
 		return;
 	}
 	
