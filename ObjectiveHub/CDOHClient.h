@@ -397,5 +397,63 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  */
 - (void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
+/**
+ * Check whether the currently authenticated user is watching the given
+ * repository owned by the given owner.
+ *
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed.
+ * 
+ * @warning *Important* This method requires the user to be authenticated.
+ *
+ * @param repository The name of the repository.
+ * @param owner The login of the repository owner.
+ * @param successBlock The block which is called if the user is watching the
+ * given repository.
+ * @param failureBlock The block which is called if the user is not watching the
+ * given repository. In which case the error code will be
+ * set to `kCDOHErrorCodeNotFound`. The block will also be called for other
+ * types of errors. The parameter may be set to `NULL` in which case nothing
+ * will be done upon failure.
+ */
+- (void)isUserWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
+/**
+ * Watch a repository using the currently authenticated user.
+ *
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed.
+ * 
+ * @warning *Important* This method requires the user to be authenticated.
+ *
+ * @param repository The name of the repository.
+ * @param owner The login of the repository owner.
+ * @param successBlock The block which is called if the user is watching the
+ * given repository.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ */
+- (void)watchRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
+/**
+ * Stop watching a repository using the currently authenticated user.
+ *
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed.
+ * 
+ * @warning *Important* This method requires the user to be authenticated.
+ *
+ * @param repository The name of the repository.
+ * @param owner The login of the repository owner.
+ * @param successBlock The block which is called if the request to stop watching
+ * the specified repository succeeded.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ */
+- (void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
+
 
 @end

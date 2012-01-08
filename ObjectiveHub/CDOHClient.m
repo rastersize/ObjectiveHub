@@ -85,7 +85,7 @@ NSString *const kCDOHResponseHeaderLinkKey					= @"Link";
 #pragma mark - GitHub Relative API Path (Formats)
 /// The relative path for a user with login.
 /// Takes one string;
-/// - the login name of the user.
+/// 1. the login name of the user.
 NSString *const kCDOHUserPathFormat					= @"/users/%@";
 /// The relative path for an authenticated user.
 NSString *const kCDOHUserAuthenticatedPath			= @"/user";
@@ -93,13 +93,19 @@ NSString *const kCDOHUserAuthenticatedPath			= @"/user";
 NSString *const kCDOHUserEmailsPath					= @"/user/emails";
 /// The relative path for the watchers of a repository.
 /// Takes two strings;
-/// - the first is the username of the repository owner,
-/// - the second is the name of the repository.
+/// 1. the username of the repository owner,
+/// 2. the name of the repository.
 NSString *const kCDOHRepositoryWatchersPath			= @"/repos/%@/%@/watchers";
 /// The relative path for repositories watched by a user.
 /// Takes one string;
-/// - the login name of the user.
+/// 1. the login name of the user.
 NSString *const kCDOHWatchedRepositoriesByUserPath	= @"/users/%@/watched";
+/// The relative path for a specific repository watched by the authenticated
+/// user.
+/// Takes two strings;
+/// 1. the username of the repository owner,
+/// 2. the name of the repository.
+NSString *const kCDOHUserWatchedRepositoryPath		= @"/user/watched/%@/%@";
 
 
 #pragma mark - ObjectiveHub Generic Block Types
@@ -713,11 +719,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if ([pages count] == 0) {
 		pages = [[NSIndexSet alloc] initWithIndex:1];
 	}
-
+	
 	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryWatchersPath, owner, repository];
 	[pages enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *__unused stop) {
 		NSDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
-
+		
 		[self.client getPath:watchersPath
 				  parameters:paramDict
 					 success:[self standardUserArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repository, owner)]
@@ -748,5 +754,54 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 					 failure:[self standardFailureBlock:failureBlock]];
 	}];
 }
+
+- (void)isUserWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (!successBlock && !failureBlock) {
+		return;
+	}
+	if (!repository || !owner) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
+	}
+	
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHUserWatchedRepositoryPath, owner, repository];
+	[self.client getPath:path
+			  parameters:nil
+				 success:[self standardSuccessBlockWithNoData:successBlock]
+				 failure:[self standardFailureBlock:failureBlock]];
+}
+
+- (void)watchRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (!successBlock && !failureBlock) {
+		return;
+	}
+	if (!repository || !owner) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
+	}
+	
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHUserWatchedRepositoryPath, owner, repository];
+	[self.client putPath:path
+			  parameters:nil
+				 success:[self standardSuccessBlockWithNoData:successBlock]
+				 failure:[self standardFailureBlock:failureBlock]];
+}
+
+- (void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (!successBlock && !failureBlock) {
+		return;
+	}
+	if (!repository || !owner) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
+	}
+	
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHUserWatchedRepositoryPath, owner, repository];
+	[self.client deletePath:path
+				 parameters:nil
+					success:[self standardSuccessBlockWithNoData:successBlock]
+					failure:[self standardFailureBlock:failureBlock]];
+}
+
 
 @end
