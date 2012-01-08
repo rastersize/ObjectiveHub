@@ -31,21 +31,33 @@
 //
 
 #import "CDOHLinkRelationshipHeader.h"
+#import "NSURL+ObjectiveHub.h"
 
 
-#pragma mark - HTTP Link Relationship Header Keys
+#pragma mark Relationship Name Keys
 NSString *const kCDOHResponseHeaderLinkNextKey			= @"next";
 NSString *const kCDOHResponseHeaderLinkLastKey			= @"last";
+
+
+#pragma mark - Link Separator
 NSString *const kCDOHResponseHeaderLinkSeparatorKey		= @",";
 
+
+#pragma mark - Query Keys
+NSString *const kCDOHResponseHeaderPageKey				= @"page";
+NSString *const kCDOHResponseHeaderPerPageKey			= @"per_page";
 
 
 #pragma mark CDOHLinkRelationshipHeader Implementation
 @implementation CDOHLinkRelationshipHeader
 
+
+#pragma mark - Link Relationship Properties
 @synthesize name = _name;
 @synthesize URL = _url;
 
+
+#pragma mark - Initialize a Link Relationship
 - (id)initWithName:(NSString *)name URL:(NSURL *)url
 {
 	self = [super init];
@@ -57,6 +69,42 @@ NSString *const kCDOHResponseHeaderLinkSeparatorKey		= @",";
 	return self;
 }
 
+
+#pragma mark - Extracting Information From Link Relationships
+- (NSUInteger)pageNumber
+{
+	NSString *pageString = [self.URL cdoh_queryValueForKey:kCDOHResponseHeaderPageKey];
+	NSUInteger page = [pageString integerValue];
+	
+	return page;
+	
+	/*NSUInteger page = 0;
+	NSArray *paramComponents = [[[self URL] query] componentsSeparatedByString:@"&"];
+	
+	for (NSString *paramStr in paramComponents) {
+		NSArray *paramPair = [paramStr componentsSeparatedByString:@"="];
+		if ([paramPair count] == 2) {
+			NSString *key = [paramPair objectAtIndex:0];
+			if ([key isEqualToString:@"page"]) {
+				page = [[paramPair objectAtIndex:1] integerValue];
+			}
+		}
+	}
+	
+	return page;*/
+}
+
+- (NSUInteger)perPageNumber
+{
+	NSString *perPageString = [self.URL cdoh_queryValueForKey:kCDOHResponseHeaderPerPageKey];
+	NSUInteger perPage = [perPageString integerValue];
+	
+	return perPage;
+}
+
+
+
+#pragma mark - Describing a Link Relationship
 - (NSString *)description
 {
 	return [NSString stringWithFormat:@"<%@: %p { name = %@, URL = %@ }>",

@@ -33,29 +33,77 @@
 #import <Foundation/Foundation.h>
 
 
-#pragma mark - HTTP Link Relationship Header Keys
-/// 
+#pragma mark Relationship Name Keys
+/// The HTTP Link next relationship key.
 extern NSString *const kCDOHResponseHeaderLinkNextKey;
-///
+/// The HTTP Link last relationship key.
 extern NSString *const kCDOHResponseHeaderLinkLastKey;
-/// 
+
+
+#pragma mark - Link Separator
+/// The HTTP Link relationship separator.
 extern NSString *const kCDOHResponseHeaderLinkSeparatorKey;
 
 
-#pragma mark CDOHLinkRelationshipHeader Interface
-/// Wrapper class of relationship link header objects.
+#pragma mark - Query Keys
+/// The HTTP Link relationship current page query key.
+extern NSString *const kCDOHResponseHeaderPageKey;
+/// The HTTP Link relationship current per page query key.
+extern NSString *const kCDOHResponseHeaderPerPageKey;
+
+
+#pragma mark - CDOHLinkRelationshipHeader Interface
+/**
+ * Wrapper class of relationship link header objects.
+ *
+ * @private
+ */
 @interface CDOHLinkRelationshipHeader : NSObject
 
-/// Inititate the link relationship.
+#pragma mark - Initialize a Link Relationship
+/** @name Initialize a Link Relationship */
+/**
+ * Initialize a newly allocated link relationship instance.
+ *
+ * @private
+ */
 - (id)initWithName:(NSString *)name URL:(NSURL *)url;
 
-/// The name of the relationship.
-/// Can be one of;
-/// - kCDOHResponseHeaderLinkNextKey,
-/// - kCDOHResponseHeaderLinkLastKey.
+#pragma mark - Link Relationship Properties
+/** @name Link Relationship Properties */
+/**
+ * The name of the relationship.
+ *
+ * Can be one of;
+ * - kCDOHResponseHeaderLinkNextKey,
+ * - kCDOHResponseHeaderLinkLastKey.
+ *
+ * @private
+ */
 @property (copy, readonly) NSString *name;
 
-/// The URL the relationship points to.
+/**
+ * The URL the relationship points to.
+ *
+ * @private
+ */
 @property (strong, readonly) NSURL *URL;
+
+
+#pragma mark - Extracting Information From Link Relationships
+/** @name Extracting Information From Link Relationships */
+/**
+ * The page number specified in the query part of the link relationship URL.
+ *
+ * @private
+ */
+- (NSUInteger)pageNumber;
+
+/**
+ * The per page number specified in the query part of the link relationship URL.
+ *
+ * @private
+ */
+- (NSUInteger)perPageNumber;
 
 @end
