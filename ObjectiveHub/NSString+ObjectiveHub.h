@@ -46,6 +46,6 @@
  * @return A `NSDate` instance initialized with this RFC 3339 formatted string
  * if this string does not conform to the RFC 3339 format `nil` is returned.
  */
-- (NSDate *)dateRFC3339Formatted;
+- (NSDate *)cdoh_dateUsingRFC3339Format;
 
 @end

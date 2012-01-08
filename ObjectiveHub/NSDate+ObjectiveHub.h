@@ -33,6 +33,7 @@
 #import <Foundation/Foundation.h>
 
 
+#pragma mark NSDate(ObjectiveHub) Category Interface
 /**
  * Various NSString additions used by ObjectiveHub.
  */
@@ -46,6 +47,6 @@
  * @return A `NSString` instance initialized with this date as a RFC 3339
  * formatted date string.
  */
-- (NSString *)RFC3339FormattedString;
+- (NSString *)cdoh_stringUsingRFC3339Format;
 
 @end

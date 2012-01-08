@@ -38,9 +38,9 @@
 CDOH_FIX_CATEGORY_BUG(NSDate_ObjectiveHub)
 @implementation NSDate (ObjectiveHub)
 
-- (NSString *)RFC3339FormattedString
+- (NSString *)cdoh_stringUsingRFC3339Format
 {
-	NSDateFormatter *rfc3339DateFormatter = [NSDateFormatter rfc3339DateFormatter];
+	NSDateFormatter *rfc3339DateFormatter = [NSDateFormatter cdoh_RFC3339DateFormatter];
 	NSString *rfc3339DateString = [rfc3339DateFormatter stringFromDate:self];
 	return rfc3339DateString;
 }

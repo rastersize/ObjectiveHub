@@ -40,7 +40,7 @@ CDOH_FIX_CATEGORY_BUG(NSDateFormatter_CDOHRFC3339)
 // Implementation based on Apples cached RFC 3339 date formatter available in
 // the developer documentation.
 // http://developer.apple.com/library/mac/#documentation/Cocoa/Conceptual/DataFormatting/Articles/dfDateFormatting10_4.html
-+ (NSDateFormatter *)rfc3339DateFormatter
++ (NSDateFormatter *)cdoh_RFC3339DateFormatter
 {
 	static NSDateFormatter *rfc3339DateFormatter = nil;
 	

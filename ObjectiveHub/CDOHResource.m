@@ -85,7 +85,7 @@ NSString *const kCDOHResourceAPIResourceURLKey =  @"url";
 		if ([objFromDict isKindOfClass:[NSDate class]]) {
 			*retObj = [objFromDict copy];
 		} else if ([objFromDict isKindOfClass:[NSString class]]) {
-			NSDate *parsedDateString = [objFromDict dateRFC3339Formatted];
+			NSDate *parsedDateString = [objFromDict cdoh_dateUsingRFC3339Format];
 			*retObj = parsedDateString;
 		}
 	}];

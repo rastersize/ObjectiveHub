@@ -44,6 +44,6 @@
  *
  * @return A RFC 3339 date formatter.
  */
-+ (NSDateFormatter *)rfc3339DateFormatter;
++ (NSDateFormatter *)cdoh_RFC3339DateFormatter;
 
 @end
