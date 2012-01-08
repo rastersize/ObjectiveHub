@@ -161,16 +161,21 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * request will be performed.
  *
  * @param login The login of the sought user.
- * @param successBlock The block which is called upon success with the user
- * information. The parameter may be set to `NULL` in which case nothing will be
- * done upon success.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
+ *
+ * The `resource` property of the response will be set to a `CDOHUser` object
+ * representing the user with the given login.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
  * @see user:failure:
+ * @see CDOHResponse
+ * @see CDOHUser
  */
-- (void)userWithLogin:(NSString *)login success:(void (^)(CDOHUser *user))successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)userWithLogin:(NSString *)login success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get information about the currently authenticated user.
@@ -181,22 +186,23 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  *
- * @warning *Note:* This method requires the user to be authenticated.
+ * @warning *Important:* This method requires the user to be authenticated.
  *
- * @param successBlock The block which is called upon success with the user
- * information. The parameter may be set to `NULL` in which case nothing will be
- * done upon success.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
  *
- * The successBlock takes one argument:
- * _user_ The user object for the authenticated user, can be `nil` if no user
- * data was in the response from GitHub but no error was reported.
+ * The `resource` property of the response will be set to a `CDOHUser` object
+ * representing the authenticated user.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
  * @see userWithLogin:success:failure:
+ * @see CDOHResponse
+ * @see CDOHUser
  */
-- (void)user:(void (^)(CDOHUser *user))successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)user:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Update the currently authenticated user with the contents of the given
@@ -252,21 +258,23 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
  *
- * @warning *Note:* This method requires the user to be authenticated.
+ * @warning *Important:* This method requires the user to be authenticated.
  *
  * @param dictionary A dictionary containing values for the pre-defined keys.
- * @param successBlock The block which is called upon success with the updated
- * user information. The parameter may be set to `NULL` in which case nothing
- * will be done upon success.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
  *
- * The successBlock takes one argument:
- * _user_ The user object for the authenticated user, can be `nil` if no user
- * data was in the response from GitHub but no error was reported.
+ * The `resource` property of the response will be set to a `CDOHUser` object
+ * representing the authenticated user with updated values.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
+ *
+ * @see CDOHResponse
+ * @see CDOHUser
  */
-- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(CDOHUser *updatedUser))successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - Getting and Modyfing User Emails
@@ -279,18 +287,19 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  *
  * @warning *Important* This method requires the user to be authenticated.
  *
- * @param successBlock The block which is called upon success with an array of
- * email addresses associated with the user. The parameter may be set to `NULL`
- * in which case nothing will be done upon success.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
  *
- * The successBlock takes one argument:
- * _emails_ The email addresses associated with the authenticated user, can be
- * `nil` if no email addresses are associated with the user.
+ * The `resource` property of the response will be set to a `NSArray`
+ * containing all the email addresses associated with the authenticated user.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
+ *
+ * @see CDOHResponse
  */
-- (void)userEmails:(void (^)(NSArray *emails))successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)userEmails:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Add new email addresses of the currently authenticated user.
@@ -302,18 +311,19 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  *
  * @param emails An array of email addresses to add to the currently
  * authenticated user.
- * @param successBlock The block which is called upon success with an array of
- * email addresses associated with the user. The parameter may be set to `NULL`
- * in which case nothing will be done upon success.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
  *
- * The successBlock takes one argument:
- * _emails_ The email addresses associated with the authenticated user, can be
- * `nil` if no email addresses are associated with the user.
+ * The `resource` property of the response will be set to a `NSArray`
+ * containing all the email addresses associated with the authenticated user.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
+ *
+ * @see CDOHResponse
  */
-- (void)addUserEmails:(NSArray *)emails success:(void (^)(NSArray *emails))successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)addUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Delete the given email addresses from the currently authenticated user.
@@ -321,16 +331,17 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
  *
+ * @warning *Important* This method requires the user to be authenticated.
+ *
  * @param emails An array of email addresses to delete from the currently
  * authenticated user.
- * @param successBlock The block which is called upon success with an array of
- * email addresses associated with the user. The parameter may be set to `NULL`
- * in which case nothing will be done upon success.
+ * @param successBlock The block which is called upon success. The parameter may
+ * be set to `NULL` in which case nothing will be done upon success.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  */
-- (void)deleteUserEmails:(NSArray *)emails success:(void (^)(void))successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)deleteUserEmails:(NSArray *)emails success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - Getting Watched and Watching Repositories
@@ -344,19 +355,21 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * @param repositoryName The name of the repository.
  * @param repositoryOwner The name of the owner of the given repository
  * _repositoryName_.
- * @param successBlock The block which is called upon success with an array of
- * users watching a repository. The parameter may be set to `NULL` in which case
- * nothing will be done upon success.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
  *
- * The successBlock takes one argument:
- * _watchers_ An array of users who watch the repository given by
- * _repositoryName_ and owned by _repositoryOwner_, can be `nil` if no one is
- * watching the repository.
+ * The `resource` property of the response will be set to a `NSArray` of
+ * `CDOHUser` objects representing all the watchers of the given repository
+ * (for one page).
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
+ *
+ * @see CDOHResponse
+ * @see CDOHUser
  */
-- (void)watchersOfRepository:(NSString *)repositoryName repositoryOwner:(NSString *)repositoryOwner success:(void (^)(NSArray *watchers, NSDictionary *responseInfo))successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)watchersOfRepository:(NSString *)repositoryName repositoryOwner:(NSString *)repositoryOwner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all repositories watched by a specific user.
@@ -368,14 +381,19 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * repositories should be fetched.
  * @param pages The pages to get. May be `nil`, in which case the first page
  * will be loaded.
- * @param successBlock The block which is called upon success with an array of
- * email addresses associated with the user. The parameter may be set to `NULL`
- * in which case nothing will be done upon success.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
+ *
+ * The `resource` property of the response will be set to a `NSArray` of
+ * `CDOHRepository` objects representing all the repositories watched by the
+ * given user (for one page).
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
  * @see CDOHResponse
+ * @see CDOHRepository
  */
 - (void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 

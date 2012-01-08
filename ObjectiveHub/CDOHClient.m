@@ -107,6 +107,8 @@ NSString *const kCDOHWatchedRepositoriesByUserPath	= @"/users/%@/watched";
 typedef void (^CDOHInternalSuccessBlock)(AFHTTPRequestOperation *operation, id responseObject);
 /// Block type for failed requests.
 typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSError *error);
+/// Block type for creating the resource from parsed JSON data.
+typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Macro to Create Argument Arrays
@@ -145,28 +147,35 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 /// `<https://api.github.com/resource?page=3&per_page=100>; rel="next"`
 - (CDOHLinkRelationshipHeader *)linkRelationshipFromLinkString:(NSString *)linkString;
 
+
 #pragma mark - Standard Blocks
 #pragma mark |- Standard Error Block
 /// The standard failure block.
 ///
 - (CDOHInternalFailureBlock)standardFailureBlock:(CDOHFailureBlock)failureBlock;
 
-#pragma mark |- Standard Success Blocks
-/// The standard success block for requests which return no data.
-- (CDOHInternalSuccessBlock)standardSuccessBlockWithNoData:(void (^)(void))successBlock;
 
+#pragma mark |- Generic Standard Success Blocks
+/// The standard success block for requests which return no data.
+- (CDOHInternalSuccessBlock)standardSuccessBlockWithNoData:(CDOHNoResponseBlock)successBlock;
+
+/// The standard success block for requests which return data.
+- (CDOHInternalSuccessBlock)standardSuccessBlockWithResourceCreationBlock:(CDOHInternalResponseCreationBlock)block success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments;
+
+
+#pragma mark |- Concrete Standard Success Blocks
 /// The standard success block for requests returning a user.
-- (CDOHInternalSuccessBlock)standardUserSuccessBlock:(void (^)(CDOHUser *user))successBlock;
+- (CDOHInternalSuccessBlock)standardUserSuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments;
 
 /// The standard success block for requests returning an array of email
 /// addresses.
-- (CDOHInternalSuccessBlock)standardUserEmailSuccessBlock:(void (^)(NSArray *emails))successBlock;
+- (CDOHInternalSuccessBlock)standardUserEmailSuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments;
 
 /// The standard success block for requests returning an array of users.
-- (CDOHInternalSuccessBlock)standardUserArraySuccessBlock:(void (^)(NSArray *users, NSDictionary *responseInfo))successBlock;
+- (CDOHInternalSuccessBlock)standardUserArraySuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments;
 
 /// The standard success block for requests returning a repository.
-- (CDOHInternalSuccessBlock)standardRepositorySuccessBlock:(void (^)(CDOHRepository * repository, NSDictionary *responseInfo))successBlock;
+- (CDOHInternalSuccessBlock)standardRepositorySuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments;
 
 /// The standard success block for requests returning an array of repositories.
 - (CDOHInternalSuccessBlock)standardRepositoryArraySuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments;
@@ -248,7 +257,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 }
 
 
-#pragma mark - Standard Blocks
+#pragma mark - Standard Error Block
 - (CDOHInternalFailureBlock)standardFailureBlock:(CDOHFailureBlock)failureBlock
 {
 	return ^(AFHTTPRequestOperation *operation, __unused NSError *error) {
@@ -259,7 +268,9 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	};
 }
 
-- (CDOHInternalSuccessBlock)standardSuccessBlockWithNoData:(void (^)(void))successBlock
+
+#pragma mark - Generic Standard Success Blocks
+- (CDOHInternalSuccessBlock)standardSuccessBlockWithNoData:(CDOHNoResponseBlock)successBlock
 {
 	return ^(__unused AFHTTPRequestOperation *operation, __unused id responseObject) {
 		if (successBlock) {
@@ -268,9 +279,60 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	};
 }
 
-- (CDOHInternalSuccessBlock)standardUserSuccessBlock:(void (^)(CDOHUser *user))successBlock
+- (CDOHInternalSuccessBlock)standardSuccessBlockWithResourceCreationBlock:(CDOHInternalResponseCreationBlock)resourceCreationBlock success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
 {
-	return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
+	return ^(AFHTTPRequestOperation *operation, id responseObject) {
+		if (successBlock) {
+			if (responseObject && [responseObject length] > 0) {
+				id parsedResponseObject = [self.JSONDecoder objectWithData:responseObject];
+				id resource = resourceCreationBlock(parsedResponseObject);
+				
+				if (resource != nil) {
+					NSDictionary *responseInfoDict = [self responseDictionaryFromOperation:operation];
+					NSArray *links = [responseInfoDict objectForKey:kCDOHResponseHeaderLinkKey];
+					
+					CDOHResponse *response = [[CDOHResponse alloc] initWithResource:resource
+																			 target:self
+																			 action:action
+																	   successBlock:successBlock failureBlock:failureBlock
+																			  links:links
+																		  arguments:arguments];
+					successBlock(response);
+				} else if (failureBlock) {
+					NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
+											  operation, @"operation",
+											  responseObject, kCDOHErrorUserInfoResponseDataKey,
+											  nil];
+					CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code: kCDOHErrorCodeResponseObjectNotOfExpectedType userInfo:userInfo];
+					failureBlock(error);
+				}
+			} else if (failureBlock) {
+				NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
+										  operation, @"operation", nil];
+				CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code:kCDOHErrorCodeResponseObjectEmpty userInfo:userInfo];
+				failureBlock(error);
+			}
+		}
+	};
+}
+
+
+#pragma mark - Concrete Standard Success Blocks
+- (CDOHInternalSuccessBlock)standardUserSuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
+{
+	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
+		CDOHUser *user = nil;
+		if ([parsedResponseObject isKindOfClass:[NSDictionary class]]) {
+			user = [[CDOHUser alloc] initWithDictionary:parsedResponseObject];
+		}
+		
+		return user;
+	};
+	
+	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
+	
+	
+	/*return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
 		if (successBlock) {
 			CDOHUser *user = nil;
 			if (responseObject && [responseObject length] > 0) {
@@ -281,12 +343,31 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 			
 			successBlock(user);
 		}
-	};
+	};*/
 }
 
-- (CDOHInternalSuccessBlock)standardUserArraySuccessBlock:(void (^)(NSArray *users, NSDictionary *responseInfo))successBlock
+- (CDOHInternalSuccessBlock)standardUserArraySuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
 {
-	return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
+	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
+		NSMutableArray *users = nil;
+		if ([parsedResponseObject isKindOfClass:[NSArray class]]) {
+			CDOHUser *user = nil;
+			users = [[NSMutableArray alloc] initWithCapacity:[parsedResponseObject count]];
+			
+			for (id userDict in parsedResponseObject) {
+				if ([userDict isKindOfClass:[NSDictionary class]]) {
+					user = [[CDOHUser alloc] initWithDictionary:userDict];
+					[users addObject:user];
+				}
+			}
+		}
+		
+		return users;
+	};
+	
+	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
+	
+	/*return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
 		if (successBlock) {
 			NSArray *users = nil;
 			NSDictionary *responseInfo = nil;
@@ -314,12 +395,23 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 				}
 			}
 		}
-	};
+	};*/
 }
 
-- (CDOHInternalSuccessBlock)standardUserEmailSuccessBlock:(void (^)(NSArray *emails))successBlock
+- (CDOHInternalSuccessBlock)standardUserEmailSuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
 {
-	return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
+	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
+		NSArray *emails = nil;
+		if ([parsedResponseObject isKindOfClass:[NSArray class]]) {
+			emails = [parsedResponseObject copy];
+		}
+		
+		return emails;
+	};
+	
+	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
+	
+	/*return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
 		if (successBlock) {
 			NSArray *emails = nil;
 			if (responseObject && [responseObject length] > 0) {
@@ -328,12 +420,24 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 			
 			successBlock(emails);
 		}
-	};
+	};*/
 }
 
-- (CDOHInternalSuccessBlock)standardRepositorySuccessBlock:(void (^)(CDOHRepository *, NSDictionary *))successBlock
+- (CDOHInternalSuccessBlock)standardRepositorySuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
 {
-	return ^(AFHTTPRequestOperation *operation, id responseObject) {
+	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
+		CDOHRepository *repo = nil;
+		if ([parsedResponseObject isKindOfClass:[NSDictionary class]]) {
+			repo = [[CDOHRepository alloc] initWithDictionary:parsedResponseObject];
+		}
+		
+		return repo;
+	};
+	
+	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
+	
+	
+	/*return ^(AFHTTPRequestOperation *operation, id responseObject) {
 		if (successBlock) {
 			if (responseObject && [responseObject length] > 0) {
 				NSDictionary *repoDict = [self.JSONDecoder objectWithData:responseObject];
@@ -349,15 +453,34 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 				}
 			}
 		}
-	};
+	};*/
 }
 
 - (CDOHInternalSuccessBlock)standardRepositoryArraySuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
 {
-	return ^(AFHTTPRequestOperation *operation, id responseObject) {
-		if (successBlock) {
-			if (responseObject && [responseObject length] > 0) {
-				id repoDicts = [self.JSONDecoder objectWithData:responseObject];
+	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
+		NSMutableArray *reposArray = nil;
+		if ([parsedResponseObject isKindOfClass:[NSArray class]]) {
+			reposArray = [[NSMutableArray alloc] initWithCapacity:[parsedResponseObject count]];
+		
+			for (id repoDict in parsedResponseObject) {
+				if ([repoDict isKindOfClass:[NSDictionary class]]) {
+					CDOHRepository *repo = [[CDOHRepository alloc] initWithDictionary:repoDict];
+					[reposArray addObject:repo];
+				}
+			}
+		}
+		
+		return reposArray;
+	};
+	
+	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
+	
+	/*
+	return ^(AFHTTPRequestOperation *operation, id responseObject) { // SAME
+		if (successBlock) { // SAME
+			if (responseObject && [responseObject length] > 0) { // SAME
+				id repoDicts = [self.JSONDecoder objectWithData:responseObject]; // SAME
 				
 				if ([repoDicts isKindOfClass:[NSArray class]]) {
 					NSMutableArray *reposArray = [[NSMutableArray alloc] initWithCapacity:[repoDicts count]];
@@ -369,32 +492,32 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 						}
 					}
 					
-					NSDictionary *responseInfoDict = [self responseDictionaryFromOperation:operation];
-					NSArray *links = [responseInfoDict objectForKey:kCDOHResponseHeaderLinkKey];
+					NSDictionary *responseInfoDict = [self responseDictionaryFromOperation:operation]; // SAME
+					NSArray *links = [responseInfoDict objectForKey:kCDOHResponseHeaderLinkKey]; // SAME
 					
 					CDOHResponse *response = [[CDOHResponse alloc] initWithResource:reposArray
 																			 target:self
 																			 action:action
 																	   successBlock:successBlock failureBlock:failureBlock
 																			  links:links
-																		  arguments:arguments];
-					successBlock(response);
-				} else if (failureBlock) {
+																		  arguments:arguments]; // SAME
+					successBlock(response); // SAME
+				} else if (failureBlock) {  // SAME
 					NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
 											  operation, @"operation",
 											  responseObject, kCDOHErrorUserInfoResponseDataKey,
-											  nil];
-					CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code:kCDOHErrorCodeResponseObjectNotOfExpectedType userInfo:userInfo];
-					failureBlock(error);
+											  nil];  // SAME
+					CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code: kCDOHErrorCodeResponseObjectNotOfExpectedType userInfo:userInfo]; // SAME
+					failureBlock(error);  // SAME
 				}
-			} else if (failureBlock) {
+			} else if (failureBlock) {  // SAME
 				NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
-										  operation, @"operation", nil];
-				CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code:kCDOHErrorCodeResponseObjectEmpty userInfo:userInfo];
-				failureBlock(error);
+										  operation, @"operation", nil]; // SAME
+				CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code:kCDOHErrorCodeResponseObjectEmpty userInfo:userInfo]; // SAME
+				failureBlock(error); // SAME
 			}
 		}
-	};
+	};*/
 }
 
 
@@ -494,7 +617,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 
 
 #pragma mark - Getting and Updating Users
-- (void)userWithLogin:(NSString *)login success:(void (^)(CDOHUser *user))successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)userWithLogin:(NSString *)login success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
 		return;
@@ -506,27 +629,38 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	NSString *getPath = [[NSString alloc] initWithFormat:kCDOHUserPathFormat, login];
 	[self.client getPath:getPath
 			  parameters:nil
-				 success:[self standardUserSuccessBlock:successBlock]
+				 success:[self standardUserSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(login)]
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)user:(void (^)(CDOHUser *user))successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)user:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	if (!successBlock && !failureBlock) {
+		return;
+	}
+	if (!self.username) {
+		[NSException raise:NSInternalInconsistencyException format:@"Username not set."];
+	}
+	
 	return [self userWithLogin:self.username success:successBlock failure:failureBlock];
 }
 
-- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(void (^)(CDOHUser *))successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	if (!dictionary) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) suppoed were invalid (nil)", @"dictionary"];
+	}
+	
 	NSString *patchPath = kCDOHUserAuthenticatedPath;
 	[self.client patchPath:patchPath
 				parameters:dictionary
-				   success:[self standardUserSuccessBlock:successBlock]
+				   success:[self standardUserSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(dictionary)]
 				   failure:[self standardFailureBlock:failureBlock]];
 }
 
 
 #pragma mark - Getting and Modyfing User Emails
-- (void)userEmails:(void (^)(NSArray *))successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)userEmails:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
 		return;
@@ -535,11 +669,11 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	NSString *getPath = kCDOHUserEmailsPath;
 	[self.client getPath:getPath
 			  parameters:nil
-				 success:[self standardUserEmailSuccessBlock:successBlock]
+				 success:[self standardUserEmailSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:nil]
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)addUserEmails:(NSArray *)emails success:(void (^)(NSArray *))successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)addUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!emails) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"emails"];
@@ -548,11 +682,11 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	NSString *postPath = kCDOHUserEmailsPath;
 	[self.client postPath:postPath
 			   parameters:emails
-				  success:[self standardUserEmailSuccessBlock:successBlock]
+				  success:[self standardUserEmailSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(emails)]
 				  failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)deleteUserEmails:(NSArray *)emails success:(void (^)(void))successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)deleteUserEmails:(NSArray *)emails success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!emails) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"emails"];
@@ -567,7 +701,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 
 
 #pragma mark - Getting Watched and Watching Repositories
-- (void)watchersOfRepository:(NSString *)repositoryName repositoryOwner:(NSString *)repositoryOwner success:(void (^)(NSArray *, NSDictionary *))successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)watchersOfRepository:(NSString *)repositoryName repositoryOwner:(NSString *)repositoryOwner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
 		return;
@@ -579,7 +713,7 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryWatchersPath, repositoryOwner, repositoryName];
 	[self.client getPath:watchersPath
 			  parameters:nil
-				 success:[self standardUserArraySuccessBlock:successBlock]
+				 success:[self standardUserArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repositoryName, repositoryOwner)]
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
