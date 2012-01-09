@@ -3,7 +3,7 @@
 //  ObjectiveHub-MacTests
 //
 //  Created by Aron Cedercrantz on 2011-11-09.
-//  Copyright (c) 2011 Icomera. All rights reserved.
+//  Copyright (c) 2011 Aron Cedercrantz. All rights reserved.
 //
 
 #import "ObjectiveHub_Tests.h"
