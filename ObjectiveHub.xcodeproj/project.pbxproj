@@ -602,6 +602,7 @@
 				9CA5FAC914B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.m */,
 			);
 			name = "Private Model Interfaces";
+			path = Private;
 			sourceTree = "<group>";
 		};
 		9C5D2D551470281A0064F02A /* ObjectiveHub Test App */ = {
