@@ -22,6 +22,8 @@ Furthermore, the project use [semantic versioning](http://semver.org/) and there
 ## ObjectiveHub contributors ##
 You can help improve the documentation, code quality and feature list. Either by contributing directly to the project, [filing bug reports](https://github.com/rastersize/ObjectiveHub/issues) or by donating to keep the development going. It is all greatly appreciated!
 
+### Source code contributors (alphabetical by last name) ###
+
 - **Aron Cedercrantz** &mdash; [GitHub](https://github.com/rastersize) | [Website](https://aron.cedercrantz.com/)<br>
   ![Image of Aron Cedercrantz (rastersize)s](https://secure.gravatar.com/avatar/2f21aac393665a85428eab10c2bdbe79?s=140)
 
