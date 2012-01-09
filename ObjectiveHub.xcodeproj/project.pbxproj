@@ -974,7 +974,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# \n# Generates API documentation with the help of appledoc.\n# Generates both HTML code and a DocSet (which *can* be installed into Xcode).\n#\n# Copyright (c) 2011 Fruit is Good. All rights reserved.\n#\n\n#                            Output dir:        Search dirs (space separated list):           The version\n./Scripts/GenerateAPIDocs.sh \"Documentation\"    \"ObjectiveHub-Mac ObjectiveHub-iOS Shared\"    \"${DOCS_LIBRARY_VERSION}\"\n";
+			shellScript = "# \n# Generates API documentation with the help of appledoc.\n# Generates both HTML code and a DocSet (which *can* be installed into Xcode).\n#\n# Copyright (c) 2011 Fruit is Good. All rights reserved.\n#\n\n#                            Output dir:        Search dirs (space separated list):                 The version\n./Scripts/GenerateAPIDocs.sh \"Documentation\"    \"ObjectiveHub-Mac ObjectiveHub-iOS ObjectiveHub\"    \"${DOCS_LIBRARY_VERSION}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1460,7 +1460,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DOCS_LIBRARY_VERSION = head;
-				LIBRARY_VERSION = 0.1;
+				LIBRARY_VERSION = 0.1.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1469,7 +1469,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DOCS_LIBRARY_VERSION = "${LIBRARY_VERSION}";
-				LIBRARY_VERSION = 0.1;
+				LIBRARY_VERSION = 0.1.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
