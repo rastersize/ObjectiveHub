@@ -1,6 +1,8 @@
 # ObjectiveHub #
 An Objective-C (ARC enabled) library for version 3 of the GitHub API, for iOS 4.2+ and Mac OS X 10.6+.
 
+The [official website](http://libobjectivehub.com/) contains [documentation and usage guides](http://libobjectivehub.com/documentation/)
+
 The development speed and growth of ObjectiveHub is bound by the rate of the documentation. That is O(documentation), just like [nimbus](http://jverkoey.github.com/nimbus/).
 
 ## Getting Started ##
@@ -30,7 +32,7 @@ You can help improve the documentation, code quality and feature list. Either by
 - None yet, [be the first](#)!
 
 ## Misc information ##
-The project use [semantic versioning](http://semver.org/) and the git repository is maintained using [git flow](https://github.com/nvie/gitflow).
+The project use [semantic versioning](http://semver.org/) and the git repository is maintained using [git flow](https://github.com/nvie/gitflow). As such all active development takes place on the `develop` branch or a feature branch (prefixed with `feature/` followed by an identifier). The `master` branch is dedicated for the latest stable version.
 
 
 ## License ##
