@@ -40,7 +40,7 @@
  * categories and no classes.
  * See http://developer.apple.com/library/mac/#qa/qa2006/qa1490.html for more info.
  *
- * Macro from the Numbis project at https://github.com/jverkoey/nimbus/.
+ * Macro from the Nimbus project at https://github.com/jverkoey/nimbus/.
  */
 #define CDOH_FIX_CATEGORY_BUG(name) @interface CDOH_FIX_CATEGORY_BUG_##name @end \
 @implementation CDOH_FIX_CATEGORY_BUG_##name @end
