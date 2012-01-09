@@ -121,6 +121,8 @@
 		9C6018E014B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C6018DD14B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.h */; };
 		9C6018E114B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6018DE14B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.m */; };
 		9C6018E214B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6018DE14B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.m */; };
+		9C6018E414BA65DC00DAB6E2 /* CDOHTestAppUserCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C6018E314BA65DC00DAB6E2 /* CDOHTestAppUserCredentials.m */; };
+		9C6018E614BA665C00DAB6E2 /* account.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C6018E514BA665C00DAB6E2 /* account.plist */; };
 		9C613A9314B601C70067B6B6 /* ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9214B601C70067B6B6 /* ObjectiveHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C613A9414B601C70067B6B6 /* ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9214B601C70067B6B6 /* ObjectiveHub.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C613A9B14B60C370067B6B6 /* CDOHResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9914B60C370067B6B6 /* CDOHResource.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -321,6 +323,8 @@
 		9C5D2D70147029E10064F02A /* CDOHTestAppUserCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHTestAppUserCredentials.h; sourceTree = "<group>"; };
 		9C6018DD14B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+ObjectiveHub.h"; sourceTree = "<group>"; };
 		9C6018DE14B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+ObjectiveHub.m"; sourceTree = "<group>"; };
+		9C6018E314BA65DC00DAB6E2 /* CDOHTestAppUserCredentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHTestAppUserCredentials.m; sourceTree = "<group>"; };
+		9C6018E514BA665C00DAB6E2 /* account.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = account.plist; sourceTree = "<group>"; };
 		9C613A9214B601C70067B6B6 /* ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectiveHub.h; sourceTree = "<group>"; };
 		9C613A9914B60C370067B6B6 /* CDOHResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHResource.h; sourceTree = "<group>"; };
 		9C613A9A14B60C370067B6B6 /* CDOHResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHResource.m; sourceTree = "<group>"; };
@@ -604,6 +608,7 @@
 			isa = PBXGroup;
 			children = (
 				9C5D2D70147029E10064F02A /* CDOHTestAppUserCredentials.h */,
+				9C6018E314BA65DC00DAB6E2 /* CDOHTestAppUserCredentials.m */,
 				9C5D2D611470281A0064F02A /* AppDelegate.h */,
 				9C5D2D621470281A0064F02A /* AppDelegate.m */,
 				9C5D2D641470281B0064F02A /* MainMenu.xib */,
@@ -615,6 +620,7 @@
 		9C5D2D561470281A0064F02A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9C6018E514BA665C00DAB6E2 /* account.plist */,
 				9C5D2D571470281A0064F02A /* ObjectiveHub Test App-Info.plist */,
 				9C5D2D581470281A0064F02A /* InfoPlist.strings */,
 				9C5D2D5B1470281A0064F02A /* main.m */,
@@ -924,6 +930,7 @@
 				9C5D2D5A1470281A0064F02A /* InfoPlist.strings in Resources */,
 				9C5D2D601470281A0064F02A /* Credits.rtf in Resources */,
 				9C5D2D661470281B0064F02A /* MainMenu.xib in Resources */,
+				9C6018E614BA665C00DAB6E2 /* account.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1060,6 +1067,7 @@
 			files = (
 				9C5D2D5C1470281A0064F02A /* main.m in Sources */,
 				9C5D2D631470281A0064F02A /* AppDelegate.m in Sources */,
+				9C6018E414BA65DC00DAB6E2 /* CDOHTestAppUserCredentials.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

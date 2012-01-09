@@ -27,8 +27,9 @@
 {
 	dispatch_queue_t queue = dispatch_queue_create("com.cedercrantz.objectivehub.testapp", NULL);
 	dispatch_suspend(queue);
-	
-	_hub = [[CDOHClient alloc] initWithUsername:CDOHTestAppUsername password:CDOHTestAppPassword];
+
+	CDOHTestAppUserCredentials *cred = [[CDOHTestAppUserCredentials alloc] init];
+	_hub = [[CDOHClient alloc] initWithUsername:cred.username password:cred.password];
 	NSLog(@"hub: %@", self.hub);
 	
 	// Should fail:

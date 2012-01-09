@@ -10,4 +10,20 @@
 
 @implementation CDOHTestAppUserCredentials
 
+@synthesize username;
+@synthesize password;
+
+- (id)init
+{
+	self = [super init];
+	if (self) {
+		NSURL *accountPlistURL = [[NSBundle mainBundle] URLForResource:@"account" withExtension:@"plist"];
+		NSDictionary *account = [NSDictionary dictionaryWithContentsOfURL:accountPlistURL];
+		username = [account objectForKey:@"username"];
+		password = [account objectForKey:@"password"];
+	}
+	
+	return self;
+}
+
 @end

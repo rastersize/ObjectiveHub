@@ -30,10 +30,12 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-#ifndef ObjectiveHub_CDOHTestAppUserCredentials_h
-#define ObjectiveHub_CDOHTestAppUserCredentials_h
+#import <Foundation/Foundation.h>
 
-#define CDOHTestAppUsername				@"_user_"
-#define CDOHTestAppPassword				@"_pass_"
 
-#endif
+@interface CDOHTestAppUserCredentials : NSObject
+
+@property (readonly, strong) NSString *username;
+@property (readonly, strong) NSString *password;
+
+@end
