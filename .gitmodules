@@ -1,0 +1,6 @@
+[submodule "Vendor/JSONKit"]
+	path = Vendor/JSONKit
+	url = https://github.com/johnezang/JSONKit.git
+[submodule "Vendor/AFNetworking"]
+	path = Vendor/AFNetworking
+	url = https://github.com/rastersize/AFNetworking.git

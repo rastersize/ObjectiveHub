@@ -1,0 +1,37 @@
+# ObjectiveHub #
+An Objective-C (ARC enabled) library for version 3 of the GitHub API, for iOS 4.2+ and Mac OS X 10.6+.
+
+The development speed and growth of ObjectiveHub is bound by the rate of the documentation. That is O(documentation), just like [nimbus](http://jverkoey.github.com/nimbus/).
+
+## Getting Started ##
+Please see the [getting started](https://github.com/rastersize/ObjectiveHub/wiki/Getting-started) wiki page.
+
+## Requirements ##
+Requires iOS 4.2+ or Mac OS X 10.6 during runtime and Xcode 4.2+ (and as such Mac OS X 10.7) to build.
+
+## Documentation ##
+[ObjectiveHub documentation](http://libobjectivehub.com/documentation).
+
+## Hacking ##
+The project follows the [git flow](https://github.com/nvie/gitflow) model laid out by nvie in his blog-post "[A syccessful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)". This means that all development occur on the `develop` branch and the `master` branch is reserved for **stable releases**.
+
+Furthermore, the project use [semantic versioning](http://semver.org/) and there will be one tag per version as well as possibly a support branch. That is when version `1.1.0` is introduced a support branch for `1.0.x` might be created as `support/1.0` and so on.
+
+## ObjectiveHub contributors ##
+You can help improve the documentation, code quality and feature list. Either by contributing directly to the project, [filing bug reports](https://github.com/rastersize/ObjectiveHub/issues) or by donating to keep the development going. It is all greatly appreciated!
+
+### Source code contributors (alphabetical by last name) ###
+
+- **Aron Cedercrantz** &mdash; [GitHub](https://github.com/rastersize) | [Website](https://aron.cedercrantz.com/)<br>
+  ![Image of Aron Cedercrantz (rastersize)s](https://secure.gravatar.com/avatar/2f21aac393665a85428eab10c2bdbe79?s=140)
+
+### Generous donations have been made by the following people ###
+
+- None yet, [be the first](#)!
+
+## Misc information ##
+The project use [semantic versioning](http://semver.org/) and the git repository is maintained using [git flow](https://github.com/nvie/gitflow).
+
+
+## License ##
+The project is licensed under the "Simplified BSD license" (2-clause), for the exact terms please see the [LICENSE file](https://github.com/rastersize/ObjectiveHub/blob/develop/LICENSE).
