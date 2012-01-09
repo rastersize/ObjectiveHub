@@ -103,6 +103,8 @@
  * Load the resource response pages specified by _pages_.
  *
  * If the resource response is not paginated this method does nothing.
+ *
+ * @param pages The pages to load.
  */
 - (void)loadPages:(NSIndexSet *)pages;
 

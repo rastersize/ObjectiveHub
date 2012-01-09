@@ -35,6 +35,9 @@
 
 
 #pragma mark CDOHOrganization Interface
+/**
+ * An immutable class containing information about a single GitHub organization.
+ */
 @interface CDOHOrganization : CDOHAbstractUser
 
 #pragma mark - Identifying and Comparing Users
