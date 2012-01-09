@@ -48,7 +48,7 @@
  * @return A string containing the query value for the given key, or `nil` if
  * none could be located.
  *
- * @see query
+ * @see [query](http://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSURL_Class/Reference/Reference.html#//apple_ref/occ/instm/NSURL/query)
  */
 - (NSString *)cdoh_queryValueForKey:(NSString *)key;
 
@@ -57,7 +57,7 @@
  *
  * @return The query string as a dictionary.
  *
- * @see query
+ * @see [query](http://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSURL_Class/Reference/Reference.html#//apple_ref/occ/instm/NSURL/query)
  */
 - (NSDictionary *)cdoh_queryDictionary;
 
