@@ -355,6 +355,8 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * @param repository The name of the repository.
  * @param owner The name of the owner of the given repository
  * _repositoryName_.
+ * @param pages The resource response pages to load. May be `nil` in which case
+ * the first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.
@@ -381,6 +383,8 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * repositories should be fetched.
  * @param pages The pages to get. May be `nil`, in which case the first page
  * will be loaded.
+ * @param pages The resource response pages to load. May be `nil` in which case
+ * the first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.

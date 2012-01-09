@@ -65,6 +65,8 @@ extern NSString *const kCDOHResponseHeaderPerPageKey;
 /**
  * Initialize a newly allocated link relationship instance.
  *
+ * @param name The link relationship name.
+ * @param url The link relationship URL.
  * @private
  */
 - (id)initWithName:(NSString *)name URL:(NSURL *)url;
