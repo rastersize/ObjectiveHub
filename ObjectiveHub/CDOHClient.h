@@ -83,7 +83,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * Initializes and returns an `ObjectiveHub` instance that uses the default
  * settings.
  *
- * @warning *Important:* To get data which requires authentication you must set
+ * @warning **Important:** To get data which requires authentication you must set
  * the username and password properties after calling the init method.
  * Alternatively you can use the initialization method
  * initWithUsername:password: instead which will do it for you.
@@ -96,7 +96,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * Initializes and returns an `ObjectiveHub` instance that uses the given
  * username and password for authentication with GitHub.
  *
- * @warning *Important:* The
+ * @warning **Important:** The
  * [basic authentication](http://developer.github.com/v3/#authentication) method
  * is used as this is what GitHub recommend that desktop applications use.
  *
@@ -135,7 +135,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * The default is to let GitHub decide how many items per page should be
  * returned.
  *
- * @warning *Note* Valid range is between 0 to 100 (the upper limit is a
+ * @warning **Note:** Valid range is between 0 to 100 (the upper limit is a
  * [restriction from GitHub](http://developer.github.com/v3/#pagination)).
  * Where 0 (zero) means that we will use GitHub’s default value.
  */
@@ -144,7 +144,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
 /**
  * The API request rate limit.
  *
- * @warning *Note* setting the rate limit to zero (`0`) will make the framework
+ * @warning **Note:** setting the rate limit to zero (`0`) will make the framework
  * manage the rate limiting automatically.
  *
  * @todo Implement this.
@@ -186,7 +186,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  *
- * @warning *Important:* This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated.
  *
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
@@ -258,7 +258,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
  *
- * @warning *Important:* This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated.
  *
  * @param dictionary A dictionary containing values for the pre-defined keys.
  * @param successBlock The block which is called upon success with a
@@ -285,7 +285,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  *
- * @warning *Important* This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated.
  *
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
@@ -307,7 +307,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
  *
- * @warning *Important* This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated.
  *
  * @param emails An array of email addresses to add to the currently
  * authenticated user.
@@ -331,7 +331,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
  *
- * @warning *Important* This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated.
  *
  * @param emails An array of email addresses to delete from the currently
  * authenticated user.
@@ -408,7 +408,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  * 
- * @warning *Important* This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated.
  *
  * @param repository The name of the repository.
  * @param owner The login of the repository owner.
@@ -428,7 +428,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  * 
- * @warning *Important* This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated.
  *
  * @param repository The name of the repository.
  * @param owner The login of the repository owner.
@@ -446,7 +446,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  * 
- * @warning *Important* This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated.
  *
  * @param repository The name of the repository.
  * @param owner The login of the repository owner.

@@ -101,7 +101,7 @@
 /**
  * The total number of private repositories the user is a member of.
  *
- * @warning *Important:* If the instance does not represent an authenticated
+ * @warning **Important:** If the instance does not represent an authenticated
  * user this will be zero (`0`). 
  */
 @property (readonly) NSUInteger numberOfPrivateRepositories;
@@ -109,7 +109,7 @@
 /**
  * The total number of private repositories owned by the user.
  *
- * @warning *Important:* If the instance does not represent an authenticated
+ * @warning **Important:** If the instance does not represent an authenticated
  * user this will be zero (`0`). 
  */
 @property (readonly) NSUInteger numberOfOwnedPrivateRepositories;
@@ -122,7 +122,7 @@
 /**
  * The number of private gists by the user.
  *
- * @warning *Important:* If the instance does not represent an authenticated
+ * @warning **Important:** If the instance does not represent an authenticated
  * user this will be zero (`0`). 
  */
 @property (readonly) NSUInteger numberOfPrivateGists;
@@ -140,7 +140,7 @@
 /**
  * The number of people the user is collaborating with.
  *
- * @warning *Important:* If the instance does not represent an authenticated
+ * @warning **Important:** If the instance does not represent an authenticated
  * user this will be zero (`0`).
  */
 @property (readonly) NSUInteger collaborators;
@@ -158,7 +158,7 @@
 /**
  * The amount of disk space the user have used up. 
  *
- * @warning *Important:* If the instance does not represent an authenticated
+ * @warning **Important:** If the instance does not represent an authenticated
  * user this will be zero (`0`).
  */
 @property (readonly) NSUInteger diskUsage;
@@ -166,7 +166,7 @@
 /**
  * The users plan.
  *
- * @warning *Important:* If the instance does not represent an authenticated
+ * @warning **Important:** If the instance does not represent an authenticated
  * user this will be `nil`.
  */
 @property (readonly, strong) CDOHPlan *plan;
