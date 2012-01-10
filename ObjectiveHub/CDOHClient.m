@@ -145,14 +145,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 /// Create an error from a failed request operation.
 - (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation;
 
-/// Create a respone dictionary from an response.
-- (NSDictionary *)responseDictionaryFromOperation:(AFHTTPRequestOperation *)operation;
-
-/// Create a CDOHLinkRelationshipHeader object from a link string.
-/// The link string should be of the following format:
-/// `<https://api.github.com/resource?page=3&per_page=100>; rel="next"`
-- (CDOHLinkRelationshipHeader *)linkRelationshipFromLinkString:(NSString *)linkString;
-
 
 #pragma mark - Standard Blocks
 #pragma mark |- Standard Error Block
@@ -294,14 +286,14 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				id resource = resourceCreationBlock(parsedResponseObject);
 				
 				if (resource != nil) {
-					NSDictionary *responseInfoDict = [self responseDictionaryFromOperation:operation];
-					NSArray *links = [responseInfoDict objectForKey:kCDOHResponseHeaderLinkKey];
+					NSHTTPURLResponse *httpUrlResponse = operation.response;
+					NSDictionary *httpHeaders = [httpUrlResponse allHeaderFields];
 					
 					CDOHResponse *response = [[CDOHResponse alloc] initWithResource:resource
 																			 target:self
 																			 action:action
 																	   successBlock:successBlock failureBlock:failureBlock
-																			  links:links
+																		HTTPHeaders:httpHeaders
 																		  arguments:arguments];
 					successBlock(response);
 				} else if (failureBlock) {
@@ -558,67 +550,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	CDOHError *ohError = [[CDOHError alloc] initWithHTTPHeaders:httpHeaders HTTPStatus:httpStatus responseBody:responseData];
 	
 	return ohError;
-}
-
-- (NSDictionary *)responseDictionaryFromOperation:(AFHTTPRequestOperation *)operation
-{
-	NSDictionary *allHeaders = [[operation response] allHeaderFields];
-	
-	id rateLimitLimit		= [allHeaders objectForKey:kCDOHResponseHeaderXRateLimitLimitKey];
-	id rateLimitRemaining	= [allHeaders objectForKey:kCDOHResponseHeaderXRateLimitRemainingKey];
-	id location				= [allHeaders objectForKey:kCDOHResponseHeaderLocationKey];
-	NSString *link			= [allHeaders objectForKey:kCDOHResponseHeaderLinkKey];
-	
-	rateLimitLimit			= (rateLimitLimit		? rateLimitLimit		: [NSNull null]);
-	rateLimitRemaining		= (rateLimitRemaining	? rateLimitRemaining	: [NSNull null]);
-	location				= (location				? location				: [NSNull null]);
-
-	id links = nil;
-	if ([link length] > 0) {
-		NSArray *linkComps = [link componentsSeparatedByString:kCDOHResponseHeaderLinkSeparatorKey];
-		links = [[NSMutableArray alloc] initWithCapacity:[linkComps count]];
-		
-		// Link format: 
-		// <https://api.github.com/resource?page=10>; rel="__name__"
-		for (NSString *singleLink in linkComps) {
-			CDOHLinkRelationshipHeader *linkRel = [self linkRelationshipFromLinkString:singleLink];
-			[links addObject:linkRel];
-		}
-	} else {
-		links = [NSNull null];
-	}
-	
-	NSDictionary *responseInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
-								  rateLimitLimit,		kCDOHResponseHeaderXRateLimitLimitKey,
-								  rateLimitRemaining,	kCDOHResponseHeaderXRateLimitRemainingKey,
-								  links,				kCDOHResponseHeaderLinkKey,
-								  location,				kCDOHResponseHeaderLocationKey,
-								  nil];
-	
-	return responseInfo;
-}
-
-- (CDOHLinkRelationshipHeader *)linkRelationshipFromLinkString:(NSString *)linkString
-{
-	CDOHLinkRelationshipHeader *link = nil;
-	NSArray *singleLinkComp = [linkString componentsSeparatedByString:@">; rel=\""];
-	
-	if ([singleLinkComp count] == 2) {
-		NSString *linkUrlString = [singleLinkComp objectAtIndex:0];
-		linkUrlString = [linkUrlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-		NSString *linkName = [singleLinkComp objectAtIndex:1];
-		linkName = [linkName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-		
-		if ([linkUrlString length] > 2 && [linkName length] > 2) {
-			linkUrlString = [linkUrlString substringFromIndex:1];
-			NSURL *linkUrl = [[NSURL alloc] initWithString:linkUrlString];
-			linkName = [linkName substringToIndex:[linkName length] - 1];
-			
-			link = [[CDOHLinkRelationshipHeader alloc] initWithName:linkName URL:linkUrl];
-		}
-	}
-	
-	return link;
 }
 
 

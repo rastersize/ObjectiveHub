@@ -150,7 +150,7 @@
  * @param action The action used to load the data.
  * @param successBlock The block to be called upon success.
  * @param failureBlock The block to be called upon failure.
- * @param links The HTTP header links as recieved from the remote.
+ * @param httpHeaders The HTTP header returned by the remote.
  * @param arguments The arguments to send to the action. Excluding the `self`,
  * `_cmd`, `successBlock`, `failureBlock` and `pages` arguments.
  * @return A `CDOHResponse` initialized using the given parameters.
@@ -164,7 +164,7 @@
 				action:(SEL)action
 		  successBlock:(CDOHResponseBlock)successBlock
 		  failureBlock:(CDOHFailureBlock)failureBlock
-				 links:(NSArray *)links
+		   HTTPHeaders:(NSDictionary *)httpHeaders
 			 arguments:(NSArray *)arguments;
 
 

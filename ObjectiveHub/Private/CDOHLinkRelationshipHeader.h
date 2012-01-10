@@ -71,6 +71,13 @@ extern NSString *const kCDOHResponseHeaderPerPageKey;
  */
 - (id)initWithName:(NSString *)name URL:(NSURL *)url;
 
+/**
+ * Create a link relationship instance using the given link string.
+ *
+ * The link string must be on the format `<__URL__>; rel="__NAME__"`
+ */
++ (CDOHLinkRelationshipHeader *)linkRelationshipFromLinkString:(NSString *)linkString;
+
 #pragma mark - Link Relationship Properties
 /** @name Link Relationship Properties */
 /**

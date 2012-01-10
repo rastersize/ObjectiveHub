@@ -69,6 +69,29 @@ NSString *const kCDOHResponseHeaderPerPageKey			= @"per_page";
 	return self;
 }
 
++ (CDOHLinkRelationshipHeader *)linkRelationshipFromLinkString:(NSString *)linkString
+{
+	CDOHLinkRelationshipHeader *link = nil;
+	NSArray *singleLinkComp = [linkString componentsSeparatedByString:@">; rel=\""];
+	
+	if ([singleLinkComp count] == 2) {
+		NSString *linkUrlString = [singleLinkComp objectAtIndex:0];
+		linkUrlString = [linkUrlString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		NSString *linkName = [singleLinkComp objectAtIndex:1];
+		linkName = [linkName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		
+		if ([linkUrlString length] > 2 && [linkName length] > 2) {
+			linkUrlString = [linkUrlString substringFromIndex:1];
+			NSURL *linkUrl = [[NSURL alloc] initWithString:linkUrlString];
+			linkName = [linkName substringToIndex:[linkName length] - 1];
+			
+			link = [[CDOHLinkRelationshipHeader alloc] initWithName:linkName URL:linkUrl];
+		}
+	}
+	
+	return link;
+}
+
 
 #pragma mark - Extracting Information From Link Relationships
 - (NSUInteger)pageNumber
@@ -77,21 +100,6 @@ NSString *const kCDOHResponseHeaderPerPageKey			= @"per_page";
 	NSUInteger page = [pageString integerValue];
 	
 	return page;
-	
-	/*NSUInteger page = 0;
-	NSArray *paramComponents = [[[self URL] query] componentsSeparatedByString:@"&"];
-	
-	for (NSString *paramStr in paramComponents) {
-		NSArray *paramPair = [paramStr componentsSeparatedByString:@"="];
-		if ([paramPair count] == 2) {
-			NSString *key = [paramPair objectAtIndex:0];
-			if ([key isEqualToString:@"page"]) {
-				page = [[paramPair objectAtIndex:1] integerValue];
-			}
-		}
-	}
-	
-	return page;*/
 }
 
 - (NSUInteger)perPageNumber

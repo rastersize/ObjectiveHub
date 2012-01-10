@@ -38,6 +38,8 @@
 #import "CDOHClient.h"
 #import "CDOHResource.h"
 
+
+#pragma mark CDOHResponse Implementation
 @implementation CDOHResponse {
 	NSMutableArray *_pagesIndexSets;
 	
@@ -66,13 +68,27 @@
 				action:(SEL)action
 		  successBlock:(CDOHResponseBlock)successBlock
 		  failureBlock:(CDOHFailureBlock)failureBlock
-				 links:(NSArray *)links
+		   HTTPHeaders:(NSDictionary *)httpHeaders
 			 arguments:(NSArray *)arguments
 {
 	self = [super init];
 	if (self) {
 		_resource = resource;
 		_paginated= NO;
+		
+		NSString *linksString = [httpHeaders objectForKey:@"Link"];
+		NSMutableArray *links = nil;
+		if ([linksString length] > 0) {
+			NSArray *linkComps = [linksString componentsSeparatedByString:kCDOHResponseHeaderLinkSeparatorKey];
+			links = [[NSMutableArray alloc] initWithCapacity:[linkComps count]];
+			
+			// Link format: 
+			// <https://api.github.com/resource?page=10>; rel="__name__"
+			for (NSString *singleLink in linkComps) {
+				CDOHLinkRelationshipHeader *linkRel = [CDOHLinkRelationshipHeader linkRelationshipFromLinkString:singleLink];
+				[links addObject:linkRel];
+			}
+		}
 		
 		if ([links count] > 0) {
 			CDOHLinkRelationshipHeader *lastLink = nil;
