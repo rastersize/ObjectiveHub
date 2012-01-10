@@ -328,20 +328,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	};
 	
 	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
-	
-	
-	/*return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
-		if (successBlock) {
-			CDOHUser *user = nil;
-			if (responseObject && [responseObject length] > 0) {
-				NSDictionary *userDict = [self.JSONDecoder objectWithData:responseObject];
-//TODO: Should the library call the failure block instead here as the library can not understand the returrend data (wrong format)?
-				user = [[CDOHUser alloc] initWithDictionary:userDict];
-			}
-			
-			successBlock(user);
-		}
-	};*/
 }
 
 - (CDOHInternalSuccessBlock)standardUserArraySuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
@@ -364,36 +350,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	};
 	
 	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
-	
-	/*return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
-		if (successBlock) {
-			NSArray *users = nil;
-			NSDictionary *responseInfo = nil;
-			
-			if (responseObject && [responseObject length] > 0) {
-				NSArray *userDicts = [self.JSONDecoder objectWithData:responseObject];
-//TODO: Should the library call the failure block instead here as the library can not understand the returrend data (wrong format)?
-				
-				if ([userDicts isKindOfClass:[NSArray class]]) {
-					CDOHUser *user = nil;
-					NSMutableArray *mutableUsers = [[NSMutableArray alloc] initWithCapacity:[userDicts count]];
-					for (NSDictionary *userDict in userDicts) {
-						if ([userDict isKindOfClass:[NSDictionary class]]) {
-							user = [[CDOHUser alloc] initWithDictionary:userDict];
-							[mutableUsers addObject:user];
-						}
-					}
-					users = mutableUsers;
-					
-					responseInfo = [self responseDictionaryFromOperation:operation];
-					
-					successBlock(users, responseInfo);
-				} else {
-					[NSException raise:NSInternalInconsistencyException format:@"The using app should be notified that the response was incorrect so that we can gracefully handle the problem."];
-				}
-			}
-		}
-	};*/
 }
 
 - (CDOHInternalSuccessBlock)standardUserEmailSuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
@@ -408,17 +364,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	};
 	
 	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
-	
-	/*return ^(__unused AFHTTPRequestOperation *operation, id responseObject) {
-		if (successBlock) {
-			NSArray *emails = nil;
-			if (responseObject && [responseObject length] > 0) {
-				emails = [self.JSONDecoder objectWithData:responseObject];
-			}
-			
-			successBlock(emails);
-		}
-	};*/
 }
 
 - (CDOHInternalSuccessBlock)standardRepositorySuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
@@ -433,25 +378,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	};
 	
 	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
-	
-	
-	/*return ^(AFHTTPRequestOperation *operation, id responseObject) {
-		if (successBlock) {
-			if (responseObject && [responseObject length] > 0) {
-				NSDictionary *repoDict = [self.JSONDecoder objectWithData:responseObject];
-				
-				if ([repoDict isKindOfClass:[NSDictionary class]]) {
-					CDOHRepository *repo = [[CDOHRepository alloc] initWithDictionary:repoDict];
-					
-					NSDictionary *responseInfo = [self responseDictionaryFromOperation:operation];
-					
-					successBlock(repo, responseInfo);
-				} else {
-					[NSException raise:NSInternalInconsistencyException format:@"The using app should be notified that the response was incorrect so that we can gracefully handle the problem."];
-				}
-			}
-		}
-	};*/
 }
 
 - (CDOHInternalSuccessBlock)standardRepositoryArraySuccessBlock:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
@@ -473,49 +399,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	};
 	
 	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
-	
-	/*
-	return ^(AFHTTPRequestOperation *operation, id responseObject) { // SAME
-		if (successBlock) { // SAME
-			if (responseObject && [responseObject length] > 0) { // SAME
-				id repoDicts = [self.JSONDecoder objectWithData:responseObject]; // SAME
-				
-				if ([repoDicts isKindOfClass:[NSArray class]]) {
-					NSMutableArray *reposArray = [[NSMutableArray alloc] initWithCapacity:[repoDicts count]];
-					
-					for (id repoDict in repoDicts) {
-						if ([repoDict isKindOfClass:[NSDictionary class]]) {
-							CDOHRepository *repo = [[CDOHRepository alloc] initWithDictionary:repoDict];
-							[reposArray addObject:repo];
-						}
-					}
-					
-					NSDictionary *responseInfoDict = [self responseDictionaryFromOperation:operation]; // SAME
-					NSArray *links = [responseInfoDict objectForKey:kCDOHResponseHeaderLinkKey]; // SAME
-					
-					CDOHResponse *response = [[CDOHResponse alloc] initWithResource:reposArray
-																			 target:self
-																			 action:action
-																	   successBlock:successBlock failureBlock:failureBlock
-																			  links:links
-																		  arguments:arguments]; // SAME
-					successBlock(response); // SAME
-				} else if (failureBlock) {  // SAME
-					NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
-											  operation, @"operation",
-											  responseObject, kCDOHErrorUserInfoResponseDataKey,
-											  nil];  // SAME
-					CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code: kCDOHErrorCodeResponseObjectNotOfExpectedType userInfo:userInfo]; // SAME
-					failureBlock(error);  // SAME
-				}
-			} else if (failureBlock) {  // SAME
-				NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
-										  operation, @"operation", nil]; // SAME
-				CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code:kCDOHErrorCodeResponseObjectEmpty userInfo:userInfo]; // SAME
-				failureBlock(error); // SAME
-			}
-		}
-	};*/
 }
 
 
