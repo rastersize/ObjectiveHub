@@ -35,6 +35,7 @@
 
 #import "CDOHLinkRelationshipHeader.h"
 
+#import "CDOHClient.h"
 #import "CDOHResource.h"
 
 @implementation CDOHResponse {

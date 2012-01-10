@@ -36,6 +36,7 @@
 
 #pragma mark Forward Class Declarations
 @class CDOHResource;
+@class CDOHClient;
 
 
 #pragma mark - CDOHResponse Interface
