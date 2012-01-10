@@ -31,26 +31,21 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CDOHClient.h"
 
+
+#pragma mark Forward Class Declarations
 @class CDOHResource;
 @class CDOHLinkRelationshipHeader;
 
 
+#pragma mark - CDOHResponse Private Interface
+/**
+ * Private members of the CDOHResponse class.
+ */
 @interface CDOHResponse ()
 
 @property (strong, readonly) NSInvocation *invocation;
 @property (strong, readonly) NSArray *arguments;
-
-#pragma mark - Initializing a CDOHResponse Instance
-- (id)initWithResource:(id)resource
-				target:(CDOHClient *)target
-				action:(SEL)action
-		  successBlock:(CDOHResponseBlock)successBlock
-		  failureBlock:(CDOHFailureBlock)failureBlock
-				 links:(NSArray *)links
-			 arguments:(NSArray *)arguments;
-
 
 @end
 

@@ -139,4 +139,32 @@
 @property (strong, readonly) CDOHResponseBlock failureBlock;
 
 
+#pragma mark - Initializing a CDOHResponse Instance
+/**
+ * Intialize a newly allocated `CDOHResponse` instance using the given
+ * parameters.
+ *
+ * @param resource The requested resource.
+ * @param target The target for loading more data.
+ * @param action The action used to load the data.
+ * @param successBlock The block to be called upon success.
+ * @param failureBlock The block to be called upon failure.
+ * @param links The HTTP header links as recieved from the remote.
+ * @param arguments The arguments to send to the action. Excluding the `self`,
+ * `_cmd`, `successBlock`, `failureBlock` and `pages` arguments.
+ * @return A `CDOHResponse` initialized using the given parameters.
+ *
+ * @see CDOHClient
+ * @see CDOHResponseBlock
+ * @see CDOHFailureBlock
+ */
+- (id)initWithResource:(id)resource
+				target:(CDOHClient *)target
+				action:(SEL)action
+		  successBlock:(CDOHResponseBlock)successBlock
+		  failureBlock:(CDOHFailureBlock)failureBlock
+				 links:(NSArray *)links
+			 arguments:(NSArray *)arguments;
+
+
 @end
