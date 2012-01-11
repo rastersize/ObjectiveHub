@@ -113,9 +113,12 @@
 			_hasPreviousPage = (_previousPage >= 1 && _previousPage < _page);
 		}
 		
+		
 		// If response is paginated we need this to be able to perform the
 		// request again. Otherwise there is no need to perform it again.
-		if (_paginated) {
+		if (action != NULL && _paginated &&
+			!(successBlock == NULL && failureBlock == NULL)) {
+			
 			_successBlock = [successBlock copy];
 			_failureBlock = [failureBlock copy];
 			

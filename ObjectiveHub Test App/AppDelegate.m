@@ -162,7 +162,8 @@
 			NSLog(@"previousPage: %lu", response.previousPage);
 			NSLog(@"lastPage: %lu", response.lastPage);
 			
-			if (response.nextPage == 2) {
+			if (response.hasNextPage && response.nextPage == 2) {
+				NSLog(@"Loading page 2…");
 				[response loadNextPage];
 			}
 		} failure:^(CDOHError *error) {

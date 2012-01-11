@@ -155,7 +155,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 #pragma mark |- Generic Standard Success Blocks
 /// The standard success block for requests which return no data.
-- (CDOHInternalSuccessBlock)standardSuccessBlockWithNoData:(CDOHNoResponseBlock)successBlock;
+- (CDOHInternalSuccessBlock)standardSuccessBlockWithNoData:(CDOHResponseBlock)successBlock;
 
 /// The standard success block for requests which return data.
 - (CDOHInternalSuccessBlock)standardSuccessBlockWithResourceCreationBlock:(CDOHInternalResponseCreationBlock)block success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments;
@@ -268,11 +268,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Generic Standard Success Blocks
-- (CDOHInternalSuccessBlock)standardSuccessBlockWithNoData:(CDOHNoResponseBlock)successBlock
+- (CDOHInternalSuccessBlock)standardSuccessBlockWithNoData:(CDOHResponseBlock)successBlock
 {
-	return ^(__unused AFHTTPRequestOperation *operation, __unused id responseObject) {
+	return ^(__unused AFHTTPRequestOperation *__unused operation, __unused id responseObject) {
 		if (successBlock) {
-			successBlock();
+			successBlock(nil);
 		}
 	};
 }
@@ -292,7 +292,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 					CDOHResponse *response = [[CDOHResponse alloc] initWithResource:resource
 																			 target:self
 																			 action:action
-																	   successBlock:successBlock failureBlock:failureBlock
+																	   successBlock:successBlock 
+																	   failureBlock:failureBlock
 																		HTTPHeaders:httpHeaders
 																		  arguments:arguments];
 					successBlock(response);
@@ -506,7 +507,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				  failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)deleteUserEmails:(NSArray *)emails success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)deleteUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!emails) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"emails"];
@@ -569,7 +570,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	}];
 }
 
-- (void)isUserWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)isUserWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
 		return;
@@ -585,7 +586,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)watchRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)watchRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
 		return;
@@ -601,7 +602,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
 		return;

@@ -336,12 +336,13 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * @param emails An array of email addresses to delete from the currently
  * authenticated user.
  * @param successBlock The block which is called upon success. The parameter may
- * be set to `NULL` in which case nothing will be done upon success.
+ * be set to `NULL` in which case nothing will be done upon success. The
+ * response object **will** be `nil`.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  */
-- (void)deleteUserEmails:(NSArray *)emails success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)deleteUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - Getting Watched and Watching Repositories
@@ -413,14 +414,14 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * @param repository The name of the repository.
  * @param owner The login of the repository owner.
  * @param successBlock The block which is called if the user is watching the
- * given repository.
+ * given repository. The response object **will** be `nil`.
  * @param failureBlock The block which is called if the user is not watching the
  * given repository. In which case the error code will be
  * set to `kCDOHErrorCodeNotFound`. The block will also be called for other
  * types of errors. The parameter may be set to `NULL` in which case nothing
  * will be done upon failure.
  */
-- (void)isUserWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)isUserWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Watch a repository using the currently authenticated user.
@@ -433,12 +434,12 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * @param repository The name of the repository.
  * @param owner The login of the repository owner.
  * @param successBlock The block which is called if the user is watching the
- * given repository.
+ * given repository. The response object **will** be `nil`.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  */
-- (void)watchRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)watchRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Stop watching a repository using the currently authenticated user.
@@ -451,12 +452,12 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * @param repository The name of the repository.
  * @param owner The login of the repository owner.
  * @param successBlock The block which is called if the request to stop watching
- * the specified repository succeeded.
+ * the specified repository succeeded. The response object **will** be `nil`.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  */
-- (void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHNoResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 

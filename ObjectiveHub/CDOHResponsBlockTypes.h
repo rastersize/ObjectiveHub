@@ -58,9 +58,3 @@ typedef void (^CDOHFailureBlock)(CDOHError *error);
  */
 typedef void (^CDOHResponseBlock)(CDOHResponse *response);
 
-/**
- * The type of blocks called when a user request succeeded but does not contain
- * a response.
- */
-typedef void (^CDOHNoResponseBlock)(void);
-

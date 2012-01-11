@@ -145,7 +145,7 @@
  * Intialize a newly allocated `CDOHResponse` instance using the given
  * parameters.
  *
- * @param resource The requested resource.
+ * @param resource The requested resource. May be `nil`.
  * @param target The target for loading more data.
  * @param action The action used to load the data.
  * @param successBlock The block to be called upon success.
