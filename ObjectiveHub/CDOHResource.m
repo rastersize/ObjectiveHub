@@ -37,9 +37,14 @@
 
 
 #pragma mark NSCoding and GitHub JSON Keys
-NSString *const kCDOHResourceAPIResourceURLKey =  @"url";
+NSString *const kCDOHResourceAPIResourceURLKey			=  @"url";
 
 
+#pragma mark - NSCoding Keys
+NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesDictionary";
+
+
+#pragma mark - CDOHResource Private Interface
 @interface CDOHResource ()
 
 #pragma mark - Decoding Dictionary Objects
@@ -104,6 +109,19 @@ NSString *const kCDOHResourceAPIResourceURLKey =  @"url";
 }
 
 
+#pragma mark - Encoding Resources
+- (NSDictionary *)encodeAsDictionary
+{
+	NSDictionary *resourceDict = nil;
+	
+	resourceDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+					_apiResourceUrl, kCDOHResourceAPIResourceURLKey,
+					nil];
+	
+	return resourceDict;
+}
+
+
 #pragma mark - Identifying and Comparing Users
 - (BOOL)isEqual:(id)other
 {
@@ -135,17 +153,16 @@ NSString *const kCDOHResourceAPIResourceURLKey =  @"url";
 #pragma mark - NSCoding Methods
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {	
-	[aCoder encodeObject:_apiResourceUrl forKey:kCDOHResourceAPIResourceURLKey];
+	NSDictionary *resourceDict = [self encodeAsDictionary];
+	
+	[aCoder encodeObject:resourceDict forKey:kCDOHResourcePropertiesDictionaryKey];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-	id decodedApiResourceUrl = [aDecoder decodeObjectForKey:kCDOHResourceAPIResourceURLKey];
-	NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
-						  decodedApiResourceUrl, kCDOHResourceAPIResourceURLKey,
-						  nil];
+	NSDictionary *resourceDict = [aDecoder decodeObjectForKey:kCDOHResourcePropertiesDictionaryKey];
 	
-	self = [self initWithDictionary:dict];
+	self = [self initWithDictionary:resourceDict];
 	return self;
 }
 

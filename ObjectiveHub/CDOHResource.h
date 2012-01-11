@@ -43,7 +43,7 @@
 @interface CDOHResource : NSObject <NSCoding, NSCopying>
 
 #pragma mark - Initializing a CDOHResource Instance
-/** @name Initializing an CDOHPlan Instance */
+/** @name Initializing an CDOHResource Instance */
 /**
  * Initializes and returns an `CDOHResource` instance intialized with the
  * values of the given dictionary.
@@ -52,6 +52,16 @@
  * @return A `CDOHResource` instance initialized with the given dictionary.
  */
 - (id)initWithDictionary:(NSDictionary *)dictionary;
+
+
+#pragma mark - Encoding Resources
+/** @name Encoding Resources */
+/**
+ * Encode the resource as a dictionary object.
+ *
+ * @return The resource encoded as a `NSDictionary` object.
+ */
+- (NSDictionary *)encodeAsDictionary;
 
 
 #pragma mark - Identifying and Comparing Resources

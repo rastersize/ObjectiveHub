@@ -38,6 +38,11 @@
 extern NSString *const kCDOHResourceAPIResourceURLKey;
 
 
+#pragma mark - NSCoding Keys
+/// The properties dictionary key.
+extern NSString *const kCDOHResourcePropertiesDictionaryKey;
+
+
 #pragma mark - CDOHResource Private Interface
 /**
  * Private CDOHResource methods and properties.

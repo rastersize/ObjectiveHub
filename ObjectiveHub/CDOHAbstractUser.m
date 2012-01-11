@@ -172,20 +172,11 @@ NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 }
 
 
-#pragma mark - NSCoding Methods
-- (id)initWithCoder:(NSCoder *)decoder
+#pragma mark - Encoding Resources
+- (NSDictionary *)encodeAsDictionary
 {
-	self = [super initWithCoder:decoder];
-	
-	NSDictionary *dictionary = [decoder decodeObjectForKey:@"CDOHAbstractUserPropertiesDictionary"];
-	self = [self initWithDictionary:dictionary];
-	
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)coder
-{
-	[super encodeWithCoder:coder];
+	NSMutableDictionary *finalDictionary = nil;
+	NSDictionary *superDictionary = [super encodeAsDictionary];
 	
 	NSNumber *identifierNumber					= [NSNumber numberWithUnsignedInteger:self.identifier];
 	NSNumber *publicRepositoriesNumber			= [NSNumber numberWithUnsignedInteger:self.numberOfPublicRepositories];
@@ -226,7 +217,12 @@ NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 								diskUsageNumber,				kCDOHUserDictionaryDiskUsageKey,
 								nil];
 	
-	[coder encodeObject:dictionary forKey:@"CDOHAbstractUserPropertiesDictionary"];
+	NSUInteger finalDictionaryCapacity = [dictionary count] + [superDictionary count];
+	finalDictionary = [[NSMutableDictionary alloc] initWithCapacity:finalDictionaryCapacity];
+	[finalDictionary addEntriesFromDictionary:superDictionary];
+	[finalDictionary addEntriesFromDictionary:dictionary];
+	
+	return finalDictionary;
 }
 
 

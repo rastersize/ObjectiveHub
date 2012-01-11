@@ -150,17 +150,11 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 }
 
 
-#pragma mark - NSCoding Methods
-- (id)initWithCoder:(NSCoder *)aDecoder
+#pragma mark - Encoding Resources
+- (NSDictionary *)encodeAsDictionary
 {
-	NSDictionary *dict = [aDecoder decodeObjectForKey:@"CDOHRepositoryPropertiesDictionary"];
-	self = [self initWithDictionary:dict];
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
-	[super encodeWithCoder:aCoder];
+	NSMutableDictionary *finalDictionary = nil;
+	NSDictionary *superDictionary = [super encodeAsDictionary];
 	
 	NSNumber *privateNum = [[NSNumber alloc] initWithBool:_private];
 	NSNumber *forkNum = [[NSNumber alloc] initWithBool:_fork];
@@ -174,35 +168,40 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 	NSNumber *openIssuesNum = [[NSNumber alloc] initWithUnsignedInteger:_openIssues];
 	
 	
-	NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:
-						   _htmlUrl,				kCDOHRepositoryHtmlUrlKey,
-						   _cloneUrl,				kCDOHRepositoryCloneUrlKey,
-						   _gitUrl,					kCDOHRepositoryGitUrlKey,
-						   _sshUrl,					kCDOHRepositorySshUrlKey,
-						   _svnUrl,					kCDOHRepositorySvnUrlKey,
-						   _owner,					kCDOHRepositoryOwnerKey,
-						   _name,					kCDOHRepositoryNameKey,
-						   _repositoryDescription,	kCDOHRepositoryDescriptionKey,
-						   _homepage,				kCDOHRepositoryHomepageKey,
-						   _language,				kCDOHRepositoryLanguageKey,
-						   privateNum,				kCDOHRepositoryPrivateKey,
-						   watchersNum,				kCDOHRepositoryWatchersKey,
-						   sizeNum,					kCDOHRepositorySizeKey,
-						   _defaultBranch,			kCDOHRepositoryDefaultBranchKey,
-						   openIssuesNum,			kCDOHRepositoryOpenIssuesKey,
-						   hasIssuesNum,			kCDOHRepositoryHasIssuesKey,
-						   _pushedAt,				kCDOHRepositoryPushedAtKey,
-						   _createdAt,				kCDOHRepositoryCreatedAtKey,
-						   _organization,			kCDOHRepositoryOrganizationKey,
-						   forkNum,					kCDOHRepositoryForkKey,
-						   forksNum,				kCDOHRepositoryForksKey,
-						   _parentRepository,		kCDOHRepositoryParentRepositoryKey,
-						   _sourceRepository,		kCDOHRepositorySourceRepositoryKey,
-						   hasWikiNum,				kCDOHRepositoryHasWikiKey,
-						   hasDownloadsNum,			kCDOHRepositoryHasDownloadsKey,
-						   nil];
+	NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
+						  _htmlUrl,				kCDOHRepositoryHtmlUrlKey,
+						  _cloneUrl,				kCDOHRepositoryCloneUrlKey,
+						  _gitUrl,					kCDOHRepositoryGitUrlKey,
+						  _sshUrl,					kCDOHRepositorySshUrlKey,
+						  _svnUrl,					kCDOHRepositorySvnUrlKey,
+						  _owner,					kCDOHRepositoryOwnerKey,
+						  _name,					kCDOHRepositoryNameKey,
+						  _repositoryDescription,	kCDOHRepositoryDescriptionKey,
+						  _homepage,				kCDOHRepositoryHomepageKey,
+						  _language,				kCDOHRepositoryLanguageKey,
+						  privateNum,				kCDOHRepositoryPrivateKey,
+						  watchersNum,				kCDOHRepositoryWatchersKey,
+						  sizeNum,					kCDOHRepositorySizeKey,
+						  _defaultBranch,			kCDOHRepositoryDefaultBranchKey,
+						  openIssuesNum,			kCDOHRepositoryOpenIssuesKey,
+						  hasIssuesNum,				kCDOHRepositoryHasIssuesKey,
+						  _pushedAt,				kCDOHRepositoryPushedAtKey,
+						  _createdAt,				kCDOHRepositoryCreatedAtKey,
+						  _organization,			kCDOHRepositoryOrganizationKey,
+						  forkNum,					kCDOHRepositoryForkKey,
+						  forksNum,					kCDOHRepositoryForksKey,
+						  _parentRepository,		kCDOHRepositoryParentRepositoryKey,
+						  _sourceRepository,		kCDOHRepositorySourceRepositoryKey,
+						  hasWikiNum,				kCDOHRepositoryHasWikiKey,
+						  hasDownloadsNum,			kCDOHRepositoryHasDownloadsKey,
+						  nil];
 	
-	[aCoder encodeObject:dict forKey:@"CDOHRepositoryPropertiesDictionary"];
+	NSUInteger finalDictionaryCapacity = [dictionary count] + [superDictionary count];
+	finalDictionary = [[NSMutableDictionary alloc] initWithCapacity:finalDictionaryCapacity];
+	[finalDictionary addEntriesFromDictionary:superDictionary];
+	[finalDictionary addEntriesFromDictionary:dictionary];
+	
+	return finalDictionary;
 }
 
 

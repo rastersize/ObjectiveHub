@@ -73,6 +73,32 @@ NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 }
 
 
+#pragma mark - Encoding Resources
+- (NSDictionary *)encodeAsDictionary
+{
+	NSMutableDictionary *finalDictionary = nil;
+	NSDictionary *superDictionary = [super encodeAsDictionary];
+	
+	NSNumber *spaceNumber			= [NSNumber numberWithUnsignedInteger:self.space];
+	NSNumber *collaboratorsNumber	= [NSNumber numberWithUnsignedInteger:self.collaborators];
+	NSNumber *privateReposNumber	= [NSNumber numberWithUnsignedInteger:self.privateRepositories];
+	
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+								self.name,				kCDOHPlanDictionaryNameKey,
+								spaceNumber,			kCDOHPlanDictionarySpaceKey,
+								collaboratorsNumber,	kCDOHPlanDictionaryCollaboratorsKey,
+								privateReposNumber,		kCDOHPlanDictionaryPrivateRepositoriesKey,
+								nil];
+	
+	NSUInteger finalDictionaryCapacity = [dictionary count] + [superDictionary count];
+	finalDictionary = [[NSMutableDictionary alloc] initWithCapacity:finalDictionaryCapacity];
+	[finalDictionary addEntriesFromDictionary:superDictionary];
+	[finalDictionary addEntriesFromDictionary:dictionary];
+	
+	return finalDictionary;
+}
+
+
 #pragma mark - Identifying and Comparing Plans
 - (BOOL)isEqual:(id)other
 {
@@ -108,42 +134,6 @@ NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 	hash = prime * hash + self.privateRepositories;
 	
 	return hash;
-}
-
-
-#pragma mark - NSCopying Method
-- (id)copyWithZone:(NSZone *)__unused zone
-{
-	// Simply return a retained pointer to this instance as the class is
-	// immutable.
-	return self;
-}
-
-
-#pragma mark - NSCoding Methods
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-	NSDictionary *dictionary = [aDecoder decodeObjectForKey:@"CDOHPlanPropertiesDictionary"];
-	self = [self initWithDictionary:dictionary];
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
-	[super encodeWithCoder:aCoder];
-	
-	NSNumber *spaceNumber			= [NSNumber numberWithUnsignedInteger:self.space];
-	NSNumber *collaboratorsNumber	= [NSNumber numberWithUnsignedInteger:self.collaborators];
-	NSNumber *privateReposNumber	= [NSNumber numberWithUnsignedInteger:self.privateRepositories];
-	
-	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-								self.name,				kCDOHPlanDictionaryNameKey,
-								spaceNumber,			kCDOHPlanDictionarySpaceKey,
-								collaboratorsNumber,	kCDOHPlanDictionaryCollaboratorsKey,
-								privateReposNumber,		kCDOHPlanDictionaryPrivateRepositoriesKey,
-								nil];
-	
-	[aCoder encodeObject:dictionary forKey:@"CDOHPlanPropertiesDictionary"];
 }
 
 

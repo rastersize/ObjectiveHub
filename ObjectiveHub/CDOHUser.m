@@ -63,6 +63,27 @@ NSString *const kCDOHUserDictionaryBioKey				= @"bio";
 }
 
 
+#pragma mark - Encoding Resources
+- (NSDictionary *)encodeAsDictionary
+{
+	NSMutableDictionary *finalDictionary = nil;
+	NSDictionary *superDictionary = [super encodeAsDictionary];
+	
+	NSNumber *hireableNumber	= [NSNumber numberWithBool:_hireable];
+	NSDictionary *dictionary	= [NSDictionary dictionaryWithObjectsAndKeys:
+								   _biography,		kCDOHUserDictionaryBioKey,
+								   hireableNumber,	kCDOHUserDictionaryHireableKey,
+								   nil];
+	
+	NSUInteger finalDictionaryCapacity = [dictionary count] + [superDictionary count];
+	finalDictionary = [[NSMutableDictionary alloc] initWithCapacity:finalDictionaryCapacity];
+	[finalDictionary addEntriesFromDictionary:superDictionary];
+	[finalDictionary addEntriesFromDictionary:dictionary];
+	
+	return finalDictionary;
+}
+
+
 #pragma mark - Identifying and Comparing Users
 - (BOOL)isEqual:(id)other
 {
@@ -82,31 +103,6 @@ NSString *const kCDOHUserDictionaryBioKey				= @"bio";
 	}
 	
 	return (aUser.identifier == self.identifier);
-}
-
-
-#pragma mark - NSCoding Methods
-- (id)initWithCoder:(NSCoder *)decoder
-{
-	self = [super initWithCoder:decoder];
-	
-	NSDictionary *dictionary = [decoder decodeObjectForKey:@"CDOHUserPropertiesDictionary"];
-	self = [self initWithDictionary:dictionary];
-	
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)coder
-{
-	[super encodeWithCoder:coder];
-
-	NSNumber *hireableNumber	= [NSNumber numberWithBool:_hireable];
-	NSDictionary *dictionary	= [NSDictionary dictionaryWithObjectsAndKeys:
-								   _biography,		kCDOHUserDictionaryBioKey,
-								   hireableNumber,	kCDOHUserDictionaryHireableKey,
-								   nil];
-	
-	[coder encodeObject:dictionary forKey:@"CDOHUserPropertiesDictionary"];
 }
 
 
