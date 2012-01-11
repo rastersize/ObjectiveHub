@@ -191,6 +191,8 @@ NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 	
 	NSNumber *authenticatedNumber				= [NSNumber numberWithBool:self.isAuthenticated];
 	
+	NSDictionary *planDict = [_plan encodeAsDictionary];
+	
 	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
 								_login,							kCDOHUserDictionaryLoginKey,
 								_name,							kCDOHUserDictionaryNameKey,
@@ -203,7 +205,7 @@ NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 								_htmlUrl,						kCDOHUserDictionaryHTMLURLKey,
 								_createdAt,						kCDOHUserDictionaryCreatedAtKey,
 								_type,							kCDOHUserDictionaryTypeKey,
-								_plan,							kCDOHUserDictionaryPlanKey,
+								planDict,						kCDOHUserDictionaryPlanKey,
 								identifierNumber,				kCDOHUserDictionaryIDKey,
 								authenticatedNumber,			kCDOHUserDictionaryAuthenticatedKey,
 								publicRepositoriesNumber,		kCDOHUserDictionaryPublicReposKey,

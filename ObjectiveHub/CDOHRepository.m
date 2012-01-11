@@ -167,14 +167,19 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 	NSNumber *sizeNum = [[NSNumber alloc] initWithUnsignedInteger:_size];
 	NSNumber *openIssuesNum = [[NSNumber alloc] initWithUnsignedInteger:_openIssues];
 	
+	NSDictionary *ownerDict = [_owner encodeAsDictionary];
+	NSDictionary *organizationDict = [_organization encodeAsDictionary];
+	NSDictionary *parentDict = [_parentRepository encodeAsDictionary];
+	NSDictionary *sourceDict = [_sourceRepository encodeAsDictionary];
+	
 	
 	NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
-						  _htmlUrl,				kCDOHRepositoryHtmlUrlKey,
+						  _htmlUrl,					kCDOHRepositoryHtmlUrlKey,
 						  _cloneUrl,				kCDOHRepositoryCloneUrlKey,
 						  _gitUrl,					kCDOHRepositoryGitUrlKey,
 						  _sshUrl,					kCDOHRepositorySshUrlKey,
 						  _svnUrl,					kCDOHRepositorySvnUrlKey,
-						  _owner,					kCDOHRepositoryOwnerKey,
+						  ownerDict,				kCDOHRepositoryOwnerKey,
 						  _name,					kCDOHRepositoryNameKey,
 						  _repositoryDescription,	kCDOHRepositoryDescriptionKey,
 						  _homepage,				kCDOHRepositoryHomepageKey,
@@ -187,11 +192,11 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 						  hasIssuesNum,				kCDOHRepositoryHasIssuesKey,
 						  _pushedAt,				kCDOHRepositoryPushedAtKey,
 						  _createdAt,				kCDOHRepositoryCreatedAtKey,
-						  _organization,			kCDOHRepositoryOrganizationKey,
+						  organizationDict,			kCDOHRepositoryOrganizationKey,
 						  forkNum,					kCDOHRepositoryForkKey,
 						  forksNum,					kCDOHRepositoryForksKey,
-						  _parentRepository,		kCDOHRepositoryParentRepositoryKey,
-						  _sourceRepository,		kCDOHRepositorySourceRepositoryKey,
+						  parentDict,				kCDOHRepositoryParentRepositoryKey,
+						  sourceDict,				kCDOHRepositorySourceRepositoryKey,
 						  hasWikiNum,				kCDOHRepositoryHasWikiKey,
 						  hasDownloadsNum,			kCDOHRepositoryHasDownloadsKey,
 						  nil];
