@@ -37,8 +37,10 @@
 
 // Models
 #import <ObjectiveHub/CDOHResource.h>
-#import <ObjectiveHub/CDOHUser.h>
 #import <ObjectiveHub/CDOHPlan.h>
+#import <ObjectiveHub/CDOHAbstractUser.h>
+#import <ObjectiveHub/CDOHUser.h>
+#import <ObjectiveHub/CDOHOrganization.h>
 #import <ObjectiveHub/CDOHRepository.h>
 
 // Client
