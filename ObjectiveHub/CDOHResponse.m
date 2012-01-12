@@ -123,6 +123,7 @@
 			_failureBlock = [failureBlock copy];
 			
 			NSMethodSignature *actionSig = [target methodSignatureForSelector:action];
+			NSUInteger numberOfArguments = [actionSig numberOfArguments];
 			_invocation = [NSInvocation invocationWithMethodSignature:actionSig];
 			[_invocation setSelector:action];
 			[_invocation setTarget:target];
@@ -134,9 +135,9 @@
 				[_invocation setArgument:&obj atIndex:idx + argOffset];
 			}];
 			
-			_pagesArgumentIndex			= [_arguments count]     + argOffset;
-			_successBlockArgumentIndex	= [_arguments count] + 1 + argOffset;
-			_failureBlockArgumentIndex	= [_arguments count] + 2 + argOffset;
+			_pagesArgumentIndex			= numberOfArguments - 3;
+			_successBlockArgumentIndex	= numberOfArguments - 2;
+			_failureBlockArgumentIndex	= numberOfArguments - 1;
 			
 			[_invocation setArgument:&_successBlock atIndex:_successBlockArgumentIndex];
 			[_invocation setArgument:&_failureBlock atIndex:_failureBlockArgumentIndex];
