@@ -132,6 +132,9 @@
 			// 0 == self, 1 == _cmd thus start at 2
 			NSUInteger argOffset = 2;
 			[_arguments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *__unused stop) {
+				if ([obj isKindOfClass:[NSNull class]]) {
+					obj = nil;
+				}
 				[_invocation setArgument:&obj atIndex:idx + argOffset];
 			}];
 			
