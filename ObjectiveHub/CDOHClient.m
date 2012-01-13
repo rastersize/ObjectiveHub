@@ -221,7 +221,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (self) {
 		_username = [username copy];
 		_password = [password copy];
-		
+
 		// TODO: This need to to be reset if the username or password is set during the lifetime of the object.
 		[_client setAuthorizationHeaderWithUsername:_username password:_password];
 	}
@@ -252,6 +252,34 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	}
 	
 	_itemsPerPage = itemsPerPage;
+}
+
+- (void)setUsername:(NSString *)username
+{
+	if (username != _username) {
+		_username = username;
+		
+		[_client setAuthorizationHeaderWithUsername:_username password:_password];
+	}
+}
+
+- (NSString *)username
+{
+	return _username;
+}
+
+- (void)setPassword:(NSString *)password
+{
+	if (password != _password) {
+		_password = password;
+		
+		[_client setAuthorizationHeaderWithUsername:_username password:_password];
+	}
+}
+
+- (NSString *)password
+{
+	return _password;
 }
 
 
