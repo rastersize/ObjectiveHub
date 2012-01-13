@@ -98,7 +98,7 @@ NSString *const kCDOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
 			body = self.responseBody;
 		}
 	
-		varDescs = [NSString stringWithFormat:@"headers = %@, body = %@", self.code, self.HTTPHeaders, body];
+		varDescs = [NSString stringWithFormat:@"headers = %@, body = %@", self.HTTPHeaders, body];
 	}
 	
 	NSString *description = [NSString stringWithFormat:descriptionFormat, varDescs];
