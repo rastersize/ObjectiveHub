@@ -46,9 +46,6 @@
 /// The default default items per page.
 #define kCDOHDefaultItemsPerPage				0
 
-/// The default rate limit of API requests, where zero (0) means automatic.
-#define kCDOHDefaultRateLimit					0
-
 
 NSString *const kCDOHResponseInfoNextPageKey;
 NSString *const kCDOHResponseInfoLastPageKey;
@@ -174,16 +171,6 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * Where 0 (zero) means that we will let GitHub decide what the value should be.
  */
 @property (assign) NSUInteger itemsPerPage;
-
-/**
- * The API request rate limit.
- *
- * @warning **Note:** setting the rate limit to zero (`0`) will make the framework
- * manage the rate limiting automatically.
- *
- * @todo Implement this.
- */
-@property (assign) NSUInteger rateLimit;
 
 
 #pragma mark - Getting and Modyfing Users

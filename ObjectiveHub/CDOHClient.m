@@ -189,7 +189,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 @synthesize username = _username;
 @synthesize password = _password;
 @synthesize itemsPerPage = _itemsPerPage;
-@synthesize rateLimit = _rateLimit;
 
 @synthesize client = _client;
 @synthesize JSONDecoder = _jsonDecoder;
@@ -200,8 +199,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 {
 	self = [super init];
 	if (self) {
-		_itemsPerPage			= kCDOHDefaultItemsPerPage;
-		_rateLimit				= kCDOHDefaultRateLimit;
+		_itemsPerPage					= kCDOHDefaultItemsPerPage;
 		
 		_client					= [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kCDOHGitHubBaseAPIURIString]];
 		[_client registerHTTPOperationClass:[AFHTTPRequestOperation class]];
