@@ -1,6 +1,6 @@
 This is the API reference document for the  [ObjectiveHub library](http://libobjectivehub.com/). If you are wondering were to start or how to use some part of the library please see the [usage guides](http://libobjectivehub.com/documentation/).
 
-### Install Documentation Into Xcode ###
+## Install Documentation Into Xcode ##
 Use the following URL to install the ObjectiveHub documentation into Xcode: `http://libobjectivehub.com/docs/com.libobjectivehub.ObjectiveHub.atom`. Follow the step by step guide below (for Xcode 4).
 
 1. In Xcode, open the preferences and click the _Downloads_ tab.
@@ -40,3 +40,5 @@ An example on how to get all the repositories watched by a user and then adding 
 	}
 
 You will probably not want to just add the repositories (of the type `CDOHRepository`) to the mutable array in your code as that would lead to duplicates if `-loadData` is called twice.
+
+The block will most probably not be called on the main thread so if you need to update any GUI-element please make sure you do so on the main thread. That is, do something like `[self performSelectorOnMainThread:@selector(updateMyGUI) withObject:nil waitUntilDone:NO]`. For more information please see the blocks section in the CDOHClient class documentation.

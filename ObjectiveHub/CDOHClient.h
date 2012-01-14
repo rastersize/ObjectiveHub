@@ -64,9 +64,15 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  *
  * ### Blocks ###
  *
- * - _Failure blocks_ takes exactly one argument, the error (CDOHError) which
+ * The library use two types of blocks, failure and success blocks. These blocks
+ * will be called as described below on a background thread. As such you should
+ * take care when updating GUI elements from within such a block. Remember to
+ * always update the GUI on the main thread only (as AppKit and UIKit aren’t
+ * thread-safe).
+ *
+ * - **_Failure blocks_** takes exactly one argument, the error (CDOHError) which
  * was encounterred during the request.
- * - _Success blocks_ takes exactly one argument, the response (CDOHResponse)
+ * - **_Success blocks_** takes exactly one argument, the response (CDOHResponse)
  * recieved from GitHub. The `resource` property models the resouce provided by
  * GitHub. More information is available through this object, such as if the
  * response is paginated and how many pages exists. The response object also
@@ -165,7 +171,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  *
  * @warning **Note:** Valid range is between 0 to 100 (the upper limit is a
  * [restriction from GitHub](http://developer.github.com/v3/#pagination)).
- * Where 0 (zero) means that we will use GitHub’s default value.
+ * Where 0 (zero) means that we will let GitHub decide what the value should be.
  */
 @property (assign) NSUInteger itemsPerPage;
 
