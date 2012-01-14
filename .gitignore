@@ -27,3 +27,5 @@ build
 
 Documentation/html
 Documentation/docset
+Documentation/publish
+Documentation/docset-installed.txt
