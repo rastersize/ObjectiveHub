@@ -60,18 +60,46 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
 /**
  * Objective-C class for comunicating with GitHub asynchronously using blocks.
  *
- * Currently version 3 of the GitHub API is supported.
+ * Currently **version 3** of the GitHub API is supported.
  *
- * **Blocks**
+ * ### Blocks ###
  *
  * - _Failure blocks_ takes exactly one argument, the error (CDOHError) which
- * was encounterred.
+ * was encounterred during the request.
  * - _Success blocks_ takes exactly one argument, the response (CDOHResponse)
  * recieved from GitHub. The `resource` property models the resouce provided by
  * GitHub. More information is available through this object, such as if the
  * response is paginated and how many pages exists. The response object also
  * makes it easy to get more pages via its `-loadNextPage`, `-loadPreviousPage`
  * and `-loadPages:`.
+ *
+ *
+ * ### Example Usage ###
+ *
+ *	#import <ObjectiveHub/ObjectiveHub.h>
+ *	...
+ *	
+ *	- (void)loadData {
+ *		NSString *username = ...
+ *		CDOHClient *client = [[CDOHClient alloc] init];
+ *		
+ *		[client repositoriesWatchedByUser:username pages:nil success:^(CDOHResponse *response) {
+ *			// Handle the respone (you will probably want to do something 
+ *			// smarter than the row below).
+ *			[self.watchedRepos addObjectsFromArray:response.resource];
+ *			
+ *			// Make sure we load all repositories watched by the user. The
+ *			// success and failure blocks used in the first request will be re-
+ *			// used. Just take care if the user is watching thousands of
+ *			// repositories.
+ *			if (response.hasNextPage) {
+ *				[response loadNextPage];
+ *			}
+ *		} failure:^(CDOHError *error) {
+ *			// Present the error or even better try to fix it for the user.
+ *			[self presentError:error];
+ *		}];
+ *	}
  *
  * @TODO: We should only require a password when GitHub requires us to authenticate else we should not store it (so that we do not expose the user to unnecessary risks. That is, if the user of the library wants this and it is possible.
  */
@@ -382,8 +410,6 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  *
  * @param login The login of the user for which the array of watched
  * repositories should be fetched.
- * @param pages The pages to get. May be `nil`, in which case the first page
- * will be loaded.
  * @param pages The resource response pages to load. May be `nil` in which case
  * the first page will be loaded.
  * @param successBlock The block which is called upon success with a
