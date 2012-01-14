@@ -22,6 +22,21 @@ echo "Will generate API documentation based on:"
 echo ${HEADER_FILES}
 
 echo "Generating API documentation into \"${API_DOCS_DIR}\" for version \"${DOCS_LIBRARY_VERSION}\""
+#TODO:
+#if $DOCS_LIBRARY_VERSION == head
+# then
+#/usr/local/bin/appledoc \
+#--verbose 3 \
+#--output "${API_DOCS_DIR}" \
+#--keep-intermediate-files \
+#--no-install-docset \
+#--project-version "${DOCS_LIBRARY_VERSION}" \
+#--project-name "ObjectiveHub" \
+#--project-company "Aron Cedercrantz" \
+#--company-id "com.libobjectivehub" \
+#--index-desc "${API_DOCS_DIR}/Index.markdown" \
+#${HEADER_FILES}
+#else
 /usr/local/bin/appledoc \
 --verbose 3 \
 --output "${API_DOCS_DIR}" \
@@ -29,8 +44,12 @@ echo "Generating API documentation into \"${API_DOCS_DIR}\" for version \"${DOCS
 --no-install-docset \
 --project-version "${DOCS_LIBRARY_VERSION}" \
 --project-name "ObjectiveHub" \
---project-company "Fruit is Good" \
---company-id "com.fruitisgood" \
+--project-company "Aron Cedercrantz" \
+--company-id "com.libobjectivehub" \
+--docset-feed-url "http://libobjectivehub.com/docs/%DOCSETATOMFILENAME" \
+--docset-package-url "http://libobjectivehub.com/docs/docset/%DOCSETPACKAGEFILENAME" \
+--docset-fallback-url "http://libobjectivehub.com/docs/docset/com.libobjectivehub.ObjectiveHub-${DOCS_LIBRARY_VERSION}.docset/Contents/Resources/Documents" \
+--publish-docset \
 --index-desc "${API_DOCS_DIR}/Index.markdown" \
 ${HEADER_FILES}
 
