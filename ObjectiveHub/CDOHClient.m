@@ -548,7 +548,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Getting Watched and Watching Repositories
-- (void)watchersOfRepository:(NSString *)repository owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)watchersOfRepository:(NSString *)repository owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
 		return;
@@ -558,21 +558,22 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	}
 	
 	if ([pages count] == 0) {
-		pages = [[NSIndexSet alloc] initWithIndex:1];
+		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
 	}
 	
 	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryWatchersPath, owner, repository];
-	[pages enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *__unused stop) {
+	for (NSNumber *idxNum in pages) {
+		NSUInteger idx = [idxNum unsignedIntegerValue];
 		NSDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
 		
 		[self.client getPath:watchersPath
 				  parameters:paramDict
 					 success:[self standardUserArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repository, owner)]
 					 failure:[self standardFailureBlock:failureBlock]];
-	}];
+	}
 }
 
-- (void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)repositoriesWatchedByUser:(NSString *)login pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
 		return;
@@ -582,18 +583,19 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	}
 	
 	if ([pages count] == 0) {
-		pages = [[NSIndexSet alloc] initWithIndex:1];
+		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
 	}
 	
 	NSString *watchedReposPath = [[NSString alloc] initWithFormat:kCDOHWatchedRepositoriesByUserPath, login];
-	[pages enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *__unused stop) {
+	for (NSNumber *idxNum in pages) {
+		NSUInteger idx = [idxNum unsignedIntegerValue];
 		NSDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
 		
 		[self.client getPath:watchedReposPath
 				  parameters:paramDict
 					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(login)]
 					 failure:[self standardFailureBlock:failureBlock]];
-	}];
+	}
 }
 
 - (void)isUserWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock

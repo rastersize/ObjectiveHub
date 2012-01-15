@@ -41,8 +41,6 @@
 
 #pragma mark CDOHResponse Implementation
 @implementation CDOHResponse {
-	NSMutableArray *_pagesIndexSets;
-	
 	NSUInteger _pagesArgumentIndex;
 	NSUInteger _successBlockArgumentIndex;
 	NSUInteger _failureBlockArgumentIndex;
@@ -103,7 +101,6 @@
 			}
 			
 			_lastPage = [lastLink pageNumber];
-			_paginated = (_lastPage > 0);
 			
 			_nextPage = [nextLink pageNumber];
 			_page = _nextPage <= 1 ? 1 : _nextPage - 1;
@@ -113,6 +110,9 @@
 			_hasPreviousPage = (_previousPage >= 1 && _previousPage < _page);
 		}
 		
+		NSString *actionString = NSStringFromSelector(action);
+		NSRange pagesRange = [actionString rangeOfString:@":pages:"];
+		_paginated = (pagesRange.location != NSNotFound);
 		
 		// If response is paginated we need this to be able to perform the
 		// request again. Otherwise there is no need to perform it again.
@@ -154,19 +154,20 @@
 #pragma mark - Load More Data
 - (void)loadNextPage
 {
-	NSIndexSet *pages = [[NSIndexSet alloc] initWithIndex:_nextPage];
+	NSNumber *nextPageNum = [[NSNumber alloc] initWithUnsignedInteger:_nextPage];
+	NSArray *pages = [[NSArray alloc] initWithObjects:nextPageNum, nil];
 	[self loadPages:pages];
 }
 
 - (void)loadPreviousPage
 {
-	NSIndexSet *pages = [[NSIndexSet alloc] initWithIndex:_nextPage];
+	NSNumber *nextPageNum = [[NSNumber alloc] initWithUnsignedInteger:_previousPage];
+	NSArray *pages = [[NSArray alloc] initWithObjects:nextPageNum, nil];
 	[self loadPages:pages];
 }
 
-- (void)loadPages:(NSIndexSet *)pages
+- (void)loadPages:(NSArray *)pages
 {
-	[_pagesIndexSets addObject:pages];
 	[_invocation setArgument:&pages atIndex:_pagesArgumentIndex];
 	[_invocation invoke];
 }

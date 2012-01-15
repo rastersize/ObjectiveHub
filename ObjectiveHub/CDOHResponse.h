@@ -48,6 +48,10 @@
  * resource response is paginated, as indicated by the paginated property.
  *
  * Please notice that page numbers start at **1**.
+ *
+ * This class expects that the last argument of the action method is the failure
+ * block and the second last the success block. If a request if paginated then
+ * CDOHRespone expects that the third last argument is for the `pages` argument.
  */
 @interface CDOHResponse : NSObject
 
@@ -107,7 +111,7 @@
  *
  * @param pages The pages to load.
  */
-- (void)loadPages:(NSIndexSet *)pages;
+- (void)loadPages:(NSArray *)pages;
 
 /**
  * Load the next resource response page.

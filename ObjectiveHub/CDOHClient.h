@@ -377,8 +377,9 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * @param repository The name of the repository.
  * @param owner The name of the owner of the given repository
  * _repositoryName_.
- * @param pages The resource response pages to load. May be `nil` in which case
- * the first page will be loaded.
+ * @param pages An array of an unsigned integer wrapped with a NSNumber for each
+ * page of the resource that should be loaded. May be `nil` in which case the
+ * first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.
@@ -393,7 +394,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * @see CDOHResponse
  * @see CDOHUser
  */
-- (void)watchersOfRepository:(NSString *)repository owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)watchersOfRepository:(NSString *)repository owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all repositories watched by a specific user.
@@ -403,8 +404,9 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  *
  * @param login The login of the user for which the array of watched
  * repositories should be fetched.
- * @param pages The resource response pages to load. May be `nil` in which case
- * the first page will be loaded.
+ * @param pages An array of an unsigned integer wrapped with a NSNumber for each
+ * page of the resource that should be loaded. May be `nil` in which case the
+ * first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.
@@ -419,7 +421,7 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
  * @see CDOHResponse
  * @see CDOHRepository
  */
-- (void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositoriesWatchedByUser:(NSString *)login pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Check whether the currently authenticated user is watching the given
