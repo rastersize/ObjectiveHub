@@ -31,11 +31,16 @@
 //
 
 
-// Custom errors
+//----------------------------------------------------------------------------//
+#pragma mark Basic Classes And Types
+//----------------------------------------------------------------------------//
 #import <ObjectiveHub/CDOHError.h>
 #import <ObjectiveHub/CDOHResponseBlockTypes.h>
 
-// Models
+
+//----------------------------------------------------------------------------//
+#pragma mark - Resource Models
+//----------------------------------------------------------------------------//
 #import <ObjectiveHub/CDOHResource.h>
 #import <ObjectiveHub/CDOHPlan.h>
 #import <ObjectiveHub/CDOHAbstractUser.h>
@@ -43,6 +48,10 @@
 #import <ObjectiveHub/CDOHOrganization.h>
 #import <ObjectiveHub/CDOHRepository.h>
 
-// Client
+
+//----------------------------------------------------------------------------//
+#pragma mark - Making Requests and Handling Responses
+//----------------------------------------------------------------------------//
+#import <ObjectiveHub/CDOHClientProtocol.h>
 #import <ObjectiveHub/CDOHClient.h>
 #import <ObjectiveHub/CDOHResponse.h>
