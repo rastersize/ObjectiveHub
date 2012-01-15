@@ -131,6 +131,8 @@
 		9C613A9E14B60C370067B6B6 /* CDOHResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C613A9A14B60C370067B6B6 /* CDOHResource.m */; };
 		9C613AA014B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9F14B60CEC0067B6B6 /* CDOHResourcePrivate.h */; };
 		9C613AA114B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C613A9F14B60CEC0067B6B6 /* CDOHResourcePrivate.h */; };
+		9C64163B14C32C1300478E39 /* CDOHClientProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C64163A14C32C1300478E39 /* CDOHClientProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C64163C14C32C1300478E39 /* CDOHClientProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C64163A14C32C1300478E39 /* CDOHClientProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C99909514AE708F00DFDD3B /* ObjectiveHub_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F95B146B2069001A5385 /* ObjectiveHub_Tests.m */; };
 		9C99909714AE70F100DFDD3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C99909614AE70F100DFDD3B /* Foundation.framework */; };
 		9C99909A14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */; };
@@ -329,6 +331,7 @@
 		9C613A9914B60C370067B6B6 /* CDOHResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHResource.h; sourceTree = "<group>"; };
 		9C613A9A14B60C370067B6B6 /* CDOHResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHResource.m; sourceTree = "<group>"; };
 		9C613A9F14B60CEC0067B6B6 /* CDOHResourcePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHResourcePrivate.h; sourceTree = "<group>"; };
+		9C64163A14C32C1300478E39 /* CDOHClientProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHClientProtocol.h; sourceTree = "<group>"; };
 		9C99909614AE70F100DFDD3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONUtilities.h; sourceTree = "<group>"; };
 		9C9990A314AE7AEE00DFDD3B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
@@ -632,6 +635,7 @@
 		9C613A9014B601930067B6B6 /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				9C64163A14C32C1300478E39 /* CDOHClientProtocol.h */,
 				9C26FA01146B2DEF001A5385 /* CDOHClient.h */,
 				9C26FA02146B2DEF001A5385 /* CDOHClient.m */,
 			);
@@ -726,6 +730,7 @@
 				9CA5FAC614B6727400F2CD13 /* CDOHResponsePrivate.h in Headers */,
 				9CA5FACA14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.h in Headers */,
 				9C6018DF14B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.h in Headers */,
+				9C64163B14C32C1300478E39 /* CDOHClientProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -770,6 +775,7 @@
 				9CA5FAC714B6727400F2CD13 /* CDOHResponsePrivate.h in Headers */,
 				9CA5FACB14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.h in Headers */,
 				9C6018E014B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.h in Headers */,
+				9C64163C14C32C1300478E39 /* CDOHClientProtocol.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1229,6 +1235,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ./;
 				INFOPLIST_FILE = "ObjectiveHub-Mac/ObjectiveHub-Mac-Info.plist";
 				INSTALL_PATH = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
@@ -1264,6 +1271,7 @@
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = ./;
 				INFOPLIST_FILE = "ObjectiveHub-Mac/ObjectiveHub-Mac-Info.plist";
 				INSTALL_PATH = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
