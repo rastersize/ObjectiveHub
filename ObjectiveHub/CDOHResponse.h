@@ -31,7 +31,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <ObjectiveHub/CDOHResponsBlockTypes.h>
+#import <ObjectiveHub/CDOHResponseBlockTypes.h>
 
 
 #pragma mark Forward Class Declarations
