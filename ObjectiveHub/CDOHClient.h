@@ -166,4 +166,26 @@ NSString *const kCDOHResponseInfoRateLimitRemainingKey;
 @property (assign) NSUInteger itemsPerPage;
 
 
+#pragma mark - Controlling Requests
+/** @name Controlling Requests */
+/**
+ * Suspends all requests, including new ones.
+ *
+ * @see resumeAllRequests
+ */
+- (void)suspendAllRequests;
+
+/**
+ * Resume all requests, including previously sent and new ones.
+ *
+ * @see suspendAllRequests
+ */
+- (void)resumeAllRequests;
+
+/**
+ * Cancel all sent requests.
+ */
+- (void)cancelAllRequests;
+
+
 @end

@@ -281,6 +281,23 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 }
 
 
+#pragma mark - Controlling Requests
+- (void)suspendAllRequests
+{
+	[self.client.operationQueue setSuspended:YES];
+}
+
+- (void)resumeAllRequests
+{
+	[self.client.operationQueue setSuspended:NO];
+}
+
+- (void)cancelAllRequests
+{
+	[self.client.operationQueue cancelAllOperations];
+}
+
+
 #pragma mark - Standard Error Block
 - (CDOHInternalFailureBlock)standardFailureBlock:(CDOHFailureBlock)failureBlock
 {
