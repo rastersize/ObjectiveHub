@@ -98,6 +98,7 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 @synthesize sourceRepository = _sourceRepository;
 @synthesize hasWiki = _hasWiki;
 @synthesize hasDownloads = _hasDownloads;
+@synthesize formattedName = _formattedName;
 
 
 #pragma mark - Initializing an CDOHRepository Instance
@@ -144,6 +145,8 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 		_size = [sizeNum unsignedIntegerValue];
 		NSNumber *openIssuesNum = [dictionary objectForKey:kCDOHRepositoryOpenIssuesKey];
 		_openIssues = [openIssuesNum unsignedIntegerValue];
+		
+		_formattedName = [_owner.name stringByAppendingFormat:@"/%@", _name];
 	}
 	
 	return self;

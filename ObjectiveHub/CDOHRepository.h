@@ -98,6 +98,15 @@
 @property (copy, readonly) NSString *name;
 
 /**
+ * The name of the repository formatted to match GitHub nameing.
+ *
+ * This means that if the repository owner is "github"
+ * (`self.owner.name`) and the repository name is "example" (`self.name`) then
+ * the formatted name will be "github/example".
+ */
+@property (copy, readonly) NSString *formattedName;
+
+/**
  * The repository description.
  */
 @property (copy, readonly) NSString *repositoryDescription;
