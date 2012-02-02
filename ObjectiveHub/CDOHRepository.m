@@ -146,7 +146,7 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 		NSNumber *openIssuesNum = [dictionary objectForKey:kCDOHRepositoryOpenIssuesKey];
 		_openIssues = [openIssuesNum unsignedIntegerValue];
 		
-		_formattedName = [_owner.name stringByAppendingFormat:@"/%@", _name];
+		_formattedName = [_owner.login stringByAppendingFormat:@"/%@", _name];
 	}
 	
 	return self;
