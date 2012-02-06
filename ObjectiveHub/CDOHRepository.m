@@ -106,11 +106,12 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 {
 	self = [super initWithDictionary:dictionary];
 	if (self) {
-		_htmlUrl = [dictionary objectForKey:kCDOHRepositoryHtmlUrlKey];
-		_cloneUrl = [dictionary objectForKey:kCDOHRepositoryCloneUrlKey];
-		_gitUrl = [dictionary objectForKey:kCDOHRepositoryGitUrlKey];
-		_sshUrl = [dictionary objectForKey:kCDOHRepositorySshUrlKey];
-		_svnUrl = [dictionary objectForKey:kCDOHRepositorySvnUrlKey];
+		// URLs
+		_htmlUrl	= [self URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryHtmlUrlKey];
+		_cloneUrl	= [self URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryCloneUrlKey];
+		_gitUrl		= [self URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryGitUrlKey];
+		_sshUrl		= [self URLObjectFromDictionary:dictionary usingKey:kCDOHRepositorySshUrlKey];
+		_svnUrl		= [self URLObjectFromDictionary:dictionary usingKey:kCDOHRepositorySvnUrlKey];
 		_name = [[dictionary objectForKey:kCDOHRepositoryNameKey] copy];
 		_repositoryDescription = [[dictionary objectForKey:kCDOHRepositoryDescriptionKey] copy];
 		_homepage = [dictionary objectForKey:kCDOHRepositoryHomepageKey];
