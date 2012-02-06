@@ -118,8 +118,7 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 		_defaultBranch = [[dictionary objectForKey:kCDOHRepositoryDefaultBranchKey] copy];
 		
 		_owner = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHUser class]];
-		//FIXME: Change to CDOHOrganization class when implemented
-		_organization = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHResource class]];
+		_organization = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHOrganization class]];
 		_parentRepository = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
 		_sourceRepository = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
 		
