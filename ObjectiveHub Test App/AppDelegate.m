@@ -182,6 +182,14 @@
 		}];
 	});
 	
+	dispatch_async(queue, ^{
+		[self.hub repositoriesForOrganization:@"twitter" type:kCDOHRepositoriesTypeAll pages:nil success:^(CDOHResponse *response) {
+			NSLog(@"repository response: %@", response);
+		} failure:^(CDOHError *error) {
+			NSLog(@"repository failure: %@", error);
+		}];
+	});
+	
 	/*dispatch_async(queue, ^{
 		[self.hub repositoriesWatchedByUser:@"rastersize" pages:nil success:^(CDOHResponse *response) {
 			NSLog(@"%@", response);
