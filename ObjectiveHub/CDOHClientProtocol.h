@@ -270,19 +270,22 @@
  * Get all repositories of the authenticated user.
  *
  * The success and failure blocks are both optional but if neither is given no
- * request will be performed. Also please note that the result is not paginated.
+ * request will be performed.
  *
  * @warning **Important:** This method requires the user to be authenticated.
  *
  * @param type The type of repositories which should returned. See the
  * constants with the prefix `kCDOHRepositoriesType*` for possible values.
+ * @param pages An array of an unsigned integers wrapped with a NSNumber for
+ * each page of the resource that should be loaded. May be `nil` in which case
+ * the first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.
  *
  * The `resource` property of the response will be set to a `NSArray` of
  * `CDOHRepository` objects representing all repositories for the user (taking
- * into account the given _type_ of repositories requested).
+ * into account the given _type_ of repositories requested, for one page).
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
@@ -295,26 +298,29 @@
  * @see CDOHRepository
  * @see CDOHRepositoriesType
  */
-- (void)repositories:(NSString *)type success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositories:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all public repositories of the user with the given _login_.
  *
  * The success and failure blocks are both optional but if neither is given no
- * request will be performed. Also please note that the result is not paginated.
+ * request will be performed.
  *
  * @param login The login of the user.
  * @param type The type of repositories which should returned. See the
  * constants with the prefix `kCDOHRepositoriesType*` for possible values.
  * Since we can only get public information for non-authenticated users the
  * `kCDOHRepositoriesTypePrivate` will not yeild any successful result.
+ * @param pages An array of an unsigned integers wrapped with a NSNumber for
+ * each page of the resource that should be loaded. May be `nil` in which case
+ * the first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.
  *
  * The `resource` property of the response will be set to a `NSArray` of
  * `CDOHRepository` objects representing all repositories for the user (taking
- * into account the given _type_ of repositories requested).
+ * into account the given _type_ of repositories requested, for one page).
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
@@ -324,7 +330,7 @@
  * @see CDOHResponse
  * @see CDOHRepository
  */
-- (void)repositoriesForUser:(NSString *)login type:(NSString *)type success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - Watched and Watching Repositories

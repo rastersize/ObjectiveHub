@@ -603,7 +603,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)repositories:(NSString *)type success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)repositories:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
 		return;
@@ -615,14 +615,22 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		[NSException raise:NSInternalInconsistencyException format:@"Username not set."];
 	}
 	
-	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
-	[self.client getPath:kCDOHUserRepositoriesPath
-			  parameters:params
-				 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(type)]
-				 failure:[self standardFailureBlock:failureBlock]];
+	if ([pages count] == 0) {
+		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
+	}
+	
+	for (NSNumber *idxNum in pages) {
+		NSUInteger idx = [idxNum unsignedIntegerValue];
+		NSMutableDictionary *params = [self standardRequestParameterDictionaryForPage:idx];
+		[params setObject:type forKey:kCDOHParameterRepositoriesTypeKey];
+		[self.client getPath:kCDOHUserRepositoriesPath
+				  parameters:params
+					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(type)]
+					 failure:[self standardFailureBlock:failureBlock]];
+	}
 }
 
-- (void)repositoriesForUser:(NSString *)login type:(NSString *)type success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
 		return;
@@ -631,12 +639,24 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"login", @"type"];
 	}
 	
-	NSString *path = [NSString stringWithFormat:kCDOHUserRepositoriesPathFormat, login];
-	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
-	[self.client getPath:path
-			  parameters:params
-				 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(login, type)]
-				 failure:[self standardFailureBlock:failureBlock]];
+	if ([pages count] == 0) {
+		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
+	}
+	
+	NSUInteger idx;
+	NSMutableDictionary *params = nil;
+	NSString *path = nil;
+	for (NSNumber *idxNum in pages) {
+		idx = [idxNum unsignedIntegerValue];
+		params = [self standardRequestParameterDictionaryForPage:idx];
+		[params setObject:type forKey:kCDOHParameterRepositoriesTypeKey];
+	
+		path = [NSString stringWithFormat:kCDOHUserRepositoriesPathFormat, login];
+		[self.client getPath:path
+				  parameters:params
+					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(login, type)]
+					 failure:[self standardFailureBlock:failureBlock]];
+	}
 }
 
 
