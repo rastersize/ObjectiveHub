@@ -245,6 +245,28 @@
 #pragma mark - Repositories
 /** @name Repositories */
 /**
+ * Get the repository for the given _owner_ login and _repository_ name.
+ *
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed. Also please note that the result is not paginated.
+ *
+ * @param repository The name of the repository.
+ * @param owner The name of the owner of the given _repository_.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success. The respone is not paginated.
+ *
+ * The `resource` property of the response will be set to a `CDOHRepository`
+ * object representing the requested repository.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ *
+ * @exception NSInvalidArgumentException if _repository_ or _owner_ is `nil`.
+ */
+- (void)repository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
+/**
  * Get all repositories of the authenticated user.
  *
  * The success and failure blocks are both optional but if neither is given no

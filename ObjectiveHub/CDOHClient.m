@@ -98,6 +98,11 @@ NSString *const kCDOHUserRepositoriesPath					= @"/user/repos";
 /// Takes one string:
 /// 1. the login of the user.
 NSString *const kCDOHUserRepositoriesPathFormat				= @"/users/%@/repos";
+/// The relative path format for a given repository.
+/// Takes two strings:
+/// 1. the login of the repository owner,
+/// 2. the name of the repository.
+NSString *const kCDOHRepositoryPathFormat					= @"/repos/%@/%@";
 /// The relative path format for the watchers of a repository.
 /// Takes two strings;
 /// 1. the login of the repository owner,
@@ -582,6 +587,22 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Repositories
+- (void)repository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (!successBlock && !failureBlock) {
+		return;
+	}
+	if (!repository || !owner) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
+	}
+	
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHRepositoryPathFormat, owner, repository];
+	[self.client getPath:path
+			  parameters:nil
+				 success:[self standardRepositorySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repository, owner)]
+				 failure:[self standardFailureBlock:failureBlock]];
+}
+
 - (void)repositories:(NSString *)type success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
