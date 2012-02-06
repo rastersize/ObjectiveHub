@@ -34,6 +34,7 @@
 #import "CDOHResource.h"
 
 
+#pragma mark Forward Class Declarations
 @class CDOHUser;
 @class CDOHOrganization;
 

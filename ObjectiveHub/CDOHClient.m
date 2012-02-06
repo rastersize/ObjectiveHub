@@ -31,6 +31,7 @@
 //
 
 #import "CDOHClient.h"
+#import "CDOHClientProtocol.h"
 #import "CDOHLibraryVersion.h"
 
 #import "AFNetworking.h"
@@ -83,29 +84,29 @@ NSString *const kCDOHResponseHeaderLinkKey					= @"Link";
 
 
 #pragma mark - GitHub Relative API Path (Formats)
-/// The relative path for a user with login.
+/// The relative path format for a user with login.
 /// Takes one string;
 /// 1. the login name of the user.
-NSString *const kCDOHUserPathFormat					= @"/users/%@";
+NSString *const kCDOHUserPathFormat							= @"/users/%@";
 /// The relative path for an authenticated user.
-NSString *const kCDOHUserAuthenticatedPath			= @"/user";
+NSString *const kCDOHUserAuthenticatedPath					= @"/user";
 /// The relative path for the authenticated users emails.
 NSString *const kCDOHUserEmailsPath					= @"/user/emails";
 /// The relative path for the watchers of a repository.
 /// Takes two strings;
-/// 1. the username of the repository owner,
+/// 1. the login of the repository owner,
 /// 2. the name of the repository.
-NSString *const kCDOHRepositoryWatchersPath			= @"/repos/%@/%@/watchers";
+NSString *const kCDOHRepositoryWatchersPathFormat			= @"/repos/%@/%@/watchers";
 /// The relative path for repositories watched by a user.
 /// Takes one string;
 /// 1. the login name of the user.
-NSString *const kCDOHWatchedRepositoriesByUserPath	= @"/users/%@/watched";
+NSString *const kCDOHWatchedRepositoriesByUserPathFormat	= @"/users/%@/watched";
 /// The relative path for a specific repository watched by the authenticated
 /// user.
 /// Takes two strings;
-/// 1. the username of the repository owner,
+/// 1. the login of the repository owner,
 /// 2. the name of the repository.
-NSString *const kCDOHUserWatchedRepositoryPath		= @"/user/watched/%@/%@";
+NSString *const kCDOHUserWatchedRepositoryPathFormat		= @"/user/watched/%@/%@";
 
 
 #pragma mark - ObjectiveHub Generic Block Types
@@ -578,7 +579,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
 	}
 	
-	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryWatchersPath, owner, repository];
+	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryWatchersPathFormat, owner, repository];
 	for (NSNumber *idxNum in pages) {
 		NSUInteger idx = [idxNum unsignedIntegerValue];
 		NSDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
@@ -603,7 +604,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
 	}
 	
-	NSString *watchedReposPath = [[NSString alloc] initWithFormat:kCDOHWatchedRepositoriesByUserPath, login];
+	NSString *watchedReposPath = [[NSString alloc] initWithFormat:kCDOHWatchedRepositoriesByUserPathFormat, login];
 	for (NSNumber *idxNum in pages) {
 		NSUInteger idx = [idxNum unsignedIntegerValue];
 		NSDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
@@ -624,7 +625,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
 	}
 	
-	NSString *path = [[NSString alloc] initWithFormat:kCDOHUserWatchedRepositoryPath, owner, repository];
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHUserWatchedRepositoryPathFormat, owner, repository];
 	[self.client getPath:path
 			  parameters:nil
 				 success:[self standardSuccessBlockWithNoData:successBlock]
@@ -640,7 +641,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
 	}
 	
-	NSString *path = [[NSString alloc] initWithFormat:kCDOHUserWatchedRepositoryPath, owner, repository];
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHUserWatchedRepositoryPathFormat, owner, repository];
 	[self.client putPath:path
 			  parameters:nil
 				 success:[self standardSuccessBlockWithNoData:successBlock]
@@ -656,7 +657,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
 	}
 	
-	NSString *path = [[NSString alloc] initWithFormat:kCDOHUserWatchedRepositoryPath, owner, repository];
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHUserWatchedRepositoryPathFormat, owner, repository];
 	[self.client deletePath:path
 				 parameters:nil
 					success:[self standardSuccessBlockWithNoData:successBlock]
