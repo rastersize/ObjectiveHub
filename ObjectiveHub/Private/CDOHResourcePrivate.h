@@ -72,17 +72,14 @@ extern NSString *const kCDOHResourcePropertiesDictionaryKey;
  *
  * _ofClass_ must be a subclass of CDOHResource.
  *
- * @param dictionary The dictionary to get the object from for the key
- * _usingKey_.
- * @param usingKey The key to get the object from the given dictionary.
+ * @param dictionary The dictionary to get the object from for the given _key_.
+ * @param key The key to get the object from the given dictionary.
  * @param ofClass The class to instanciate using the object for the given key if
  * the object is a `NSDictionary`.
  * @return The decoded object or `nil`.
  */
-- (id)resourceObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey ofClass:(Class)ofClass;
+- (id)resourceObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)key ofClass:(Class)ofClass;
 
-
-/** @name Decoding Dictionary Objects */
 /**
  * Returns the date object in the given _dictionary_ for the given _key_.
  *
@@ -92,12 +89,25 @@ extern NSString *const kCDOHResourcePropertiesDictionaryKey;
  * is not recognized, we could not parse the string or it is `nil` we return
  * `nil`.
  *
- * @param dictionary The dictionary to get the object from for the key
- * _usingKey_.
- * @param usingKey The key to get the object from the given dictionary.
- * @param ofClass The class to instanciate using the object for the given key if
- * the object is a `NSDictionary`.
+ * @param dictionary The dictionary to get the object from for the given _key_.
+ * @param key The key to get the date object from the given dictionary.
+ * @return The decoded date object or `nil`.
  */
-- (NSDate *)dateObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey;
+- (NSDate *)dateObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)key;
+
+/**
+ * Returns the URL object in the given _dictionary_ for the given _key_.
+ *
+ * If the object for the given key is not a `NSURL` object but instead a
+ * `NSString` object we will try to create a `NSURL` object using this string.
+ * In the case where we can not create an `NSURL` object `nil` will be
+ * returned.
+ *
+ * @param dictionary The dictionary to get the object from for the given _key_.
+ * @param key The key to get the URL object from the given dictionary.
+ * @return The decoded URL object or `nil`.
+ */
+- (NSURL *)URLObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)key;
+
 
 @end

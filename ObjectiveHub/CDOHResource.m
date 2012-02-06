@@ -75,7 +75,7 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 #pragma mark - Decoding Dictionary Objects
 - (id)resourceObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey ofClass:(Class)ofClass
 {
-	return [self decodeObjectFromDictionary:dictionary usingKey:usingKey block:^(id objFromDict, id *retObj) {
+	return [self decodeObjectFromDictionary:dictionary usingKey:usingKey block:^(id objFromDict, __autoreleasing id *retObj) {
 		if ([objFromDict isKindOfClass:ofClass]) {
 			*retObj = [objFromDict copy];
 		} else if ([objFromDict isKindOfClass:[NSDictionary class]]) {
@@ -86,7 +86,7 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 
 - (NSDate *)dateObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey
 {
-	return [self decodeObjectFromDictionary:dictionary usingKey:usingKey block:^(id objFromDict, id *retObj) {
+	return [self decodeObjectFromDictionary:dictionary usingKey:usingKey block:^(id objFromDict, __autoreleasing id *retObj) {
 		if ([objFromDict isKindOfClass:[NSDate class]]) {
 			*retObj = [objFromDict copy];
 		} else if ([objFromDict isKindOfClass:[NSString class]]) {
@@ -96,9 +96,21 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 	}];
 }
 
+- (NSURL *)URLObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)key
+{
+	return [self decodeObjectFromDictionary:dictionary usingKey:key block:^(id objFromDict, __autoreleasing id *retObj) {
+		if ([objFromDict isKindOfClass:[NSURL class]]) {
+			*retObj = [objFromDict copy];
+		} else if ([objFromDict isKindOfClass:[NSString class]]) {
+			NSURL *parsedUrl = [[NSURL alloc] initWithString:objFromDict];
+			*retObj = parsedUrl;
+		}
+	}];
+}
+
 - (id)decodeObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey block:(void (^)(id objFromDict, id *retObj))block
 {
-	id retObj = nil;
+	__autoreleasing id retObj = nil;
 	id objFromDict = [dictionary objectForKey:usingKey];
 	
 	if (objFromDict) {
