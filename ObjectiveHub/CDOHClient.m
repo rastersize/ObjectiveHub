@@ -584,6 +584,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Repositories
 - (void)repositories:(NSString *)type success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	if (!successBlock && !failureBlock) {
+		return;
+	}
 	if (!type) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"type"];
 	}
@@ -600,6 +603,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)repositoriesForUser:(NSString *)login type:(NSString *)type success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	if (!successBlock && !failureBlock) {
+		return;
+	}
 	if (!type || !login) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"login", @"type"];
 	}
