@@ -56,17 +56,11 @@ NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 {
 	self = [super init];
 	if (self) {
-		NSString *name = [dictionary valueForKey:kCDOHPlanDictionaryNameKey];
-		_name = [name copy];
+		_name = [[dictionary valueForKey:kCDOHPlanDictionaryNameKey] copy];
 		
-		NSNumber *space = [dictionary valueForKey:kCDOHPlanDictionarySpaceKey];
-		_space = [space unsignedIntegerValue];
-		
-		NSNumber *collaborators = [dictionary valueForKey:kCDOHPlanDictionaryCollaboratorsKey];
-		_collaborators = [collaborators unsignedIntegerValue];
-		
-		NSNumber *privateRepos = [dictionary valueForKey:kCDOHPlanDictionaryPrivateRepositoriesKey];
-		_privateRepositories = [privateRepos unsignedIntegerValue];
+		_space = [[dictionary valueForKey:kCDOHPlanDictionarySpaceKey] unsignedIntegerValue];
+		_collaborators = [[dictionary valueForKey:kCDOHPlanDictionaryCollaboratorsKey] unsignedIntegerValue];
+		_privateRepositories = [[dictionary valueForKey:kCDOHPlanDictionaryPrivateRepositoriesKey] unsignedIntegerValue];
 	}
 	
 	return self;

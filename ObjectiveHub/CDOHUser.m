@@ -52,11 +52,8 @@ NSString *const kCDOHUserDictionaryBioKey				= @"bio";
 {
 	self = [super initWithDictionary:dictionary];
 	if (self) {
-		NSString *bio = [dictionary valueForKey:kCDOHUserDictionaryBioKey];
-		_biography = [bio copy];
-		
-		NSNumber *hireable = [dictionary valueForKey:kCDOHUserDictionaryHireableKey];
-		_hireable = [hireable boolValue];
+		_biography = [[dictionary valueForKey:kCDOHUserDictionaryBioKey] copy];
+		_hireable = [[dictionary valueForKey:kCDOHUserDictionaryHireableKey] boolValue];
 	}
 	
 	return self;
