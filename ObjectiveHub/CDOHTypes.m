@@ -33,6 +33,7 @@
 #import "CDOHTypes.h"
 
 
+#pragma mark - Repository List Types Type
 NSString *const kCDOHRepositoriesTypeAll		= @"all";
 NSString *const kCDOHRepositoriesTypePublic		= @"public";
 NSString *const kCDOHRepositoriesTypePrivate	= @"private";

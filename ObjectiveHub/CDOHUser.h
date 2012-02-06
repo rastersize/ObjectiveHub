@@ -34,7 +34,14 @@
 #import "CDOHAbstractUser.h"
 
 
-#pragma mark CDOHUser Interface
+#pragma mark Abstract User Request Parameter Keys
+/// User request parameter key for the user biography.
+extern NSString *const kCDOHUserDictionaryBioKey;
+/// User request parameter key for the user hireable status.
+extern NSString *const kCDOHUserDictionaryHireableKey;
+
+
+#pragma mark - CDOHUser Interface
 /**
  * An immutable class containing information about a single "normal" GitHub
  * user, i.e. not an organization.

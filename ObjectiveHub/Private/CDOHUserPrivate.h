@@ -32,11 +32,3 @@
 
 #import <Foundation/Foundation.h>
 
-
-#pragma mark NSCoding and GitHub JSON Keys
-/** @name NSCoding and GitHub JSON Keys */
-/// Dictionary key for the biography value.
-extern NSString *const kCDOHUserDictionaryBioKey;
-/// Dictionary key for the hireable value.
-extern NSString *const kCDOHUserDictionaryHireableKey;
-

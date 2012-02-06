@@ -45,16 +45,6 @@ extern NSString *const kCDOHUserDictionaryIDKey;
 extern NSString *const kCDOHUserDictionaryAvatarURLKey;
 /// Dictionary key for the gravatar ID value.
 extern NSString *const kCDOHUserDictionaryGravatarIDKey;
-/// Dictionary key for the name value.
-extern NSString *const kCDOHUserDictionaryNameKey;
-/// Dictionary key for the company value.
-extern NSString *const kCDOHUserDictionaryCompanyKey;
-/// Dictionary key for the blog URL value.
-extern NSString *const kCDOHUserDictionaryBlogKey;
-/// Dictionary key for the location value.
-extern NSString *const kCDOHUserDictionaryLocationKey;
-/// Dictionary key for the email value.
-extern NSString *const kCDOHUserDictionaryEmailKey;
 /// Dictionary key for the number of public repositories value.
 extern NSString *const kCDOHUserDictionaryPublicReposKey;
 /// Dictionary key for the number of public gists value.
@@ -81,3 +71,4 @@ extern NSString *const kCDOHUserDictionaryDiskUsageKey;
 extern NSString *const kCDOHUserDictionaryCollaboratorsKey;
 /// Dictionary key for the plan value.
 extern NSString *const kCDOHUserDictionaryPlanKey;
+

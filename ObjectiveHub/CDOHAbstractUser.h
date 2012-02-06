@@ -37,6 +37,19 @@
 @class CDOHPlan;
 
 
+#pragma mark - Abstract User Request Parameter Keys
+/// Abstract user request parameter key for the name of the user.
+extern NSString *const kCDOHUserDictionaryNameKey;
+/// Abstract user request parameter key for the company name.
+extern NSString *const kCDOHUserDictionaryCompanyKey;
+/// Abstract user request parameter key for the name value.
+extern NSString *const kCDOHUserDictionaryBlogKey;
+/// Dictionary key for the location value.
+extern NSString *const kCDOHUserDictionaryLocationKey;
+/// Dictionary key for the email value.
+extern NSString *const kCDOHUserDictionaryEmailKey;
+
+
 #pragma mark - CDOHAbstractUser Interface
 /**
  * An immutable class containing information about a single GitHub user of any
