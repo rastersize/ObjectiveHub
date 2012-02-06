@@ -2,7 +2,7 @@
 //  CDOHTypes.h
 //  ObjectiveHub
 //
-//  Copyright 2011 Aron Cedercrantz. All rights reserved.
+//  Copyright 2011-2012 Aron Cedercrantz. All rights reserved.
 //  
 //  Redistribution and use in source and binary forms, with or without
 //  modification, are permitted provided that the following conditions are met:
@@ -82,7 +82,7 @@ extern NSString *const kCDOHRepositoriesTypePublic;
  * authenticated user).
  */
 extern NSString *const kCDOHRepositoriesTypePrivate;
-
+	
 /**
  * All repositories a user is the owner of.
  */
@@ -92,3 +92,4 @@ extern NSString *const kCDOHRepositoriesTypeOwner;
  * All repositories a user is a member of.
  */
 extern NSString *const kCDOHRepositoriesTypeMember;
+
