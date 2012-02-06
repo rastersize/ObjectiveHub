@@ -608,7 +608,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
 	[self.client getPath:path
 			  parameters:params
-				 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(type)]
+				 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(login, type)]
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
