@@ -173,5 +173,14 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 }
 
 
+#pragma mark - Describing a Resource Object
+- (NSString *)description
+{	
+	return [NSString stringWithFormat:@"<%@: %p>",
+			[self class],
+			self];
+}
+
+
 @end
 

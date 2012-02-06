@@ -250,7 +250,7 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 }
 
 
-#pragma mark - Describing a User Object
+#pragma mark - Describing a Repository Object
 - (NSString *)description
 {
 	return [NSString stringWithFormat:@"<%@: %p { %@/%@ }>",

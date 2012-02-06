@@ -137,7 +137,7 @@ NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 }
 
 
-#pragma mark - Describing a User Object
+#pragma mark - Describing a Plan Object
 - (NSString *)description
 {
 	return [NSString stringWithFormat:@"<%@: %p { name = %@ }>", [self class], self, self.name];

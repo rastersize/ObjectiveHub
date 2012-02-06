@@ -228,7 +228,7 @@ NSString *const kCDOHUserDictionaryAuthenticatedKey		= @"internal_authed";
 }
 
 
-#pragma mark - Describing a User Object
+#pragma mark - Describing an Abstract User Object
 - (NSString *)description
 {	
 	return [NSString stringWithFormat:@"<%@: %p { id = %d, login = %@, type = %@, is authed = %@ }>",

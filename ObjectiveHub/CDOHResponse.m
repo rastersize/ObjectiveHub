@@ -196,4 +196,14 @@
 }
 
 
+#pragma mark - Describing a Repository Object
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"<%@: %p { resource = %@ }>",
+			[self class],
+			self,
+			self.resource];
+}
+
+
 @end
