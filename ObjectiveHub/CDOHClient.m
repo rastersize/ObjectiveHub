@@ -84,6 +84,7 @@ NSString *const kCDOHResponseHeaderLinkKey					= @"Link";
 
 
 #pragma mark - GitHub Relative API Path (Formats)
+#pragma mark |- Users
 /// The relative path format for a user with login.
 /// Takes one string;
 /// 1. the login name of the user.
@@ -92,6 +93,7 @@ NSString *const kCDOHUserPathFormat							= @"/users/%@";
 NSString *const kCDOHUserAuthenticatedPath					= @"/user";
 /// The relative path for the authenticated users emails.
 NSString *const kCDOHUserEmailsPath							= @"/user/emails";
+#pragma mark |- User Repositories
 /// The relative path for the authenticated users repositories.
 NSString *const kCDOHUserRepositoriesPath					= @"/user/repos";
 /// The relative path format for a given users repositories.
@@ -103,6 +105,7 @@ NSString *const kCDOHUserRepositoriesPathFormat				= @"/users/%@/repos";
 /// 1. the login of the repository owner,
 /// 2. the name of the repository.
 NSString *const kCDOHRepositoryPathFormat					= @"/repos/%@/%@";
+#pragma mark |- Watched Repositories
 /// The relative path format for the watchers of a repository.
 /// Takes two strings;
 /// 1. the login of the repository owner,
@@ -118,6 +121,14 @@ NSString *const kCDOHWatchedRepositoriesByUserPathFormat	= @"/users/%@/watched";
 /// 1. the login of the repository owner,
 /// 2. the name of the repository.
 NSString *const kCDOHUserWatchedRepositoryPathFormat		= @"/user/watched/%@/%@";
+
+#pragma mark |- Organizations
+
+#pragma mark |- Organization Repositories
+/// The relative path format for a given organizations repositories.
+/// Takes one string:
+/// 1. the name of the organization.
+NSString *const kCDOHOrganizationRepositoriesPathFormat		= @"/orgs/%@/repos";
 
 
 #pragma mark - Request Parameter Keys
@@ -655,6 +666,35 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		[self.client getPath:path
 				  parameters:params
 					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(login, type)]
+					 failure:[self standardFailureBlock:failureBlock]];
+	}
+}
+
+- (void)repositoriesForOrganization:(NSString *)organization type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (!successBlock && !failureBlock) {
+		return;
+	}
+	if (!type || !organization) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"login", @"type"];
+	}
+	
+	if ([pages count] == 0) {
+		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
+	}
+	
+	NSString *path = [NSString stringWithFormat:kCDOHOrganizationRepositoriesPathFormat, organization];
+	
+	NSUInteger idx;
+	NSMutableDictionary *params = nil;
+	for (NSNumber *idxNum in pages) {
+		idx = [idxNum unsignedIntegerValue];
+		params = [self standardRequestParameterDictionaryForPage:idx];
+		[params setObject:type forKey:kCDOHParameterRepositoriesTypeKey];
+		
+		[self.client getPath:path
+				  parameters:params
+					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(organization, type)]
 					 failure:[self standardFailureBlock:failureBlock]];
 	}
 }

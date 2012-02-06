@@ -284,8 +284,9 @@
  * case nothing will be done upon success.
  *
  * The `resource` property of the response will be set to a `NSArray` of
- * `CDOHRepository` objects representing all repositories for the user (taking
- * into account the given _type_ of repositories requested, for one page).
+ * `CDOHRepository` objects representing all repositories for the authenticated
+ * user (taking into account the given _type_ of repositories requested, for
+ * one page).
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
@@ -319,7 +320,7 @@
  * case nothing will be done upon success.
  *
  * The `resource` property of the response will be set to a `NSArray` of
- * `CDOHRepository` objects representing all repositories for the user (taking
+ * `CDOHRepository` objects representing all repositories of the user (taking
  * into account the given _type_ of repositories requested, for one page).
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
@@ -331,6 +332,39 @@
  * @see CDOHRepository
  */
 - (void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
+/**
+ * Get all repositories of the given _organization_.
+ *
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed.
+ *
+ * @param organization The name of the organization.
+ * @param type The type of repositories which should returned. See the
+ * constants with the prefix `kCDOHRepositoriesType*` for possible values. Some
+ * types might require the authenticated user to be a member of the organization
+ * or have access to specific repositories in the organization.
+ * @param pages An array of an unsigned integers wrapped with a NSNumber for
+ * each page of the resource that should be loaded. May be `nil` in which case
+ * the first page will be loaded.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
+ *
+ * The `resource` property of the response will be set to a `NSArray` of
+ * `CDOHRepository` objects representing all repositories of the organization
+ * (taking into account the given _type_ of repositories requested, for one
+ * page).
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ *
+ * @exception NSInvalidArgumentException if _login_ or _type_ are `nil`.
+ *
+ * @see CDOHResponse
+ * @see CDOHRepository
+ */
+- (void)repositoriesForOrganization:(NSString *)organization type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - Watched and Watching Repositories

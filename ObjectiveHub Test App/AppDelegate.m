@@ -175,6 +175,14 @@
 	NSLog(@"didThrowExeption: %@", didThrowException ? @"YES" : @"NO");*/
 	
 	dispatch_async(queue, ^{
+		[self.hub repository:@"CDEvents" owner:@"rastersize" success:^(CDOHResponse *response) {
+			NSLog(@"repository response: %@", response);
+		} failure:^(CDOHError *error) {
+			NSLog(@"repository failure: %@", error);
+		}];
+	});
+	
+	/*dispatch_async(queue, ^{
 		[self.hub repositoriesWatchedByUser:@"rastersize" pages:nil success:^(CDOHResponse *response) {
 			NSLog(@"%@", response);
 			NSLog(@"%@", response.resource);
@@ -193,7 +201,7 @@
 		} failure:^(CDOHError *error) {
 			NSLog(@"repos watched by error: %@", error);
 		}];
-	});
+	});*/
 	
 	dispatch_resume(queue);
 }
