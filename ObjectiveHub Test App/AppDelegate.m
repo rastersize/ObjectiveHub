@@ -175,6 +175,16 @@
 	NSLog(@"didThrowExeption: %@", didThrowException ? @"YES" : @"NO");*/
 	
 	dispatch_async(queue, ^{
+		[self.hub user:^(CDOHResponse *response) {
+			NSLog(@"authed user: %@ (of class %@)",
+				  ((CDOHUser *)response.resource).blogURL,
+				  [((CDOHUser *)response.resource).blogURL class]);
+		} failure:^(CDOHError *error) {
+			NSLog(@"authed user failure: %@", error);
+		}];
+	});
+	
+	/*dispatch_async(queue, ^{
 		[self.hub repository:@"CDEvents" owner:@"rastersize" success:^(CDOHResponse *response) {
 			NSLog(@"repository response: %@", response);
 		} failure:^(CDOHError *error) {
@@ -188,7 +198,7 @@
 		} failure:^(CDOHError *error) {
 			NSLog(@"repository failure: %@", error);
 		}];
-	});
+	});*/
 	
 	/*dispatch_async(queue, ^{
 		[self.hub repositoriesWatchedByUser:@"rastersize" pages:nil success:^(CDOHResponse *response) {
