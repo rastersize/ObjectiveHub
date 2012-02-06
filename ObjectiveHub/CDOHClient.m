@@ -91,8 +91,14 @@ NSString *const kCDOHUserPathFormat							= @"/users/%@";
 /// The relative path for an authenticated user.
 NSString *const kCDOHUserAuthenticatedPath					= @"/user";
 /// The relative path for the authenticated users emails.
-NSString *const kCDOHUserEmailsPath					= @"/user/emails";
-/// The relative path for the watchers of a repository.
+NSString *const kCDOHUserEmailsPath							= @"/user/emails";
+/// The relative path for the authenticated users repositories.
+NSString *const kCDOHUserRepositoriesPath					= @"/user/repos";
+/// The relative path format for a given users repositories.
+/// Takes one string:
+/// 1. the login of the user.
+NSString *const kCDOHUserRepositoriesPathFormat				= @"/users/%@/repos";
+/// The relative path format for the watchers of a repository.
 /// Takes two strings;
 /// 1. the login of the repository owner,
 /// 2. the name of the repository.
@@ -118,8 +124,14 @@ typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSEr
 typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
-#pragma mark - Macro to Create Argument Arrays
-/// Creates an NSArray object of the objects passed into it.
+#pragma mark - Create Parameter Dictionaries
+/// Creates an `NSDictionary` object of the objects passed into it (parameter
+/// value and then followed by the parameter key).
+#define CDOHParametersDictionary(...) [[NSDictionary alloc] initWithObjectsAndKeys: __VA_ARGS__, nil]
+
+
+#pragma mark - Create Argument Arrays
+/// Creates an `NSArray` object of the objects passed into it.
 #define CDOHArrayOfArguments(...) [[NSArray alloc] initWithObjects: __VA_ARGS__, nil]
 
 
