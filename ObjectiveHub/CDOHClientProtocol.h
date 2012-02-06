@@ -2,7 +2,7 @@
 //  CDOHClientProtocol.h
 //  ObjectiveHub
 //
-//  Copyright 2011 Aron Cedercrantz. All rights reserved.
+//  Copyright 2011-2012 Aron Cedercrantz. All rights reserved.
 //  
 //  Redistribution and use in source and binary forms, with or without
 //  modification, are permitted provided that the following conditions are met:
@@ -49,8 +49,8 @@
 @protocol CDOHClientProtocol <NSObject>
 @required
 
-#pragma mark - Getting and Modyfing Users
-/** @name Getting and Updating Users */
+#pragma mark - Users
+/** @name Users */
 /**
  * Get information about a single specific user by their login.
  *
@@ -174,8 +174,8 @@
 - (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
-#pragma mark - Getting and Modyfing User Emails
-/** @name Getting and Modyfing Users */
+#pragma mark - User Emails
+/** @name User Emails */
 /**
  * Get all email addresses of the currently authenticated user.
  *
@@ -316,9 +316,9 @@
  * @param repository The name of the repository.
  * @param owner The name of the owner of the given repository
  * _repositoryName_.
- * @param pages An array of an unsigned integer wrapped with a NSNumber for each
- * page of the resource that should be loaded. May be `nil` in which case the
- * first page will be loaded.
+ * @param pages An array of an unsigned integers wrapped with a NSNumber for
+ * each page of the resource that should be loaded. May be `nil` in which case
+ * the first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.
@@ -343,9 +343,9 @@
  *
  * @param login The login of the user for which the array of watched
  * repositories should be fetched.
- * @param pages An array of an unsigned integer wrapped with a NSNumber for each
- * page of the resource that should be loaded. May be `nil` in which case the
- * first page will be loaded.
+ * @param pages An array of an unsigned integers wrapped with a NSNumber for
+ * each page of the resource that should be loaded. May be `nil` in which case
+ * the first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.

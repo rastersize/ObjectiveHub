@@ -199,7 +199,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 @end
 
 
-
 #pragma mark - ObjectiveHub Implementation
 @implementation CDOHClient
 
@@ -498,7 +497,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 }
 
 
-#pragma mark - Getting and Updating Users
+#pragma mark - Users
 - (void)userWithLogin:(NSString *)login success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
@@ -541,7 +540,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 }
 
 
-#pragma mark - Getting and Modyfing User Emails
+#pragma mark - User Emails
 - (void)userEmails:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
@@ -591,7 +590,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!self.username) {
 		[NSException raise:NSInternalInconsistencyException format:@"Username not set."];
 	}
-
+	
 	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
 	[self.client getPath:kCDOHUserRepositoriesPath
 			  parameters:params
@@ -604,7 +603,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!type || !login) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"login", @"type"];
 	}
-
+	
 	NSString *path = [NSString stringWithFormat:kCDOHUserRepositoriesPathFormat, login];
 	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
 	[self.client getPath:path
@@ -614,7 +613,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 }
 
 
-#pragma mark - Getting Watched and Watching Repositories
+#pragma mark - Watched and Watching Repositories
 - (void)watchersOfRepository:(NSString *)repository owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
