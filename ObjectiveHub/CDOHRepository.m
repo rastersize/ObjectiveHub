@@ -112,40 +112,38 @@ NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 		_gitUrl		= [self URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryGitUrlKey];
 		_sshUrl		= [self URLObjectFromDictionary:dictionary usingKey:kCDOHRepositorySshUrlKey];
 		_svnUrl		= [self URLObjectFromDictionary:dictionary usingKey:kCDOHRepositorySvnUrlKey];
+		
+		// Strings
 		_name = [[dictionary objectForKey:kCDOHRepositoryNameKey] copy];
 		_repositoryDescription = [[dictionary objectForKey:kCDOHRepositoryDescriptionKey] copy];
 		_homepage = [dictionary objectForKey:kCDOHRepositoryHomepageKey];
 		_language = [[dictionary objectForKey:kCDOHRepositoryLanguageKey] copy];
 		_defaultBranch = [[dictionary objectForKey:kCDOHRepositoryDefaultBranchKey] copy];
 		
+		// Resources
 		_owner = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHUser class]];
 		_organization = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHOrganization class]];
 		_parentRepository = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
 		_sourceRepository = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
 		
+		// Dates
 		_pushedAt = [self dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryPushedAtKey];
 		_createdAt = [self dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryCreatedAtKey];
 		
-		NSNumber *privateNum = [dictionary objectForKey:kCDOHRepositoryPrivateKey];
-		_private = [privateNum boolValue];
-		NSNumber *forkNum = [dictionary objectForKey:kCDOHRepositoryForkKey];
-		_fork = [forkNum boolValue];
-		NSNumber *hasWikiNum = [dictionary objectForKey:kCDOHRepositoryHasWikiKey];
-		_hasWiki = [hasWikiNum boolValue];
-		NSNumber *hasIssuesNum = [dictionary objectForKey:kCDOHRepositoryHasIssuesKey];
-		_hasIssues = [hasIssuesNum boolValue];
-		NSNumber *hasDownloadsNum = [dictionary objectForKey:kCDOHRepositoryHasDownloadsKey];
-		_hasDownloads = [hasDownloadsNum boolValue];
+		// Booleans
+		_private = [[dictionary objectForKey:kCDOHRepositoryPrivateKey] boolValue];
+		_fork = [[dictionary objectForKey:kCDOHRepositoryForkKey] boolValue];
+		_hasWiki = [[dictionary objectForKey:kCDOHRepositoryHasWikiKey] boolValue];
+		_hasIssues = [[dictionary objectForKey:kCDOHRepositoryHasIssuesKey] boolValue];
+		_hasDownloads = [[dictionary objectForKey:kCDOHRepositoryHasDownloadsKey] boolValue];
 		
-		NSNumber *forksNum = [dictionary objectForKey:kCDOHRepositoryForksKey];
-		_forks = [forksNum unsignedIntegerValue];
-		NSNumber *watchersNum = [dictionary objectForKey:kCDOHRepositoryWatchersKey];
-		_watchers = [watchersNum unsignedIntegerValue];
-		NSNumber *sizeNum = [dictionary objectForKey:kCDOHRepositorySizeKey];
-		_size = [sizeNum unsignedIntegerValue];
-		NSNumber *openIssuesNum = [dictionary objectForKey:kCDOHRepositoryOpenIssuesKey];
-		_openIssues = [openIssuesNum unsignedIntegerValue];
+		// Unsigned integers
+		_forks = [[dictionary objectForKey:kCDOHRepositoryForksKey] unsignedIntegerValue];
+		_watchers = [[dictionary objectForKey:kCDOHRepositoryWatchersKey] unsignedIntegerValue];
+		_size = [[dictionary objectForKey:kCDOHRepositorySizeKey] unsignedIntegerValue];
+		_openIssues = [[dictionary objectForKey:kCDOHRepositoryOpenIssuesKey] unsignedIntegerValue];
 		
+		// Custom logic
 		_formattedName = [_owner.login stringByAppendingFormat:@"/%@", _name];
 	}
 	

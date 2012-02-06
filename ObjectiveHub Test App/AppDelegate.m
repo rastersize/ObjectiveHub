@@ -174,7 +174,7 @@
 	}
 	NSLog(@"didThrowExeption: %@", didThrowException ? @"YES" : @"NO");*/
 	
-	dispatch_async(queue, ^{
+	/*dispatch_async(queue, ^{
 		[self.hub user:^(CDOHResponse *response) {
 			NSLog(@"authed user: %@ (of class %@)",
 				  ((CDOHUser *)response.resource).blogURL,
@@ -182,16 +182,16 @@
 		} failure:^(CDOHError *error) {
 			NSLog(@"authed user failure: %@", error);
 		}];
-	});
+	});*/
 	
-	/*dispatch_async(queue, ^{
+	dispatch_async(queue, ^{
 		[self.hub repository:@"CDEvents" owner:@"rastersize" success:^(CDOHResponse *response) {
-			NSLog(@"repository response: %@", response);
+			NSLog(@"repository response: %@ (of class %@)", ((CDOHRepository *)response.resource).gitURL, [((CDOHRepository *)response.resource).gitURL class]);
 		} failure:^(CDOHError *error) {
 			NSLog(@"repository failure: %@", error);
 		}];
 	});
-	
+	/*
 	dispatch_async(queue, ^{
 		[self.hub repositoriesForOrganization:@"twitter" type:kCDOHRepositoriesTypeAll pages:nil success:^(CDOHResponse *response) {
 			NSLog(@"repository response: %@", response);
