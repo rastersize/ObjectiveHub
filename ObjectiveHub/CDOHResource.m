@@ -65,7 +65,7 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 {
 	self = [super init];
 	if (self) {
-		_apiResourceUrl = [dictionary objectForKey:kCDOHResourceAPIResourceURLKey];
+		_apiResourceUrl = [self URLObjectFromDictionary:dictionary usingKey:kCDOHResourceAPIResourceURLKey];
 	}
 	
 	return self;
