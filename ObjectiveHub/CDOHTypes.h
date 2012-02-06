@@ -1,5 +1,5 @@
 //
-//  CDOHResponsBlockTypes.h
+//  CDOHTypes.h
 //  ObjectiveHub
 //
 //  Copyright 2011 Aron Cedercrantz. All rights reserved.
@@ -39,6 +39,7 @@
 
 
 #pragma mark - ObjectiveHub Generic Block Types
+/** ObjectiveHub Generic Block Types */
 /**
  * The type of blocks called when a user request failed.
  *
@@ -58,3 +59,36 @@ typedef void (^CDOHFailureBlock)(CDOHError *error);
  */
 typedef void (^CDOHResponseBlock)(CDOHResponse *response);
 
+
+#pragma mark - Repository List Types Type
+// The types of repositories one might want to get.
+/** @name Repository List Types Type */
+/**
+ * All repositories of a user or an organization.
+ *
+ * The same as `kCDOHRepositoriesTypePublic` and
+ * `kCDOHRepositoriesTypePrivate` at the same time, given that the user is
+ * authenticated else the same result as `kCDOHRepositoriesTypePublic`.
+ */
+extern NSString *const kCDOHRepositoriesTypeAll;
+
+/**
+ * All public repositories of a user or an organization.
+ */
+extern NSString *const kCDOHRepositoriesTypePublic;
+
+/**
+ * All the private repositories of a user (requres the user to be the
+ * authenticated user).
+ */
+extern NSString *const kCDOHRepositoriesTypePrivate;
+
+/**
+ * All repositories a user is the owner of.
+ */
+extern NSString *const kCDOHRepositoriesTypeOwner;
+
+/**
+ * All repositories a user is a member of.
+ */
+extern NSString *const kCDOHRepositoriesTypeMember;
