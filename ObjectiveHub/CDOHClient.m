@@ -643,15 +643,15 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
 	}
 	
+	NSString *path = [NSString stringWithFormat:kCDOHUserRepositoriesPathFormat, login];
+	
 	NSUInteger idx;
 	NSMutableDictionary *params = nil;
-	NSString *path = nil;
 	for (NSNumber *idxNum in pages) {
 		idx = [idxNum unsignedIntegerValue];
 		params = [self standardRequestParameterDictionaryForPage:idx];
 		[params setObject:type forKey:kCDOHParameterRepositoriesTypeKey];
 	
-		path = [NSString stringWithFormat:kCDOHUserRepositoriesPathFormat, login];
 		[self.client getPath:path
 				  parameters:params
 					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(login, type)]
