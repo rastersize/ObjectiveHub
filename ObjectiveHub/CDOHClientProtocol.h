@@ -242,8 +242,71 @@
 - (void)deleteUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
-#pragma mark - Getting Watched and Watching Repositories
-/** @name Getting Watched and Watching Repositories */
+#pragma mark - Repositories
+/** @name Repositories */
+/**
+ * Get all repositories of the authenticated user.
+ *
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed. Also please note that the result is not paginated.
+ *
+ * @warning **Important:** This method requires the user to be authenticated.
+ *
+ * @param type The type of repositories which should returned. See the
+ * constants with the prefix `kCDOHRepositoriesType*` for possible values.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
+ *
+ * The `resource` property of the response will be set to a `NSArray` of
+ * `CDOHRepository` objects representing all repositories for the user (taking
+ * into account the given _type_ of repositories requested).
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ *
+ * @exception NSInvalidArgumentException if _type_ is `nil`.
+ * @exception NSInternalInconsistencyException if the `username` of the
+ * authenticated user has not been set.
+ *
+ * @see CDOHResponse
+ * @see CDOHRepository
+ * @see CDOHRepositoriesType
+ */
+- (void)repositories:(NSString *)type success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
+/**
+ * Get all public repositories of the user with the given _login_.
+ *
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed. Also please note that the result is not paginated.
+ *
+ * @param login The login of the user.
+ * @param type The type of repositories which should returned. See the
+ * constants with the prefix `kCDOHRepositoriesType*` for possible values.
+ * Since we can only get public information for non-authenticated users the
+ * `kCDOHRepositoriesTypePrivate` will not yeild any successful result.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
+ *
+ * The `resource` property of the response will be set to a `NSArray` of
+ * `CDOHRepository` objects representing all repositories for the user (taking
+ * into account the given _type_ of repositories requested).
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ *
+ * @exception NSInvalidArgumentException if _login_ or _type_ are `nil`.
+ *
+ * @see CDOHResponse
+ * @see CDOHRepository
+ */
+- (void)repositoriesForUser:(NSString *)login type:(NSString *)type success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
+
+#pragma mark - Watched and Watching Repositories
+/** @name Watched and Watching Repositories */
 /**
  * Get all users watching a specific repository.
  *

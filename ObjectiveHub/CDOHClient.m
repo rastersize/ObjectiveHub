@@ -115,6 +115,11 @@ NSString *const kCDOHWatchedRepositoriesByUserPathFormat	= @"/users/%@/watched";
 NSString *const kCDOHUserWatchedRepositoryPathFormat		= @"/user/watched/%@/%@";
 
 
+#pragma mark - Request Parameter Keys
+/// The repositories type parameter key.
+NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
+
+
 #pragma mark - ObjectiveHub Generic Block Types
 /// Block type for succesful requests.
 typedef void (^CDOHInternalSuccessBlock)(AFHTTPRequestOperation *operation, id responseObject);
@@ -574,6 +579,38 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				 parameters:emails
 					success:[self standardSuccessBlockWithNoData:successBlock]
 					failure:[self standardFailureBlock:failureBlock]];
+}
+
+
+#pragma mark - Repositories
+- (void)repositories:(NSString *)type success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (!type) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"type"];
+	}
+	if (!self.username) {
+		[NSException raise:NSInternalInconsistencyException format:@"Username not set."];
+	}
+
+	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
+	[self.client getPath:kCDOHUserRepositoriesPath
+			  parameters:params
+				 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(type)]
+				 failure:[self standardFailureBlock:failureBlock]];
+}
+
+- (void)repositoriesForUser:(NSString *)login type:(NSString *)type success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (!type || !login) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"login", @"type"];
+	}
+
+	NSString *path = [NSString stringWithFormat:kCDOHUserRepositoriesPathFormat, login];
+	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
+	[self.client getPath:path
+			  parameters:params
+				 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(type)]
+				 failure:[self standardFailureBlock:failureBlock]];
 }
 
 
