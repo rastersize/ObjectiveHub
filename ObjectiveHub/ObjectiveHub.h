@@ -35,7 +35,7 @@
 #pragma mark Basic Classes And Types
 //----------------------------------------------------------------------------//
 #import <ObjectiveHub/CDOHError.h>
-#import <ObjectiveHub/CDOHResponseBlockTypes.h>
+#import <ObjectiveHub/CDOHTypes.h>
 
 
 //----------------------------------------------------------------------------//

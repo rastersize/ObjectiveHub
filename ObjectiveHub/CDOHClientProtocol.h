@@ -32,7 +32,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import <ObjectiveHub/CDOHResponseBlockTypes.h>
+#import <ObjectiveHub/CDOHTypes.h>
 
 
 #pragma mark CDOHClientProtocol Protocol
