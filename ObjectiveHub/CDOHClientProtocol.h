@@ -314,8 +314,7 @@
  * request will be performed.
  *
  * @param repository The name of the repository.
- * @param owner The name of the owner of the given repository
- * _repositoryName_.
+ * @param owner The login of the owner of the given _repository_.
  * @param pages An array of an unsigned integers wrapped with a NSNumber for
  * each page of the resource that should be loaded. May be `nil` in which case
  * the first page will be loaded.
@@ -372,7 +371,7 @@
  * @warning **Important:** This method requires the user to be authenticated.
  *
  * @param repository The name of the repository.
- * @param owner The login of the repository owner.
+ * @param owner The login of the owner of the given _repository_.
  * @param successBlock The block which is called if the user is watching the
  * given repository. The response object **will** be `nil`.
  * @param failureBlock The block which is called if the user is not watching the
@@ -392,7 +391,7 @@
  * @warning **Important:** This method requires the user to be authenticated.
  *
  * @param repository The name of the repository.
- * @param owner The login of the repository owner.
+ * @param owner The login of the owner of the given _repository_.
  * @param successBlock The block which is called if the user is watching the
  * given repository. The response object **will** be `nil`.
  * @param failureBlock The block which is called upon failure with the error
@@ -410,7 +409,7 @@
  * @warning **Important:** This method requires the user to be authenticated.
  *
  * @param repository The name of the repository.
- * @param owner The login of the repository owner.
+ * @param owner The login of the owner of the given _repository_.
  * @param successBlock The block which is called if the request to stop watching
  * the specified repository succeeded. The response object **will** be `nil`.
  * @param failureBlock The block which is called upon failure with the error
