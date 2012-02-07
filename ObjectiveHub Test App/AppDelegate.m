@@ -184,15 +184,26 @@
 		}];
 	});*/
 	
-	dispatch_async(queue, ^{
+	/*dispatch_async(queue, ^{
 		[self.hub repository:@"CDEvents" owner:@"rastersize" success:^(CDOHResponse *response) {
 			NSLog(@"repository response: %@ (of class %@)", ((CDOHRepository *)response.resource).gitURL, [((CDOHRepository *)response.resource).gitURL class]);
 		} failure:^(CDOHError *error) {
 			NSLog(@"repository failure: %@", error);
 		}];
-	});
-	/*
-	dispatch_async(queue, ^{
+	});*/
+	
+	/*@try {
+	self.hub.username = nil;
+	self.hub.password = nil;
+	[self.hub user:^(CDOHResponse __unused *response) {
+		NSLog(@"BAD SHIT!");
+	} failure:NULL];
+	} @catch (NSException *e) {
+		NSLog(@"e = %@", [e name]);
+	}*/
+	
+	
+	/*dispatch_async(queue, ^{
 		[self.hub repositoriesForOrganization:@"twitter" type:kCDOHRepositoriesTypeAll pages:nil success:^(CDOHResponse *response) {
 			NSLog(@"repository response: %@", response);
 		} failure:^(CDOHError *error) {
