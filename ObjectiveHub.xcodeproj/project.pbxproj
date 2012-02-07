@@ -92,7 +92,6 @@
 		9C26FA03146B2DEF001A5385 /* CDOHClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26FA01146B2DEF001A5385 /* CDOHClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C26FA04146B2DEF001A5385 /* CDOHClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26FA01146B2DEF001A5385 /* CDOHClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C26FA05146B2DEF001A5385 /* CDOHClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26FA02146B2DEF001A5385 /* CDOHClient.m */; };
-		9C26FA06146B2DEF001A5385 /* CDOHClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26FA02146B2DEF001A5385 /* CDOHClient.m */; };
 		9C26FA07146B2DEF001A5385 /* CDOHClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26FA02146B2DEF001A5385 /* CDOHClient.m */; };
 		9C26FA08146B2DEF001A5385 /* CDOHClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26FA02146B2DEF001A5385 /* CDOHClient.m */; };
 		9C2F3E7B146F3F2000C44A82 /* CDOHUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E79146F3F2000C44A82 /* CDOHUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -107,6 +106,12 @@
 		9C2F3E8B146F5F7D00C44A82 /* CDOHPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */; };
 		9C2F3E8D146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */; };
 		9C2F3E8E146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */; };
+		9C3ADD6414E1093F00C454F8 /* CDOHClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADD6314E1093F00C454F8 /* CDOHClientTests.m */; };
+		9C3ADD6514E1093F00C454F8 /* CDOHClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADD6314E1093F00C454F8 /* CDOHClientTests.m */; };
+		9C3ADD9514E10F7800C454F8 /* CDOHTestsUserCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADD9414E10F7800C454F8 /* CDOHTestsUserCredentials.m */; };
+		9C3ADD9614E10F7800C454F8 /* CDOHTestsUserCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADD9414E10F7800C454F8 /* CDOHTestsUserCredentials.m */; };
+		9C3ADD9914E110D800C454F8 /* account.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C3ADD9814E110D800C454F8 /* account.plist */; };
+		9C3ADD9A14E110D800C454F8 /* account.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C3ADD9814E110D800C454F8 /* account.plist */; };
 		9C47C5511473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C47C5501473E9C90026BD6D /* CDOHLibraryVersion.h */; };
 		9C47C5521473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C47C5501473E9C90026BD6D /* CDOHLibraryVersion.h */; };
 		9C5D2D5A1470281A0064F02A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C5D2D581470281A0064F02A /* InfoPlist.strings */; };
@@ -310,6 +315,11 @@
 		9C2F3E86146F5F7D00C44A82 /* CDOHPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHPlan.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CDOHPlan.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHPlanPrivate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		9C3ADD6214E1093F00C454F8 /* CDOHClientTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHClientTests.h; sourceTree = "<group>"; };
+		9C3ADD6314E1093F00C454F8 /* CDOHClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHClientTests.m; sourceTree = "<group>"; };
+		9C3ADD9314E10F7800C454F8 /* CDOHTestsUserCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHTestsUserCredentials.h; sourceTree = "<group>"; };
+		9C3ADD9414E10F7800C454F8 /* CDOHTestsUserCredentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHTestsUserCredentials.m; sourceTree = "<group>"; };
+		9C3ADD9814E110D800C454F8 /* account.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = account.plist; sourceTree = "<group>"; };
 		9C47C5501473E9C90026BD6D /* CDOHLibraryVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHLibraryVersion.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9C5D2D521470281A0064F02A /* ObjectiveHub Test App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ObjectiveHub Test App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C5D2D571470281A0064F02A /* ObjectiveHub Test App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveHub Test App-Info.plist"; sourceTree = "<group>"; };
@@ -481,6 +491,8 @@
 			isa = PBXGroup;
 			children = (
 				9C26F955146B2069001A5385 /* Supporting Files */,
+				9C3ADD6214E1093F00C454F8 /* CDOHClientTests.h */,
+				9C3ADD6314E1093F00C454F8 /* CDOHClientTests.m */,
 			);
 			name = "Unit Tests";
 			path = "ObjectiveHub-Tests";
@@ -489,6 +501,9 @@
 		9C26F955146B2069001A5385 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9C3ADD9314E10F7800C454F8 /* CDOHTestsUserCredentials.h */,
+				9C3ADD9414E10F7800C454F8 /* CDOHTestsUserCredentials.m */,
+				9C3ADD9814E110D800C454F8 /* account.plist */,
 				9C26F956146B2069001A5385 /* ObjectiveHub-Tests-Info.plist */,
 				9C26F957146B2069001A5385 /* InfoPlist.strings */,
 			);
@@ -918,6 +933,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C26F959146B2069001A5385 /* InfoPlist.strings in Resources */,
+				9C3ADD9914E110D800C454F8 /* account.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -925,6 +941,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C3ADD9A14E110D800C454F8 /* account.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1021,7 +1038,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C26FA06146B2DEF001A5385 /* CDOHClient.m in Sources */,
+				9C3ADD6414E1093F00C454F8 /* CDOHClientTests.m in Sources */,
+				9C3ADD9514E10F7800C454F8 /* CDOHTestsUserCredentials.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1063,6 +1081,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C26FA08146B2DEF001A5385 /* CDOHClient.m in Sources */,
+				9C3ADD6514E1093F00C454F8 /* CDOHClientTests.m in Sources */,
+				9C3ADD9614E10F7800C454F8 /* CDOHTestsUserCredentials.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
