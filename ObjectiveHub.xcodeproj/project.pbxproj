@@ -110,6 +110,8 @@
 		9C3ADD9A14E110D800C454F8 /* account.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C3ADD9814E110D800C454F8 /* account.plist */; };
 		9C3ADDB114E1389400C454F8 /* AFJSONUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADDB014E1389400C454F8 /* AFJSONUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C3ADDB214E1389400C454F8 /* AFJSONUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADDB014E1389400C454F8 /* AFJSONUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C3ADDB914E13A5300C454F8 /* CDOHRFC3339Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADDB814E13A5300C454F8 /* CDOHRFC3339Tests.m */; };
+		9C3ADDBA14E13A5300C454F8 /* CDOHRFC3339Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADDB814E13A5300C454F8 /* CDOHRFC3339Tests.m */; };
 		9C47C5511473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C47C5501473E9C90026BD6D /* CDOHLibraryVersion.h */; };
 		9C47C5521473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C47C5501473E9C90026BD6D /* CDOHLibraryVersion.h */; };
 		9C5D2D5A1470281A0064F02A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C5D2D581470281A0064F02A /* InfoPlist.strings */; };
@@ -317,6 +319,8 @@
 		9C3ADD9414E10F7800C454F8 /* CDOHTestsUserCredentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHTestsUserCredentials.m; sourceTree = "<group>"; };
 		9C3ADD9814E110D800C454F8 /* account.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = account.plist; sourceTree = "<group>"; };
 		9C3ADDB014E1389400C454F8 /* AFJSONUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFJSONUtilities.m; sourceTree = "<group>"; };
+		9C3ADDB714E13A5300C454F8 /* CDOHRFC3339Tests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHRFC3339Tests.h; sourceTree = "<group>"; };
+		9C3ADDB814E13A5300C454F8 /* CDOHRFC3339Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHRFC3339Tests.m; sourceTree = "<group>"; };
 		9C47C5501473E9C90026BD6D /* CDOHLibraryVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHLibraryVersion.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9C5D2D521470281A0064F02A /* ObjectiveHub Test App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ObjectiveHub Test App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C5D2D571470281A0064F02A /* ObjectiveHub Test App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveHub Test App-Info.plist"; sourceTree = "<group>"; };
@@ -490,6 +494,8 @@
 				9C26F955146B2069001A5385 /* Supporting Files */,
 				9C3ADD6214E1093F00C454F8 /* CDOHClientTests.h */,
 				9C3ADD6314E1093F00C454F8 /* CDOHClientTests.m */,
+				9C3ADDB714E13A5300C454F8 /* CDOHRFC3339Tests.h */,
+				9C3ADDB814E13A5300C454F8 /* CDOHRFC3339Tests.m */,
 			);
 			name = "Unit Tests";
 			path = "ObjectiveHub-Tests";
@@ -1034,6 +1040,7 @@
 			files = (
 				9C3ADD6414E1093F00C454F8 /* CDOHClientTests.m in Sources */,
 				9C3ADD9514E10F7800C454F8 /* CDOHTestsUserCredentials.m in Sources */,
+				9C3ADDB914E13A5300C454F8 /* CDOHRFC3339Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1077,6 +1084,7 @@
 				9C26FA08146B2DEF001A5385 /* CDOHClient.m in Sources */,
 				9C3ADD6514E1093F00C454F8 /* CDOHClientTests.m in Sources */,
 				9C3ADD9614E10F7800C454F8 /* CDOHTestsUserCredentials.m in Sources */,
+				9C3ADDBA14E13A5300C454F8 /* CDOHRFC3339Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
