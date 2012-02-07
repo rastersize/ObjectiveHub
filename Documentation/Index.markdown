@@ -41,4 +41,4 @@ An example on how to get all the repositories watched by a user and then adding 
 
 You will probably not want to just add the repositories (of the type `CDOHRepository`) to the mutable array in your code as that would lead to duplicates if `-loadData` is called twice.
 
-The block will most probably not be called on the main thread so if you need to update any GUI-element please make sure you do so on the main thread. That is, do something like `[self performSelectorOnMainThread:@selector(updateMyGUI) withObject:nil waitUntilDone:NO]`. For more information please see the blocks section in the CDOHClient class documentation.
+The success and failure blocks might not be called on the main thread so if you need to update any GUI-element please make sure you do so on the main thread. Updating of other data structures should also be performed in a thread-safe manner. That is, do something like `[self performSelectorOnMainThread:@selector(updateMyGUI) withObject:nil waitUntilDone:NO]` or similair. For more information please see the blocks section in the CDOHClient class documentation.
