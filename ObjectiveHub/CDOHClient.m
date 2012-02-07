@@ -63,17 +63,17 @@ NSArray *CDOHPagesArrayForPageIndexes_(NSUInteger pageIdx, ...)
 	NSUInteger idx = pageIdx;
 	NSNumber *idxNum = nil;
 	NSMutableArray *pages = [[NSMutableArray alloc] init];
-
+	
 	va_list args;
 	va_start(args, pageIdx);
 	while (idx != NSUIntegerMax) {
 		idxNum = [[NSNumber alloc] initWithInteger:idx];
 		[pages addObject:idxNum];
-
+		
 		idx = va_arg(args, NSInteger);
 	}
 	va_end(args);
-
+	
 	return pages;
 }
 
@@ -129,10 +129,18 @@ NSString *const kCDOHUserRepositoriesPathFormat				= @"/users/%@/repos";
 NSString *const kCDOHRepositoryPathFormat					= @"/repos/%@/%@";
 #pragma mark |- Watched Repositories
 /// The relative path format for the watchers of a repository.
-/// Takes two strings;
+/// Takes two strings:
 /// 1. the login of the repository owner,
 /// 2. the name of the repository.
+/// @deprecated
 NSString *const kCDOHRepositoryWatchersPathFormat			= @"/repos/%@/%@/watchers";
+/// The relative path format for special information, such as watchers and forks
+/// about a repository.
+/// Takes three strings:
+/// 1. the login of the repository owner,
+/// 2. the name of the repository,
+/// 3. the information identifier (such as forks, watchers and so on).
+NSString *const kCDOHRepositoryExtrasPathFormat				= @"/repos/%@/%@/%@";
 /// The relative path for repositories watched by a user.
 /// Takes one string;
 /// 1. the login name of the user.
@@ -523,12 +531,12 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if ([pages count] == 0) {
 		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
 	}
-
+	
 	for (NSNumber *idxNum in pages) {
 		NSUInteger idx = [idxNum unsignedIntegerValue];
 		NSMutableDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
 		[paramDict addEntriesFromDictionary:params];
-
+		
 		[self.client getPath:path
 				  parameters:paramDict
 					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(path)]
@@ -996,6 +1004,26 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				 parameters:nil
 					success:[self standardSuccessBlockWithNoData:successBlock]
 					failure:[self standardFailureBlock:failureBlock]];
+}
+
+
+#pragma mark - Repository Forks
+- (void)repositoryForks:(NSString *)repository owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (!successBlock && !failureBlock) {
+		return;
+	}
+	if (!repository || !owner) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
+	}
+	
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, @"forks"];
+	NSLog(@"path: %@", path);
+	[self getRepositoriesAtPath:path
+						 params:nil
+						  pages:pages
+						success:successBlock
+						failure:failureBlock];
 }
 
 

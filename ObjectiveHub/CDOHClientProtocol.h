@@ -768,4 +768,31 @@
 - (void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
+#pragma mark - Repository Forks
+/** @name Repository Forks */
+/**
+ * Get all forks of a given repository.
+ *
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed.
+ *
+ * @param repository The name of the repository.
+ * @param owner The login of the owner of the given _repository_.
+ * @param pages An array of an unsigned integers wrapped with a NSNumber for
+ * each page of the resource that should be loaded. May be `nil` in which case
+ * the first page will be loaded.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
+ *
+ * The `resource` property of the response will be set to a `NSArray` of
+ * `CDOHRepository` objects representing all the forks of the given repositories
+ * (for one page).
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ */
+- (void)repositoryForks:(NSString *)repository owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
+
 @end
