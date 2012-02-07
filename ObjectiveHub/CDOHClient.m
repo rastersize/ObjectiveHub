@@ -512,10 +512,10 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 - (NSMutableDictionary *)requestParameterDictionaryForDictionary:(NSDictionary *)dictionary validKeys:(NSArray *)validKeys
 {
 	NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:[validKeys count]];
-
+	
 	for (id key in validKeys) {
 		id obj = [dictionary objectForKey:key];
-
+		
 		// Whitelisted classes
 		if ([obj isKindOfClass:[NSString class]] ||
 			[obj isKindOfClass:[NSNumber class]] ||
@@ -523,7 +523,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 			[obj isKindOfClass:[NSDictionary class]] ||
 			[obj isKindOfClass:[NSNull class]] ||
 			[obj isKindOfClass:[NSString class]]) {
-
+			
 			[params setObject:obj forKey:key];
 		}
 		// Transformable classes
@@ -536,7 +536,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 			NSLog(@"Invalid type of class '%@' for key '%@' skipping.", [obj class], [key class]);
 		}
 	}
-
+	
 	return params;
 }
 
@@ -617,8 +617,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 					 kCDOHUserBioKey,
 					 nil];
 	params = [self requestParameterDictionaryForDictionary:dictionary validKeys:keys];
-
-
+	
+	
 	NSString *patchPath = kCDOHUserAuthenticatedPath;
 	[self.client patchPath:patchPath
 				parameters:params
@@ -692,6 +692,68 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 			  parameters:nil
 				 success:[self standardRepositorySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repository, owner)]
 				 failure:[self standardFailureBlock:failureBlock]];
+}
+
+- (void)createRepository:(NSString *)name dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) {
+		return;
+	}
+	if (!name) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) were invalid (nil)", @"name"];
+	}
+	
+	NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:[dictionary count] + 1];
+	if ([dictionary count] > 0) {
+		NSArray *keys = [[NSArray alloc] initWithObjects:
+						 kCDOHRepositoryDescriptionKey,
+						 kCDOHRepositoryHomepageKey,
+						 kCDOHRepositoryPrivateKey,
+						 kCDOHRepositoryHasIssuesKey,
+						 kCDOHRepositoryHasWikiKey,
+						 kCDOHRepositoryHasDownloadsKey,
+						 nil];
+		NSDictionary *optionalDictionary = [self requestParameterDictionaryForDictionary:dictionary validKeys:keys];
+		[params addEntriesFromDictionary:optionalDictionary];
+	}
+	[params setObject:name forKey:kCDOHRepositoryNameKey];
+	
+	[self.client postPath:kCDOHUserRepositoriesPath
+			   parameters:params
+				  success:[self standardRepositorySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(name, dictionary)]
+				  failure:[self standardFailureBlock:failureBlock]];
+}
+
+- (void)createRepository:(NSString *)name inOrganization:(NSString *)organization dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) {
+		return;
+	}
+	if (!name || !organization) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) were invalid (nil)", @"name", @"organization"];
+	}
+	
+	NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:[dictionary count] + 1];
+	if ([dictionary count] > 0) {
+		NSArray *keys = [[NSArray alloc] initWithObjects:
+						 kCDOHRepositoryDescriptionKey,
+						 kCDOHRepositoryHomepageKey,
+						 kCDOHRepositoryPrivateKey,
+						 kCDOHRepositoryHasIssuesKey,
+						 kCDOHRepositoryHasWikiKey,
+						 kCDOHRepositoryHasDownloadsKey,
+						 kCDOHRepositoryTeamIDKey,
+						 nil];
+		NSDictionary *optionalDictionary = [self requestParameterDictionaryForDictionary:dictionary validKeys:keys];
+		[params addEntriesFromDictionary:optionalDictionary];
+	}
+	[params setObject:name forKey:kCDOHRepositoryNameKey];
+	
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHOrganizationRepositoriesPathFormat, organization];
+	[self.client postPath:path
+			   parameters:params
+				  success:[self standardRepositorySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(name, organization)]
+				  failure:[self standardFailureBlock:failureBlock]];
 }
 
 - (void)repositories:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock

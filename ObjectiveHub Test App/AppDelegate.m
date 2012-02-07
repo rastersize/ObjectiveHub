@@ -232,6 +232,25 @@
 		}];
 	});*/
 	
+	dispatch_async(queue, ^{
+		NSDictionary *creationTestDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+										  @"A short description of the repo :)", kCDOHRepositoryDescriptionKey,
+										  [NSURL URLWithString:@"http://foo:bar@www.example.com:80/test?adad=3234&ddad"], kCDOHRepositoryHomepageKey,
+										  [NSNumber numberWithBool:NO], kCDOHRepositoryPrivateKey,
+										  [NSNumber numberWithBool:NO], kCDOHRepositoryHasIssuesKey,
+										  [NSNumber numberWithBool:NO], kCDOHRepositoryHasWikiKey,
+										  [NSNumber numberWithBool:NO], kCDOHRepositoryHasDownloadsKey,
+										  nil];
+		[self.hub createRepository:@"CreationTest"
+						dictionary:creationTestDict
+						   success:^(CDOHResponse *response) {
+							   NSLog(@"createRepository response: %@", response);
+						   }
+						   failure:^(CDOHError *error) {
+							   NSLog(@"createRepository failure: %@", error);
+						   }];
+	});
+	
 	dispatch_resume(queue);
 }
 

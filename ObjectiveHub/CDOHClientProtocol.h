@@ -108,6 +108,9 @@
  * Update the currently authenticated user with the contents of the given
  * dictionary.
  *
+ * In case the dictionary is empty the parameter is `nil` the method will return
+ * without doing anything.
+ *
  * Each of the available keys are optional and if omitted the value will not be
  * changed. The possible actions that can be performed as well as the
  * corresponding key and value type is listed in the table below.
@@ -302,6 +305,208 @@
  * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
  */
 - (void)repository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
+/**
+ * Create a new repository for the authenticated user with the given _name_.
+ *
+ * The success and failure blocks are both optional and the task **will** be
+ * carried out even if you set both to `NULL`.
+ *
+ * The following table details the available keys, the expected type and
+ * additional comments. All options are optional, only the name is required.
+ *
+ * <table>
+ *   <tr>
+ *     <th></th>
+ *     <th style="text-align: left">Dictionary Key Constant</th>
+ *     <th style="text-align: left">Value Type</th>
+ *     <th style="text-align: left">Comments</th>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Description:</th>
+ *     <td><code>kCDOHRepositoryDescriptionKey</code></td>
+ *     <td><code>NSString</code></td>
+ *     <td>Default is no description.</td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Homepage URL:</th>
+ *     <td><code>kCDOHRepositoryHomepageKey</code></td>
+ *     <td><code>NSURL</code></td>
+ *     <td>Default is no homepage URL.</td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Private:</th>
+ *     <td><code>kCDOHRepositoryPrivateKey</code></td>
+ *     <td>Boolean inside a <code>NSNumber</code></td>
+ *     <td>
+ *       <code>YES</code> to create a private repository, <code>NO</code> to
+ *       create a public one. Creating private repositories requires a paid
+ *       GitHub account. Default is <code>NO</code>.
+ *     </td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Has issues enabled:</th>
+ *     <td><code>kCDOHRepositoryHasIssuesKey</code></td>
+ *      <td>Boolean inside a <code>NSNumber</code></td>
+ *     <td>
+ *       <code>YES</code> to enable issues for this repository, <code>NO</code>
+ *       to disable them. Default is <code>YES</code>.
+ *     </td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Has wiki enabled:</th>
+ *     <td><code>kCDOHRepositoryHasWikiKey</code></td>
+ *      <td>Boolean inside a <code>NSNumber</code></td>
+ *     <td>
+ *       <code>YES</code> to enable the wiki for this repository,
+ *       <code>NO</code> to disable it. Default is <code>YES</code>.
+ *     </td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Has downloads enabled:</th>
+ *     <td><code>kCDOHRepositoryHasDownloadsKey</code></td>
+ *      <td>Boolean inside a <code>NSNumber</code></td>
+ *     <td>
+ *       <code>YES</code> to enable downloads for this repository,
+ *       <code>NO</code> to disable them. Default is <code>YES</code>.
+ *     </td>
+ *   </tr>
+ * </table>
+ *
+ * @warning **Important:** This method requires the user to be authenticated. If
+ * no authenticated user has been set will immediately call the given failure
+ * block and then return. If no failure block has been supplied an
+ * `NSInternalInconsistencyException` exception will be raised.
+ *
+ * @param name The name of the to be created repository.
+ * @param dictionary A dictionary containing all the options for the repository.
+ * May be `nil` in which case the GitHubs default values will be used.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success. The respone is not paginated.
+ *
+ * The `resource` property of the response will be set to a `CDOHRepository`
+ * object representing the newly created repository.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ *
+ * @exception NSInvalidArgumentException if _name_ is `nil`.
+ * @exception NSInternalInconsistencyException if no authenticated user has been
+ * set **and** no failure block has been given.
+ *
+ * @see repository:owner:success:failure:
+ * @see deleteRepository:owner:success:failure:
+ * @see createRepository:forOrganization:dictionary:success:failure:
+ */
+- (void)createRepository:(NSString *)name dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
+/**
+ * Create a new repository for the given organization with the given _name_.
+ *
+ * The success and failure blocks are both optional and the task **will** be
+ * carried out even if you set both to `NULL`.
+ *
+ * The following table details the available keys, the expected type and
+ * additional comments. All options are optional, only the name is required.
+ *
+ * <table>
+ *   <tr>
+ *     <th></th>
+ *     <th style="text-align: left">Dictionary Key Constant</th>
+ *     <th style="text-align: left">Value Type</th>
+ *     <th style="text-align: left">Comments</th>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Description:</th>
+ *     <td><code>kCDOHRepositoryDescriptionKey</code></td>
+ *     <td><code>NSString</code></td>
+ *     <td>Default is no description.</td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Homepage URL:</th>
+ *     <td><code>kCDOHRepositoryHomepageKey</code></td>
+ *     <td><code>NSURL</code></td>
+ *     <td>Default is no homepage URL.</td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Private:</th>
+ *     <td><code>kCDOHRepositoryPrivateKey</code></td>
+ *     <td>Boolean inside a <code>NSNumber</code></td>
+ *     <td>
+ *       <code>YES</code> to create a private repository, <code>NO</code> to
+ *       create a public one. Creating private repositories requires a paid
+ *       GitHub account. Default is <code>NO</code>.
+ *     </td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Has issues enabled:</th>
+ *     <td><code>kCDOHRepositoryHasIssuesKey</code></td>
+ *      <td>Boolean inside a <code>NSNumber</code></td>
+ *     <td>
+ *       <code>YES</code> to enable issues for this repository, <code>NO</code>
+ *       to disable them. Default is <code>YES</code>.
+ *     </td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Has wiki enabled:</th>
+ *     <td><code>kCDOHRepositoryHasWikiKey</code></td>
+ *      <td>Boolean inside a <code>NSNumber</code></td>
+ *     <td>
+ *       <code>YES</code> to enable the wiki for this repository,
+ *       <code>NO</code> to disable it. Default is <code>YES</code>.
+ *     </td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Has downloads enabled:</th>
+ *     <td><code>kCDOHRepositoryHasDownloadsKey</code></td>
+ *      <td>Boolean inside a <code>NSNumber</code></td>
+ *     <td>
+ *       <code>YES</code> to enable downloads for this repository,
+ *       <code>NO</code> to disable them. Default is <code>YES</code>.
+ *     </td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Team:</th>
+ *     <td><code>kCDOHRepositoryHasDownloadsKey</code></td>
+ *      <td>Boolean inside a <code>NSNumber</code></td>
+ *     <td>
+ *       <code>YES</code> to enable downloads for this repository,
+ *       <code>NO</code> to disable them. Default is <code>YES</code>.
+ *     </td>
+ *   </tr>
+ * </table>
+ *
+ * @warning **Important:** This method requires the user to be authenticated and
+ * a member of the given _organization_. If no authenticated user has been set
+ * the failure block will be will immediately executed and the method will
+ * return. If no failure block has been supplied an
+ * `NSInternalInconsistencyException` exception will be raised.
+ *
+ * @param name The name of the to be created repository.
+ * @param organization The name of the organization the repository should
+ * associated with.
+ * @param dictionary A dictionary containing all the options for the repository.
+ * May be `nil` in which case the GitHubs default values will be used.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success. The respone is not paginated.
+ *
+ * The `resource` property of the response will be set to a `CDOHRepository`
+ * object representing the newly created repository.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ *
+ * @exception NSInvalidArgumentException if _name_ is `nil`.
+ * @exception NSInternalInconsistencyException if no authenticated user has been
+ * set **and** no failure block has been given.
+ *
+ * @see repository:owner:success:failure:
+ * @see deleteRepository:owner:success:failure:
+ * @see createRepository:forOrganization:dictionary:success:failure:
+ */
+- (void)createRepository:(NSString *)name inOrganization:(NSString *)organization dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all repositories of the authenticated user.
