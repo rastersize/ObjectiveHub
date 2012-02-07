@@ -81,10 +81,10 @@
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  *
- * @warning **Important:** This method requires the user to be authenticated. If
- * no authenticated user has been set will immediately call the given failure
- * block and then return. If no failure block has been supplied an
- * `NSInternalInconsistencyException` exception will be raised.
+ * @warning **Important:** This method requires the user to be authenticated.
+ * If no authenticated user has been set the failure block will be will
+ * immediately executed and the method will return. If no failure block has been
+ * supplied an `NSInternalInconsistencyException` exception will be raised.
  *
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
@@ -162,10 +162,10 @@
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
  *
- * @warning **Important:** This method requires the user to be authenticated. If
- * no authenticated user has been set will immediately call the given failure
- * block and then return. If no failure block has been supplied an
- * `NSInternalInconsistencyException` exception will be raised.
+ * @warning **Important:** This method requires the user to be authenticated.
+ * If no authenticated user has been set the failure block will be will
+ * immediately executed and the method will return. If no failure block has been
+ * supplied an `NSInternalInconsistencyException` exception will be raised.
  *
  * @param dictionary A dictionary containing values for the pre-defined keys.
  * @param successBlock The block which is called upon success with a
@@ -196,10 +196,10 @@
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  *
- * @warning **Important:** This method requires the user to be authenticated. If
- * no authenticated user has been set will immediately call the given failure
- * block and then return. If no failure block has been supplied an
- * `NSInternalInconsistencyException` exception will be raised.
+ * @warning **Important:** This method requires the user to be authenticated.
+ * If no authenticated user has been set the failure block will be will
+ * immediately executed and the method will return. If no failure block has been
+ * supplied an `NSInternalInconsistencyException` exception will be raised.
  *
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
@@ -226,10 +226,10 @@
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
  *
- * @warning **Important:** This method requires the user to be authenticated. If
- * no authenticated user has been set will immediately call the given failure
- * block and then return. If no failure block has been supplied an
- * `NSInternalInconsistencyException` exception will be raised.
+ * @warning **Important:** This method requires the user to be authenticated.
+ * If no authenticated user has been set the failure block will be will
+ * immediately executed and the method will return. If no failure block has been
+ * supplied an `NSInternalInconsistencyException` exception will be raised.
  *
  * @param emails An array of email addresses to add to the currently
  * authenticated user.
@@ -259,10 +259,10 @@
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
  *
- * @warning **Important:** This method requires the user to be authenticated. If
- * no authenticated user has been set will immediately call the given failure
- * block and then return. If no failure block has been supplied an
- * `NSInternalInconsistencyException` exception will be raised.
+ * @warning **Important:** This method requires the user to be authenticated.
+ * If no authenticated user has been set the failure block will be will
+ * immediately executed and the method will return. If no failure block has been
+ * supplied an `NSInternalInconsistencyException` exception will be raised.
  *
  * @param emails An array of email addresses to delete from the currently
  * authenticated user.
@@ -374,10 +374,10 @@
  *   </tr>
  * </table>
  *
- * @warning **Important:** This method requires the user to be authenticated. If
- * no authenticated user has been set will immediately call the given failure
- * block and then return. If no failure block has been supplied an
- * `NSInternalInconsistencyException` exception will be raised.
+ * @warning **Important:** This method requires the user to be authenticated.
+ * If no authenticated user has been set the failure block will be will
+ * immediately executed and the method will return. If no failure block has been
+ * supplied an `NSInternalInconsistencyException` exception will be raised.
  *
  * @param name The name of the to be created repository.
  * @param dictionary A dictionary containing all the options for the repository.
@@ -515,10 +515,10 @@
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  *
- * @warning **Important:** This method requires the user to be authenticated. If
- * no authenticated user has been set will immediately call the given failure
- * block and then return. If no failure block has been supplied an
- * `NSInternalInconsistencyException` exception will be raised.
+ * @warning **Important:** This method requires the user to be authenticated.
+ * If no authenticated user has been set the failure block will be will
+ * immediately executed and the method will return. If no failure block has been
+ * supplied an `NSInternalInconsistencyException` exception will be raised.
  *
  * @param type The type of repositories which should returned. See the
  * constants with the prefix `kCDOHRepositoriesType*` for possible values.
@@ -687,10 +687,10 @@
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  * 
- * @warning **Important:** This method requires the user to be authenticated. If
- * no authenticated user has been set will immediately call the given failure
- * block and then return. If no failure block has been supplied an
- * `NSInternalInconsistencyException` exception will be raised.
+ * @warning **Important:** This method requires the user to be authenticated.
+ * If no authenticated user has been set the failure block will be will
+ * immediately executed and the method will return. If no failure block has been
+ * supplied an `NSInternalInconsistencyException` exception will be raised.
  *
  * @param repository The name of the repository.
  * @param owner The login of the owner of the given _repository_.
@@ -717,10 +717,10 @@
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
  * 
- * @warning **Important:** This method requires the user to be authenticated. If
- * no authenticated user has been set will immediately call the given failure
- * block and then return. If no failure block has been supplied an
- * `NSInternalInconsistencyException` exception will be raised.
+ * @warning **Important:** This method requires the user to be authenticated.
+ * If no authenticated user has been set the failure block will be will
+ * immediately executed and the method will return. If no failure block has been
+ * supplied an `NSInternalInconsistencyException` exception will be raised.
  *
  * @param repository The name of the repository.
  * @param owner The login of the owner of the given _repository_.
@@ -745,10 +745,10 @@
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
  * 
- * @warning **Important:** This method requires the user to be authenticated. If
- * no authenticated user has been set will immediately call the given failure
- * block and then return. If no failure block has been supplied an
- * `NSInternalInconsistencyException` exception will be raised.
+ * @warning **Important:** This method requires the user to be authenticated.
+ * If no authenticated user has been set the failure block will be will
+ * immediately executed and the method will return. If no failure block has been
+ * supplied an `NSInternalInconsistencyException` exception will be raised.
  *
  * @param repository The name of the repository.
  * @param owner The login of the owner of the given _repository_.
