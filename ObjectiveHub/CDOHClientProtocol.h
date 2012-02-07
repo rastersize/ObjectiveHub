@@ -714,8 +714,8 @@
 /**
  * Watch a repository using the currently authenticated user.
  *
- * The success and failure blocks are both optional but if neither is given no
- * request will be performed.
+ * The success and failure blocks are both optional and the task **will** be
+ * carried out even if you set both to `NULL`.
  * 
  * @warning **Important:** This method requires the user to be authenticated. If
  * no authenticated user has been set will immediately call the given failure
@@ -742,8 +742,8 @@
 /**
  * Stop watching a repository using the currently authenticated user.
  *
- * The success and failure blocks are both optional but if neither is given no
- * request will be performed.
+ * The success and failure blocks are both optional and the task **will** be
+ * carried out even if you set both to `NULL`.
  * 
  * @warning **Important:** This method requires the user to be authenticated. If
  * no authenticated user has been set will immediately call the given failure

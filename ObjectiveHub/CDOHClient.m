@@ -970,9 +970,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)watchRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	if (!successBlock && !failureBlock) {
-		return;
-	}
 	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) {
 		return;
 	}
@@ -989,9 +986,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	if (!successBlock && !failureBlock) {
-		return;
-	}
 	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) {
 		return;
 	}
