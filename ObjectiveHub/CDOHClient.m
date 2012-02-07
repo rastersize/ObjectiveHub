@@ -128,18 +128,12 @@ NSString *const kCDOHUserRepositoriesPathFormat				= @"/users/%@/repos";
 /// 2. the name of the repository.
 NSString *const kCDOHRepositoryPathFormat					= @"/repos/%@/%@";
 #pragma mark |- Watched Repositories
-/// The relative path format for the watchers of a repository.
-/// Takes two strings:
-/// 1. the login of the repository owner,
-/// 2. the name of the repository.
-/// @deprecated
-NSString *const kCDOHRepositoryWatchersPathFormat			= @"/repos/%@/%@/watchers";
-/// The relative path format for special information, such as watchers and forks
-/// about a repository.
+/// The relative path format for extra repository information, such as watchers
+/// and forks, about a repository.
 /// Takes three strings:
 /// 1. the login of the repository owner,
 /// 2. the name of the repository,
-/// 3. the information identifier (such as forks, watchers and so on).
+/// 3. the extra information identifier (such as forks, watchers and so on).
 NSString *const kCDOHRepositoryExtrasPathFormat				= @"/repos/%@/%@/%@";
 /// The relative path for repositories watched by a user.
 /// Takes one string;
@@ -912,7 +906,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
 	}
 	
-	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryWatchersPathFormat, owner, repository];
+	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, @"watchers"];
 	for (NSNumber *idxNum in pages) {
 		NSUInteger idx = [idxNum unsignedIntegerValue];
 		NSDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
@@ -1025,14 +1019,14 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!repository || !owner) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
 	}
-
+	
 	NSDictionary *params = nil;
 	if ([intoOrganization length] > 0) {
 		params = [[NSDictionary alloc] initWithObjectsAndKeys:
 				  intoOrganization, @"org",
 				  nil];
 	}
-
+	
 	NSString *path = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, @"forks"];
 	[self.client postPath:path
 			   parameters:params
