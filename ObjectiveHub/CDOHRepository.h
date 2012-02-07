@@ -92,6 +92,9 @@ extern NSString *const kCDOHRepositoryHasWikiKey;
 /// Repository dictionary key for whether the repository has downloads enabled
 /// or not.
 extern NSString *const kCDOHRepositoryHasDownloadsKey;
+/// The team id that is granted access to the repository, given that the
+/// repository belongs to an organization.
+extern NSString *const kCDOHRepositoryTeamIDKey;
 
 
 #pragma mark - CDOHRepository Interface

@@ -67,6 +67,7 @@ NSString *const kCDOHRepositoryParentRepositoryKey	= @"parent";
 NSString *const kCDOHRepositorySourceRepositoryKey	= @"source";
 NSString *const kCDOHRepositoryHasWikiKey			= @"has_wiki";
 NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
+NSString *const kCDOHRepositoryTeamIDKey			= @"team_id";
 
 
 #pragma mark - CDOHRepository Implementation
