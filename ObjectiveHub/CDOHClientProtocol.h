@@ -791,8 +791,47 @@
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
+ *
+ * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ *
+ * @see forkRepository:owner:success:failure:
  */
 - (void)repositoryForks:(NSString *)repository owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
+/**
+ * Create a new fork of the given repository.
+ *
+ * The success and failure blocks are both optional and the task **will** be
+ * carried out even if you set both to `NULL`.
+ *
+ * @warning **Important:** This method requires the user to be authenticated.
+ * If no authenticated user has been set the failure block will be will
+ * immediately executed and the method will return. If no failure block has been
+ * supplied an `NSInternalInconsistencyException` exception will be raised.
+ *
+ * @param repository The name of the repository that should be forked.
+ * @param owner The login of the owner of the given _repository_ that should be
+ * forked.
+ * @param intoOrganization The organization the repository should be forked
+ * into. May be `nil` or an empty string in which case the fork will be created
+ * for the authenticated user. 
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
+ *
+ * The `resource` property of the response will be set to a `CDOHRepository`
+ * object representing the newly created fork of the given repository.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ *
+ * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ * @exception NSInternalInconsistencyException if no authenticated user has been
+ * set **and** no failure block has been given.
+ *
+ * @see repositoryForks:owner:pages:success:failure:
+ */
+- (void)forkRepository:(NSString *)repository owner:(NSString *)owner intoOrganization:(NSString *)intoOrganization success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 @end

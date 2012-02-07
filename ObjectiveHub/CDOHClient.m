@@ -1026,5 +1026,25 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 						failure:failureBlock];
 }
 
+- (void)forkRepository:(NSString *)repository owner:(NSString *)owner intoOrganization:(NSString *)intoOrganization success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (!repository || !owner) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
+	}
+
+	NSDictionary *params = nil;
+	if ([intoOrganization length] > 0) {
+		params = [[NSDictionary alloc] initWithObjectsAndKeys:
+				  intoOrganization, @"org",
+				  nil];
+	}
+
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, @"forks"];
+	[self.client postPath:path
+			   parameters:params
+				  success:[self standardRepositorySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repository, owner, intoOrganization)]
+				  failure:[self standardFailureBlock:failureBlock]];
+}
+
 
 @end
