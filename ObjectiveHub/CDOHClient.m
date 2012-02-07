@@ -174,6 +174,13 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 /// Creates the standard request parameter dictionary.
 - (NSMutableDictionary *)standardRequestParameterDictionaryForPage:(NSUInteger)page;
 
+/// Creates a request parameter dictionary from a user supplied dictionary only
+/// containing the keys in the given _validKeys_ array.
+///
+/// Also converts objects not directly supported by JSON such as `NSURL` objects
+/// to a suitable JSON format.
+- (NSMutableDictionary *)requestParameterDictionaryForDictionary:(NSDictionary *)dictionary validKeys:(NSArray *)validKeys;
+
 /// Verify that an authenticated user has been set (will not verify that the
 /// user is actually authorized) or call the given failureBlock.
 - (BOOL)verfiyAuthenticatedUserIsSetOrFail:(CDOHFailureBlock)failureBlock;
@@ -187,7 +194,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Standard Blocks
 #pragma mark |- Standard Error Block
 /// The standard failure block.
-///
 - (CDOHInternalFailureBlock)standardFailureBlock:(CDOHFailureBlock)failureBlock;
 
 
@@ -501,6 +507,37 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	}
 	
 	return dict;
+}
+
+- (NSMutableDictionary *)requestParameterDictionaryForDictionary:(NSDictionary *)dictionary validKeys:(NSArray *)validKeys
+{
+	NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:[validKeys count]];
+
+	for (id key in validKeys) {
+		id obj = [dictionary objectForKey:key];
+
+		// Whitelisted classes
+		if ([obj isKindOfClass:[NSString class]] ||
+			[obj isKindOfClass:[NSNumber class]] ||
+			[obj isKindOfClass:[NSArray class]] ||
+			[obj isKindOfClass:[NSDictionary class]] ||
+			[obj isKindOfClass:[NSNull class]] ||
+			[obj isKindOfClass:[NSString class]]) {
+
+			[params setObject:obj forKey:key];
+		}
+		// Transformable classes
+		else if ([obj isKindOfClass:[NSURL class]]) {
+			NSString *objStr = [(NSURL *)obj absoluteString];
+			[params setObject:objStr forKey:key];
+		}
+		// Unkown classes
+		else {
+			NSLog(@"Invalid type of class '%@' for key '%@' skipping.", [obj class], [key class]);
+		}
+	}
+
+	return params;
 }
 
 - (BOOL)verfiyAuthenticatedUserIsSetOrFail:(CDOHFailureBlock)failureBlock
