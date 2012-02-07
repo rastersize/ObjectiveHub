@@ -46,7 +46,7 @@
  *
  * @param key The key to get the query value for.
  * @return A string containing the query value for the given key, or `nil` if
- * none could be located.
+ * the key could not be found or the key is not associated with any value.
  *
  * @see [query](http://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSURL_Class/Reference/Reference.html#//apple_ref/occ/instm/NSURL/query)
  */

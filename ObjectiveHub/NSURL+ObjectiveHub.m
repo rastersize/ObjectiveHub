@@ -72,6 +72,9 @@ CDOH_FIX_CATEGORY_BUG(NSURL_ObjectiveHub)
 {
 	NSDictionary *queryDict = [self cdoh_queryDictionary];
 	NSString *value = [queryDict objectForKey:key];
+	if ([value isKindOfClass:[NSNull class]]) {
+		value = nil;
+	}
 	return value;
 }
 
