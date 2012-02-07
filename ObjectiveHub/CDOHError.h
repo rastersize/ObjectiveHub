@@ -83,6 +83,11 @@ enum {
 	/// All ObjectiveHub errors are numbered after this.
 	kCDOHErrorCodeFrameworkErrors					= 10000,
 	
+	#pragma mark |- Framework Client Errors
+	/** @name Framework Client Errors */
+	/// The method requires an authenticated user be set but it was not.
+	kCDOHErrorCodeNoAuthenticatedUser				= 10401,
+	
 	#pragma mark |- Framework Internal Errors
 	/** @name Framework Internal Errors */
 	/// The respone object was empty.
