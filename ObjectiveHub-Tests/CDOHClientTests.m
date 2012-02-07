@@ -62,6 +62,24 @@
 }
 
 
+#pragma mark - CDOHPagesArrayForPageIndexes Tests
+- (void)testCDOHPagesArrayForPageIndexesMacro
+{
+	NSArray *controlArray = [[NSArray alloc] initWithObjects:
+							 [NSNumber numberWithUnsignedInteger:9],
+							 [NSNumber numberWithUnsignedInteger:2],
+							 [NSNumber numberWithUnsignedInteger:123124],
+							 [NSNumber numberWithUnsignedInteger:84239847392],
+							 [NSNumber numberWithUnsignedInteger:0],
+							 [NSNumber numberWithUnsignedInteger:1],
+							 nil];
+	
+	NSArray *pages = CDOHPagesArrayForPageIndexes(9, 2, 123124, 84239847392, 0, 1);
+	
+	STAssertTrue([pages isEqual:controlArray], @"Pages array should be equal to control array");
+}
+
+
 #pragma mark - CDOHClient Class Tests
 - (void)testInitWithUsernameAndPassword
 {
