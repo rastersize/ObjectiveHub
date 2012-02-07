@@ -77,9 +77,6 @@
 /**
  * Get information about the currently authenticated user.
  *
- * If either one of the properties username or password is not set the failure
- * block will be called immediately.
- *
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  *

@@ -507,7 +507,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 {
 	BOOL hasAuthenticatedUser = (self.username != nil && self.password != nil);
 
-	if (!hasAuthenticatedUser && failureBlock) {
+	if (!hasAuthenticatedUser && failureBlock != NULL) {
 		CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code:kCDOHErrorCodeNoAuthenticatedUser userInfo:nil];
 		failureBlock(error);
 	} else if (!hasAuthenticatedUser) {
