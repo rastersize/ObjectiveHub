@@ -232,7 +232,7 @@
 		}];
 	});*/
 	
-	dispatch_async(queue, ^{
+	/*dispatch_async(queue, ^{
 		NSDictionary *creationTestDict = [[NSDictionary alloc] initWithObjectsAndKeys:
 										  @"A short description of the repo :)", kCDOHRepositoryDescriptionKey,
 										  [NSURL URLWithString:@"http://foo:bar@www.example.com:80/test?adad=3234&ddad"], kCDOHRepositoryHomepageKey,
@@ -249,7 +249,13 @@
 						   failure:^(CDOHError *error) {
 							   NSLog(@"createRepository failure: %@", error);
 						   }];
-	});
+	});*/
+	
+	[self.hub forkRepository:@"bootstrap" owner:@"twitter" intoOrganization:nil success:^(CDOHResponse *response) {
+		NSLog(@"forked %@", response);
+	} failure:^(CDOHError *error) {
+		NSLog(@"failed to fork with error %@", error);
+	}];
 	
 	dispatch_resume(queue);
 }
