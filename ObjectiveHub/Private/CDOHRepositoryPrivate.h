@@ -33,28 +33,3 @@
 #import <Foundation/Foundation.h>
 
 #pragma mark NSCoding and GitHub JSON Keys
-extern NSString *const kCDOHRepositoryHtmlUrlKey;
-extern NSString *const kCDOHRepositoryCloneUrlKey;
-extern NSString *const kCDOHRepositoryGitUrlKey;
-extern NSString *const kCDOHRepositorySshUrlKey;
-extern NSString *const kCDOHRepositorySvnUrlKey;
-extern NSString *const kCDOHRepositoryOwnerKey;
-extern NSString *const kCDOHRepositoryNameKey;	
-extern NSString *const kCDOHRepositoryDescriptionKey;
-extern NSString *const kCDOHRepositoryHomepageKey;
-extern NSString *const kCDOHRepositoryLanguageKey;
-extern NSString *const kCDOHRepositoryPrivateKey;
-extern NSString *const kCDOHRepositoryWatchersKey;
-extern NSString *const kCDOHRepositorySizeKey;
-extern NSString *const kCDOHRepositoryDefaultBranchKey;
-extern NSString *const kCDOHRepositoryOpenIssuesKey;
-extern NSString *const kCDOHRepositoryHasIssuesKey;
-extern NSString *const kCDOHRepositoryPushedAtKey;
-extern NSString *const kCDOHRepositoryCreatedAtKey;
-extern NSString *const kCDOHRepositoryOrganizationKey;
-extern NSString *const kCDOHRepositoryForkKey;
-extern NSString *const kCDOHRepositoryForksKey;
-extern NSString *const kCDOHRepositoryParentRepositoryKey;
-extern NSString *const kCDOHRepositorySourceRepositoryKey;
-extern NSString *const kCDOHRepositoryHasWikiKey;	
-extern NSString *const kCDOHRepositoryHasDownloadsKey;

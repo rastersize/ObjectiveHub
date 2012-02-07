@@ -39,6 +39,61 @@
 @class CDOHOrganization;
 
 
+#pragma mark - Dictionary Representation Keys
+/// Repository dictionary key for the HTML URL.
+extern NSString *const kCDOHRepositoryHtmlUrlKey;
+/// Repository dictionary key for the default clone URL.
+extern NSString *const kCDOHRepositoryCloneUrlKey;
+/// Repository dictionary key for the git protocol URL.
+extern NSString *const kCDOHRepositoryGitUrlKey;
+/// Repository dictionary key for the ssh protocol URL.
+extern NSString *const kCDOHRepositorySshUrlKey;
+/// Repository dictionary key for the svn protocol URL.
+extern NSString *const kCDOHRepositorySvnUrlKey;
+/// Repository dictionary key for the repository owner.
+extern NSString *const kCDOHRepositoryOwnerKey;
+/// Repository dictionary key for the name of the repository.
+extern NSString *const kCDOHRepositoryNameKey;	
+/// Repository dictionary key for the description of the repository.
+extern NSString *const kCDOHRepositoryDescriptionKey;
+/// Repository dictionary key for the homepage URL.
+extern NSString *const kCDOHRepositoryHomepageKey;
+/// Repository dictionary key for the primary language used in the repository.
+extern NSString *const kCDOHRepositoryLanguageKey;
+/// Repository dictionary key for wheter the repository is private or not.
+extern NSString *const kCDOHRepositoryPrivateKey;
+/// Repository dictionary key for the number of watchers of the repository.
+extern NSString *const kCDOHRepositoryWatchersKey;
+/// Repository dictionary key for the size of the repository.
+extern NSString *const kCDOHRepositorySizeKey;
+/// Repository dictionary key for the repository’s default branch.
+extern NSString *const kCDOHRepositoryDefaultBranchKey;
+/// Repository dictionary key for the number of open issues.
+extern NSString *const kCDOHRepositoryOpenIssuesKey;
+/// Repository dictionary key for whether the repository have issues enabled.
+extern NSString *const kCDOHRepositoryHasIssuesKey;
+/// Repository dictionary key for the date when the repository was pushed to.
+extern NSString *const kCDOHRepositoryPushedAtKey;
+/// Repository dictionary key for the date when the repository was created.
+extern NSString *const kCDOHRepositoryCreatedAtKey;
+/// Repository dictionary key for the organization the repository belongs to.
+extern NSString *const kCDOHRepositoryOrganizationKey;
+/// Repository dictionary key for whether the repository is a fork or not.
+extern NSString *const kCDOHRepositoryForkKey;
+/// Repository dictionary key for the number of forks of the repository.
+extern NSString *const kCDOHRepositoryForksKey;
+/// Repository dictionary key for the parent repository.
+extern NSString *const kCDOHRepositoryParentRepositoryKey;
+/// Repository dictionary key for the source repository.
+extern NSString *const kCDOHRepositorySourceRepositoryKey;
+/// Repository dictionary key for whether the repository has the wiki enabled
+/// or not.
+extern NSString *const kCDOHRepositoryHasWikiKey;
+/// Repository dictionary key for whether the repository has downloads enabled
+/// or not.
+extern NSString *const kCDOHRepositoryHasDownloadsKey;
+
+
 #pragma mark - CDOHRepository Interface
 /**
  * An immutable class containing information about a single GitHub repository.
