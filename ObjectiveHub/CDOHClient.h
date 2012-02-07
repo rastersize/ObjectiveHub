@@ -36,12 +36,32 @@
 
 #pragma mark Constants
 /// The default default items per page.
-#define kCDOHDefaultItemsPerPage				0
+#define kCDOHDefaultItemsPerPage			0
+
+
+#pragma mark - Pages Array Helper
+/**
+ * Helper macro for creating pages arrays from a variable list of `NSUIntegers`.
+ */
+#define CDOHPagesArrayForPageIndexes(...)	CDOHPagesArrayForPageIndexes_(__VA_ARGS__, NSUIntegerMax)
+
+/**
+ * Creates an array of pages from the given page indexes. Must be ended with
+ * `NSUIntegerMax`.
+ *
+ * You will probably want to use the convenience macro
+ * `CDOHPagesArrayForPageIndexes` instead of this function as you do not have to
+ * pass `NSUIntegerMax` yourself to it.
+ */
+extern NSArray *CDOHPagesArrayForPageIndexes_(NSUInteger pageIdx, ...);
 
 
 #pragma mark - ObjectiveHub Interface
 /**
  * Objective-C class for comunicating with GitHub asynchronously using blocks.
+ * Besides this class you will probably be very interested in the
+ * CDOHClientProtocol protcol which defins all methods used to interact with
+ * GitHub.
  *
  * Currently **version 3** of the GitHub API is supported.
  *

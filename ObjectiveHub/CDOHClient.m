@@ -56,6 +56,28 @@ NSString *const kCDOHDateFormat				= @"YYYY-MM-DDTHH:MM:SSZ";
 /// ObjectiveHub User Agent Format String
 NSString *const kCDOHUserAgentFormat		= @"ObjectiveHub/%@";
 
+
+#pragma mark - Pages Array Helper
+NSArray *CDOHPagesArrayForPageIndexes_(NSUInteger pageIdx, ...)
+{
+	NSUInteger idx = pageIdx;
+	NSNumber *idxNum = nil;
+	NSMutableArray *pages = [[NSMutableArray alloc] init];
+
+	va_list args;
+	va_start(args, pageIdx);
+	while (idx != NSUIntegerMax) {
+		idxNum = [[NSNumber alloc] initWithInteger:idx];
+		[pages addObject:idxNum];
+
+		idx = va_arg(args, NSInteger);
+	}
+	va_end(args);
+
+	return pages;
+}
+
+
 #pragma mark - GitHub Mime Types
 /// Mime type for getting the default type of data as JSON.
 NSString *const kCDOHGitHubMimeGenericJSON	= @"application/vnd.github.beta+json";
