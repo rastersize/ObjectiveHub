@@ -83,7 +83,10 @@
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  *
- * @warning **Important:** This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated. If
+ * no authenticated user has been set will immediately call the given failure
+ * block and then return. If no failure block has been supplied an
+ * `NSInternalInconsistencyException` exception will be raised.
  *
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
@@ -94,6 +97,9 @@
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
+ *
+ * @exception NSInternalInconsistencyException if no authenticated user has been
+ * set **and** no failure block has been given.
  *
  * @see userWithLogin:success:failure:
  * @see CDOHResponse
@@ -155,7 +161,10 @@
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
  *
- * @warning **Important:** This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated. If
+ * no authenticated user has been set will immediately call the given failure
+ * block and then return. If no failure block has been supplied an
+ * `NSInternalInconsistencyException` exception will be raised.
  *
  * @param dictionary A dictionary containing values for the pre-defined keys.
  * @param successBlock The block which is called upon success with a
@@ -167,6 +176,10 @@
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
+ *
+ * @exception NSInvalidArgumentException if _dictionary_ is `nil`.
+ * @exception NSInternalInconsistencyException if no authenticated user has been
+ * set **and** no failure block has been given.
  *
  * @see CDOHResponse
  * @see CDOHUser
@@ -182,7 +195,10 @@
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  *
- * @warning **Important:** This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated. If
+ * no authenticated user has been set will immediately call the given failure
+ * block and then return. If no failure block has been supplied an
+ * `NSInternalInconsistencyException` exception will be raised.
  *
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
@@ -194,6 +210,11 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
+ * @exception NSInternalInconsistencyException if no authenticated user has been
+ * set **and** no failure block has been given.
+ *
+ * @see addUserEmails:success:failure:
+ * @see deleteUserEmails:success:failure:
  * @see CDOHResponse
  */
 - (void)userEmails:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
@@ -204,7 +225,10 @@
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
  *
- * @warning **Important:** This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated. If
+ * no authenticated user has been set will immediately call the given failure
+ * block and then return. If no failure block has been supplied an
+ * `NSInternalInconsistencyException` exception will be raised.
  *
  * @param emails An array of email addresses to add to the currently
  * authenticated user.
@@ -218,6 +242,12 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
+ * @exception NSInvalidArgumentException if _emails_ is `nil`.
+ * @exception NSInternalInconsistencyException if no authenticated user has been
+ * set **and** no failure block has been given.
+ *
+ * @see userEmails:success:failure:
+ * @see deleteUserEmails:success:failure:
  * @see CDOHResponse
  */
 - (void)addUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
@@ -228,7 +258,10 @@
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
  *
- * @warning **Important:** This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated. If
+ * no authenticated user has been set will immediately call the given failure
+ * block and then return. If no failure block has been supplied an
+ * `NSInternalInconsistencyException` exception will be raised.
  *
  * @param emails An array of email addresses to delete from the currently
  * authenticated user.
@@ -238,6 +271,13 @@
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
+ *
+ * @exception NSInvalidArgumentException if _emails_ is `nil`.
+ * @exception NSInternalInconsistencyException if no authenticated user has been
+ * set **and** no failure block has been given.
+ *
+ * @see userEmails:success:failure:
+ * @see addUserEmails:success:failure:
  */
 - (void)deleteUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
@@ -262,7 +302,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _repository_ or _owner_ is `nil`.
+ * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
  */
 - (void)repository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
@@ -272,7 +312,10 @@
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  *
- * @warning **Important:** This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated. If
+ * no authenticated user has been set will immediately call the given failure
+ * block and then return. If no failure block has been supplied an
+ * `NSInternalInconsistencyException` exception will be raised.
  *
  * @param type The type of repositories which should returned. See the
  * constants with the prefix `kCDOHRepositoriesType*` for possible values.
@@ -292,12 +335,15 @@
  * done upon failure.
  *
  * @exception NSInvalidArgumentException if _type_ is `nil`.
- * @exception NSInternalInconsistencyException if the `username` of the
- * authenticated user has not been set.
+ * @exception NSInternalInconsistencyException if no authenticated user has been
+ * set **and** no failure block has been given.
  *
+ * @see repositoriesForUser:type:pages:success:failure:
+ * @see repositoriesForOrganization:type:pages:success:failure:
+ * @see username
+ * @see password
  * @see CDOHResponse
  * @see CDOHRepository
- * @see CDOHRepositoriesType
  */
 - (void)repositories:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
@@ -328,6 +374,8 @@
  *
  * @exception NSInvalidArgumentException if _login_ or _type_ are `nil`.
  *
+ * @see repositories:pages:success:failure:
+ * @see repositoriesForOrganization:type:pages:success:failure:
  * @see CDOHResponse
  * @see CDOHRepository
  */
@@ -359,8 +407,10 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _login_ or _type_ are `nil`.
+ * @exception NSInvalidArgumentException if _organization_ or _type_ are `nil`.
  *
+ * @see repositories:pages:success:failure:
+ * @see repositoriesForUser:type:pages:success:failure:
  * @see CDOHResponse
  * @see CDOHRepository
  */
@@ -391,6 +441,8 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
+ * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ *
  * @see CDOHResponse
  * @see CDOHUser
  */
@@ -418,6 +470,8 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
+ * @exception NSInvalidArgumentException if _login_ is `nil`.
+ *
  * @see CDOHResponse
  * @see CDOHRepository
  */
@@ -430,7 +484,10 @@
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  * 
- * @warning **Important:** This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated. If
+ * no authenticated user has been set will immediately call the given failure
+ * block and then return. If no failure block has been supplied an
+ * `NSInternalInconsistencyException` exception will be raised.
  *
  * @param repository The name of the repository.
  * @param owner The login of the owner of the given _repository_.
@@ -441,6 +498,13 @@
  * set to `kCDOHErrorCodeNotFound`. The block will also be called for other
  * types of errors. The parameter may be set to `NULL` in which case nothing
  * will be done upon failure.
+ *
+ * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ * @exception NSInternalInconsistencyException if no authenticated user has been
+ * set **and** no failure block has been given.
+ *
+ * @see username
+ * @see password
  */
 - (void)isUserWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
@@ -450,7 +514,10 @@
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  * 
- * @warning **Important:** This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated. If
+ * no authenticated user has been set will immediately call the given failure
+ * block and then return. If no failure block has been supplied an
+ * `NSInternalInconsistencyException` exception will be raised.
  *
  * @param repository The name of the repository.
  * @param owner The login of the owner of the given _repository_.
@@ -459,6 +526,13 @@
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
+ *
+ * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ * @exception NSInternalInconsistencyException if no authenticated user has been
+ * set **and** no failure block has been given.
+ *
+ * @see username
+ * @see password
  */
 - (void)watchRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
@@ -468,7 +542,10 @@
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
  * 
- * @warning **Important:** This method requires the user to be authenticated.
+ * @warning **Important:** This method requires the user to be authenticated. If
+ * no authenticated user has been set will immediately call the given failure
+ * block and then return. If no failure block has been supplied an
+ * `NSInternalInconsistencyException` exception will be raised.
  *
  * @param repository The name of the repository.
  * @param owner The login of the owner of the given _repository_.
@@ -477,6 +554,13 @@
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
+ *
+ * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ * @exception NSInternalInconsistencyException if no authenticated user has been
+ * set **and** no failure block has been given.
+ *
+ * @see username
+ * @see password
  */
 - (void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
