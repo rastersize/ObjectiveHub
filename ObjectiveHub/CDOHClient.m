@@ -174,6 +174,10 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 /// Creates the standard request parameter dictionary.
 - (NSMutableDictionary *)standardRequestParameterDictionaryForPage:(NSUInteger)page;
 
+/// Verify that an authenticated user has been set (will not verify that the
+/// user is actually authorized) or call the given failureBlock.
+- (BOOL)verfiyAuthenticatedUserIsSetOrFail:(CDOHFailureBlock)failureBlock;
+
 
 #pragma mark - Response Helpers
 /// Create an error from a failed request operation.
@@ -499,6 +503,20 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	return dict;
 }
 
+- (BOOL)verfiyAuthenticatedUserIsSetOrFail:(CDOHFailureBlock)failureBlock
+{
+	BOOL hasAuthenticatedUser = (self.username != nil && self.password != nil);
+
+	if (!hasAuthenticatedUser && failureBlock) {
+		CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code:kCDOHErrorCodeNoAuthenticatedUser userInfo:nil];
+		failureBlock(error);
+	} else if (!hasAuthenticatedUser) {
+		[NSException raise:NSInternalInconsistencyException format:@"No authenticated user set."];
+	}
+	
+	return hasAuthenticatedUser;
+}
+
 
 #pragma mark - Response Helpers
 - (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation
@@ -535,8 +553,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!successBlock && !failureBlock) {
 		return;
 	}
-	if (!self.username) {
-		[NSException raise:NSInternalInconsistencyException format:@"Username not set."];
+	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) {
+		return;
 	}
 	
 	return [self userWithLogin:self.username success:successBlock failure:failureBlock];
@@ -544,6 +562,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) {
+		return;
+	}
 	if (!dictionary) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) suppoed were invalid (nil)", @"dictionary"];
 	}
@@ -562,6 +583,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!successBlock && !failureBlock) {
 		return;
 	}
+	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) {
+		return;
+	}
 	
 	NSString *getPath = kCDOHUserEmailsPath;
 	[self.client getPath:getPath
@@ -572,6 +596,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)addUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) {
+		return;
+	}
 	if (!emails) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"emails"];
 	}
@@ -585,6 +612,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)deleteUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) {
+		return;
+	}
 	if (!emails) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"emails"];
 	}
@@ -619,11 +649,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!successBlock && !failureBlock) {
 		return;
 	}
+	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) {
+		return;
+	}
 	if (!type) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"type"];
-	}
-	if (!self.username) {
-		[NSException raise:NSInternalInconsistencyException format:@"Username not set."];
 	}
 	
 	if ([pages count] == 0) {
@@ -756,6 +786,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!successBlock && !failureBlock) {
 		return;
 	}
+	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) {
+		return;
+	}
 	if (!repository || !owner) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
 	}
@@ -772,6 +805,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!successBlock && !failureBlock) {
 		return;
 	}
+	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) {
+		return;
+	}
 	if (!repository || !owner) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
 	}
@@ -786,6 +822,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 - (void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {
+		return;
+	}
+	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) {
 		return;
 	}
 	if (!repository || !owner) {
