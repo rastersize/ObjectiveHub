@@ -115,42 +115,42 @@
  * <table>
  *   <tr>
  *     <th></th>
- *     <th style="text-align: left">Dictionary Key</th>
+ *     <th style="text-align: left">Dictionary Key Constant</th>
  *     <th style="text-align: left">Value Type</th>
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Change name:</th>
- *     <td><code>kCDOHUserDictionaryNameKey</code></td>
+ *     <td><code>kCDOHUserNameKey</code></td>
  *     <td><code>NSString</code></td>
  *   </tr>
  *   <tr>
  *     <th  style="text-align: right">Change email address:</th>
- *     <td><code>kCDOHUserDictionaryEmailKey</code></td>
+ *     <td><code>kCDOHUserEmailKey</code></td>
  *     <td><code>NSString</code></td>
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Change blog URL:</th>
- *     <td><code>kCDOHUserDictionaryBlogKey</code></td>
+ *     <td><code>kCDOHUserBlogKey</code></td>
  *     <td><code>NSURL</code></td>
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Change company name:</th>
- *     <td><code>kCDOHUserDictionaryCompanyKey</code></td>
+ *     <td><code>kCDOHUserCompanyKey</code></td>
  *     <td><code>NSString</code></td>
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Change location string:</th>
- *     <td><code>kCDOHUserDictionaryLocationKey</code></td>
+ *     <td><code>kCDOHUserLocationKey</code></td>
  *     <td><code>NSString</code></td>
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Change hireable status:</th>
- *     <td><code>kCDOHUserDictionaryHireableKey</code></td>
+ *     <td><code>kCDOHUserHireableKey</code></td>
  *     <td>Boolean inside a <code>NSNumber</code></td>
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Change biography text:</th>
- *     <td><code>kCDOHUserDictionaryBioKey</code></td>
+ *     <td><code>kCDOHUserBioKey</code></td>
  *     <td><code>NSString</code></td>
  *   </tr>
  * </table>

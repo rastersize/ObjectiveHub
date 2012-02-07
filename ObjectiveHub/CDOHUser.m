@@ -35,8 +35,8 @@
 
 
 #pragma mark NSCoding and GitHub JSON Keys
-NSString *const kCDOHUserDictionaryHireableKey			= @"hireable";
-NSString *const kCDOHUserDictionaryBioKey				= @"bio";
+NSString *const kCDOHUserHireableKey	= @"hireable";
+NSString *const kCDOHUserBioKey			= @"bio";
 
 
 #pragma mark - CDOHUser Implementation
@@ -52,8 +52,8 @@ NSString *const kCDOHUserDictionaryBioKey				= @"bio";
 {
 	self = [super initWithDictionary:dictionary];
 	if (self) {
-		_biography = [[dictionary valueForKey:kCDOHUserDictionaryBioKey] copy];
-		_hireable = [[dictionary valueForKey:kCDOHUserDictionaryHireableKey] boolValue];
+		_biography = [[dictionary valueForKey:kCDOHUserBioKey] copy];
+		_hireable = [[dictionary valueForKey:kCDOHUserHireableKey] boolValue];
 	}
 	
 	return self;
@@ -68,8 +68,8 @@ NSString *const kCDOHUserDictionaryBioKey				= @"bio";
 	
 	NSNumber *hireableNumber	= [NSNumber numberWithBool:_hireable];
 	NSDictionary *dictionary	= [NSDictionary dictionaryWithObjectsAndKeys:
-								   _biography,		kCDOHUserDictionaryBioKey,
-								   hireableNumber,	kCDOHUserDictionaryHireableKey,
+								   _biography,		kCDOHUserBioKey,
+								   hireableNumber,	kCDOHUserHireableKey,
 								   nil];
 	
 	NSUInteger finalDictionaryCapacity = [dictionary count] + [superDictionary count];

@@ -85,22 +85,22 @@
 	 
 	// Should succeed:
 	NSDictionary *updateUserDefaultDict = [NSDictionary dictionaryWithObjectsAndKeys:
-										   [[NSDate date] description], kCDOHUserDictionaryNameKey,
-										   @"test@example.com", kCDOHUserDictionaryEmailKey,
-										   @"http://example.com/", kCDOHUserDictionaryBlogKey,
-										   @"Example", kCDOHUserDictionaryCompanyKey,
-										   @"localhost", kCDOHUserDictionaryLocationKey,
-										   [NSNumber numberWithBool:NO], kCDOHUserDictionaryHireableKey,
-										   @"No bio", kCDOHUserDictionaryBioKey,
+										   [[NSDate date] description], kCDOHUserNameKey,
+										   @"test@example.com", kCDOHUserEmailKey,
+										   @"http://example.com/", kCDOHUserBlogKey,
+										   @"Example", kCDOHUserCompanyKey,
+										   @"localhost", kCDOHUserLocationKey,
+										   [NSNumber numberWithBool:NO], kCDOHUserHireableKey,
+										   @"No bio", kCDOHUserBioKey,
 										   nil];
 	NSDictionary *updateUserDict = [NSDictionary dictionaryWithObjectsAndKeys:
-									[[NSDate date] description], kCDOHUserDictionaryNameKey,
-									@"github@example.com", kCDOHUserDictionaryEmailKey,
-									@"http://example.org/blog", kCDOHUserDictionaryBlogKey,
-									@"Example Corp", kCDOHUserDictionaryCompanyKey,
-									@"California", kCDOHUserDictionaryLocationKey,
-									[NSNumber numberWithBool:YES], kCDOHUserDictionaryHireableKey,
-									@"Test user biography", kCDOHUserDictionaryBioKey,
+									[[NSDate date] description], kCDOHUserNameKey,
+									@"github@example.com", kCDOHUserEmailKey,
+									@"http://example.org/blog", kCDOHUserBlogKey,
+									@"Example Corp", kCDOHUserCompanyKey,
+									@"California", kCDOHUserLocationKey,
+									[NSNumber numberWithBool:YES], kCDOHUserHireableKey,
+									@"Test user biography", kCDOHUserBioKey,
 									nil];
 	dispatch_async(queue, ^{
 		[self.hub updateUserWithDictionary:updateUserDict success:^(CDOHUser *updatedUser) {

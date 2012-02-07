@@ -36,9 +36,9 @@
 
 #pragma mark Abstract User Request Parameter Keys
 /// User request parameter key for the user biography.
-extern NSString *const kCDOHUserDictionaryBioKey;
+extern NSString *const kCDOHUserBioKey;
 /// User request parameter key for the user hireable status.
-extern NSString *const kCDOHUserDictionaryHireableKey;
+extern NSString *const kCDOHUserHireableKey;
 
 
 #pragma mark - CDOHUser Interface

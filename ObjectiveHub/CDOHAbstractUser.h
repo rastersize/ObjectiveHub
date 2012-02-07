@@ -39,51 +39,51 @@
 
 #pragma mark - Dictionary Representation Keys
 /// Abstract user dictionary key for the name of the user.
-extern NSString *const kCDOHUserDictionaryNameKey;
+extern NSString *const kCDOHUserNameKey;
 /// Abstract user dictionary key for the company name.
-extern NSString *const kCDOHUserDictionaryCompanyKey;
+extern NSString *const kCDOHUserCompanyKey;
 /// Abstract user dictionary key for the name value.
-extern NSString *const kCDOHUserDictionaryBlogKey;
+extern NSString *const kCDOHUserBlogKey;
 /// Abstract user dictionary key for the location value.
-extern NSString *const kCDOHUserDictionaryLocationKey;
+extern NSString *const kCDOHUserLocationKey;
 /// Abstract user dictionary key for the email value.
-extern NSString *const kCDOHUserDictionaryEmailKey;
+extern NSString *const kCDOHUserEmailKey;
 /// Abstract user dictionary key for the authenticated value.
-extern NSString *const kCDOHUserDictionaryAuthenticatedKey;
+extern NSString *const kCDOHUserAuthenticatedKey;
 /// Abstract user dictionary key for the login value.
-extern NSString *const kCDOHUserDictionaryLoginKey;
+extern NSString *const kCDOHUserLoginKey;
 /// Abstract user dictionary key for the id value.
-extern NSString *const kCDOHUserDictionaryIDKey;
+extern NSString *const kCDOHUserIDKey;
 /// Abstract user dictionary key for the avatar URL value.
-extern NSString *const kCDOHUserDictionaryAvatarURLKey;
+extern NSString *const kCDOHUserAvatarURLKey;
 /// Abstract user dictionary key for the gravatar ID value.
-extern NSString *const kCDOHUserDictionaryGravatarIDKey;
+extern NSString *const kCDOHUserGravatarIDKey;
 /// Abstract user dictionary key for the number of public repositories value.
-extern NSString *const kCDOHUserDictionaryPublicReposKey;
+extern NSString *const kCDOHUserPublicReposKey;
 /// Abstract user dictionary key for the number of public gists value.
-extern NSString *const kCDOHUserDictionaryPublicGistsKey;
+extern NSString *const kCDOHUserPublicGistsKey;
 /// Abstract user dictionary key for the number of followers value.
-extern NSString *const kCDOHUserDictionaryFollowersKey;
+extern NSString *const kCDOHUserFollowersKey;
 /// Abstract user dictionary key for the number of people the user is following value.
-extern NSString *const kCDOHUserDictionaryFollowingKey;
+extern NSString *const kCDOHUserFollowingKey;
 /// Abstract user dictionary key for the HTML URL value.
-extern NSString *const kCDOHUserDictionaryHTMLURLKey;
+extern NSString *const kCDOHUserHTMLURLKey;
 /// Abstract user dictionary key for the created at value.
-extern NSString *const kCDOHUserDictionaryCreatedAtKey;
+extern NSString *const kCDOHUserCreatedAtKey;
 /// Abstract user dictionary key for the user type value.
-extern NSString *const kCDOHUserDictionaryTypeKey;
+extern NSString *const kCDOHUserTypeKey;
 /// Abstract user dictionary key for the total number of private repositories value.
-extern NSString *const kCDOHUserDictionaryTotalPrivateReposKey;
+extern NSString *const kCDOHUserTotalPrivateReposKey;
 /// Abstract user dictionary key for the total number of owned private repositories value.
-extern NSString *const kCDOHUserDictionaryOwnedPrivateReposKey;
+extern NSString *const kCDOHUserOwnedPrivateReposKey;
 /// Abstract user dictionary key for the number of private gists value.
-extern NSString *const kCDOHUserDictionaryPrivateGistsKey;
+extern NSString *const kCDOHUserPrivateGistsKey;
 /// Abstract user dictionary key for the total disk usage value.
-extern NSString *const kCDOHUserDictionaryDiskUsageKey;
+extern NSString *const kCDOHUserDiskUsageKey;
 /// Abstract user dictionary key for the number of collaborators value.
-extern NSString *const kCDOHUserDictionaryCollaboratorsKey;
+extern NSString *const kCDOHUserCollaboratorsKey;
 /// Abstract user dictionary key for the plan value.
-extern NSString *const kCDOHUserDictionaryPlanKey;
+extern NSString *const kCDOHUserPlanKey;
 
 
 #pragma mark - CDOHAbstractUser Interface
