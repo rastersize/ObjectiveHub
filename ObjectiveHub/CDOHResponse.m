@@ -90,21 +90,24 @@
 		
 		if ([links count] > 0) {
 			CDOHLinkRelationshipHeader *lastLink = nil;
+			CDOHLinkRelationshipHeader *prevLink = nil;
 			CDOHLinkRelationshipHeader *nextLink = nil;
 			
 			for (CDOHLinkRelationshipHeader *link in links) {
 				if ([link.name isEqualToString:kCDOHResponseHeaderLinkNextKey]) {
 					nextLink = link;
+				} else if ([link.name isEqualToString:kCDOHResponseHeaderLinkPreviousKey]) {
+					prevLink = link;
 				} else if ([link.name isEqualToString:kCDOHResponseHeaderLinkLastKey]) {
 					lastLink = link;
 				}
 			}
 			
 			_lastPage = [lastLink pageNumber];
-			
+			_previousPage = [prevLink pageNumber];
 			_nextPage = [nextLink pageNumber];
+			
 			_page = _nextPage <= 1 ? 1 : _nextPage - 1;
-			_previousPage = _page <= 1 ? 1 : _page - 1;
 			
 			_hasNextPage = (_nextPage > 1 && _nextPage > _page);
 			_hasPreviousPage = (_previousPage >= 1 && _previousPage < _page);
