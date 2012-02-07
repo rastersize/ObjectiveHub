@@ -41,7 +41,12 @@ CDOH_FIX_CATEGORY_BUG(NSURL_ObjectiveHub)
 - (NSDictionary *)cdoh_queryDictionary
 {
 	NSDictionary *dict = nil;
-	NSArray *paramComponents = [[self query] componentsSeparatedByString:@"&"];
+	
+	NSMutableCharacterSet *trimmedCharactersSet = [NSMutableCharacterSet whitespaceCharacterSet];
+	[trimmedCharactersSet addCharactersInString:@"?&"];
+	NSString *query = [[self query] stringByTrimmingCharactersInSet:trimmedCharactersSet];
+	
+	NSArray *paramComponents = [query componentsSeparatedByString:@"&"];
 	NSMutableArray *keys = [[NSMutableArray alloc] initWithCapacity:[paramComponents count]];
 	NSMutableArray *values = [[NSMutableArray alloc] initWithCapacity:[paramComponents count]];
 	

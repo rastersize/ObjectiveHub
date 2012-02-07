@@ -55,6 +55,8 @@
 /**
  * The query string as a dictionary with the query key to query value.
  *
+ * Trailing ampersands (`&`) and question marks (`?`) will be removed.
+ *
  * @return The query string as a dictionary.
  *
  * @see [query](http://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSURL_Class/Reference/Reference.html#//apple_ref/occ/instm/NSURL/query)
