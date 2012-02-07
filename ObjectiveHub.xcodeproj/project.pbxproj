@@ -40,7 +40,6 @@
 		9C26F94F146B2069001A5385 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F94E146B2069001A5385 /* SenTestingKit.framework */; };
 		9C26F953146B2069001A5385 /* ObjectiveHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F935146B2069001A5385 /* ObjectiveHub.framework */; };
 		9C26F959146B2069001A5385 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F957146B2069001A5385 /* InfoPlist.strings */; };
-		9C26F95C146B2069001A5385 /* ObjectiveHub_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F95B146B2069001A5385 /* ObjectiveHub_Tests.m */; };
 		9C26F976146B207A001A5385 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F94E146B2069001A5385 /* SenTestingKit.framework */; };
 		9C26F979146B207A001A5385 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F968146B207A001A5385 /* Foundation.framework */; };
 		9C26F97C146B207A001A5385 /* libObjectiveHub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F967146B207A001A5385 /* libObjectiveHub.a */; };
@@ -135,7 +134,6 @@
 		9C64163C14C32C1300478E39 /* CDOHClientProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C64163A14C32C1300478E39 /* CDOHClientProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C76A25E14E0680700CA444C /* CDOHTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C76A25D14E0680700CA444C /* CDOHTypes.m */; };
 		9C76A25F14E0680700CA444C /* CDOHTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C76A25D14E0680700CA444C /* CDOHTypes.m */; };
-		9C99909514AE708F00DFDD3B /* ObjectiveHub_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F95B146B2069001A5385 /* ObjectiveHub_Tests.m */; };
 		9C99909714AE70F100DFDD3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C99909614AE70F100DFDD3B /* Foundation.framework */; };
 		9C99909A14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */; };
 		9C99909B14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */; };
@@ -275,8 +273,6 @@
 		9C26F94E146B2069001A5385 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		9C26F956146B2069001A5385 /* ObjectiveHub-MacTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveHub-MacTests-Info.plist"; sourceTree = "<group>"; };
 		9C26F958146B2069001A5385 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9C26F95A146B2069001A5385 /* ObjectiveHub_Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ObjectiveHub_Tests.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		9C26F95B146B2069001A5385 /* ObjectiveHub_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveHub_Tests.m; sourceTree = "<group>"; };
 		9C26F967146B207A001A5385 /* libObjectiveHub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjectiveHub.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C26F968146B207A001A5385 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9C26F96C146B207A001A5385 /* ObjectiveHub-iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveHub-iOS-Prefix.pch"; sourceTree = "<group>"; };
@@ -485,8 +481,6 @@
 			isa = PBXGroup;
 			children = (
 				9C26F955146B2069001A5385 /* Supporting Files */,
-				9C26F95A146B2069001A5385 /* ObjectiveHub_Tests.h */,
-				9C26F95B146B2069001A5385 /* ObjectiveHub_Tests.m */,
 			);
 			name = "Unit Tests";
 			path = "ObjectiveHub-MacTests";
@@ -1027,7 +1021,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C26F95C146B2069001A5385 /* ObjectiveHub_Tests.m in Sources */,
 				9C26FA06146B2DEF001A5385 /* CDOHClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1070,7 +1063,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C26FA08146B2DEF001A5385 /* CDOHClient.m in Sources */,
-				9C99909514AE708F00DFDD3B /* ObjectiveHub_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
