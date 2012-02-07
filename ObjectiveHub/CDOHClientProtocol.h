@@ -109,8 +109,8 @@
  * Update the currently authenticated user with the contents of the given
  * dictionary.
  *
- * In case the dictionary is empty the parameter is `nil` the method will return
- * without doing anything.
+ * In case the dictionary is empty or `nil` is passed to the method, it will
+ * return immidiately without performing anything.
  *
  * Each of the available keys are optional and if omitted the value will not be
  * changed. The possible actions that can be performed as well as the
@@ -158,6 +158,9 @@
  *     <td><code>NSString</code></td>
  *   </tr>
  * </table>
+ *
+ * If the dictionary contains any other key-value pairs they will be removed and
+ * as such not sent to GitHub.
  *
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
@@ -374,6 +377,9 @@
  *   </tr>
  * </table>
  *
+ * If the dictionary contains any other key-value pairs they will be removed and
+ * as such not sent to GitHub.
+ *
  * @warning **Important:** This method requires the user to be authenticated.
  * If no authenticated user has been set the failure block will be will
  * immediately executed and the method will return. If no failure block has been
@@ -477,6 +483,9 @@
  *     </td>
  *   </tr>
  * </table>
+ *
+ * If the dictionary contains any other key-value pairs they will be removed and
+ * as such not sent to GitHub.
  *
  * @warning **Important:** This method requires the user to be authenticated and
  * a member of the given _organization_. If no authenticated user has been set
