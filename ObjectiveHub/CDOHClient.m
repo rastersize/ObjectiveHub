@@ -790,6 +790,36 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				  failure:[self standardFailureBlock:failureBlock]];
 }
 
+- (void)updateRepository:(NSString *)repository owner:(NSString *)owner dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
+	if (!dictionary || [dictionary count] == 0) { return; }
+	if (!repository || !owner) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) were invalid (nil)", @"repository", @"owner"];
+	}
+	
+	NSMutableDictionary *params = nil;
+	NSArray *keys = [[NSArray alloc] initWithObjects:
+					 kCDOHRepositoryNameKey,
+					 kCDOHRepositoryDescriptionKey,
+					 kCDOHRepositoryHomepageKey,
+					 kCDOHRepositoryPrivateKey,
+					 kCDOHRepositoryHasIssuesKey,
+					 kCDOHRepositoryHasWikiKey,
+					 kCDOHRepositoryHasDownloadsKey,
+					 nil];
+	params = [self requestParameterDictionaryForDictionary:dictionary validKeys:keys];
+	
+	if (![params objectForKey:kCDOHRepositoryNameKey]) {
+		[params setObject:repository forKey:kCDOHRepositoryNameKey];
+	}
+	
+	[self.client postPath:kCDOHRepositoryPathFormat
+			   parameters:params
+				  success:[self standardRepositorySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repository, owner, dictionary)]
+				  failure:[self standardFailureBlock:failureBlock]];
+}
+
 - (void)repositories:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) {

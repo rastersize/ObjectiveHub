@@ -519,6 +519,114 @@
 - (void)createRepository:(NSString *)name inOrganization:(NSString *)organization dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
+ * Update the given _repository_ owned by the given _owner_ with the values of
+ * the given _dictionary_.
+ *
+ * The success and failure blocks are both optional and the task **will** be
+ * carried out even if you set both to `NULL`.
+ *
+ * In case the _dictionary_ is empty or `nil` is passed to the method, it will
+ * return immidiately without performing anything.
+ *
+ * Each of the available keys are optional and if omitted the value will not be
+ * changed. The possible actions that can be performed as well as the
+ * corresponding key and value type is listed in the table below.
+ *
+ * <table>
+ *   <tr>
+ *     <th></th>
+ *     <th style="text-align: left">Dictionary Key Constant</th>
+ *     <th style="text-align: left">Value Type</th>
+ *     <th style="text-align: left">Comments</th>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Name:</th>
+ *     <td><code>kCDOHRepositoryNameKey</code></td>
+ *     <td><code>NSString</code></td>
+ *     <td>
+ *       If not set the value of the _repository_ parameter will be used. Since
+ *       the parameter is required by GitHub.
+ *     </td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Description:</th>
+ *     <td><code>kCDOHRepositoryDescriptionKey</code></td>
+ *     <td><code>NSString</code></td>
+ *     <td></td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Homepage URL:</th>
+ *     <td><code>kCDOHRepositoryHomepageKey</code></td>
+ *     <td><code>NSURL</code></td>
+ *     <td></td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Private:</th>
+ *     <td><code>kCDOHRepositoryPrivateKey</code></td>
+ *     <td>Boolean inside a <code>NSNumber</code></td>
+ *     <td>
+ *       <code>YES</code> makes the repository private, and <code>NO</code>
+ *       makes it public.
+ *     </td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Has issues enabled:</th>
+ *     <td><code>kCDOHRepositoryHasIssuesKey</code></td>
+ *      <td>Boolean inside a <code>NSNumber</code></td>
+ *     <td>
+ *       <code>YES</code> to enable issues for the repository, <code>NO</code>
+ *       to disable them. Default is <code>YES</code>.
+ *     </td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Has wiki enabled:</th>
+ *     <td><code>kCDOHRepositoryHasWikiKey</code></td>
+ *      <td>Boolean inside a <code>NSNumber</code></td>
+ *     <td>
+ *       <code>YES</code> to enable the wiki for the repository,
+ *       <code>NO</code> to disable it. Default is <code>YES</code>.
+ *     </td>
+ *   </tr>
+ *   <tr>
+ *     <th style="text-align: right">Has downloads enabled:</th>
+ *     <td><code>kCDOHRepositoryHasDownloadsKey</code></td>
+ *      <td>Boolean inside a <code>NSNumber</code></td>
+ *     <td>
+ *       <code>YES</code> to enable downloads for the repository,
+ *       <code>NO</code> to disable them. Default is <code>YES</code>.
+ *     </td>
+ *   </tr>
+ * </table>
+ *
+ * If the dictionary contains any other key-value pairs they will be removed and
+ * as such not sent to GitHub.
+ *
+ * @warning **Important:** This method requires the user to be authenticated.
+ * If no authenticated user has been set the failure block will be will
+ * immediately executed and the method will return. If no failure block has been
+ * supplied an `NSInternalInconsistencyException` exception will be raised.
+ *
+ * @param repository The name of the repository that should be updated.
+ * @param owner The login of the owner of the given _repository_ that should be
+ * updated.
+ * @param dictionary A dictionary containing all the options for the repository.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
+ *
+ * The `resource` property of the response will be set to a `CDOHRepository`
+ * object representing the updated repository.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ *
+ * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ * @exception NSInternalInconsistencyException if no authenticated user has been
+ * set **and** no failure block has been given.
+ */
+- (void)updateRepository:(NSString *)repository owner:(NSString *)owner dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
+/**
  * Get all repositories of the authenticated user.
  *
  * The success and failure blocks are both optional but if neither is given no
