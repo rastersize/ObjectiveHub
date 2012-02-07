@@ -231,7 +231,7 @@ NSString *const kCDOHRepositoryTeamIDKey			= @"team_id";
 		return YES;
 	}
 	
-	return ([_owner isEqualTo:aRepository.owner] &&
+	return ([_owner isEqual:aRepository.owner] &&
 			[_name isEqualToString:aRepository.name] &&
 			[_organization isEqual:aRepository.organization]);
 }
