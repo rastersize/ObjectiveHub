@@ -36,6 +36,10 @@
 #pragma mark Relationship Name Keys
 /// The HTTP Link next relationship key.
 extern NSString *const kCDOHResponseHeaderLinkNextKey;
+/// The HTTP Link next relationship key.
+extern NSString *const kCDOHResponseHeaderLinkPreviousKey;
+/// The HTTP Link next relationship key.
+extern NSString *const kCDOHResponseHeaderLinkFirstKey;
 /// The HTTP Link last relationship key.
 extern NSString *const kCDOHResponseHeaderLinkLastKey;
 
@@ -85,6 +89,8 @@ extern NSString *const kCDOHResponseHeaderPerPageKey;
  *
  * Can be one of;
  * - kCDOHResponseHeaderLinkNextKey,
+ * - kCDOHResponseHeaderLinkPreviousKey,
+ * - kCDOHResponseHeaderLinkFirstKey,
  * - kCDOHResponseHeaderLinkLastKey.
  *
  * @private

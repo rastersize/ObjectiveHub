@@ -36,6 +36,8 @@
 
 #pragma mark Relationship Name Keys
 NSString *const kCDOHResponseHeaderLinkNextKey			= @"next";
+NSString *const kCDOHResponseHeaderLinkPreviousKey		= @"prev";
+NSString *const kCDOHResponseHeaderLinkFirstKey			= @"first";
 NSString *const kCDOHResponseHeaderLinkLastKey			= @"last";
 
 
