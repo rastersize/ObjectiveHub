@@ -271,7 +271,7 @@
 		9C26F944146B2069001A5385 /* ObjectiveHub-Mac-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveHub-Mac-Prefix.pch"; sourceTree = "<group>"; };
 		9C26F94D146B2069001A5385 /* ObjectiveHub-MacTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ObjectiveHub-MacTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C26F94E146B2069001A5385 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		9C26F956146B2069001A5385 /* ObjectiveHub-MacTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveHub-MacTests-Info.plist"; sourceTree = "<group>"; };
+		9C26F956146B2069001A5385 /* ObjectiveHub-Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveHub-Tests-Info.plist"; sourceTree = "<group>"; };
 		9C26F958146B2069001A5385 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9C26F967146B207A001A5385 /* libObjectiveHub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjectiveHub.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C26F968146B207A001A5385 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -483,13 +483,13 @@
 				9C26F955146B2069001A5385 /* Supporting Files */,
 			);
 			name = "Unit Tests";
-			path = "ObjectiveHub-MacTests";
+			path = "ObjectiveHub-Tests";
 			sourceTree = "<group>";
 		};
 		9C26F955146B2069001A5385 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				9C26F956146B2069001A5385 /* ObjectiveHub-MacTests-Info.plist */,
+				9C26F956146B2069001A5385 /* ObjectiveHub-Tests-Info.plist */,
 				9C26F957146B2069001A5385 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -1303,7 +1303,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "ObjectiveHub-MacTests/ObjectiveHub-MacTests-Info.plist";
+				INFOPLIST_FILE = "ObjectiveHub-Tests/ObjectiveHub-Tests-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1329,7 +1329,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "ObjectiveHub-MacTests/ObjectiveHub-MacTests-Info.plist";
+				INFOPLIST_FILE = "ObjectiveHub-Tests/ObjectiveHub-Tests-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1415,7 +1415,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "ObjectiveHub-iOSTests/ObjectiveHub-iOSTests-Info.plist";
+				INFOPLIST_FILE = "ObjectiveHub-Tests/ObjectiveHub-Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1440,7 +1440,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "ObjectiveHub-iOSTests/ObjectiveHub-iOSTests-Info.plist";
+				INFOPLIST_FILE = "ObjectiveHub-Tests/ObjectiveHub-Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
