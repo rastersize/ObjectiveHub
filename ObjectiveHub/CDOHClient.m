@@ -602,13 +602,26 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (![self verfiyAuthenticatedUserIsSetOrFail:failureBlock]) {
 		return;
 	}
-	if (!dictionary) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) suppoed were invalid (nil)", @"dictionary"];
+	if (!dictionary || [dictionary count] == 0) {
+		return;
 	}
 	
+	NSMutableDictionary *params = nil;
+	NSArray *keys = [[NSArray alloc] initWithObjects:
+					 kCDOHUserNameKey,
+					 kCDOHUserEmailKey,
+					 kCDOHUserBlogKey,
+					 kCDOHUserCompanyKey,
+					 kCDOHUserLocationKey,
+					 kCDOHUserHireableKey,
+					 kCDOHUserBioKey,
+					 nil];
+	params = [self requestParameterDictionaryForDictionary:dictionary validKeys:keys];
+
+
 	NSString *patchPath = kCDOHUserAuthenticatedPath;
 	[self.client patchPath:patchPath
-				parameters:dictionary
+				parameters:params
 				   success:[self standardUserSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(dictionary)]
 				   failure:[self standardFailureBlock:failureBlock]];
 }
