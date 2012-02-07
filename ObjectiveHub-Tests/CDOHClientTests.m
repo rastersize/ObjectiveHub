@@ -35,21 +35,30 @@
 #import "CDOHTestsUserCredentials.h"
 
 #import "CDOHClient.h"
+#import "CDOHError.h"
+#import "CDOHResponse.h"
+#import "CDOHUser.h"
+#import "CDOHPlan.h"
 
-@implementation CDOHClientTests
+
+@implementation CDOHClientTests {
+	dispatch_queue_t _queue;
+}
 
 @synthesize client = _client;
 
 #pragma mark - Test Life Cycle
 - (void)setUp
 {
+	_queue = dispatch_get_main_queue(); //dispatch_queue_create("com.libobjectivehub.tests.CDOHClientTests", DISPATCH_QUEUE_SERIAL);
+	
 	CDOHTestsUserCredentials *cred = [[CDOHTestsUserCredentials alloc] init];
 	_client = [[CDOHClient alloc] initWithUsername:cred.username password:cred.password];
 }
 
 - (void)tearDown
 {
-	_client = nil;
+	//_client = nil;
 }
 
 
@@ -68,6 +77,135 @@
 
 
 #pragma mark - GitHub Communication Tests
+- (void)testNoAuthenticatedUser
+{
+	__unsafe_unretained CDOHClientTests *blockSelf = self;
+	
+	// Should call failure block immediately
+	dispatch_async(_queue, ^{
+		NSString *tmpUsername = self.client.username;
+		NSString *tmpPassword = self.client.password;
+		
+		blockSelf.client.username = nil;
+		blockSelf.client.password = nil;
+		STAssertNoThrow(
+			[blockSelf.client user:^(CDOHResponse *response) {
+				STAssertTrue(NO, @"Should always fail when no authenticated user is set (response: %@)", response);
+			} failure:^(CDOHError *error) {
+				STAssertEqualObjects(kCDOHErrorDomain, [error domain], @"Error domain should be kCDOHErrorDomain (%@) was %@", kCDOHErrorDomain, [error domain]);
+				STAssertTrue(kCDOHErrorCodeNoAuthenticatedUser == [error code], @"Error code when no authed user is set should be kCDOHErrorCodeNoAuthenticatedUser (%d) was (%d)", kCDOHErrorCodeNoAuthenticatedUser, [error code]);
+			}],
+			@"Should not throw any exception but call the failure block."
+		);
+		blockSelf.client.username = tmpUsername;
+		blockSelf.client.password = tmpPassword;
+	});
+	
+	// Should call failure block immediately
+	dispatch_async(_queue, ^{
+		NSString *tmpUsername = blockSelf.client.username;
+		NSString *tmpPassword = blockSelf.client.password;
+		
+		blockSelf.client.username = @"login";
+		blockSelf.client.password = nil;
+		STAssertNoThrow(
+			[blockSelf.client user:^(CDOHResponse *response) {
+				STAssertTrue(NO, @"Should always fail when no authenticated user is set (response: %@)", response);
+			} failure:^(CDOHError *error) {
+				STAssertEqualObjects(kCDOHErrorDomain, [error domain], @"Error domain should be kCDOHErrorDomain (%@) was %@", kCDOHErrorDomain, [error domain]);
+				STAssertTrue(kCDOHErrorCodeNoAuthenticatedUser == [error code], @"Error code when no authed user is set should be kCDOHErrorCodeNoAuthenticatedUser (%d) was (%d)", kCDOHErrorCodeNoAuthenticatedUser, [error code]);
+			}],
+			@"Should not throw any exception but call the failure block."
+		);
+		blockSelf.client.username = tmpUsername;
+		blockSelf.client.password = tmpPassword;
+	});
+	
+	// Should call failure block immediately
+	dispatch_async(_queue, ^{
+		NSString *tmpUsername = blockSelf.client.username;
+		NSString *tmpPassword = blockSelf.client.password;
+		
+		blockSelf.client.username = nil;
+		blockSelf.client.password = @"password";
+		STAssertNoThrow(
+			[self.client user:^(CDOHResponse *response) {
+				STAssertTrue(NO, @"Should always fail when no authenticated user is set (response: %@)", response);
+			} failure:^(CDOHError *error) {
+				STAssertEqualObjects(kCDOHErrorDomain, [error domain], @"Error domain should be kCDOHErrorDomain (%@) was %@", kCDOHErrorDomain, [error domain]);
+				STAssertTrue(kCDOHErrorCodeNoAuthenticatedUser == [error code], @"Error code when no authed user is set should be kCDOHErrorCodeNoAuthenticatedUser (%d) was (%d)", kCDOHErrorCodeNoAuthenticatedUser, [error code]);
+			}],
+			@"Should not throw any exception but call the failure block."
+		);
+		blockSelf.client.username = tmpUsername;
+		blockSelf.client.password = tmpPassword;
+	});
+	
+	// Should throw an exception named NSInternalInconsistencyException
+	// Should call failure block immediately
+	dispatch_async(_queue, ^{
+		NSString *tmpUsername = blockSelf.client.username;
+		NSString *tmpPassword = blockSelf.client.password;
+		
+		blockSelf.client.username = nil;
+		blockSelf.client.password = nil;
+		STAssertThrows(
+		//STAssertThrowsSpecificNamed(
+			[blockSelf.client user:^(CDOHResponse *response) {
+				STAssertTrue(NO, @"Should always fail when no authenticated user is set (response: %@)", response);
+			} failure:NULL],
+			//NSException,
+			//NSInternalInconsistencyException,
+			@"Should always fail with an NSInternalInconsistencyException when no authenticated user is set (username set = %@, password set = %@.",
+			(blockSelf.client.username ? @"YES" : @"NO"),
+			(blockSelf.client.password ? @"YES" : @"NO")
+		);
+		blockSelf.client.username = tmpUsername;
+		blockSelf.client.password = tmpPassword;
+	});
+}
+
+- (void)testGetAuthenticatedUser
+{
+	__unsafe_unretained CDOHClientTests *blockSelf = self;
+	
+	dispatch_async(_queue, ^{
+		[blockSelf.client user:^(CDOHResponse *response) {
+			STAssertTrue([response.resource isKindOfClass:[CDOHUser class]], @"Resource should be a CDOHUser instance was: %@", [response.resource class]);
+			
+			CDOHUser *user = response.resource;
+			STAssertEqualObjects(blockSelf.client.username, user.login, @"Client username (%@) should match user login (%@).", blockSelf.client.username, user.login);
+			STAssertTrue(user.isAuthenticated, @"User object recieved should be authenticated.");
+			STAssertNotNil(user.plan, @"Authenticated user’s plan should not be nil.");
+			STAssertTrue([user.plan isKindOfClass:[CDOHPlan class]], @"Authenticated user’s plan should be of type CDOHPlan was %@.", [user.plan class]);
+		} failure:^(CDOHError *error) {
+			STAssertTrue(NO, @"Request failed with error: %@", error);
+		}];
+	});
+}
+
+- (void)testGetUserWithLogin
+{
+	__unsafe_unretained CDOHClientTests *blockSelf = self;
+	
+	dispatch_async(_queue, ^{
+		NSString *login = @"octocat";
+		NSLog(@"blockSelf: %@", blockSelf);
+		[blockSelf.client userWithLogin:login success:^(CDOHResponse *response) {
+			NSLog(@"det här går liiite fort imo");
+			STAssertTrue([response.resource isKindOfClass:[CDOHUser class]], @"Resource should be a CDOHUser instance was: %@", [response.resource class]);
+			
+			CDOHUser *user = response.resource;
+			STAssertEqualObjects(login, user.login, @"Client username (%@) should match user login (%@).", login, user.login);
+			STAssertFalse(!user.isAuthenticated, @"User object recieved should not be authenticated.");
+			STAssertNil(user.plan, @"Authenticated user’s plan should be nil.");
+			STAssertEqualObjects(@"octocat@github.com", user.email, @"Email address should be %@ was %@", @"octocat@github.com", user.email);
+			STAssertEqualObjects([NSURL URLWithString:@"http://www.github.com/blog"], user.htmlURL, @"HTML URL should be %@ was %@", [NSURL URLWithString:@"http://www.github.com/blog"], user.htmlURL);
+		} failure:^(CDOHError *error) {
+			STAssertTrue(NO, @"Request failed with error: %@", error);
+		}];
+	});
+}
 
 
 @end
