@@ -33,8 +33,7 @@
 #import "CDOHAbstractUser.h"
 #import "CDOHAbstractUserPrivate.h"
 #import "CDOHResourcePrivate.h"
-
-#import "CDOHPlanPrivate.h"
+#import "CDOHPlan.h"
 
 
 #pragma mark NSCoding and GitHub JSON Keys

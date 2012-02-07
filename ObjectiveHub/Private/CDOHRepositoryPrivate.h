@@ -32,4 +32,3 @@
 
 #import <Foundation/Foundation.h>
 
-#pragma mark NSCoding and GitHub JSON Keys

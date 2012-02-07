@@ -32,15 +32,4 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CDOHPlan.h"
 
-
-#pragma mark NSCoding and GitHub JSON Keys
-/// Dictionary key for the name value.
-extern NSString *const kCDOHPlanDictionaryNameKey;
-/// Dictionary key for the name value.
-extern NSString *const kCDOHPlanDictionarySpaceKey;
-/// Dictionary key for the name value.
-extern NSString *const kCDOHPlanDictionaryCollaboratorsKey;
-/// Dictionary key for the name value.
-extern NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey;

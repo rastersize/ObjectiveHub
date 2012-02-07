@@ -34,7 +34,18 @@
 #import "CDOHResource.h"
 
 
-#pragma mark CDOHPlan Interface
+#pragma mark Dictionary Representation Keys
+/// Dictionary key for the name value.
+extern NSString *const kCDOHPlanDictionaryNameKey;
+/// Dictionary key for the name value.
+extern NSString *const kCDOHPlanDictionarySpaceKey;
+/// Dictionary key for the name value.
+extern NSString *const kCDOHPlanDictionaryCollaboratorsKey;
+/// Dictionary key for the name value.
+extern NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey;
+
+
+#pragma mark - CDOHPlan Interface
 /**
  * A GitHub plan and the restrictions it impose on the user.
  */
