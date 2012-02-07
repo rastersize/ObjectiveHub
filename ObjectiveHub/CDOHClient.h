@@ -93,7 +93,7 @@ extern NSArray *CDOHPagesArrayForPageIndexes_(NSUInteger pageIdx, ...);
  *		CDOHClient *client = [[CDOHClient alloc] init];
  *		
  *		[client repositoriesWatchedByUser:username pages:nil success:^(CDOHResponse *response) {
- *			// Handle the respone (you will probably want to do something 
+ *			// Handle the response (you will probably want to do something
  *			// smarter than the row below).
  *			[self.watchedRepos addObjectsFromArray:response.resource];
  *			

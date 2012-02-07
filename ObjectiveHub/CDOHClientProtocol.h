@@ -38,19 +38,20 @@
 #pragma mark CDOHClientProtocol Protocol
 /**
  * The `CDOHClientProtocol` defines the methods which are used to interact with
- * GitHub. Please see the concrete class CDOHClient, which implement this
- * protocol, for details on how to to interact with GitHub.
+ * GitHub. You use a concrete class such as `CDOHClient`, which implement this
+ * protocol, when actually interacting with GitHub this protocol merly specifies
+ * how you use the concrete class.
  *
  * One example use of this protocol is if you have a proxy class infront of the
  * "real" `CDOHClient` instance you can have that proxy class conform to this
- * protocol. That way the compiler will not complain that your class might not
- * implement some method.
+ * protocol. That way the compiler will not complain about your proxy class not
+ * implementing certain methods.
  */
 @protocol CDOHClientProtocol <NSObject>
 @required
 
-#pragma mark - Users
-/** @name Users */
+#pragma mark - Managing Users
+/** @name Managing Users */
 /**
  * Get information about a single specific user by their login.
  *
@@ -246,7 +247,7 @@
  * @exception NSInternalInconsistencyException if no authenticated user has been
  * set **and** no failure block has been given.
  *
- * @see userEmails:success:failure:
+ * @see userEmails:failure:
  * @see deleteUserEmails:success:failure:
  * @see CDOHResponse
  */
@@ -276,14 +277,14 @@
  * @exception NSInternalInconsistencyException if no authenticated user has been
  * set **and** no failure block has been given.
  *
- * @see userEmails:success:failure:
+ * @see userEmails:failure:
  * @see addUserEmails:success:failure:
  */
 - (void)deleteUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
-#pragma mark - Repositories
-/** @name Repositories */
+#pragma mark - Managing Repositories
+/** @name Managing Repositories */
 /**
  * Get the repository for the given _owner_ login and _repository_ name.
  *
@@ -397,7 +398,7 @@
  *
  * @see repository:owner:success:failure:
  * @see deleteRepository:owner:success:failure:
- * @see createRepository:forOrganization:dictionary:success:failure:
+ * @see createRepository:inOrganization:dictionary:success:failure:
  */
 - (void)createRepository:(NSString *)name dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
@@ -504,7 +505,7 @@
  *
  * @see repository:owner:success:failure:
  * @see deleteRepository:owner:success:failure:
- * @see createRepository:forOrganization:dictionary:success:failure:
+ * @see createRepository:inOrganization:dictionary:success:failure:
  */
 - (void)createRepository:(NSString *)name inOrganization:(NSString *)organization dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
@@ -542,8 +543,8 @@
  *
  * @see repositoriesForUser:type:pages:success:failure:
  * @see repositoriesForOrganization:type:pages:success:failure:
- * @see username
- * @see password
+ * @see [CDOHClient username]
+ * @see [CDOHClient password]
  * @see CDOHResponse
  * @see CDOHRepository
  */
@@ -705,8 +706,8 @@
  * @exception NSInternalInconsistencyException if no authenticated user has been
  * set **and** no failure block has been given.
  *
- * @see username
- * @see password
+ * @see [CDOHClient username]
+ * @see [CDOHClient password]
  */
 - (void)isUserWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
@@ -733,8 +734,8 @@
  * @exception NSInternalInconsistencyException if no authenticated user has been
  * set **and** no failure block has been given.
  *
- * @see username
- * @see password
+ * @see [CDOHClient username]
+ * @see [CDOHClient password]
  */
 - (void)watchRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
@@ -761,8 +762,8 @@
  * @exception NSInternalInconsistencyException if no authenticated user has been
  * set **and** no failure block has been given.
  *
- * @see username
- * @see password
+ * @see [CDOHClient username]
+ * @see [CDOHClient password]
  */
 - (void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
