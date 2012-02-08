@@ -572,6 +572,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Standard Requests
 - (void)getRepositoriesAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	CDOHVerifyArgumentsNotNilOrThrowException(path);
 	if ([pages count] == 0) {
 		pages = CDOHPagesArrayForPageIndexes(1);
 	}
@@ -671,12 +672,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Users
 - (void)userWithLogin:(NSString *)login success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	if (!successBlock && !failureBlock) {
-		return;
-	}
-	if (!login) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"login"];
-	}
+	if (!successBlock && !failureBlock) { return; }
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(login)) { return; }
 
 	NSString *getPath = [[NSString alloc] initWithFormat:kCDOHUserPathFormat, login];
 	[self.client getPath:getPath
@@ -724,9 +721,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - User Emails
 - (void)userEmails:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	if (!successBlock && !failureBlock) {
-		return;
-	}
+	if (!successBlock && !failureBlock) { return; }
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	
 	NSString *getPath = kCDOHUserEmailsPath;
@@ -739,9 +734,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 - (void)addUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!emails) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"emails"];
-	}
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(emails)) { return; }
 	
 	NSString *postPath = kCDOHUserEmailsPath;
 	[self.client postPath:postPath
@@ -753,9 +746,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 - (void)deleteUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!emails) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"emails"];
-	}
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(emails)) { return; }
 	
 	NSString *deletePath = kCDOHUserEmailsPath;
 	[self.client deletePath:deletePath
@@ -768,12 +759,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Repositories
 - (void)repository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	if (!successBlock && !failureBlock) {
-		return;
-	}
-	if (!repository || !owner) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
-	}
+	if (!successBlock && !failureBlock) { return; }
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(repository, owner)) { return; }
 	
 	NSString *path = [[NSString alloc] initWithFormat:kCDOHRepositoryPathFormat, owner, repository];
 	[self.client getPath:path
@@ -785,9 +772,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 - (void)createRepository:(NSString *)name dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!name) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) were invalid (nil)", @"name"];
-	}
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(name)) { return; }
 	
 	NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:[dictionary count] + 1];
 	if ([dictionary count] > 0) {
@@ -813,9 +798,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 - (void)createRepository:(NSString *)name inOrganization:(NSString *)organization dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!name || !organization) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) were invalid (nil)", @"name", @"organization"];
-	}
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(name, organization)) { return; }
 	
 	NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:[dictionary count] + 1];
 	if ([dictionary count] > 0) {
@@ -844,9 +827,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 {
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	if (!dictionary || [dictionary count] == 0) { return; }
-	if (!repository || !owner) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) were invalid (nil)", @"repository", @"owner"];
-	}
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(repository, owner)) { return; }
 	
 	NSMutableDictionary *params = nil;
 	NSArray *keys = [[NSArray alloc] initWithObjects:
@@ -872,13 +853,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)repositories:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	if (!successBlock && !failureBlock) {
-		return;
-	}
+	if (!successBlock && !failureBlock) { return; }
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!type) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"type"];
-	}
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(type)) { return; }
 	
 	if ([pages count] == 0) {
 		pages = CDOHPagesArrayForPageIndexes(1);
@@ -897,12 +874,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	if (!successBlock && !failureBlock) {
-		return;
-	}
-	if (!type || !login) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"login", @"type"];
-	}
+	if (!successBlock && !failureBlock) { return; }
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(login, type)) { return; }
 	
 	if ([pages count] == 0) {
 		pages = CDOHPagesArrayForPageIndexes(1);
@@ -926,12 +899,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)repositoriesForOrganization:(NSString *)organization type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	if (!successBlock && !failureBlock) {
-		return;
-	}
-	if (!type || !organization) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"login", @"type"];
-	}
+	if (!successBlock && !failureBlock) { return; }
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(organization, type)) { return; }
 	
 	if ([pages count] == 0) {
 		pages = CDOHPagesArrayForPageIndexes(1);
@@ -957,12 +926,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Watched and Watching Repositories
 - (void)repositoryWatchers:(NSString *)repository owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	if (!successBlock && !failureBlock) {
-		return;
-	}
-	if (!repository || !owner) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
-	}
+	if (!successBlock && !failureBlock) { return; }
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(repository, owner)) { return; }
 	
 	if ([pages count] == 0) {
 		pages = CDOHPagesArrayForPageIndexes(1);
@@ -982,12 +947,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)repositoriesWatchedByUser:(NSString *)login pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	if (!successBlock && !failureBlock) {
-		return;
-	}
-	if (!login) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", @"login"];
-	}
+	if (!successBlock && !failureBlock) { return; }
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(login)) { return; }
 	
 	if ([pages count] == 0) {
 		pages = CDOHPagesArrayForPageIndexes(1);
@@ -1007,13 +968,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)isUserWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	if (!successBlock && !failureBlock) {
-		return;
-	}
+	if (!successBlock && !failureBlock) { return; }
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!repository || !owner) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
-	}
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(repository, owner)) { return; }
 	
 	NSString *path = [[NSString alloc] initWithFormat:kCDOHUserWatchedRepositoryPathFormat, owner, repository];
 	[self.client getPath:path
@@ -1025,9 +982,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 - (void)watchRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!repository || !owner) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
-	}
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(repository, owner)) { return; }
 	
 	NSString *path = [[NSString alloc] initWithFormat:kCDOHUserWatchedRepositoryPathFormat, owner, repository];
 	[self.client putPath:path
@@ -1039,9 +994,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 - (void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!repository || !owner) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
-	}
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(repository, owner)) { return; }
 	
 	NSString *path = [[NSString alloc] initWithFormat:kCDOHUserWatchedRepositoryPathFormat, owner, repository];
 	[self.client deletePath:path
@@ -1054,12 +1007,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Repository Forks
 - (void)repositoryForks:(NSString *)repository owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	if (!successBlock && !failureBlock) {
-		return;
-	}
-	if (!repository || !owner) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
-	}
+	if (!successBlock && !failureBlock) { return; }
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(repository, owner)) { return; }
 	
 	NSString *path = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, kCDOHRepositoryExtrasPathForks];
 	NSLog(@"path: %@", path);
@@ -1073,9 +1022,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 - (void)forkRepository:(NSString *)repository owner:(NSString *)owner intoOrganization:(NSString *)intoOrganization success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!repository || !owner) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
-	}
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(repository, owner)) { return; }
 	
 	NSDictionary *params = nil;
 	if ([intoOrganization length] > 0) {
