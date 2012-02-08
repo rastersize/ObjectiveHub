@@ -968,7 +968,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		pages = CDOHPagesArrayForPageIndexes(1);
 	}
 	
-	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, @"watchers"];
+	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, kCDOHRepositoryExtrasPathWatchers];
 	for (NSNumber *idxNum in pages) {
 		NSUInteger idx = [idxNum unsignedIntegerValue];
 		NSDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
