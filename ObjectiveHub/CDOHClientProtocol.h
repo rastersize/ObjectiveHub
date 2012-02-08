@@ -793,6 +793,29 @@
  */
 - (void)repositoryContributors:(NSString *)repository owner:(NSString *)owner anonymous:(BOOL)anonymous success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
+/**
+ * Get all languages used in the repository.
+ *
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed.
+ *
+ * @param repository The name of the repository.
+ * @param owner The login of the owner of the given _repository_.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
+ *
+ * The `resource` property of the response will be set to a `NSArray` of
+ * `NSDictionary` objects representing a language
+ * (`kCDOHRepositoryLanguageNameKey`) and the number of characters
+ * (`kCDOHRepositoryLanguageCharactersKey`) in that language.
+ * The response is not paginated.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ */
+- (void)repositoryLanguages:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
 
 #pragma mark - Watched and Watching Repositories
 /** @name Watched and Watching Repositories */

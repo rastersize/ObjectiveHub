@@ -39,7 +39,7 @@
 
 #import "NSString+ObjectiveHub.h"
 
-#pragma mark NSCoding and GitHub JSON Keys
+#pragma mark - Dictionary Representation Keys
 //FIXME: These will soon be change from *_url to *_links
 NSString *const kCDOHRepositoryHtmlUrlKey			= @"html_url";
 NSString *const kCDOHRepositoryCloneUrlKey			= @"clone_url";
@@ -68,6 +68,11 @@ NSString *const kCDOHRepositorySourceRepositoryKey	= @"source";
 NSString *const kCDOHRepositoryHasWikiKey			= @"has_wiki";
 NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 NSString *const kCDOHRepositoryTeamIDKey			= @"team_id";
+
+
+#pragma mark - Repository Language Dictionary Keys
+NSString *const kCDOHRepositoryLanguageNameKey			= @"name";
+NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 
 
 #pragma mark - CDOHRepository Implementation

@@ -97,6 +97,14 @@ extern NSString *const kCDOHRepositoryHasDownloadsKey;
 extern NSString *const kCDOHRepositoryTeamIDKey;
 
 
+#pragma mark - Repository Language Dictionary Keys
+/// The key for the name of the language in a repository language dictionary.
+extern NSString *const kCDOHRepositoryLanguageNameKey;
+/// The key for the number of characters of the language in a repository
+/// language dictionary.
+extern NSString *const kCDOHRepositoryLanguageCharactersKey;
+
+
 #pragma mark - CDOHRepository Interface
 /**
  * An immutable class containing information about a single GitHub repository.

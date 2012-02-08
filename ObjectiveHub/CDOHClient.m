@@ -276,11 +276,12 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Standard Requests
-/// Get an array of `CDOHRepository` objects from a given _path_ at the given
-/// _pages_.
+/// Get an array of `CDOHRepository` objects from a given _path_ using the given
+/// _params_ for the given _pages_.
 - (void)getRepositoriesAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
-/// Get an array of `CDOHUser` objects from a given _path_ at the given _pages_.
+/// Get an array of `CDOHUser` objects from a given _path_ using the given
+/// _params_ for the given _pages_.
 - (void)getUsersAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
@@ -933,6 +934,38 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	NSDictionary *params = CDOHParametersDictionary([NSNumber numberWithBool:anonymous], @"anon");
 	
 	[self getUsersAtPath:path params:params pages:nil success:successBlock failure:failureBlock];
+}
+
+- (void)repositoryLanguages:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (!successBlock && !failureBlock) { return; }
+	if (!CDOHVerifyArgumentsNotNilOrThrowException(repository, owner)) { return; }
+	
+	CDOHInternalResponseCreationBlock resourceCreationBlock = ^id (id parsedResponseObject) {
+		NSDictionary *languagesDict = parsedResponseObject;
+		
+		NSMutableArray *languagesArray = nil;
+		if ([languagesDict isKindOfClass:[NSDictionary class]]) {
+			languagesArray = [[NSMutableArray alloc] initWithCapacity:[languagesDict count]];
+			[languagesDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *__unused stop) {
+				NSDictionary *lang = [[NSDictionary alloc] initWithObjectsAndKeys:
+									  key, kCDOHRepositoryLanguageNameKey,
+									  obj, kCDOHRepositoryLanguageCharactersKey,
+									  nil];
+				
+				[languagesArray addObject:lang];
+			}];
+		}
+		
+		return languagesArray;
+	};
+	
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, kCDOHRepositoryExtrasPathLanguages];
+	
+	[self.client getPath:path
+			  parameters:nil
+				 success:[self standardSuccessBlockWithResourceCreationBlock:resourceCreationBlock success:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repository, owner)]
+				 failure:[self standardFailureBlock:failureBlock]];
 }
 
 
