@@ -78,6 +78,39 @@ NSArray *_CDOHPagesArrayForPageIndexes(NSUInteger pageIdx, ...)
 }
 
 
+#pragma mark - Argument Verification Helper.
+/// `YES` == no argument was `nil`, `NO` == one or more arguments were `nil`.
+#define CDOHVerifyArgumentsNotNilOrThrowException(...) _CDOHVerifyArgumentsNotNilOrThrowException(@"" # __VA_ARGS__, __VA_ARGS__, [_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker class])
+
+@interface _CDOHVerifyArgumentsNotNilOrThrowExceptionMarker : NSObject @end
+@implementation _CDOHVerifyArgumentsNotNilOrThrowExceptionMarker @end
+/// Last argument MUST be the `_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker`
+/// class object (i.e. [_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker class]).
+BOOL _CDOHVerifyArgumentsNotNilOrThrowException(NSString *commaSeparatedVariableNameString, id firstArgument, ...);
+
+BOOL _CDOHVerifyArgumentsNotNilOrThrowException(NSString *commaSeparatedVariableNameString, id firstArgument, ...)
+{
+	NSLog(@"comma args: %@", commaSeparatedVariableNameString);
+
+	id arg = firstArgument;
+	BOOL hasNilArg = NO;
+
+	va_list args;
+	va_start(args, firstArgument);
+	while (![arg isKindOfClass:[_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker class]] && !hasNilArg) {
+		hasNilArg = arg == nil;
+		arg = va_arg(args, id);
+	}
+
+	if (hasNilArg) {
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", commaSeparatedVariableNameString];
+		return NO;
+	}
+
+	return YES;
+}
+
+
 #pragma mark - GitHub Mime Types
 /// Mime type for getting the default type of data as JSON.
 NSString *const kCDOHGitHubMimeGenericJSON	= @"application/vnd.github.beta+json";
