@@ -573,7 +573,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 - (void)getRepositoriesAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if ([pages count] == 0) {
-		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
+		pages = CDOHPagesArrayForPageIndexes(1);
 	}
 	
 	for (NSNumber *idxNum in pages) {
@@ -881,7 +881,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	}
 	
 	if ([pages count] == 0) {
-		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
+		pages = CDOHPagesArrayForPageIndexes(1);
 	}
 	
 	for (NSNumber *idxNum in pages) {
@@ -905,7 +905,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	}
 	
 	if ([pages count] == 0) {
-		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
+		pages = CDOHPagesArrayForPageIndexes(1);
 	}
 	
 	NSString *path = [NSString stringWithFormat:kCDOHUserRepositoriesPathFormat, login];
@@ -934,7 +934,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	}
 	
 	if ([pages count] == 0) {
-		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
+		pages = CDOHPagesArrayForPageIndexes(1);
 	}
 	
 	NSString *path = [NSString stringWithFormat:kCDOHOrganizationRepositoriesPathFormat, organization];
@@ -965,7 +965,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	}
 	
 	if ([pages count] == 0) {
-		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
+		pages = CDOHPagesArrayForPageIndexes(1);
 	}
 	
 	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, @"watchers"];
@@ -990,7 +990,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	}
 	
 	if ([pages count] == 0) {
-		pages = [[NSArray alloc] initWithObjects:[NSNumber numberWithUnsignedInteger:1], nil];
+		pages = CDOHPagesArrayForPageIndexes(1);
 	}
 	
 	NSString *watchedReposPath = [[NSString alloc] initWithFormat:kCDOHWatchedRepositoriesByUserPathFormat, login];
