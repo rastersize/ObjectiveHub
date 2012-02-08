@@ -265,6 +265,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 /// _pages_.
 - (void)getRepositoriesAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
+/// Get an array of `CDOHUser` objects from a given _path_ at the given _pages_.
+- (void)getUsersAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
 
 #pragma mark - Response Helpers
 /// Create an error from a failed request operation.
@@ -585,6 +588,25 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		[self.client getPath:path
 				  parameters:paramDict
 					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(path)]
+					 failure:[self standardFailureBlock:failureBlock]];
+	}
+}
+
+- (void)getUsersAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	CDOHVerifyArgumentsNotNilOrThrowException(path);
+	if ([pages count] == 0) {
+		pages = CDOHPagesArrayForPageIndexes(1);
+	}
+
+	for (NSNumber *idxNum in pages) {
+		NSUInteger idx = [idxNum unsignedIntegerValue];
+		NSMutableDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
+		[paramDict addEntriesFromDictionary:params];
+
+		[self.client getPath:path
+				  parameters:paramDict
+					 success:[self standardUserArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(path, params)]
 					 failure:[self standardFailureBlock:failureBlock]];
 	}
 }
