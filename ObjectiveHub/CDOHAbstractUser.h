@@ -52,7 +52,7 @@ extern NSString *const kCDOHUserEmailKey;
 extern NSString *const kCDOHUserAuthenticatedKey;
 /// Abstract user dictionary key for the login value.
 extern NSString *const kCDOHUserLoginKey;
-/// Abstract user dictionary key for the id value.
+/// Abstract user dictionary key for the identifier value.
 extern NSString *const kCDOHUserIDKey;
 /// Abstract user dictionary key for the avatar URL value.
 extern NSString *const kCDOHUserAvatarURLKey;
@@ -249,8 +249,8 @@ extern NSString *const kCDOHUserPlanKey;
 @property (readonly, strong) NSURL *blogURL;
 
 
-#pragma mark - Identifying and Comparing Users
-/** @name Identifying and Comparing Users */
+#pragma mark - Identifying and Comparing Abstract Users
+/** @name Identifying and Comparing Abstract Users */
 /**
  * Returns a Boolean value that indicates whether a given user is equal to the
  * receiver.
@@ -268,7 +268,7 @@ extern NSString *const kCDOHUserPlanKey;
 /**
  * Returns an unsigned integer that can be used as a has table address.
  *
- * If two user objects are equal (as determined by the isEqualToUser: method),
+ * If two user objects are equal (as determined by the `isEqualToUser:` method),
  * they will have the same hash value.
  *
  * @return An unsigned integer that can be used as a has table address.

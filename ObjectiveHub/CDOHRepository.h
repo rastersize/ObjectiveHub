@@ -294,12 +294,13 @@ extern NSString *const kCDOHRepositoryLanguageCharactersKey;
 
 
 #pragma mark - Identifying and Comparing Repositories
-/** @name Identifying and Comparing Plans */
+/** @name Identifying and Comparing Repositories */
 /**
  * Returns a Boolean value that indicates whether a given repository is equal to
  * the receiver.
  *
- * The receiver and _aRepository_ is determined to be equal if their names ***TODO***
+ * The receiver and _aRepository_ is determined to be equal if their owner,
+ * name and organization properties are equal.
  *
  * @param aRepository The repository with which to compare the reciever.
  * @return `YES` if _aRepository_ is equivalent to the reciever, otherwise `NO`.
@@ -309,8 +310,8 @@ extern NSString *const kCDOHRepositoryLanguageCharactersKey;
 /**
  * Returns an unsigned integer that can be used as a has table address.
  *
- * If two resource objects are equal (as determined by the isEqualToRepository:
- * method), they will have the same hash value.
+ * If two resource objects are equal (as determined by the
+ * `isEqualToRepository:` method), they will have the same hash value.
  *
  * @return An unsigned integer that can be used as a hash table address.
  */

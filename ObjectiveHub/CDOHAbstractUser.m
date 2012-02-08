@@ -197,7 +197,7 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 #pragma mark - Describing an Abstract User Object
 - (NSString *)description
 {	
-	return [NSString stringWithFormat:@"<%@: %p { id = %d, login = %@, type = %@, is authed = %@ }>",
+	return [NSString stringWithFormat:@"<%@: %p { id = %lu, login = %@, type = %@, is authed = %@ }>",
 			[self class],
 			self,
 			_identifier,

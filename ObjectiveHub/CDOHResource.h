@@ -78,7 +78,7 @@
 /**
  * Returns an unsigned integer that can be used as a has table address.
  *
- * If two resource objects are equal (as determined by the isEqualToResource:
+ * If two resource objects are equal (as determined by the `isEqualToResource:`
  * method), they will have the same hash value.
  *
  * @return An unsigned integer that can be used as a has table address.

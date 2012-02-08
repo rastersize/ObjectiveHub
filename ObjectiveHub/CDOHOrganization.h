@@ -40,8 +40,8 @@
  */
 @interface CDOHOrganization : CDOHAbstractUser
 
-#pragma mark - Identifying and Comparing Users
-/** @name Identifying and Comparing Users */
+#pragma mark - Identifying and Comparing Organizations
+/** @name Identifying and Comparing Organizations */
 /**
  * Returns a Boolean value that indicates whether a given organization is equal
  * to the receiver.

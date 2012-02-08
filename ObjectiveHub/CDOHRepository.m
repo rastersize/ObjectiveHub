@@ -236,6 +236,10 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 		return YES;
 	}
 	
+	// We got nothing else to go on, no unique repository ID unfortunately.
+	// Because of this if a repository is renamed (anywhere) and then compared
+	// to an instance represeting the repository before the rename they will not
+	// be equal!
 	return ([_owner isEqual:aRepository.owner] &&
 			[_name isEqualToString:aRepository.name] &&
 			[_organization isEqual:aRepository.organization]);
