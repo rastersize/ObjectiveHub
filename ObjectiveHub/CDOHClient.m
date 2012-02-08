@@ -93,7 +93,7 @@ NSArray *_CDOHPagesArrayForPageIndexes(NSUInteger pageIdx, ...)
 	dispatch_once(&markerOnceToken, ^{
 		marker = [[self alloc] init];
 	});
-
+	
 	return marker;
 }
 @end
@@ -106,9 +106,9 @@ BOOL _CDOHVerifyArgumentsNotNilOrThrowException(const char *prettyFunction, NSSt
 {
 	id arg = firstArgument;
 	BOOL hasNilArg = NO;
-
+	
 	id endMarker = [_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker marker];
-
+	
 	va_list args;
 	va_start(args, firstArgument);
 	while (arg != endMarker && !hasNilArg) {
@@ -116,12 +116,12 @@ BOOL _CDOHVerifyArgumentsNotNilOrThrowException(const char *prettyFunction, NSSt
 		arg = va_arg(args, id);
 	}
 	va_end(args);
-
+	
 	if (hasNilArg) {
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied to %s were invalid (nil)", commaSeparatedVariableNameString, prettyFunction];
 		return NO;
 	}
-
+	
 	return YES;
 }
 
@@ -613,12 +613,12 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if ([pages count] == 0) {
 		pages = CDOHPagesArrayForPageIndexes(1);
 	}
-
+	
 	for (NSNumber *idxNum in pages) {
 		NSUInteger idx = [idxNum unsignedIntegerValue];
 		NSMutableDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
 		[paramDict addEntriesFromDictionary:params];
-
+		
 		[self.client getPath:path
 				  parameters:paramDict
 					 success:[self standardUserArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(path, params)]
@@ -745,7 +745,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 					 kCDOHUserBioKey,
 					 nil];
 	params = [self requestParameterDictionaryForDictionary:dictionary validKeys:keys];
-	
 	
 	NSString *patchPath = kCDOHUserAuthenticatedPath;
 	[self.client patchPath:patchPath
@@ -894,69 +893,31 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	if (!CDOHVerifyArgumentsNotNilOrThrowException(type)) { return; }
 	
-	if ([pages count] == 0) {
-		pages = CDOHPagesArrayForPageIndexes(1);
-	}
-	
-	for (NSNumber *idxNum in pages) {
-		NSUInteger idx = [idxNum unsignedIntegerValue];
-		NSMutableDictionary *params = [self standardRequestParameterDictionaryForPage:idx];
-		[params setObject:type forKey:kCDOHParameterRepositoriesTypeKey];
-		[self.client getPath:kCDOHUserRepositoriesPath
-				  parameters:params
-					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(type)]
-					 failure:[self standardFailureBlock:failureBlock]];
-	}
+	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
+	[self getRepositoriesAtPath:kCDOHUserRepositoriesPath params:params pages:pages success:successBlock failure:failureBlock];
 }
 
 - (void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) { return; }
 	if (!CDOHVerifyArgumentsNotNilOrThrowException(login, type)) { return; }
-	
-	if ([pages count] == 0) {
-		pages = CDOHPagesArrayForPageIndexes(1);
-	}
-	
+
 	NSString *path = [NSString stringWithFormat:kCDOHUserRepositoriesPathFormat, login];
-	
-	NSUInteger idx;
-	NSMutableDictionary *params = nil;
-	for (NSNumber *idxNum in pages) {
-		idx = [idxNum unsignedIntegerValue];
-		params = [self standardRequestParameterDictionaryForPage:idx];
-		[params setObject:type forKey:kCDOHParameterRepositoriesTypeKey];
-	
-		[self.client getPath:path
-				  parameters:params
-					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(login, type)]
-					 failure:[self standardFailureBlock:failureBlock]];
-	}
+	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
+
+	[self getRepositoriesAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
 }
 
 - (void)repositoriesForOrganization:(NSString *)organization type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) { return; }
 	if (!CDOHVerifyArgumentsNotNilOrThrowException(organization, type)) { return; }
-	
-	if ([pages count] == 0) {
-		pages = CDOHPagesArrayForPageIndexes(1);
-	}
-	
+
 	NSString *path = [NSString stringWithFormat:kCDOHOrganizationRepositoriesPathFormat, organization];
+	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
+
+	[self getRepositoriesAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
 	
-	NSUInteger idx;
-	NSMutableDictionary *params = nil;
-	for (NSNumber *idxNum in pages) {
-		idx = [idxNum unsignedIntegerValue];
-		params = [self standardRequestParameterDictionaryForPage:idx];
-		[params setObject:type forKey:kCDOHParameterRepositoriesTypeKey];
-		
-		[self.client getPath:path
-				  parameters:params
-					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(organization, type)]
-					 failure:[self standardFailureBlock:failureBlock]];
-	}
 }
 
 
@@ -966,20 +927,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!successBlock && !failureBlock) { return; }
 	if (!CDOHVerifyArgumentsNotNilOrThrowException(repository, owner)) { return; }
 	
-	if ([pages count] == 0) {
-		pages = CDOHPagesArrayForPageIndexes(1);
-	}
-	
-	NSString *watchersPath = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, kCDOHRepositoryExtrasPathWatchers];
-	for (NSNumber *idxNum in pages) {
-		NSUInteger idx = [idxNum unsignedIntegerValue];
-		NSDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
-		
-		[self.client getPath:watchersPath
-				  parameters:paramDict
-					 success:[self standardUserArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repository, owner)]
-					 failure:[self standardFailureBlock:failureBlock]];
-	}
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, kCDOHRepositoryExtrasPathWatchers];
+	[self getUsersAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
 }
 
 - (void)repositoriesWatchedByUser:(NSString *)login pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -987,20 +936,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!successBlock && !failureBlock) { return; }
 	if (!CDOHVerifyArgumentsNotNilOrThrowException(login)) { return; }
 	
-	if ([pages count] == 0) {
-		pages = CDOHPagesArrayForPageIndexes(1);
-	}
-	
-	NSString *watchedReposPath = [[NSString alloc] initWithFormat:kCDOHWatchedRepositoriesByUserPathFormat, login];
-	for (NSNumber *idxNum in pages) {
-		NSUInteger idx = [idxNum unsignedIntegerValue];
-		NSDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
-		
-		[self.client getPath:watchedReposPath
-				  parameters:paramDict
-					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(login)]
-					 failure:[self standardFailureBlock:failureBlock]];
-	}
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHWatchedRepositoriesByUserPathFormat, login];
+	[self getRepositoriesAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
 }
 
 - (void)isUserWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -1048,12 +985,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!CDOHVerifyArgumentsNotNilOrThrowException(repository, owner)) { return; }
 	
 	NSString *path = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, kCDOHRepositoryExtrasPathForks];
-	NSLog(@"path: %@", path);
-	[self getRepositoriesAtPath:path
-						 params:nil
-						  pages:pages
-						success:successBlock
-						failure:failureBlock];
+	[self getRepositoriesAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
 }
 
 - (void)forkRepository:(NSString *)repository owner:(NSString *)owner intoOrganization:(NSString *)intoOrganization success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
