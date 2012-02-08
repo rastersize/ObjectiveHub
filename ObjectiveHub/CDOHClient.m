@@ -587,7 +587,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		
 		[self.client getPath:path
 				  parameters:paramDict
-					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(path)]
+					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(path, params)]
 					 failure:[self standardFailureBlock:failureBlock]];
 	}
 }
