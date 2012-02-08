@@ -141,6 +141,10 @@
 		9C64163C14C32C1300478E39 /* CDOHClientProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C64163A14C32C1300478E39 /* CDOHClientProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C76A25E14E0680700CA444C /* CDOHTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C76A25D14E0680700CA444C /* CDOHTypes.m */; };
 		9C76A25F14E0680700CA444C /* CDOHTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C76A25D14E0680700CA444C /* CDOHTypes.m */; };
+		9C92313A14E2DCC300287DD9 /* CDOHOrganizationTeam.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C92313814E2DCC300287DD9 /* CDOHOrganizationTeam.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C92313B14E2DCC400287DD9 /* CDOHOrganizationTeam.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C92313814E2DCC300287DD9 /* CDOHOrganizationTeam.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C92313C14E2DCC400287DD9 /* CDOHOrganizationTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92313914E2DCC300287DD9 /* CDOHOrganizationTeam.m */; };
+		9C92313D14E2DCC400287DD9 /* CDOHOrganizationTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92313914E2DCC300287DD9 /* CDOHOrganizationTeam.m */; };
 		9C92314414E2E80300287DD9 /* CDOHOrganizationTeamTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314314E2E80300287DD9 /* CDOHOrganizationTeamTests.m */; };
 		9C92314514E2E80300287DD9 /* CDOHOrganizationTeamTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314314E2E80300287DD9 /* CDOHOrganizationTeamTests.m */; };
 		9C92315614E2EA3A00287DD9 /* CDOHAbstractUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314714E2EA3900287DD9 /* CDOHAbstractUserTests.m */; };
@@ -364,6 +368,8 @@
 		9C613A9F14B60CEC0067B6B6 /* CDOHResourcePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHResourcePrivate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9C64163A14C32C1300478E39 /* CDOHClientProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHClientProtocol.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9C76A25D14E0680700CA444C /* CDOHTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHTypes.m; sourceTree = "<group>"; };
+		9C92313814E2DCC300287DD9 /* CDOHOrganizationTeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHOrganizationTeam.h; sourceTree = "<group>"; };
+		9C92313914E2DCC300287DD9 /* CDOHOrganizationTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHOrganizationTeam.m; sourceTree = "<group>"; };
 		9C92314214E2E80300287DD9 /* CDOHOrganizationTeamTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHOrganizationTeamTests.h; sourceTree = "<group>"; };
 		9C92314314E2E80300287DD9 /* CDOHOrganizationTeamTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHOrganizationTeamTests.m; sourceTree = "<group>"; };
 		9C92314614E2EA3900287DD9 /* CDOHAbstractUserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHAbstractUserTests.h; sourceTree = "<group>"; };
@@ -721,6 +727,8 @@
 				9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */,
 				9CF962AC147FC01B00F52A98 /* CDOHRepository.h */,
 				9CF962AD147FC01B00F52A98 /* CDOHRepository.m */,
+				9C92313814E2DCC300287DD9 /* CDOHOrganizationTeam.h */,
+				9C92313914E2DCC300287DD9 /* CDOHOrganizationTeam.m */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -804,6 +812,7 @@
 				9CA5FAB714B668DB00F2CD13 /* CDOHOrganization.h in Headers */,
 				9CF962AE147FC01B00F52A98 /* CDOHRepository.h in Headers */,
 				9CA5FAA114B6304600F2CD13 /* CDOHCommon.h in Headers */,
+				9C92313A14E2DCC300287DD9 /* CDOHOrganizationTeam.h in Headers */,
 				9C6018DF14B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.h in Headers */,
 				9C26F9B2146B2424001A5385 /* JSONKit.h in Headers */,
 				9CA5FA9614B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */,
@@ -849,6 +858,7 @@
 				9CA5FADC14B6AB1F00F2CD13 /* CDOHTypes.h in Headers */,
 				9CA5FAA214B6304600F2CD13 /* CDOHCommon.h in Headers */,
 				9C6018E014B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.h in Headers */,
+				9C92313B14E2DCC400287DD9 /* CDOHOrganizationTeam.h in Headers */,
 				9C26F9B3146B2424001A5385 /* JSONKit.h in Headers */,
 				9C26F9D6146B2979001A5385 /* AFHTTPClient.h in Headers */,
 				9C26F9DA146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */,
@@ -1115,6 +1125,7 @@
 				9CA5FACC14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.m in Sources */,
 				9C6018E114B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.m in Sources */,
 				9C76A25E14E0680700CA444C /* CDOHTypes.m in Sources */,
+				9C92313C14E2DCC400287DD9 /* CDOHOrganizationTeam.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1168,6 +1179,7 @@
 				9CA5FACD14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.m in Sources */,
 				9C6018E214B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.m in Sources */,
 				9C76A25F14E0680700CA444C /* CDOHTypes.m in Sources */,
+				9C92313D14E2DCC400287DD9 /* CDOHOrganizationTeam.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
