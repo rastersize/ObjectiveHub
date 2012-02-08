@@ -155,6 +155,23 @@ NSString *const kCDOHUserWatchedRepositoryPathFormat		= @"/user/watched/%@/%@";
 NSString *const kCDOHOrganizationRepositoriesPathFormat		= @"/orgs/%@/repos";
 
 
+#pragma mark - Repositories Extras
+/// Repository watchers extras relative path.
+NSString *const kCDOHRepositoryExtrasPathWatchers			= @"watchers";
+/// Repository forks extras relative path.
+NSString *const kCDOHRepositoryExtrasPathForks				= @"forks";
+/// Repository contributors extras relative path.
+NSString *const kCDOHRepositoryExtrasPathContributors		= @"contributors";
+/// Repository languages extras relative path.
+NSString *const kCDOHRepositoryExtrasPathLanguages			= @"languages";
+/// Repository teams extras relative path.
+NSString *const kCDOHRepositoryExtrasPathTeams				= @"teams";
+/// Repository tags extras relative path.
+NSString *const kCDOHRepositoryExtrasPathTags				= @"tags";
+/// Repository branches extras relative path.
+NSString *const kCDOHRepositoryExtrasPathBranches			= @"branches";
+
+
 #pragma mark - Request Parameter Keys
 /// The repositories type parameter key.
 NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
@@ -1011,7 +1028,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@, %@) supplied were invalid (nil)", @"repository", @"owner"];
 	}
 	
-	NSString *path = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, @"forks"];
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, kCDOHRepositoryExtrasPathForks];
 	NSLog(@"path: %@", path);
 	[self getRepositoriesAtPath:path
 						 params:nil
@@ -1034,7 +1051,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				  nil];
 	}
 	
-	NSString *path = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, @"forks"];
+	NSString *path = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, kCDOHRepositoryExtrasPathForks];
 	[self.client postPath:path
 			   parameters:params
 				  success:[self standardRepositorySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repository, owner, intoOrganization)]
