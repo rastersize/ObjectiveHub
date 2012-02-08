@@ -919,12 +919,12 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	[self getRepositoriesAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
 }
 
-- (void)repositoryContributors:(NSString *)repository owner:(NSString *)owner pages:(NSArray *) pages success:(CDOHResponseBlock) successBlock failure:(CDOHFailureBlock) failureBlock
+- (void)repositoryContributors:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock) successBlock failure:(CDOHFailureBlock) failureBlock
 {
-	[self repositoryContributors:repository owner:owner anonymous:NO pages:pages success:successBlock failure:failureBlock];
+	[self repositoryContributors:repository owner:owner anonymous:NO success:successBlock failure:failureBlock];
 }
 
-- (void)repositoryContributors:(NSString *)repository owner:(NSString *)owner anonymous:(BOOL)anonymous pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)repositoryContributors:(NSString *)repository owner:(NSString *)owner anonymous:(BOOL)anonymous success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) { return; }
 	if (!CDOHVerifyArgumentsNotNilOrThrowException(repository, owner)) { return; }
@@ -932,7 +932,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	NSString *path = [[NSString alloc] initWithFormat:kCDOHRepositoryExtrasPathFormat, owner, repository, kCDOHRepositoryExtrasPathContributors];
 	NSDictionary *params = CDOHParametersDictionary([NSNumber numberWithBool:anonymous], @"anon");
 	
-	[self getUsersAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
+	[self getUsersAtPath:path params:params pages:nil success:successBlock failure:failureBlock];
 }
 
 

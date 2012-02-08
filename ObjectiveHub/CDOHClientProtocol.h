@@ -745,16 +745,13 @@
  *
  * @param repository The name of the repository.
  * @param owner The login of the owner of the given _repository_.
- * @param pages An array of an unsigned integers wrapped with a NSNumber for
- * each page of the resource that should be loaded. May be `nil` in which case
- * the first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.
  *
  * The `resource` property of the response will be set to a `NSArray` of
- * `CDOHUser` objects representing all the contributors of the given repository
- * (for one page).
+ * `CDOHUser` objects representing all the contributors of the given repository.
+ * The response is not paginated.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
@@ -765,7 +762,7 @@
  * @see CDOHResponse
  * @see CDOHUser
  */
-- (void)repositoryContributors:(NSString *)repository owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositoryContributors:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all contributors of the given repository.
@@ -777,16 +774,13 @@
  * @param owner The login of the owner of the given _repository_.
  * @param anonymous `YES` to include anonymous contributors, `NO` to exlude
  * anonymous contributors from the result.
- * @param pages An array of an unsigned integers wrapped with a NSNumber for
- * each page of the resource that should be loaded. May be `nil` in which case
- * the first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.
  *
  * The `resource` property of the response will be set to a `NSArray` of
- * `CDOHUser` objects representing all the contributors of the given repository
- * (for one page).
+ * `CDOHUser` objects representing all the contributors of the given repository.
+ * The response is not paginated.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
@@ -797,7 +791,7 @@
  * @see CDOHResponse
  * @see CDOHUser
  */
-- (void)repositoryContributors:(NSString *)repository owner:(NSString *)owner anonymous:(BOOL)anonymous pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositoryContributors:(NSString *)repository owner:(NSString *)owner anonymous:(BOOL)anonymous success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - Watched and Watching Repositories
