@@ -58,7 +58,7 @@ NSString *const kCDOHUserAgentFormat		= @"ObjectiveHub/%@";
 
 
 #pragma mark - Pages Array Helper
-NSArray *CDOHPagesArrayForPageIndexes_(NSUInteger pageIdx, ...)
+NSArray *_CDOHPagesArrayForPageIndexes(NSUInteger pageIdx, ...)
 {
 	NSUInteger idx = pageIdx;
 	NSNumber *idxNum = nil;

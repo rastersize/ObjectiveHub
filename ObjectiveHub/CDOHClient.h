@@ -43,17 +43,14 @@
 /**
  * Helper macro for creating pages arrays from a variable list of `NSUIntegers`.
  */
-#define CDOHPagesArrayForPageIndexes(...)	CDOHPagesArrayForPageIndexes_(__VA_ARGS__, NSUIntegerMax)
+#define CDOHPagesArrayForPageIndexes(...)	_CDOHPagesArrayForPageIndexes(__VA_ARGS__, NSUIntegerMax)
 
 /**
  * Creates an array of pages from the given page indexes. Must be ended with
- * `NSUIntegerMax`.
- *
- * You will probably want to use the convenience macro
- * `CDOHPagesArrayForPageIndexes` instead of this function as you do not have to
- * pass `NSUIntegerMax` yourself to it.
+ * `NSUIntegerMax`. Not for direct use, please use the macro
+ * `CDOHPagesArrayForPageIndexes` instead.
  */
-extern NSArray *CDOHPagesArrayForPageIndexes_(NSUInteger pageIdx, ...);
+extern NSArray *_CDOHPagesArrayForPageIndexes(NSUInteger pageIdx, ...);
 
 
 #pragma mark - ObjectiveHub Interface
