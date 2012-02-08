@@ -80,30 +80,45 @@ NSArray *_CDOHPagesArrayForPageIndexes(NSUInteger pageIdx, ...)
 
 #pragma mark - Argument Verification Helper.
 /// `YES` == no argument was `nil`, `NO` == one or more arguments were `nil`.
-#define CDOHVerifyArgumentsNotNilOrThrowException(...) _CDOHVerifyArgumentsNotNilOrThrowException(@"" # __VA_ARGS__, __VA_ARGS__, [_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker class])
+#define CDOHVerifyArgumentsNotNilOrThrowException(...) _CDOHVerifyArgumentsNotNilOrThrowException(__PRETTY_FUNCTION__, @"" # __VA_ARGS__, __VA_ARGS__, [_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker marker])
 
-@interface _CDOHVerifyArgumentsNotNilOrThrowExceptionMarker : NSObject @end
-@implementation _CDOHVerifyArgumentsNotNilOrThrowExceptionMarker @end
-/// Last argument MUST be the `_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker`
-/// class object (i.e. [_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker class]).
-BOOL _CDOHVerifyArgumentsNotNilOrThrowException(NSString *commaSeparatedVariableNameString, id firstArgument, ...);
-
-BOOL _CDOHVerifyArgumentsNotNilOrThrowException(NSString *commaSeparatedVariableNameString, id firstArgument, ...)
+@interface _CDOHVerifyArgumentsNotNilOrThrowExceptionMarker : NSObject
++ (_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker *)marker;
+@end
+@implementation _CDOHVerifyArgumentsNotNilOrThrowExceptionMarker
++ (_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker *)marker
 {
-	NSLog(@"comma args: %@", commaSeparatedVariableNameString);
+	static _CDOHVerifyArgumentsNotNilOrThrowExceptionMarker *marker = nil;
+	static dispatch_once_t markerOnceToken;
+	dispatch_once(&markerOnceToken, ^{
+		marker = [[self alloc] init];
+	});
 
+	return marker;
+}
+@end
+
+/// Last argument MUST be the `_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker`
+/// +marker object.
+BOOL _CDOHVerifyArgumentsNotNilOrThrowException(const char *prettyFunction, NSString *commaSeparatedVariableNameString, id firstArgument, ...);
+
+BOOL _CDOHVerifyArgumentsNotNilOrThrowException(const char *prettyFunction, NSString *commaSeparatedVariableNameString, id firstArgument, ...)
+{
 	id arg = firstArgument;
 	BOOL hasNilArg = NO;
 
+	id endMarker = [_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker marker];
+
 	va_list args;
 	va_start(args, firstArgument);
-	while (![arg isKindOfClass:[_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker class]] && !hasNilArg) {
+	while (arg != endMarker && !hasNilArg) {
 		hasNilArg = arg == nil;
 		arg = va_arg(args, id);
 	}
+	va_end(args);
 
 	if (hasNilArg) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied were invalid (nil)", commaSeparatedVariableNameString];
+		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied to %s were invalid (nil)", commaSeparatedVariableNameString, prettyFunction];
 		return NO;
 	}
 
