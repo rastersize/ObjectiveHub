@@ -96,7 +96,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInternalInconsistencyException if no authenticated user has been
+ * @exception NSInternalInconsistencyException If no authenticated user has been
  * set **and** no failure block has been given.
  *
  * @see userWithLogin:success:failure:
@@ -181,8 +181,8 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _dictionary_ is `nil`.
- * @exception NSInternalInconsistencyException if no authenticated user has been
+ * @exception NSInvalidArgumentException If _dictionary_ is `nil`.
+ * @exception NSInternalInconsistencyException If no authenticated user has been
  * set **and** no failure block has been given.
  *
  * @see CDOHResponse
@@ -214,7 +214,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInternalInconsistencyException if no authenticated user has been
+ * @exception NSInternalInconsistencyException If no authenticated user has been
  * set **and** no failure block has been given.
  *
  * @see addUserEmails:success:failure:
@@ -246,8 +246,8 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _emails_ is `nil`.
- * @exception NSInternalInconsistencyException if no authenticated user has been
+ * @exception NSInvalidArgumentException If _emails_ is `nil`.
+ * @exception NSInternalInconsistencyException If no authenticated user has been
  * set **and** no failure block has been given.
  *
  * @see userEmails:failure:
@@ -276,8 +276,8 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _emails_ is `nil`.
- * @exception NSInternalInconsistencyException if no authenticated user has been
+ * @exception NSInvalidArgumentException If _emails_ is `nil`.
+ * @exception NSInternalInconsistencyException If no authenticated user has been
  * set **and** no failure block has been given.
  *
  * @see userEmails:failure:
@@ -306,7 +306,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ * @exception NSInvalidArgumentException If _repository_ or _owner_ are `nil`.
  */
 - (void)repository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
@@ -398,8 +398,8 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _name_ is `nil`.
- * @exception NSInternalInconsistencyException if no authenticated user has been
+ * @exception NSInvalidArgumentException If _name_ is `nil`.
+ * @exception NSInternalInconsistencyException If no authenticated user has been
  * set **and** no failure block has been given.
  *
  * @see repository:owner:success:failure:
@@ -508,8 +508,8 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _name_ is `nil`.
- * @exception NSInternalInconsistencyException if no authenticated user has been
+ * @exception NSInvalidArgumentException If _name_ is `nil`.
+ * @exception NSInternalInconsistencyException If no authenticated user has been
  * set **and** no failure block has been given.
  *
  * @see repository:owner:success:failure:
@@ -620,8 +620,8 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
- * @exception NSInternalInconsistencyException if no authenticated user has been
+ * @exception NSInvalidArgumentException If _repository_ or _owner_ are `nil`.
+ * @exception NSInternalInconsistencyException If no authenticated user has been
  * set **and** no failure block has been given.
  */
 - (void)updateRepository:(NSString *)repository owner:(NSString *)owner dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
@@ -654,8 +654,8 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _type_ is `nil`.
- * @exception NSInternalInconsistencyException if no authenticated user has been
+ * @exception NSInvalidArgumentException If _type_ is `nil`.
+ * @exception NSInternalInconsistencyException If no authenticated user has been
  * set **and** no failure block has been given.
  *
  * @see repositoriesForUser:type:pages:success:failure:
@@ -692,7 +692,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _login_ or _type_ are `nil`.
+ * @exception NSInvalidArgumentException If _login_ or _type_ are `nil`.
  *
  * @see repositories:pages:success:failure:
  * @see repositoriesForOrganization:type:pages:success:failure:
@@ -727,7 +727,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _organization_ or _type_ are `nil`.
+ * @exception NSInvalidArgumentException If _organization_ or _type_ are `nil`.
  *
  * @see repositories:pages:success:failure:
  * @see repositoriesForUser:type:pages:success:failure:
@@ -756,7 +756,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ * @exception NSInvalidArgumentException If _repository_ or _owner_ are `nil`.
  *
  * @see repositoryContributors:owner:anonymous:pages:success:failure:
  * @see CDOHResponse
@@ -785,7 +785,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ * @exception NSInvalidArgumentException If _repository_ or _owner_ are `nil`.
  *
  * @see repositoryContributors:owner:pages:success:failure:
  * @see CDOHResponse
@@ -813,6 +813,10 @@
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
+ *
+ * @exception NSInvalidArgumentException If _repository_ or _owner_ are `nil`.
+ *
+ * @see CDOHResponse
  */
 - (void)repositoryLanguages:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
@@ -841,7 +845,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ * @exception NSInvalidArgumentException If _repository_ or _owner_ are `nil`.
  *
  * @see CDOHResponse
  * @see CDOHUser
@@ -870,7 +874,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _login_ is `nil`.
+ * @exception NSInvalidArgumentException If _login_ is `nil`.
  *
  * @see CDOHResponse
  * @see CDOHRepository
@@ -899,7 +903,7 @@
  * types of errors. The parameter may be set to `NULL` in which case nothing
  * will be done upon failure.
  *
- * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ * @exception NSInvalidArgumentException If _repository_ or _owner_ are `nil`.
  * @exception NSInternalInconsistencyException if no authenticated user has been
  * set **and** no failure block has been given.
  *
@@ -927,7 +931,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ * @exception NSInvalidArgumentException If _repository_ or _owner_ are `nil`.
  * @exception NSInternalInconsistencyException if no authenticated user has been
  * set **and** no failure block has been given.
  *
@@ -955,7 +959,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ * @exception NSInvalidArgumentException If _repository_ or _owner_ are `nil`.
  * @exception NSInternalInconsistencyException if no authenticated user has been
  * set **and** no failure block has been given.
  *
@@ -989,7 +993,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ * @exception NSInvalidArgumentException If _repository_ or _owner_ are `nil`.
  *
  * @see forkRepository:owner:success:failure:
  */
@@ -1022,7 +1026,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
- * @exception NSInvalidArgumentException if _repository_ or _owner_ are `nil`.
+ * @exception NSInvalidArgumentException If _repository_ or _owner_ are `nil`.
  * @exception NSInternalInconsistencyException if no authenticated user has been
  * set **and** no failure block has been given.
  *
