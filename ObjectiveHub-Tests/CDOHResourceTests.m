@@ -34,6 +34,8 @@
 #import "CDOHResource.h"
 #import "CDOHResourcePrivate.h"
 
+#import "NSDate+ObjectiveHub.h"
+
 
 @implementation CDOHResourceTests
 
@@ -64,7 +66,25 @@
 
 - (void)testDateObjectFromDictionary
 {
+	NSDate *date = [NSDate dateWithTimeIntervalSince1970:3613454];
+	NSString *dateString = [date cdoh_stringUsingRFC3339Format];
 	
+	NSDictionary *dateDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+							  date, @"date",
+							  dateString, @"dateString",
+							  nil];
+	
+	NSDate *dateFromDict = [CDOHResource dateObjectFromDictionary:dateDict usingKey:@"date"];
+	NSDate *dateCreatedFromDict = [CDOHResource dateObjectFromDictionary:dateDict usingKey:@"dateString"];
+	
+	STAssertNotNil(dateFromDict, @"Date (%@) fetched from dictionary (%@) should not be nil", date, dateDict);
+	STAssertNotNil(dateCreatedFromDict, @"Date (%@) created and fetched from dictionary (%@) should not be nil", dateString, dateDict);
+	
+	STAssertTrue([dateFromDict isKindOfClass:[NSDate class]], @"Date (%@) fetched from dictionary (%@) should be of class 'NSDate'", date, dateDict);
+	STAssertTrue([dateCreatedFromDict isKindOfClass:[NSDate class]], @"Date (%@) created and fetched from dictionary (%@) should be of class 'NSDate'", date, dateDict);
+	
+	STAssertEqualObjects(date, dateFromDict, @"Date (%@) fetched from dictionary (%@) should be equal (using isEqual:) to the original date (%@)", dateCreatedFromDict, dateDict, date);
+	STAssertEqualObjects(date, dateCreatedFromDict, @"Date (%@) created and fetched from dictionary (%@) should be equal (using isEqual:) to the original date (%@)", dateCreatedFromDict, dateDict, date);
 }
 
 - (void)testURLObjectFromDictionary
