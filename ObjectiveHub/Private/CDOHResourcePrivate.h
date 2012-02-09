@@ -78,7 +78,7 @@ extern NSString *const kCDOHResourcePropertiesDictionaryKey;
  * the object is a `NSDictionary`.
  * @return The decoded object or `nil`.
  */
-- (id)resourceObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)key ofClass:(Class)ofClass;
++ (id)resourceObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)key ofClass:(Class)ofClass;
 
 /**
  * Returns the date object in the given _dictionary_ for the given _key_.
@@ -93,7 +93,7 @@ extern NSString *const kCDOHResourcePropertiesDictionaryKey;
  * @param key The key to get the date object from the given dictionary.
  * @return The decoded date object or `nil`.
  */
-- (NSDate *)dateObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)key;
++ (NSDate *)dateObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)key;
 
 /**
  * Returns the URL object in the given _dictionary_ for the given _key_.
@@ -107,7 +107,7 @@ extern NSString *const kCDOHResourcePropertiesDictionaryKey;
  * @param key The key to get the URL object from the given dictionary.
  * @return The decoded URL object or `nil`.
  */
-- (NSURL *)URLObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)key;
++ (NSURL *)URLObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)key;
 
 
 @end

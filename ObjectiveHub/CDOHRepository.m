@@ -113,11 +113,11 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 	self = [super initWithDictionary:dictionary];
 	if (self) {
 		// URLs
-		_htmlUrl	= [self URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryHtmlUrlKey];
-		_cloneUrl	= [self URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryCloneUrlKey];
-		_gitUrl		= [self URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryGitUrlKey];
-		_sshUrl		= [self URLObjectFromDictionary:dictionary usingKey:kCDOHRepositorySshUrlKey];
-		_svnUrl		= [self URLObjectFromDictionary:dictionary usingKey:kCDOHRepositorySvnUrlKey];
+		_htmlUrl	= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryHtmlUrlKey];
+		_cloneUrl	= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryCloneUrlKey];
+		_gitUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryGitUrlKey];
+		_sshUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositorySshUrlKey];
+		_svnUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositorySvnUrlKey];
 		
 		// Strings
 		_name = [[dictionary objectForKey:kCDOHRepositoryNameKey] copy];
@@ -127,14 +127,14 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 		_defaultBranch = [[dictionary objectForKey:kCDOHRepositoryDefaultBranchKey] copy];
 		
 		// Resources
-		_owner = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHUser class]];
-		_organization = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHOrganization class]];
-		_parentRepository = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
-		_sourceRepository = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
+		_owner = [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHUser class]];
+		_organization = [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHOrganization class]];
+		_parentRepository = [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
+		_sourceRepository = [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
 		
 		// Dates
-		_pushedAt = [self dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryPushedAtKey];
-		_createdAt = [self dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryCreatedAtKey];
+		_pushedAt = [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryPushedAtKey];
+		_createdAt = [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryCreatedAtKey];
 		
 		// Booleans
 		_private = [[dictionary objectForKey:kCDOHRepositoryPrivateKey] boolValue];

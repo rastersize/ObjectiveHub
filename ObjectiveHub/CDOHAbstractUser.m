@@ -111,12 +111,12 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 		_gravatarId	= [[dictionary valueForKey:kCDOHUserGravatarIDKey] copy];
 		
 		// URLs
-		_blogUrl		= [self URLObjectFromDictionary:dictionary usingKey:kCDOHUserBlogKey];
-		_avatarUrl		= [self URLObjectFromDictionary:dictionary usingKey:kCDOHUserAvatarURLKey];
-		_htmlUrl		= [self URLObjectFromDictionary:dictionary usingKey:kCDOHUserHTMLURLKey];
+		_blogUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHUserBlogKey];
+		_avatarUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHUserAvatarURLKey];
+		_htmlUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHUserHTMLURLKey];
 		
 		// Dates
-		_createdAt = [self dateObjectFromDictionary:dictionary usingKey:kCDOHUserCreatedAtKey];
+		_createdAt = [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHUserCreatedAtKey];
 		
 		// Unsigned integers
 		_identifier							= [[dictionary valueForKey:kCDOHUserIDKey] unsignedIntegerValue];
@@ -131,7 +131,7 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 		_diskUsage							= [[dictionary valueForKey:kCDOHUserDiskUsageKey] unsignedIntegerValue];
 		
 		// Resources
-		_plan = [self resourceObjectFromDictionary:dictionary usingKey:kCDOHUserPlanKey ofClass:[CDOHPlan class]];
+		_plan = [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHUserPlanKey ofClass:[CDOHPlan class]];
 	}
 	
 	return self;

@@ -49,17 +49,17 @@
 								nil];
 	
 	
-	id resourceFromDict = [resource resourceObjectFromDictionary:objectDict usingKey:@"resource" ofClass:[CDOHResource class]];
-	id resourceCreatedFromDict = [resource resourceObjectFromDictionary:objectDict usingKey:@"resourceDict" ofClass:[CDOHResource class]];
+	id resourceFromDict = [CDOHResource resourceObjectFromDictionary:objectDict usingKey:@"resource" ofClass:[CDOHResource class]];
+	id resourceCreatedFromDict = [CDOHResource resourceObjectFromDictionary:objectDict usingKey:@"resourceDict" ofClass:[CDOHResource class]];
 	
 	STAssertNotNil(resourceFromDict, @"Resource (%@) fetched from dictionary (%@) should not be nil", resource, objectDict);
-	STAssertNotNil(resourceCreatedFromDict, @"Resource (%@) created and fetched from dictionary (%@) should not be nil", resource, objectDict);
+	STAssertNotNil(resourceCreatedFromDict, @"Resource (%@) created and fetched from dictionary (%@) should not be nil", resourceDict, objectDict);
 	
 	STAssertTrue([resourceFromDict isKindOfClass:[CDOHResource class]], @"Resource (%@) fetched from dictionary (%@) should be of class 'CDOHResource'", resource, objectDict);
-	STAssertTrue([resourceCreatedFromDict isKindOfClass:[CDOHResource class]], @"Resource (%@) created and fetched from dictionary (%@) should be of class 'CDOHResource'", resource, objectDict);
+	STAssertTrue([resourceCreatedFromDict isKindOfClass:[CDOHResource class]], @"Resource (%@) created and fetched from dictionary (%@) should be of class 'CDOHResource'", resourceDict, objectDict);
 	
 	STAssertEqualObjects(resource, resourceFromDict, @"Resource (%@) fetched from dictionary (%@) should be equal (using isEqual:) to the original resource (%@)", resourceFromDict, objectDict, resource);
-	STAssertEqualObjects(resource, resourceCreatedFromDict, @"Resource (%@) created and fetched from dictionary (%@) should be equal (using isEqual:) to the original resource (%@)", resourceCreatedFromDict, objectDict, resource);
+	STAssertEqualObjects(resource, resourceCreatedFromDict, @"Resource (%@) created and fetched from dictionary (%@) should be equal (using isEqual:) to the resource (%@) created with the dictionary (%@)", resourceCreatedFromDict, objectDict, resource, resourceDict);
 }
 
 - (void)testDateObjectFromDictionary
