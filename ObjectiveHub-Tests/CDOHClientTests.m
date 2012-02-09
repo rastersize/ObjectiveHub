@@ -53,6 +53,9 @@
 	_queue = dispatch_get_main_queue(); //dispatch_queue_create("com.libobjectivehub.tests.CDOHClientTests", DISPATCH_QUEUE_SERIAL);
 	
 	CDOHTestsUserCredentials *cred = [[CDOHTestsUserCredentials alloc] init];
+	STAssertNotNil(cred.username, @"Did you create an accounts.plist file in the unit tests root? Please refer to the documentation for more information (username is nil)");
+	STAssertNotNil(cred.password, @"Did you create an accounts.plist file in the unit tests root? Please refer to the documentation for more information (password is nil)");
+	
 	_client = [[CDOHClient alloc] initWithUsername:cred.username password:cred.password];
 }
 
@@ -89,13 +92,13 @@
 	CDOHClient *objHub = [[CDOHClient alloc] initWithUsername:username password:password];
 	
 	STAssertNotNil(objHub, @"ObjectiveHub instance objHub should not return nil");
-	STAssertTrue(objHub.username == username, @"objHub.username should be equal to username");
-	STAssertTrue(objHub.password == password, @"objHub.password should be equal to password");
+	STAssertEqualObjects(objHub.username, username, @"objHub.username should be equal to username");
+	STAssertEqualObjects(objHub.password, password, @"objHub.password should be equal to password");
 }
 
 
 #pragma mark - GitHub Communication Tests
-- (void)testNoAuthenticatedUser
+/*- (void)testNoAuthenticatedUser
 {
 	__unsafe_unretained CDOHClientTests *blockSelf = self;
 	
@@ -223,7 +226,7 @@
 			STAssertTrue(NO, @"Request failed with error: %@", error);
 		}];
 	});
-}
+}*/
 
 
 @end
