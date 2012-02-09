@@ -141,6 +141,8 @@
 		9C64163C14C32C1300478E39 /* CDOHClientProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C64163A14C32C1300478E39 /* CDOHClientProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C76A25E14E0680700CA444C /* CDOHTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C76A25D14E0680700CA444C /* CDOHTypes.m */; };
 		9C76A25F14E0680700CA444C /* CDOHTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C76A25D14E0680700CA444C /* CDOHTypes.m */; };
+		9C89DC2314E447EC0057AB17 /* CDOHResourceBaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C89DC2214E447EC0057AB17 /* CDOHResourceBaseTests.m */; };
+		9C89DC2414E447EC0057AB17 /* CDOHResourceBaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C89DC2214E447EC0057AB17 /* CDOHResourceBaseTests.m */; };
 		9C92313A14E2DCC300287DD9 /* CDOHOrganizationTeam.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C92313814E2DCC300287DD9 /* CDOHOrganizationTeam.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C92313B14E2DCC400287DD9 /* CDOHOrganizationTeam.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C92313814E2DCC300287DD9 /* CDOHOrganizationTeam.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C92313C14E2DCC400287DD9 /* CDOHOrganizationTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92313914E2DCC300287DD9 /* CDOHOrganizationTeam.m */; };
@@ -368,6 +370,8 @@
 		9C613A9F14B60CEC0067B6B6 /* CDOHResourcePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHResourcePrivate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9C64163A14C32C1300478E39 /* CDOHClientProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHClientProtocol.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9C76A25D14E0680700CA444C /* CDOHTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHTypes.m; sourceTree = "<group>"; };
+		9C89DC2114E447EC0057AB17 /* CDOHResourceBaseTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHResourceBaseTests.h; sourceTree = "<group>"; };
+		9C89DC2214E447EC0057AB17 /* CDOHResourceBaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHResourceBaseTests.m; sourceTree = "<group>"; };
 		9C92313814E2DCC300287DD9 /* CDOHOrganizationTeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHOrganizationTeam.h; sourceTree = "<group>"; };
 		9C92313914E2DCC300287DD9 /* CDOHOrganizationTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHOrganizationTeam.m; sourceTree = "<group>"; };
 		9C92314214E2E80300287DD9 /* CDOHOrganizationTeamTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHOrganizationTeamTests.h; sourceTree = "<group>"; };
@@ -736,6 +740,8 @@
 		9C92313F14E2E7AE00287DD9 /* Resource Tests */ = {
 			isa = PBXGroup;
 			children = (
+				9C89DC2114E447EC0057AB17 /* CDOHResourceBaseTests.h */,
+				9C89DC2214E447EC0057AB17 /* CDOHResourceBaseTests.m */,
 				9C92314614E2EA3900287DD9 /* CDOHAbstractUserTests.h */,
 				9C92314714E2EA3900287DD9 /* CDOHAbstractUserTests.m */,
 				9C92314814E2EA3900287DD9 /* CDOHErrorTests.h */,
@@ -1146,6 +1152,7 @@
 				9C92316014E2EA3A00287DD9 /* CDOHResourceTests.m in Sources */,
 				9C92316214E2EA3A00287DD9 /* CDOHResponseTests.m in Sources */,
 				9C92316414E2EA3A00287DD9 /* CDOHUserTests.m in Sources */,
+				9C89DC2314E447EC0057AB17 /* CDOHResourceBaseTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1201,6 +1208,7 @@
 				9C92316114E2EA3A00287DD9 /* CDOHResourceTests.m in Sources */,
 				9C92316314E2EA3A00287DD9 /* CDOHResponseTests.m in Sources */,
 				9C92316514E2EA3A00287DD9 /* CDOHUserTests.m in Sources */,
+				9C89DC2414E447EC0057AB17 /* CDOHResourceBaseTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
