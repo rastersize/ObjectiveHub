@@ -52,7 +52,7 @@
 	
 	static dispatch_once_t firstTestDictionaryToken;
 	dispatch_once(&firstTestDictionaryToken, ^{
-		firstTestDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+		firstTestDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
 							   [NSURL URLWithString:@"https://api.github.com/first_resource"],	kCDOHResourceAPIResourceURLKey,
 							   nil];
 	});
@@ -66,7 +66,7 @@
 	
 	static dispatch_once_t secondTestDictionaryToken;
 	dispatch_once(&secondTestDictionaryToken, ^{
-		secondTestDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+		secondTestDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
 								[NSURL URLWithString:@"https://api.github.com/second_resource"],	kCDOHResourceAPIResourceURLKey,
 								nil];
 	});
@@ -86,7 +86,7 @@
 	NSMutableDictionary *mergedDictionary = [[NSMutableDictionary alloc] initWithCapacity:[dictionary count] + [superDictionary count]];
 	[mergedDictionary addEntriesFromDictionary:superDictionary];
 	[mergedDictionary addEntriesFromDictionary:dictionary];
-
+	
 	return [mergedDictionary copy];
 }
 
