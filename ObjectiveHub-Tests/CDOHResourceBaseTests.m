@@ -81,6 +81,15 @@
 	return [self firstTestDictionary];
 }
 
++ (NSDictionary *)mergeOwnTestDictionary:(NSDictionary *)dictionary withSuperDictionary:(NSDictionary *)superDictionary
+{
+	NSMutableDictionary *mergedDictionary = [[NSMutableDictionary alloc] initWithCapacity:[dictionary count] + [superDictionary count]];
+	[mergedDictionary addEntriesFromDictionary:superDictionary];
+	[mergedDictionary addEntriesFromDictionary:dictionary];
+
+	return [mergedDictionary copy];
+}
+
 
 #pragma mark - Test Resources
 - (CDOHResource *)firstTestResource

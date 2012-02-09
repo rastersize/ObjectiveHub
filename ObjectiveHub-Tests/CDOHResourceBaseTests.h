@@ -67,6 +67,9 @@
 // fully test the resource.
 + (NSDictionary *)firstTestDictionaryAlt;
 
+// Merges two dictionaries.
+// No need to override this, just a nice helper :)
++ (NSDictionary *)mergeOwnTestDictionary:(NSDictionary *)dictionary withSuperDictionary:(NSDictionary *)superDictionary;
 
 
 #pragma mark - Shared Test Resources
