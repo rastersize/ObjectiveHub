@@ -9,7 +9,7 @@ The development speed and growth of ObjectiveHub is bound by the rate of the doc
 Please see the [getting started](https://github.com/rastersize/ObjectiveHub/wiki/Getting-started) wiki page or the tutorial [_Your First ObjectiveHub App_](http://libobjectivehub.com/docs/docs/guides/objectivehub101-ios.html) (or [the Mac OS X version of the tutorial](http://libobjectivehub.com/docs/docs/guides/objectivehub101-osx.html)).
 
 ## Requirements ##
-Requires iOS 4.2+ or Mac OS X 10.6 during runtime and Xcode 4.2+ with the Mac OS X 10.7 SDK to build.
+Requires iOS 4.2+ or Mac OS X 10.6 during runtime and Xcode 4.2+ with the _iOS 5_ or _Mac OS X 10.7_ SDK to build.
 
 ## Documentation ##
 [ObjectiveHub documentation](http://libobjectivehub.com/docs).
