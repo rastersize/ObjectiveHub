@@ -39,6 +39,27 @@
 
 - (void)testResourceObjectFromDictionary
 {
+	NSDictionary *resourceDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								  [NSURL URLWithString:@"https://api.github.com/resource"], kCDOHResourceAPIResourceURLKey,
+								  nil];
+	CDOHResource *resource = [[CDOHResource alloc] initWithDictionary:resourceDict];
+	NSDictionary *objectDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								resource, @"resource",
+								resourceDict, @"resourceDict",
+								nil];
+	
+	
+	id resourceFromDict = [resource resourceObjectFromDictionary:objectDict usingKey:@"resource" ofClass:[CDOHResource class]];
+	id resourceCreatedFromDict = [resource resourceObjectFromDictionary:objectDict usingKey:@"resourceDict" ofClass:[CDOHResource class]];
+	
+	STAssertNotNil(resourceFromDict, @"Resource (%@) fetched from dictionary (%@) should not be nil", resource, objectDict);
+	STAssertNotNil(resourceCreatedFromDict, @"Resource (%@) created and fetched from dictionary (%@) should not be nil", resource, objectDict);
+	
+	STAssertTrue([resourceFromDict isKindOfClass:[CDOHResource class]], @"Resource (%@) fetched from dictionary (%@) should be of class 'CDOHResource'", resource, objectDict);
+	STAssertTrue([resourceCreatedFromDict isKindOfClass:[CDOHResource class]], @"Resource (%@) created and fetched from dictionary (%@) should be of class 'CDOHResource'", resource, objectDict);
+	
+	STAssertEqualObjects(resource, resourceFromDict, @"Resource (%@) fetched from dictionary (%@) should be equal (using isEqual:) to the original resource (%@)", resourceFromDict, objectDict, resource);
+	STAssertEqualObjects(resource, resourceCreatedFromDict, @"Resource (%@) created and fetched from dictionary (%@) should be equal (using isEqual:) to the original resource (%@)", resourceCreatedFromDict, objectDict, resource);
 }
 
 - (void)testDateObjectFromDictionary
