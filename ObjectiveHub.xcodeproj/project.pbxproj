@@ -543,6 +543,7 @@
 			children = (
 				9C92314114E2E7CE00287DD9 /* Client Tests */,
 				9C92313F14E2E7AE00287DD9 /* Resource Tests */,
+				9C89DC2514E46D2F0057AB17 /* Other Tests */,
 				9C92314014E2E7B800287DD9 /* Category Tests */,
 				9C26F955146B2069001A5385 /* Supporting Files */,
 			);
@@ -737,29 +738,36 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		9C89DC2514E46D2F0057AB17 /* Other Tests */ = {
+			isa = PBXGroup;
+			children = (
+				9C92314814E2EA3900287DD9 /* CDOHErrorTests.h */,
+				9C92314914E2EA3900287DD9 /* CDOHErrorTests.m */,
+				9C92315214E2EA3A00287DD9 /* CDOHResponseTests.h */,
+				9C92315314E2EA3A00287DD9 /* CDOHResponseTests.m */,
+				9C92314A14E2EA3900287DD9 /* CDOHLinkRelationshipHeaderTests.h */,
+				9C92314B14E2EA3900287DD9 /* CDOHLinkRelationshipHeaderTests.m */,
+			);
+			name = "Other Tests";
+			sourceTree = "<group>";
+		};
 		9C92313F14E2E7AE00287DD9 /* Resource Tests */ = {
 			isa = PBXGroup;
 			children = (
 				9C89DC2114E447EC0057AB17 /* CDOHResourceBaseTests.h */,
 				9C89DC2214E447EC0057AB17 /* CDOHResourceBaseTests.m */,
+				9C92315014E2EA3A00287DD9 /* CDOHResourceTests.h */,
+				9C92315114E2EA3A00287DD9 /* CDOHResourceTests.m */,
 				9C92314614E2EA3900287DD9 /* CDOHAbstractUserTests.h */,
 				9C92314714E2EA3900287DD9 /* CDOHAbstractUserTests.m */,
-				9C92314814E2EA3900287DD9 /* CDOHErrorTests.h */,
-				9C92314914E2EA3900287DD9 /* CDOHErrorTests.m */,
-				9C92314A14E2EA3900287DD9 /* CDOHLinkRelationshipHeaderTests.h */,
-				9C92314B14E2EA3900287DD9 /* CDOHLinkRelationshipHeaderTests.m */,
+				9C92315414E2EA3A00287DD9 /* CDOHUserTests.h */,
+				9C92315514E2EA3A00287DD9 /* CDOHUserTests.m */,
 				9C92314C14E2EA3900287DD9 /* CDOHOrganizationTests.h */,
 				9C92314D14E2EA3900287DD9 /* CDOHOrganizationTests.m */,
 				9C92314214E2E80300287DD9 /* CDOHOrganizationTeamTests.h */,
 				9C92314314E2E80300287DD9 /* CDOHOrganizationTeamTests.m */,
 				9C92314E14E2EA3900287DD9 /* CDOHPlanTests.h */,
 				9C92314F14E2EA3900287DD9 /* CDOHPlanTests.m */,
-				9C92315014E2EA3A00287DD9 /* CDOHResourceTests.h */,
-				9C92315114E2EA3A00287DD9 /* CDOHResourceTests.m */,
-				9C92315214E2EA3A00287DD9 /* CDOHResponseTests.h */,
-				9C92315314E2EA3A00287DD9 /* CDOHResponseTests.m */,
-				9C92315414E2EA3A00287DD9 /* CDOHUserTests.h */,
-				9C92315514E2EA3A00287DD9 /* CDOHUserTests.m */,
 			);
 			name = "Resource Tests";
 			sourceTree = "<group>";
