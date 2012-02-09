@@ -111,9 +111,4 @@
 	STAssertEqualObjects(url, urlCreatedFromDict, @"URL (%@) created and fetched from dictionary (%@) should be equal (using isEqual:) to the URL (%@) created with the string (%@)", urlCreatedFromDict, objectDict, url, urlString);
 }
 
-- (void)testDecodeObjectFromDictionary
-{
-	
-}
-
 @end
