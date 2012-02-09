@@ -31,8 +31,18 @@
 //
 
 #import "CDOHAbstractUserTests.h"
+#import "CDOHAbstractUser.h"
 
 @implementation CDOHAbstractUserTests
+
+#pragma mark - Tested Class
++ (Class)testedClass
+{
+	return [CDOHAbstractUser class];
+}
+
+
+#pragma mark - Test Dictionaries
 
 
 

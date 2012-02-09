@@ -31,8 +31,18 @@
 //
 
 #import "CDOHPlanTests.h"
+#import "CDOHPlan.h"
 
 @implementation CDOHPlanTests
+
+#pragma mark - Tested Class
++ (Class)testedClass
+{
+	return [CDOHPlan class];
+}
+
+
+#pragma mark - Test Dictionaries
 
 
 

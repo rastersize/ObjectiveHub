@@ -31,7 +31,8 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "CDOHAbstractUserTests.h"
 
-@interface CDOHOrganizationTests : SenTestCase
+@interface CDOHOrganizationTests : CDOHAbstractUserTests
 
 @end

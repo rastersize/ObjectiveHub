@@ -31,9 +31,28 @@
 //
 
 #import "CDOHResourceTests.h"
+#import "CDOHResource.h"
+#import "CDOHResourcePrivate.h"
+
 
 @implementation CDOHResourceTests
 
+- (void)testResourceObjectFromDictionary
+{
+}
 
+- (void)testDateObjectFromDictionary
+{
+	
+}
+
+- (void)testURLObjectFromDictionary
+{
+}
+
+- (void)testDecodeObjectFromDictionary
+{
+	
+}
 
 @end
