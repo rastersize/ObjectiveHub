@@ -51,14 +51,14 @@
 								nil];
 	
 	
-	id resourceFromDict = [CDOHResource resourceObjectFromDictionary:objectDict usingKey:@"resource" ofClass:[CDOHResource class]];
-	id resourceCreatedFromDict = [CDOHResource resourceObjectFromDictionary:objectDict usingKey:@"resourceDict" ofClass:[CDOHResource class]];
+	id resourceFromDict			= [CDOHResource resourceObjectFromDictionary:objectDict usingKey:@"resource" ofClass:[CDOHResource class]];
+	id resourceCreatedFromDict	= [CDOHResource resourceObjectFromDictionary:objectDict usingKey:@"resourceDict" ofClass:[CDOHResource class]];
 	
 	STAssertNotNil(resourceFromDict, @"Resource (%@) fetched from dictionary (%@) should not be nil", resource, objectDict);
 	STAssertNotNil(resourceCreatedFromDict, @"Resource (%@) created and fetched from dictionary (%@) should not be nil", resourceDict, objectDict);
 	
-	STAssertTrue([resourceFromDict isKindOfClass:[CDOHResource class]], @"Resource (%@) fetched from dictionary (%@) should be of class 'CDOHResource'", resource, objectDict);
-	STAssertTrue([resourceCreatedFromDict isKindOfClass:[CDOHResource class]], @"Resource (%@) created and fetched from dictionary (%@) should be of class 'CDOHResource'", resourceDict, objectDict);
+	STAssertTrue([resourceFromDict isKindOfClass:[CDOHResource class]], @"Resource (%@) fetched from dictionary (%@) should be of class 'CDOHResource' was '%@'", resourceFromDict, objectDict, NSStringFromClass([resourceFromDict class]));
+	STAssertTrue([resourceCreatedFromDict isKindOfClass:[CDOHResource class]], @"Resource (%@) created and fetched from dictionary (%@) should be of class 'CDOHResource' was '%@'", resourceCreatedFromDict, objectDict, NSStringFromClass([resourceCreatedFromDict class]));
 	
 	STAssertEqualObjects(resource, resourceFromDict, @"Resource (%@) fetched from dictionary (%@) should be equal (using isEqual:) to the original resource (%@)", resourceFromDict, objectDict, resource);
 	STAssertEqualObjects(resource, resourceCreatedFromDict, @"Resource (%@) created and fetched from dictionary (%@) should be equal (using isEqual:) to the resource (%@) created with the dictionary (%@)", resourceCreatedFromDict, objectDict, resource, resourceDict);
@@ -74,14 +74,14 @@
 							  dateString, @"dateString",
 							  nil];
 	
-	NSDate *dateFromDict = [CDOHResource dateObjectFromDictionary:dateDict usingKey:@"date"];
-	NSDate *dateCreatedFromDict = [CDOHResource dateObjectFromDictionary:dateDict usingKey:@"dateString"];
+	id dateFromDict			= [CDOHResource dateObjectFromDictionary:dateDict usingKey:@"date"];
+	id dateCreatedFromDict	= [CDOHResource dateObjectFromDictionary:dateDict usingKey:@"dateString"];
 	
 	STAssertNotNil(dateFromDict, @"Date (%@) fetched from dictionary (%@) should not be nil", date, dateDict);
 	STAssertNotNil(dateCreatedFromDict, @"Date (%@) created and fetched from dictionary (%@) should not be nil", dateString, dateDict);
 	
-	STAssertTrue([dateFromDict isKindOfClass:[NSDate class]], @"Date (%@) fetched from dictionary (%@) should be of class 'NSDate'", date, dateDict);
-	STAssertTrue([dateCreatedFromDict isKindOfClass:[NSDate class]], @"Date (%@) created and fetched from dictionary (%@) should be of class 'NSDate'", date, dateDict);
+	STAssertTrue([dateFromDict isKindOfClass:[NSDate class]], @"Date (%@) fetched from dictionary (%@) should be of class 'NSDate' was '%@'", dateFromDict, dateDict, NSStringFromClass([dateFromDict class]));
+	STAssertTrue([dateCreatedFromDict isKindOfClass:[NSDate class]], @"Date (%@) created and fetched from dictionary (%@) should be of class 'NSDate' was '%@'", dateCreatedFromDict, dateDict, NSStringFromClass([dateCreatedFromDict class]));
 	
 	STAssertEqualObjects(date, dateFromDict, @"Date (%@) fetched from dictionary (%@) should be equal (using isEqual:) to the original date (%@)", dateCreatedFromDict, dateDict, date);
 	STAssertEqualObjects(date, dateCreatedFromDict, @"Date (%@) created and fetched from dictionary (%@) should be equal (using isEqual:) to the original date (%@)", dateCreatedFromDict, dateDict, date);
@@ -89,6 +89,26 @@
 
 - (void)testURLObjectFromDictionary
 {
+	NSString *urlString = @"https://user:pass@api.github.com/resource/stuff?per_page=5&page=2&#hashBang";
+	NSURL *url = [NSURL URLWithString:urlString];
+	
+	NSDictionary *objectDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								url,		@"url",
+								urlString,	@"urlString",
+								nil];
+	
+	
+	id urlFromDict			= [CDOHResource URLObjectFromDictionary:objectDict usingKey:@"url"];
+	id urlCreatedFromDict	= [CDOHResource URLObjectFromDictionary:objectDict usingKey:@"urlString"];
+	
+	STAssertNotNil(urlFromDict, @"URL (%@) fetched from dictionary (%@) should not be nil", url, objectDict);
+	STAssertNotNil(urlCreatedFromDict, @"URL (%@) created and fetched from dictionary (%@) should not be nil", urlString, objectDict);
+	
+	STAssertTrue([urlFromDict isKindOfClass:[NSURL class]], @"URL (%@) fetched from dictionary (%@) should be of class 'CDOHResource' was '%@'", urlFromDict, objectDict, NSStringFromClass([urlFromDict class]));
+	STAssertTrue([urlCreatedFromDict isKindOfClass:[NSURL class]], @"URL (%@) created and fetched from dictionary (%@) should be of class 'CDOHResource' was '%@'", urlCreatedFromDict, objectDict, NSStringFromClass([urlCreatedFromDict class]));
+	
+	STAssertEqualObjects(url, urlFromDict, @"URL (%@) fetched from dictionary (%@) should be equal (using isEqual:) to the original URL (%@)", urlFromDict, objectDict, url);
+	STAssertEqualObjects(url, urlCreatedFromDict, @"URL (%@) created and fetched from dictionary (%@) should be equal (using isEqual:) to the URL (%@) created with the string (%@)", urlCreatedFromDict, objectDict, url, urlString);
 }
 
 - (void)testDecodeObjectFromDictionary
