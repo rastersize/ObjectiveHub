@@ -2,7 +2,7 @@
 # Generates API documentation with the help of appledoc.
 # Generates both HTML code and a DocSet (which *can* be installed into Xcode).
 #
-# Copyright (c) 2011 Fruit is Good. All rights reserved.
+# Copyright (c) 2011-2012 Aron Cedercrantz. All rights reserved.
 #
 
 API_DOCS_DIR=`pwd`"/${1}"
@@ -50,7 +50,11 @@ echo "Generating API documentation into \"${API_DOCS_DIR}\" for version \"${DOCS
 --docset-package-url "http://libobjectivehub.com/docs/docset/%DOCSETPACKAGEFILENAME" \
 --docset-fallback-url "http://libobjectivehub.com/docs/docset/com.libobjectivehub.ObjectiveHub-${DOCS_LIBRARY_VERSION}.docset/Contents/Resources/Documents" \
 --publish-docset \
---index-desc "${API_DOCS_DIR}/Index.markdown" \
+--include "${API_DOCS_DIR}/index-template.markdown" \
+--include "${API_DOCS_DIR}/guides-template.markdown" \
+--include "${API_DOCS_DIR}/concepts-template.markdown" \
+--include "${API_DOCS_DIR}/guides" \
+--index-desc "${API_DOCS_DIR}/main-index.markdown" \
 ${HEADER_FILES}
 
 echo "Done!"
