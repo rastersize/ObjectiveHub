@@ -43,7 +43,8 @@
 #pragma mark - Tested Class
 // The resource class which is being tested.
 //
-// This method MUST be overriden by the subclass.
+// This method MUST be overriden by the subclass and the returned class MUST be
+// a subclass of the `CDOHResource` class.
 + (Class)testedClass;
 
 
@@ -82,6 +83,7 @@
 
 
 
+#pragma mark - Test Cases:
 // -------------------------------------------------------------------------- //
 // The methods below this line MAY be overriden if needed. It is strongly     //
 // recommended to call the super-implementation if you override any one of    //
