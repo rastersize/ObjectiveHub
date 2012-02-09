@@ -1,4 +1,6 @@
-# ObjectiveHub Guides
+<div class="section-header">
+	<h1 class="title title-header">ObjectiveHub Guides</h1>
+</div>
 
 The following ObjectiveHub guides are available.
 

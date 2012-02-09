@@ -1,4 +1,6 @@
-# Your First ObjectiveHub App – iOS
+<div class="section-header">
+	<h1 class="title title-header">Your First ObjectiveHub App – iOS</h1>
+</div>
 
 ## Introduction
 This tutorial shows how to create an **iOS** application that use _ObjectiveHub_ to interact with GitHub’s API.
