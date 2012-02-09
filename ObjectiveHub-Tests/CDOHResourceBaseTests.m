@@ -36,16 +36,6 @@
 #import "CDOHResourcePrivate.h"
 
 
-@interface CDOHResourceBaseTests ()
-
-#pragma mark - Shared Test Resources
-- (CDOHResource *)_firstTestResource;
-- (CDOHResource *)_firstTestResourceAlt;
-- (CDOHResource *)_secondTestResource;
-
-@end
-
-
 @implementation CDOHResourceBaseTests
 
 #pragma mark - Tested Class
@@ -93,21 +83,21 @@
 
 
 #pragma mark - Test Resources
-- (CDOHResource *)_firstTestResource
+- (CDOHResource *)firstTestResource
 {
 	NSDictionary *firstTestDictionary = [[self class] firstTestDictionary];
 	CDOHResource *firstTestResource = [[[[self class] testedClass] alloc] initWithDictionary:firstTestDictionary];
 	return firstTestResource;
 }
 
-- (CDOHResource *)_firstTestResourceAlt
+- (CDOHResource *)firstTestResourceAlt
 {
 	NSDictionary *firstTestDictionaryAlt = [[self class] firstTestDictionaryAlt];
 	CDOHResource *firstTestResourceAlt = [[[[self class] testedClass] alloc] initWithDictionary:firstTestDictionaryAlt];
 	return firstTestResourceAlt;
 }
 
-- (CDOHResource *)_secondTestResource
+- (CDOHResource *)secondTestResource
 {
 	NSDictionary *secondTestDictionary = [[self class] secondTestDictionary];
 	CDOHResource *secondTestResource = [[[[self class] testedClass] alloc] initWithDictionary:secondTestDictionary];
@@ -119,10 +109,10 @@
 #pragma mark - Test Resource Equality and Hash
 - (void)testResourceEquality
 {
-	CDOHResource *firstResource_1 = [self _firstTestResource];
-	CDOHResource *firstResource_2 = [self _firstTestResource];
-	CDOHResource *firstResourceAlt = [self _firstTestResourceAlt];
-	CDOHResource *secondResource = [self _secondTestResource];
+	CDOHResource *firstResource_1 = [self firstTestResource];
+	CDOHResource *firstResource_2 = [self firstTestResource];
+	CDOHResource *firstResourceAlt = [self firstTestResourceAlt];
+	CDOHResource *secondResource = [self secondTestResource];
 	CDOHResource *firstResource_1Copy = [firstResource_1 copy];
 	
 	STAssertEqualObjects(firstResource_1, firstResource_2,		@"Two resources ('%@' and '%@') intialized using the same dictionary should be equal (using isEqual:)", firstResource_1, firstResource_2);
@@ -135,8 +125,8 @@
 
 - (void)testResourceInequality
 {
-	CDOHResource *firstResource = [self _firstTestResource];
-	CDOHResource *secondResource = [self _secondTestResource];
+	CDOHResource *firstResource = [self firstTestResource];
+	CDOHResource *secondResource = [self secondTestResource];
 	NSObject *differentClassObject = [[NSObject alloc] init];
 	
 	STAssertFalse(firstResource == secondResource, @"Two different resources ('%@' and '%@') should not be the exact same object (i.e. %p != %p)", firstResource, secondResource, firstResource, secondResource);
@@ -146,9 +136,9 @@
 
 - (void)testResourceHashEqual
 {
-	CDOHResource *firstResource_1 = [self _firstTestResource];
-	CDOHResource *firstResource_2 = [self _firstTestResource];
-	CDOHResource *firstResourceAlt = [self _firstTestResourceAlt];
+	CDOHResource *firstResource_1 = [self firstTestResource];
+	CDOHResource *firstResource_2 = [self firstTestResource];
+	CDOHResource *firstResourceAlt = [self firstTestResourceAlt];
 	CDOHResource *firstResource_1Copy = [firstResource_1 copy];
 	
 	STAssertEquals([firstResource_1 hash], [firstResource_2 hash], @"Two resources ('%@' and '%@') intialized using the same dictionary should have the same hash (%lu == %lu)", firstResource_1, firstResource_2, [firstResource_1 hash], [firstResource_2 hash]);
@@ -158,8 +148,8 @@
 
 - (void)testResourceHashInequal
 {
-	CDOHResource *firstResource = [self _firstTestResource];
-	CDOHResource *secondResource = [self _secondTestResource];
+	CDOHResource *firstResource = [self firstTestResource];
+	CDOHResource *secondResource = [self secondTestResource];
 	
 	STAssertFalse([firstResource hash] == [secondResource hash], @"Two resources ('%@', '%@') that are not said to be equal should not have the same hash (%lu != %lu)", firstResource, secondResource, [firstResource hash], [secondResource hash]);
 }
@@ -187,14 +177,14 @@
 #pragma mark - Test NSCoding Encoding and Decoding
 - (void)testResourceConformsToNSCoding
 {
-	CDOHResource *firstResource = [self _firstTestResource];
+	CDOHResource *firstResource = [self firstTestResource];
 	
 	STAssertTrue([firstResource conformsToProtocol:@protocol(NSCoding)], @"The resource '%@' must conform to the 'NSCoding' protocl", [[self class] testedClass]);
 }
 
 - (void)testResourceNSCodingRoundTrip
 {
-	CDOHResource *firstResource = [self _firstTestResource];
+	CDOHResource *firstResource = [self firstTestResource];
 	CDOHResource *decodedFirstResource = nil;
 	
 	NSData *encodedFirstResource = [NSKeyedArchiver archivedDataWithRootObject:firstResource];
@@ -210,14 +200,14 @@
 #pragma mark - Test NSCopying Conformans
 - (void)testResourceConformsToNSCopying
 {
-	CDOHResource *firstResource = [self _firstTestResource];
+	CDOHResource *firstResource = [self firstTestResource];
 	
 	STAssertTrue([firstResource conformsToProtocol:@protocol(NSCopying)], @"The resource '%@' must conform to the 'NSCopying' protocl", [[self class] testedClass]);
 }
 
 - (void)testResourceImmutableCopy
 {
-	CDOHResource *firstResource = [self _firstTestResource];
+	CDOHResource *firstResource = [self firstTestResource];
 	CDOHResource *firstResourceCopy = [firstResource copy];
 	
 	STAssertTrue(firstResource == firstResourceCopy, @"The copy (%@) of a resource (%@) should be the same object (%p == %p)", firstResource, firstResourceCopy, firstResource, firstResourceCopy);

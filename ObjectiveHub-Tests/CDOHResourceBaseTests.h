@@ -34,6 +34,9 @@
 #import <Foundation/Foundation.h>
 
 
+@class CDOHResource;
+
+
 // Resource base test case class.
 @interface CDOHResourceBaseTests : SenTestCase
 
@@ -63,6 +66,16 @@
 // their result is merged with the dictionary returned by the super-class to
 // fully test the resource.
 + (NSDictionary *)firstTestDictionaryAlt;
+
+
+
+#pragma mark - Shared Test Resources
+// Use these methods to get a resource initialized using the coresponding test
+// dictionary.
+// Resource initialized using the firstTestDictionary
+- (CDOHResource *)firstTestResource;
+- (CDOHResource *)firstTestResourceAlt;
+- (CDOHResource *)secondTestResource;
 
 
 
