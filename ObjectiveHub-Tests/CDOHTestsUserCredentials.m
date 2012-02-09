@@ -30,7 +30,6 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-
 #import "CDOHTestsUserCredentials.h"
 
 @implementation CDOHTestsUserCredentials
@@ -42,7 +41,7 @@
 {
 	self = [super init];
 	if (self) {
-		NSURL *accountPlistURL = [[NSBundle mainBundle] URLForResource:@"account" withExtension:@"plist"];
+		NSURL *accountPlistURL = [[NSBundle bundleForClass:[self class]] URLForResource:@"account" withExtension:@"plist"];
 		NSDictionary *account = [NSDictionary dictionaryWithContentsOfURL:accountPlistURL];
 		username = [account objectForKey:@"username"];
 		password = [account objectForKey:@"password"];
