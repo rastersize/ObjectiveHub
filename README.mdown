@@ -1,18 +1,18 @@
 # ObjectiveHub #
 An Objective-C (ARC enabled) library for version 3 of the GitHub API, for iOS 4.2+ and Mac OS X 10.6+.
 
-The [official website](http://libobjectivehub.com/) contains [documentation and usage guides](http://libobjectivehub.com/documentation/)
+The [official website](http://libobjectivehub.com/) holds an [API reference guide]((http://libobjectivehub.com/docs) and [some guides](http://libobjectivehub.com/docs/docs/guides.html) on how to work with ObjectiveHub.
 
 The development speed and growth of ObjectiveHub is bound by the rate of the documentation. That is O(documentation), just like [nimbus](http://jverkoey.github.com/nimbus/).
 
 ## Getting Started ##
-Please see the [getting started](https://github.com/rastersize/ObjectiveHub/wiki/Getting-started) wiki page.
+Please see the [getting started](https://github.com/rastersize/ObjectiveHub/wiki/Getting-started) wiki page or the tutorial [_Your First ObjectiveHub App_](http://libobjectivehub.com/docs/docs/guides/objectivehub101-ios.html) (or [the Mac OS X version of the tutorial](http://libobjectivehub.com/docs/docs/guides/objectivehub101-osx.html)).
 
 ## Requirements ##
-Requires iOS 4.2+ or Mac OS X 10.6 during runtime and Xcode 4.2+ (and as such Mac OS X 10.7) to build.
+Requires iOS 4.2+ or Mac OS X 10.6 during runtime and Xcode 4.2+ with the Mac OS X 10.7 SDK to build.
 
 ## Documentation ##
-[ObjectiveHub documentation](http://libobjectivehub.com/documentation).
+[ObjectiveHub documentation](http://libobjectivehub.com/docs).
 
 ## Hacking ##
 The project follows the [git flow](https://github.com/nvie/gitflow) model laid out by nvie in his blog-post "[A syccessful Git branching model](http://nvie.com/posts/a-successful-git-branching-model/)". This means that all development occur on the `develop` branch and the `master` branch is reserved for **stable releases**.
