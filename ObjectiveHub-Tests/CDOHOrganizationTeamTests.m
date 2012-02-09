@@ -33,117 +33,116 @@
 #import "CDOHOrganizationTeamTests.h"
 #import "CDOHOrganizationTeam.h"
 
+
 @implementation CDOHOrganizationTeamTests
 
-- (void)testEquality
+#pragma mark - Tested Class
++ (Class)testedClass
 {
-	NSDictionary *testDict1 = [NSDictionary dictionaryWithObjectsAndKeys:
-							  [NSNumber numberWithUnsignedInteger:1234],	kCDOHOrganizationTeamIdentifierKey,
-							  @"A test team",								kCDOHOrganizationTeamNameKey,
-							  kCDOHOrganizationTeamPermissionPull,			kCDOHOrganizationTeamPermissionKey,
-							  [NSNumber numberWithUnsignedInteger:10],		kCDOHOrganizationTeamRepositoriesKey,
-							  [NSNumber numberWithUnsignedInteger:321],		kCDOHOrganizationTeamMembersKey,
-							  nil];
-	// Exactly as testDict1 except the kCDOHOrganizationTeamIdentifierKey is
-	// different and as such should not be equal. (ID: "1234" vs. "9876".)
-	NSDictionary *testDict2 = [NSDictionary dictionaryWithObjectsAndKeys:
-							  [NSNumber numberWithUnsignedInteger:9876],	kCDOHOrganizationTeamIdentifierKey,
-							  @"A test team",								kCDOHOrganizationTeamNameKey,
-							  kCDOHOrganizationTeamPermissionPull,			kCDOHOrganizationTeamPermissionKey,
-							  [NSNumber numberWithUnsignedInteger:10],		kCDOHOrganizationTeamRepositoriesKey,
-							  [NSNumber numberWithUnsignedInteger:321],		kCDOHOrganizationTeamMembersKey,
-							  nil];
-	// Completely different than testDict1 except the
-	// kCDOHOrganizationTeamIdentifierKey which is the same. As such the teams
-	// should be equal.
-	NSDictionary *testDict3 = [NSDictionary dictionaryWithObjectsAndKeys:
-							   [NSNumber numberWithUnsignedInteger:1234],	kCDOHOrganizationTeamIdentifierKey,
-							   @"New name for the team",					kCDOHOrganizationTeamNameKey,
-							   kCDOHOrganizationTeamPermissionPush,			kCDOHOrganizationTeamPermissionKey,
-							   [NSNumber numberWithUnsignedInteger:999],	kCDOHOrganizationTeamRepositoriesKey,
-							   [NSNumber numberWithUnsignedInteger:345],	kCDOHOrganizationTeamMembersKey,
-							   nil];
-	
-	CDOHOrganizationTeam *team1 = [[CDOHOrganizationTeam alloc] initWithDictionary:testDict1];
-	CDOHOrganizationTeam *team2 = [[CDOHOrganizationTeam alloc] initWithDictionary:testDict1];
-	CDOHOrganizationTeam *team1Copy = [team1 copy];
-	
-	CDOHOrganizationTeam *teamEqual = [[CDOHOrganizationTeam alloc] initWithDictionary:testDict3];
-	
-	CDOHOrganizationTeam *differentTeam = [[CDOHOrganizationTeam alloc] initWithDictionary:testDict2];
-	NSObject *differentObject = [[NSObject alloc] init];
-	
-	
-	STAssertTrue([team1 isEqual:team2],								@"Two teams ('%@' and '%@') intialized using the same dictionary should be equal (using isEqual:)", team1, team2);
-	STAssertTrue([team1 isEqualToOrganizationTeam:team2],			@"Two teams ('%@' and '%@') intialized using the same dictionary should be equal (using isEqualToOrganizationTeam:)", team1, team2);
-	
-	STAssertTrue(team1 == team1Copy,								@"A copy of a team (%@) should be the same object as the original (%@)", team1Copy, team1);
-	STAssertTrue([team1 isEqual:team1Copy],							@"A copy of a team (%@) should be equal to the original (%@). (Using isEqual:)", team1Copy, team1);
-	STAssertTrue([team1 isEqualToOrganizationTeam:team1Copy],		@"A copy of a team (%@) should be equal to the original (%@). (Using isEqualToOrganizationTeam:)", team1Copy, team1);
-	
-	STAssertTrue([team1 isEqual:teamEqual],							@"Two teams ('%@' and '%@') with the same identifier but otherwise completely different should be equal", team1, teamEqual);
-	
-	STAssertFalse(team1 == differentTeam,							@"Two different teams ('%@' and '%@') should NOT be the same object", team1, differentTeam);
-	STAssertFalse([team1 isEqual:differentTeam],					@"Two different teams ('%@' and '%@') should NOT be equal (using isEqual:)", team1, differentTeam);
-	STAssertFalse([team1 isEqualToOrganizationTeam:differentTeam],	@"Two different teams ('%@' and '%@') should NOT be equal (using isEqualToOrganizationTeam:)", team1, differentTeam);
-	STAssertFalse([team1 isEqual:differentObject],					@"A team object (%@) should not be equal to a object (%@) of any other class than 'CDOHOrganizationTeam'", team1, differentObject);
+	return [CDOHOrganizationTeam class];
 }
 
-- (void)testHash
+
+#pragma mark - Test Dictionaries
++ (NSDictionary *)firstTestDictionary
 {
-	NSDictionary *testDict1 = [NSDictionary dictionaryWithObjectsAndKeys:
-							   [NSNumber numberWithUnsignedInteger:1234],	kCDOHOrganizationTeamIdentifierKey,
-							   @"A test team",								kCDOHOrganizationTeamNameKey,
-							   kCDOHOrganizationTeamPermissionPull,			kCDOHOrganizationTeamPermissionKey,
-							   [NSNumber numberWithUnsignedInteger:10],		kCDOHOrganizationTeamRepositoriesKey,
-							   [NSNumber numberWithUnsignedInteger:321],		kCDOHOrganizationTeamMembersKey,
-							   nil];
-	// Exactly as testDict1 except the kCDOHOrganizationTeamIdentifierKey is
-	// different and as such should not have the same hash.
-	// (Compare identifier: "1234" of testDict1 vs. "9876" of testDict2.)
-	NSDictionary *testDict2 = [NSDictionary dictionaryWithObjectsAndKeys:
-							   [NSNumber numberWithUnsignedInteger:9876],	kCDOHOrganizationTeamIdentifierKey,
-							   @"A test team",								kCDOHOrganizationTeamNameKey,
-							   kCDOHOrganizationTeamPermissionPull,			kCDOHOrganizationTeamPermissionKey,
-							   [NSNumber numberWithUnsignedInteger:10],		kCDOHOrganizationTeamRepositoriesKey,
-							   [NSNumber numberWithUnsignedInteger:321],		kCDOHOrganizationTeamMembersKey,
-							   nil];
-	// Completely different than testDict1 except the
-	// kCDOHOrganizationTeamIdentifierKey which is the same. As such the teams
-	// should have the same hash.
-	NSDictionary *testDict3 = [NSDictionary dictionaryWithObjectsAndKeys:
-							   [NSNumber numberWithUnsignedInteger:1234],	kCDOHOrganizationTeamIdentifierKey,
-							   @"New name for the team",					kCDOHOrganizationTeamNameKey,
-							   kCDOHOrganizationTeamPermissionPush,			kCDOHOrganizationTeamPermissionKey,
-							   [NSNumber numberWithUnsignedInteger:999],	kCDOHOrganizationTeamRepositoriesKey,
-							   [NSNumber numberWithUnsignedInteger:345],	kCDOHOrganizationTeamMembersKey,
-							   nil];
+	static NSDictionary *dictionary = nil;
 	
-	CDOHOrganizationTeam *team1 = [[CDOHOrganizationTeam alloc] initWithDictionary:testDict1];
-	CDOHOrganizationTeam *team2 = [[CDOHOrganizationTeam alloc] initWithDictionary:testDict1];
-	CDOHOrganizationTeam *team1Copy = [team1 copy];
+	static dispatch_once_t firstTestDictionaryToken;
+	dispatch_once(&firstTestDictionaryToken, ^{
+		NSDictionary *superDict = [super firstTestDictionary];
+		NSDictionary *localDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								   [NSNumber numberWithUnsignedInteger:1234], kCDOHOrganizationTeamIdentifierKey,
+								   @"A test team", kCDOHOrganizationTeamNameKey,
+								   kCDOHOrganizationTeamPermissionPull, kCDOHOrganizationTeamPermissionKey,
+								   [NSNumber numberWithUnsignedInteger:10], kCDOHOrganizationTeamRepositoriesKey,
+								   [NSNumber numberWithUnsignedInteger:321], kCDOHOrganizationTeamMembersKey,
+					  nil];
+		
+		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
+	});
 	
-	CDOHOrganizationTeam *teamEqual = [[CDOHOrganizationTeam alloc] initWithDictionary:testDict3];
-	
-	CDOHOrganizationTeam *differentTeam = [[CDOHOrganizationTeam alloc] initWithDictionary:testDict2];
-	
-	STAssertTrue([team1 hash] == [team2 hash],			@"Two teams ('%@' and '%@') intialized using the same dictionary should have the same hash (%lu == %lu)", team1, team2, [team1 hash], [team2 hash]);
-	STAssertTrue([team1 hash] == [team1Copy hash],		@"A copy of a team (%@, hash = %lu) should yeild the same hash as the original (%@, hash = %lu)", team1, [team1 hash], team1Copy, [team1Copy hash]);
-	STAssertTrue([team1 hash] == [teamEqual hash],		@"Two teams ('%@' and '%@') with the same identifier but otherwise completely different should have the same hash (%lu == %lu)", team1, teamEqual, [team1 hash], [teamEqual hash]);
-	
-	STAssertFalse([team1 hash] == [differentTeam hash],	@"Two teams ('%@', '%@') with different identifiers should not have the same hash (%lu != %lu)", team1, differentTeam, [team1 hash], [differentTeam hash]);
+	return dictionary;
 }
 
-- (void)testCreateNewFromDictionary
++ (NSDictionary *)firstTestDictionaryAlt
 {
-	NSDictionary *testDict = [NSDictionary dictionaryWithObjectsAndKeys:
-							  [NSNumber numberWithUnsignedInteger:1234],	kCDOHOrganizationTeamIdentifierKey,
-							  @"A test team",								kCDOHOrganizationTeamNameKey,
-							  kCDOHOrganizationTeamPermissionPull,			kCDOHOrganizationTeamPermissionKey,
-							  [NSNumber numberWithUnsignedInteger:10],		kCDOHOrganizationTeamRepositoriesKey,
-							  [NSNumber numberWithUnsignedInteger:321],		kCDOHOrganizationTeamMembersKey,
-							  nil];
+	static NSDictionary *dictionary = nil;
 	
+	static dispatch_once_t firstTestDictionaryAltToken;
+	dispatch_once(&firstTestDictionaryAltToken, ^{
+		NSDictionary *superDict = [super firstTestDictionaryAlt];
+		NSDictionary *localDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								   [NSNumber numberWithUnsignedInteger:1234], kCDOHOrganizationTeamIdentifierKey,
+								   @"New name for the team", kCDOHOrganizationTeamNameKey,
+								   kCDOHOrganizationTeamPermissionPull, kCDOHOrganizationTeamPermissionKey,
+								   [NSNumber numberWithUnsignedInteger:999], kCDOHOrganizationTeamRepositoriesKey,
+								   [NSNumber numberWithUnsignedInteger:456], kCDOHOrganizationTeamMembersKey,
+								   nil];
+		
+		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
+	});
+	
+	return dictionary;
+}
+
+// Difference between +firstTestDictionary and +secondTestDictionary is only the
+// value for the kCDOHOrganizationTeamIdentifierKey key.
++ (NSDictionary *)secondTestDictionary
+{
+	static NSDictionary *dictionary = nil;
+	
+	static dispatch_once_t secondTestDictionaryToken;
+	dispatch_once(&secondTestDictionaryToken, ^{
+		NSDictionary *superDict = [super secondTestDictionary];
+		NSDictionary *localDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								   [NSNumber numberWithUnsignedInteger:4321], kCDOHOrganizationTeamIdentifierKey,
+								   @"A test team", kCDOHOrganizationTeamNameKey,
+								   kCDOHOrganizationTeamPermissionPull, kCDOHOrganizationTeamPermissionKey,
+								   [NSNumber numberWithUnsignedInteger:10], kCDOHOrganizationTeamRepositoriesKey,
+								   [NSNumber numberWithUnsignedInteger:321], kCDOHOrganizationTeamMembersKey,
+								   nil];
+		
+		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
+	});
+	
+	return dictionary;
+}
+
+
+#pragma mark - Test Resource Equality and Hash
+// Adds tests of the `isEqualToOrganizationTeam:` method.
+- (void)testResourceEquality
+{
+	[super testResourceEquality];
+	
+	CDOHOrganizationTeam *resource_1 = (CDOHOrganizationTeam *)[self firstTestResource];
+	CDOHOrganizationTeam *resource_2 = (CDOHOrganizationTeam *)[self firstTestResource];
+	CDOHOrganizationTeam *resource_1Copy = [resource_1 copy];
+	
+	STAssertTrue([resource_1 isEqualToOrganizationTeam:resource_2],			@"Two teams ('%@' and '%@') intialized using the same dictionary should be equal (using isEqualToOrganizationTeam:)", resource_1, resource_2);
+	STAssertTrue([resource_1 isEqualToOrganizationTeam:resource_1Copy],		@"A copy of a team (%@) should be equal to the original (%@). (Using isEqualToOrganizationTeam:)", resource_1Copy, resource_1);
+}
+
+// Adds tests of the `isEqualToOrganizationTeam:` method.
+- (void)testResourceInequality
+{
+	[super testResourceInequality];
+	
+	CDOHOrganizationTeam *resource_1 = (CDOHOrganizationTeam *)[self firstTestResource];
+	CDOHOrganizationTeam *differentResource = (CDOHOrganizationTeam *)[self secondTestResource];
+	
+	STAssertFalse([resource_1 isEqualToOrganizationTeam:differentResource],	@"Two different teams ('%@' and '%@') should NOT be equal (using isEqualToOrganizationTeam:)", resource_1, differentResource);
+}
+
+
+#pragma mark - Test Dictionary Encoding and Decoding
+// Adds tests of the properties special to a organization team.
+- (void)testResourceDecodeFromDictionary
+{
+	[super testResourceDecodeFromDictionary];
+	
+	NSDictionary *testDict = [[self class] firstTestDictionary];
 	CDOHOrganizationTeam *team = [[CDOHOrganizationTeam alloc] initWithDictionary:testDict];
 	
 	STAssertEquals(team.identifier,		[[testDict objectForKey:kCDOHOrganizationTeamIdentifierKey] unsignedIntegerValue], @"Team identifier should be set from dictionary");
@@ -154,20 +153,5 @@
 	STAssertEqualObjects(team.permission, [testDict objectForKey:kCDOHOrganizationTeamPermissionKey], @"Team permission should be set from dictionary");
 }
 
-- (void)testEncodeAsDictionary
-{
-	NSDictionary *testDict = [NSDictionary dictionaryWithObjectsAndKeys:
-							  [NSNumber numberWithUnsignedInteger:1234],	kCDOHOrganizationTeamIdentifierKey,
-							  @"A test team",								kCDOHOrganizationTeamNameKey,
-							  kCDOHOrganizationTeamPermissionAdminister,	kCDOHOrganizationTeamPermissionKey,
-							  [NSNumber numberWithUnsignedInteger:10],		kCDOHOrganizationTeamRepositoriesKey,
-							  [NSNumber numberWithUnsignedInteger:321],		kCDOHOrganizationTeamMembersKey,
-							  nil];
-	
-	CDOHOrganizationTeam *team = [[CDOHOrganizationTeam alloc] initWithDictionary:testDict];
-	NSDictionary *encodedTeamDict = [team encodeAsDictionary];
-	
-	STAssertEqualObjects(testDict, encodedTeamDict, @"Creating a organization team from a dictionary and then encoding it as a dictionary should yeild an identical dictionary");
-}
 
 @end
