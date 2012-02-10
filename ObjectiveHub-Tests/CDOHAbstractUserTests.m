@@ -82,6 +82,7 @@
 								   CDOHTestNumFromUInteger(103),		kCDOHUserPrivateGistsKey,
 								   CDOHTestNumFromUInteger(5),			kCDOHUserDiskUsageKey,
 								   CDOHTestNumFromUInteger(5),			kCDOHUserCollaboratorsKey,
+								   [NSNumber numberWithBool:YES],		kCDOHUserAuthenticatedKey,
 								   planDict,							kCDOHUserPlanKey,
 								   nil];
 		
