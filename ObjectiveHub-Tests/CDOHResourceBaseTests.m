@@ -53,7 +53,7 @@
 	static dispatch_once_t firstTestDictionaryToken;
 	dispatch_once(&firstTestDictionaryToken, ^{
 		firstTestDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
-							   [NSURL URLWithString:@"https://api.github.com/first_resource"],	kCDOHResourceAPIResourceURLKey,
+							   @"https://api.github.com/first_resource", kCDOHResourceAPIResourceURLKey,
 							   nil];
 	});
 	
@@ -67,7 +67,7 @@
 	static dispatch_once_t secondTestDictionaryToken;
 	dispatch_once(&secondTestDictionaryToken, ^{
 		secondTestDictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
-								[NSURL URLWithString:@"https://api.github.com/second_resource"],	kCDOHResourceAPIResourceURLKey,
+								@"https://api.github.com/second_resource", kCDOHResourceAPIResourceURLKey,
 								nil];
 	});
 	
@@ -170,6 +170,8 @@
 	NSDictionary *testDict = [[self class] firstTestDictionary];
 	CDOHResource *resource = [[[[self class] testedClass] alloc] initWithDictionary:testDict];
 	
+	STAssertNotNil(resource._APIResourceURL, @"The resource API URL should not be nil");
+	STAssertTrue([resource._APIResourceURL isKindOfClass:[NSURL class]], @"The resource API URL (%@) should be of class 'NSURL' was '%@'", resource._APIResourceURL, [resource._APIResourceURL class]);
 	STAssertEqualObjects(resource._APIResourceURL, [testDict objectForKey:kCDOHResourceAPIResourceURLKey], @"Resource API URL (%@) should be same as URL in dictionary (%@)", resource._APIResourceURL, [testDict objectForKey:kCDOHResourceAPIResourceURLKey]);
 }
 
