@@ -230,13 +230,7 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 
 - (NSUInteger)hash
 {
-	NSUInteger prime = 31;
-	NSUInteger hash = 1;
-	
-	hash = prime + _identifier;
-	hash = prime * hash + [_type hash];
-	
-	return hash;
+	return _identifier;
 }
 
 @end
