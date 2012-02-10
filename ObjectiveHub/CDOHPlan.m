@@ -54,7 +54,7 @@ NSString *const kCDOHPlanPrivateRepositoriesKey	= @"private_repos";
 #pragma mark - Initializing an CDOHPlan Instance
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
-	self = [super init];
+	self = [super initWithDictionary:dictionary];
 	if (self) {
 		_name = [[dictionary valueForKey:kCDOHPlanNameKey] copy];
 		
