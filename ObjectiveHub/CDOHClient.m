@@ -67,10 +67,10 @@ NSArray *_CDOHPagesArrayForPageIndexes(NSUInteger pageIdx, ...)
 	va_list args;
 	va_start(args, pageIdx);
 	while (idx != NSUIntegerMax) {
-		idxNum = [[NSNumber alloc] initWithInteger:idx];
+		idxNum = [[NSNumber alloc] initWithUnsignedInteger:idx];
 		[pages addObject:idxNum];
 		
-		idx = va_arg(args, NSInteger);
+		idx = va_arg(args, NSUInteger);
 	}
 	va_end(args);
 	
