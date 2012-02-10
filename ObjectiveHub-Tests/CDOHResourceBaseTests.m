@@ -170,9 +170,9 @@
 	NSDictionary *testDict = [[self class] firstTestDictionary];
 	CDOHResource *resource = [[[[self class] testedClass] alloc] initWithDictionary:testDict];
 	
-	STAssertNotNil(resource._APIResourceURL, @"The resource API URL should not be nil");
-	STAssertTrue([resource._APIResourceURL isKindOfClass:[NSURL class]], @"The resource API URL (%@) should be of class 'NSURL' was '%@'", resource._APIResourceURL, [resource._APIResourceURL class]);
-	STAssertEqualObjects(resource._APIResourceURL, [testDict objectForKey:kCDOHResourceAPIResourceURLKey], @"Resource API URL (%@) should be same as URL in dictionary (%@)", resource._APIResourceURL, [testDict objectForKey:kCDOHResourceAPIResourceURLKey]);
+	STAssertNotNil(resource._APIResourceURL, @"The resource (%@) API URL should not be nil", resource);
+	STAssertTrue([resource._APIResourceURL isKindOfClass:[NSURL class]], @"The resource (%@) API URL (%@) should be of class 'NSURL' was '%@'", resource, resource._APIResourceURL, [resource._APIResourceURL class]);
+	STAssertEqualObjects(resource._APIResourceURL, [testDict objectForKey:kCDOHResourceAPIResourceURLKey], @"Resource (%@) API URL (%@) should be same as URL in dictionary (%@)", resource, resource._APIResourceURL, [testDict objectForKey:kCDOHResourceAPIResourceURLKey]);
 }
 
 - (void)testResourceEncodeAsDictionary
