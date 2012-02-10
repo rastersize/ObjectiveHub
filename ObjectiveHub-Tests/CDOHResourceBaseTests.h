@@ -34,6 +34,9 @@
 #import <Foundation/Foundation.h>
 
 
+#define CDOHTestNumFromUInteger(x) [NSNumber numberWithUnsignedInteger:((NSUInteger)x)]
+
+
 @class CDOHResource;
 
 

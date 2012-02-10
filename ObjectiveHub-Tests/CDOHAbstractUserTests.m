@@ -35,9 +35,6 @@
 #import "CDOHPlan.h"
 
 
-#define CDOHTestNumFromUInteger(x) [NSNumber numberWithUnsignedInteger:((NSUInteger)x)]
-
-
 @implementation CDOHAbstractUserTests
 
 #pragma mark - Tested Class
