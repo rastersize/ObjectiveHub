@@ -43,6 +43,52 @@
 
 
 #pragma mark - Test Dictionaries
++ (NSDictionary *)firstTestDictionary
+{
+	static NSDictionary *dictionary = nil;
+	
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSDictionary *superDict = [super firstTestDictionary];
+		NSDictionary *localDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								   @"small",						kCDOHPlanNameKey,
+								   CDOHTestNumFromUInteger(1234),	kCDOHPlanSpaceKey,
+								   CDOHTestNumFromUInteger(5),		kCDOHPlanCollaboratorsKey,
+								   CDOHTestNumFromUInteger(10),		kCDOHPlanPrivateRepositoriesKey,
+								   nil];
+		
+		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
+	});
+	
+	return dictionary;
+}
+
+// A plan is equal if all its properties are equal
++ (NSDictionary *)firstTestDictionaryAlt
+{
+	return [self firstTestDictionary];
+}
+
++ (NSDictionary *)secondTestDictionary
+{
+	static NSDictionary *dictionary = nil;
+	
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSDictionary *superDict = [super firstTestDictionary];
+		NSDictionary *localDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								   @"medium",						kCDOHPlanNameKey,
+								   CDOHTestNumFromUInteger(1234),	kCDOHPlanSpaceKey,
+								   CDOHTestNumFromUInteger(5),		kCDOHPlanCollaboratorsKey,
+								   CDOHTestNumFromUInteger(10),		kCDOHPlanPrivateRepositoriesKey,
+								   nil];
+
+		
+		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
+	});
+	
+	return dictionary;
+}
 
 
 
