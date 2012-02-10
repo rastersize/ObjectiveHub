@@ -99,7 +99,7 @@ NSString *const kCDOHResponseHeaderPerPageKey			= @"per_page";
 - (NSUInteger)pageNumber
 {
 	NSString *pageString = [self.URL cdoh_queryValueForKey:kCDOHResponseHeaderPageKey];
-	NSUInteger page = [pageString integerValue];
+	NSUInteger page = (NSUInteger)[pageString integerValue];
 	
 	return page;
 }
@@ -107,7 +107,7 @@ NSString *const kCDOHResponseHeaderPerPageKey			= @"per_page";
 - (NSUInteger)perPageNumber
 {
 	NSString *perPageString = [self.URL cdoh_queryValueForKey:kCDOHResponseHeaderPerPageKey];
-	NSUInteger perPage = [perPageString integerValue];
+	NSUInteger perPage = (NSUInteger)[perPageString integerValue];
 	
 	return perPage;
 }

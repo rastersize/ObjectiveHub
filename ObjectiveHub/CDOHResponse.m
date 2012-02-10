@@ -41,9 +41,9 @@
 
 #pragma mark CDOHResponse Implementation
 @implementation CDOHResponse {
-	NSUInteger _pagesArgumentIndex;
-	NSUInteger _successBlockArgumentIndex;
-	NSUInteger _failureBlockArgumentIndex;
+	NSInteger _pagesArgumentIndex;
+	NSInteger _successBlockArgumentIndex;
+	NSInteger _failureBlockArgumentIndex;
 }
 
 @synthesize resource = _resource;
@@ -138,12 +138,12 @@
 				if ([obj isKindOfClass:[NSNull class]]) {
 					obj = nil;
 				}
-				[_invocation setArgument:&obj atIndex:idx + argOffset];
+				[_invocation setArgument:&obj atIndex:(NSInteger)(idx + argOffset)];
 			}];
 			
-			_pagesArgumentIndex			= numberOfArguments - 3;
-			_successBlockArgumentIndex	= numberOfArguments - 2;
-			_failureBlockArgumentIndex	= numberOfArguments - 1;
+			_pagesArgumentIndex			= (NSInteger)numberOfArguments - 3;
+			_successBlockArgumentIndex	= (NSInteger)numberOfArguments - 2;
+			_failureBlockArgumentIndex	= (NSInteger)numberOfArguments - 1;
 			
 			[_invocation setArgument:&_successBlock atIndex:_successBlockArgumentIndex];
 			[_invocation setArgument:&_failureBlock atIndex:_failureBlockArgumentIndex];
