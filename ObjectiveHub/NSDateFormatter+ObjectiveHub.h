@@ -1,5 +1,5 @@
 //
-//  NSDateFormatter+CDOHRFC3339.h
+//  NSDateFormatter+ObjectiveHub.h
 //  ObjectiveHub
 //
 //  Copyright 2011-2012 Aron Cedercrantz. All rights reserved.
@@ -37,7 +37,7 @@
  *
  * The format of formatted date is: "2008-01-14T04:33:35Z".
  */
-@interface NSDateFormatter (CDOHRFC3339)
+@interface NSDateFormatter (ObjectiveHub)
 
 /**
  * Returns a RFC 3339 date formatter.

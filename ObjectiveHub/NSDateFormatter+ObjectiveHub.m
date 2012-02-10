@@ -1,5 +1,5 @@
 //
-//  NSDateFormatter+CDOHRFC3339.m
+//  NSDateFormatter+ObjectiveHub.m
 //  ObjectiveHub
 //
 //  Copyright 2011-2012 Aron Cedercrantz. All rights reserved.
@@ -30,12 +30,12 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-#import "NSDateFormatter+CDOHRFC3339.h"
+#import "NSDateFormatter+ObjectiveHub.h"
 #import "CDOHCommon.h"
 
 
-CDOH_FIX_CATEGORY_BUG(NSDateFormatter_CDOHRFC3339)
-@implementation NSDateFormatter (CDOHRFC3339)
+CDOH_FIX_CATEGORY_BUG(NSDateFormatter_ObjectiveHub)
+@implementation NSDateFormatter (ObjectiveHub)
 
 // Implementation based on Apples cached RFC 3339 date formatter available in
 // the developer documentation.
