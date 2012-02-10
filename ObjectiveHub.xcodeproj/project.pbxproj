@@ -45,16 +45,16 @@
 		9C26F97C146B207A001A5385 /* libObjectiveHub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F967146B207A001A5385 /* libObjectiveHub.a */; };
 		9C26F9B2146B2424001A5385 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9AE146B2424001A5385 /* JSONKit.h */; };
 		9C26F9B3146B2424001A5385 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9AE146B2424001A5385 /* JSONKit.h */; };
-		9C26F9B4146B2424001A5385 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9AF146B2424001A5385 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9C26F9B5146B2424001A5385 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9AF146B2424001A5385 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9B4146B2424001A5385 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9AF146B2424001A5385 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-sign-conversion -Wno-deprecated-implementations"; }; };
+		9C26F9B5146B2424001A5385 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9AF146B2424001A5385 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-sign-conversion -Wno-deprecated-implementations"; }; };
 		9C26F9D5146B2979001A5385 /* AFHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C0146B2979001A5385 /* AFHTTPClient.h */; };
 		9C26F9D6146B2979001A5385 /* AFHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C0146B2979001A5385 /* AFHTTPClient.h */; };
 		9C26F9D7146B2979001A5385 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C1146B2979001A5385 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9D8146B2979001A5385 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C1146B2979001A5385 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9D9146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C2146B2979001A5385 /* AFHTTPRequestOperation.h */; };
 		9C26F9DA146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C2146B2979001A5385 /* AFHTTPRequestOperation.h */; };
-		9C26F9DB146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unused-parameter"; }; };
-		9C26F9DC146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unused-parameter"; }; };
+		9C26F9DB146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unused-parameter -Wno-sign-conversion"; }; };
+		9C26F9DC146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unused-parameter -Wno-sign-conversion"; }; };
 		9C26F9E1146B2979001A5385 /* AFImageRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C6146B2979001A5385 /* AFImageRequestOperation.h */; };
 		9C26F9E2146B2979001A5385 /* AFImageRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C6146B2979001A5385 /* AFImageRequestOperation.h */; };
 		9C26F9E3146B2979001A5385 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unused-parameter"; }; };
@@ -75,8 +75,8 @@
 		9C26F9F2146B2979001A5385 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CE146B2979001A5385 /* AFPropertyListRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26F9F3146B2979001A5385 /* AFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CF146B2979001A5385 /* AFURLConnectionOperation.h */; };
 		9C26F9F4146B2979001A5385 /* AFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CF146B2979001A5385 /* AFURLConnectionOperation.h */; };
-		9C26F9F5146B2979001A5385 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D0146B2979001A5385 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9C26F9F6146B2979001A5385 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D0146B2979001A5385 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		9C26F9F5146B2979001A5385 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D0146B2979001A5385 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-sign-conversion"; }; };
+		9C26F9F6146B2979001A5385 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D0146B2979001A5385 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-sign-conversion"; }; };
 		9C26F9F7146B2979001A5385 /* AFXMLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9D1146B2979001A5385 /* AFXMLRequestOperation.h */; };
 		9C26F9F8146B2979001A5385 /* AFXMLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9D1146B2979001A5385 /* AFXMLRequestOperation.h */; };
 		9C26F9F9146B2979001A5385 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D2146B2979001A5385 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -1362,6 +1362,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				COPY_PHASE_STRIP = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -1404,6 +1406,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1496,6 +1500,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				COPY_PHASE_STRIP = NO;
 				DSTROOT = /tmp/ObjectiveHub_iOS.dst;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1509,6 +1515,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1526,12 +1533,15 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_IMPLICIT_SIGN_CONVERSION = YES;
 				COPY_PHASE_STRIP = YES;
 				DSTROOT = /tmp/ObjectiveHub_iOS.dst;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ObjectiveHub-iOS/ObjectiveHub-iOS-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1607,6 +1617,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_AFTER_BUILD = YES;
 			};
 			name = Debug;
 		};
@@ -1614,6 +1625,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_AFTER_BUILD = YES;
 			};
 			name = Release;
 		};
