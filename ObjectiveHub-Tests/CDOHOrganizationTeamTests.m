@@ -52,11 +52,11 @@
 	dispatch_once(&firstTestDictionaryToken, ^{
 		NSDictionary *superDict = [super firstTestDictionary];
 		NSDictionary *localDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-								   [NSNumber numberWithUnsignedInteger:1234], kCDOHOrganizationTeamIdentifierKey,
-								   @"A test team", kCDOHOrganizationTeamNameKey,
-								   kCDOHOrganizationTeamPermissionPull, kCDOHOrganizationTeamPermissionKey,
-								   [NSNumber numberWithUnsignedInteger:10], kCDOHOrganizationTeamRepositoriesKey,
-								   [NSNumber numberWithUnsignedInteger:321], kCDOHOrganizationTeamMembersKey,
+								   CDOHTestNumFromUInteger(1234),		kCDOHOrganizationTeamIdentifierKey,
+								   @"A test team",						kCDOHOrganizationTeamNameKey,
+								   kCDOHOrganizationTeamPermissionPull,	kCDOHOrganizationTeamPermissionKey,
+								   CDOHTestNumFromUInteger(10),			kCDOHOrganizationTeamRepositoriesKey,
+								   CDOHTestNumFromUInteger(321),		kCDOHOrganizationTeamMembersKey,
 					  nil];
 		
 		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
@@ -73,11 +73,11 @@
 	dispatch_once(&firstTestDictionaryAltToken, ^{
 		NSDictionary *superDict = [super firstTestDictionaryAlt];
 		NSDictionary *localDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-								   [NSNumber numberWithUnsignedInteger:1234], kCDOHOrganizationTeamIdentifierKey,
-								   @"New name for the team", kCDOHOrganizationTeamNameKey,
-								   kCDOHOrganizationTeamPermissionPull, kCDOHOrganizationTeamPermissionKey,
-								   [NSNumber numberWithUnsignedInteger:999], kCDOHOrganizationTeamRepositoriesKey,
-								   [NSNumber numberWithUnsignedInteger:456], kCDOHOrganizationTeamMembersKey,
+								   CDOHTestNumFromUInteger(1234),		kCDOHOrganizationTeamIdentifierKey,
+								   @"New name for the team",			kCDOHOrganizationTeamNameKey,
+								   kCDOHOrganizationTeamPermissionPull,	kCDOHOrganizationTeamPermissionKey,
+								   CDOHTestNumFromUInteger(999),		kCDOHOrganizationTeamRepositoriesKey,
+								   CDOHTestNumFromUInteger(456),		kCDOHOrganizationTeamMembersKey,
 								   nil];
 		
 		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
@@ -96,11 +96,11 @@
 	dispatch_once(&secondTestDictionaryToken, ^{
 		NSDictionary *superDict = [super secondTestDictionary];
 		NSDictionary *localDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-								   [NSNumber numberWithUnsignedInteger:4321], kCDOHOrganizationTeamIdentifierKey,
-								   @"A test team", kCDOHOrganizationTeamNameKey,
-								   kCDOHOrganizationTeamPermissionPull, kCDOHOrganizationTeamPermissionKey,
-								   [NSNumber numberWithUnsignedInteger:10], kCDOHOrganizationTeamRepositoriesKey,
-								   [NSNumber numberWithUnsignedInteger:321], kCDOHOrganizationTeamMembersKey,
+								   CDOHTestNumFromUInteger(4321),		kCDOHOrganizationTeamIdentifierKey,
+								   @"A test team",						kCDOHOrganizationTeamNameKey,
+								   kCDOHOrganizationTeamPermissionPull,	kCDOHOrganizationTeamPermissionKey,
+								   CDOHTestNumFromUInteger(10),			kCDOHOrganizationTeamRepositoriesKey,
+								   CDOHTestNumFromUInteger(321),		kCDOHOrganizationTeamMembersKey,
 								   nil];
 		
 		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
