@@ -50,9 +50,6 @@
 /// The base URI for the GitHub API
 NSString *const kCDOHGitHubBaseAPIURIString	= @"https://api.github.com";
 
-/// A date format string for the ISO 8601 format
-NSString *const kCDOHDateFormat				= @"YYYY-MM-DDTHH:MM:SSZ";
-
 /// ObjectiveHub User Agent Format String
 NSString *const kCDOHUserAgentFormat		= @"ObjectiveHub/%@";
 

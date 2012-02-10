@@ -31,6 +31,8 @@
 //
 
 #import "CDOHResponseTests.h"
+#import "CDOHResponse.h"
+#import "CDOHResponsePrivate.h"
 
 @implementation CDOHResponseTests
 
