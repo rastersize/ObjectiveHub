@@ -160,7 +160,7 @@ NSString *const kCDOHResponseHeaderLinkKey					= @"Link";
 /// 1. the login name of the user.
 NSString *const kCDOHUserPathFormat							= @"/users/%@";
 /// The relative path for an authenticated user.
-NSString *const kCDOHUserAuthenticatedPath					= @"/user";
+NSString *const kCDOHAuthenticatedUserPath					= @"/user";
 /// The relative path for the authenticated users emails.
 NSString *const kCDOHUserEmailsPath							= @"/user/emails";
 #pragma mark |- User Repositories
@@ -722,12 +722,13 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)user:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	if (!successBlock && !failureBlock) {
-		return;
-	}
+	if (!successBlock && !failureBlock) { return; }
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	
-	return [self userWithLogin:self.username success:successBlock failure:failureBlock];
+	[self.client getPath:kCDOHAuthenticatedUserPath
+			  parameters:nil
+				 success:[self standardUserSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:nil]
+				 failure:[self standardFailureBlock:failureBlock]];
 }
 
 - (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -747,8 +748,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 					 nil];
 	params = [self requestParameterDictionaryForDictionary:dictionary validKeys:keys];
 	
-	NSString *patchPath = kCDOHUserAuthenticatedPath;
-	[self.client patchPath:patchPath
+	[self.client patchPath:kCDOHAuthenticatedUserPath
 				parameters:params
 				   success:[self standardUserSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(dictionary)]
 				   failure:[self standardFailureBlock:failureBlock]];
@@ -761,8 +761,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!successBlock && !failureBlock) { return; }
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	
-	NSString *getPath = kCDOHUserEmailsPath;
-	[self.client getPath:getPath
+	[self.client getPath:kCDOHUserEmailsPath
 			  parameters:nil
 				 success:[self standardUserEmailSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:nil]
 				 failure:[self standardFailureBlock:failureBlock]];
@@ -773,8 +772,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	if (!CDOHVerifyArgumentsNotNilOrThrowException(emails)) { return; }
 	
-	NSString *postPath = kCDOHUserEmailsPath;
-	[self.client postPath:postPath
+	[self.client postPath:kCDOHUserEmailsPath
 			   parameters:emails
 				  success:[self standardUserEmailSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(emails)]
 				  failure:[self standardFailureBlock:failureBlock]];
@@ -785,8 +783,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	if (!CDOHVerifyArgumentsNotNilOrThrowException(emails)) { return; }
 	
-	NSString *deletePath = kCDOHUserEmailsPath;
-	[self.client deletePath:deletePath
+	[self.client deletePath:kCDOHUserEmailsPath
 				 parameters:emails
 					success:[self standardSuccessBlockWithNoData:successBlock]
 					failure:[self standardFailureBlock:failureBlock]];
