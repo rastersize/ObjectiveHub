@@ -37,7 +37,7 @@
 #import "CDOHUser.h"
 #import "CDOHOrganization.h"
 
-#import "NSString+ObjectiveHub.h"
+#import "NSDate+ObjectiveHub.h"
 
 #pragma mark - Dictionary Representation Keys
 //FIXME: These will soon be change from *_url to *_links
@@ -179,34 +179,44 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 	NSDictionary *parentDict = [_parentRepository encodeAsDictionary];
 	NSDictionary *sourceDict = [_sourceRepository encodeAsDictionary];
 	
+	NSString *htmlUrlString		= [_htmlUrl absoluteString];
+	NSString *cloneUrlString	= [_cloneUrl absoluteString];
+	NSString *gitUrlString		= [_gitUrl absoluteString];
+	NSString *sshUrlString		= [_sshUrl absoluteString];
+	NSString *svnUrlString		= [_svnUrl absoluteString];
+	NSString *homepageString	= [_homepage absoluteString];
+	
+	NSString *pushedAtString	= [_pushedAt cdoh_stringUsingRFC3339Format];
+	NSString *createdAtString	= [_createdAt cdoh_stringUsingRFC3339Format];
+	
 	
 	NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
-						  _htmlUrl,					kCDOHRepositoryHtmlUrlKey,
-						  _cloneUrl,				kCDOHRepositoryCloneUrlKey,
-						  _gitUrl,					kCDOHRepositoryGitUrlKey,
-						  _sshUrl,					kCDOHRepositorySshUrlKey,
-						  _svnUrl,					kCDOHRepositorySvnUrlKey,
-						  ownerDict,				kCDOHRepositoryOwnerKey,
-						  _name,					kCDOHRepositoryNameKey,
-						  _repositoryDescription,	kCDOHRepositoryDescriptionKey,
-						  _homepage,				kCDOHRepositoryHomepageKey,
-						  _language,				kCDOHRepositoryLanguageKey,
-						  privateNum,				kCDOHRepositoryPrivateKey,
-						  watchersNum,				kCDOHRepositoryWatchersKey,
-						  sizeNum,					kCDOHRepositorySizeKey,
-						  _defaultBranch,			kCDOHRepositoryDefaultBranchKey,
-						  openIssuesNum,			kCDOHRepositoryOpenIssuesKey,
-						  hasIssuesNum,				kCDOHRepositoryHasIssuesKey,
-						  _pushedAt,				kCDOHRepositoryPushedAtKey,
-						  _createdAt,				kCDOHRepositoryCreatedAtKey,
-						  organizationDict,			kCDOHRepositoryOrganizationKey,
-						  forkNum,					kCDOHRepositoryForkKey,
-						  forksNum,					kCDOHRepositoryForksKey,
-						  parentDict,				kCDOHRepositoryParentRepositoryKey,
-						  sourceDict,				kCDOHRepositorySourceRepositoryKey,
-						  hasWikiNum,				kCDOHRepositoryHasWikiKey,
-						  hasDownloadsNum,			kCDOHRepositoryHasDownloadsKey,
-						  nil];
+								_name,					kCDOHRepositoryNameKey,
+								_repositoryDescription,	kCDOHRepositoryDescriptionKey,
+								_language,				kCDOHRepositoryLanguageKey,
+								_defaultBranch,			kCDOHRepositoryDefaultBranchKey,
+								htmlUrlString,			kCDOHRepositoryHtmlUrlKey,
+								cloneUrlString,			kCDOHRepositoryCloneUrlKey,
+								gitUrlString,			kCDOHRepositoryGitUrlKey,
+								sshUrlString,			kCDOHRepositorySshUrlKey,
+								svnUrlString,			kCDOHRepositorySvnUrlKey,
+								homepageString,			kCDOHRepositoryHomepageKey,
+								pushedAtString,			kCDOHRepositoryPushedAtKey,
+								createdAtString,		kCDOHRepositoryCreatedAtKey,
+								ownerDict,				kCDOHRepositoryOwnerKey,
+								organizationDict,		kCDOHRepositoryOrganizationKey,
+								parentDict,				kCDOHRepositoryParentRepositoryKey,
+								sourceDict,				kCDOHRepositorySourceRepositoryKey,
+								privateNum,				kCDOHRepositoryPrivateKey,
+								watchersNum,			kCDOHRepositoryWatchersKey,
+								sizeNum,				kCDOHRepositorySizeKey,
+								openIssuesNum,			kCDOHRepositoryOpenIssuesKey,
+								hasIssuesNum,			kCDOHRepositoryHasIssuesKey,
+								forkNum,				kCDOHRepositoryForkKey,
+								forksNum,				kCDOHRepositoryForksKey,
+								hasWikiNum,				kCDOHRepositoryHasWikiKey,
+								hasDownloadsNum,		kCDOHRepositoryHasDownloadsKey,
+								nil];
 	
 	NSUInteger finalDictionaryCapacity = [dictionary count] + [superDictionary count];
 	finalDictionary = [[NSMutableDictionary alloc] initWithCapacity:finalDictionaryCapacity];

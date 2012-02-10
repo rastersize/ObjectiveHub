@@ -126,8 +126,10 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 {
 	NSDictionary *resourceDict = nil;
 	
+	NSString *apiResourceUrlAbsoluteString = [_apiResourceUrl absoluteString];
+	//NSAssert(NO, @"class: %@; url: %@; urlString: %@ of class %@;", [self class], _apiResourceUrl, apiResourceUrlAbsoluteString, [apiResourceUrlAbsoluteString class]);
 	resourceDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-					_apiResourceUrl, kCDOHResourceAPIResourceURLKey,
+					apiResourceUrlAbsoluteString, kCDOHResourceAPIResourceURLKey,
 					nil];
 	
 	return resourceDict;

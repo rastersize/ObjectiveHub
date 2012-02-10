@@ -35,6 +35,8 @@
 #import "CDOHResourcePrivate.h"
 #import "CDOHPlan.h"
 
+#import "NSDate+ObjectiveHub.h"
+
 
 #pragma mark NSCoding and GitHub JSON Keys
 NSString *const kCDOHUserLoginKey				= @"login";
@@ -157,6 +159,12 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 	
 	NSNumber *authenticatedNumber				= [NSNumber numberWithBool:self.isAuthenticated];
 	
+	NSString *blogUrlString						= [_blogUrl absoluteString];
+	NSString *htmlUrlString						= [_htmlUrl absoluteString];
+	NSString *avatarUrlString					= [_avatarUrl absoluteString];
+	
+	NSString *createdAtString					= [_createdAt cdoh_stringUsingRFC3339Format];
+	
 	NSDictionary *planDict = [_plan encodeAsDictionary];
 	
 	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -165,12 +173,12 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 								_company,						kCDOHUserCompanyKey,
 								_email,							kCDOHUserEmailKey,
 								_location,						kCDOHUserLocationKey,
-								_blogUrl,						kCDOHUserBlogKey,
-								_avatarUrl,						kCDOHUserAvatarURLKey,
-								_gravatarId,					kCDOHUserGravatarIDKey,
-								_htmlUrl,						kCDOHUserHTMLURLKey,
-								_createdAt,						kCDOHUserCreatedAtKey,
 								_type,							kCDOHUserTypeKey,
+								_gravatarId,					kCDOHUserGravatarIDKey,
+								avatarUrlString,				kCDOHUserAvatarURLKey,
+								htmlUrlString,					kCDOHUserHTMLURLKey,
+								blogUrlString,					kCDOHUserBlogKey,
+								createdAtString,				kCDOHUserCreatedAtKey,
 								planDict,						kCDOHUserPlanKey,
 								identifierNumber,				kCDOHUserIDKey,
 								authenticatedNumber,			kCDOHUserAuthenticatedKey,
