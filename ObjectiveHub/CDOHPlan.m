@@ -32,6 +32,7 @@
 
 #import "CDOHPlan.h"
 #import "CDOHPlanPrivate.h"
+#import "CDOHResourcePrivate.h"
 
 
 #pragma mark Dictionary Keys
@@ -70,7 +71,7 @@ NSString *const kCDOHPlanPrivateRepositoriesKey	= @"private_repos";
 #pragma mark - Encoding Resources
 - (NSDictionary *)encodeAsDictionary
 {
-	NSMutableDictionary *finalDictionary = nil;
+	NSDictionary *finalDictionary = nil;
 	NSDictionary *superDictionary = [super encodeAsDictionary];
 	
 	NSNumber *spaceNumber			= [NSNumber numberWithUnsignedInteger:self.space];
@@ -84,11 +85,7 @@ NSString *const kCDOHPlanPrivateRepositoriesKey	= @"private_repos";
 								privateReposNumber,		kCDOHPlanPrivateRepositoriesKey,
 								nil];
 	
-	NSUInteger finalDictionaryCapacity = [dictionary count] + [superDictionary count];
-	finalDictionary = [[NSMutableDictionary alloc] initWithCapacity:finalDictionaryCapacity];
-	[finalDictionary addEntriesFromDictionary:superDictionary];
-	[finalDictionary addEntriesFromDictionary:dictionary];
-	
+	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSiperclassDictionary:superDictionary];
 	return finalDictionary;
 }
 

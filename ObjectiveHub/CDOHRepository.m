@@ -160,7 +160,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 #pragma mark - Encoding Resources
 - (NSDictionary *)encodeAsDictionary
 {
-	NSMutableDictionary *finalDictionary = nil;
+	NSDictionary *finalDictionary = nil;
 	NSDictionary *superDictionary = [super encodeAsDictionary];
 	
 	NSNumber *privateNum = [[NSNumber alloc] initWithBool:_private];
@@ -218,11 +218,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 								hasDownloadsNum,		kCDOHRepositoryHasDownloadsKey,
 								nil];
 	
-	NSUInteger finalDictionaryCapacity = [dictionary count] + [superDictionary count];
-	finalDictionary = [[NSMutableDictionary alloc] initWithCapacity:finalDictionaryCapacity];
-	[finalDictionary addEntriesFromDictionary:superDictionary];
-	[finalDictionary addEntriesFromDictionary:dictionary];
-	
+	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSiperclassDictionary:superDictionary];
 	return finalDictionary;
 }
 

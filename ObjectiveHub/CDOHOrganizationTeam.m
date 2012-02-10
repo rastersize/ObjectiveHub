@@ -81,7 +81,7 @@ NSString *const kCDOHOrganizationTeamPermissionAdminister	= @"admin";
 #pragma mark - Encoding Resources
 - (NSDictionary *)encodeAsDictionary
 {
-	NSMutableDictionary *finalDictionary = nil;
+	NSDictionary *finalDictionary = nil;
 	NSDictionary *superDictionary = [super encodeAsDictionary];
 	
 	NSNumber *identifierNum = [[NSNumber alloc] initWithUnsignedInteger:_identifier];
@@ -96,11 +96,7 @@ NSString *const kCDOHOrganizationTeamPermissionAdminister	= @"admin";
 								repositoriesNum,	kCDOHOrganizationTeamRepositoriesKey,
 								nil];
 	
-	NSUInteger finalDictionaryCapacity = [dictionary count] + [superDictionary count];
-	finalDictionary = [[NSMutableDictionary alloc] initWithCapacity:finalDictionaryCapacity];
-	[finalDictionary addEntriesFromDictionary:superDictionary];
-	[finalDictionary addEntriesFromDictionary:dictionary];
-	
+	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSiperclassDictionary:superDictionary];
 	return finalDictionary;
 }
 

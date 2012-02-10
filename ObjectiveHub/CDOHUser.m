@@ -32,6 +32,7 @@
 
 #import "CDOHUser.h"
 #import "CDOHUserPrivate.h"
+#import "CDOHResourcePrivate.h"
 
 
 #pragma mark NSCoding and GitHub JSON Keys
@@ -63,7 +64,7 @@ NSString *const kCDOHUserBioKey			= @"bio";
 #pragma mark - Encoding Resources
 - (NSDictionary *)encodeAsDictionary
 {
-	NSMutableDictionary *finalDictionary = nil;
+	NSDictionary *finalDictionary = nil;
 	NSDictionary *superDictionary = [super encodeAsDictionary];
 	
 	NSNumber *hireableNumber	= [NSNumber numberWithBool:_hireable];
@@ -72,11 +73,7 @@ NSString *const kCDOHUserBioKey			= @"bio";
 								   hireableNumber,	kCDOHUserHireableKey,
 								   nil];
 	
-	NSUInteger finalDictionaryCapacity = [dictionary count] + [superDictionary count];
-	finalDictionary = [[NSMutableDictionary alloc] initWithCapacity:finalDictionaryCapacity];
-	[finalDictionary addEntriesFromDictionary:superDictionary];
-	[finalDictionary addEntriesFromDictionary:dictionary];
-	
+	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSiperclassDictionary:superDictionary];
 	return finalDictionary;
 }
 
