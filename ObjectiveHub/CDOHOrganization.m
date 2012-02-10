@@ -39,11 +39,7 @@
 #pragma mark - Identifying and Comparing Users
 - (BOOL)isEqualToOrganization:(CDOHOrganization *)anOrganization
 {
-	if (anOrganization == self) {
-		return YES;
-	}
-	
-	return (anOrganization.identifier == self.identifier);
+	return [self isEqualToAbstractUser:anOrganization];
 }
 
 @end

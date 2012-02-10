@@ -95,11 +95,7 @@ NSString *const kCDOHUserBioKey			= @"bio";
 
 - (BOOL)isEqualToUser:(CDOHUser *)aUser
 {
-	if (aUser == self) {
-		return YES;
-	}
-	
-	return (aUser.identifier == self.identifier);
+	return [self isEqualToAbstractUser:aUser];
 }
 
 

@@ -256,9 +256,9 @@ extern NSString *const kCDOHUserPlanKey;
  * receiver.
  *
  * As the user identifier integer uniquely identifies a GitHub the receiver and
- * _aUser_ is determined to be equal if their identifiers are equal and they
- * are of the same type. They are also equal if the receiver and the _aUser_
- * instances are the same instance.
+ * _aUser_ is determined to be equal if their identifiers are equal.
+ * They are also equal if the receiver and the _aUser_ instances are the same
+ * instance.
  *
  * @param aUser The user with which to compare the reciever.
  * @return `YES` if _aUser_ is equivalent to the reciever, otherwise `NO`.

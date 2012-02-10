@@ -225,8 +225,7 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 		return YES;
 	}
 	
-	return (aUser.identifier == self.identifier &&
-			[_type isEqualToString:aUser.type]);
+	return (aUser.identifier == self.identifier);
 }
 
 - (NSUInteger)hash
