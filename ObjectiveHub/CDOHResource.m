@@ -122,6 +122,31 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 
 
 #pragma mark - Encoding Resources
++ (NSDictionary *)mergeSubclassDictionary:(NSDictionary *)subclassDictionary withSiperclassDictionary:(NSDictionary *)superclassDictionary
+{
+	NSDictionary *mergedDictionary = nil;
+	
+	if (subclassDictionary != nil && superclassDictionary != nil) {
+		NSMutableDictionary *dictionary = nil;
+		
+		NSUInteger capacity = [subclassDictionary count] + [superclassDictionary count];
+		dictionary = [[NSMutableDictionary alloc] initWithCapacity:capacity];
+		[dictionary addEntriesFromDictionary:superclassDictionary];
+		[dictionary addEntriesFromDictionary:subclassDictionary];
+		
+		mergedDictionary = dictionary;
+	} else {
+		// One or more of the dictionaries are nil.
+		// If the subclass dictionary is _not_ nil we use that, else we use the
+		// superclass dictionary. The superclass dictionary may also be nil in
+		// which case we will return nil (as defined by the methods
+		// specification).
+		mergedDictionary = subclassDictionary != nil ? subclassDictionary :superclassDictionary;
+	}
+	
+	return mergedDictionary;
+}
+
 - (NSDictionary *)encodeAsDictionary
 {
 	NSDictionary *resourceDict = nil;

@@ -60,6 +60,26 @@ extern NSString *const kCDOHResourcePropertiesDictionaryKey;
 @property (strong, readonly) NSURL *_APIResourceURL;
 
 
+#pragma mark - Encoding Resources
+/** @name Encoding Resources */
+/**
+ * Merges the subclass resource dictionary with the superclass’s resource
+ * dictionary and returns the resulting dictionary.
+ *
+ * The subclass resource dictionary’s values will overwrite those of the
+ * superclass’s resource dictionary if both contain values for the same keys.
+ *
+ * If both parameters are `nil`, `nil` will be returned. If one of the given
+ * dictionaries are `nil` the non-`nil` dictionary will be returned.
+ *
+ * @param subclassDictionary The subclass resource dictionary.
+ * @param superclassDictionary The superclass resource dictionary.
+ * @return The subclass resource dictionary merged with the superclass resource
+ * dictionary.
+ */
++ (NSDictionary *)mergeSubclassDictionary:(NSDictionary *)subclassDictionary withSiperclassDictionary:(NSDictionary *)superclassDictionary;
+
+
 #pragma mark - Decoding Dictionary Objects
 /** @name Decoding Dictionary Objects */
 /**

@@ -39,6 +39,41 @@
 
 @implementation CDOHResourceTests
 
+- (void)testMergeDictionaries
+{
+	NSDictionary *superDict = [NSDictionary dictionaryWithObjectsAndKeys:
+							   @"superValue", @"super",
+							   @"superDupValue", @"duplicate",
+							   nil];
+	NSDictionary *subclassDict = [NSDictionary dictionaryWithObjectsAndKeys:
+								  @"subValue", @"sub",
+								  @"subDupValue", @"duplicate",
+								  nil];
+	NSDictionary *expectedMergeResult = [NSDictionary dictionaryWithObjectsAndKeys:
+										 @"superValue", @"super",
+										 @"subValue", @"sub",
+										 @"subDupValue", @"duplicate",
+										 nil];
+	NSDictionary *mergedDict = [CDOHResource mergeSubclassDictionary:subclassDict withSiperclassDictionary:superDict];
+	
+	STAssertNotNil(mergedDict, @"Merging two dictionaries ('%@' and '%@') should not result in nil", superDict, subclassDict);
+	STAssertTrue([mergedDict count] == 3, @"Merging two dictionaries ('%@' and '%@') with one duplicate key should result in a dictionary of size '3' was '%lu'", superDict, subclassDict, [mergedDict count]);
+	STAssertEqualObjects(mergedDict, expectedMergeResult, @"Merging two dictionaries ('%@' and '%@') with one duplicate key should result in the following dictionary '%@' was '%@'", superDict, subclassDict, expectedMergeResult, mergedDict);
+	
+	
+	NSDictionary *mergedNilDict = [CDOHResource mergeSubclassDictionary:nil withSiperclassDictionary:nil];
+	NSDictionary *mergedSuperNilDict = [CDOHResource mergeSubclassDictionary:subclassDict withSiperclassDictionary:nil];
+	NSDictionary *mergedSubNilDict = [CDOHResource mergeSubclassDictionary:nil withSiperclassDictionary:superDict];
+	
+	STAssertNil(mergedNilDict, @"Merging nil with nil should result in nil");
+	STAssertNotNil(mergedSuperNilDict, @"Merging nil with a super dictionary (%@) should not result in nil", superDict);
+	STAssertNotNil(mergedSubNilDict, @"Merging nil with a subclass dictionary (%@) should not result in nil", subclassDict);
+	
+	STAssertEqualObjects(mergedSuperNilDict, subclassDict, @"Merging the subclass dictionary (%@) with nil should result in the subclass dictionary was '%@'", subclassDict, mergedSuperNilDict);
+	STAssertEqualObjects(mergedSubNilDict, superDict, @"Merging the super dictionary (%@) with nil should result in the super dictionary was '%@'", superDict, mergedSubNilDict);
+	
+}
+
 - (void)testResourceObjectFromDictionary
 {
 	NSDictionary *resourceDict = [[NSDictionary alloc] initWithObjectsAndKeys:
