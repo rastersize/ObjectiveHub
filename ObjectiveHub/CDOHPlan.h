@@ -36,13 +36,13 @@
 
 #pragma mark Dictionary Representation Keys
 /// Dictionary key for the name value.
-extern NSString *const kCDOHPlanDictionaryNameKey;
+extern NSString *const kCDOHPlanNameKey;
 /// Dictionary key for the name value.
-extern NSString *const kCDOHPlanDictionarySpaceKey;
+extern NSString *const kCDOHPlanSpaceKey;
 /// Dictionary key for the name value.
-extern NSString *const kCDOHPlanDictionaryCollaboratorsKey;
+extern NSString *const kCDOHPlanCollaboratorsKey;
 /// Dictionary key for the name value.
-extern NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey;
+extern NSString *const kCDOHPlanPrivateRepositoriesKey;
 
 
 #pragma mark - CDOHPlan Interface

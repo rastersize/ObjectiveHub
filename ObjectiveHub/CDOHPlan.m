@@ -35,10 +35,10 @@
 
 
 #pragma mark Dictionary Keys
-NSString *const kCDOHPlanDictionaryNameKey					= @"name";
-NSString *const kCDOHPlanDictionarySpaceKey					= @"space";
-NSString *const kCDOHPlanDictionaryCollaboratorsKey			= @"collaborators";
-NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
+NSString *const kCDOHPlanNameKey					= @"name";
+NSString *const kCDOHPlanSpaceKey					= @"space";
+NSString *const kCDOHPlanCollaboratorsKey			= @"collaborators";
+NSString *const kCDOHPlanPrivateRepositoriesKey	= @"private_repos";
 
 
 #pragma mark - CDOHPlan Implementation
@@ -56,11 +56,11 @@ NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 {
 	self = [super init];
 	if (self) {
-		_name = [[dictionary valueForKey:kCDOHPlanDictionaryNameKey] copy];
+		_name = [[dictionary valueForKey:kCDOHPlanNameKey] copy];
 		
-		_space = [[dictionary valueForKey:kCDOHPlanDictionarySpaceKey] unsignedIntegerValue];
-		_collaborators = [[dictionary valueForKey:kCDOHPlanDictionaryCollaboratorsKey] unsignedIntegerValue];
-		_privateRepositories = [[dictionary valueForKey:kCDOHPlanDictionaryPrivateRepositoriesKey] unsignedIntegerValue];
+		_space = [[dictionary valueForKey:kCDOHPlanSpaceKey] unsignedIntegerValue];
+		_collaborators = [[dictionary valueForKey:kCDOHPlanCollaboratorsKey] unsignedIntegerValue];
+		_privateRepositories = [[dictionary valueForKey:kCDOHPlanPrivateRepositoriesKey] unsignedIntegerValue];
 	}
 	
 	return self;
@@ -78,10 +78,10 @@ NSString *const kCDOHPlanDictionaryPrivateRepositoriesKey	= @"private_repos";
 	NSNumber *privateReposNumber	= [NSNumber numberWithUnsignedInteger:self.privateRepositories];
 	
 	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-								self.name,				kCDOHPlanDictionaryNameKey,
-								spaceNumber,			kCDOHPlanDictionarySpaceKey,
-								collaboratorsNumber,	kCDOHPlanDictionaryCollaboratorsKey,
-								privateReposNumber,		kCDOHPlanDictionaryPrivateRepositoriesKey,
+								self.name,				kCDOHPlanNameKey,
+								spaceNumber,			kCDOHPlanSpaceKey,
+								collaboratorsNumber,	kCDOHPlanCollaboratorsKey,
+								privateReposNumber,		kCDOHPlanPrivateRepositoriesKey,
 								nil];
 	
 	NSUInteger finalDictionaryCapacity = [dictionary count] + [superDictionary count];
