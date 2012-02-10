@@ -33,6 +33,17 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import "CDOHResourceBaseTests.h"
 
+
+@class CDOHAbstractUser;
+
+
 @interface CDOHAbstractUserTests : CDOHResourceBaseTests
+
+#pragma mark - Test Dictionaries
++ (id)unauthenticatedTestUserDictionary;
+
+
+#pragma mark - Test Resources
+- (CDOHAbstractUser *)unauthenticatedTestUser;
 
 @end

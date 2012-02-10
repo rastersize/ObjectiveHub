@@ -32,6 +32,11 @@
 
 #import "CDOHAbstractUserTests.h"
 #import "CDOHAbstractUser.h"
+#import "CDOHPlan.h"
+
+
+#define CDOHTestNumFromUInteger(x) [NSNumber numberWithUnsignedInteger:((NSUInteger)x)]
+
 
 @implementation CDOHAbstractUserTests
 
@@ -43,6 +48,217 @@
 
 
 #pragma mark - Test Dictionaries
+// The user should be identified as an authenticated user
++ (NSDictionary *)firstTestDictionary
+{
+	static NSDictionary *dictionary = nil;
+	
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSDictionary *superDict = [super firstTestDictionary];
+		NSDictionary *planDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								  @"small",								kCDOHPlanNameKey,
+								  CDOHTestNumFromUInteger(1228800),		kCDOHPlanSpaceKey,
+								  CDOHTestNumFromUInteger(5),			kCDOHPlanCollaboratorsKey,
+								  CDOHTestNumFromUInteger(10),			kCDOHPlanPrivateRepositoriesKey,
+								  nil];
+		
+		NSDictionary *localDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								   CDOHTestNumFromUInteger(583231),		kCDOHUserIDKey,
+								   @"octocat",							kCDOHUserLoginKey,
+								   @"The Octocat",						kCDOHUserNameKey,
+								   @"GitHub",							kCDOHUserCompanyKey,
+								   @"San Francisco",					kCDOHUserLocationKey,
+								   @"octocat@github.com",				kCDOHUserEmailKey,
+								   @"User",								kCDOHUserTypeKey,
+								   @"2011-01-25T18:44:36Z",				kCDOHUserCreatedAtKey,
+								   @"http://www.github.com/blog",		kCDOHUserBlogKey,
+								   @"https://github.com/octocat",		kCDOHUserHTMLURLKey,
+								   @"https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png", kCDOHUserAvatarURLKey,
+								   @"7ad39074b0584bc555d0417ae3e7d974", kCDOHUserGravatarIDKey,
+								   CDOHTestNumFromUInteger(2),			kCDOHUserPublicReposKey,
+								   CDOHTestNumFromUInteger(4),			kCDOHUserPublicGistsKey,
+								   CDOHTestNumFromUInteger(120),		kCDOHUserFollowersKey,
+								   CDOHTestNumFromUInteger(0),			kCDOHUserFollowingKey,
+								   CDOHTestNumFromUInteger(5),			kCDOHUserTotalPrivateReposKey,
+								   CDOHTestNumFromUInteger(1),			kCDOHUserOwnedPrivateReposKey,
+								   CDOHTestNumFromUInteger(103),		kCDOHUserPrivateGistsKey,
+								   CDOHTestNumFromUInteger(5),			kCDOHUserDiskUsageKey,
+								   CDOHTestNumFromUInteger(5),			kCDOHUserCollaboratorsKey,
+								   planDict,							kCDOHUserPlanKey,
+								   nil];
+		
+		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
+	});
+	
+	return dictionary;
+}
+
++ (NSDictionary *)firstTestDictionaryAlt
+{
+	static NSDictionary *dictionary = nil;
+	
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSDictionary *superDict = [super firstTestDictionary];
+		NSDictionary *planDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								  @"medium",							kCDOHPlanNameKey,
+								  CDOHTestNumFromUInteger(2457600),		kCDOHPlanSpaceKey,
+								  CDOHTestNumFromUInteger(10),			kCDOHPlanCollaboratorsKey,
+								  CDOHTestNumFromUInteger(20),			kCDOHPlanPrivateRepositoriesKey,
+								  nil];
+		
+		NSDictionary *localDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								   CDOHTestNumFromUInteger(583231),		kCDOHUserIDKey,
+								   @"new_octocat",						kCDOHUserLoginKey,
+								   @"Monalisa Octocat",					kCDOHUserNameKey,
+								   @"A company",						kCDOHUserCompanyKey,
+								   @"New York",							kCDOHUserLocationKey,
+								   @"monalisa.octocat@github.com",		kCDOHUserEmailKey,
+								   @"Organization",						kCDOHUserTypeKey,
+								   @"2012-01-01T01:01:01Z",				kCDOHUserCreatedAtKey,
+								   @"http://www.example.com/blog",		kCDOHUserBlogKey,
+								   @"https://example.com/octocat",		kCDOHUserHTMLURLKey,
+								   @"https://secure.gravatar.com/avatar/2f21aac393665a85428eab10c2bdbe79?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png", kCDOHUserAvatarURLKey,
+								   @"2f21aac393665a85428eab10c2bdbe79",	kCDOHUserGravatarIDKey,
+								   CDOHTestNumFromUInteger(3),			kCDOHUserPublicReposKey,
+								   CDOHTestNumFromUInteger(5),			kCDOHUserPublicGistsKey,
+								   CDOHTestNumFromUInteger(121),		kCDOHUserFollowersKey,
+								   CDOHTestNumFromUInteger(1),			kCDOHUserFollowingKey,
+								   CDOHTestNumFromUInteger(6),			kCDOHUserTotalPrivateReposKey,
+								   CDOHTestNumFromUInteger(2),			kCDOHUserOwnedPrivateReposKey,
+								   CDOHTestNumFromUInteger(104),		kCDOHUserPrivateGistsKey,
+								   CDOHTestNumFromUInteger(6),			kCDOHUserDiskUsageKey,
+								   CDOHTestNumFromUInteger(6),			kCDOHUserCollaboratorsKey,
+								   planDict,							kCDOHUserPlanKey,
+								   nil];
+		
+		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
+	});
+	
+	return dictionary;
+}
+
+// Exactly the same as firstTestDictionary except the user ID is different and
+// as such the user created from this dictionary should not be equal to a user
+// created from the firstTestDictionary.
++ (NSDictionary *)secondTestDictionary
+{
+	static NSDictionary *dictionary = nil;
+	
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSDictionary *superDict = [super firstTestDictionary];
+		NSDictionary *planDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								  @"small",								kCDOHPlanNameKey,
+								  CDOHTestNumFromUInteger(1228800),		kCDOHPlanSpaceKey,
+								  CDOHTestNumFromUInteger(5),			kCDOHPlanCollaboratorsKey,
+								  CDOHTestNumFromUInteger(10),			kCDOHPlanPrivateRepositoriesKey,
+								  nil];
+		
+		NSDictionary *localDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+								   CDOHTestNumFromUInteger(1234),		kCDOHUserIDKey,
+								   @"octocat",							kCDOHUserLoginKey,
+								   @"The Octocat",						kCDOHUserNameKey,
+								   @"GitHub",							kCDOHUserCompanyKey,
+								   @"San Francisco",					kCDOHUserLocationKey,
+								   @"octocat@github.com",				kCDOHUserEmailKey,
+								   @"User",								kCDOHUserTypeKey,
+								   @"2011-01-25T18:44:36Z",				kCDOHUserCreatedAtKey,
+								   @"http://www.github.com/blog",		kCDOHUserBlogKey,
+								   @"https://github.com/octocat",		kCDOHUserHTMLURLKey,
+								   @"https://secure.gravatar.com/avatar/7ad39074b0584bc555d0417ae3e7d974?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png", kCDOHUserAvatarURLKey,
+								   @"7ad39074b0584bc555d0417ae3e7d974", kCDOHUserGravatarIDKey,
+								   CDOHTestNumFromUInteger(2),			kCDOHUserPublicReposKey,
+								   CDOHTestNumFromUInteger(4),			kCDOHUserPublicGistsKey,
+								   CDOHTestNumFromUInteger(120),		kCDOHUserFollowersKey,
+								   CDOHTestNumFromUInteger(0),			kCDOHUserFollowingKey,
+								   CDOHTestNumFromUInteger(5),			kCDOHUserTotalPrivateReposKey,
+								   CDOHTestNumFromUInteger(1),			kCDOHUserOwnedPrivateReposKey,
+								   CDOHTestNumFromUInteger(103),		kCDOHUserPrivateGistsKey,
+								   CDOHTestNumFromUInteger(5),			kCDOHUserDiskUsageKey,
+								   CDOHTestNumFromUInteger(5),			kCDOHUserCollaboratorsKey,
+								   planDict,							kCDOHUserPlanKey,
+								   nil];
+		
+		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
+	});
+	
+	return dictionary;
+}
+
+// Creates an un-authenticate user based on the firstTestDictionary.
+// Should be equal to the firstTestResource/Dictionary when compared using
+// -[CDOHAbstractUser isEqual:].
++ (id)unauthenticatedTestUserDictionary
+{
+	static NSDictionary *dictionary = nil;
+	
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSDictionary *firstTestDictionary = [self firstTestDictionary];
+		
+		NSArray *keys = [[NSArray alloc] initWithObjects:
+						 kCDOHUserIDKey,
+						 kCDOHUserLoginKey,
+						 kCDOHUserNameKey,
+						 kCDOHUserCompanyKey,
+						 kCDOHUserLocationKey,
+						 kCDOHUserEmailKey,
+						 kCDOHUserTypeKey,
+						 kCDOHUserCreatedAtKey,
+						 kCDOHUserBlogKey,
+						 kCDOHUserHTMLURLKey,
+						 kCDOHUserAvatarURLKey,
+						 kCDOHUserGravatarIDKey,
+						 kCDOHUserPublicReposKey,
+						 kCDOHUserPublicGistsKey,
+						 kCDOHUserFollowersKey,
+						 kCDOHUserFollowingKey,
+						 nil];
+		dictionary = [firstTestDictionary dictionaryWithValuesForKeys:keys];
+	});
+	
+	return dictionary;
+}
+
+
+#pragma mark - Test Resources
+- (id)unauthenticatedTestUser
+{
+	NSDictionary *unauthenticatedTestUserDictionary = [[self class] unauthenticatedTestUserDictionary];
+	CDOHResource *unauthenticatedTestUser = [[[[self class] testedClass] alloc] initWithDictionary:unauthenticatedTestUserDictionary];
+	return unauthenticatedTestUser;
+}
+
+
+#pragma mark - Test Resource Equality and Hash
+- (void)testResourceEquality
+{
+	[super testResourceEquality];
+}
+
+- (void)testResourceInequality
+{
+	[super testResourceInequality];
+}
+
+- (void)testResourceHashEqual
+{
+	[super testResourceHashEqual];
+}
+
+- (void)testResourceHashInequal
+{
+	[super testResourceHashInequal];
+}
+
+
+#pragma mark - Test Dictionary Encoding and Decoding
+- (void)testResourceDecodeFromDictionary
+{
+	[super testResourceDecodeFromDictionary];
+}
 
 
 
