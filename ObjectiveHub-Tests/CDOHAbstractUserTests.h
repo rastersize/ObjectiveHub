@@ -40,6 +40,9 @@
 @interface CDOHAbstractUserTests : CDOHResourceBaseTests
 
 #pragma mark - Test Dictionaries
+// Creates an un-authenticate user based on the firstTestDictionary.
+// Should be equal to the firstTestResource/Dictionary when compared using
+// -[CDOHAbstractUser isEqual:] but be unauthenticated!
 + (id)unauthenticatedTestUserDictionary;
 
 

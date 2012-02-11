@@ -185,9 +185,6 @@
 	return dictionary;
 }
 
-// Creates an un-authenticate user based on the firstTestDictionary.
-// Should be equal to the firstTestResource/Dictionary when compared using
-// -[CDOHAbstractUser isEqual:].
 + (id)unauthenticatedTestUserDictionary
 {
 	static NSDictionary *dictionary = nil;
