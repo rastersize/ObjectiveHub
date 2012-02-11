@@ -211,7 +211,7 @@
 		}];
 	});*/
 	
-	/*dispatch_async(queue, ^{
+	dispatch_async(queue, ^{
 		[self.hub repositoriesWatchedByUser:@"rastersize" pages:nil success:^(CDOHResponse *response) {
 			NSLog(@"%@", response);
 			NSLog(@"%@", response.resource);
@@ -230,7 +230,7 @@
 		} failure:^(CDOHError *error) {
 			NSLog(@"repos watched by error: %@", error);
 		}];
-	});*/
+	});
 	
 	/*dispatch_async(queue, ^{
 		NSDictionary *creationTestDict = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -256,6 +256,14 @@
 	} failure:^(CDOHError *error) {
 		NSLog(@"failed to fork with error %@", error);
 	}];*/
+	
+	[self.hub userWithLogin:@"octocat" success:^(CDOHResponse *response) {
+		NSLog(@"response: %@", response);
+	} failure:^(CDOHError *error) {
+		NSLog(@"error: %@", error);
+	}];
+	
+	dispatch_resume(queue);
 }
 
 @end
