@@ -150,6 +150,95 @@ NSString *const kCDOHResponseHeaderLocationKey				= @"Location";
 NSString *const kCDOHResponseHeaderLinkKey					= @"Link";
 
 
+#pragma mark - Relative API Path
+/// Creates a dictionary wherein the keys are string representations of the
+/// corresponding values’ variable names.
+///
+/// More or less the same macro that was introduced in Mac OS X 10.7 with auto-
+/// layout, but as it does not exist on the iOS platform we re-implement it
+/// here.
+#define CDOHDictionaryOfVariableBindings(...) _CDOHDictionaryOfVariableBindings(@"" # __VA_ARGS__, __VA_ARGS__, nil)
+
+NSDictionary *_CDOHDictionaryOfVariableBindings(NSString *commaSeparatedKeysString, id firstValue, ...); // not for direct use
+NSDictionary *_CDOHDictionaryOfVariableBindings(NSString *commaSeparatedKeysString, id firstValue, ...)
+{
+	NSDictionary *dictionary = nil;
+	NSMutableArray *keys = nil;
+	NSMutableArray *objects = nil;
+	
+	NSArray *tmpKeys = [commaSeparatedKeysString componentsSeparatedByString:@","];
+	keys = [[NSMutableArray alloc] initWithCapacity:[tmpKeys count]];
+	for (NSString *tmpKey in tmpKeys) {
+		NSString *key = [tmpKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+		[keys addObject:key];
+	}
+	
+	objects = [[NSMutableArray alloc] initWithCapacity:[keys count]];
+	id obj = firstValue;
+	
+	va_list args;
+	va_start(args, firstValue);
+	while (obj != nil) {
+		[objects addObject:obj];
+		obj = va_arg(args, id);
+	}
+	va_end(args);
+	
+	dictionary = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
+	return dictionary;
+}
+
+
+/// Create the relative API path for the given _pathFormat_. The given _options_
+/// are substituted into the path format.
+///
+/// As such if the path format is `/users/:login` you should supply a dictionary
+/// with a key named `login` the object for that key should then be what you
+/// wish to substitute `:login`.
+///
+/// For example:
+/// 
+///		// Assume the following path format is defined.
+///		NSString *const kCDOHUserPathFormat = @"/users/:login";
+///		...
+///		
+///		NSString *login = @"octocat";
+///		NSDictionary *options = CDOHDictionaryOfVariableBindings(login);
+///		NSString *path = CDOHRelativeAPIPath(
+///			kCDOHUserPathFormat,
+///			options
+///		);
+///
+/// If an option is not supplied the key (including the colon, ":") will be
+/// used.
+NSString *CDOHRelativeAPIPath(NSString *pathFormat, NSDictionary *options);
+NSString *CDOHRelativeAPIPath(NSString *pathFormat, NSDictionary *__unused options)
+{
+	// Length of path + 8 extra chars per option (as it is likely the login of
+	// a user or the name of a repo to be longer than ":login" or ":repo").
+	NSMutableString *path = [[NSMutableString alloc] initWithCapacity:[pathFormat length] + ([options count] * 8)];
+	
+	NSArray *pathComponents = [pathFormat pathComponents];
+	for (NSString *component in pathComponents) {
+		NSString *pathComponent = nil;
+		if ([component isEqualToString:@"/"]) {
+			continue;
+		} else if ([[component substringToIndex:1] isEqualToString:@":"]) {
+			NSString *key = [component substringFromIndex:1];
+			pathComponent = [options objectForKey:key];
+		}
+		
+		if (pathComponent == nil) {
+			pathComponent = component;
+		}
+		
+		[path appendFormat:@"/%@", pathComponent];
+	}
+	
+	return path;
+}
+
+
 #pragma mark - GitHub Relative API Path (Formats)
 #pragma mark |- Users
 /// The relative path format for a user with login.
