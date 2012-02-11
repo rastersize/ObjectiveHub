@@ -53,8 +53,8 @@ NSString *const kCDOHUserBioKey			= @"bio";
 {
 	self = [super initWithDictionary:dictionary];
 	if (self) {
-		_biography = [[dictionary valueForKey:kCDOHUserBioKey] copy];
-		_hireable = [[dictionary valueForKey:kCDOHUserHireableKey] boolValue];
+		_biography = [[dictionary objectForKey:kCDOHUserBioKey] copy];
+		_hireable = [[dictionary objectForKey:kCDOHUserHireableKey] boolValue];
 	}
 	
 	return self;

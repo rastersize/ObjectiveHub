@@ -100,17 +100,17 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 	self = [super initWithDictionary:dictionary];
 	if (self) {
 		// Custom logic
-		NSNumber *authenticated = [dictionary valueForKey:kCDOHUserAuthenticatedKey];
-		_authenticated = [authenticated boolValue] || ([dictionary valueForKey:kCDOHUserTotalPrivateReposKey] != nil);
+		NSNumber *authenticated = [dictionary objectForKey:kCDOHUserAuthenticatedKey];
+		_authenticated = [authenticated boolValue] || ([dictionary objectForKey:kCDOHUserTotalPrivateReposKey] != nil);
 		
 		// Strings
-		_login		= [[dictionary valueForKey:kCDOHUserLoginKey] copy];
-		_name		= [[dictionary valueForKey:kCDOHUserNameKey] copy];
-		_company	= [[dictionary valueForKey:kCDOHUserCompanyKey] copy];
-		_email		= [[dictionary valueForKey:kCDOHUserEmailKey] copy];
-		_location	= [[dictionary valueForKey:kCDOHUserLocationKey] copy];
-		_type		= [[dictionary valueForKey:kCDOHUserTypeKey] copy];
-		_gravatarId	= [[dictionary valueForKey:kCDOHUserGravatarIDKey] copy];
+		_login		= [[dictionary objectForKey:kCDOHUserLoginKey] copy];
+		_name		= [[dictionary objectForKey:kCDOHUserNameKey] copy];
+		_company	= [[dictionary objectForKey:kCDOHUserCompanyKey] copy];
+		_email		= [[dictionary objectForKey:kCDOHUserEmailKey] copy];
+		_location	= [[dictionary objectForKey:kCDOHUserLocationKey] copy];
+		_type		= [[dictionary objectForKey:kCDOHUserTypeKey] copy];
+		_gravatarId	= [[dictionary objectForKey:kCDOHUserGravatarIDKey] copy];
 		
 		// URLs
 		_blogUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHUserBlogKey];
@@ -121,16 +121,16 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 		_createdAt = [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHUserCreatedAtKey];
 		
 		// Unsigned integers
-		_identifier							= [[dictionary valueForKey:kCDOHUserIDKey] unsignedIntegerValue];
-		_numberOfPublicRepositories			= [[dictionary valueForKey:kCDOHUserPublicReposKey] unsignedIntegerValue];		
-		_numberOfPrivateRepositories		= [[dictionary valueForKey:kCDOHUserTotalPrivateReposKey] unsignedIntegerValue];
-		_numberOfOwnedPrivateRepositories	= [[dictionary valueForKey:kCDOHUserOwnedPrivateReposKey] unsignedIntegerValue];
-		_numberOfPublicGists				= [[dictionary valueForKey:kCDOHUserPublicGistsKey] unsignedIntegerValue];
-		_numberOfPrivateGists				= [[dictionary valueForKey:kCDOHUserPrivateGistsKey] unsignedIntegerValue];
-		_followers							= [[dictionary valueForKey:kCDOHUserFollowersKey] unsignedIntegerValue];
-		_following							= [[dictionary valueForKey:kCDOHUserFollowingKey] unsignedIntegerValue];
-		_collaborators						= [[dictionary valueForKey:kCDOHUserCollaboratorsKey] unsignedIntegerValue];
-		_diskUsage							= [[dictionary valueForKey:kCDOHUserDiskUsageKey] unsignedIntegerValue];
+		_identifier							= [[dictionary objectForKey:kCDOHUserIDKey] unsignedIntegerValue];
+		_numberOfPublicRepositories			= [[dictionary objectForKey:kCDOHUserPublicReposKey] unsignedIntegerValue];		
+		_numberOfPrivateRepositories		= [[dictionary objectForKey:kCDOHUserTotalPrivateReposKey] unsignedIntegerValue];
+		_numberOfOwnedPrivateRepositories	= [[dictionary objectForKey:kCDOHUserOwnedPrivateReposKey] unsignedIntegerValue];
+		_numberOfPublicGists				= [[dictionary objectForKey:kCDOHUserPublicGistsKey] unsignedIntegerValue];
+		_numberOfPrivateGists				= [[dictionary objectForKey:kCDOHUserPrivateGistsKey] unsignedIntegerValue];
+		_followers							= [[dictionary objectForKey:kCDOHUserFollowersKey] unsignedIntegerValue];
+		_following							= [[dictionary objectForKey:kCDOHUserFollowingKey] unsignedIntegerValue];
+		_collaborators						= [[dictionary objectForKey:kCDOHUserCollaboratorsKey] unsignedIntegerValue];
+		_diskUsage							= [[dictionary objectForKey:kCDOHUserDiskUsageKey] unsignedIntegerValue];
 		
 		// Resources
 		_plan = [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHUserPlanKey ofClass:[CDOHPlan class]];
