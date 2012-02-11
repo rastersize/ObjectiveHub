@@ -73,7 +73,7 @@ NSString *const kCDOHUserBioKey			= @"bio";
 								   hireableNumber,	kCDOHUserHireableKey,
 								   nil];
 	
-	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSiperclassDictionary:superDictionary];
+	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSuperclassDictionary:superDictionary];
 	return finalDictionary;
 }
 

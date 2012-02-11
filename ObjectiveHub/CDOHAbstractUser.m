@@ -193,7 +193,7 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 								diskUsageNumber,				kCDOHUserDiskUsageKey,
 								nil];
 	
-	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSiperclassDictionary:superDictionary];
+	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSuperclassDictionary:superDictionary];
 	return finalDictionary;
 }
 

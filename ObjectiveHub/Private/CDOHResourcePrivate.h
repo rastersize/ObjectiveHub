@@ -77,7 +77,7 @@ extern NSString *const kCDOHResourcePropertiesDictionaryKey;
  * @return The subclass resource dictionary merged with the superclass resource
  * dictionary.
  */
-+ (NSDictionary *)mergeSubclassDictionary:(NSDictionary *)subclassDictionary withSiperclassDictionary:(NSDictionary *)superclassDictionary;
++ (NSDictionary *)mergeSubclassDictionary:(NSDictionary *)subclassDictionary withSuperclassDictionary:(NSDictionary *)superclassDictionary;
 
 
 #pragma mark - Decoding Dictionary Objects

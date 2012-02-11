@@ -122,7 +122,7 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 
 
 #pragma mark - Encoding Resources
-+ (NSDictionary *)mergeSubclassDictionary:(NSDictionary *)subclassDictionary withSiperclassDictionary:(NSDictionary *)superclassDictionary
++ (NSDictionary *)mergeSubclassDictionary:(NSDictionary *)subclassDictionary withSuperclassDictionary:(NSDictionary *)superclassDictionary
 {
 	NSDictionary *mergedDictionary = nil;
 	

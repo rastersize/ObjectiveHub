@@ -218,7 +218,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 								hasDownloadsNum,		kCDOHRepositoryHasDownloadsKey,
 								nil];
 	
-	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSiperclassDictionary:superDictionary];
+	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSuperclassDictionary:superDictionary];
 	return finalDictionary;
 }
 

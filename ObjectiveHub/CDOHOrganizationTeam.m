@@ -96,7 +96,7 @@ NSString *const kCDOHOrganizationTeamPermissionAdminister	= @"admin";
 								repositoriesNum,	kCDOHOrganizationTeamRepositoriesKey,
 								nil];
 	
-	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSiperclassDictionary:superDictionary];
+	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSuperclassDictionary:superDictionary];
 	return finalDictionary;
 }
 
