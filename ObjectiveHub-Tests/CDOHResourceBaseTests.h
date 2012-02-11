@@ -34,10 +34,11 @@
 #import <Foundation/Foundation.h>
 
 
+#import "CDOHResource.h"
+#import "CDOHResourcePrivate.h"
+
+
 #define CDOHTestNumFromUInteger(x) [NSNumber numberWithUnsignedInteger:((NSUInteger)x)]
-
-
-@class CDOHResource;
 
 
 // Resource base test case class.
@@ -70,10 +71,6 @@
 // their result is merged with the dictionary returned by the super-class to
 // fully test the resource.
 + (NSDictionary *)firstTestDictionaryAlt;
-
-// Merges two dictionaries.
-// No need to override this, just a nice helper :)
-+ (NSDictionary *)mergeOwnTestDictionary:(NSDictionary *)dictionary withSuperDictionary:(NSDictionary *)superDictionary;
 
 
 #pragma mark - Shared Test Resources

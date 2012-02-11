@@ -59,7 +59,7 @@
 								   CDOHTestNumFromUInteger(321),		kCDOHOrganizationTeamMembersKey,
 					  nil];
 		
-		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
+		dictionary = [CDOHResource mergeSubclassDictionary:localDict withSuperclassDictionary:superDict];
 	});
 	
 	return dictionary;
@@ -80,7 +80,7 @@
 								   CDOHTestNumFromUInteger(456),		kCDOHOrganizationTeamMembersKey,
 								   nil];
 		
-		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
+		dictionary = [CDOHResource mergeSubclassDictionary:localDict withSuperclassDictionary:superDict];
 	});
 	
 	return dictionary;
@@ -103,7 +103,7 @@
 								   CDOHTestNumFromUInteger(321),		kCDOHOrganizationTeamMembersKey,
 								   nil];
 		
-		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
+		dictionary = [CDOHResource mergeSubclassDictionary:localDict withSuperclassDictionary:superDict];
 	});
 	
 	return dictionary;

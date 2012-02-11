@@ -31,8 +31,6 @@
 //
 
 #import "CDOHResourceTests.h"
-#import "CDOHResource.h"
-#import "CDOHResourcePrivate.h"
 
 #import "NSDate+ObjectiveHub.h"
 
@@ -54,16 +52,16 @@
 										 @"subValue", @"sub",
 										 @"subDupValue", @"duplicate",
 										 nil];
-	NSDictionary *mergedDict = [CDOHResource mergeSubclassDictionary:subclassDict withSiperclassDictionary:superDict];
+	NSDictionary *mergedDict = [CDOHResource mergeSubclassDictionary:subclassDict withSuperclassDictionary:superDict];
 	
 	STAssertNotNil(mergedDict, @"Merging two dictionaries ('%@' and '%@') should not result in nil", superDict, subclassDict);
 	STAssertTrue([mergedDict count] == 3, @"Merging two dictionaries ('%@' and '%@') with one duplicate key should result in a dictionary of size '3' was '%lu'", superDict, subclassDict, [mergedDict count]);
 	STAssertEqualObjects(mergedDict, expectedMergeResult, @"Merging two dictionaries ('%@' and '%@') with one duplicate key should result in the following dictionary '%@' was '%@'", superDict, subclassDict, expectedMergeResult, mergedDict);
 	
 	
-	NSDictionary *mergedNilDict = [CDOHResource mergeSubclassDictionary:nil withSiperclassDictionary:nil];
-	NSDictionary *mergedSuperNilDict = [CDOHResource mergeSubclassDictionary:subclassDict withSiperclassDictionary:nil];
-	NSDictionary *mergedSubNilDict = [CDOHResource mergeSubclassDictionary:nil withSiperclassDictionary:superDict];
+	NSDictionary *mergedNilDict = [CDOHResource mergeSubclassDictionary:nil withSuperclassDictionary:nil];
+	NSDictionary *mergedSuperNilDict = [CDOHResource mergeSubclassDictionary:subclassDict withSuperclassDictionary:nil];
+	NSDictionary *mergedSubNilDict = [CDOHResource mergeSubclassDictionary:nil withSuperclassDictionary:superDict];
 	
 	STAssertNil(mergedNilDict, @"Merging nil with nil should result in nil");
 	STAssertNotNil(mergedSuperNilDict, @"Merging nil with a super dictionary (%@) should not result in nil", superDict);

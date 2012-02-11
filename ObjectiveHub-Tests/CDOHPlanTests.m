@@ -57,7 +57,7 @@
 								   CDOHTestNumFromUInteger(10),		kCDOHPlanPrivateRepositoriesKey,
 								   nil];
 		
-		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
+		dictionary = [CDOHResource mergeSubclassDictionary:localDict withSuperclassDictionary:superDict];
 	});
 	
 	return dictionary;
@@ -84,7 +84,7 @@
 								   nil];
 
 		
-		dictionary = [self mergeOwnTestDictionary:localDict withSuperDictionary:superDict];
+		dictionary = [CDOHResource mergeSubclassDictionary:localDict withSuperclassDictionary:superDict];
 	});
 	
 	return dictionary;
