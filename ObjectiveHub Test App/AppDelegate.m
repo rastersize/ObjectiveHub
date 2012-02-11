@@ -251,13 +251,11 @@
 						   }];
 	});*/
 	
-	[self.hub forkRepository:@"bootstrap" owner:@"twitter" intoOrganization:nil success:^(CDOHResponse *response) {
+	/*[self.hub forkRepository:@"bootstrap" owner:@"twitter" intoOrganization:nil success:^(CDOHResponse *response) {
 		NSLog(@"forked %@", response);
 	} failure:^(CDOHError *error) {
 		NSLog(@"failed to fork with error %@", error);
-	}];
-	
-	dispatch_resume(queue);
+	}];*/
 }
 
 @end
