@@ -36,8 +36,9 @@
 
 
 #pragma mark NSCoding and GitHub JSON Keys
-NSString *const kCDOHUserHireableKey	= @"hireable";
-NSString *const kCDOHUserBioKey			= @"bio";
+NSString *const kCDOHUserHireableKey		= @"hireable";
+NSString *const kCDOHUserBioKey				= @"bio";
+NSString *const kCDOHUserContributionsKey	= @"contributions";
 
 
 #pragma mark - CDOHUser Implementation
@@ -46,6 +47,7 @@ NSString *const kCDOHUserBioKey			= @"bio";
 #pragma mark - Synthesization
 @synthesize biography = _biography;
 @synthesize hireable = _hireable;
+@synthesize contributions = _contributions;
 
 
 #pragma mark - Initializing an CDOHUser Instance
@@ -55,6 +57,7 @@ NSString *const kCDOHUserBioKey			= @"bio";
 	if (self) {
 		_biography = [[dictionary objectForKey:kCDOHUserBioKey] copy];
 		_hireable = [[dictionary objectForKey:kCDOHUserHireableKey] boolValue];
+		_contributions = [[dictionary objectForKey:kCDOHUserContributionsKey] unsignedIntegerValue];
 	}
 	
 	return self;
@@ -67,11 +70,14 @@ NSString *const kCDOHUserBioKey			= @"bio";
 	NSDictionary *finalDictionary = nil;
 	NSDictionary *superDictionary = [super encodeAsDictionary];
 	
-	NSNumber *hireableNumber	= [NSNumber numberWithBool:_hireable];
-	NSDictionary *dictionary	= [NSDictionary dictionaryWithObjectsAndKeys:
-								   _biography,		kCDOHUserBioKey,
-								   hireableNumber,	kCDOHUserHireableKey,
-								   nil];
+	NSNumber *hireableNumber		= [[NSNumber alloc] initWithBool:_hireable];
+	NSNumber *contributionsNumber	= [[NSNumber alloc] initWithUnsignedInteger:_contributions];
+	
+	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+								_biography,				kCDOHUserBioKey,
+								hireableNumber,			kCDOHUserHireableKey,
+								contributionsNumber,	kCDOHUserContributionsKey,
+								nil];
 	
 	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSuperclassDictionary:superDictionary];
 	return finalDictionary;

@@ -34,11 +34,14 @@
 #import "CDOHAbstractUser.h"
 
 
-#pragma mark Abstract User Request Parameter Keys
-/// User request parameter key for the user biography.
+#pragma mark - Dictionary Representation Keys
+/// User dictionary representation key for the user biography.
 extern NSString *const kCDOHUserBioKey;
-/// User request parameter key for the user hireable status.
+/// User dictionary representation key for the user hireable status.
 extern NSString *const kCDOHUserHireableKey;
+/// User dictionary representation key for the number of contributions a user
+/// have made to a specific repository.
+extern NSString *const kCDOHUserContributionsKey;
 
 
 #pragma mark - CDOHUser Interface
@@ -59,6 +62,20 @@ extern NSString *const kCDOHUserHireableKey;
  * Wheter the user is hireable or not.
  */
 @property (readonly, getter = isHireable) BOOL hireable;
+
+
+#pragma mark - Repository Contributions
+/** @name Repository Contributions */
+/**
+ * The number of contributions the user have made to a specific repository.
+ *
+ * Only set if you specifically request the contributors of a specific
+ * repository. Otherwise it will be 0.
+ *
+ * @see repositoryContributors:owner:success:failure:
+ * @see repositoryContributors:owner:anonymous:success:failure:
+ */
+@property (readonly, assign) NSUInteger contributions;
 
 
 #pragma mark - Identifying and Comparing Users
