@@ -45,11 +45,8 @@
  */
 #define CDOHPagesArrayForPageIndexes(...)	_CDOHPagesArrayForPageIndexes(__VA_ARGS__, NSUIntegerMax)
 
-/**
- * Creates an array of pages from the given page indexes. Must be ended with
- * `NSUIntegerMax`. Not for direct use, please use the macro
- * `CDOHPagesArrayForPageIndexes` instead.
- */
+// Internal, do NOT use directly. Use the macro `CDOHPagesArrayForPageIndexes`
+// instead.
 extern NSArray *_CDOHPagesArrayForPageIndexes(NSUInteger pageIdx, ...);
 
 
