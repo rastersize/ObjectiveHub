@@ -50,6 +50,8 @@ extern NSString *const kCDOHRepositoryGitUrlKey;
 extern NSString *const kCDOHRepositorySshUrlKey;
 /// Repository dictionary key for the svn protocol URL.
 extern NSString *const kCDOHRepositorySvnUrlKey;
+/// Repository dictionary key for the repository unique identifier.
+extern NSString *const kCDOHRepositoryIdentifierKey;
 /// Repository dictionary key for the repository owner.
 extern NSString *const kCDOHRepositoryOwnerKey;
 /// Repository dictionary key for the name of the repository.
@@ -145,6 +147,11 @@ extern NSString *const kCDOHRepositoryLanguageCharactersKey;
 
 #pragma mark - General Information
 /** @name General Information */
+/**
+ * The unique identifier of the repository.
+ */
+@property (assign, readonly) NSUInteger identifier;
+
 /**
  * The owner of the repository.
  *

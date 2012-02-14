@@ -46,6 +46,8 @@ NSString *const kCDOHRepositoryCloneUrlKey			= @"clone_url";
 NSString *const kCDOHRepositoryGitUrlKey			= @"git_url";
 NSString *const kCDOHRepositorySshUrlKey			= @"ssh_url";
 NSString *const kCDOHRepositorySvnUrlKey			= @"svn_url";
+NSString *const kCDOHRepositoryMirrorUrlKey			= @"mirror_url";
+NSString *const kCDOHRepositoryIdentifierKey		= @"id";
 NSString *const kCDOHRepositoryOwnerKey				= @"owner";
 NSString *const kCDOHRepositoryNameKey				= @"name";
 NSString *const kCDOHRepositoryDescriptionKey		= @"description";
@@ -85,6 +87,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 @synthesize gitURL = _gitUrl;
 @synthesize SSHURL = _sshUrl;
 @synthesize svnURL = _svnUrl;
+@synthesize identifier = _identifier;
 @synthesize owner = _owner;
 @synthesize name = _name;
 @synthesize repositoryDescription = _repositoryDescription;
@@ -147,6 +150,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 		_hasDownloads	= [[dictionary objectForKey:kCDOHRepositoryHasDownloadsKey] boolValue];
 		
 		// Unsigned integers
+		_identifier = [[dictionary objectForKey:kCDOHRepositoryIdentifierKey] unsignedIntegerValue];
 		_forks		= [[dictionary objectForKey:kCDOHRepositoryForksKey] unsignedIntegerValue];
 		_watchers	= [[dictionary objectForKey:kCDOHRepositoryWatchersKey] unsignedIntegerValue];
 		_size		= [[dictionary objectForKey:kCDOHRepositorySizeKey] unsignedIntegerValue];
@@ -172,6 +176,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 	NSNumber *hasIssuesNum = [[NSNumber alloc] initWithBool:_hasIssues];
 	NSNumber *hasDownloadsNum = [[NSNumber alloc] initWithBool:_hasDownloads];
 	
+	NSNumber *idNum = [[NSNumber alloc] initWithUnsignedInteger:_identifier];
 	NSNumber *forksNum = [[NSNumber alloc] initWithUnsignedInteger:_forks];
 	NSNumber *watchersNum = [[NSNumber alloc] initWithUnsignedInteger:_watchers];
 	NSNumber *sizeNum = [[NSNumber alloc] initWithUnsignedInteger:_size];
@@ -195,6 +200,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 	
 	
 	NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
+								idNum,					kCDOHRepositoryIdentifierKey,
 								_name,					kCDOHRepositoryNameKey,
 								_repositoryDescription,	kCDOHRepositoryDescriptionKey,
 								_language,				kCDOHRepositoryLanguageKey,
