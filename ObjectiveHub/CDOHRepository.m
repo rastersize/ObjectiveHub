@@ -58,6 +58,7 @@ NSString *const kCDOHRepositorySizeKey				= @"size";
 NSString *const kCDOHRepositoryDefaultBranchKey		= @"master_branch";
 NSString *const kCDOHRepositoryOpenIssuesKey		= @"open_issues";
 NSString *const kCDOHRepositoryHasIssuesKey			= @"has_issues";
+NSString *const kCDOHRepositoryUpdatedAtKey			= @"updated_at";
 NSString *const kCDOHRepositoryPushedAtKey			= @"pushed_at";
 NSString *const kCDOHRepositoryCreatedAtKey			= @"created_at";
 NSString *const kCDOHRepositoryOrganizationKey		= @"organization";
@@ -95,6 +96,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 @synthesize defaultBranch = _defaultBranch;
 @synthesize openIssues = _openIssues;
 @synthesize hasIssues = _hasIssues;
+@synthesize updatedAt = _updatedAt;
 @synthesize pushedAt = _pushedAt;
 @synthesize createdAt = _createdAt;
 @synthesize organization = _organization;
@@ -133,8 +135,9 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 		_sourceRepository = [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
 		
 		// Dates
-		_pushedAt = [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryPushedAtKey];
-		_createdAt = [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryCreatedAtKey];
+		_updatedAt	= [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryUpdatedAtKey];
+		_pushedAt	= [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryPushedAtKey];
+		_createdAt	= [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryCreatedAtKey];
 		
 		// Booleans
 		_private = [[dictionary objectForKey:kCDOHRepositoryPrivateKey] boolValue];
@@ -186,6 +189,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 	NSString *svnUrlString		= [_svnUrl absoluteString];
 	NSString *homepageString	= [_homepage absoluteString];
 	
+	NSString *updatedAtString	= [_updatedAt cdoh_stringUsingRFC3339Format];
 	NSString *pushedAtString	= [_pushedAt cdoh_stringUsingRFC3339Format];
 	NSString *createdAtString	= [_createdAt cdoh_stringUsingRFC3339Format];
 	
@@ -201,6 +205,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 								sshUrlString,			kCDOHRepositorySshUrlKey,
 								svnUrlString,			kCDOHRepositorySvnUrlKey,
 								homepageString,			kCDOHRepositoryHomepageKey,
+								updatedAtString,		kCDOHRepositoryUpdatedAtKey,
 								pushedAtString,			kCDOHRepositoryPushedAtKey,
 								createdAtString,		kCDOHRepositoryCreatedAtKey,
 								ownerDict,				kCDOHRepositoryOwnerKey,

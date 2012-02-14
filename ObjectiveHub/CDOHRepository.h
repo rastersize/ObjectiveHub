@@ -72,6 +72,8 @@ extern NSString *const kCDOHRepositoryDefaultBranchKey;
 extern NSString *const kCDOHRepositoryOpenIssuesKey;
 /// Repository dictionary key for whether the repository have issues enabled.
 extern NSString *const kCDOHRepositoryHasIssuesKey;
+/// Repository dictionary key for the date when the repository was updated.
+extern NSString *const kCDOHRepositoryUpdatedAtKey;
 /// Repository dictionary key for the date when the repository was pushed to.
 extern NSString *const kCDOHRepositoryPushedAtKey;
 /// Repository dictionary key for the date when the repository was created.
@@ -211,6 +213,11 @@ extern NSString *const kCDOHRepositoryLanguageCharactersKey;
  * The total size of the project in bytes.
  */
 @property (assign, readonly) NSUInteger size;
+
+/**
+ * The date and time of the latest push to the repository.
+ */
+@property (strong, readonly) NSDate *updatedAt;
 
 /**
  * The date and time of the latest push to the repository.
