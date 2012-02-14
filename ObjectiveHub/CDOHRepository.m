@@ -123,16 +123,16 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 		_homepage	= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryHomepageKey];
 		
 		// Strings
-		_name = [[dictionary objectForKey:kCDOHRepositoryNameKey] copy];
+		_name			= [[dictionary objectForKey:kCDOHRepositoryNameKey] copy];
 		_repositoryDescription = [[dictionary objectForKey:kCDOHRepositoryDescriptionKey] copy];
-		_language = [[dictionary objectForKey:kCDOHRepositoryLanguageKey] copy];
-		_defaultBranch = [[dictionary objectForKey:kCDOHRepositoryDefaultBranchKey] copy];
+		_language		= [[dictionary objectForKey:kCDOHRepositoryLanguageKey] copy];
+		_defaultBranch	= [[dictionary objectForKey:kCDOHRepositoryDefaultBranchKey] copy];
 		
 		// Resources
-		_owner = [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHUser class]];
-		_organization = [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHOrganization class]];
-		_parentRepository = [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
-		_sourceRepository = [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
+		_owner				= [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHUser class]];
+		_organization		= [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHOrganization class]];
+		_parentRepository	= [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
+		_sourceRepository	= [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
 		
 		// Dates
 		_updatedAt	= [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryUpdatedAtKey];
@@ -140,17 +140,17 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 		_createdAt	= [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryCreatedAtKey];
 		
 		// Booleans
-		_private = [[dictionary objectForKey:kCDOHRepositoryPrivateKey] boolValue];
-		_fork = [[dictionary objectForKey:kCDOHRepositoryForkKey] boolValue];
-		_hasWiki = [[dictionary objectForKey:kCDOHRepositoryHasWikiKey] boolValue];
-		_hasIssues = [[dictionary objectForKey:kCDOHRepositoryHasIssuesKey] boolValue];
-		_hasDownloads = [[dictionary objectForKey:kCDOHRepositoryHasDownloadsKey] boolValue];
+		_private		= [[dictionary objectForKey:kCDOHRepositoryPrivateKey] boolValue];
+		_fork			= [[dictionary objectForKey:kCDOHRepositoryForkKey] boolValue];
+		_hasWiki		= [[dictionary objectForKey:kCDOHRepositoryHasWikiKey] boolValue];
+		_hasIssues		= [[dictionary objectForKey:kCDOHRepositoryHasIssuesKey] boolValue];
+		_hasDownloads	= [[dictionary objectForKey:kCDOHRepositoryHasDownloadsKey] boolValue];
 		
 		// Unsigned integers
-		_forks = [[dictionary objectForKey:kCDOHRepositoryForksKey] unsignedIntegerValue];
-		_watchers = [[dictionary objectForKey:kCDOHRepositoryWatchersKey] unsignedIntegerValue];
-		_size = [[dictionary objectForKey:kCDOHRepositorySizeKey] unsignedIntegerValue];
-		_openIssues = [[dictionary objectForKey:kCDOHRepositoryOpenIssuesKey] unsignedIntegerValue];
+		_forks		= [[dictionary objectForKey:kCDOHRepositoryForksKey] unsignedIntegerValue];
+		_watchers	= [[dictionary objectForKey:kCDOHRepositoryWatchersKey] unsignedIntegerValue];
+		_size		= [[dictionary objectForKey:kCDOHRepositorySizeKey] unsignedIntegerValue];
+		_openIssues	= [[dictionary objectForKey:kCDOHRepositoryOpenIssuesKey] unsignedIntegerValue];
 		
 		// Custom logic
 		_formattedName = [_owner.login stringByAppendingFormat:@"/%@", _name];
