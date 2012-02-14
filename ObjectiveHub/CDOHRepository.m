@@ -120,11 +120,11 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 		_gitUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryGitUrlKey];
 		_sshUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositorySshUrlKey];
 		_svnUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositorySvnUrlKey];
+		_homepage	= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryHomepageKey];
 		
 		// Strings
 		_name = [[dictionary objectForKey:kCDOHRepositoryNameKey] copy];
 		_repositoryDescription = [[dictionary objectForKey:kCDOHRepositoryDescriptionKey] copy];
-		_homepage = [dictionary objectForKey:kCDOHRepositoryHomepageKey];
 		_language = [[dictionary objectForKey:kCDOHRepositoryLanguageKey] copy];
 		_defaultBranch = [[dictionary objectForKey:kCDOHRepositoryDefaultBranchKey] copy];
 		
