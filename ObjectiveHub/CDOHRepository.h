@@ -324,8 +324,8 @@ extern NSString *const kCDOHRepositoryLanguageCharactersKey;
  * Returns a Boolean value that indicates whether a given repository is equal to
  * the receiver.
  *
- * The receiver and _aRepository_ is determined to be equal if their owner,
- * name and organization properties are equal.
+ * The receiver and _aRepository_ is determined to be equal if their identifiers
+ * are equal.
  *
  * @param aRepository The repository with which to compare the reciever.
  * @return `YES` if _aRepository_ is equivalent to the reciever, otherwise `NO`.
