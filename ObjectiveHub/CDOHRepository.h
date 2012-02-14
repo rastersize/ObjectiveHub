@@ -50,6 +50,8 @@ extern NSString *const kCDOHRepositoryGitUrlKey;
 extern NSString *const kCDOHRepositorySshUrlKey;
 /// Repository dictionary key for the svn protocol URL.
 extern NSString *const kCDOHRepositorySvnUrlKey;
+/// Repository dictionary key for the repository mirror URL.
+extern NSString *const kCDOHRepositoryMirrorUrlKey;
 /// Repository dictionary key for the repository unique identifier.
 extern NSString *const kCDOHRepositoryIdentifierKey;
 /// Repository dictionary key for the repository owner.
@@ -143,6 +145,15 @@ extern NSString *const kCDOHRepositoryLanguageCharactersKey;
  * The Subversion (SVN) URL to the project.
  */
 @property (strong, readonly) NSURL *svnURL;
+
+/**
+ * The URL to the repository this repository mirrors.
+ *
+ * If this repository does not mirror some other repository then this will be
+ * `nil`.
+ */
+@property (strong, readonly) NSURL *mirrorURL;
+
 
 
 #pragma mark - General Information

@@ -87,6 +87,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 @synthesize gitURL = _gitUrl;
 @synthesize SSHURL = _sshUrl;
 @synthesize svnURL = _svnUrl;
+@synthesize mirrorURL = _mirrorUrl;
 @synthesize identifier = _identifier;
 @synthesize owner = _owner;
 @synthesize name = _name;
@@ -123,6 +124,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 		_gitUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryGitUrlKey];
 		_sshUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositorySshUrlKey];
 		_svnUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositorySvnUrlKey];
+		_mirrorUrl	= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryMirrorUrlKey];
 		_homepage	= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryHomepageKey];
 		
 		// Strings
@@ -192,6 +194,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 	NSString *gitUrlString		= [_gitUrl absoluteString];
 	NSString *sshUrlString		= [_sshUrl absoluteString];
 	NSString *svnUrlString		= [_svnUrl absoluteString];
+	NSString *mirrorUrlString	= [_mirrorUrl absoluteString];
 	NSString *homepageString	= [_homepage absoluteString];
 	
 	NSString *updatedAtString	= [_updatedAt cdoh_stringUsingRFC3339Format];
@@ -210,6 +213,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 								gitUrlString,			kCDOHRepositoryGitUrlKey,
 								sshUrlString,			kCDOHRepositorySshUrlKey,
 								svnUrlString,			kCDOHRepositorySvnUrlKey,
+								mirrorUrlString,		kCDOHRepositoryMirrorUrlKey,
 								homepageString,			kCDOHRepositoryHomepageKey,
 								updatedAtString,		kCDOHRepositoryUpdatedAtKey,
 								pushedAtString,			kCDOHRepositoryPushedAtKey,
