@@ -33,6 +33,13 @@
 #import "CDOHResourceBaseTests.h"
 
 
+@interface CDOHResourceBaseTests ()
+
+- (void)testEqualObjectsForKeysInDictionary:(NSDictionary *)dictionary withOriginal:(NSDictionary *)originalDictionary;
+
+@end
+
+
 @implementation CDOHResourceBaseTests
 
 #pragma mark - Tested Class
@@ -170,7 +177,27 @@
 	CDOHResource *resource = [[[[self class] testedClass] alloc] initWithDictionary:testDict];
 	NSDictionary *encodedDict = [resource encodeAsDictionary];
 	
-	STAssertEqualObjects(testDict, encodedDict, @"Creating a resource (%@) from a dictionary (%@) and then encoding it as a dictionary (%@) should yeild an identical dictionary", resource, testDict, encodedDict);
+	[self testEqualObjectsForKeysInDictionary:encodedDict withOriginal:testDict];
+}
+
+- (void)testEqualObjectsForKeysInDictionary:(NSDictionary *__unused)dictionary withOriginal:(NSDictionary *__unused)originalDictionary
+{
+	for (id key in originalDictionary) {
+		id originalObject = [originalDictionary objectForKey:key];
+		id equalObject = [dictionary objectForKey:key];
+		
+		if (originalObject == nil) {
+			STAssertNil(equalObject, @"original object was 'nil' the equal object must also be 'nil' for the key '%@'", key);
+		} else {
+			STAssertNotNil(equalObject, @"original object was NOT 'nil' but '%@' the equal object must also not be 'nil' for the key '%@'", originalObject, key);
+
+			if ([originalObject isKindOfClass:[NSDictionary class]]) {
+				[self testEqualObjectsForKeysInDictionary:equalObject withOriginal:originalObject];
+			} else {
+				STAssertEqualObjects(equalObject, originalObject, @"(using isEqual:) for the key '%@'", key);
+			}
+		}
+	}
 }
 
 
