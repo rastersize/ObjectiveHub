@@ -38,6 +38,7 @@
 #import "CDOHOrganization.h"
 
 #import "NSDate+ObjectiveHub.h"
+#import "NSMutableDictionary+ObjectiveHub.h"
 
 #pragma mark - Dictionary Representation Keys
 //FIXME: These will soon be change from *_url to *_links
@@ -119,47 +120,47 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 	self = [super initWithDictionary:dictionary];
 	if (self) {
 		// URLs
-		_htmlUrl	= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryHtmlUrlKey];
-		_cloneUrl	= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryCloneUrlKey];
-		_gitUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryGitUrlKey];
-		_sshUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositorySshUrlKey];
-		_svnUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositorySvnUrlKey];
-		_mirrorUrl	= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryMirrorUrlKey];
-		_homepage	= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHRepositoryHomepageKey];
+		_htmlUrl				= [dictionary cdoh_URLForKey:kCDOHRepositoryHtmlUrlKey];
+		_cloneUrl				= [dictionary cdoh_URLForKey:kCDOHRepositoryCloneUrlKey];
+		_gitUrl					= [dictionary cdoh_URLForKey:kCDOHRepositoryGitUrlKey];
+		_sshUrl					= [dictionary cdoh_URLForKey:kCDOHRepositorySshUrlKey];
+		_svnUrl					= [dictionary cdoh_URLForKey:kCDOHRepositorySvnUrlKey];
+		_mirrorUrl				= [dictionary cdoh_URLForKey:kCDOHRepositoryMirrorUrlKey];
+		_homepage				= [dictionary cdoh_URLForKey:kCDOHRepositoryHomepageKey];
 		
 		// Strings
-		_name			= [[dictionary objectForKey:kCDOHRepositoryNameKey] copy];
-		_repositoryDescription = [[dictionary objectForKey:kCDOHRepositoryDescriptionKey] copy];
-		_language		= [[dictionary objectForKey:kCDOHRepositoryLanguageKey] copy];
-		_defaultBranch	= [[dictionary objectForKey:kCDOHRepositoryDefaultBranchKey] copy];
+		_name					= [[dictionary cdoh_objectOrNilForKey:kCDOHRepositoryNameKey] copy];
+		_repositoryDescription	= [[dictionary cdoh_objectOrNilForKey:kCDOHRepositoryDescriptionKey] copy];
+		_language				= [[dictionary cdoh_objectOrNilForKey:kCDOHRepositoryLanguageKey] copy];
+		_defaultBranch			= [[dictionary cdoh_objectOrNilForKey:kCDOHRepositoryDefaultBranchKey] copy];
 		
 		// Resources
-		_owner				= [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHUser class]];
-		_organization		= [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHOrganization class]];
-		_parentRepository	= [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
-		_sourceRepository	= [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHRepositoryOwnerKey ofClass:[CDOHRepository class]];
+		_owner					= [dictionary cdoh_resourceForKey:kCDOHRepositoryOwnerKey ofClass:[CDOHUser class]];
+		_organization			= [dictionary cdoh_resourceForKey:kCDOHRepositoryOrganizationKey ofClass:[CDOHOrganization class]];
+		_parentRepository		= [dictionary cdoh_resourceForKey:kCDOHRepositoryParentRepositoryKey ofClass:[CDOHRepository class]];
+		_sourceRepository		= [dictionary cdoh_resourceForKey:kCDOHRepositorySourceRepositoryKey ofClass:[CDOHRepository class]];
 		
 		// Dates
-		_updatedAt	= [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryUpdatedAtKey];
-		_pushedAt	= [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryPushedAtKey];
-		_createdAt	= [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHRepositoryCreatedAtKey];
+		_updatedAt				= [dictionary cdoh_dateForKey:kCDOHRepositoryUpdatedAtKey];
+		_pushedAt				= [dictionary cdoh_dateForKey:kCDOHRepositoryPushedAtKey];
+		_createdAt				= [dictionary cdoh_dateForKey:kCDOHRepositoryCreatedAtKey];
 		
 		// Booleans
-		_private		= [[dictionary objectForKey:kCDOHRepositoryPrivateKey] boolValue];
-		_fork			= [[dictionary objectForKey:kCDOHRepositoryForkKey] boolValue];
-		_hasWiki		= [[dictionary objectForKey:kCDOHRepositoryHasWikiKey] boolValue];
-		_hasIssues		= [[dictionary objectForKey:kCDOHRepositoryHasIssuesKey] boolValue];
-		_hasDownloads	= [[dictionary objectForKey:kCDOHRepositoryHasDownloadsKey] boolValue];
+		_private				= [[dictionary cdoh_numberForKey:kCDOHRepositoryPrivateKey] boolValue];
+		_fork					= [[dictionary cdoh_numberForKey:kCDOHRepositoryForkKey] boolValue];
+		_hasWiki				= [[dictionary cdoh_numberForKey:kCDOHRepositoryHasWikiKey] boolValue];
+		_hasIssues				= [[dictionary cdoh_numberForKey:kCDOHRepositoryHasIssuesKey] boolValue];
+		_hasDownloads			= [[dictionary cdoh_numberForKey:kCDOHRepositoryHasDownloadsKey] boolValue];
 		
 		// Unsigned integers
-		_identifier = [[dictionary objectForKey:kCDOHRepositoryIdentifierKey] unsignedIntegerValue];
-		_forks		= [[dictionary objectForKey:kCDOHRepositoryForksKey] unsignedIntegerValue];
-		_watchers	= [[dictionary objectForKey:kCDOHRepositoryWatchersKey] unsignedIntegerValue];
-		_size		= [[dictionary objectForKey:kCDOHRepositorySizeKey] unsignedIntegerValue];
-		_openIssues	= [[dictionary objectForKey:kCDOHRepositoryOpenIssuesKey] unsignedIntegerValue];
+		_identifier				= [[dictionary cdoh_numberForKey:kCDOHRepositoryIdentifierKey] unsignedIntegerValue];
+		_forks					= [[dictionary cdoh_numberForKey:kCDOHRepositoryForksKey] unsignedIntegerValue];
+		_watchers				= [[dictionary cdoh_numberForKey:kCDOHRepositoryWatchersKey] unsignedIntegerValue];
+		_size					= [[dictionary cdoh_numberForKey:kCDOHRepositorySizeKey] unsignedIntegerValue];
+		_openIssues				= [[dictionary cdoh_numberForKey:kCDOHRepositoryOpenIssuesKey] unsignedIntegerValue];
 		
 		// Custom logic
-		_formattedName = [_owner.login stringByAppendingFormat:@"/%@", _name];
+		_formattedName			= [_owner.login stringByAppendingFormat:@"/%@", _name];
 	}
 	
 	return self;
@@ -169,71 +170,50 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 #pragma mark - Encoding Resources
 - (NSDictionary *)encodeAsDictionary
 {
-	NSDictionary *finalDictionary = nil;
 	NSDictionary *superDictionary = [super encodeAsDictionary];
+	NSMutableDictionary *finalDictionary = [[NSMutableDictionary alloc] initWithCapacity:28 + [superDictionary count]];
+	[finalDictionary addEntriesFromDictionary:superDictionary];
 	
-	NSNumber *privateNum = [[NSNumber alloc] initWithBool:_private];
-	NSNumber *forkNum = [[NSNumber alloc] initWithBool:_fork];
-	NSNumber *hasWikiNum = [[NSNumber alloc] initWithBool:_hasWiki];
-	NSNumber *hasIssuesNum = [[NSNumber alloc] initWithBool:_hasIssues];
-	NSNumber *hasDownloadsNum = [[NSNumber alloc] initWithBool:_hasDownloads];
+	// Strings
+	[finalDictionary cdoh_setObject:_name forKey:kCDOHRepositoryNameKey];
+	[finalDictionary cdoh_setObject:_repositoryDescription forKey:kCDOHRepositoryDescriptionKey];
+	[finalDictionary cdoh_setObject:_language forKey:kCDOHRepositoryLanguageKey];
+	[finalDictionary cdoh_setObject:_defaultBranch forKey:kCDOHRepositoryDefaultBranchKey];
 	
-	NSNumber *idNum = [[NSNumber alloc] initWithUnsignedInteger:_identifier];
-	NSNumber *forksNum = [[NSNumber alloc] initWithUnsignedInteger:_forks];
-	NSNumber *watchersNum = [[NSNumber alloc] initWithUnsignedInteger:_watchers];
-	NSNumber *sizeNum = [[NSNumber alloc] initWithUnsignedInteger:_size];
-	NSNumber *openIssuesNum = [[NSNumber alloc] initWithUnsignedInteger:_openIssues];
+	// Booleans
+	[finalDictionary cdoh_setBool:_private forKey:kCDOHRepositoryPrivateKey];
+	[finalDictionary cdoh_setBool:_fork forKey:kCDOHRepositoryForkKey];
+	[finalDictionary cdoh_setBool:_hasWiki forKey:kCDOHRepositoryHasWikiKey];
+	[finalDictionary cdoh_setBool:_hasIssues forKey:kCDOHRepositoryHasIssuesKey];
+	[finalDictionary cdoh_setBool:_hasDownloads forKey:kCDOHRepositoryHasDownloadsKey];
 	
-	NSDictionary *ownerDict = [_owner encodeAsDictionary];
-	NSDictionary *organizationDict = [_organization encodeAsDictionary];
-	NSDictionary *parentDict = [_parentRepository encodeAsDictionary];
-	NSDictionary *sourceDict = [_sourceRepository encodeAsDictionary];
+	// Unsigned integers
+	[finalDictionary cdoh_setUnsignedInteger:_identifier forKey:kCDOHRepositoryIdentifierKey];
+	[finalDictionary cdoh_setUnsignedInteger:_forks forKey:kCDOHRepositoryForksKey];
+	[finalDictionary cdoh_setUnsignedInteger:_watchers forKey:kCDOHRepositoryWatchersKey];
+	[finalDictionary cdoh_setUnsignedInteger:_size forKey:kCDOHRepositorySizeKey];
+	[finalDictionary cdoh_setUnsignedInteger:_openIssues forKey:kCDOHRepositoryOpenIssuesKey];
 	
-	NSString *htmlUrlString		= [_htmlUrl absoluteString];
-	NSString *cloneUrlString	= [_cloneUrl absoluteString];
-	NSString *gitUrlString		= [_gitUrl absoluteString];
-	NSString *sshUrlString		= [_sshUrl absoluteString];
-	NSString *svnUrlString		= [_svnUrl absoluteString];
-	NSString *mirrorUrlString	= [_mirrorUrl absoluteString];
-	NSString *homepageString	= [_homepage absoluteString];
+	// Resources
+	[finalDictionary cdoh_encodeAndSetResource:_owner forKey:kCDOHRepositoryOwnerKey];
+	[finalDictionary cdoh_encodeAndSetResource:_organization forKey:kCDOHRepositoryOrganizationKey];
+	[finalDictionary cdoh_encodeAndSetResource:_parentRepository forKey:kCDOHRepositoryParentRepositoryKey];
+	[finalDictionary cdoh_encodeAndSetResource:_sourceRepository forKey:kCDOHRepositorySourceRepositoryKey];
 	
-	NSString *updatedAtString	= [_updatedAt cdoh_stringUsingRFC3339Format];
-	NSString *pushedAtString	= [_pushedAt cdoh_stringUsingRFC3339Format];
-	NSString *createdAtString	= [_createdAt cdoh_stringUsingRFC3339Format];
+	// URLs
+	[finalDictionary cdoh_encodeAndSetURL:_htmlUrl forKey:kCDOHRepositoryHtmlUrlKey];
+	[finalDictionary cdoh_encodeAndSetURL:_cloneUrl forKey:kCDOHRepositoryCloneUrlKey];
+	[finalDictionary cdoh_encodeAndSetURL:_gitUrl forKey:kCDOHRepositoryGitUrlKey];
+	[finalDictionary cdoh_encodeAndSetURL:_sshUrl forKey:kCDOHRepositorySshUrlKey];
+	[finalDictionary cdoh_encodeAndSetURL:_svnUrl forKey:kCDOHRepositorySvnUrlKey];
+	[finalDictionary cdoh_encodeAndSetURL:_mirrorUrl forKey:kCDOHRepositoryMirrorUrlKey];
+	[finalDictionary cdoh_encodeAndSetURL:_homepage forKey:kCDOHRepositoryHomepageKey];
 	
-	
-	NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
-								idNum,					kCDOHRepositoryIdentifierKey,
-								_name,					kCDOHRepositoryNameKey,
-								_repositoryDescription,	kCDOHRepositoryDescriptionKey,
-								_language,				kCDOHRepositoryLanguageKey,
-								_defaultBranch,			kCDOHRepositoryDefaultBranchKey,
-								htmlUrlString,			kCDOHRepositoryHtmlUrlKey,
-								cloneUrlString,			kCDOHRepositoryCloneUrlKey,
-								gitUrlString,			kCDOHRepositoryGitUrlKey,
-								sshUrlString,			kCDOHRepositorySshUrlKey,
-								svnUrlString,			kCDOHRepositorySvnUrlKey,
-								mirrorUrlString,		kCDOHRepositoryMirrorUrlKey,
-								homepageString,			kCDOHRepositoryHomepageKey,
-								updatedAtString,		kCDOHRepositoryUpdatedAtKey,
-								pushedAtString,			kCDOHRepositoryPushedAtKey,
-								createdAtString,		kCDOHRepositoryCreatedAtKey,
-								ownerDict,				kCDOHRepositoryOwnerKey,
-								organizationDict,		kCDOHRepositoryOrganizationKey,
-								parentDict,				kCDOHRepositoryParentRepositoryKey,
-								sourceDict,				kCDOHRepositorySourceRepositoryKey,
-								privateNum,				kCDOHRepositoryPrivateKey,
-								watchersNum,			kCDOHRepositoryWatchersKey,
-								sizeNum,				kCDOHRepositorySizeKey,
-								openIssuesNum,			kCDOHRepositoryOpenIssuesKey,
-								hasIssuesNum,			kCDOHRepositoryHasIssuesKey,
-								forkNum,				kCDOHRepositoryForkKey,
-								forksNum,				kCDOHRepositoryForksKey,
-								hasWikiNum,				kCDOHRepositoryHasWikiKey,
-								hasDownloadsNum,		kCDOHRepositoryHasDownloadsKey,
-								nil];
-	
-	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSuperclassDictionary:superDictionary];
+	// Dates
+	[finalDictionary cdoh_encodeAndSetDate:_updatedAt forKey:kCDOHRepositoryUpdatedAtKey];
+	[finalDictionary cdoh_encodeAndSetDate:_pushedAt forKey:kCDOHRepositoryPushedAtKey];
+	[finalDictionary cdoh_encodeAndSetDate:_createdAt forKey:kCDOHRepositoryCreatedAtKey];
+
 	return finalDictionary;
 }
 

@@ -33,7 +33,7 @@
 #import <Foundation/Foundation.h>
 
 
-#pragma mark - CDOHResource Interface
+#pragma mark CDOHResource Interface
 /**
  * `CDOHResource` models a GitHub resource. It is intended to be subclassed and
  * as such is not very useful by itself.
@@ -54,7 +54,7 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
 
-#pragma mark - Encoding Resources
+#pragma mark - Handling Resource Encoding and Decoding
 /** @name Encoding Resources */
 /**
  * Encode the resource as a dictionary object.

@@ -118,7 +118,7 @@
 	CDOHResource *firstResourceAlt = [self firstTestResourceAlt];
 	CDOHResource *secondResource = [self secondTestResource];
 	CDOHResource *firstResource_1Copy = [firstResource_1 copy];
-	
+
 	STAssertEqualObjects(firstResource_1, firstResource_2,		@"Two resources ('%@' and '%@') intialized using the same dictionary should be equal (using isEqual:)", firstResource_1, firstResource_2);
 	STAssertEqualObjects(firstResource_1, firstResource_1Copy,	@"A copy of a resource (%@) should be equal (using isEqual:) to the original (%@)", firstResource_1Copy, firstResource_1);
 	STAssertEqualObjects(firstResource_1, firstResourceAlt,		@"Two resources ('%@' and '%@') with everything required (by spec) to be equal but otherwise completely different should be equal (using isEqual:)", firstResource_1, firstResourceAlt);

@@ -35,6 +35,8 @@
 
 #import "NSString+ObjectiveHub.h"
 
+#import <objc/runtime.h>
+
 
 #pragma mark NSCoding and GitHub JSON Keys
 NSString *const kCDOHResourceAPIResourceURLKey			=  @"url";
@@ -47,8 +49,7 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 #pragma mark - CDOHResource Private Interface
 @interface CDOHResource ()
 
-#pragma mark - Decoding Dictionary Objects
-+ (id)decodeObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey block:(void (^)(id objFromDict, id *retObj))block;
++ (BOOL)supportsSecureCoding;
 
 @end
 
@@ -65,68 +66,26 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 {
 	self = [super init];
 	if (self) {
-		_apiResourceUrl = [[self class] URLObjectFromDictionary:dictionary usingKey:kCDOHResourceAPIResourceURLKey];
+		_apiResourceUrl = [dictionary cdoh_URLForKey:kCDOHResourceAPIResourceURLKey];
 	}
 	
 	return self;
 }
 
 
-#pragma mark - Decoding Dictionary Objects
-+ (id)resourceObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey ofClass:(Class)ofClass
-{
-	return [self decodeObjectFromDictionary:dictionary usingKey:usingKey block:^(id objFromDict, __autoreleasing id *retObj) {
-		if ([objFromDict isKindOfClass:ofClass]) {
-			*retObj = [objFromDict copy];
-		} else if ([objFromDict isKindOfClass:[NSDictionary class]]) {
-			*retObj = [[ofClass alloc] initWithDictionary:objFromDict];
-		}
-	}];
-}
-
-+ (NSDate *)dateObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey
-{
-	return [self decodeObjectFromDictionary:dictionary usingKey:usingKey block:^(id objFromDict, __autoreleasing id *retObj) {
-		if ([objFromDict isKindOfClass:[NSDate class]]) {
-			*retObj = [objFromDict copy];
-		} else if ([objFromDict isKindOfClass:[NSString class]]) {
-			NSDate *parsedDateString = [objFromDict cdoh_dateUsingRFC3339Format];
-			*retObj = parsedDateString;
-		}
-	}];
-}
-
-+ (NSURL *)URLObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)key
-{
-	return [self decodeObjectFromDictionary:dictionary usingKey:key block:^(id objFromDict, __autoreleasing id *retObj) {
-		if ([objFromDict isKindOfClass:[NSURL class]]) {
-			*retObj = [objFromDict copy];
-		} else if ([objFromDict isKindOfClass:[NSString class]]) {
-			NSURL *parsedUrl = [[NSURL alloc] initWithString:objFromDict];
-			*retObj = parsedUrl;
-		}
-	}];
-}
-
-+ (id)decodeObjectFromDictionary:(NSDictionary *)dictionary usingKey:(id)usingKey block:(void (^)(id objFromDict, id *retObj))block
-{
-	__autoreleasing id retObj = nil;
-	id objFromDict = [dictionary objectForKey:usingKey];
-	
-	if (objFromDict) {
-		block(objFromDict, &retObj);
-	}
-	
-	return retObj;
-}
-
-
-#pragma mark - Encoding Resources
+#pragma mark - Handling Resource Encoding and Decoding
 + (NSDictionary *)mergeSubclassDictionary:(NSDictionary *)subclassDictionary withSuperclassDictionary:(NSDictionary *)superclassDictionary
 {
 	NSDictionary *mergedDictionary = nil;
 	
-	if (subclassDictionary != nil && superclassDictionary != nil) {
+	if (subclassDictionary == nil || superclassDictionary == nil) {
+		// One or more of the dictionaries are nil.
+		// If the subclass dictionary is _not_ nil we use that, else we use the
+		// superclass dictionary. The superclass dictionary may also be nil in
+		// which case we will return nil (as defined by the methods
+		// specification).
+		mergedDictionary = subclassDictionary != nil ? subclassDictionary : superclassDictionary;
+	} else {
 		NSMutableDictionary *dictionary = nil;
 		
 		NSUInteger capacity = [subclassDictionary count] + [superclassDictionary count];
@@ -135,13 +94,6 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 		[dictionary addEntriesFromDictionary:subclassDictionary];
 		
 		mergedDictionary = dictionary;
-	} else {
-		// One or more of the dictionaries are nil.
-		// If the subclass dictionary is _not_ nil we use that, else we use the
-		// superclass dictionary. The superclass dictionary may also be nil in
-		// which case we will return nil (as defined by the methods
-		// specification).
-		mergedDictionary = subclassDictionary != nil ? subclassDictionary :superclassDictionary;
 	}
 	
 	return mergedDictionary;
@@ -152,12 +104,31 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 	NSDictionary *resourceDict = nil;
 	
 	NSString *apiResourceUrlAbsoluteString = [_apiResourceUrl absoluteString];
-	//NSAssert(NO, @"class: %@; url: %@; urlString: %@ of class %@;", [self class], _apiResourceUrl, apiResourceUrlAbsoluteString, [apiResourceUrlAbsoluteString class]);
 	resourceDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-					apiResourceUrlAbsoluteString, kCDOHResourceAPIResourceURLKey,
+					apiResourceUrlAbsoluteString,	kCDOHResourceAPIResourceURLKey,
 					nil];
 	
 	return resourceDict;
+}
+
++ (BOOL)supportsSecureCoding
+{
+	return YES;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{	
+	NSDictionary *resourceDict = [self encodeAsDictionary];
+	
+	[aCoder encodeObject:resourceDict forKey:kCDOHResourcePropertiesDictionaryKey];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+	NSDictionary *resourceDict = [aDecoder decodeObjectForKey:kCDOHResourcePropertiesDictionaryKey];
+	
+	self = [self initWithDictionary:resourceDict];
+	return self;
 }
 
 
@@ -188,22 +159,6 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 	return [self._APIResourceURL hash] + 137;
 }
 
-
-#pragma mark - NSCoding Methods
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{	
-	NSDictionary *resourceDict = [self encodeAsDictionary];
-	
-	[aCoder encodeObject:resourceDict forKey:kCDOHResourcePropertiesDictionaryKey];
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-	NSDictionary *resourceDict = [aDecoder decodeObjectForKey:kCDOHResourcePropertiesDictionaryKey];
-	
-	self = [self initWithDictionary:resourceDict];
-	return self;
-}
 
 #pragma mark - NSCopyingMethods
 - (id)copyWithZone:(NSZone *)__unused zone

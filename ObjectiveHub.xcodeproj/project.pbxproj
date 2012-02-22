@@ -173,6 +173,14 @@
 		9C9990A814AE7B4A00DFDD3B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9990A314AE7AEE00DFDD3B /* Cocoa.framework */; };
 		9C9DFA5514E9B51D0061D08C /* CDOHRepositoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9DFA5414E9B51D0061D08C /* CDOHRepositoryTests.m */; };
 		9C9DFA5614E9B51D0061D08C /* CDOHRepositoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9DFA5414E9B51D0061D08C /* CDOHRepositoryTests.m */; };
+		9C9DFA7814E9EEF50061D08C /* NSDictionary+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C9DFA7614E9EEF50061D08C /* NSDictionary+ObjectiveHub.h */; };
+		9C9DFA7914E9EEF50061D08C /* NSDictionary+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C9DFA7614E9EEF50061D08C /* NSDictionary+ObjectiveHub.h */; };
+		9C9DFA7A14E9EEF50061D08C /* NSDictionary+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9DFA7714E9EEF50061D08C /* NSDictionary+ObjectiveHub.m */; };
+		9C9DFA7B14E9EEF50061D08C /* NSDictionary+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9DFA7714E9EEF50061D08C /* NSDictionary+ObjectiveHub.m */; };
+		9C9DFA8214EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C9DFA8014EA873D0061D08C /* NSMutableDictionary+ObjectiveHub.h */; };
+		9C9DFA8314EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C9DFA8014EA873D0061D08C /* NSMutableDictionary+ObjectiveHub.h */; };
+		9C9DFA8414EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9DFA8114EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m */; };
+		9C9DFA8514EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9DFA8114EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m */; };
 		9CA5FA9614B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FA9414B62E3700F2CD13 /* NSString+ObjectiveHub.h */; settings = {ATTRIBUTES = (); }; };
 		9CA5FA9714B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FA9414B62E3700F2CD13 /* NSString+ObjectiveHub.h */; };
 		9CA5FA9814B62E3700F2CD13 /* NSString+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FA9514B62E3700F2CD13 /* NSString+ObjectiveHub.m */; };
@@ -400,6 +408,10 @@
 		9C9990A614AE7B1600DFDD3B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		9C9DFA5314E9B51D0061D08C /* CDOHRepositoryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHRepositoryTests.h; sourceTree = "<group>"; };
 		9C9DFA5414E9B51D0061D08C /* CDOHRepositoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHRepositoryTests.m; sourceTree = "<group>"; };
+		9C9DFA7614E9EEF50061D08C /* NSDictionary+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ObjectiveHub.h"; sourceTree = "<group>"; };
+		9C9DFA7714E9EEF50061D08C /* NSDictionary+ObjectiveHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ObjectiveHub.m"; sourceTree = "<group>"; };
+		9C9DFA8014EA873D0061D08C /* NSMutableDictionary+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+ObjectiveHub.h"; sourceTree = "<group>"; };
+		9C9DFA8114EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+ObjectiveHub.m"; sourceTree = "<group>"; };
 		9CA5FA9414B62E3700F2CD13 /* NSString+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSString+ObjectiveHub.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9CA5FA9514B62E3700F2CD13 /* NSString+ObjectiveHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSString+ObjectiveHub.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9CA5FA9A14B62EC300F2CD13 /* NSDateFormatter+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSDateFormatter+ObjectiveHub.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -809,6 +821,10 @@
 				9CA5FAA414B6320000F2CD13 /* NSDate+ObjectiveHub.m */,
 				9C6018DD14B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.h */,
 				9C6018DE14B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.m */,
+				9C9DFA7614E9EEF50061D08C /* NSDictionary+ObjectiveHub.h */,
+				9C9DFA7714E9EEF50061D08C /* NSDictionary+ObjectiveHub.m */,
+				9C9DFA8014EA873D0061D08C /* NSMutableDictionary+ObjectiveHub.h */,
+				9C9DFA8114EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -858,6 +874,8 @@
 				9CA5FAC614B6727400F2CD13 /* CDOHResponsePrivate.h in Headers */,
 				9CA5FACA14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.h in Headers */,
 				9C64163B14C32C1300478E39 /* CDOHClientProtocol.h in Headers */,
+				9C9DFA7814E9EEF50061D08C /* NSDictionary+ObjectiveHub.h in Headers */,
+				9C9DFA8214EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,6 +921,8 @@
 				9CA5FAC714B6727400F2CD13 /* CDOHResponsePrivate.h in Headers */,
 				9CA5FACB14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.h in Headers */,
 				9C64163C14C32C1300478E39 /* CDOHClientProtocol.h in Headers */,
+				9C9DFA7914E9EEF50061D08C /* NSDictionary+ObjectiveHub.h in Headers */,
+				9C9DFA8314EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1147,6 +1167,8 @@
 				9C6018E114B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.m in Sources */,
 				9C76A25E14E0680700CA444C /* CDOHTypes.m in Sources */,
 				9C92313C14E2DCC400287DD9 /* CDOHOrganizationTeam.m in Sources */,
+				9C9DFA7A14E9EEF50061D08C /* NSDictionary+ObjectiveHub.m in Sources */,
+				9C9DFA8414EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1203,6 +1225,8 @@
 				9C6018E214B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.m in Sources */,
 				9C76A25F14E0680700CA444C /* CDOHTypes.m in Sources */,
 				9C92313D14E2DCC400287DD9 /* CDOHOrganizationTeam.m in Sources */,
+				9C9DFA7B14E9EEF50061D08C /* NSDictionary+ObjectiveHub.m in Sources */,
+				9C9DFA8514EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

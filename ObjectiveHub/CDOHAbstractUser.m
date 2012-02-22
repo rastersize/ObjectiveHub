@@ -35,8 +35,6 @@
 #import "CDOHResourcePrivate.h"
 #import "CDOHPlan.h"
 
-#import "NSDate+ObjectiveHub.h"
-
 
 #pragma mark NSCoding and GitHub JSON Keys
 NSString *const kCDOHUserLoginKey				= @"login";
@@ -100,8 +98,23 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 	self = [super initWithDictionary:dictionary];
 	if (self) {
 		// Custom logic
+		// A user is considerred authenticated if any of the following keys are
+		// set:
+		// - kCDOHUserAuthenticatedKey and is `YES`
+		// - kCDOHUserTotalPrivateReposKey
+		// - kCDOHUserOwnedPrivateReposKey
+		// - kCDOHUserPrivateGistsKey
+		// - kCDOHUserDiskUsageKey
+		// - kCDOHUserCollaboratorsKey
+		// - kCDOHUserPlanKey
 		NSNumber *authenticated = [dictionary objectForKey:kCDOHUserAuthenticatedKey];
-		_authenticated = [authenticated boolValue] || ([dictionary objectForKey:kCDOHUserTotalPrivateReposKey] != nil);
+		_authenticated = ([authenticated boolValue] ||
+						  ([dictionary objectForKey:kCDOHUserTotalPrivateReposKey] != nil) ||
+						  ([dictionary objectForKey:kCDOHUserOwnedPrivateReposKey] != nil) ||
+						  ([dictionary objectForKey:kCDOHUserPrivateGistsKey] != nil) ||
+						  ([dictionary objectForKey:kCDOHUserDiskUsageKey] != nil) ||
+						  ([dictionary objectForKey:kCDOHUserCollaboratorsKey] != nil) ||
+						  ([dictionary objectForKey:kCDOHUserPlanKey] != nil));
 		
 		// Strings
 		_login		= [[dictionary objectForKey:kCDOHUserLoginKey] copy];
@@ -113,12 +126,12 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 		_gravatarId	= [[dictionary objectForKey:kCDOHUserGravatarIDKey] copy];
 		
 		// URLs
-		_blogUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHUserBlogKey];
-		_avatarUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHUserAvatarURLKey];
-		_htmlUrl		= [CDOHResource URLObjectFromDictionary:dictionary usingKey:kCDOHUserHTMLURLKey];
+		_blogUrl		= [dictionary cdoh_URLForKey:kCDOHUserBlogKey];
+		_avatarUrl		= [dictionary cdoh_URLForKey:kCDOHUserAvatarURLKey];
+		_htmlUrl		= [dictionary cdoh_URLForKey:kCDOHUserHTMLURLKey];
 		
 		// Dates
-		_createdAt = [CDOHResource dateObjectFromDictionary:dictionary usingKey:kCDOHUserCreatedAtKey];
+		_createdAt = [dictionary cdoh_dateForKey:kCDOHUserCreatedAtKey];
 		
 		// Unsigned integers
 		_identifier							= [[dictionary objectForKey:kCDOHUserIDKey] unsignedIntegerValue];
@@ -133,7 +146,7 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 		_diskUsage							= [[dictionary objectForKey:kCDOHUserDiskUsageKey] unsignedIntegerValue];
 		
 		// Resources
-		_plan = [CDOHResource resourceObjectFromDictionary:dictionary usingKey:kCDOHUserPlanKey ofClass:[CDOHPlan class]];
+		_plan = [dictionary cdoh_resourceForKey:kCDOHUserPlanKey ofClass:[CDOHPlan class]];
 	}
 	
 	return self;
@@ -143,57 +156,44 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 #pragma mark - Encoding Resources
 - (NSDictionary *)encodeAsDictionary
 {
-	NSDictionary *finalDictionary = nil;
 	NSDictionary *superDictionary = [super encodeAsDictionary];
+	NSMutableDictionary *finalDictionary = [[NSMutableDictionary alloc] initWithDictionary:superDictionary];
 	
-	NSNumber *identifierNumber					= [NSNumber numberWithUnsignedInteger:self.identifier];
-	NSNumber *publicRepositoriesNumber			= [NSNumber numberWithUnsignedInteger:self.numberOfPublicRepositories];
-	NSNumber *publicGistsNumber					= [NSNumber numberWithUnsignedInteger:self.numberOfPublicGists];
-	NSNumber *privateRepositoriesNumber			= [NSNumber numberWithUnsignedInteger:self.numberOfPrivateRepositories];
-	NSNumber *privateOwnedRepositoriesNumber	= [NSNumber numberWithUnsignedInteger:self.numberOfOwnedPrivateRepositories];
-	NSNumber *privateGistsNumber				= [NSNumber numberWithUnsignedInteger:self.numberOfPrivateGists];
-	NSNumber *followersNumber					= [NSNumber numberWithUnsignedInteger:self.followers];
-	NSNumber *followingNumber					= [NSNumber numberWithUnsignedInteger:self.following];
-	NSNumber *collaboratorsNumber				= [NSNumber numberWithUnsignedInteger:self.collaborators];
-	NSNumber *diskUsageNumber					= [NSNumber numberWithUnsignedInteger:self.diskUsage];
+	// Strings
+	[finalDictionary cdoh_setObject:_login forKey:kCDOHUserLoginKey];
+	[finalDictionary cdoh_setObject:_name forKey:kCDOHUserNameKey];
+	[finalDictionary cdoh_setObject:_company forKey:kCDOHUserCompanyKey];
+	[finalDictionary cdoh_setObject:_email forKey:kCDOHUserEmailKey];
+	[finalDictionary cdoh_setObject:_location forKey:kCDOHUserLocationKey];
+	[finalDictionary cdoh_setObject:_type forKey:kCDOHUserTypeKey];
+	[finalDictionary cdoh_setObject:_gravatarId forKey:kCDOHUserGravatarIDKey];
 	
-	NSNumber *authenticatedNumber				= [NSNumber numberWithBool:self.isAuthenticated];
+	// Unsigned integers
+	[finalDictionary cdoh_setUnsignedInteger:_identifier forKey:kCDOHUserIDKey];
+	[finalDictionary cdoh_setUnsignedInteger:_numberOfPublicRepositories forKey:kCDOHUserPublicReposKey];
+	[finalDictionary cdoh_setUnsignedInteger:_numberOfPublicGists forKey:kCDOHUserPublicGistsKey];
+	[finalDictionary cdoh_setUnsignedInteger:_numberOfPrivateRepositories forKey:kCDOHUserTotalPrivateReposKey];
+	[finalDictionary cdoh_setUnsignedInteger:_numberOfOwnedPrivateRepositories forKey:kCDOHUserOwnedPrivateReposKey];
+	[finalDictionary cdoh_setUnsignedInteger:_numberOfPrivateGists forKey:kCDOHUserPrivateGistsKey];
+	[finalDictionary cdoh_setUnsignedInteger:_followers forKey:kCDOHUserFollowersKey];
+	[finalDictionary cdoh_setUnsignedInteger:_following forKey:kCDOHUserFollowingKey];
+	[finalDictionary cdoh_setUnsignedInteger:_collaborators forKey:kCDOHUserCollaboratorsKey];
+	[finalDictionary cdoh_setUnsignedInteger:_diskUsage forKey:kCDOHUserDiskUsageKey];
 	
-	NSString *blogUrlString						= [_blogUrl absoluteString];
-	NSString *htmlUrlString						= [_htmlUrl absoluteString];
-	NSString *avatarUrlString					= [_avatarUrl absoluteString];
+	// Booleans
+	[finalDictionary cdoh_setBool:_authenticated forKey:kCDOHUserAuthenticatedKey];
 	
-	NSString *createdAtString					= [_createdAt cdoh_stringUsingRFC3339Format];
+	// URLs
+	[finalDictionary cdoh_encodeAndSetURL:_blogUrl forKey:kCDOHUserBlogKey];
+	[finalDictionary cdoh_encodeAndSetURL:_htmlUrl forKey:kCDOHUserHTMLURLKey];
+	[finalDictionary cdoh_encodeAndSetURL:_avatarUrl forKey:kCDOHUserAvatarURLKey];
 	
-	NSDictionary *planDict = [_plan encodeAsDictionary];
+	// Dates
+	[finalDictionary cdoh_encodeAndSetDate:_createdAt forKey:kCDOHUserCreatedAtKey];
 	
-	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-								_login,							kCDOHUserLoginKey,
-								_name,							kCDOHUserNameKey,
-								_company,						kCDOHUserCompanyKey,
-								_email,							kCDOHUserEmailKey,
-								_location,						kCDOHUserLocationKey,
-								_type,							kCDOHUserTypeKey,
-								_gravatarId,					kCDOHUserGravatarIDKey,
-								avatarUrlString,				kCDOHUserAvatarURLKey,
-								htmlUrlString,					kCDOHUserHTMLURLKey,
-								blogUrlString,					kCDOHUserBlogKey,
-								createdAtString,				kCDOHUserCreatedAtKey,
-								planDict,						kCDOHUserPlanKey,
-								identifierNumber,				kCDOHUserIDKey,
-								authenticatedNumber,			kCDOHUserAuthenticatedKey,
-								publicRepositoriesNumber,		kCDOHUserPublicReposKey,
-								publicGistsNumber,				kCDOHUserPublicGistsKey,
-								privateRepositoriesNumber,		kCDOHUserTotalPrivateReposKey,
-								privateOwnedRepositoriesNumber,	kCDOHUserOwnedPrivateReposKey,
-								privateGistsNumber,				kCDOHUserPrivateGistsKey,
-								followersNumber,				kCDOHUserFollowersKey,
-								followingNumber,				kCDOHUserFollowingKey,
-								collaboratorsNumber,			kCDOHUserCollaboratorsKey,
-								diskUsageNumber,				kCDOHUserDiskUsageKey,
-								nil];
+	// Resources
+	[finalDictionary cdoh_encodeAndSetResource:_plan forKey:kCDOHUserPlanKey];
 	
-	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSuperclassDictionary:superDictionary];
 	return finalDictionary;
 }
 

@@ -39,7 +39,7 @@
 NSString *const kCDOHPlanNameKey					= @"name";
 NSString *const kCDOHPlanSpaceKey					= @"space";
 NSString *const kCDOHPlanCollaboratorsKey			= @"collaborators";
-NSString *const kCDOHPlanPrivateRepositoriesKey	= @"private_repos";
+NSString *const kCDOHPlanPrivateRepositoriesKey		= @"private_repos";
 
 
 #pragma mark - CDOHPlan Implementation

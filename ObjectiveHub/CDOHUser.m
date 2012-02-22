@@ -67,19 +67,18 @@ NSString *const kCDOHUserContributionsKey	= @"contributions";
 #pragma mark - Encoding Resources
 - (NSDictionary *)encodeAsDictionary
 {
-	NSDictionary *finalDictionary = nil;
 	NSDictionary *superDictionary = [super encodeAsDictionary];
+	NSMutableDictionary *finalDictionary = [[NSMutableDictionary alloc] initWithDictionary:superDictionary];
 	
-	NSNumber *hireableNumber		= [[NSNumber alloc] initWithBool:_hireable];
-	NSNumber *contributionsNumber	= [[NSNumber alloc] initWithUnsignedInteger:_contributions];
+	// Strings
+	[finalDictionary cdoh_setObject:_biography forKey:kCDOHUserBioKey];
 	
-	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-								_biography,				kCDOHUserBioKey,
-								hireableNumber,			kCDOHUserHireableKey,
-								contributionsNumber,	kCDOHUserContributionsKey,
-								nil];
+	// Booleans
+	[finalDictionary cdoh_setBool:_hireable forKey:kCDOHUserHireableKey];
 	
-	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSuperclassDictionary:superDictionary];
+	// Unsigned integers
+	[finalDictionary cdoh_setUnsignedInteger:_contributions forKey:kCDOHUserContributionsKey];
+	
 	return finalDictionary;
 }
 

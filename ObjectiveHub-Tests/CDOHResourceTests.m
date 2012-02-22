@@ -84,8 +84,8 @@
 								nil];
 	
 	
-	id resourceFromDict			= [CDOHResource resourceObjectFromDictionary:objectDict usingKey:@"resource" ofClass:[CDOHResource class]];
-	id resourceCreatedFromDict	= [CDOHResource resourceObjectFromDictionary:objectDict usingKey:@"resourceDict" ofClass:[CDOHResource class]];
+	id resourceFromDict			= [objectDict cdoh_resourceForKey:@"resource" ofClass:[CDOHResource class]];
+	id resourceCreatedFromDict	= [objectDict cdoh_resourceForKey:@"resourceDict" ofClass:[CDOHResource class]];
 	
 	STAssertNotNil(resourceFromDict, @"Resource (%@) fetched from dictionary (%@) should not be nil", resource, objectDict);
 	STAssertNotNil(resourceCreatedFromDict, @"Resource (%@) created and fetched from dictionary (%@) should not be nil", resourceDict, objectDict);
@@ -107,8 +107,8 @@
 							  dateString, @"dateString",
 							  nil];
 	
-	id dateFromDict			= [CDOHResource dateObjectFromDictionary:dateDict usingKey:@"date"];
-	id dateCreatedFromDict	= [CDOHResource dateObjectFromDictionary:dateDict usingKey:@"dateString"];
+	id dateFromDict			= [dateDict cdoh_dateForKey:@"date"];
+	id dateCreatedFromDict	= [dateDict cdoh_dateForKey:@"dateString"];
 	
 	STAssertNotNil(dateFromDict, @"Date (%@) fetched from dictionary (%@) should not be nil", date, dateDict);
 	STAssertNotNil(dateCreatedFromDict, @"Date (%@) created and fetched from dictionary (%@) should not be nil", dateString, dateDict);
@@ -131,8 +131,8 @@
 								nil];
 	
 	
-	id urlFromDict			= [CDOHResource URLObjectFromDictionary:objectDict usingKey:@"url"];
-	id urlCreatedFromDict	= [CDOHResource URLObjectFromDictionary:objectDict usingKey:@"urlString"];
+	id urlFromDict			= [objectDict cdoh_URLForKey:@"url"];
+	id urlCreatedFromDict	= [objectDict cdoh_URLForKey:@"urlString"];
 	
 	STAssertNotNil(urlFromDict, @"URL (%@) fetched from dictionary (%@) should not be nil", url, objectDict);
 	STAssertNotNil(urlCreatedFromDict, @"URL (%@) created and fetched from dictionary (%@) should not be nil", urlString, objectDict);
