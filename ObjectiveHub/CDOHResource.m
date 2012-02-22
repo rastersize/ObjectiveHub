@@ -61,6 +61,7 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 @synthesize _APIResourceURL = _apiResourceUrl;
 
 
+
 #pragma mark - Initializing an CDOHPlan Instance
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
