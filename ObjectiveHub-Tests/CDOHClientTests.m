@@ -100,7 +100,7 @@
 #pragma mark - GitHub Communication Tests
 /*- (void)testNoAuthenticatedUser
 {
-	__unsafe_unretained CDOHClientTests *blockSelf = self;
+	__weak CDOHClientTests *blockSelf = self;
 	
 	// Should call failure block immediately
 	dispatch_async(_queue, ^{
@@ -188,7 +188,7 @@
 
 - (void)testGetAuthenticatedUser
 {
-	__unsafe_unretained CDOHClientTests *blockSelf = self;
+	__weak CDOHClientTests *blockSelf = self;
 	
 	dispatch_async(_queue, ^{
 		[blockSelf.client user:^(CDOHResponse *response) {
@@ -207,7 +207,7 @@
 
 - (void)testGetUserWithLogin
 {
-	__unsafe_unretained CDOHClientTests *blockSelf = self;
+	__weak CDOHClientTests *blockSelf = self;
 	
 	dispatch_async(_queue, ^{
 		NSString *login = @"octocat";

@@ -25,10 +25,11 @@ An example on how to get all the repositories watched by a user and then adding 
 		NSString *username = ...
 		CDOHClient *client = [[CDOHClient alloc] init];
 		
+		__weak MyViewController *blockSelf = self;
 		[client repositoriesWatchedByUser:username pages:nil success:^(CDOHResponse *response) {
 			// Handle the respone (you will probably want to do something 
 			// smarter than the row below).
-			[self.watchedRepos addObjectsFromArray:response.resource];
+			[blockSelf.watchedRepos addObjectsFromArray:response.resource];
 			
 			// Make sure we load all repositories watched by the user. The
 			// success and failure blocks used in the first request will be re-
@@ -39,7 +40,7 @@ An example on how to get all the repositories watched by a user and then adding 
 			}
 		} failure:^(CDOHError *error) {
 			// Present the error or even better try to fix it for the user.
-			[self presentError:error];
+			[blockSelf presentError:error];
 		}];
 	}
 
