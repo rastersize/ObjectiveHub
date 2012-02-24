@@ -89,7 +89,6 @@
 		9C26FA04146B2DEF001A5385 /* CDOHClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26FA01146B2DEF001A5385 /* CDOHClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C26FA05146B2DEF001A5385 /* CDOHClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26FA02146B2DEF001A5385 /* CDOHClient.m */; };
 		9C26FA07146B2DEF001A5385 /* CDOHClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26FA02146B2DEF001A5385 /* CDOHClient.m */; };
-		9C26FA08146B2DEF001A5385 /* CDOHClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26FA02146B2DEF001A5385 /* CDOHClient.m */; };
 		9C2F3E7B146F3F2000C44A82 /* CDOHUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E79146F3F2000C44A82 /* CDOHUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C2F3E7C146F3F2000C44A82 /* CDOHUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E79146F3F2000C44A82 /* CDOHUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C2F3E7D146F3F2000C44A82 /* CDOHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F3E7A146F3F2000C44A82 /* CDOHUser.m */; };
@@ -1256,7 +1255,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C26FA08146B2DEF001A5385 /* CDOHClient.m in Sources */,
 				9C3ADD6514E1093F00C454F8 /* CDOHClientTests.m in Sources */,
 				9C3ADD9614E10F7800C454F8 /* CDOHTestsUserCredentials.m in Sources */,
 				9C3ADDBA14E13A5300C454F8 /* CDOHRFC3339Tests.m in Sources */,
