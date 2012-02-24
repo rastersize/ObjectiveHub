@@ -219,6 +219,7 @@
 		9CA5FACD14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FAC914B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.m */; };
 		9CA5FADB14B6AB1F00F2CD13 /* CDOHTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FADA14B6AB1F00F2CD13 /* CDOHTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CA5FADC14B6AB1F00F2CD13 /* CDOHTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FADA14B6AB1F00F2CD13 /* CDOHTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9CABD7AB14F84BD400EFF010 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F957146B2069001A5385 /* InfoPlist.strings */; };
 		9CB2C44314F7CD0500E9FC91 /* NSObject+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CB2C44114F7CD0500E9FC91 /* NSObject+ObjectiveHub.h */; };
 		9CB2C44414F7CD0500E9FC91 /* NSObject+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CB2C44114F7CD0500E9FC91 /* NSObject+ObjectiveHub.h */; };
 		9CB2C44514F7CD0500E9FC91 /* NSObject+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2C44214F7CD0500E9FC91 /* NSObject+ObjectiveHub.m */; };
@@ -1094,6 +1095,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CABD7AB14F84BD400EFF010 /* InfoPlist.strings in Resources */,
 				9C3ADD9A14E110D800C454F8 /* account.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
