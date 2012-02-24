@@ -219,6 +219,10 @@
 		9CA5FACD14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FAC914B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.m */; };
 		9CA5FADB14B6AB1F00F2CD13 /* CDOHTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FADA14B6AB1F00F2CD13 /* CDOHTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CA5FADC14B6AB1F00F2CD13 /* CDOHTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FADA14B6AB1F00F2CD13 /* CDOHTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9CB2C44314F7CD0500E9FC91 /* NSObject+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CB2C44114F7CD0500E9FC91 /* NSObject+ObjectiveHub.h */; };
+		9CB2C44414F7CD0500E9FC91 /* NSObject+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CB2C44114F7CD0500E9FC91 /* NSObject+ObjectiveHub.h */; };
+		9CB2C44514F7CD0500E9FC91 /* NSObject+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2C44214F7CD0500E9FC91 /* NSObject+ObjectiveHub.m */; };
+		9CB2C44614F7CD0500E9FC91 /* NSObject+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2C44214F7CD0500E9FC91 /* NSObject+ObjectiveHub.m */; };
 		9CE663411470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663421470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663431470929500D8A95F /* CDOHError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE663401470929500D8A95F /* CDOHError.m */; };
@@ -813,6 +817,8 @@
 		9CA5FA8A14B6276B00F2CD13 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				9CB2C44114F7CD0500E9FC91 /* NSObject+ObjectiveHub.h */,
+				9CB2C44214F7CD0500E9FC91 /* NSObject+ObjectiveHub.m */,
 				9CA5FA9A14B62EC300F2CD13 /* NSDateFormatter+ObjectiveHub.h */,
 				9CA5FA9B14B62EC300F2CD13 /* NSDateFormatter+ObjectiveHub.m */,
 				9CA5FA9414B62E3700F2CD13 /* NSString+ObjectiveHub.h */,
@@ -876,6 +882,7 @@
 				9C64163B14C32C1300478E39 /* CDOHClientProtocol.h in Headers */,
 				9C9DFA7814E9EEF50061D08C /* NSDictionary+ObjectiveHub.h in Headers */,
 				9C9DFA8214EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.h in Headers */,
+				9CB2C44314F7CD0500E9FC91 /* NSObject+ObjectiveHub.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -923,6 +930,7 @@
 				9C64163C14C32C1300478E39 /* CDOHClientProtocol.h in Headers */,
 				9C9DFA7914E9EEF50061D08C /* NSDictionary+ObjectiveHub.h in Headers */,
 				9C9DFA8314EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.h in Headers */,
+				9CB2C44414F7CD0500E9FC91 /* NSObject+ObjectiveHub.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1169,6 +1177,7 @@
 				9C92313C14E2DCC400287DD9 /* CDOHOrganizationTeam.m in Sources */,
 				9C9DFA7A14E9EEF50061D08C /* NSDictionary+ObjectiveHub.m in Sources */,
 				9C9DFA8414EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m in Sources */,
+				9CB2C44514F7CD0500E9FC91 /* NSObject+ObjectiveHub.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1227,6 +1236,7 @@
 				9C92313D14E2DCC400287DD9 /* CDOHOrganizationTeam.m in Sources */,
 				9C9DFA7B14E9EEF50061D08C /* NSDictionary+ObjectiveHub.m in Sources */,
 				9C9DFA8514EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m in Sources */,
+				9CB2C44614F7CD0500E9FC91 /* NSObject+ObjectiveHub.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
