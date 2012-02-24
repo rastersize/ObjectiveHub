@@ -173,6 +173,17 @@ extern NSArray *_CDOHPagesArrayForPageIndexes(NSUInteger pageIdx, ...);
 @property (assign) NSUInteger itemsPerPage;
 
 
+#pragma mark - Network Activity
+/** @name Network Activity */
+/**
+ * Whether the client should update the network activity indicator on iOS
+ * automatically or not.
+ *
+ * @warning Only works on iOS.
+ */
+@property (nonatomic, assign) BOOL showNetworkActivityStatusAutomatically;
+
+
 #pragma mark - Controlling Requests
 /** @name Controlling Requests */
 /**

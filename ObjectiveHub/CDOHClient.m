@@ -45,6 +45,8 @@
 #import "CDOHUser.h"
 #import "CDOHRepository.h"
 
+#import "UIApplication+ObjectiveHub.h"
+
 
 #pragma mark Constants
 /// The base URI for the GitHub API
@@ -452,6 +454,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 @synthesize username = _username;
 @synthesize password = _password;
 @synthesize itemsPerPage = _itemsPerPage;
+@synthesize showNetworkActivityStatusAutomatically = _showNetworkActivityStatusAutomatically;
 
 @synthesize client = _client;
 @synthesize JSONDecoder = _jsonDecoder;
@@ -564,6 +567,18 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 }
 
 
+#pragma mark - Network Activity
+- (void)setShowNetworkActivityStatusAutomatically:(BOOL)flag
+{
+	_showNetworkActivityStatusAutomatically = flag;
+#if TARGET_OS_IPHONE
+	if (flag == NO) {
+		[[UIApplication sharedApplication] cdoh_resetNetworkActivity];
+	}
+#endif // TARGET_OS_IPHONE
+}
+
+
 #pragma mark - Controlling Requests
 - (void)suspendAllRequests
 {
@@ -578,6 +593,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 - (void)cancelAllRequests
 {
 	[self.client.operationQueue cancelAllOperations];
+
 }
 
 
