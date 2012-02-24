@@ -33,6 +33,7 @@
 #import "CDOHResource.h"
 #import "CDOHResourcePrivate.h"
 
+#import "NSObject+ObjectiveHub.h"
 #import "NSString+ObjectiveHub.h"
 
 #import <objc/runtime.h>
@@ -74,6 +75,28 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 
 
 #pragma mark - Handling Resource Encoding and Decoding
++ (NSArray *)encodableKeyPaths
+{
+	static NSArray *encodableKeyPaths = nil;
+	static dispatch_once_t encodableKeyPathsOnceToken;
+	dispatch_once(&encodableKeyPathsOnceToken, ^{
+		NSArray *superKeyPaths = nil;
+		if ([self class] != [CDOHResource class]) {
+			superKeyPaths = [NSObject cdoh_instancePropertiesForClass:[self superclass]];
+		}
+		NSArray *localKeyPaths = [NSObject cdoh_instancePropertiesForClass:[self class]];
+		
+		NSUInteger capacity = [superKeyPaths count] + [localKeyPaths count];
+		NSMutableArray *keyPaths = [[NSMutableArray alloc] initWithCapacity:capacity];
+		[keyPaths addObjectsFromArray:superKeyPaths];
+		[keyPaths addObjectsFromArray:localKeyPaths];
+		
+		encodableKeyPaths = [keyPaths copy];
+	});
+	
+	return encodableKeyPaths;
+}
+
 + (NSDictionary *)mergeSubclassDictionary:(NSDictionary *)subclassDictionary withSuperclassDictionary:(NSDictionary *)superclassDictionary
 {
 	NSDictionary *mergedDictionary = nil;
