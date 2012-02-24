@@ -145,7 +145,7 @@ CDOH_FIX_CATEGORY_BUG(NSDictionary_ObjectiveHub)
 	return [[self cdoh_numberForKey:key] unsignedIntegerValue];
 }
 
-- (CGFloat)cdoh_floatForKey:(id)key
+- (double)cdoh_doubleForKey:(id)key
 {
 	return [[self cdoh_numberForKey:key] doubleValue];
 }

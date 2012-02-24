@@ -119,12 +119,12 @@
 
 /**
  * Set the value for the given _key_ to an `NSNumber` representing the given
- * float _value_.
+ * double _value_.
  *
- * @param value The float to be wrapped with a `NSNumber` and set for the given
+ * @param value The double to be wrapped with a `NSNumber` and set for the given
  * _key_.
- * @param key The key which the given float _value_ should be associated with.
+ * @param key The key which the given double _value_ should be associated with.
  */
-- (void)cdoh_setFloat:(CGFloat)value forKey:(id)key;
+- (void)cdoh_setDouble:(double)value forKey:(id)key;
 
 @end

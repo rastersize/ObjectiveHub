@@ -158,17 +158,17 @@
 - (NSUInteger)cdoh_unsignedIntegerForKey:(id)key;
 
 /**
- * Returns the float value wrapped by a `NSNumber` associated with the given
+ * Returns the double value wrapped by a `NSNumber` associated with the given
  * _key_.
  *
  * If no object exists for the given _key_ `0.0f` (zero) will be returned. In
  * the case where the object associated with _key_ is not an instance of
  * `NSNumber` an exception will be rasied.
  *
- * @param key The key associated with the sought float value.
- * @return The float value associated with the given _key_.
+ * @param key The key associated with the sought double value.
+ * @return The double value associated with the given _key_.
  */
-- (CGFloat)cdoh_floatForKey:(id)key;
+- (double)cdoh_doubleForKey:(id)key;
 
 
 @end

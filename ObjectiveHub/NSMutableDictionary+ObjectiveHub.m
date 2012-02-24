@@ -88,7 +88,7 @@ CDOH_FIX_CATEGORY_BUG(NSMutableDictionary_ObjectiveHub)
 	[self cdoh_setObject:num forKey:key];
 }
 
-- (void)cdoh_setFloat:(CGFloat)value forKey:(id)key
+- (void)cdoh_setDouble:(double)value forKey:(id)key
 {
 	NSNumber *num = [[NSNumber alloc] initWithDouble:value];
 	[self cdoh_setObject:num forKey:key];
