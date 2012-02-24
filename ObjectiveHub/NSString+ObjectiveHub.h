@@ -33,6 +33,7 @@
 #import <Foundation/Foundation.h>
 
 
+#pragma mark NSString(ObjectiveHub) Category Interface
 /**
  * Various NSString additions used by ObjectiveHub.
  */

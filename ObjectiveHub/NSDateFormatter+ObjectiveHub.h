@@ -32,6 +32,8 @@
 
 #import <Foundation/Foundation.h>
 
+
+#pragma mark NSDateFormatter(ObjectiveHub) Category Interface
 /**
  * The category privdes an RFC 3339 date formatter.
  *
