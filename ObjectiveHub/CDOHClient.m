@@ -443,7 +443,10 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - ObjectiveHub Implementation
-@implementation CDOHClient
+@implementation CDOHClient {
+	NSLock *_usernameLock;
+	NSLock *_passwordLock;
+}
 
 #pragma mark - Synthesizing
 @synthesize username = _username;
@@ -459,15 +462,19 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 {
 	self = [super init];
 	if (self) {
-		_itemsPerPage					= kCDOHDefaultItemsPerPage;
 		
-		_client					= [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kCDOHGitHubBaseAPIURIString]];
+		_itemsPerPage = kCDOHDefaultItemsPerPage;
+
+		_usernameLock = [[NSLock alloc] init];
+		_passwordLock = [[NSLock alloc] init];
+
+		_client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kCDOHGitHubBaseAPIURIString]];
 		[_client registerHTTPOperationClass:[AFHTTPRequestOperation class]];
 		[_client setParameterEncoding:AFJSONParameterEncoding];
 		[_client setDefaultHeader:@"Accept" value:kCDOHGitHubMimeGenericJSON];
 		[_client setDefaultHeader:@"User-Agent" value:[NSString stringWithFormat:kCDOHUserAgentFormat, kCDOHLibraryVersion]];
 
-		_jsonDecoder			= [[JSONDecoder alloc] initWithParseOptions:JKParseOptionStrict];
+		_jsonDecoder = [[JSONDecoder alloc] initWithParseOptions:JKParseOptionStrict];
 	}
 	
 	return self;
@@ -514,30 +521,46 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)setUsername:(NSString *)username
 {
+	[_usernameLock lock];
 	if (username != _username) {
-		_username = username;
+		_username = [username copy];
 		
+		// FIXME: This should be set per request.
 		[_client setAuthorizationHeaderWithUsername:_username password:_password];
 	}
+	[_usernameLock unlock];
 }
 
 - (NSString *)username
 {
-	return _username;
+	NSString *username = nil;
+	[_usernameLock lock];
+	username = _username;
+	[_usernameLock unlock];
+
+	return username;
 }
 
 - (void)setPassword:(NSString *)password
 {
+	[_passwordLock lock];
 	if (password != _password) {
-		_password = password;
+		_password = [password copy];
 		
+		// FIXME: This should be set per request.
 		[_client setAuthorizationHeaderWithUsername:_username password:_password];
 	}
+	[_passwordLock unlock];
 }
 
 - (NSString *)password
 {
-	return _password;
+	NSString *password = nil;
+	[_passwordLock lock];
+	password = _password;
+	[_passwordLock unlock];
+
+	return password;
 }
 
 
