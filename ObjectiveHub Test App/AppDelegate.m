@@ -50,15 +50,25 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *__unused)aNotification
 {
-	/*dispatch_queue_t queue = dispatch_queue_create("com.cedercrantz.objectivehub.testapp", NULL);
+	dispatch_queue_t queue = dispatch_queue_create("com.cedercrantz.objectivehub.testapp", NULL);
 	dispatch_suspend(queue);
 
 	CDOHTestAppUserCredentials *cred = [[CDOHTestAppUserCredentials alloc] init];
 	_hub = [[CDOHClient alloc] initWithUsername:cred.username password:cred.password];
 	NSLog(@"hub: %@", self.hub);
 	
+	__weak AppDelegate *blockSelf = self;
+	
+	dispatch_async(queue, ^{
+		[blockSelf.hub repositoriesWatchedByUser:@"rastersize" pages:nil success:^(CDOHResponse *response) {
+			NSLog(@"response: %@", response);
+		} failure:^(CDOHError *error) {
+			NSLog(@"error %@", error);
+		}];
+	});
+	
 	dispatch_resume(queue);
-	dispatch_release(queue);*/
+	dispatch_release(queue);
 	
 	NSLog(@"DONE!");
 }
