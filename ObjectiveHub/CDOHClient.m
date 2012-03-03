@@ -552,7 +552,17 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Standard Error Block
 - (CDOHInternalFailureBlock)standardFailureBlock:(CDOHFailureBlock)failureBlock
 {
+#if TARGET_OS_IPHONE
+	__weak CDOHClient *blockSelf = self;
+#endif
+	
 	return ^(AFHTTPRequestOperation *operation, __unused NSError *error) {
+#if TARGET_OS_IPHONE
+		if (blockSelf.showNetworkActivityStatusAutomatically) {
+			[[UIApplication sharedApplication] cdoh_popNetworkActivity];
+		}
+#endif
+		
 		if (failureBlock) {
 			CDOHError *ohError = [self errorFromFailedOperation:operation];
 			failureBlock(ohError);
@@ -564,7 +574,17 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Generic Standard Success Blocks
 - (CDOHInternalSuccessBlock)standardSuccessBlockWithNoData:(CDOHResponseBlock)successBlock
 {
+#if TARGET_OS_IPHONE
+	__weak CDOHClient *blockSelf = self;
+#endif
+	
 	return ^(__unused AFHTTPRequestOperation *__unused operation, __unused id responseObject) {
+#if TARGET_OS_IPHONE
+		if (blockSelf.showNetworkActivityStatusAutomatically) {
+			[[UIApplication sharedApplication] cdoh_popNetworkActivity];
+		}
+#endif
+		
 		if (successBlock) {
 			successBlock(nil);
 		}
@@ -573,7 +593,17 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (CDOHInternalSuccessBlock)standardSuccessBlockWithResourceCreationBlock:(CDOHInternalResponseCreationBlock)resourceCreationBlock success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
 {
+#if TARGET_OS_IPHONE
+	__weak CDOHClient *blockSelf = self;
+#endif
+	
 	return ^(AFHTTPRequestOperation *operation, id responseObject) {
+#if TARGET_OS_IPHONE
+		if (blockSelf.showNetworkActivityStatusAutomatically) {
+			[[UIApplication sharedApplication] cdoh_popNetworkActivity];
+		}
+#endif
+		
 		if (successBlock) {
 			if (responseObject && [responseObject length] > 0) {
 				id parsedResponseObject = [self.JSONDecoder objectWithData:responseObject];
