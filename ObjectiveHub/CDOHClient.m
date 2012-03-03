@@ -77,54 +77,6 @@ NSArray *_CDOHPagesArrayForPageIndexes(NSUInteger pageIdx, ...)
 }
 
 
-#pragma mark - Argument Verification Helper.
-/// `YES` == no argument was `nil`, `NO` == one or more arguments were `nil`.
-#define CDOHVerifyArgumentsNotNilOrThrowException(...) _CDOHVerifyArgumentsNotNilOrThrowException(__PRETTY_FUNCTION__, @"" # __VA_ARGS__, __VA_ARGS__, [_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker marker])
-
-@interface _CDOHVerifyArgumentsNotNilOrThrowExceptionMarker : NSObject
-+ (_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker *)marker;
-@end
-@implementation _CDOHVerifyArgumentsNotNilOrThrowExceptionMarker
-+ (_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker *)marker
-{
-	static _CDOHVerifyArgumentsNotNilOrThrowExceptionMarker *marker = nil;
-	static dispatch_once_t markerOnceToken;
-	dispatch_once(&markerOnceToken, ^{
-		marker = [[self alloc] init];
-	});
-	
-	return marker;
-}
-@end
-
-/// Last argument MUST be the `_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker`
-/// +marker object.
-BOOL _CDOHVerifyArgumentsNotNilOrThrowException(const char *prettyFunction, NSString *commaSeparatedVariableNameString, id firstArgument, ...);
-
-BOOL _CDOHVerifyArgumentsNotNilOrThrowException(const char *prettyFunction, NSString *commaSeparatedVariableNameString, id firstArgument, ...)
-{
-	id arg = firstArgument;
-	BOOL hasNilArg = NO;
-	
-	id endMarker = [_CDOHVerifyArgumentsNotNilOrThrowExceptionMarker marker];
-	
-	va_list args;
-	va_start(args, firstArgument);
-	while (arg != endMarker && !hasNilArg) {
-		hasNilArg = arg == nil;
-		arg = va_arg(args, id);
-	}
-	va_end(args);
-	
-	if (hasNilArg) {
-		[NSException raise:NSInvalidArgumentException format:@"One or more arguments (%@) supplied to %s were invalid (nil)", commaSeparatedVariableNameString, prettyFunction];
-		return NO;
-	}
-	
-	return YES;
-}
-
-
 #pragma mark - GitHub Mime Types
 /// Mime type for getting the default type of data as JSON.
 NSString *const kCDOHGitHubMimeGenericJSON	= @"application/vnd.github.beta+json";
@@ -748,7 +700,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Standard Requests
 - (void)getRepositoriesAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	CDOHVerifyArgumentsNotNilOrThrowException(path);
+	NSParameterAssert(path);
 	if ([pages count] == 0) {
 		pages = CDOHPagesArrayForPageIndexes(1);
 	}
@@ -767,7 +719,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)getUsersAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	CDOHVerifyArgumentsNotNilOrThrowException(path);
+	NSParameterAssert(path);
 	if ([pages count] == 0) {
 		pages = CDOHPagesArrayForPageIndexes(1);
 	}
@@ -867,8 +819,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Users
 - (void)userWithLogin:(NSString *)login success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(login);
 	if (!successBlock && !failureBlock) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(login)) { return; }
 
 	NSString *path = CDOHRelativeAPIPath(kCDOHUserPathFormat, CDOHDictionaryOfVariableBindings(login));
 	//NSString *getPath = [[NSString alloc] initWithFormat:kCDOHUserPathFormat, login];
@@ -930,8 +882,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)addUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(emails);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(emails)) { return; }
 	
 	NSString *resource = kCDOHAuthenticatedUserEmailsResource;
 	NSString *path = CDOHRelativeAPIPath(kCDOHAuthenticatedUserResourcePath, CDOHDictionaryOfVariableBindings(resource));
@@ -944,8 +896,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)deleteUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(emails);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(emails)) { return; }
 	
 	NSString *resource = kCDOHAuthenticatedUserEmailsResource;
 	NSString *path = CDOHRelativeAPIPath(kCDOHAuthenticatedUserResourcePath, CDOHDictionaryOfVariableBindings(resource));
@@ -960,8 +912,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Repositories
 - (void)repository:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(repo);
+	NSParameterAssert(owner);
 	if (!successBlock && !failureBlock) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(repo, owner)) { return; }
 	
 	NSString *path = CDOHRelativeAPIPath(kCDOHRepositoryPathFormat, CDOHDictionaryOfVariableBindings(repo, owner));
 	
@@ -973,8 +926,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)createRepository:(NSString *)name dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(name);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(name)) { return; }
 	
 	NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:[dictionary count] + 1];
 	if ([dictionary count] > 0) {
@@ -1003,8 +956,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)createRepository:(NSString *)name inOrganization:(NSString *)organization dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(name);
+	NSParameterAssert(organization);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(name, organization)) { return; }
 	
 	NSMutableDictionary *params = [[NSMutableDictionary alloc] initWithCapacity:[dictionary count] + 1];
 	if ([dictionary count] > 0) {
@@ -1033,9 +987,10 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)updateRepository:(NSString *)repo owner:(NSString *)owner dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(repo);
+	NSParameterAssert(owner);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	if (!dictionary || [dictionary count] == 0) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(repo, owner)) { return; }
 	
 	NSMutableDictionary *params = nil;
 	NSArray *keys = [[NSArray alloc] initWithObjects:
@@ -1063,9 +1018,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)repositories:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(type);
 	if (!successBlock && !failureBlock) { return; }
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(type)) { return; }
 	
 	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
 	
@@ -1077,8 +1032,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(login);
+	NSParameterAssert(type);
 	if (!successBlock && !failureBlock) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(login, type)) { return; }
 
 	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
 	
@@ -1090,8 +1046,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)repositoriesForOrganization:(NSString *)organization type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(organization);
+	NSParameterAssert(type);
 	if (!successBlock && !failureBlock) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(organization, type)) { return; }
 
 	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
 	
@@ -1108,8 +1065,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)repositoryContributors:(NSString *)repo owner:(NSString *)owner anonymous:(BOOL)anonymous success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(repo);
+	NSParameterAssert(owner);
 	if (!successBlock && !failureBlock) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(repo, owner)) { return; }
 
 	NSDictionary *params = CDOHParametersDictionary([NSNumber numberWithBool:anonymous], @"anon");
 	
@@ -1121,8 +1079,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)repositoryLanguages:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(repo);
+	NSParameterAssert(owner);
 	if (!successBlock && !failureBlock) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(repo, owner)) { return; }
 	
 	CDOHInternalResponseCreationBlock resourceCreationBlock = ^id (id parsedResponseObject) {
 		NSDictionary *languagesDict = parsedResponseObject;
@@ -1156,8 +1115,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Watched and Watching Repositories
 - (void)repositoryWatchers:(NSString *)repo owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(repo);
+	NSParameterAssert(owner);
 	if (!successBlock && !failureBlock) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(repo, owner)) { return; }
 	
 	NSString *resource = kCDOHRepositoryWatchersResource;
 	NSString *path = CDOHRelativeAPIPath(kCDOHRepositoryResourcePathFormat, CDOHDictionaryOfVariableBindings(resource, repo, owner));
@@ -1167,8 +1127,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)repositoriesWatchedByUser:(NSString *)login pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(login);
 	if (!successBlock && !failureBlock) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(login)) { return; }
 	
 	NSString *resource = kCDOHUserWatchedRepositoriesResource;
 	NSString *path = CDOHRelativeAPIPath(kCDOHUserResourcePathFormat, CDOHDictionaryOfVariableBindings(resource, login));
@@ -1178,9 +1138,10 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)isUserWatchingRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(repo);
+	NSParameterAssert(owner);
 	if (!successBlock && !failureBlock) { return; }
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(repo, owner)) { return; }
 	
 	NSString *path = CDOHRelativeAPIPath(kCDOHAuthenticatedWatchedRepositoryPath, CDOHDictionaryOfVariableBindings(repo, owner));
 	
@@ -1192,8 +1153,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)watchRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(repo);
+	NSParameterAssert(owner);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(repo, owner)) { return; }
 	
 	NSString *path = CDOHRelativeAPIPath(kCDOHAuthenticatedWatchedRepositoryPath, CDOHDictionaryOfVariableBindings(repo, owner));
 	
@@ -1205,8 +1167,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)stopWatchingRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(repo);
+	NSParameterAssert(owner);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(repo, owner)) { return; }
 	
 	NSString *path = CDOHRelativeAPIPath(kCDOHAuthenticatedWatchedRepositoryPath, CDOHDictionaryOfVariableBindings(repo, owner));
 	
@@ -1220,8 +1183,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Repository Forks
 - (void)repositoryForks:(NSString *)repo owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(repo);
+	NSParameterAssert(owner);
 	if (!successBlock && !failureBlock) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(repo, owner)) { return; }
 	
 	NSString *resource = kCDOHRepositoryForksResource;
 	NSString *path = CDOHRelativeAPIPath(kCDOHRepositoryResourcePathFormat, CDOHDictionaryOfVariableBindings(resource, repo, owner));
@@ -1231,8 +1195,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 - (void)forkRepository:(NSString *)repo owner:(NSString *)owner intoOrganization:(NSString *)intoOrganization success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
+	NSParameterAssert(repo);
+	NSParameterAssert(owner);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
-	if (!CDOHVerifyArgumentsNotNilOrThrowException(repo, owner)) { return; }
 	
 	NSDictionary *params = nil;
 	if ([intoOrganization length] > 0) {
