@@ -41,17 +41,17 @@
 
 #pragma mark - Dictionary Representation Keys
 /// Repository dictionary key for the HTML URL.
-extern NSString *const kCDOHRepositoryHtmlUrlKey;
+extern NSString *const kCDOHRepositoryHTMLURLKey;
 /// Repository dictionary key for the default clone URL.
-extern NSString *const kCDOHRepositoryCloneUrlKey;
+extern NSString *const kCDOHRepositoryCloneURLKey;
 /// Repository dictionary key for the git protocol URL.
-extern NSString *const kCDOHRepositoryGitUrlKey;
+extern NSString *const kCDOHRepositoryGitURLKey;
 /// Repository dictionary key for the ssh protocol URL.
-extern NSString *const kCDOHRepositorySshUrlKey;
+extern NSString *const kCDOHRepositorySSHURLKey;
 /// Repository dictionary key for the svn protocol URL.
-extern NSString *const kCDOHRepositorySvnUrlKey;
+extern NSString *const kCDOHRepositorySVNURLKey;
 /// Repository dictionary key for the repository mirror URL.
-extern NSString *const kCDOHRepositoryMirrorUrlKey;
+extern NSString *const kCDOHRepositoryMirrorURLKey;
 /// Repository dictionary key for the repository unique identifier.
 extern NSString *const kCDOHRepositoryIdentifierKey;
 /// Repository dictionary key for the repository owner.
@@ -144,7 +144,7 @@ extern NSString *const kCDOHRepositoryLanguageCharactersKey;
 /**
  * The Subversion (SVN) URL to the project.
  */
-@property (strong, readonly) NSURL *svnURL;
+@property (strong, readonly) NSURL *SVNURL;
 
 /**
  * The URL to the repository this repository mirrors.

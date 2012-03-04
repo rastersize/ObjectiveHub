@@ -53,15 +53,15 @@ NSString *const kCDOHPlanPrivateRepositoriesKey		= @"private_repos";
 
 
 #pragma mark - Initializing an CDOHPlan Instance
-- (id)initWithDictionary:(NSDictionary *)dictionary
+- (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary
 {
-	self = [super initWithDictionary:dictionary];
+	self = [super initWithJSONDictionary:jsonDictionary];
 	if (self) {
-		_name = [[dictionary objectForKey:kCDOHPlanNameKey] copy];
+		_name = [[jsonDictionary objectForKey:kCDOHPlanNameKey] copy];
 		
-		_space = [[dictionary objectForKey:kCDOHPlanSpaceKey] unsignedIntegerValue];
-		_collaborators = [[dictionary objectForKey:kCDOHPlanCollaboratorsKey] unsignedIntegerValue];
-		_privateRepositories = [[dictionary objectForKey:kCDOHPlanPrivateRepositoriesKey] unsignedIntegerValue];
+		_space = [[jsonDictionary objectForKey:kCDOHPlanSpaceKey] unsignedIntegerValue];
+		_collaborators = [[jsonDictionary objectForKey:kCDOHPlanCollaboratorsKey] unsignedIntegerValue];
+		_privateRepositories = [[jsonDictionary objectForKey:kCDOHPlanPrivateRepositoriesKey] unsignedIntegerValue];
 	}
 	
 	return self;
@@ -69,24 +69,28 @@ NSString *const kCDOHPlanPrivateRepositoriesKey		= @"private_repos";
 
 
 #pragma mark - Encoding Resources
-- (NSDictionary *)encodeAsDictionary
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-	NSDictionary *finalDictionary = nil;
-	NSDictionary *superDictionary = [super encodeAsDictionary];
+	self = [super initWithCoder:aDecoder];
+	if (self) {
+		_name					= [[aDecoder decodeObjectForKey:kCDOHPlanNameKey] copy];
+		_space					= [[aDecoder decodeObjectForKey:kCDOHPlanSpaceKey] unsignedIntegerValue];
+		_collaborators			= [[aDecoder decodeObjectForKey:kCDOHPlanCollaboratorsKey] unsignedIntegerValue];
+		_privateRepositories	= [[aDecoder decodeObjectForKey:kCDOHPlanPrivateRepositoriesKey] unsignedIntegerValue];
+	}
 	
-	NSNumber *spaceNumber			= [NSNumber numberWithUnsignedInteger:self.space];
-	NSNumber *collaboratorsNumber	= [NSNumber numberWithUnsignedInteger:self.collaborators];
-	NSNumber *privateReposNumber	= [NSNumber numberWithUnsignedInteger:self.privateRepositories];
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+	[super encodeWithCoder:aCoder];
 	
-	NSDictionary *dictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-								self.name,				kCDOHPlanNameKey,
-								spaceNumber,			kCDOHPlanSpaceKey,
-								collaboratorsNumber,	kCDOHPlanCollaboratorsKey,
-								privateReposNumber,		kCDOHPlanPrivateRepositoriesKey,
-								nil];
+	[aCoder encodeObject:_name forKey:kCDOHPlanNameKey];
 	
-	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSuperclassDictionary:superDictionary];
-	return finalDictionary;
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_space] forKey:kCDOHPlanSpaceKey];
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_collaborators] forKey:kCDOHPlanCollaboratorsKey];
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_privateRepositories] forKey:kCDOHPlanPrivateRepositoriesKey];
 }
 
 

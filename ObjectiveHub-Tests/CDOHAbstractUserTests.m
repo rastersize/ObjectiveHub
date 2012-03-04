@@ -223,7 +223,7 @@
 - (id)unauthenticatedTestUser
 {
 	NSDictionary *unauthenticatedTestUserDictionary = [[self class] unauthenticatedTestUserDictionary];
-	CDOHResource *unauthenticatedTestUser = [[[[self class] testedClass] alloc] initWithDictionary:unauthenticatedTestUserDictionary];
+	CDOHResource *unauthenticatedTestUser = [[[[self class] testedClass] alloc] initWithJSONDictionary:unauthenticatedTestUserDictionary];
 	return unauthenticatedTestUser;
 }
 

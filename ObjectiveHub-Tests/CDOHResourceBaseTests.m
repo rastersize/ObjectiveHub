@@ -90,21 +90,21 @@
 - (CDOHResource *)firstTestResource
 {
 	NSDictionary *firstTestDictionary = [[self class] firstTestDictionary];
-	CDOHResource *firstTestResource = [[[[self class] testedClass] alloc] initWithDictionary:firstTestDictionary];
+	CDOHResource *firstTestResource = [[[[self class] testedClass] alloc] initWithJSONDictionary:firstTestDictionary];
 	return firstTestResource;
 }
 
 - (CDOHResource *)firstTestResourceAlt
 {
 	NSDictionary *firstTestDictionaryAlt = [[self class] firstTestDictionaryAlt];
-	CDOHResource *firstTestResourceAlt = [[[[self class] testedClass] alloc] initWithDictionary:firstTestDictionaryAlt];
+	CDOHResource *firstTestResourceAlt = [[[[self class] testedClass] alloc] initWithJSONDictionary:firstTestDictionaryAlt];
 	return firstTestResourceAlt;
 }
 
 - (CDOHResource *)secondTestResource
 {
 	NSDictionary *secondTestDictionary = [[self class] secondTestDictionary];
-	CDOHResource *secondTestResource = [[[[self class] testedClass] alloc] initWithDictionary:secondTestDictionary];
+	CDOHResource *secondTestResource = [[[[self class] testedClass] alloc] initWithJSONDictionary:secondTestDictionary];
 	return secondTestResource;
 }
 
@@ -163,7 +163,7 @@
 - (void)testResourceDecodeFromDictionary
 {
 	NSDictionary *testDict = [[self class] firstTestDictionary];
-	CDOHResource *resource = [[[[self class] testedClass] alloc] initWithDictionary:testDict];
+	CDOHResource *resource = [[[[self class] testedClass] alloc] initWithJSONDictionary:testDict];
 	
 	STAssertNotNil(resource._APIResourceURL, @"The resource (%@) API URL should not be nil", resource);
 	STAssertTrue([resource._APIResourceURL isKindOfClass:[NSURL class]], @"The resource (%@) API URL (%@) should be of class 'NSURL' was '%@'", resource, resource._APIResourceURL, [resource._APIResourceURL class]);
@@ -174,7 +174,7 @@
 - (void)testResourceEncodeAsDictionary
 {
 	NSDictionary *testDict = [[self class] firstTestDictionary];
-	CDOHResource *resource = [[[[self class] testedClass] alloc] initWithDictionary:testDict];
+	CDOHResource *resource = [[[[self class] testedClass] alloc] initWithJSONDictionary:testDict];
 	NSDictionary *encodedDict = [resource encodeAsDictionary];
 	
 	[self testEqualObjectsForKeysInDictionary:encodedDict withOriginal:testDict];

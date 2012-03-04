@@ -60,9 +60,9 @@ NSString *const kCDOHOrganizationTeamPermissionAdminister	= @"admin";
 
 
 #pragma mark - Initializing a CDOHOrganizationTeam Instance
-- (id)initWithDictionary:(NSDictionary *)dictionary
+- (id)initWithJSONDictionary:(NSDictionary *)dictionary
 {
-	self = [super initWithDictionary:dictionary];
+	self = [super initWithJSONDictionary:dictionary];
 	if (self) {
 		// Unsigned integers
 		_identifier		= [[dictionary objectForKey:kCDOHOrganizationTeamIdentifierKey] unsignedIntegerValue];
@@ -79,25 +79,31 @@ NSString *const kCDOHOrganizationTeamPermissionAdminister	= @"admin";
 
 
 #pragma mark - Encoding Resources
-- (NSDictionary *)encodeAsDictionary
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-	NSDictionary *finalDictionary = nil;
-	NSDictionary *superDictionary = [super encodeAsDictionary];
+	self = [super initWithCoder:aDecoder];
+	if (self) {
+		_name			= [[aDecoder decodeObjectForKey:kCDOHOrganizationTeamNameKey] copy];
+		_permission		= [[aDecoder decodeObjectForKey:kCDOHOrganizationTeamPermissionKey] copy];
+		
+		_identifier		= [[aDecoder decodeObjectForKey:kCDOHOrganizationTeamIdentifierKey] unsignedIntegerValue];
+		_members		= [[aDecoder decodeObjectForKey:kCDOHOrganizationTeamMembersKey] unsignedIntegerValue];
+		_repositories	= [[aDecoder decodeObjectForKey:kCDOHOrganizationTeamRepositoriesKey] unsignedIntegerValue];
+	}
 	
-	NSNumber *identifierNum = [[NSNumber alloc] initWithUnsignedInteger:_identifier];
-	NSNumber *membersNum = [[NSNumber alloc] initWithUnsignedInteger:_members];
-	NSNumber *repositoriesNum = [[NSNumber alloc] initWithUnsignedInteger:_repositories];
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+	[super encodeWithCoder:aCoder];
 	
-	NSDictionary *dictionary = [[NSDictionary alloc] initWithObjectsAndKeys:
-								identifierNum,		kCDOHOrganizationTeamIdentifierKey,
-								_name,				kCDOHOrganizationTeamNameKey,
-								_permission,		kCDOHOrganizationTeamPermissionKey,
-								membersNum,			kCDOHOrganizationTeamMembersKey,
-								repositoriesNum,	kCDOHOrganizationTeamRepositoriesKey,
-								nil];
+	[aCoder encodeObject:_name forKey:kCDOHOrganizationTeamNameKey];
+	[aCoder encodeObject:_permission forKey:kCDOHOrganizationTeamPermissionKey];
 	
-	finalDictionary = [CDOHResource mergeSubclassDictionary:dictionary withSuperclassDictionary:superDictionary];
-	return finalDictionary;
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_identifier] forKey:kCDOHOrganizationTeamIdentifierKey];
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_members] forKey:kCDOHOrganizationTeamMembersKey];
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_repositories] forKey:kCDOHOrganizationTeamRepositoriesKey];
 }
 
 

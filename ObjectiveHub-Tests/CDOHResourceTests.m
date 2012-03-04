@@ -77,7 +77,7 @@
 	NSDictionary *resourceDict = [[NSDictionary alloc] initWithObjectsAndKeys:
 								  [NSURL URLWithString:@"https://api.github.com/resource"], kCDOHResourceAPIResourceURLKey,
 								  nil];
-	CDOHResource *resource = [[CDOHResource alloc] initWithDictionary:resourceDict];
+	CDOHResource *resource = [[CDOHResource alloc] initWithJSONDictionary:resourceDict];
 	NSDictionary *objectDict = [[NSDictionary alloc] initWithObjectsAndKeys:
 								resource, @"resource",
 								resourceDict, @"resourceDict",

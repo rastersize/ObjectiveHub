@@ -51,9 +51,9 @@ NSString *const kCDOHUserContributionsKey	= @"contributions";
 
 
 #pragma mark - Initializing an CDOHUser Instance
-- (id)initWithDictionary:(NSDictionary *)dictionary
+- (id)initWithJSONDictionary:(NSDictionary *)dictionary
 {
-	self = [super initWithDictionary:dictionary];
+	self = [super initWithJSONDictionary:dictionary];
 	if (self) {
 		_biography = [[dictionary objectForKey:kCDOHUserBioKey] copy];
 		_hireable = [[dictionary objectForKey:kCDOHUserHireableKey] boolValue];
@@ -65,21 +65,25 @@ NSString *const kCDOHUserContributionsKey	= @"contributions";
 
 
 #pragma mark - Encoding Resources
-- (NSDictionary *)encodeAsDictionary
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-	NSDictionary *superDictionary = [super encodeAsDictionary];
-	NSMutableDictionary *finalDictionary = [[NSMutableDictionary alloc] initWithDictionary:superDictionary];
+	self = [super initWithCoder:aDecoder];
+	if (self) {
+		_biography = [[aDecoder decodeObjectForKey:kCDOHUserBioKey] copy];
+		_hireable = [aDecoder decodeBoolForKey:kCDOHUserHireableKey];
+		_contributions = [[aDecoder decodeObjectForKey:kCDOHUserContributionsKey] unsignedIntegerValue];
+	}
 	
-	// Strings
-	[finalDictionary cdoh_setObject:_biography forKey:kCDOHUserBioKey];
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+	[super encodeWithCoder:aCoder];
 	
-	// Booleans
-	[finalDictionary cdoh_setBool:_hireable forKey:kCDOHUserHireableKey];
-	
-	// Unsigned integers
-	[finalDictionary cdoh_setUnsignedInteger:_contributions forKey:kCDOHUserContributionsKey];
-	
-	return finalDictionary;
+	[aCoder encodeObject:_biography forKey:kCDOHUserBioKey];
+	[aCoder encodeBool:_hireable forKey:kCDOHUserHireableKey];
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_contributions] forKey:kCDOHUserContributionsKey];
 }
 
 

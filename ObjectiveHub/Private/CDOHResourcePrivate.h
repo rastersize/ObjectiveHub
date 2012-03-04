@@ -60,42 +60,7 @@ extern NSString *const kCDOHResourcePropertiesDictionaryKey;
 /**
  * The URL of the API resource represented.
  */
-@property (strong, readonly) NSURL *_APIResourceURL;
-
-#pragma mark - Handling Resource Encoding and Decoding
-/** @name Handling Resource Encoding and Decoding */
-/**
- * Returns an array of key paths representing the encodeable (and as such
- * also decodable) attributes of the resource.
- *
- * The default implementation returns the key path for all the properties of the
- * class and its super classes (except the superclass of CDOHResource, i.e.
- * NSObject).
- *
- * @return An array of `NSString` objects, each of which contains a key path to
- * one of the resource’s attributes.
- */
-+ (NSArray *)encodableKeyPaths;
-
-/**
- * Merges the subclass resource dictionary with the superclass’s resource
- * dictionary and returns the resulting dictionary.
- *
- * The subclass resource dictionary’s values will overwrite those of the
- * superclass’s resource dictionary if both contain values for the same keys.
- *
- * If both parameters are `nil`, `nil` will be returned. If one of the given
- * dictionaries are `nil` the non-`nil` dictionary will be returned.
- *
- * @param subclassDictionary The subclass resource dictionary.
- * @param superclassDictionary The superclass resource dictionary.
- * @return The subclass resource dictionary merged with the superclass resource
- * dictionary.
- */
-+ (NSDictionary *)mergeSubclassDictionary:(NSDictionary *)subclassDictionary withSuperclassDictionary:(NSDictionary *)superclassDictionary;
-
-
-
+@property (strong, readwrite) NSURL *_APIResourceURL;
 
 
 @end

@@ -38,7 +38,7 @@
 
 #pragma mark NSCoding and GitHub JSON Keys
 NSString *const kCDOHUserLoginKey				= @"login";
-NSString *const kCDOHUserIDKey					= @"id";
+NSString *const kCDOHUserIdentifierKey			= @"id";
 NSString *const kCDOHUserAvatarURLKey			= @"avatar_url";
 NSString *const kCDOHUserGravatarIDKey			= @"gravatar_id";
 NSString *const kCDOHUserNameKey				= @"name";
@@ -77,7 +77,7 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 @synthesize login = _login;
 @synthesize avatarURL = _avatarUrl;
 @synthesize gravatarID = _gravatarId;
-@synthesize htmlURL = _htmlUrl;
+@synthesize HTMLURL = _htmlUrl;
 @synthesize numberOfPublicRepositories = _numberOfPublicRepositories;
 @synthesize numberOfPrivateRepositories = _numberOfPrivateRepositories;
 @synthesize numberOfOwnedPrivateRepositories = _numberOfOwnedPrivateRepositories;
@@ -93,9 +93,9 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 
 
 #pragma mark - Initializing an CDOHUser Instance
-- (id)initWithDictionary:(NSDictionary *)dictionary
+- (id)initWithJSONDictionary:(NSDictionary *)dictionary
 {
-	self = [super initWithDictionary:dictionary];
+	self = [super initWithJSONDictionary:dictionary];
 	if (self) {
 		// Custom logic
 		// A user is considerred authenticated if any of the following keys are
@@ -134,7 +134,7 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 		_createdAt = [dictionary cdoh_dateForKey:kCDOHUserCreatedAtKey];
 		
 		// Unsigned integers
-		_identifier							= [[dictionary objectForKey:kCDOHUserIDKey] unsignedIntegerValue];
+		_identifier							= [[dictionary objectForKey:kCDOHUserIdentifierKey] unsignedIntegerValue];
 		_numberOfPublicRepositories			= [[dictionary objectForKey:kCDOHUserPublicReposKey] unsignedIntegerValue];		
 		_numberOfPrivateRepositories		= [[dictionary objectForKey:kCDOHUserTotalPrivateReposKey] unsignedIntegerValue];
 		_numberOfOwnedPrivateRepositories	= [[dictionary objectForKey:kCDOHUserOwnedPrivateReposKey] unsignedIntegerValue];
@@ -154,47 +154,74 @@ NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
 
 
 #pragma mark - Encoding Resources
-- (NSDictionary *)encodeAsDictionary
+- (id)initWithCoder:(NSCoder *)aDecoder
 {
-	NSDictionary *superDictionary = [super encodeAsDictionary];
-	NSMutableDictionary *finalDictionary = [[NSMutableDictionary alloc] initWithDictionary:superDictionary];
+	self = [super initWithCoder:aDecoder];
+	if (self) {
+		// Copy relation
+		_login								= [[aDecoder decodeObjectForKey:kCDOHUserLoginKey] copy];
+		_name								= [[aDecoder decodeObjectForKey:kCDOHUserNameKey] copy];
+		_company							= [[aDecoder decodeObjectForKey:kCDOHUserCompanyKey] copy];
+		_email								= [[aDecoder decodeObjectForKey:kCDOHUserEmailKey] copy];
+		_location							= [[aDecoder decodeObjectForKey:kCDOHUserLocationKey] copy];
+		_type								= [[aDecoder decodeObjectForKey:kCDOHUserTypeKey] copy];
+		_gravatarId							= [[aDecoder decodeObjectForKey:kCDOHUserGravatarIDKey] copy];
+		
+		// Strong relation
+		_blogUrl							= [aDecoder decodeObjectForKey:kCDOHUserBlogKey];
+		_htmlUrl							= [aDecoder decodeObjectForKey:kCDOHUserHTMLURLKey];
+		_avatarUrl							= [aDecoder decodeObjectForKey:kCDOHUserAvatarURLKey];
+		_createdAt							= [aDecoder decodeObjectForKey:kCDOHUserCreatedAtKey];
+		_plan								= [aDecoder decodeObjectForKey:kCDOHUserPlanKey];
+		
+		// Booleans
+		_authenticated						= [aDecoder decodeBoolForKey:kCDOHUserAuthenticatedKey];
+		
+		// Unsigned integers
+		_identifier							= [[aDecoder decodeObjectForKey:kCDOHUserIdentifierKey] unsignedIntegerValue];
+		_numberOfPublicRepositories			= [[aDecoder decodeObjectForKey:kCDOHUserPublicReposKey] unsignedIntegerValue];
+		_numberOfPublicGists				= [[aDecoder decodeObjectForKey:kCDOHUserPublicGistsKey] unsignedIntegerValue];
+		_numberOfPrivateRepositories		= [[aDecoder decodeObjectForKey:kCDOHUserTotalPrivateReposKey] unsignedIntegerValue];
+		_numberOfOwnedPrivateRepositories	= [[aDecoder decodeObjectForKey:kCDOHUserOwnedPrivateReposKey] unsignedIntegerValue];
+		_numberOfPrivateGists				= [[aDecoder decodeObjectForKey:kCDOHUserPrivateGistsKey] unsignedIntegerValue];
+		_followers							= [[aDecoder decodeObjectForKey:kCDOHUserFollowersKey] unsignedIntegerValue];
+		_following							= [[aDecoder decodeObjectForKey:kCDOHUserFollowingKey] unsignedIntegerValue];
+		_collaborators						= [[aDecoder decodeObjectForKey:kCDOHUserCollaboratorsKey] unsignedIntegerValue];
+		_diskUsage							= [[aDecoder decodeObjectForKey:kCDOHUserDiskUsageKey] unsignedIntegerValue];
+	}
 	
-	// Strings
-	[finalDictionary cdoh_setObject:_login forKey:kCDOHUserLoginKey];
-	[finalDictionary cdoh_setObject:_name forKey:kCDOHUserNameKey];
-	[finalDictionary cdoh_setObject:_company forKey:kCDOHUserCompanyKey];
-	[finalDictionary cdoh_setObject:_email forKey:kCDOHUserEmailKey];
-	[finalDictionary cdoh_setObject:_location forKey:kCDOHUserLocationKey];
-	[finalDictionary cdoh_setObject:_type forKey:kCDOHUserTypeKey];
-	[finalDictionary cdoh_setObject:_gravatarId forKey:kCDOHUserGravatarIDKey];
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+	[super encodeWithCoder:aCoder];
 	
-	// Unsigned integers
-	[finalDictionary cdoh_setUnsignedInteger:_identifier forKey:kCDOHUserIDKey];
-	[finalDictionary cdoh_setUnsignedInteger:_numberOfPublicRepositories forKey:kCDOHUserPublicReposKey];
-	[finalDictionary cdoh_setUnsignedInteger:_numberOfPublicGists forKey:kCDOHUserPublicGistsKey];
-	[finalDictionary cdoh_setUnsignedInteger:_numberOfPrivateRepositories forKey:kCDOHUserTotalPrivateReposKey];
-	[finalDictionary cdoh_setUnsignedInteger:_numberOfOwnedPrivateRepositories forKey:kCDOHUserOwnedPrivateReposKey];
-	[finalDictionary cdoh_setUnsignedInteger:_numberOfPrivateGists forKey:kCDOHUserPrivateGistsKey];
-	[finalDictionary cdoh_setUnsignedInteger:_followers forKey:kCDOHUserFollowersKey];
-	[finalDictionary cdoh_setUnsignedInteger:_following forKey:kCDOHUserFollowingKey];
-	[finalDictionary cdoh_setUnsignedInteger:_collaborators forKey:kCDOHUserCollaboratorsKey];
-	[finalDictionary cdoh_setUnsignedInteger:_diskUsage forKey:kCDOHUserDiskUsageKey];
+	[aCoder encodeObject:_login forKey:kCDOHUserLoginKey];
+	[aCoder encodeObject:_name forKey:kCDOHUserNameKey];
+	[aCoder encodeObject:_company forKey:kCDOHUserCompanyKey];
+	[aCoder encodeObject:_email forKey:kCDOHUserEmailKey];
+	[aCoder encodeObject:_location forKey:kCDOHUserLocationKey];
+	[aCoder encodeObject:_type forKey:kCDOHUserTypeKey];
+	[aCoder encodeObject:_gravatarId forKey:kCDOHUserGravatarIDKey];
+	[aCoder encodeObject:_blogUrl forKey:kCDOHUserBlogKey];
+	[aCoder encodeObject:_htmlUrl forKey:kCDOHUserHTMLURLKey];
+	[aCoder encodeObject:_avatarUrl forKey:kCDOHUserAvatarURLKey];
+	[aCoder encodeObject:_createdAt forKey:kCDOHUserCreatedAtKey];
+	[aCoder encodeObject:_plan forKey:kCDOHUserPlanKey];
 	
-	// Booleans
-	[finalDictionary cdoh_setBool:_authenticated forKey:kCDOHUserAuthenticatedKey];
+	[aCoder encodeBool:_authenticated forKey:kCDOHUserAuthenticatedKey];
 	
-	// URLs
-	[finalDictionary cdoh_encodeAndSetURL:_blogUrl forKey:kCDOHUserBlogKey];
-	[finalDictionary cdoh_encodeAndSetURL:_htmlUrl forKey:kCDOHUserHTMLURLKey];
-	[finalDictionary cdoh_encodeAndSetURL:_avatarUrl forKey:kCDOHUserAvatarURLKey];
-	
-	// Dates
-	[finalDictionary cdoh_encodeAndSetDate:_createdAt forKey:kCDOHUserCreatedAtKey];
-	
-	// Resources
-	[finalDictionary cdoh_encodeAndSetResource:_plan forKey:kCDOHUserPlanKey];
-	
-	return finalDictionary;
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_identifier] forKey:kCDOHUserIdentifierKey];
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_numberOfPublicRepositories] forKey:kCDOHUserPublicReposKey];
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_numberOfPublicGists] forKey:kCDOHUserPublicGistsKey];
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_numberOfPrivateRepositories] forKey:kCDOHUserTotalPrivateReposKey];
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_numberOfOwnedPrivateRepositories] forKey:kCDOHUserOwnedPrivateReposKey];
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_numberOfPrivateGists] forKey:kCDOHUserPrivateGistsKey];
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_followers] forKey:kCDOHUserFollowersKey];
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_following] forKey:kCDOHUserFollowingKey];
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_collaborators] forKey:kCDOHUserCollaboratorsKey];
+	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_diskUsage] forKey:kCDOHUserDiskUsageKey];
 }
 
 

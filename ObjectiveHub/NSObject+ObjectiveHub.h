@@ -50,4 +50,5 @@
  */
 + (NSArray *)cdoh_instancePropertiesForClass:(Class)aClass;
 
+
 @end
