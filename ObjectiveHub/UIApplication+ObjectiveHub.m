@@ -31,6 +31,7 @@
 //
 
 #import "UIApplication+ObjectiveHub.h"
+#import "CDOHCommon.h"
 
 
 #if TARGET_OS_IPHONE
@@ -42,6 +43,8 @@
 
 @end
 
+
+CDOH_FIX_CATEGORY_BUG(UIApplication_ObjectiveHub);
 @implementation UIApplication (ObjectiveHub)
 
 static NSInteger _networkActivityCount;
