@@ -61,7 +61,17 @@
 	
 	dispatch_async(queue, ^{
 		[blockSelf.hub repositoriesWatchedByUser:@"rastersize" pages:nil success:^(CDOHResponse *response) {
-			NSLog(@"response: %@", response);
+			//NSLog(@"response: %@", response);
+			CDOHRepository *repo = [((NSArray *)response.resource) lastObject];
+			NSLog(@"repo: %@", repo);
+			
+			NSData *encodedData = [NSKeyedArchiver archivedDataWithRootObject:repo];
+			CDOHRepository *decodedRepo = [NSKeyedUnarchiver unarchiveObjectWithData:encodedData];
+			NSLog(@"decodedRepo: %@", decodedRepo);
+			
+			NSLog(@"[repo isEqual:decodedRepo] => %@", [repo isEqual:decodedRepo] ? @"YES" : @"NO");
+			NSLog(@"[repo _APIResourceURL] == %@", [repo _APIResourceURL]);
+			NSLog(@"[decodedRepo _APIResourceURL] == %@", [decodedRepo _APIResourceURL]);
 		} failure:^(CDOHError *error) {
 			NSLog(@"error %@", error);
 		}];
@@ -69,6 +79,19 @@
 	
 	dispatch_resume(queue);
 	dispatch_release(queue);
+	
+	//NSLog(@"resource: %@", [CDOHResource encodableKeys]);
+	//NSLog(@"org team: %@", [CDOHOrganizationTeam encodableKeys]);
+	
+	/*
+	NSLog(@"resource: %@", [CDOHResource completePropertyToJSONKeyDictionary]);
+	NSLog(@"abstract user: %@", [CDOHAbstractUser completePropertyToJSONKeyDictionary]);
+	NSLog(@"user: %@", [CDOHUser completePropertyToJSONKeyDictionary]);
+	NSLog(@"org: %@", [CDOHOrganization completePropertyToJSONKeyDictionary]);
+	NSLog(@"org team: %@", [CDOHOrganizationTeam completePropertyToJSONKeyDictionary]);
+	NSLog(@"plan: %@", [CDOHPlan completePropertyToJSONKeyDictionary]);
+	NSLog(@"repo: %@", [CDOHRepository completePropertyToJSONKeyDictionary]);
+	*/
 	
 	NSLog(@"DONE!");
 }

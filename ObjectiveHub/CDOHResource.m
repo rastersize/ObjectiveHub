@@ -43,18 +43,6 @@
 NSString *const kCDOHResourceAPIResourceURLKey			=  @"url";
 
 
-#pragma mark - NSCoding Keys
-NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesDictionary";
-
-
-#pragma mark - CDOHResource Private Interface
-@interface CDOHResource ()
-
-+ (BOOL)supportsSecureCoding;
-
-@end
-
-
 #pragma mark - CDOHResource Implementation
 @implementation CDOHResource
 
@@ -63,11 +51,11 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 
 
 #pragma mark - Initializing an CDOHPlan Instance
-- (id)initWithDictionary:(NSDictionary *)dictionary
+- (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary
 {
 	self = [super init];
 	if (self) {
-		_apiResourceUrl = [dictionary cdoh_URLForKey:kCDOHResourceAPIResourceURLKey];
+		_apiResourceUrl = [jsonDictionary cdoh_URLForKey:kCDOHResourceAPIResourceURLKey];
 	}
 	
 	return self;
@@ -75,83 +63,31 @@ NSString *const kCDOHResourcePropertiesDictionaryKey	= @"CDOHResourcePropertiesD
 
 
 #pragma mark - Handling Resource Encoding and Decoding
-+ (NSArray *)encodableKeyPaths
+- (id)initWithCoder:(NSCoder *)coder
 {
-	static NSArray *encodableKeyPaths = nil;
-	static dispatch_once_t encodableKeyPathsOnceToken;
-	dispatch_once(&encodableKeyPathsOnceToken, ^{
-		NSArray *superKeyPaths = nil;
-		if ([self class] != [CDOHResource class]) {
-			superKeyPaths = [NSObject cdoh_instancePropertiesForClass:[self superclass]];
-		}
-		NSArray *localKeyPaths = [NSObject cdoh_instancePropertiesForClass:[self class]];
-		
-		NSUInteger capacity = [superKeyPaths count] + [localKeyPaths count];
-		NSMutableArray *keyPaths = [[NSMutableArray alloc] initWithCapacity:capacity];
-		[keyPaths addObjectsFromArray:superKeyPaths];
-		[keyPaths addObjectsFromArray:localKeyPaths];
-		
-		encodableKeyPaths = [keyPaths copy];
-	});
+	NSAssert([coder allowsKeyedCoding], @"Coder must support keyed coding");
 	
-	return encodableKeyPaths;
-}
-
-+ (NSDictionary *)mergeSubclassDictionary:(NSDictionary *)subclassDictionary withSuperclassDictionary:(NSDictionary *)superclassDictionary
-{
-	NSDictionary *mergedDictionary = nil;
-	
-	if (subclassDictionary == nil || superclassDictionary == nil) {
-		// One or more of the dictionaries are nil.
-		// If the subclass dictionary is _not_ nil we use that, else we use the
-		// superclass dictionary. The superclass dictionary may also be nil in
-		// which case we will return nil (as defined by the methods
-		// specification).
-		mergedDictionary = subclassDictionary != nil ? subclassDictionary : superclassDictionary;
-	} else {
-		NSMutableDictionary *dictionary = nil;
-		
-		NSUInteger capacity = [subclassDictionary count] + [superclassDictionary count];
-		dictionary = [[NSMutableDictionary alloc] initWithCapacity:capacity];
-		[dictionary addEntriesFromDictionary:superclassDictionary];
-		[dictionary addEntriesFromDictionary:subclassDictionary];
-		
-		mergedDictionary = dictionary;
+	self = [super init];
+	if (self) {		
+		_apiResourceUrl = [coder decodeObjectForKey:kCDOHResourceAPIResourceURLKey];
 	}
 	
-	return mergedDictionary;
+	return self;
 }
 
-- (NSDictionary *)encodeAsDictionary
-{
-	NSDictionary *resourceDict = nil;
+- (void)encodeWithCoder:(NSCoder *)coder
+{	
+	NSAssert([coder allowsKeyedCoding], @"Coder must support keyed coding");	
 	
-	NSString *apiResourceUrlAbsoluteString = [_apiResourceUrl absoluteString];
-	resourceDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-					apiResourceUrlAbsoluteString,	kCDOHResourceAPIResourceURLKey,
-					nil];
-	
-	return resourceDict;
+	[coder encodeObject:_apiResourceUrl forKey:kCDOHResourceAPIResourceURLKey];
 }
 
+
+// Implemented for [redacted] of [redacted] will be added in the [redacted]
+// protocol.
 + (BOOL)supportsSecureCoding
 {
 	return YES;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{	
-	NSDictionary *resourceDict = [self encodeAsDictionary];
-	
-	[aCoder encodeObject:resourceDict forKey:kCDOHResourcePropertiesDictionaryKey];
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-	NSDictionary *resourceDict = [aDecoder decodeObjectForKey:kCDOHResourcePropertiesDictionaryKey];
-	
-	self = [self initWithDictionary:resourceDict];
-	return self;
 }
 
 

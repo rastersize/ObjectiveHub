@@ -51,17 +51,7 @@
  * @param dictionary A dictionary containing user information.
  * @return A `CDOHResource` instance initialized with the given dictionary.
  */
-- (id)initWithDictionary:(NSDictionary *)dictionary;
-
-
-#pragma mark - Handling Resource Encoding and Decoding
-/** @name Encoding Resources */
-/**
- * Encode the resource as a dictionary object.
- *
- * @return The resource encoded as a `NSDictionary` object.
- */
-- (NSDictionary *)encodeAsDictionary;
+- (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
 
 
 #pragma mark - Identifying and Comparing Resources

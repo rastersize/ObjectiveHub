@@ -75,7 +75,7 @@ CDOH_FIX_CATEGORY_BUG(NSDictionary_ObjectiveHub)
 		if ([objFromDict isKindOfClass:ofClass]) {
 			*retObj = [objFromDict copy];
 		} else if ([objFromDict isKindOfClass:[NSDictionary class]]) {
-			*retObj = [[ofClass alloc] initWithDictionary:objFromDict];
+			*retObj = [[ofClass alloc] initWithJSONDictionary:objFromDict];
 		}
 	}];
 }

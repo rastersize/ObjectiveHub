@@ -616,7 +616,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
 		CDOHUser *user = nil;
 		if ([parsedResponseObject isKindOfClass:[NSDictionary class]]) {
-			user = [[CDOHUser alloc] initWithDictionary:parsedResponseObject];
+			user = [[CDOHUser alloc] initWithJSONDictionary:parsedResponseObject];
 		}
 		
 		return user;
@@ -635,7 +635,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 			
 			for (id userDict in parsedResponseObject) {
 				if ([userDict isKindOfClass:[NSDictionary class]]) {
-					user = [[CDOHUser alloc] initWithDictionary:userDict];
+					user = [[CDOHUser alloc] initWithJSONDictionary:userDict];
 					[users addObject:user];
 				}
 			}
@@ -666,7 +666,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
 		CDOHRepository *repo = nil;
 		if ([parsedResponseObject isKindOfClass:[NSDictionary class]]) {
-			repo = [[CDOHRepository alloc] initWithDictionary:parsedResponseObject];
+			repo = [[CDOHRepository alloc] initWithJSONDictionary:parsedResponseObject];
 		}
 		
 		return repo;
@@ -684,7 +684,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		
 			for (id repoDict in parsedResponseObject) {
 				if ([repoDict isKindOfClass:[NSDictionary class]]) {
-					CDOHRepository *repo = [[CDOHRepository alloc] initWithDictionary:repoDict];
+					CDOHRepository *repo = [[CDOHRepository alloc] initWithJSONDictionary:repoDict];
 					[reposArray addObject:repo];
 				}
 			}

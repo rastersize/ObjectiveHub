@@ -42,9 +42,9 @@ CDOH_FIX_CATEGORY_BUG(NSObject_ObjectiveHub)
 
 + (NSArray *)cdoh_instancePropertiesForClass:(Class)aClass
 {
-	static NSArray *cdoh_instanceProperties = nil;
-	static dispatch_once_t cdoh_instancePropertiesForClassOnceToken;
-	dispatch_once(&cdoh_instancePropertiesForClassOnceToken, ^{
+	NSArray *cdoh_instanceProperties = nil;
+	//static dispatch_once_t cdoh_instancePropertiesForClassOnceToken;
+	//dispatch_once(&cdoh_instancePropertiesForClassOnceToken, ^{
 		unsigned int propertiesCount;
 		objc_property_t *properties = class_copyPropertyList(aClass, &propertiesCount);
 		
@@ -60,9 +60,10 @@ CDOH_FIX_CATEGORY_BUG(NSObject_ObjectiveHub)
 		free(properties);
 		
 		cdoh_instanceProperties = [keyPaths copy];
-	});
+	//});
 	
 	return cdoh_instanceProperties;
 }
+
 
 @end

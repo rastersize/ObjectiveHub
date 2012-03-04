@@ -53,7 +53,7 @@ extern NSString *const kCDOHUserAuthenticatedKey;
 /// Abstract user dictionary key for the login value.
 extern NSString *const kCDOHUserLoginKey;
 /// Abstract user dictionary key for the identifier value.
-extern NSString *const kCDOHUserIDKey;
+extern NSString *const kCDOHUserIdentifierKey;
 /// Abstract user dictionary key for the avatar URL value.
 extern NSString *const kCDOHUserAvatarURLKey;
 /// Abstract user dictionary key for the gravatar ID value.
@@ -140,7 +140,7 @@ extern NSString *const kCDOHUserPlanKey;
 /**
  * The HTML URL of the user.
  */
-@property (readonly, strong) NSURL *htmlURL;
+@property (readonly, strong) NSURL *HTMLURL;
 
 /**
  * The number of public repositories of the user.

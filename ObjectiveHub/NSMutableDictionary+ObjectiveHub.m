@@ -52,8 +52,9 @@ CDOH_FIX_CATEGORY_BUG(NSMutableDictionary_ObjectiveHub)
 
 - (void)cdoh_encodeAndSetResource:(CDOHResource *)resource forKey:(id)key
 {
-	NSDictionary *resourceDict = [resource encodeAsDictionary];
-	[self cdoh_setObject:resourceDict forKey:key];
+	//NSDictionary *resourceDict = [resource encodeAsDictionary];
+	//[self cdoh_setObject:resourceDict forKey:key];
+	NSLog(@"%s has been deprecated (messaged with: '%@' for the key '%@'", __PRETTY_FUNCTION__, resource, key);
 }
 
 - (void)cdoh_encodeAndSetDate:(NSDate *)date forKey:(id)key

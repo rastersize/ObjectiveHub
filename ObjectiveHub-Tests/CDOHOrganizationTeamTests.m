@@ -143,7 +143,7 @@
 	[super testResourceDecodeFromDictionary];
 	
 	NSDictionary *testDict = [[self class] firstTestDictionary];
-	CDOHOrganizationTeam *team = [[CDOHOrganizationTeam alloc] initWithDictionary:testDict];
+	CDOHOrganizationTeam *team = [[CDOHOrganizationTeam alloc] initWithJSONDictionary:testDict];
 	
 	STAssertEquals(team.identifier,		[[testDict objectForKey:kCDOHOrganizationTeamIdentifierKey] unsignedIntegerValue], @"Team identifier should be set from dictionary");
 	STAssertEquals(team.repositories,	[[testDict objectForKey:kCDOHOrganizationTeamRepositoriesKey] unsignedIntegerValue], @"Team repositories count should be set from dictionary");
