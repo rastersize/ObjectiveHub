@@ -67,6 +67,11 @@ enum {
 	kCDOHErrorCodeNotFound							= 404,
 	/// Error code if the method used was not allowed.
 	kCDOHErrorCodeMethodNotAllowed					= 405,
+	/// Error code if the request could not be processed because of a conflict
+	/// in the request, such as an edit conflict. Is also used by GitHub to
+	/// indicate that a repository is empty or unavailable which usually means
+	/// that it is being created.
+	kCDOHErrorCodeConflict							= 409,
 	/// Error code if the request data was not correct.
 	kCDOHErrorCodeUnprocessableEntity				= 422,
 	/// Error code if the rate limit has been reached.
