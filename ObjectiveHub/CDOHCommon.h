@@ -43,3 +43,10 @@
 #define CDOH_FIX_CATEGORY_BUG(name) @interface CDOH_FIX_CATEGORY_BUG_##name @end \
 @implementation CDOH_FIX_CATEGORY_BUG_##name @end
 
+
+#pragma mark - Create Arrays and Dictionaries
+// Create an NSArray object.
+#define CDOHMakeArray(...) [NSArray arrayWithObjects:__VA_ARGS__, nil]
+// Create a NSDictionary object.
+#define CDOHMakeDict(...) [NSDictionary dictionaryWithObjectsAndKeys:__VA_ARGS__, nil]
+

@@ -213,9 +213,6 @@ NSString *CDOHConcatenatedRelativeAPIPaths(NSArray *pathFormats, NSArray *option
 	return path;
 }
 
-#define CDOHMakeArray(...) [NSArray arrayWithObjects:__VA_ARGS__, nil]
-#define CDOHMakeDict(...) [NSDictionary dictionaryWithObjectsAndKeys:__VA_ARGS__, nil]
-
 
 #pragma mark - GitHub Relative API Path (Formats)
 #pragma mark |- Path Format Keys
