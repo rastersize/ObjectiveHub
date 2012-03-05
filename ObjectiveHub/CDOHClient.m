@@ -33,20 +33,27 @@
 #import "CDOHClient.h"
 #import "CDOHClientPrivate.h"
 #import "CDOHClientProtocol.h"
+
+#import "CDOHCommon.h"
 #import "CDOHLibraryVersion.h"
-
-#import "AFNetworking.h"
-#import "JSONKit.h"
-
 #import "CDOHError.h"
 #import "CDOHLinkRelationshipHeader.h"
 #import "CDOHResponse.h"
 #import "CDOHResponsePrivate.h"
 
+#import "CDOHResource.h"
+#import "CDOHResourcePrivate.h"
+#import "CDOHAbstractUser.h"
 #import "CDOHUser.h"
+#import "CDOHOrganization.h"
+#import "CDOHOrganizationTeam.h"
+#import "CDOHPlan.h"
 #import "CDOHRepository.h"
 
 #import "UIApplication+ObjectiveHub.h"
+
+#import "AFNetworking.h"
+#import "JSONKit.h"
 
 
 #pragma mark GitHub API Base URI
