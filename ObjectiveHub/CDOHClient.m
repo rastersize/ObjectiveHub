@@ -48,15 +48,41 @@
 #import "UIApplication+ObjectiveHub.h"
 
 
-#pragma mark Constants
+#pragma mark GitHub API Base URI
 /// The base URI for the GitHub API
 NSString *const kCDOHGitHubBaseAPIURIString	= @"https://api.github.com";
 
+
+#pragma mark - GitHub Mime Types
+/// Mime type for getting the default type of data as JSON.
+NSString *const kCDOHGitHubMimeGenericJSON	= @"application/vnd.github.v3+json";
+/// Mime type for getting the raw data as JSON.
+NSString *const kCDOHGitHubMimeRawJSON		= @"application/vnd.github.v3.raw+json";
+/// Mime type for getting the text only representation of the data, as JSON.
+NSString *const kCDOHGitHubMimeTextInJSON	= @"application/vnd.github.v3.text+json";
+/// Mime type for getting the resource rendered as HTML as JSON.
+NSString *const kCDOHGitHubMimeHtmlInJSON	= @"application/vnd.github.v3.html+json";
+/// Mime type for getting raw, text and html versions of a resource in the same
+/// response as JSON.
+NSString *const kCDOHGitHubMimeFullInJSON	= @"application/vnd.github.v3.full+json";
+/// Mime type for getting raw blob data (**not** wrapped in a JSON object).
+NSString *const kCDOHGitHubMimeRaw			= @"application/vnd.github.v3.raw";
+
+
+#pragma mark - ObjectiveHub User Agent
 /// ObjectiveHub User Agent Format String
 NSString *const kCDOHUserAgentFormat		= @"ObjectiveHub/%@";
 
 
+#pragma mark - HTTP Header Response Keys
+NSString *const kCDOHResponseHeaderXRateLimitLimitKey		= @"X-RateLimit-Limit";
+NSString *const kCDOHResponseHeaderXRateLimitRemainingKey	= @"X-RateLimit-Remaining";
+NSString *const kCDOHResponseHeaderLocationKey				= @"Location";
+NSString *const kCDOHResponseHeaderLinkKey					= @"Link";
+
+
 #pragma mark - Pages Array Helper
+// TODO: Remove this when fixing "Use NSIndexSet instead of NSArray for pages" (#43)
 NSArray *_CDOHPagesArrayForPageIndexes(NSUInteger pageIdx, ...)
 {
 	NSUInteger idx = pageIdx;
@@ -75,33 +101,6 @@ NSArray *_CDOHPagesArrayForPageIndexes(NSUInteger pageIdx, ...)
 	
 	return pages;
 }
-
-
-#pragma mark - GitHub Mime Types
-/// Mime type for getting the default type of data as JSON.
-NSString *const kCDOHGitHubMimeGenericJSON	= @"application/vnd.github.beta+json";
-/// Mime type for getting the raw data as JSON.
-NSString *const kCDOHGitHubMimeRawJSON		= @"application/vnd.github.beta.raw+json";
-/// Mime type for getting the text only representation of the data, as JSON.
-NSString *const kCDOHGitHubMimeTextInJSON	= @"application/vnd.github.beta.text+json";
-/// Mime type for getting the resource rendered as HTML as JSON.
-NSString *const kCDOHGitHubMimeHtmlInJSON	= @"application/vnd.github.beta.html+json";
-/// Mime type for getting raw, text and html versions of a resource in the same
-/// response as JSON.
-NSString *const kCDOHGitHubMimeFullInJSON	= @"application/vnd.github.beta.full+json";
-/// Mime type for getting raw blob data (**not** wrapped in a JSON object).
-NSString *const kCDOHGitHubMimeRaw			= @"application/vnd.github.beta.raw";
-
-
-#pragma mark - HTTP Header Response Keys
-///
-NSString *const kCDOHResponseHeaderXRateLimitLimitKey		= @"X-RateLimit-Limit";
-///
-NSString *const kCDOHResponseHeaderXRateLimitRemainingKey	= @"X-RateLimit-Remaining";
-///
-NSString *const kCDOHResponseHeaderLocationKey				= @"Location";
-///
-NSString *const kCDOHResponseHeaderLinkKey					= @"Link";
 
 
 #pragma mark - Relative API Path
@@ -166,13 +165,15 @@ NSDictionary *_CDOHDictionaryOfVariableBindings(NSString *commaSeparatedKeysStri
 /// If an option is not supplied the key (including the colon, ":") will be
 /// used.
 NSString *CDOHRelativeAPIPath(NSString *pathFormat, NSDictionary *options);
-NSString *CDOHRelativeAPIPath(NSString *pathFormat, NSDictionary *__unused options)
+NSString *CDOHRelativeAPIPath(NSString *pathFormat, NSDictionary *options)
 {
-	// Length of path + 8 extra chars per option (as it is likely the login of
-	// a user or the name of a repo to be longer than ":login" or ":repo").
-	NSMutableString *path = [[NSMutableString alloc] initWithCapacity:[pathFormat length] + ([options count] * 8)];
+	// No need to do anything if options is empty or even nil, the end result
+	// would have been to return the pathFormat anyway.
+	if ([options count] == 0) { return pathFormat; }
 	
+	NSMutableString *path = [[NSMutableString alloc] init];
 	NSArray *pathComponents = [pathFormat pathComponents];
+	
 	for (NSString *component in pathComponents) {
 		NSString *pathComponent = nil;
 		if ([component isEqualToString:@"/"]) {
@@ -184,6 +185,9 @@ NSString *CDOHRelativeAPIPath(NSString *pathFormat, NSDictionary *__unused optio
 		
 		if (pathComponent == nil) {
 			pathComponent = component;
+#if DEBUG
+			NSLog(@"=== %s: No option for '%@'", __PRETTY_FUNCTION__, component);
+#endif
 		}
 		
 		[path appendFormat:@"/%@", pathComponent];
@@ -192,104 +196,129 @@ NSString *CDOHRelativeAPIPath(NSString *pathFormat, NSDictionary *__unused optio
 	return path;
 }
 
+/**
+ * To get/use the relative API path "/repos/:user/:repo/issues/:id/labels/:id"
+ * you can do the following (psuedo codeish):
+ *
+ *     NSArray *pathFormats = @[
+ *         kCDOHRepositoryPathFormat,
+ *         kCDOHResourcePropertyPathFormat,
+ *         kCDOHResourcePropertyPathFormat
+ *     ];
+ *     NSArray *optionDicts = @[
+ *         @{@"owner", owner, @"repo", repo},
+ *         @{@"resource", kCDOHResourceIssues, @"identifier", issueIdentifier},
+ *         @{@"resource", kCDOHResourceLabels, @"identifier", labelIdentifier}
+ *     ];
+ *     
+ *     NSString *path = CDOHConcatenatedRelativeAPIPaths(pathFormats, optionDicts);
+ *
+ */
+NSString *CDOHConcatenatedRelativeAPIPaths(NSArray *pathFormats, NSArray *optionDicts);
+NSString *CDOHConcatenatedRelativeAPIPaths(NSArray *pathFormats, NSArray *optionDicts)
+{
+	NSMutableString *path = [[NSMutableString alloc] init];
+	
+	[pathFormats enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL __unused *stop) {
+		NSString *pathFormat = obj;
+		
+		NSDictionary *options = nil;
+		if (idx < [optionDicts count]) {
+			options = [optionDicts objectAtIndex:idx];
+		}
+		
+		NSString *relativeApiPath = CDOHRelativeAPIPath(pathFormat, options);
+		[path appendString:relativeApiPath];
+	}];
+	
+	return path;
+}
+
+#define CDOHMakeArray(...) [NSArray arrayWithObjects:__VA_ARGS__, nil]
+#define CDOHMakeDict(...) [NSDictionary dictionaryWithObjectsAndKeys:__VA_ARGS__, nil]
+
 
 #pragma mark - GitHub Relative API Path (Formats)
-#pragma mark |- Users
-/// The relative path format for a user with login.
-/// Takes one string;
-/// 1. the `login` name of the user.
-NSString *const kCDOHUserPathFormat							= @"/users/:login";
-/// The relative path format for a given users resource (such as "repos",
-/// "followers" and so on).
-/// Takes two string:
-/// 1. the `login` of the user.
-/// 2. the `resource` sought for the user.
-NSString *const kCDOHUserResourcePathFormat					= @"/users/:login/:resource";
+#pragma mark |- Path Format Keys
+NSString *const kCDOHResourceKey							= @"resource";
+NSString *const kCDOHPropertyKey							= @"property";
+NSString *const kCDOHIdentifierKey							= @"identifier";
+NSString *const kCDOHOwnerKey								= @"owner";
+NSString *const kCDOHRepositoryKey							= @"repo";
+NSString *const kCDOHBaseKey								= @"base";
+NSString *const kCDOHHeadKey								= @"head";
 
-#pragma mark |- Authenticated User
-/// The relative path for the authenticated user.
-NSString *const kCDOHAuthenticatedUserPath					= @"/user";
-/// The relative path format for a resource of the authenticated user (such as
-/// "repos", "followers", "emails" and so on).
-/// Takes one string:
-/// 2. the `resource` sought for the user.
-NSString *const kCDOHAuthenticatedUserResourcePath			= @"/user/:resource";
-/// The relative path for checking if the authenticated user is watching the
-/// given repository. Also used to start/stop watching the given repository.
-/// Takes two strings;
-/// 1. the `owner` login of the repository,
-/// 2. the `repo` name.
-NSString *const kCDOHAuthenticatedWatchedRepositoryPath		= @"/user/watched/:owner/:repo";
-/// The relative path for checking if the authenticated user is following the
-/// given user. Also used to start/stop follow or the given user.
-/// Takes one strings;
-/// 1. the `login` of the user which should be checked if the authenticated user
-/// is following or to start/stop follow.
-NSString *const kCDOHAuthenticatedFollowingUserPath			= @"/user/following/:login";
+#pragma mark |- Resource Path Formats
+/// The relative path for a :resource.
+NSString *const kCDOHResourcePathFormat						= @"/:resource";
+/// The relative path for a :property of a :resource.
+NSString *const kCDOHResourcePropertyPathFormat				= @"/:resource/:property";
+/// The relative path for a specific :resource identified using :identifier.
+NSString *const kCDOHIdentifiedResourcePathFormat			= @"/:resource/:identifier";
+/// The relative path for a :property of a :resource identified using :identifier.
+NSString *const kCDOHIdentifiedResourcePropertyPathFormat	= @"/:resource/:identifier/:property";
+/// The relative path for a :property identified using :identfier of a :resource.
+NSString *const kCDOHResourcePropertyIdentifiedPathFormat	= @"/:resource/:property/:identifier";
+/// The relative path for a repository (:owner, :repo) for a specific :property
+/// of a :resource.
+NSString *const kCDOHResourcePropertyRepositoryPathFormat	= @"/:resource/:property/:owner/:repo";
 
-#pragma mark |- Repositories
-/// The relative path format for a given repository.
-/// Takes two strings:
-/// 1. the `owner` login of the repository,
-/// 2. the `repo` name.
+#pragma mark |- Repository Path Formats
 NSString *const kCDOHRepositoryPathFormat					= @"/repos/:owner/:repo";
-/// The relative path format for a resource of the given repository.
-/// Takes three strings:
-/// 1. the `owner` login of the repository,
-/// 2. the `repo` name.
-/// 3. the `resource` sought for the repository (such as "forks", "watchers" and
-///    so on).
-NSString *const kCDOHRepositoryResourcePathFormat			= @"/repos/:owner/:repo/:resource";
+NSString *const kCDOHRepositoryComparePathFormat			= @"/repos/:owner/:repo/compare/:base...:head";
 
-#pragma mark |- Organizations
-/// The relative path format for a given organizations repositories.
-/// Takes one string:
-/// 1. the name of the `organization`.
-NSString *const kCDOHOrganizationPathFormat					= @"/orgs/:organization";
-NSString *const kCDOHOrganizationResourcePathFormat			= @"/orgs/:organization/:resource";
-NSString *const kCDOHOrganizationResourceUserPathFormat		= @"/orgs/:organization/:resource/:login";
+#pragma mark |- Git Data Path Formats
+NSString *const kCDOHGitDataResourcePathFormat				= @"/repos/:owner/:repo/git/:resource";
+NSString *const kCDOHGitDataResourcePropertyPathFormat		= @"/repos/:owner/:repo/git/:resource/:property";
 
-#pragma mark |- Teams
-NSString *const kCDOHTeamPathFormat							= @"/teams/:team";
-NSString *const kCDOHTeamResourcePathFormat					= @"/teams/:team/:resource";
-NSString *const kCDOHTeamResourceUserPathFormat				= @"/teams/:team/:resource/:user";
-NSString *const kCDOHTeamResourceRepositoryPathFormat		= @"/teams/:team/:resource/:owner/:repo";
+#pragma mark |- Resources
+NSString *const kCDOHResourceBlobs							= @"blobs";
+NSString *const kCDOHResourceBranches						= @"branches";
+NSString *const kCDOHResourceCollaborators					= @"collaborators";
+NSString *const kCDOHResourceCommits						= @"commits";
+NSString *const kCDOHResourceCompare						= @"compare";
+NSString *const kCDOHResourceContributors					= @"contributors";
+NSString *const kCDOHResourceDownloads						= @"downloads";
+NSString *const kCDOHResourceForks							= @"forks";
+NSString *const kCDOHResourceGists							= @"gists";
+NSString *const kCDOHResourceHooks							= @"hooks";
+NSString *const kCDOHResourceHub							= @"hub";
+NSString *const kCDOHResourceIssues							= @"issues";
+NSString *const kCDOHResourceKeys							= @"keys";
+NSString *const kCDOHResourceLabels							= @"labels";
+NSString *const kCDOHResourceLanguages						= @"languages";
+NSString *const kCDOHResourceMilestones						= @"milestones";
+NSString *const kCDOHResourceOrganizations					= @"orgs";
+NSString *const kCDOHResourcePulls							= @"pulls";
+NSString *const kCDOHResourceReceivedEvents					= @"received_events";
+NSString *const kCDOHResourceReferences						= @"refs";
+NSString *const kCDOHResourceRepositories					= @"repos";
+NSString *const kCDOHResourceTags							= @"tags";
+NSString *const kCDOHResourceTeams							= @"teams";
+NSString *const kCDOHResourceTrees							= @"trees";
+NSString *const kCDOHResourceAuthenticatedUser				= @"user";
+NSString *const kCDOHResourceUsers							= @"users";
+NSString *const kCDOHResourceWatchers						= @"watchers";
 
-
-#pragma mark - GitHub API Path Resources
-#pragma mark |- User and Authenticated User Resources
-///
-NSString *const kCDOHUserRepositoriesResource				= @"repos";
-///
-NSString *const kCDOHUserWatchedRepositoriesResource		= @"watched";
-///
-NSString *const kCDOHUserFollowersResource					= @"followers";
-///
-NSString *const kCDOHUserFollowingResource					= @"following";
-///
-NSString *const kCDOHAuthenticatedUserEmailsResource		= @"emails";
-
-
-#pragma mark |- Repository Resources
-/// Repository watchers resource.
-NSString *const kCDOHRepositoryWatchersResource				= @"watchers";
-/// Repository forks resource.
-NSString *const kCDOHRepositoryForksResource				= @"forks";
-/// Repository contributors resource.
-NSString *const kCDOHRepositoryContributorsResource			= @"contributors";
-/// Repository languages resource.
-NSString *const kCDOHRepositoryLanguagesResource			= @"languages";
-/// Repository teams resource.
-NSString *const kCDOHRepositoryTeamsResource				= @"teams";
-/// Repository tags resource.
-NSString *const kCDOHRepositoryTagsResource					= @"tags";
-/// Repository branches resource.
-NSString *const kCDOHRepositoryBranchesResource				= @"branches";
-
-#pragma mark |- Organization Resources
-///
-NSString *const kCDOHOrganizationRepositoriesResource		= @"repos";
-
+#pragma mark |- Resource Properties
+NSString *const kCDOHResourcePropertyComments				= @"comments";
+NSString *const kCDOHResourcePropertyEmails					= @"emails";
+NSString *const kCDOHResourcePropertyEvents					= @"events";
+NSString *const kCDOHResourcePropertyFiles					= @"files";
+NSString *const kCDOHResourcePropertyFollowers				= @"followers";
+NSString *const kCDOHResourcePropertyFollowing				= @"following";
+NSString *const kCDOHResourcePropertyForks					= @"forks";
+NSString *const kCDOHResourcePropertyMembers				= @"members";
+NSString *const kCDOHResourcePropertyMerge					= @"merge";
+NSString *const kCDOHResourcePropertyOrganizations			= @"orgs";
+NSString *const kCDOHResourcePropertyPublic					= @"public";
+NSString *const kCDOHResourcePropertyPublicMembers			= @"public_members";
+NSString *const kCDOHResourcePropertyPush					= @"push";
+NSString *const kCDOHResourcePropertyRepositories			= @"repos";
+NSString *const kCDOHResourcePropertyStar					= @"star";
+NSString *const kCDOHResourcePropertyStarred				= @"starred";
+NSString *const kCDOHResourcePropertyTeams					= @"teams";
+NSString *const kCDOHResourcePropertyWatched				= @"watched";
 
 
 #pragma mark - Request Parameter Keys
@@ -350,11 +379,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Standard Requests
 /// Get an array of `CDOHRepository` objects from a given _path_ using the given
 /// _params_ for the given _pages_.
-- (void)getRepositoriesAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositoriesAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /// Get an array of `CDOHUser` objects from a given _path_ using the given
 /// _params_ for the given _pages_.
-- (void)getUsersAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)usersAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - Response Helpers
@@ -474,6 +503,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	_itemsPerPage = itemsPerPage;
 }
 
+// FIXME: Auth header should be set per request.
 - (void)setUsername:(NSString *)username
 {
 	[_usernameLock lock];
@@ -496,6 +526,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	return username;
 }
 
+// FIXME: Auth header should be set per request.
 - (void)setPassword:(NSString *)password
 {
 	[_passwordLock lock];
@@ -698,7 +729,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Standard Requests
-- (void)getRepositoriesAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)repositoriesAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(path);
 	if ([pages count] == 0) {
@@ -717,7 +748,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	}
 }
 
-- (void)getUsersAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)usersAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(path);
 	if ([pages count] == 0) {
@@ -822,8 +853,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	NSParameterAssert(login);
 	if (!successBlock && !failureBlock) { return; }
 
-	NSString *path = CDOHRelativeAPIPath(kCDOHUserPathFormat, CDOHDictionaryOfVariableBindings(login));
-	//NSString *getPath = [[NSString alloc] initWithFormat:kCDOHUserPathFormat, login];
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceUsers,	kCDOHResourceKey,
+										 login,					kCDOHIdentifierKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHIdentifiedResourcePathFormat, options);
 	[self.client getPath:path
 			  parameters:nil
 				 success:[self standardUserSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(login)]
@@ -835,7 +867,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!successBlock && !failureBlock) { return; }
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	
-	[self.client getPath:kCDOHAuthenticatedUserPath
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceAuthenticatedUser, kCDOHResourceKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePathFormat, options);
+	[self.client getPath:path
 			  parameters:nil
 				 success:[self standardUserSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:nil]
 				 failure:[self standardFailureBlock:failureBlock]];
@@ -858,7 +892,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 					 nil];
 	params = [self requestParameterDictionaryForDictionary:dictionary validKeys:keys];
 	
-	[self.client patchPath:kCDOHAuthenticatedUserPath
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceAuthenticatedUser, kCDOHResourceKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePathFormat, options);
+	[self.client patchPath:path
 				parameters:params
 				   success:[self standardUserSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(dictionary)]
 				   failure:[self standardFailureBlock:failureBlock]];
@@ -871,8 +907,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!successBlock && !failureBlock) { return; }
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	
-	NSString *resource = kCDOHAuthenticatedUserEmailsResource;
-	NSString *path = CDOHRelativeAPIPath(kCDOHAuthenticatedUserResourcePath, CDOHDictionaryOfVariableBindings(resource));
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceAuthenticatedUser,	kCDOHResourceKey,
+										 kCDOHResourcePropertyEmails,		kCDOHPropertyKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyPathFormat, options);
 	
 	[self.client getPath:path
 			  parameters:nil
@@ -885,8 +922,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	NSParameterAssert(emails);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	
-	NSString *resource = kCDOHAuthenticatedUserEmailsResource;
-	NSString *path = CDOHRelativeAPIPath(kCDOHAuthenticatedUserResourcePath, CDOHDictionaryOfVariableBindings(resource));
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceAuthenticatedUser,	kCDOHResourceKey,
+										 kCDOHResourcePropertyEmails,		kCDOHPropertyKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyPathFormat, options);
 	
 	[self.client postPath:path
 			   parameters:emails
@@ -899,8 +937,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	NSParameterAssert(emails);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	
-	NSString *resource = kCDOHAuthenticatedUserEmailsResource;
-	NSString *path = CDOHRelativeAPIPath(kCDOHAuthenticatedUserResourcePath, CDOHDictionaryOfVariableBindings(resource));
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceAuthenticatedUser,	kCDOHResourceKey,
+										 kCDOHResourcePropertyEmails,		kCDOHPropertyKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyPathFormat, options);
 	
 	[self.client deletePath:path
 				 parameters:emails
@@ -944,9 +983,9 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	}
 	[params setObject:name forKey:kCDOHRepositoryNameKey];
 	
-	
-	NSString *resource = kCDOHUserRepositoriesResource;
-	NSString *path = CDOHRelativeAPIPath(kCDOHAuthenticatedUserResourcePath, CDOHDictionaryOfVariableBindings(resource));
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceAuthenticatedUser,	kCDOHResourceKey,
+										 kCDOHResourcePropertyRepositories,	kCDOHPropertyKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyPathFormat, options);
 	
 	[self.client postPath:path
 			   parameters:params
@@ -976,8 +1015,10 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	}
 	[params setObject:name forKey:kCDOHRepositoryNameKey];
 	
-	NSString *resource = kCDOHOrganizationRepositoriesResource;
-	NSString *path = CDOHRelativeAPIPath(kCDOHOrganizationResourcePathFormat, CDOHDictionaryOfVariableBindings(resource, organization));
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceOrganizations,		kCDOHResourceKey,
+										 kCDOHResourcePropertyRepositories,	kCDOHPropertyKey,
+										 organization,						kCDOHIdentifierKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHIdentifiedResourcePropertyPathFormat, options);
 	
 	[self.client postPath:path
 			   parameters:params
@@ -1008,7 +1049,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		[params setObject:repo forKey:kCDOHRepositoryNameKey];
 	}
 	
-	NSString *path = CDOHRelativeAPIPath(kCDOHRepositoryPathFormat, CDOHDictionaryOfVariableBindings(repo,owner));
+	NSString *path = CDOHRelativeAPIPath(kCDOHRepositoryPathFormat, CDOHDictionaryOfVariableBindings(repo, owner));
 	
 	[self.client postPath:path
 			   parameters:params
@@ -1024,10 +1065,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	
 	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
 	
-	NSString *resource = kCDOHUserRepositoriesResource;
-	NSString *path = CDOHRelativeAPIPath(kCDOHAuthenticatedUserResourcePath, CDOHDictionaryOfVariableBindings(resource));
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceAuthenticatedUser,	kCDOHResourceKey,
+										 kCDOHResourcePropertyRepositories,	kCDOHPropertyKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyPathFormat, options);
 	
-	[self getRepositoriesAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
+	[self repositoriesAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
 }
 
 - (void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -1038,10 +1080,12 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
 	
-	NSString *resource = kCDOHUserRepositoriesResource;
-	NSString *path = CDOHRelativeAPIPath(kCDOHUserResourcePathFormat, CDOHDictionaryOfVariableBindings(resource, login));
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceUsers,				kCDOHResourceKey,
+										 kCDOHResourcePropertyRepositories,	kCDOHPropertyKey,
+										 login,								kCDOHIdentifierKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHIdentifiedResourcePropertyPathFormat, options);
 	
-	[self getRepositoriesAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
+	[self repositoriesAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
 }
 
 - (void)repositoriesForOrganization:(NSString *)organization type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -1052,10 +1096,12 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 	NSDictionary *params = CDOHParametersDictionary(type, kCDOHParameterRepositoriesTypeKey);
 	
-	NSString *resource = kCDOHOrganizationRepositoriesResource;
-	NSString *path = CDOHRelativeAPIPath(kCDOHOrganizationResourcePathFormat, CDOHDictionaryOfVariableBindings(resource, organization));
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceOrganizations,		kCDOHResourceKey,
+										 kCDOHResourcePropertyRepositories,	kCDOHPropertyKey,
+										 organization,						kCDOHIdentifierKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHIdentifiedResourcePropertyPathFormat, options);
 
-	[self getRepositoriesAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
+	[self repositoriesAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
 }
 
 - (void)repositoryContributors:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock) successBlock failure:(CDOHFailureBlock) failureBlock
@@ -1063,6 +1109,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	[self repositoryContributors:repository owner:owner anonymous:NO success:successBlock failure:failureBlock];
 }
 
+// TODO: This should create an array of dictionaries instead of user-objects (#42)
 - (void)repositoryContributors:(NSString *)repo owner:(NSString *)owner anonymous:(BOOL)anonymous success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
@@ -1071,10 +1118,15 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 	NSDictionary *params = CDOHParametersDictionary([NSNumber numberWithBool:anonymous], @"anon");
 	
-	NSString *resource = kCDOHRepositoryContributorsResource;
-	NSString *path = CDOHRelativeAPIPath(kCDOHRepositoryResourcePathFormat, CDOHDictionaryOfVariableBindings(resource, owner, repo));
 	
-	[self getUsersAtPath:path params:params pages:nil success:successBlock failure:failureBlock];
+	NSArray *pathFormats = CDOHMakeArray(kCDOHRepositoryPathFormat,
+										 kCDOHResourcePathFormat);
+	NSArray *optionDicts = CDOHMakeArray(CDOHMakeDict(repo,		kCDOHRepositoryKey,
+													  owner,	kCDOHOwnerKey),
+										 CDOHMakeDict(kCDOHResourceContributors, kCDOHResourceKey));
+	NSString *path = CDOHConcatenatedRelativeAPIPaths(pathFormats, optionDicts);
+	
+	[self usersAtPath:path params:params pages:nil success:successBlock failure:failureBlock];
 }
 
 - (void)repositoryLanguages:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -1102,8 +1154,12 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		return languagesArray;
 	};
 	
-	NSString *resource = kCDOHRepositoryLanguagesResource;
-	NSString *path = CDOHRelativeAPIPath(kCDOHRepositoryResourcePathFormat, CDOHDictionaryOfVariableBindings(resource, owner, repo));
+	NSArray *pathFormats = CDOHMakeArray(kCDOHRepositoryPathFormat,
+										 kCDOHResourcePathFormat);
+	NSArray *optionDicts = CDOHMakeArray(CDOHMakeDict(repo,		kCDOHRepositoryKey,
+													  owner,	kCDOHOwnerKey),
+										 CDOHMakeDict(kCDOHResourceLanguages, kCDOHResourceKey));
+	NSString *path = CDOHConcatenatedRelativeAPIPaths(pathFormats, optionDicts);
 	
 	[self.client getPath:path
 			  parameters:nil
@@ -1119,10 +1175,14 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	NSParameterAssert(owner);
 	if (!successBlock && !failureBlock) { return; }
 	
-	NSString *resource = kCDOHRepositoryWatchersResource;
-	NSString *path = CDOHRelativeAPIPath(kCDOHRepositoryResourcePathFormat, CDOHDictionaryOfVariableBindings(resource, repo, owner));
+	NSArray *pathFormats = CDOHMakeArray(kCDOHRepositoryPathFormat,
+										 kCDOHResourcePathFormat);
+	NSArray *optionDicts = CDOHMakeArray(CDOHMakeDict(repo,		kCDOHRepositoryKey,
+													  owner,	kCDOHOwnerKey),
+										 CDOHMakeDict(kCDOHResourceWatchers, kCDOHResourceKey));
+	NSString *path = CDOHConcatenatedRelativeAPIPaths(pathFormats, optionDicts);
 	
-	[self getUsersAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
+	[self usersAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
 }
 
 - (void)repositoriesWatchedByUser:(NSString *)login pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -1130,10 +1190,12 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	NSParameterAssert(login);
 	if (!successBlock && !failureBlock) { return; }
 	
-	NSString *resource = kCDOHUserWatchedRepositoriesResource;
-	NSString *path = CDOHRelativeAPIPath(kCDOHUserResourcePathFormat, CDOHDictionaryOfVariableBindings(resource, login));
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceUsers,			kCDOHResourceKey,
+										 kCDOHResourcePropertyWatched,	kCDOHPropertyKey,
+										 login,							kCDOHIdentifierKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHIdentifiedResourcePropertyPathFormat, options);
 	
-	[self getRepositoriesAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
+	[self repositoriesAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
 }
 
 - (void)isUserWatchingRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -1143,7 +1205,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (!successBlock && !failureBlock) { return; }
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	
-	NSString *path = CDOHRelativeAPIPath(kCDOHAuthenticatedWatchedRepositoryPath, CDOHDictionaryOfVariableBindings(repo, owner));
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceUsers,			kCDOHResourceKey,
+										 kCDOHResourcePropertyWatched,	kCDOHPropertyKey,
+										 repo,							kCDOHRepositoryKey,
+										 owner,							kCDOHOwnerKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyRepositoryPathFormat, options);
 	
 	[self.client getPath:path
 			  parameters:nil
@@ -1157,7 +1223,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	NSParameterAssert(owner);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	
-	NSString *path = CDOHRelativeAPIPath(kCDOHAuthenticatedWatchedRepositoryPath, CDOHDictionaryOfVariableBindings(repo, owner));
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceUsers,			kCDOHResourceKey,
+										 kCDOHResourcePropertyWatched,	kCDOHPropertyKey,
+										 repo,							kCDOHRepositoryKey,
+										 owner,							kCDOHOwnerKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyRepositoryPathFormat, options);
 	
 	[self.client putPath:path
 			  parameters:nil
@@ -1171,7 +1241,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	NSParameterAssert(owner);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	
-	NSString *path = CDOHRelativeAPIPath(kCDOHAuthenticatedWatchedRepositoryPath, CDOHDictionaryOfVariableBindings(repo, owner));
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceUsers,			kCDOHResourceKey,
+										 kCDOHResourcePropertyWatched,	kCDOHPropertyKey,
+										 repo,							kCDOHRepositoryKey,
+										 owner,							kCDOHOwnerKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyRepositoryPathFormat, options);
 	
 	[self.client deletePath:path
 				 parameters:nil
@@ -1187,10 +1261,14 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	NSParameterAssert(owner);
 	if (!successBlock && !failureBlock) { return; }
 	
-	NSString *resource = kCDOHRepositoryForksResource;
-	NSString *path = CDOHRelativeAPIPath(kCDOHRepositoryResourcePathFormat, CDOHDictionaryOfVariableBindings(resource, repo, owner));
+	NSArray *pathFormats = CDOHMakeArray(kCDOHRepositoryPathFormat,
+										 kCDOHResourcePathFormat);
+	NSArray *optionDicts = CDOHMakeArray(CDOHMakeDict(repo,		kCDOHRepositoryKey,
+													  owner,	kCDOHOwnerKey),
+										 CDOHMakeDict(kCDOHResourceForks, kCDOHResourceKey));
+	NSString *path = CDOHConcatenatedRelativeAPIPaths(pathFormats, optionDicts);
 	
-	[self getRepositoriesAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
+	[self repositoriesAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
 }
 
 - (void)forkRepository:(NSString *)repo owner:(NSString *)owner intoOrganization:(NSString *)intoOrganization success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -1206,8 +1284,12 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				  nil];
 	}
 	
-	NSString *resource = kCDOHRepositoryForksResource;
-	NSString *path = CDOHRelativeAPIPath(kCDOHRepositoryResourcePathFormat, CDOHDictionaryOfVariableBindings(resource, repo, owner));
+	NSArray *pathFormats = CDOHMakeArray(kCDOHRepositoryPathFormat,
+										 kCDOHResourcePathFormat);
+	NSArray *optionDicts = CDOHMakeArray(CDOHMakeDict(repo,		kCDOHRepositoryKey,
+													  owner,	kCDOHOwnerKey),
+										 CDOHMakeDict(kCDOHResourceForks, kCDOHResourceKey));
+	NSString *path = CDOHConcatenatedRelativeAPIPaths(pathFormats, optionDicts);
 	
 	[self.client postPath:path
 			   parameters:params
