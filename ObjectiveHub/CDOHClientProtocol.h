@@ -631,9 +631,8 @@
  *
  * @param type The type of repositories which should returned. See the
  * constants with the prefix `kCDOHRepositoriesType*` for possible values.
- * @param pages An array of an unsigned integers wrapped with a NSNumber for
- * each page of the resource that should be loaded. May be `nil` in which case
- * the first page will be loaded.
+ * @param pages A set of indexes representing the pages which should be loaded.
+ * May be `nil` in which case the first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.
@@ -656,7 +655,7 @@
  * @see CDOHResponse
  * @see CDOHRepository
  */
-- (void)repositories:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositories:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all public repositories of the user with the given _login_.
@@ -669,9 +668,8 @@
  * constants with the prefix `kCDOHRepositoriesType*` for possible values.
  * Since we can only get public information for non-authenticated users the
  * `kCDOHRepositoriesTypePrivate` will not yeild any successful result.
- * @param pages An array of an unsigned integers wrapped with a NSNumber for
- * each page of the resource that should be loaded. May be `nil` in which case
- * the first page will be loaded.
+ * @param pages A set of indexes representing the pages which should be loaded.
+ * May be `nil` in which case the first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.
@@ -688,7 +686,7 @@
  * @see CDOHResponse
  * @see CDOHRepository
  */
-- (void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all repositories of the given _organization_.
@@ -701,9 +699,8 @@
  * constants with the prefix `kCDOHRepositoriesType*` for possible values. Some
  * types might require the authenticated user to be a member of the organization
  * or have access to specific repositories in the organization.
- * @param pages An array of an unsigned integers wrapped with a NSNumber for
- * each page of the resource that should be loaded. May be `nil` in which case
- * the first page will be loaded.
+ * @param pages A set of indexes representing the pages which should be loaded.
+ * May be `nil` in which case the first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.
@@ -721,7 +718,7 @@
  * @see CDOHResponse
  * @see CDOHRepository
  */
-- (void)repositoriesForOrganization:(NSString *)organization type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositoriesForOrganization:(NSString *)organization type:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all contributors (exluding anonymous contributors) of the given
@@ -812,9 +809,8 @@
  *
  * @param repository The name of the repository.
  * @param owner The login of the owner of the given _repository_.
- * @param pages An array of an unsigned integers wrapped with a NSNumber for
- * each page of the resource that should be loaded. May be `nil` in which case
- * the first page will be loaded.
+ * @param pages A set of indexes representing the pages which should be loaded.
+ * May be `nil` in which case the first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.
@@ -829,7 +825,7 @@
  * @see CDOHResponse
  * @see CDOHUser
  */
-- (void)repositoryWatchers:(NSString *)repository owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositoryWatchers:(NSString *)repository owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all repositories watched by a specific user.
@@ -839,9 +835,8 @@
  *
  * @param login The login of the user for which the array of watched
  * repositories should be fetched.
- * @param pages An array of an unsigned integers wrapped with a NSNumber for
- * each page of the resource that should be loaded. May be `nil` in which case
- * the first page will be loaded.
+ * @param pages A set of indexes representing the pages which should be loaded.
+ * May be `nil` in which case the first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.
@@ -855,7 +850,7 @@
  *
  * @see CDOHRepository
  */
-- (void)repositoriesWatchedByUser:(NSString *)login pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Check whether the currently authenticated user is watching the given
@@ -952,9 +947,8 @@
  *
  * @param repository The name of the repository.
  * @param owner The login of the owner of the given _repository_.
- * @param pages An array of an unsigned integers wrapped with a NSNumber for
- * each page of the resource that should be loaded. May be `nil` in which case
- * the first page will be loaded.
+ * @param pages A set of indexes representing the pages which should be loaded.
+ * May be `nil` in which case the first page will be loaded.
  * @param successBlock The block which is called upon success with a
  * (CDOHResponse) response object. The parameter may be set to `NULL` in which
  * case nothing will be done upon success.
@@ -968,7 +962,7 @@
  *
  * @see forkRepository:owner:success:failure:
  */
-- (void)repositoryForks:(NSString *)repository owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositoryForks:(NSString *)repository owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Create a new fork of the given repository.

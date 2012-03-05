@@ -31,6 +31,7 @@
 //
 
 #import "CDOHClient.h"
+#import "CDOHClientPrivate.h"
 #import "CDOHClientProtocol.h"
 #import "CDOHLibraryVersion.h"
 
@@ -79,28 +80,6 @@ NSString *const kCDOHResponseHeaderXRateLimitLimitKey		= @"X-RateLimit-Limit";
 NSString *const kCDOHResponseHeaderXRateLimitRemainingKey	= @"X-RateLimit-Remaining";
 NSString *const kCDOHResponseHeaderLocationKey				= @"Location";
 NSString *const kCDOHResponseHeaderLinkKey					= @"Link";
-
-
-#pragma mark - Pages Array Helper
-// TODO: Remove this when fixing "Use NSIndexSet instead of NSArray for pages" (#43)
-NSArray *_CDOHPagesArrayForPageIndexes(NSUInteger pageIdx, ...)
-{
-	NSUInteger idx = pageIdx;
-	NSNumber *idxNum = nil;
-	NSMutableArray *pages = [[NSMutableArray alloc] init];
-	
-	va_list args;
-	va_start(args, pageIdx);
-	while (idx != NSUIntegerMax) {
-		idxNum = [[NSNumber alloc] initWithUnsignedInteger:idx];
-		[pages addObject:idxNum];
-		
-		idx = va_arg(args, NSUInteger);
-	}
-	va_end(args);
-	
-	return pages;
-}
 
 
 #pragma mark - Relative API Path
@@ -379,11 +358,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Standard Requests
 /// Get an array of `CDOHRepository` objects from a given _path_ using the given
 /// _params_ for the given _pages_.
-- (void)repositoriesAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositoriesAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /// Get an array of `CDOHUser` objects from a given _path_ using the given
 /// _params_ for the given _pages_.
-- (void)usersAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)usersAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - Response Helpers
@@ -729,42 +708,42 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Standard Requests
-- (void)repositoriesAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)repositoriesAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(path);
 	if ([pages count] == 0) {
-		pages = CDOHPagesArrayForPageIndexes(1);
+		pages = [NSIndexSet indexSetWithIndex:1];
 	}
 	
-	for (NSNumber *idxNum in pages) {
-		NSUInteger idx = [idxNum unsignedIntegerValue];
+	__weak CDOHClient *blockSelf = self;
+	[pages enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL __unused *stop) {
 		NSMutableDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
 		[paramDict addEntriesFromDictionary:params];
 		
-		[self.client getPath:path
-				  parameters:paramDict
-					 success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(path, params)]
-					 failure:[self standardFailureBlock:failureBlock]];
-	}
+		[blockSelf.client getPath:path
+					   parameters:paramDict
+						  success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(path, params)]
+						  failure:[self standardFailureBlock:failureBlock]];
+	}];
 }
 
-- (void)usersAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)usersAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(path);
 	if ([pages count] == 0) {
-		pages = CDOHPagesArrayForPageIndexes(1);
+		pages = [NSIndexSet indexSetWithIndex:1];
 	}
 	
-	for (NSNumber *idxNum in pages) {
-		NSUInteger idx = [idxNum unsignedIntegerValue];
+	__weak CDOHClient *blockSelf = self;
+	[pages enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL __unused *stop) {
 		NSMutableDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
 		[paramDict addEntriesFromDictionary:params];
 		
-		[self.client getPath:path
-				  parameters:paramDict
-					 success:[self standardUserArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(path, params)]
-					 failure:[self standardFailureBlock:failureBlock]];
-	}
+		[blockSelf.client getPath:path
+					   parameters:paramDict
+						  success:[blockSelf standardUserArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(path, params)]
+						  failure:[blockSelf standardFailureBlock:failureBlock]];
+	}];
 }
 
 
@@ -1057,7 +1036,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				  failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)repositories:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)repositories:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(type);
 	if (!successBlock && !failureBlock) { return; }
@@ -1072,7 +1051,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	[self repositoriesAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
 }
 
-- (void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(login);
 	NSParameterAssert(type);
@@ -1088,7 +1067,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	[self repositoriesAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
 }
 
-- (void)repositoriesForOrganization:(NSString *)organization type:(NSString *)type pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)repositoriesForOrganization:(NSString *)organization type:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(organization);
 	NSParameterAssert(type);
@@ -1169,7 +1148,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Watched and Watching Repositories
-- (void)repositoryWatchers:(NSString *)repo owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)repositoryWatchers:(NSString *)repo owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);
@@ -1185,7 +1164,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	[self usersAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
 }
 
-- (void)repositoriesWatchedByUser:(NSString *)login pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(login);
 	if (!successBlock && !failureBlock) { return; }
@@ -1255,7 +1234,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Repository Forks
-- (void)repositoryForks:(NSString *)repo owner:(NSString *)owner pages:(NSArray *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)repositoryForks:(NSString *)repo owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);

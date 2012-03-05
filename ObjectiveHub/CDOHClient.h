@@ -39,17 +39,6 @@
 #define kCDOHDefaultItemsPerPage			0
 
 
-#pragma mark - Pages Array Helper
-/**
- * Helper macro for creating pages arrays from a variable list of `NSUIntegers`.
- */
-#define CDOHPagesArrayForPageIndexes(...)	_CDOHPagesArrayForPageIndexes(__VA_ARGS__, NSUIntegerMax)
-
-// Internal, do NOT use directly. Use the macro `CDOHPagesArrayForPageIndexes`
-// instead.
-extern NSArray *_CDOHPagesArrayForPageIndexes(NSUInteger pageIdx, ...);
-
-
 #pragma mark - ObjectiveHub Interface
 /**
  * Objective-C class for comunicating with GitHub asynchronously using blocks.
