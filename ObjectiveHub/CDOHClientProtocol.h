@@ -848,9 +848,36 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  *
+ * @see repositoriesWatchedForPages:success:failure:
  * @see CDOHRepository
  */
 - (void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
+/**
+ * Get all repositories watched by the authenticated user.
+ *
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed.
+ *
+ * @param pages A set of indexes representing the pages which should be loaded.
+ * May be `nil` in which case the first page will be loaded.
+ * @param successBlock The block which is called upon success with a
+ * (`CDOHResponse`) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
+ *
+ * The `[CDOHResponse resource]` property of the response will be set to an
+ * `NSArray` object containing one `CDOHRespository` object per watched
+ * repository, up to the maximum items per page.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. May be `NULL` in which case nothing will be done upon failure.
+ *
+ * @exception NSInternalInconsistencyException If no authenticated user has been
+ * set **and** no failure block has been given.
+ *
+ * @see repositoriesWatchedByUser:pages:success:failure:
+ * @see CDOHRepository
+ */
+- (void)repositoriesWatchedForPages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Check whether the currently authenticated user is watching the given

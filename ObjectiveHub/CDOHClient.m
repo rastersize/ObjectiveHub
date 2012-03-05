@@ -1177,6 +1177,20 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	[self repositoriesAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
 }
 
+// TODO: Send message to repositoriesAtPath:params:pages:success:failure:
+- (void)repositoriesWatchedForPages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	if (!successBlock && !failureBlock) { return; }
+	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
+	
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceAuthenticatedUser,	kCDOHResourceKey,
+										 kCDOHResourcePropertyWatched,		kCDOHPropertyKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyPathFormat, options);
+	
+	[self repositoriesAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
+}
+
+
 - (void)isUserWatchingRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
