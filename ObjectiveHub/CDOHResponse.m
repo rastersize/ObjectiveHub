@@ -157,15 +157,25 @@
 #pragma mark - Load More Data
 - (void)loadNextPage
 {
-	NSNumber *nextPageNum = [[NSNumber alloc] initWithUnsignedInteger:_nextPage];
-	NSArray *pages = [[NSArray alloc] initWithObjects:nextPageNum, nil];
+	NSIndexSet *pages = [NSIndexSet indexSetWithIndex:self.nextPage];
 	[self loadPages:pages];
 }
 
 - (void)loadPreviousPage
 {
-	NSNumber *nextPageNum = [[NSNumber alloc] initWithUnsignedInteger:_previousPage];
-	NSArray *pages = [[NSArray alloc] initWithObjects:nextPageNum, nil];
+	NSIndexSet *pages = [NSIndexSet indexSetWithIndex:self.previousPage];
+	[self loadPages:pages];
+}
+
+- (void)loadFirstPage
+{
+	NSIndexSet *pages = [NSIndexSet indexSet];
+	[self loadPages:pages];
+}
+
+- (void)loadLastPage
+{
+	NSIndexSet *pages = [NSIndexSet indexSetWithIndex:self.lastPage];
 	[self loadPages:pages];
 }
 

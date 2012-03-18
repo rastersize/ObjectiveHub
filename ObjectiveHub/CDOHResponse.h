@@ -111,7 +111,7 @@
  *
  * @param pages The pages to load.
  */
-- (void)loadPages:(NSArray *)pages;
+- (void)loadPages:(NSIndexSet *)pages;
 
 /**
  * Load the next resource response page.
@@ -126,6 +126,21 @@
  * If the resource response is not paginated this method does nothing.
  */
 - (void)loadPreviousPage;
+
+/**
+ * Load the first resource response page.
+ *
+ * Even if the resource is not paginated this method will load it again.
+ */
+- (void)loadFirstPage;
+
+/**
+ * Load the last resource response page.
+ *
+ * If the resource response is not paginated this method does nothing.
+ */
+- (void)loadLastPage;
+
 
 #pragma mark - Success and Failure Blocks
 /** @name Success and Failure Blocks */
