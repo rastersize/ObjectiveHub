@@ -62,6 +62,7 @@
  */
 @property (strong, readonly) id resource;
 
+
 #pragma mark - Resource Pagination
 /** @name Resource Pagination */
 /**
@@ -149,7 +150,7 @@
  *
  * Defaults to the success block used in the initial request.
  */
-@property (strong, readonly) CDOHResponseBlock successBlock;
+@property (copy, readonly) CDOHSuccessBlock successBlock;
 
 /**
  * The block to be called upon failure.

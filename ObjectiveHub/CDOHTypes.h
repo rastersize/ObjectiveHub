@@ -57,7 +57,7 @@ typedef void (^CDOHFailureBlock)(CDOHError *error);
  *
  * @param response The response from the service. Is of the type CDOHResponse.
  */
-typedef void (^CDOHResponseBlock)(CDOHResponse *response);
+typedef void (^CDOHSuccessBlock)(CDOHResponse *response);
 
 
 #pragma mark - Repository List Types Type

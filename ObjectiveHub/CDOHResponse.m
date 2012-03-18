@@ -64,7 +64,7 @@
 - (id)initWithResource:(id)resource
 				target:(CDOHClient *)target
 				action:(SEL)action
-		  successBlock:(CDOHResponseBlock)successBlock
+		  successBlock:(CDOHSuccessBlock)successBlock
 		  failureBlock:(CDOHFailureBlock)failureBlock
 		   HTTPHeaders:(NSDictionary *)httpHeaders
 			 arguments:(NSArray *)arguments
@@ -187,7 +187,7 @@
 
 
 #pragma mark - Success and Failure Blocks
-- (void)setSuccessBlock:(CDOHResponseBlock)successBlock
+- (void)setSuccessBlock:(CDOHSuccessBlock)successBlock
 {
 	if (successBlock != _successBlock) {
 		_successBlock = [successBlock copy];
@@ -195,7 +195,7 @@
 	}
 }
 
-- (CDOHResponseBlock)successBlock
+- (CDOHSuccessBlock)successBlock
 {
 	return _successBlock;
 }
