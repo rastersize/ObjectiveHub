@@ -56,7 +56,7 @@
 @interface CDOHResponse : NSObject
 
 #pragma mark - Response Resource
-/** Response Resource */
+/** @name Response Resource */
 /**
  * Resource returned from the request.
  */
@@ -157,35 +157,7 @@
  *
  * Defaults to the failure block used in the initial request.
  */
-@property (strong, readonly) CDOHResponseBlock failureBlock;
-
-
-#pragma mark - Initializing a CDOHResponse Instance
-/**
- * Intialize a newly allocated `CDOHResponse` instance using the given
- * parameters.
- *
- * @param resource The requested resource. May be `nil`.
- * @param target The target for loading more data.
- * @param action The action used to load the data.
- * @param successBlock The block to be called upon success.
- * @param failureBlock The block to be called upon failure.
- * @param httpHeaders The HTTP header returned by the remote.
- * @param arguments The arguments to send to the action. Excluding the `self`,
- * `_cmd`, `successBlock`, `failureBlock` and `pages` arguments.
- * @return A `CDOHResponse` initialized using the given parameters.
- *
- * @see CDOHClient
- * @see CDOHResponseBlock
- * @see CDOHFailureBlock
- */
-- (id)initWithResource:(id)resource
-				target:(CDOHClient *)target
-				action:(SEL)action
-		  successBlock:(CDOHResponseBlock)successBlock
-		  failureBlock:(CDOHFailureBlock)failureBlock
-		   HTTPHeaders:(NSDictionary *)httpHeaders
-			 arguments:(NSArray *)arguments;
+@property (copy, readonly) CDOHFailureBlock failureBlock;
 
 
 @end

@@ -62,8 +62,8 @@
 @synthesize arguments = _arguments;
 
 - (id)initWithResource:(id)resource
-				target:(CDOHClient *)target
-				action:(SEL)action
+				client:(CDOHClient *)client
+			  selector:(SEL)selector
 		  successBlock:(CDOHSuccessBlock)successBlock
 		  failureBlock:(CDOHFailureBlock)failureBlock
 		   HTTPHeaders:(NSDictionary *)httpHeaders
@@ -113,25 +113,25 @@
 			_hasPreviousPage = (_previousPage >= 1 && _previousPage < _page);
 		}
 		
-		NSString *actionString = NSStringFromSelector(action);
+		NSString *actionString = NSStringFromSelector(selector);
 		NSRange pagesRange = [actionString rangeOfString:@":pages:"];
 		_paginated = (pagesRange.location != NSNotFound);
 		
 		// If response is paginated we need this to be able to perform the
 		// request again. Otherwise there is no need to perform it again.
-		if (action != NULL && _paginated &&
+		if (selector != NULL && _paginated &&
 			!(successBlock == NULL && failureBlock == NULL)) {
 			
 			_successBlock = [successBlock copy];
 			_failureBlock = [failureBlock copy];
 			
-			NSMethodSignature *actionSig = [target methodSignatureForSelector:action];
+			NSMethodSignature *actionSig = [client methodSignatureForSelector:selector];
 			NSUInteger numberOfArguments = [actionSig numberOfArguments];
 			_invocation = [NSInvocation invocationWithMethodSignature:actionSig];
-			[_invocation setSelector:action];
-			[_invocation setTarget:target];
+			[_invocation setSelector:selector];
+			[_invocation setTarget:client];
 			
-			_arguments = arguments;
+			_arguments = [arguments copy];
 			// 0 == self, 1 == _cmd thus start at 2
 			NSUInteger argOffset = 2;
 			[_arguments enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *__unused stop) {

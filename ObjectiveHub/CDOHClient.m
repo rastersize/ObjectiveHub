@@ -599,8 +599,8 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 					NSDictionary *httpHeaders = [httpUrlResponse allHeaderFields];
 					
 					CDOHResponse *response = [[CDOHResponse alloc] initWithResource:resource
-																			 target:self
-																			 action:action
+																			 client:self
+																		   selector:action
 																	   successBlock:successBlock 
 																	   failureBlock:failureBlock
 																		HTTPHeaders:httpHeaders
