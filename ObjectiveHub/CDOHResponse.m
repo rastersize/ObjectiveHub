@@ -186,29 +186,6 @@
 }
 
 
-#pragma mark - Success and Failure Blocks
-- (void)setSuccessBlock:(CDOHSuccessBlock)successBlock
-{
-	if (successBlock != _successBlock) {
-		_successBlock = [successBlock copy];
-		[_invocation setArgument:&_successBlock atIndex:_successBlockArgumentIndex];
-	}
-}
-
-- (CDOHSuccessBlock)successBlock
-{
-	return _successBlock;
-}
-
-- (void)setFailureBlock:(CDOHResponseBlock)failureBlock
-{
-	if (failureBlock != _failureBlock) {
-		_failureBlock = [failureBlock copy];
-		[_invocation setArgument:&_failureBlock atIndex:_failureBlockArgumentIndex];
-	}
-}
-
-
 #pragma mark - Describing a Repository Object
 - (NSString *)description
 {
