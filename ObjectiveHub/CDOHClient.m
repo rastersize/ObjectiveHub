@@ -546,17 +546,17 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Controlling Requests
-- (void)suspendAllRequests
+- (oneway void)suspendAllRequests
 {
 	[self.client.operationQueue setSuspended:YES];
 }
 
-- (void)resumeAllRequests
+- (oneway void)resumeAllRequests
 {
 	[self.client.operationQueue setSuspended:NO];
 }
 
-- (void)cancelAllRequests
+- (oneway void)cancelAllRequests
 {
 	[self.client.operationQueue cancelAllOperations];
 
@@ -831,7 +831,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Users
-- (void)userWithLogin:(NSString *)login success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)userWithLogin:(NSString *)login success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(login);
 	if (!successBlock && !failureBlock) { return; }
@@ -845,7 +845,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)user:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)user:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) { return; }
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
@@ -858,7 +858,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)updateUserWithDictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
 	if (!dictionary || [dictionary count] == 0) { return; }
@@ -885,7 +885,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - User Emails
-- (void)userEmails:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)userEmails:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) { return; }
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
@@ -900,7 +900,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)addUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)addUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(emails);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
@@ -915,7 +915,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				  failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)deleteUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)deleteUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(emails);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
@@ -932,7 +932,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Repositories
-- (void)repository:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)repository:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);
@@ -946,7 +946,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)createRepository:(NSString *)name dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)createRepository:(NSString *)name dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(name);
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
@@ -976,7 +976,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				  failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)createRepository:(NSString *)name inOrganization:(NSString *)organization dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)createRepository:(NSString *)name inOrganization:(NSString *)organization dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(name);
 	NSParameterAssert(organization);
@@ -1009,7 +1009,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				  failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)updateRepository:(NSString *)repo owner:(NSString *)owner dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)updateRepository:(NSString *)repo owner:(NSString *)owner dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);
@@ -1040,7 +1040,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				  failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)repositories:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)repositories:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(type);
 	if (!successBlock && !failureBlock) { return; }
@@ -1055,7 +1055,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	[self repositoriesAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
 }
 
-- (void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(login);
 	NSParameterAssert(type);
@@ -1071,7 +1071,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	[self repositoriesAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
 }
 
-- (void)repositoriesForOrganization:(NSString *)organization type:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)repositoriesForOrganization:(NSString *)organization type:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(organization);
 	NSParameterAssert(type);
@@ -1087,13 +1087,13 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	[self repositoriesAtPath:path params:params pages:pages success:successBlock failure:failureBlock];
 }
 
-- (void)repositoryContributors:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock) successBlock failure:(CDOHFailureBlock) failureBlock
+- (oneway void)repositoryContributors:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock) successBlock failure:(CDOHFailureBlock) failureBlock
 {
 	[self repositoryContributors:repository owner:owner anonymous:NO success:successBlock failure:failureBlock];
 }
 
 // TODO: This should create an array of dictionaries instead of user-objects (#42)
-- (void)repositoryContributors:(NSString *)repo owner:(NSString *)owner anonymous:(BOOL)anonymous success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)repositoryContributors:(NSString *)repo owner:(NSString *)owner anonymous:(BOOL)anonymous success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);
@@ -1112,7 +1112,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	[self usersAtPath:path params:params pages:nil success:successBlock failure:failureBlock];
 }
 
-- (void)repositoryLanguages:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)repositoryLanguages:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);
@@ -1152,7 +1152,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Watched and Watching Repositories
-- (void)repositoryWatchers:(NSString *)repo owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)repositoryWatchers:(NSString *)repo owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);
@@ -1168,7 +1168,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	[self usersAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
 }
 
-- (void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(login);
 	if (!successBlock && !failureBlock) { return; }
@@ -1182,7 +1182,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 }
 
 // TODO: Send message to repositoriesAtPath:params:pages:success:failure:
-- (void)repositoriesWatchedForPages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)repositoriesWatchedForPages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) { return; }
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
@@ -1195,7 +1195,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 }
 
 
-- (void)isUserWatchingRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)isUserWatchingRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);
@@ -1214,7 +1214,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)watchRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)watchRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);
@@ -1232,7 +1232,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 				 failure:[self standardFailureBlock:failureBlock]];
 }
 
-- (void)stopWatchingRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)stopWatchingRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);
@@ -1252,7 +1252,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 
 
 #pragma mark - Repository Forks
-- (void)repositoryForks:(NSString *)repo owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)repositoryForks:(NSString *)repo owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);
@@ -1268,7 +1268,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	[self repositoriesAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
 }
 
-- (void)forkRepository:(NSString *)repo owner:(NSString *)owner intoOrganization:(NSString *)intoOrganization success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (oneway void)forkRepository:(NSString *)repo owner:(NSString *)owner intoOrganization:(NSString *)intoOrganization success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);

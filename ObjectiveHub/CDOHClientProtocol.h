@@ -73,7 +73,7 @@
  * @see CDOHResponse
  * @see CDOHUser
  */
-- (void)userWithLogin:(NSString *)login success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)userWithLogin:(NSString *)login success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get information about the currently authenticated user.
@@ -103,7 +103,7 @@
  * @see CDOHResponse
  * @see CDOHUser
  */
-- (void)user:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)user:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Update the currently authenticated user with the contents of the given
@@ -187,7 +187,7 @@
  * @see CDOHResponse
  * @see CDOHUser
  */
-- (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)updateUserWithDictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - User Emails
@@ -220,7 +220,7 @@
  * @see deleteUserEmails:success:failure:
  * @see CDOHResponse
  */
-- (void)userEmails:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)userEmails:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Add new email addresses of the currently authenticated user.
@@ -252,7 +252,7 @@
  * @see deleteUserEmails:success:failure:
  * @see CDOHResponse
  */
-- (void)addUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)addUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Delete the given email addresses from the currently authenticated user.
@@ -280,7 +280,7 @@
  * @see userEmails:failure:
  * @see addUserEmails:success:failure:
  */
-- (void)deleteUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)deleteUserEmails:(NSArray *)emails success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - Managing Repositories
@@ -303,7 +303,7 @@
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
  */
-- (void)repository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)repository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Create a new repository for the authenticated user with the given _name_.
@@ -400,7 +400,7 @@
  * @see deleteRepository:owner:success:failure:
  * @see createRepository:inOrganization:dictionary:success:failure:
  */
-- (void)createRepository:(NSString *)name dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)createRepository:(NSString *)name dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Create a new repository for the given organization with the given _name_.
@@ -509,7 +509,7 @@
  * @see deleteRepository:owner:success:failure:
  * @see createRepository:inOrganization:dictionary:success:failure:
  */
-- (void)createRepository:(NSString *)name inOrganization:(NSString *)organization dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)createRepository:(NSString *)name inOrganization:(NSString *)organization dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Update the given _repository_ owned by the given _owner_ with the values of
@@ -616,7 +616,7 @@
  * @exception NSInternalInconsistencyException If no authenticated user has been
  * set **and** no failure block has been given.
  */
-- (void)updateRepository:(NSString *)repository owner:(NSString *)owner dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)updateRepository:(NSString *)repository owner:(NSString *)owner dictionary:(NSDictionary *)dictionary success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all repositories of the authenticated user.
@@ -655,7 +655,7 @@
  * @see CDOHResponse
  * @see CDOHRepository
  */
-- (void)repositories:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)repositories:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all public repositories of the user with the given _login_.
@@ -686,7 +686,7 @@
  * @see CDOHResponse
  * @see CDOHRepository
  */
-- (void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)repositoriesForUser:(NSString *)login type:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all repositories of the given _organization_.
@@ -718,7 +718,7 @@
  * @see CDOHResponse
  * @see CDOHRepository
  */
-- (void)repositoriesForOrganization:(NSString *)organization type:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)repositoriesForOrganization:(NSString *)organization type:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all contributors (exluding anonymous contributors) of the given
@@ -744,7 +744,7 @@
  * @see CDOHResponse
  * @see CDOHUser
  */
-- (void)repositoryContributors:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)repositoryContributors:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all contributors of the given repository.
@@ -771,7 +771,7 @@
  * @see CDOHResponse
  * @see CDOHUser
  */
-- (void)repositoryContributors:(NSString *)repository owner:(NSString *)owner anonymous:(BOOL)anonymous success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)repositoryContributors:(NSString *)repository owner:(NSString *)owner anonymous:(BOOL)anonymous success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all languages used in the repository.
@@ -796,7 +796,7 @@
  *
  * @see CDOHResponse
  */
-- (void)repositoryLanguages:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)repositoryLanguages:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - Watched and Watching Repositories
@@ -825,7 +825,7 @@
  * @see CDOHResponse
  * @see CDOHUser
  */
-- (void)repositoryWatchers:(NSString *)repository owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)repositoryWatchers:(NSString *)repository owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all repositories watched by a specific user.
@@ -851,7 +851,7 @@
  * @see repositoriesWatchedForPages:success:failure:
  * @see CDOHRepository
  */
-- (void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Get all repositories watched by the authenticated user.
@@ -877,7 +877,7 @@
  * @see repositoriesWatchedByUser:pages:success:failure:
  * @see CDOHRepository
  */
-- (void)repositoriesWatchedForPages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)repositoriesWatchedForPages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Check whether the currently authenticated user is watching the given
@@ -907,7 +907,7 @@
  * @see [CDOHClient username]
  * @see [CDOHClient password]
  */
-- (void)isUserWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)isUserWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Watch a repository using the currently authenticated user.
@@ -934,7 +934,7 @@
  * @see [CDOHClient username]
  * @see [CDOHClient password]
  */
-- (void)watchRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)watchRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Stop watching a repository using the currently authenticated user.
@@ -961,7 +961,7 @@
  * @see [CDOHClient username]
  * @see [CDOHClient password]
  */
-- (void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - Repository Forks
@@ -989,7 +989,7 @@
  *
  * @see forkRepository:owner:success:failure:
  */
-- (void)repositoryForks:(NSString *)repository owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)repositoryForks:(NSString *)repository owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
  * Create a new fork of the given repository.
@@ -1023,7 +1023,7 @@
  *
  * @see repositoryForks:owner:pages:success:failure:
  */
-- (void)forkRepository:(NSString *)repository owner:(NSString *)owner intoOrganization:(NSString *)intoOrganization success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (oneway void)forkRepository:(NSString *)repository owner:(NSString *)owner intoOrganization:(NSString *)intoOrganization success:(CDOHResponseBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 @end

@@ -180,19 +180,19 @@
  *
  * @see resumeAllRequests
  */
-- (void)suspendAllRequests;
+- (oneway void)suspendAllRequests;
 
 /**
  * Resume all requests, including previously sent and new ones.
  *
  * @see suspendAllRequests
  */
-- (void)resumeAllRequests;
+- (oneway void)resumeAllRequests;
 
 /**
  * Cancel all sent requests.
  */
-- (void)cancelAllRequests;
+- (oneway void)cancelAllRequests;
 
 
 @end
