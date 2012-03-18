@@ -83,14 +83,6 @@ NSString *const kCDOHResourceAPIResourceURLKey			=  @"url";
 }
 
 
-// Implemented for [redacted] of [redacted] will be added in the [redacted]
-// protocol.
-+ (BOOL)supportsSecureCoding
-{
-	return YES;
-}
-
-
 #pragma mark - Identifying and Comparing Users
 - (BOOL)isEqual:(id)other
 {
