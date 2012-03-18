@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CDOHAbstractUser" representedClassName="CDOHAbstractUser" isAbstract="YES" parentEntity="CDOHResource" syncable="YES">
+        <attribute name="authenticated" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="avatarURL" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="blogURL" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="collaborators" optional="YES" attributeType="Integer 64" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="diskUsage" optional="YES" attributeType="Integer 64" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="followersCount" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="followingCount" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="gravatarID" optional="YES" attributeType="String" regularExpressionString="^[a-f0-9]{32}$" syncable="YES"/>
+        <attribute name="identifier" attributeType="Integer 64" minValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="login" attributeType="String" minValueString="1" indexed="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="privateGistsCount" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="privateRepositoriesCount" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="privateRepositoriesOwnedCount" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="publicGistsCount" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="publicRepositoriesCount" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userHTMLProfileURL" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="plan" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CDOHPLan" inverseName="user" inverseEntity="CDOHPLan" syncable="YES"/>
+        <relationship name="repositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDOHRepository" inverseName="organization" inverseEntity="CDOHRepository" syncable="YES"/>
+    </entity>
+    <entity name="CDOHOrganization" representedClassName="CDOHOrganization" parentEntity="CDOHAbstractUser" syncable="YES">
+        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDOHOrganizationTeam" inverseName="organization" inverseEntity="CDOHOrganizationTeam" syncable="YES"/>
+    </entity>
+    <entity name="CDOHOrganizationTeam" representedClassName="CDOHOrganizationTeam" parentEntity="CDOHResource" syncable="YES">
+        <attribute name="identifier" attributeType="Integer 64" minValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="membersCount" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" attributeType="String" minValueString="1" indexed="YES" syncable="YES"/>
+        <attribute name="permission" attributeType="String" minValueString="1" defaultValueString="pull" syncable="YES"/>
+        <attribute name="repositoriesCount" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDOHUser" inverseName="teams" inverseEntity="CDOHUser" syncable="YES"/>
+        <relationship name="organization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CDOHOrganization" inverseName="teams" inverseEntity="CDOHOrganization" syncable="YES"/>
+    </entity>
+    <entity name="CDOHPLan" representedClassName="CDOHPLan" parentEntity="CDOHResource" syncable="YES">
+        <attribute name="collaborators" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" minValueString="1" indexed="YES" syncable="YES"/>
+        <attribute name="privateRepositories" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="space" optional="YES" attributeType="Integer 64" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <relationship name="user" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CDOHAbstractUser" inverseName="plan" inverseEntity="CDOHAbstractUser" syncable="YES"/>
+    </entity>
+    <entity name="CDOHRepository" representedClassName="CDOHRepository" parentEntity="CDOHResource" syncable="YES">
+        <attribute name="cloneURL" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="defaultBranch" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fork" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="forksCount" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="formattedName" transient="YES" syncable="YES"/>
+        <attribute name="gitURL" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="hasDownloads" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="hasIssues" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="hasWiki" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="homepageURL" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="homepageURLPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" attributeType="Integer 64" minValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="language" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mirrorURL" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="name" attributeType="String" indexed="YES" spotlightIndexingEnabled="YES" syncable="YES"/>
+        <attribute name="openIssuesCount" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="private" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="pushedAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="repositoryDescription" optional="YES" attributeType="String" spotlightIndexingEnabled="YES" syncable="YES"/>
+        <attribute name="repositoryHTMLURL" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="size" optional="YES" attributeType="Integer 64" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="sshURL" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="svnURL" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="watchersCount" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <relationship name="forks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDOHRepository" inverseName="parent" inverseEntity="CDOHRepository" syncable="YES"/>
+        <relationship name="organization" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CDOHOrganization" inverseName="repositories" inverseEntity="CDOHAbstractUser" syncable="YES"/>
+        <relationship name="owner" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CDOHAbstractUser" inverseName="repositories" inverseEntity="CDOHAbstractUser" syncable="YES"/>
+        <relationship name="parent" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CDOHRepository" inverseName="forks" inverseEntity="CDOHRepository" syncable="YES"/>
+        <relationship name="source" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="CDOHRepository" syncable="YES"/>
+        <relationship name="watchers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDOHUser" inverseName="watchedRepositories" inverseEntity="CDOHUser" syncable="YES"/>
+    </entity>
+    <entity name="CDOHResource" isAbstract="YES" syncable="YES">
+        <attribute name="resourceURL" attributeType="Transformable" syncable="YES"/>
+    </entity>
+    <entity name="CDOHUser" representedClassName="CDOHUser" parentEntity="CDOHAbstractUser" syncable="YES">
+        <attribute name="hireable" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDOHOrganizationTeam" inverseName="members" inverseEntity="CDOHOrganizationTeam" syncable="YES"/>
+        <relationship name="watchedRepositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDOHRepository" inverseName="watchers" inverseEntity="CDOHRepository" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CDOHResource" positionX="52" positionY="-513" width="128" height="60"/>
+        <element name="CDOHAbstractUser" positionX="54" positionY="-405" width="128" height="405"/>
+        <element name="CDOHUser" positionX="369" positionY="-300" width="128" height="90"/>
+        <element name="CDOHOrganization" positionX="369" positionY="-450" width="128" height="60"/>
+        <element name="CDOHPLan" positionX="261" positionY="45" width="128" height="120"/>
+        <element name="CDOHRepository" positionX="-227" positionY="-288" width="128" height="525"/>
+        <element name="CDOHOrganizationTeam" positionX="369" positionY="-177" width="137" height="150"/>
+    </elements>
+</model>

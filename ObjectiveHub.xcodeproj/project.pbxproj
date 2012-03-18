@@ -101,6 +101,8 @@
 		9C2F3E8B146F5F7D00C44A82 /* CDOHPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */; };
 		9C2F3E8D146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */; };
 		9C2F3E8E146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */; };
+		9C34C4A41516289C00B423B4 /* ObjectiveHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9C34C4A21516289C00B423B4 /* ObjectiveHub.xcdatamodeld */; };
+		9C34C4A51516289C00B423B4 /* ObjectiveHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9C34C4A21516289C00B423B4 /* ObjectiveHub.xcdatamodeld */; };
 		9C3ADD6414E1093F00C454F8 /* CDOHClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADD6314E1093F00C454F8 /* CDOHClientTests.m */; };
 		9C3ADD6514E1093F00C454F8 /* CDOHClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADD6314E1093F00C454F8 /* CDOHClientTests.m */; };
 		9C3ADD9514E10F7800C454F8 /* CDOHTestsUserCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADD9414E10F7800C454F8 /* CDOHTestsUserCredentials.m */; };
@@ -358,6 +360,7 @@
 		9C2F3E86146F5F7D00C44A82 /* CDOHPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHPlan.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CDOHPlan.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CDOHPlanPrivate.h; path = Private/CDOHPlanPrivate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		9C34C4A31516289C00B423B4 /* ObjectiveHub.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ObjectiveHub.xcdatamodel; sourceTree = "<group>"; };
 		9C3ADD6214E1093F00C454F8 /* CDOHClientTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHClientTests.h; sourceTree = "<group>"; };
 		9C3ADD6314E1093F00C454F8 /* CDOHClientTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHClientTests.m; sourceTree = "<group>"; };
 		9C3ADD9314E10F7800C454F8 /* CDOHTestsUserCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHTestsUserCredentials.h; sourceTree = "<group>"; };
@@ -674,6 +677,7 @@
 		9C26FA09146B2E1E001A5385 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9C34C4A21516289C00B423B4 /* ObjectiveHub.xcdatamodeld */,
 				9C2F3E82146F44E000C44A82 /* Private Models */,
 				9C613AA214B60DF10067B6B6 /* Resources */,
 				9CE6633F1470929500D8A95F /* CDOHError.h */,
@@ -1204,6 +1208,7 @@
 				9C9DFA8414EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m in Sources */,
 				9CB2C44514F7CD0500E9FC91 /* NSObject+ObjectiveHub.m in Sources */,
 				9CABD7AA14F8493700EFF010 /* UIApplication+ObjectiveHub.m in Sources */,
+				9C34C4A41516289C00B423B4 /* ObjectiveHub.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1264,6 +1269,7 @@
 				9C9DFA8514EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m in Sources */,
 				9CB2C44614F7CD0500E9FC91 /* NSObject+ObjectiveHub.m in Sources */,
 				9CABD7A914F846D700EFF010 /* UIApplication+ObjectiveHub.m in Sources */,
+				9C34C4A51516289C00B423B4 /* ObjectiveHub.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1853,6 +1859,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9C34C4A21516289C00B423B4 /* ObjectiveHub.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9C34C4A31516289C00B423B4 /* ObjectiveHub.xcdatamodel */,
+			);
+			currentVersion = 9C34C4A31516289C00B423B4 /* ObjectiveHub.xcdatamodel */;
+			path = ObjectiveHub.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9C26F929146B1B74001A5385 /* Project object */;
 }
