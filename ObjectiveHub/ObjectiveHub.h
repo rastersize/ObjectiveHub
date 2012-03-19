@@ -51,6 +51,14 @@
 
 
 //----------------------------------------------------------------------------//
+#pragma mark - Network Client
+//----------------------------------------------------------------------------//
+#import <ObjectiveHub/CDOHNetworkClient.h>
+#import <ObjectiveHub/CDOHNetworkClientReply.h>
+#import <ObjectiveHub/CDOHAFNetworkingClient.h>
+
+
+//----------------------------------------------------------------------------//
 #pragma mark - Making Requests and Handling Responses
 //----------------------------------------------------------------------------//
 #import <ObjectiveHub/CDOHClientProtocol.h>
