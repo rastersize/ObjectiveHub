@@ -421,6 +421,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 @synthesize itemsPerPage = _itemsPerPage;
 @synthesize showNetworkActivityStatusAutomatically = _showNetworkActivityStatusAutomatically;
 
+@synthesize networkClient = _networkClient;
 @synthesize client = _client;
 @synthesize JSONDecoder = _jsonDecoder;
 

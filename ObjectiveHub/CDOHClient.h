@@ -32,6 +32,7 @@
 
 #import <Foundation/Foundation.h>
 #import <ObjectiveHub/CDOHClientProtocol.h>
+#import <ObjectiveHub/CDOHNetworkClient.h>
 
 
 #pragma mark Constants
@@ -160,6 +161,15 @@
  * Where 0 (zero) means that we will let GitHub decide what the value should be.
  */
 @property (assign) NSUInteger itemsPerPage;
+
+/**
+ * The network client which the library should use for network requests.
+ *
+ * The default tries to find out which network library have been linked in
+ * (that is supported) and use that. You may implement your own adapter class
+ * which implement the `CDOHNetworkClient` protocol and use it if you want to. 
+ */
+@property (strong) id<CDOHNetworkClient>networkClient;
 
 
 #pragma mark - Network Activity
