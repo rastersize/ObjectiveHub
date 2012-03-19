@@ -54,6 +54,18 @@
 @protocol CDOHNetworkClient <NSObject>
 @required
 
+#pragma mark - Adapter Dependencies
+/** @name Adapter Dependencies */
+/**
+ * Checks the network client adapter dependencies.
+ *
+ * @return `YES` if all the dependencies of the adapter are satisfied, otherwise
+ * `NO`.
+ */
++ (BOOL)checkDependencies;
+
+
+
 #pragma mark - Creating and Initializing Network Clients
 /** @name Creating and Initializing Network Clients */
 /**

@@ -66,7 +66,15 @@
 #pragma mark -
 @synthesize client = _client;
 
-#pragma mark -
+
+#pragma mark - Adapter Dependencies
++ (BOOL)checkDependencies
+{
+	return (NSClassFromString(@"AFHTTPClient") != nil);
+}
+
+
+#pragma mark - Creating and Initializing Network Clients
 - (instancetype)initWithBaseURL:(NSURL *)baseURL defaultHeaders:(NSDictionary *)defaultHeaders
 {
 	self = [super init];
