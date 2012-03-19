@@ -31,6 +31,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <ObjectiveHub/CDOHTypes.h>
 
 
 #pragma mark Forward Class Declarations
@@ -70,7 +71,7 @@
 - (instancetype)initWithBaseURL:(NSURL *)baseURL defaultHeaders:(NSDictionary *)defaultHeaders;
 
 
-#pragma mark - Remote Host Information
+#pragma mark - Client Configuration
 /**
  * The base URL of the service.
  */
@@ -132,7 +133,7 @@
 			parameters:(id)parameters
 			  username:(NSString *)username
 			  password:(NSString *)password
-		withReplyBlock:(void (^)(CDOHNetworkClientReply *reply))replyBlock;
+		withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock;
 
 /**
  * Perform a HTTP `POST` request for the resource at the given relative path.
@@ -156,7 +157,7 @@
 			 parameters:(id)parameters
 			   username:(NSString *)username
 			   password:(NSString *)password
-		 withReplyBlock:(void (^)(CDOHNetworkClientReply *reply))replyBlock;
+		 withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock;
 
 /**
  * Perform a HTTP `PUT` request for the resource at the given relative path.
@@ -180,7 +181,7 @@
 			parameters:(id)parameters
 			  username:(NSString *)username
 			  password:(NSString *)password
-		withReplyBlock:(void (^)(CDOHNetworkClientReply *reply))replyBlock;
+		withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock;
 
 /**
  * Perform a HTTP `PATCH` request for the resource at the given relative path.
@@ -204,7 +205,7 @@
 			  parameters:(id)parameters
 				username:(NSString *)username
 				password:(NSString *)password
-		  withReplyBlock:(void (^)(CDOHNetworkClientReply *reply))replyBlock;
+		  withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock;
 
 /**
  * Perform a HTTP `DELETE` request for the resource at the given relative path.
@@ -228,7 +229,7 @@
 			   parameters:(id)parameters
 				 username:(NSString *)username
 				 password:(NSString *)password
-		   withReplyBlock:(void (^)(CDOHNetworkClientReply *reply))replyBlock;
+		   withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock;
 
 
 #pragma mark - Performing Multipart Form Data Requests

@@ -31,6 +31,7 @@
 //
 
 #import "CDOHAFNetworkingClient.h"
+#import "CDOHTypes.h"
 
 #import "CDOHNetworkClientReply.h"
 #import "CDOHError.h"
@@ -115,8 +116,8 @@
 }
 
 
-#pragma mark - 
-- (oneway void)getPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(void (^)(CDOHNetworkClientReply *reply))replyBlock
+#pragma mark - Performing Requests
+- (oneway void)getPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
 {
 	NSParameterAssert(path);
 	NSParameterAssert(replyBlock);
@@ -129,7 +130,7 @@
 				 failure:[[self class] standardFailureBlockForReplyBlock:replyBlock]];
 }
 
-- (oneway void)postPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(void (^)(CDOHNetworkClientReply *))replyBlock
+- (oneway void)postPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
 {
 	NSParameterAssert(path);
 	NSParameterAssert(replyBlock);
@@ -142,7 +143,7 @@
 				  failure:[[self class] standardFailureBlockForReplyBlock:replyBlock]];
 }
 
-- (oneway void)putPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(void (^)(CDOHNetworkClientReply *))replyBlock
+- (oneway void)putPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
 {
 	NSParameterAssert(path);
 	NSParameterAssert(replyBlock);
@@ -157,7 +158,7 @@
 
 // TODO: Send pull request to AFNetworking/AFNetworking with patchPath:parameters:success:failure.
 // TODO: Send pull request to AFNetworking/AFNetworking with generic(ish) parameters.
-- (oneway void)patchPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(void (^)(CDOHNetworkClientReply *))replyBlock
+- (oneway void)patchPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
 {
 	NSParameterAssert(path);
 	NSParameterAssert(replyBlock);
@@ -184,8 +185,8 @@
 }
 
 
-#pragma mark - 
-- (void (^)(AFHTTPRequestOperation *, NSError *))standardFailureBlockForReplyBlock:(void (^)(CDOHNetworkClientReply *))replyBlock
+#pragma mark - Standard Blocks
+- (void (^)(AFHTTPRequestOperation *, NSError *))standardFailureBlockForReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
 {
 	__weak CDOHAFNetworkingClient *blockSelf = self;
 	return ^(AFHTTPRequestOperation *operation, NSError *__unused unusedError) {
@@ -203,7 +204,7 @@
 	};
 }
 
-- (void (^)(AFHTTPRequestOperation *, id))standardSuccessBlockForReplyBlock:(void (^)(CDOHNetworkClientReply *))replyBlock
+- (void (^)(AFHTTPRequestOperation *, id))standardSuccessBlockForReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
 {
 	__weak CDOHAFNetworkingClient *blockSelf = self;
 	return ^(AFHTTPRequestOperation *operation, id responseObject) {
