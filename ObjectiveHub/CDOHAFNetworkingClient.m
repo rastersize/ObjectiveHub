@@ -197,7 +197,8 @@
 		
 		CDOHNetworkClientReply *reply = nil;
 		reply = [[CDOHNetworkClientReply alloc] initWithSuccessStatus:NO
-															 response:error
+															 response:nil
+																error:error
 														  HTTPHeaders:httpHeaders];
 		
 		replyBlock(reply);
@@ -215,6 +216,7 @@
 		CDOHNetworkClientReply *reply = nil;
 		reply = [[CDOHNetworkClientReply alloc] initWithSuccessStatus:YES
 															 response:responseObject
+																error:nil
 														  HTTPHeaders:httpHeaders];
 		
 		replyBlock(reply);

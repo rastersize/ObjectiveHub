@@ -33,7 +33,11 @@
 #import <Foundation/Foundation.h>
 
 
-#pragma mark CDOHNetworkClientReply Interface
+#pragma mark Forward Class Declarations
+@class CDOHError;
+
+
+#pragma mark - CDOHNetworkClientReply Interface
 /**
  * An immutable class which represent a reply from a network client.
  */
@@ -44,7 +48,7 @@
 /**
  *
  */
-- (instancetype)initWithSuccessStatus:(BOOL)success response:(id<NSCoding>)response HTTPHeaders:(NSDictionary *)httpHeaders;
+- (instancetype)initWithSuccessStatus:(BOOL)success response:(id<NSCoding>)response error:(CDOHError *)error HTTPHeaders:(NSDictionary *)httpHeaders;
 
 
 #pragma mark - Reply Message
@@ -58,12 +62,20 @@
 @property (assign, readonly) BOOL success;
 
 /**
- * The response from the server.
+ * The response from the remote host.
  *
  * If `success` is `YES` it should be be an `NSData` object representing the
- * data received, otherwise it should be a `CDOHError` object.
+ * data received, otherwise it should be `nil`.
  */
 @property (strong, readonly) id<NSCoding> response;
+
+/**
+ * The error received from the remote host.
+ *
+ * If `success` is `NO` it should be be an `CDOHError` object, otherwise it
+ * should be `nil`.
+ */
+@property (strong, readonly) CDOHError *error;
 
 /**
  * The HTTP headers the remote host replied with.

@@ -35,6 +35,7 @@
 #pragma mark - 
 NSString *const kCDOHNetworkClientReplySuccessKey		= @"CDOHNCRSuccess";
 NSString *const kCDOHNetworkClientReplyResponseKey		= @"CDOHNCRResponse";
+NSString *const kCDOHNetworkClientReplyErrorKey			= @"CDOHNCRError";
 NSString *const kCDOHNetworkClientReplyHTTPHeadersKey	= @"CDOHNCRHTTPHeaders";
 
 
@@ -44,16 +45,18 @@ NSString *const kCDOHNetworkClientReplyHTTPHeadersKey	= @"CDOHNCRHTTPHeaders";
 #pragma mark - 
 @synthesize success = _success;
 @synthesize response = _response;
+@synthesize error = _error;
 @synthesize HTTPHeaders = _httpHeaders;
 
 
 #pragma mark - Creating and Initializing Network Client Replies
-- (instancetype)initWithSuccessStatus:(BOOL)success response:(id<NSCoding>)response HTTPHeaders:(NSDictionary *)httpHeaders
+- (instancetype)initWithSuccessStatus:(BOOL)success response:(id<NSCoding>)response error:(CDOHError *)error HTTPHeaders:(NSDictionary *)httpHeaders
 {
 	self = [super init];
 	if (self) {
 		_success = success;
 		_response = response;
+		_error = error;
 		_httpHeaders = [httpHeaders copy];
 	}
 	
@@ -66,9 +69,10 @@ NSString *const kCDOHNetworkClientReplyHTTPHeadersKey	= @"CDOHNCRHTTPHeaders";
 {
 	BOOL success = [aDecoder decodeBoolForKey:kCDOHNetworkClientReplySuccessKey];
 	id<NSCoding> response = [aDecoder decodeObjectForKey:kCDOHNetworkClientReplyResponseKey];
+	CDOHError *error = [aDecoder decodeObjectForKey:kCDOHNetworkClientReplyErrorKey];
 	NSDictionary *httpHeaders = [aDecoder decodeObjectForKey:kCDOHNetworkClientReplyHTTPHeadersKey];
 	
-	self = [self initWithSuccessStatus:success response:response HTTPHeaders:httpHeaders];
+	self = [self initWithSuccessStatus:success response:response error:error HTTPHeaders:httpHeaders];
 	return self;
 }
 
