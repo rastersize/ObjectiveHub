@@ -33,6 +33,17 @@
 			name = Documentation;
 			productName = Documentation;
 		};
+		9C2FD4EE1517A6B60058E3E7 /* Mogenerator */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 9C2FD4EF1517A6B60058E3E7 /* Build configuration list for PBXAggregateTarget "Mogenerator" */;
+			buildPhases = (
+				9C2FD4F21517A6BF0058E3E7 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Mogenerator;
+			productName = Mogenerator;
+		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
@@ -278,6 +289,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 9C26F966146B207A001A5385;
 			remoteInfo = "ObjectiveHub-iOS";
+		};
+		9C2FD4F71517A9630058E3E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C26F929146B1B74001A5385 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C2FD4EE1517A6B60058E3E7;
+			remoteInfo = Mogenerator;
+		};
+		9C2FD4F91517A9690058E3E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C26F929146B1B74001A5385 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C2FD4EE1517A6B60058E3E7;
+			remoteInfo = Mogenerator;
 		};
 		9C5D2D6B147028220064F02A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1011,6 +1036,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9C2FD4F81517A9630058E3E7 /* PBXTargetDependency */,
 			);
 			name = "ObjectiveHub-Mac";
 			productName = "ObjectiveHub-Mac";
@@ -1047,6 +1073,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				9C2FD4FA1517A9690058E3E7 /* PBXTargetDependency */,
 			);
 			name = "ObjectiveHub-iOS";
 			productName = "ObjectiveHub-iOS";
@@ -1120,6 +1147,7 @@
 				9C26F966146B207A001A5385 /* ObjectiveHub-iOS */,
 				9C26F974146B207A001A5385 /* ObjectiveHub-iOSTests */,
 				9C5D2D511470281A0064F02A /* ObjectiveHub Test App */,
+				9C2FD4EE1517A6B60058E3E7 /* Mogenerator */,
 			);
 		};
 /* End PBXProject section */
@@ -1203,6 +1231,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# \n# Generates API documentation with the help of appledoc.\n# Generates both HTML code and a DocSet (which *can* be installed into Xcode).\n#\n# Copyright (c) 2011 Fruit is Good. All rights reserved.\n#\n\n#                            Output dir:        Search dirs (space separated list):                 The version\n./Scripts/GenerateAPIDocs.sh \"Documentation\"    \"ObjectiveHub-Mac ObjectiveHub-iOS ObjectiveHub\"    \"${DOCS_LIBRARY_VERSION}\"\n";
+		};
+		9C2FD4F21517A6BF0058E3E7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "echo \"Running mogenerator…\"\n\nmodeldDir=\"${SRCROOT}/ObjectiveHub/ObjectiveHub.xcdatamodeld/\"\ncurVer=`/usr/libexec/PlistBuddy \"${modeldDir}/.xccurrentversion\" -c 'print _XCCurrentVersionName'`\n/usr/local/bin/mogenerator --template-var arc=true --model \"${modeldDir}/${curVer}\" --output-dir \"${SRCROOT}/ObjectiveHub\"\n\necho \"Finished running mogenerator.\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1365,6 +1406,16 @@
 			isa = PBXTargetDependency;
 			target = 9C26F966146B207A001A5385 /* ObjectiveHub-iOS */;
 			targetProxy = 9C26F9AA146B2402001A5385 /* PBXContainerItemProxy */;
+		};
+		9C2FD4F81517A9630058E3E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C2FD4EE1517A6B60058E3E7 /* Mogenerator */;
+			targetProxy = 9C2FD4F71517A9630058E3E7 /* PBXContainerItemProxy */;
+		};
+		9C2FD4FA1517A9690058E3E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C2FD4EE1517A6B60058E3E7 /* Mogenerator */;
+			targetProxy = 9C2FD4F91517A9690058E3E7 /* PBXContainerItemProxy */;
 		};
 		9C5D2D6C147028220064F02A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1766,6 +1817,20 @@
 			};
 			name = Release;
 		};
+		9C2FD4F01517A6B60058E3E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9C2FD4F11517A6B60058E3E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		9C5D2D671470281B0064F02A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1886,6 +1951,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		9C2FD4EF1517A6B60058E3E7 /* Build configuration list for PBXAggregateTarget "Mogenerator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9C2FD4F01517A6B60058E3E7 /* Debug */,
+				9C2FD4F11517A6B60058E3E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		9C5D2D691470281B0064F02A /* Build configuration list for PBXNativeTarget "ObjectiveHub Test App" */ = {
 			isa = XCConfigurationList;
