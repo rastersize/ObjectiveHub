@@ -40,30 +40,37 @@
 #import "AFHTTPRequestOperation.h"
 
 
-#pragma mark -
+#pragma mark CDOHAFNetwkringClient Private Interface
 @interface CDOHAFNetworkingClient (/*Private*/)
 
+#pragma mark - AFNetworking Client Instance
 @property (strong) AFHTTPClient *client;
 
+
+#pragma mark - Authorization Header
 - (void)setAuthHeaderAndIncrementCounterWithUsername:(NSString *)username password:(NSString *)password;
 - (void)incrementAuthHeadersBalanceCount;
 - (void)decrementAuthHeadersBalanceCount;
 
 
+#pragma mark - Creating Errors From AFHTTPRequestOperations
 + (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation;
 
+
+#pragma mark - Standard Blocks
 - (void (^)(AFHTTPRequestOperation *, id))standardSuccessBlockForReplyBlock:(void (^)(CDOHNetworkClientReply *reply))replyBlock;
 - (void (^)(AFHTTPRequestOperation *, NSError *))standardFailureBlockForReplyBlock:(void (^)(CDOHNetworkClientReply *reply))replyBlock;
 
 @end
 
 
-#pragma mark - 
+
+#pragma mark - CDOHAFNetworkingClient Implementation
 @implementation CDOHAFNetworkingClient {
 	NSUInteger _authHeadersBalanceCount;
 }
 
-#pragma mark -
+#pragma mark - AFNetworking Client Instance
 @synthesize client = _client;
 
 
@@ -95,19 +102,14 @@
 }
 
 
-#pragma mark - 
-- (void)setBaseURL:(NSURL *__unused)baseURL
-{
-	NSAssert(NO, @"Setting base URL after init not supported by AFNetworking");
-}
-
+#pragma mark - Remote Host Information
 - (NSURL *)baseURL
 {
 	return self.client.baseURL;
 }
 
 
-#pragma mark -
+#pragma mark - Request Controls
 - (oneway void)suspend
 {
 	[self.client.operationQueue setSuspended:YES];
@@ -232,7 +234,7 @@
 }
 
 
-#pragma mark - 
+#pragma mark - Creating Errors From AFHTTPRequestOperations
 + (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation
 {
 	NSDictionary *httpHeaders = [operation.response allHeaderFields];
@@ -245,7 +247,7 @@
 }
 
 
-#pragma mark - 
+#pragma mark - Authorization Header
 - (void)setAuthHeaderAndIncrementCounterWithUsername:(NSString *)username password:(NSString *)password
 {
 	[self incrementAuthHeadersBalanceCount];
