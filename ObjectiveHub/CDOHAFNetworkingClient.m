@@ -136,8 +136,8 @@
 	
 	[self.client getPath:path
 			  parameters:parameters
-				 success:[[self class] standardSuccessBlockForReplyBlock:replyBlock]
-				 failure:[[self class] standardFailureBlockForReplyBlock:replyBlock]];
+				 success:[self standardSuccessBlockForReplyBlock:replyBlock]
+				 failure:[self standardFailureBlockForReplyBlock:replyBlock]];
 }
 
 - (oneway void)postPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
@@ -149,8 +149,8 @@
 	
 	[self.client postPath:path
 			   parameters:parameters
-				  success:[[self class] standardSuccessBlockForReplyBlock:replyBlock]
-				  failure:[[self class] standardFailureBlockForReplyBlock:replyBlock]];
+				  success:[self standardSuccessBlockForReplyBlock:replyBlock]
+				  failure:[self standardFailureBlockForReplyBlock:replyBlock]];
 }
 
 - (oneway void)putPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
@@ -162,8 +162,8 @@
 	
 	[self.client putPath:path
 			  parameters:parameters
-				 success:[[self class] standardSuccessBlockForReplyBlock:replyBlock]
-				 failure:[[self class] standardFailureBlockForReplyBlock:replyBlock]];
+				 success:[self standardSuccessBlockForReplyBlock:replyBlock]
+				 failure:[self standardFailureBlockForReplyBlock:replyBlock]];
 }
 
 // TODO: Send pull request to AFNetworking/AFNetworking with patchPath:parameters:success:failure.
@@ -177,8 +177,8 @@
 	
 	[self.client patchPath:path
 				parameters:parameters
-				   success:[[self class] standardSuccessBlockForReplyBlock:replyBlock]
-				   failure:[[self class] standardFailureBlockForReplyBlock:replyBlock]];
+				   success:[self standardSuccessBlockForReplyBlock:replyBlock]
+				   failure:[self standardFailureBlockForReplyBlock:replyBlock]];
 }
 
 - (oneway void)deletePath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(void (^)(CDOHNetworkClientReply *))replyBlock
@@ -190,8 +190,8 @@
 	
 	[self.client deletePath:path
 			   parameters:parameters
-				  success:[[self class] standardSuccessBlockForReplyBlock:replyBlock]
-				  failure:[[self class] standardFailureBlockForReplyBlock:replyBlock]];
+				  success:[self standardSuccessBlockForReplyBlock:replyBlock]
+				  failure:[self standardFailureBlockForReplyBlock:replyBlock]];
 }
 
 
