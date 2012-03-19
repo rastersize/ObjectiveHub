@@ -36,6 +36,7 @@
 #pragma mark Forward Class Declarations
 @class CDOHError;
 @class CDOHResponse;
+@class CDOHNetworkClientReply;
 
 
 #pragma mark - ObjectiveHub Generic Block Types
@@ -58,6 +59,14 @@ typedef void (^CDOHFailureBlock)(CDOHError *error);
  * @param response The response from the service. Is of the type CDOHResponse.
  */
 typedef void (^CDOHSuccessBlock)(CDOHResponse *response);
+
+/**
+ * A network client reply block.
+ *
+ * @see CDOHNetworkClient
+ * @see CDOHNetworkClientReply
+ */
+typedef void (^CDOHNetworkClientReplyBlock)(CDOHNetworkClientReply *);
 
 
 #pragma mark - Repository List Types Type
