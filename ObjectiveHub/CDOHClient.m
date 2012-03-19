@@ -41,6 +41,10 @@
 #import "CDOHResponse.h"
 #import "CDOHResponsePrivate.h"
 
+#import "CDOHNetworkClient.h"
+#import "CDOHNetworkClientReply.h"
+#import "CDOHAFNetworkingClient.h"
+
 #import "CDOHResource.h"
 #import "CDOHResourcePrivate.h"
 #import "CDOHAbstractUser.h"
@@ -51,6 +55,8 @@
 #import "CDOHRepository.h"
 
 #import "UIApplication+ObjectiveHub.h"
+
+#import <objc/runtime.h>
 
 #import "AFNetworking.h"
 #import "JSONKit.h"
@@ -79,7 +85,7 @@ NSString *const kCDOHGitHubMimeRaw			= @"application/vnd.github.v3.raw";
 
 #pragma mark - ObjectiveHub User Agent
 /// ObjectiveHub User Agent Format String
-NSString *const kCDOHUserAgentFormat		= @"ObjectiveHub/%@";
+NSString *const kCDOHUserAgentFormat						= @"ObjectiveHub/%@";
 
 
 #pragma mark - HTTP Header Response Keys
@@ -90,15 +96,6 @@ NSString *const kCDOHResponseHeaderLinkKey					= @"Link";
 
 
 #pragma mark - Relative API Path
-/// Creates a dictionary wherein the keys are string representations of the
-/// corresponding values’ variable names.
-///
-/// More or less the same macro that was introduced in Mac OS X 10.7 with auto-
-/// layout, but as it does not exist on the iOS platform we re-implement it
-/// here.
-#define CDOHDictionaryOfVariableBindings(...) _CDOHDictionaryOfVariableBindings(@"" # __VA_ARGS__, __VA_ARGS__, nil)
-
-NSDictionary *_CDOHDictionaryOfVariableBindings(NSString *commaSeparatedKeysString, id firstValue, ...); // not for direct use
 NSDictionary *_CDOHDictionaryOfVariableBindings(NSString *commaSeparatedKeysString, id firstValue, ...)
 {
 	NSDictionary *dictionary = nil;
@@ -127,30 +124,6 @@ NSDictionary *_CDOHDictionaryOfVariableBindings(NSString *commaSeparatedKeysStri
 	return dictionary;
 }
 
-
-/// Create the relative API path for the given _pathFormat_. The given _options_
-/// are substituted into the path format.
-///
-/// As such if the path format is `/users/:login` you should supply a dictionary
-/// with a key named `login` the object for that key should then be what you
-/// wish to substitute `:login`.
-///
-/// For example:
-/// 
-///		// Assume the following path format is defined.
-///		NSString *const kCDOHUserPathFormat = @"/users/:login";
-///		...
-///		
-///		NSString *login = @"octocat";
-///		NSDictionary *options = CDOHDictionaryOfVariableBindings(login);
-///		NSString *path = CDOHRelativeAPIPath(
-///			kCDOHUserPathFormat,
-///			options
-///		);
-///
-/// If an option is not supplied the key (including the colon, ":") will be
-/// used.
-NSString *CDOHRelativeAPIPath(NSString *pathFormat, NSDictionary *options);
 NSString *CDOHRelativeAPIPath(NSString *pathFormat, NSDictionary *options)
 {
 	// No need to do anything if options is empty or even nil, the end result
@@ -182,25 +155,6 @@ NSString *CDOHRelativeAPIPath(NSString *pathFormat, NSDictionary *options)
 	return path;
 }
 
-/**
- * To get/use the relative API path "/repos/:user/:repo/issues/:id/labels/:id"
- * you can do the following (psuedo codeish):
- *
- *     NSArray *pathFormats = @[
- *         kCDOHRepositoryPathFormat,
- *         kCDOHResourcePropertyPathFormat,
- *         kCDOHResourcePropertyPathFormat
- *     ];
- *     NSArray *optionDicts = @[
- *         @{@"owner", owner, @"repo", repo},
- *         @{@"resource", kCDOHResourceIssues, @"identifier", issueIdentifier},
- *         @{@"resource", kCDOHResourceLabels, @"identifier", labelIdentifier}
- *     ];
- *     
- *     NSString *path = CDOHConcatenatedRelativeAPIPaths(pathFormats, optionDicts);
- *
- */
-NSString *CDOHConcatenatedRelativeAPIPaths(NSArray *pathFormats, NSArray *optionDicts);
 NSString *CDOHConcatenatedRelativeAPIPaths(NSArray *pathFormats, NSArray *optionDicts)
 {
 	NSMutableString *path = [[NSMutableString alloc] init];
@@ -309,121 +263,68 @@ NSString *const kCDOHResourcePropertyWatched				= @"watched";
 NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 
 
-#pragma mark - ObjectiveHub Generic Block Types
-/// Block type for succesful requests.
-typedef void (^CDOHInternalSuccessBlock)(AFHTTPRequestOperation *operation, id responseObject);
-/// Block type for failed requests.
-typedef void (^CDOHInternalFailureBlock)(AFHTTPRequestOperation *operation, NSError *error);
-/// Block type for creating the resource from parsed JSON data.
-typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
-
-
-#pragma mark - Create Parameter Dictionaries
-/// Creates an `NSDictionary` object of the objects passed into it (parameter
-/// value and then followed by the parameter key).
-#define CDOHParametersDictionary(...) [[NSDictionary alloc] initWithObjectsAndKeys: __VA_ARGS__, nil]
-
-
-#pragma mark - Create Argument Arrays
-/// Creates an `NSArray` object of the objects passed into it.
-#define CDOHArrayOfArguments(...)	[[NSArray alloc] initWithObjects: __VA_ARGS__, nil]
-
-
-
-#pragma mark - ObjectiveHub Private Interface
-@interface CDOHClient ()
-
-
-#pragma mark - HTTP Client
-/// The HTTP client used to communicate with GitHub internally.
-@property (readonly, strong) AFHTTPClient *client;
-
-
-#pragma mark - JSON Decoder
-/// The JSON decoder object used for decoding JSON strings.
-@property (readonly, strong) JSONDecoder *JSONDecoder;
-
-
-#pragma mark - Request Helpers
-/// Creates the standard request parameter dictionary.
-- (NSMutableDictionary *)standardRequestParameterDictionaryForPage:(NSUInteger)page;
-
-/// Creates a request parameter dictionary from a user supplied dictionary only
-/// containing the keys in the given _validKeys_ array.
-///
-/// Also converts objects not directly supported by JSON such as `NSURL` objects
-/// to a suitable JSON format.
-- (NSMutableDictionary *)requestParameterDictionaryForDictionary:(NSDictionary *)dictionary validKeys:(NSArray *)validKeys;
-
-/// Verify that an authenticated user has been set (will not verify that the
-/// user is actually authorized) or call the given failureBlock.
-- (BOOL)verifyAuthenticatedUserIsSetOrFail:(CDOHFailureBlock)failureBlock;
-
-
-#pragma mark - Standard Requests
-/// Get an array of `CDOHRepository` objects from a given _path_ using the given
-/// _params_ for the given _pages_.
-- (void)repositoriesAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
-
-/// Get an array of `CDOHUser` objects from a given _path_ using the given
-/// _params_ for the given _pages_.
-- (void)usersAtPath:(NSString *)path params:(NSDictionary *)params pages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
-
-
-#pragma mark - Response Helpers
-/// Create an error from a failed request operation.
-- (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation;
-
-
-#pragma mark - Standard Blocks
-#pragma mark |- Standard Error Block
-/// The standard failure block.
-- (CDOHInternalFailureBlock)standardFailureBlock:(CDOHFailureBlock)failureBlock;
-
-
-#pragma mark |- Generic Standard Success Blocks
-/// The standard success block for requests which return no data.
-- (CDOHInternalSuccessBlock)standardSuccessBlockWithNoData:(CDOHSuccessBlock)successBlock;
-
-/// The standard success block for requests which return data.
-- (CDOHInternalSuccessBlock)standardSuccessBlockWithResourceCreationBlock:(CDOHInternalResponseCreationBlock)block success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments;
-
-
-#pragma mark |- Concrete Standard Success Blocks
-/// The standard success block for requests returning a user.
-- (CDOHInternalSuccessBlock)standardUserSuccessBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments;
-
-/// The standard success block for requests returning an array of email
-/// addresses.
-- (CDOHInternalSuccessBlock)standardUserEmailSuccessBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments;
-
-/// The standard success block for requests returning an array of users.
-- (CDOHInternalSuccessBlock)standardUserArraySuccessBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments;
-
-/// The standard success block for requests returning a repository.
-- (CDOHInternalSuccessBlock)standardRepositorySuccessBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments;
-
-/// The standard success block for requests returning an array of repositories.
-- (CDOHInternalSuccessBlock)standardRepositoryArraySuccessBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments;
-
-@end
-
-
 #pragma mark - ObjectiveHub Implementation
-@implementation CDOHClient {
-	NSLock *_usernameLock;
-	NSLock *_passwordLock;
-}
+@implementation CDOHClient
 
 #pragma mark - Synthesizing
 @synthesize username = _username;
 @synthesize password = _password;
 @synthesize itemsPerPage = _itemsPerPage;
+@synthesize baseURL = _baseUrl;
 @synthesize showNetworkActivityStatusAutomatically = _showNetworkActivityStatusAutomatically;
 
 @synthesize networkClient = _networkClient;
-@synthesize client = _client;
 @synthesize JSONDecoder = _jsonDecoder;
+
+
+#pragma mark - Network Client Adapters
++ (NSMutableArray *)registeredNetworkClientAdapters
+{
+	static NSMutableArray *registeredNetworkClientAdapters = nil;
+	static dispatch_once_t registeredNetworkClientAdaptersToken;
+	dispatch_once(&registeredNetworkClientAdaptersToken, ^{
+		registeredNetworkClientAdapters = [[NSMutableArray alloc] initWithObjects:
+										   [CDOHAFNetworkingClient class],
+										   nil];
+	});
+	
+	return registeredNetworkClientAdapters;
+}
+
++ (BOOL)registerNetworkClientAdapterClass:(Class)adapterClass
+{
+	if (class_conformsToProtocol(adapterClass, @protocol(CDOHNetworkClient))) {
+		@synchronized(self) {
+			[[self registeredNetworkClientAdapters] insertObject:adapterClass atIndex:0];
+		}
+		
+		return YES;
+	}
+	return NO;
+}
+
++ (void)unregisterNetworkClientAdapterClass:(Class)adapterClass
+{
+	@synchronized(self) {
+		[[self registeredNetworkClientAdapters] removeObject:adapterClass];
+	}
+}
+
++ (Class)networkClientAdapaterClass
+{
+	Class adapterClass = nil;
+
+	@synchronized(self) {
+		for (Class registeredClass in [self registeredNetworkClientAdapters]) {
+			if ([registeredClass checkDependencies]) {
+				adapterClass = registeredClass;
+				break;
+			}
+		}
+	}
+	
+	return adapterClass;
+}
 
 
 #pragma mark - Initializing ObjectiveHub
@@ -431,17 +332,12 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 {
 	self = [super init];
 	if (self) {
-		
 		_itemsPerPage = kCDOHDefaultItemsPerPage;
-
-		_usernameLock = [[NSLock alloc] init];
-		_passwordLock = [[NSLock alloc] init];
-
-		_client = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kCDOHGitHubBaseAPIURIString]];
-		[_client registerHTTPOperationClass:[AFHTTPRequestOperation class]];
-		[_client setParameterEncoding:AFJSONParameterEncoding];
-		[_client setDefaultHeader:@"Accept" value:kCDOHGitHubMimeGenericJSON];
-		[_client setDefaultHeader:@"User-Agent" value:[NSString stringWithFormat:kCDOHUserAgentFormat, kCDOHLibraryVersion]];
+		
+		_baseUrl = [NSURL URLWithString:kCDOHGitHubBaseAPIURIString];
+		NSDictionary *defaultHeaders = [[self class] defaultNetworkClientHTTPHeaders];
+		Class networkClientClass = [[self class] networkClientAdapaterClass];
+		_networkClient = [[networkClientClass alloc] initWithBaseURL:_baseUrl defaultHeaders:defaultHeaders];
 
 		_jsonDecoder = [[JSONDecoder alloc] initWithParseOptions:JKParseOptionStrict];
 	}
@@ -455,9 +351,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	if (self) {
 		_username = [username copy];
 		_password = [password copy];
-
-		// TODO: This need to to be reset if the username or password is set during the lifetime of the object.
-		[_client setAuthorizationHeaderWithUsername:_username password:_password];
 	}
 	
 	return self;
@@ -467,7 +360,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Describing a User Object
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"<%@: %p { github API URI = %@, username is set = %@, password is set = %@ }>", [self class], self, kCDOHGitHubBaseAPIURIString, (self.username ? @"YES" : @"NO"), (self.password ? @"YES" : @"NO")];
+	return [NSString stringWithFormat:@"<%@: %p { GitHub API URI = %@, username = %@, password is set = %@ }>", [self class], self, kCDOHGitHubBaseAPIURIString, self.username, (self.password ? @"YES" : @"NO")];
 }
 
 
@@ -488,50 +381,19 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	_itemsPerPage = itemsPerPage;
 }
 
-// FIXME: Auth header should be set per request.
-- (void)setUsername:(NSString *)username
++ (NSDictionary *)defaultNetworkClientHTTPHeaders
 {
-	[_usernameLock lock];
-	if (username != _username) {
-		_username = [username copy];
-		
-		// FIXME: This should be set per request.
-		[_client setAuthorizationHeaderWithUsername:_username password:_password];
-	}
-	[_usernameLock unlock];
-}
-
-- (NSString *)username
-{
-	NSString *username = nil;
-	[_usernameLock lock];
-	username = _username;
-	[_usernameLock unlock];
-
-	return username;
-}
-
-// FIXME: Auth header should be set per request.
-- (void)setPassword:(NSString *)password
-{
-	[_passwordLock lock];
-	if (password != _password) {
-		_password = [password copy];
-		
-		// FIXME: This should be set per request.
-		[_client setAuthorizationHeaderWithUsername:_username password:_password];
-	}
-	[_passwordLock unlock];
-}
-
-- (NSString *)password
-{
-	NSString *password = nil;
-	[_passwordLock lock];
-	password = _password;
-	[_passwordLock unlock];
-
-	return password;
+	static NSDictionary *defaultNetworkClientHTTPHeaders = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSString *userAgent = [NSString stringWithFormat:kCDOHUserAgentFormat, kCDOHLibraryVersion];
+		defaultNetworkClientHTTPHeaders = [NSDictionary dictionaryWithObjectsAndKeys:
+										   kCDOHGitHubMimeGenericJSON,	@"Accept",
+										   userAgent,					@"User-Agent",
+										   nil];
+	});
+	
+	return defaultNetworkClientHTTPHeaders;
 }
 
 
@@ -550,84 +412,70 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 #pragma mark - Controlling Requests
 - (void)suspendAllRequests
 {
-	[self.client.operationQueue setSuspended:YES];
+	[self.networkClient suspend];
 }
 
 - (void)resumeAllRequests
 {
-	[self.client.operationQueue setSuspended:NO];
+	[self.networkClient resume];
 }
 
 - (void)cancelAllRequests
 {
-	[self.client.operationQueue cancelAllOperations];
+	[self.networkClient cancelAll];
 
 }
 
 
-#pragma mark - Standard Error Block
-- (CDOHInternalFailureBlock)standardFailureBlock:(CDOHFailureBlock)failureBlock
+#pragma mark - Generic Standard Reply Blocks
+- (CDOHNetworkClientReplyBlock)standardReplyBlockForNoDataResponse:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
-	return ^(AFHTTPRequestOperation *operation, __unused NSError *error) {
-		if (failureBlock) {
-			CDOHError *ohError = [self errorFromFailedOperation:operation];
-			failureBlock(ohError);
+	return ^(CDOHNetworkClientReply *reply) {
+		if (reply.success == YES && successBlock) {
+				successBlock(nil);
+		} else if (reply.success == NO && failureBlock) {
+			failureBlock(reply.error);
 		}
 	};
 }
 
-
-#pragma mark - Generic Standard Success Blocks
-- (CDOHInternalSuccessBlock)standardSuccessBlockWithNoData:(CDOHSuccessBlock)successBlock
+- (CDOHNetworkClientReplyBlock)standardReplyBlockWithResourceCreationBlock:(CDOHInternalResponseCreationBlock)resourceCreationBlock success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock selector:(SEL)selector arguments:(NSArray *)arguments
 {
-	return ^(__unused AFHTTPRequestOperation *__unused operation, __unused id responseObject) {
-		if (successBlock) {
-			successBlock(nil);
-		}
-	};
-}
-
-- (CDOHInternalSuccessBlock)standardSuccessBlockWithResourceCreationBlock:(CDOHInternalResponseCreationBlock)resourceCreationBlock success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
-{
-	return ^(AFHTTPRequestOperation *operation, id responseObject) {
-		if (successBlock) {
-			if (responseObject && [responseObject length] > 0) {
-				id parsedResponseObject = [self.JSONDecoder objectWithData:responseObject];
+	__weak CDOHClient *blockSelf = self;
+	return ^(CDOHNetworkClientReply *reply) {
+		if (reply.success == YES && successBlock) {
+			id responseObject = reply.response;
+			
+			if ([responseObject length] > 0) {
+				id parsedResponseObject = [blockSelf.JSONDecoder objectWithData:responseObject];
 				id resource = resourceCreationBlock(parsedResponseObject);
 				
 				if (resource != nil) {
-					NSHTTPURLResponse *httpUrlResponse = operation.response;
-					NSDictionary *httpHeaders = [httpUrlResponse allHeaderFields];
-					
 					CDOHResponse *response = [[CDOHResponse alloc] initWithResource:resource
-																			 client:self
-																		   selector:action
-																	   successBlock:successBlock 
+																			 client:blockSelf
+																		   selector:selector
+																	   successBlock:successBlock
 																	   failureBlock:failureBlock
-																		HTTPHeaders:httpHeaders
+																		HTTPHeaders:reply.HTTPHeaders
 																		  arguments:arguments];
 					successBlock(response);
 				} else if (failureBlock) {
-					NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
-											  operation, @"operation",
-											  responseObject, kCDOHErrorUserInfoResponseDataKey,
-											  nil];
-					CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code: kCDOHErrorCodeResponseObjectNotOfExpectedType userInfo:userInfo];
+					CDOHError *error = [[CDOHError alloc] initWithHTTPHeaders:reply.HTTPHeaders HTTPStatus:kCDOHErrorCodeResponseObjectNotOfExpectedType responseBody:responseObject];
 					failureBlock(error);
 				}
 			} else if (failureBlock) {
-				NSDictionary *userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:
-										  operation, @"operation", nil];
-				CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code:kCDOHErrorCodeResponseObjectEmpty userInfo:userInfo];
+				CDOHError *error = [[CDOHError alloc] initWithHTTPHeaders:reply.HTTPHeaders HTTPStatus:kCDOHErrorCodeResponseObjectEmpty responseBody:responseObject];
 				failureBlock(error);
 			}
+		} else if (reply.success == NO && failureBlock) {
+			failureBlock(reply.error);
 		}
 	};
 }
 
 
-#pragma mark - Concrete Standard Success Blocks
-- (CDOHInternalSuccessBlock)standardUserSuccessBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
+#pragma mark - Concrete Standard Reply Blocks
+- (CDOHNetworkClientReplyBlock)standardUserReplyBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock selector:(SEL)selector arguments:(NSArray *)arguments
 {
 	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
 		CDOHUser *user = nil;
@@ -638,20 +486,19 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		return user;
 	};
 	
-	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
+	return [self standardReplyBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock selector:selector arguments:arguments];
 }
 
-- (CDOHInternalSuccessBlock)standardUserArraySuccessBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
+- (CDOHNetworkClientReplyBlock)standardUserArrayReplyBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock selector:(SEL)selector arguments:(NSArray *)arguments
 {
 	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
 		NSMutableArray *users = nil;
 		if ([parsedResponseObject isKindOfClass:[NSArray class]]) {
-			CDOHUser *user = nil;
 			users = [[NSMutableArray alloc] initWithCapacity:[parsedResponseObject count]];
 			
 			for (id userDict in parsedResponseObject) {
 				if ([userDict isKindOfClass:[NSDictionary class]]) {
-					user = [[CDOHUser alloc] initWithJSONDictionary:userDict];
+					CDOHUser *user = [[CDOHUser alloc] initWithJSONDictionary:userDict];
 					[users addObject:user];
 				}
 			}
@@ -660,24 +507,23 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		return users;
 	};
 	
-	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
+	return [self standardReplyBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock selector:selector arguments:arguments];
 }
 
-- (CDOHInternalSuccessBlock)standardUserEmailSuccessBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
+- (CDOHNetworkClientReplyBlock)standardArrayReplyBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock selector:(SEL)selector arguments:(NSArray *)arguments
 {
 	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
-		NSArray *emails = nil;
 		if ([parsedResponseObject isKindOfClass:[NSArray class]]) {
-			emails = [parsedResponseObject copy];
+			return [parsedResponseObject copy];
 		}
 		
-		return emails;
+		return nil;
 	};
 	
-	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
+	return [self standardReplyBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock selector:selector arguments:arguments];
 }
 
-- (CDOHInternalSuccessBlock)standardRepositorySuccessBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
+- (CDOHNetworkClientReplyBlock)standardRepositoryReplyBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock selector:(SEL)selector arguments:(NSArray *)arguments
 {
 	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
 		CDOHRepository *repo = nil;
@@ -688,16 +534,16 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		return repo;
 	};
 	
-	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
+	return [self standardReplyBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock selector:selector arguments:arguments];
 }
 
-- (CDOHInternalSuccessBlock)standardRepositoryArraySuccessBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock action:(SEL)action arguments:(NSArray *)arguments
+- (CDOHNetworkClientReplyBlock)standardRepositoryArrayReplyBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock selector:(SEL)selector arguments:(NSArray *)arguments
 {
 	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
 		NSMutableArray *reposArray = nil;
 		if ([parsedResponseObject isKindOfClass:[NSArray class]]) {
 			reposArray = [[NSMutableArray alloc] initWithCapacity:[parsedResponseObject count]];
-		
+			
 			for (id repoDict in parsedResponseObject) {
 				if ([repoDict isKindOfClass:[NSDictionary class]]) {
 					CDOHRepository *repo = [[CDOHRepository alloc] initWithJSONDictionary:repoDict];
@@ -709,7 +555,7 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		return reposArray;
 	};
 	
-	return [self standardSuccessBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock action:action arguments:arguments];
+	return [self standardReplyBlockWithResourceCreationBlock:block success:successBlock failure:failureBlock selector:selector arguments:arguments];
 }
 
 
@@ -726,10 +572,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		NSMutableDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
 		[paramDict addEntriesFromDictionary:params];
 		
-		[blockSelf.client getPath:path
-					   parameters:paramDict
-						  success:[self standardRepositoryArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(path, params)]
-						  failure:[self standardFailureBlock:failureBlock]];
+		[blockSelf.networkClient getPath:path
+							  parameters:paramDict
+								username:blockSelf.username
+								password:blockSelf.password
+						  withReplyBlock:[blockSelf standardRepositoryReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:CDOHArrayOfArguments(path, params)]];
 	}];
 }
 
@@ -745,10 +592,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 		NSMutableDictionary *paramDict = [self standardRequestParameterDictionaryForPage:idx];
 		[paramDict addEntriesFromDictionary:params];
 		
-		[blockSelf.client getPath:path
-					   parameters:paramDict
-						  success:[blockSelf standardUserArraySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(path, params)]
-						  failure:[blockSelf standardFailureBlock:failureBlock]];
+		[blockSelf.networkClient getPath:path
+							  parameters:paramDict
+								username:blockSelf.username
+								password:blockSelf.password
+						  withReplyBlock:[blockSelf standardUserArrayReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:CDOHArrayOfArguments(path, params)]];
 	}];
 }
 
@@ -841,10 +689,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	NSDictionary *options = CDOHMakeDict(kCDOHResourceUsers,	kCDOHResourceKey,
 										 login,					kCDOHIdentifierKey);
 	NSString *path = CDOHRelativeAPIPath(kCDOHIdentifiedResourcePathFormat, options);
-	[self.client getPath:path
-			  parameters:nil
-				 success:[self standardUserSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(login)]
-				 failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient getPath:path
+					 parameters:nil
+					   username:self.username
+					   password:self.password
+				 withReplyBlock:[self standardUserReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:CDOHArrayOfArguments(login)]];
 }
 
 - (void)user:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -854,10 +703,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	
 	NSDictionary *options = CDOHMakeDict(kCDOHResourceAuthenticatedUser, kCDOHResourceKey);
 	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePathFormat, options);
-	[self.client getPath:path
-			  parameters:nil
-				 success:[self standardUserSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:nil]
-				 failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient getPath:path
+					 parameters:nil
+					   username:self.username
+					   password:self.password
+				 withReplyBlock:[self standardUserReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:nil]];
 }
 
 - (void)updateUserWithDictionary:(NSDictionary *)dictionary success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -879,10 +729,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	
 	NSDictionary *options = CDOHMakeDict(kCDOHResourceAuthenticatedUser, kCDOHResourceKey);
 	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePathFormat, options);
-	[self.client patchPath:path
-				parameters:params
-				   success:[self standardUserSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(dictionary)]
-				   failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient patchPath:path
+					   parameters:params
+						 username:self.username
+						 password:self.password
+				   withReplyBlock:[self standardUserReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:CDOHArrayOfArguments(dictionary)]];
 }
 
 
@@ -896,10 +747,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 										 kCDOHResourcePropertyEmails,		kCDOHPropertyKey);
 	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyPathFormat, options);
 	
-	[self.client getPath:path
-			  parameters:nil
-				 success:[self standardUserEmailSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:nil]
-				 failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient getPath:path
+					 parameters:nil
+					   username:self.username
+					   password:self.password
+				 withReplyBlock:[self standardArrayReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:nil]];
 }
 
 - (void)addUserEmails:(NSArray *)emails success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -911,10 +763,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 										 kCDOHResourcePropertyEmails,		kCDOHPropertyKey);
 	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyPathFormat, options);
 	
-	[self.client postPath:path
-			   parameters:emails
-				  success:[self standardUserEmailSuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(emails)]
-				  failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient postPath:path
+					  parameters:emails
+						username:self.username
+						password:self.password
+				  withReplyBlock:[self standardArrayReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:CDOHArrayOfArguments(emails)]];
 }
 
 - (void)deleteUserEmails:(NSArray *)emails success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -926,10 +779,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 										 kCDOHResourcePropertyEmails,		kCDOHPropertyKey);
 	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyPathFormat, options);
 	
-	[self.client deletePath:path
-				 parameters:emails
-					success:[self standardSuccessBlockWithNoData:successBlock]
-					failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient deletePath:path
+						parameters:emails
+						  username:self.username
+						  password:self.password
+					withReplyBlock:[self standardReplyBlockForNoDataResponse:successBlock failure:failureBlock]];
 }
 
 
@@ -942,10 +796,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	
 	NSString *path = CDOHRelativeAPIPath(kCDOHRepositoryPathFormat, CDOHDictionaryOfVariableBindings(repo, owner));
 	
-	[self.client getPath:path
-			  parameters:nil
-				 success:[self standardRepositorySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repo, owner)]
-				 failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient getPath:path
+					 parameters:nil
+					   username:self.username
+					   password:self.password
+				 withReplyBlock:[self standardRepositoryReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:CDOHArrayOfArguments(repo, owner)]];
 }
 
 - (void)createRepository:(NSString *)name dictionary:(NSDictionary *)dictionary success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -972,10 +827,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 										 kCDOHResourcePropertyRepositories,	kCDOHPropertyKey);
 	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyPathFormat, options);
 	
-	[self.client postPath:path
-			   parameters:params
-				  success:[self standardRepositorySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(name, dictionary)]
-				  failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient postPath:path
+					  parameters:params
+						username:self.username
+						password:self.password
+				  withReplyBlock:[self standardRepositoryReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:CDOHArrayOfArguments(name, dictionary)]];
 }
 
 - (void)createRepository:(NSString *)name inOrganization:(NSString *)organization dictionary:(NSDictionary *)dictionary success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -1005,10 +861,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 										 organization,						kCDOHIdentifierKey);
 	NSString *path = CDOHRelativeAPIPath(kCDOHIdentifiedResourcePropertyPathFormat, options);
 	
-	[self.client postPath:path
-			   parameters:params
-				  success:[self standardRepositorySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(name, organization)]
-				  failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient postPath:path
+					  parameters:params
+						username:self.username
+						password:self.password
+				  withReplyBlock:[self standardRepositoryReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:CDOHArrayOfArguments(name, organization)]];
 }
 
 - (void)updateRepository:(NSString *)repo owner:(NSString *)owner dictionary:(NSDictionary *)dictionary success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -1036,10 +893,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	
 	NSString *path = CDOHRelativeAPIPath(kCDOHRepositoryPathFormat, CDOHDictionaryOfVariableBindings(repo, owner));
 	
-	[self.client postPath:path
-			   parameters:params
-				  success:[self standardRepositorySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repo, owner, dictionary)]
-				  failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient postPath:path
+					  parameters:params
+						username:self.username
+						password:self.password
+				  withReplyBlock:[self standardRepositoryReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:CDOHArrayOfArguments(repo, owner, dictionary)]];
 }
 
 - (void)repositories:(NSString *)type pages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -1146,10 +1004,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 										 CDOHMakeDict(kCDOHResourceLanguages, kCDOHResourceKey));
 	NSString *path = CDOHConcatenatedRelativeAPIPaths(pathFormats, optionDicts);
 	
-	[self.client getPath:path
-			  parameters:nil
-				 success:[self standardSuccessBlockWithResourceCreationBlock:resourceCreationBlock success:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repo, owner)]
-				 failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient getPath:path
+					 parameters:nil
+					   username:self.username
+					   password:self.password
+				 withReplyBlock:[self standardReplyBlockWithResourceCreationBlock:resourceCreationBlock success:successBlock failure:failureBlock selector:_cmd arguments:CDOHArrayOfArguments(repo, owner)]];
 }
 
 
@@ -1183,7 +1042,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 	[self repositoriesAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
 }
 
-// TODO: Send message to repositoriesAtPath:params:pages:success:failure:
 - (void)repositoriesWatchedForPages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) { return; }
@@ -1210,10 +1068,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 										 owner,							kCDOHOwnerKey);
 	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyRepositoryPathFormat, options);
 	
-	[self.client getPath:path
-			  parameters:nil
-				 success:[self standardSuccessBlockWithNoData:successBlock]
-				 failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient getPath:path
+					 parameters:nil
+					   username:self.username
+					   password:self.password
+				 withReplyBlock:[self standardReplyBlockForNoDataResponse:successBlock failure:failureBlock]];
 }
 
 - (void)watchRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -1228,10 +1087,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 										 owner,							kCDOHOwnerKey);
 	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyRepositoryPathFormat, options);
 	
-	[self.client putPath:path
-			  parameters:nil
-				 success:[self standardSuccessBlockWithNoData:successBlock]
-				 failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient putPath:path
+					 parameters:nil
+					   username:self.username
+					   password:self.password
+				 withReplyBlock:[self standardReplyBlockForNoDataResponse:successBlock failure:failureBlock]];
 }
 
 - (void)stopWatchingRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
@@ -1246,10 +1106,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 										 owner,							kCDOHOwnerKey);
 	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePropertyRepositoryPathFormat, options);
 	
-	[self.client deletePath:path
-				 parameters:nil
-					success:[self standardSuccessBlockWithNoData:successBlock]
-					failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient deletePath:path
+						parameters:nil
+						  username:self.username
+						  password:self.password
+					withReplyBlock:[self standardReplyBlockForNoDataResponse:successBlock failure:failureBlock]];
 }
 
 
@@ -1290,10 +1151,11 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 										 CDOHMakeDict(kCDOHResourceForks, kCDOHResourceKey));
 	NSString *path = CDOHConcatenatedRelativeAPIPaths(pathFormats, optionDicts);
 	
-	[self.client postPath:path
-			   parameters:params
-				  success:[self standardRepositorySuccessBlock:successBlock failure:failureBlock action:_cmd arguments:CDOHArrayOfArguments(repo, owner, intoOrganization)]
-				  failure:[self standardFailureBlock:failureBlock]];
+	[self.networkClient postPath:path
+					  parameters:params
+						username:self.username
+						password:self.password
+				  withReplyBlock:[self standardRepositoryReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:CDOHArrayOfArguments(repo, owner, intoOrganization)]];
 }
 
 

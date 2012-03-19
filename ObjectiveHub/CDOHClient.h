@@ -98,11 +98,37 @@
  */
 @interface CDOHClient : NSObject <CDOHClientProtocol>
 
+#pragma mark - Network Client Adapters
+/** @name Network Client Adapters */
+/**
+ * Attempts to register the given class as a possible network client adapter.
+ *
+ * Instances of _adapterClass_ must conform to the `CDOHNetworkClient` protocol.
+ *
+ * @param adapterClass The class which should be registerred as a network client
+ * adapter. Must conform to the `CDOHNetworkClient` protocol.
+ * @return `YES` if the registration was successful, otherwise `NO`.
+ */
++ (BOOL)registerNetworkClientAdapterClass:(Class)adapterClass;
+
+/**
+ * Unregisters the given network client adapter class.
+ *
+ * @param adapterClass The network client adapter class which should be
+ * unregistered.
+ */
++ (void)unregisterNetworkClientAdapterClass:(Class)adapterClass;
+
+
 #pragma mark - Initializing ObjectiveHub
 /** @name Initializing ObjectiveHub */
 /**
  * Initializes and returns an `ObjectiveHub` instance that uses the default
  * settings.
+ *
+ * Will try to set the network client to one of the known adapters. If this
+ * fails (becasue no known library was found). Please see the `CDOHNetworkClient` protocol
+ * documentation for a list of bundled adapters.
  *
  * @warning **Important:** To get data which requires authentication you must set
  * the username and password properties after calling the init method.
@@ -161,6 +187,24 @@
  * Where 0 (zero) means that we will let GitHub decide what the value should be.
  */
 @property (assign) NSUInteger itemsPerPage;
+
+/**
+ * The base URL of the GitHub API.
+ *
+ * The default value is the URL of GitHubs "hosted" API. You can set this to
+ * your private GitHub instance.
+ */
+@property (strong) NSURL *baseURL;
+
+
+/**
+ * The default HTTP headers used to initialize a network client.
+ *
+ * @return A dictionary containing the default HTTP headers used with a network
+ * client.
+ */
++ (NSDictionary *)defaultNetworkClientHTTPHeaders;
+
 
 /**
  * The network client which the library should use for network requests.
