@@ -1,0 +1,271 @@
+//
+//  CDOHAFNetworkingClient.m
+//  ObjectiveHub
+//
+//  Copyright 2011-2012 Aron Cedercrantz. All rights reserved.
+//  
+//  Redistribution and use in source and binary forms, with or without
+//  modification, are permitted provided that the following conditions are met:
+//  
+//  1. Redistributions of source code must retain the above copyright notice,
+//  this list of conditions and the following disclaimer.
+//  
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//  this list of conditions and the following disclaimer in the documentation
+//  and/or other materials provided with the distribution.
+//  
+//  THIS SOFTWARE IS PROVIDED BY ARON CEDERCRANTZ ''AS IS'' AND ANY EXPRESS OR
+//  IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+//  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+//  EVENT SHALL ARON CEDERCRANTZ OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+//  INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+//  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+//  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+//  ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+//  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+//  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//  
+//  The views and conclusions contained in the software and documentation are
+//  those of the authors and should not be interpreted as representing official
+//  policies, either expressed or implied, of Aron Cedercrantz.
+//
+
+#import "CDOHAFNetworkingClient.h"
+
+#import "CDOHNetworkClientReply.h"
+#import "CDOHError.h"
+
+#import "AFHTTPClient.h"
+#import "AFHTTPRequestOperation.h"
+
+
+#pragma mark -
+@interface CDOHAFNetworkingClient (/*Private*/)
+
+@property (strong) AFHTTPClient *client;
+
+- (void)setAuthHeaderAndIncrementCounterWithUsername:(NSString *)username password:(NSString *)password;
+- (void)incrementAuthHeadersBalanceCount;
+- (void)decrementAuthHeadersBalanceCount;
+
+
++ (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation;
+
+- (void (^)(AFHTTPRequestOperation *, id))standardSuccessBlockForReplyBlock:(void (^)(CDOHNetworkClientReply *reply))replyBlock;
+- (void (^)(AFHTTPRequestOperation *, NSError *))standardFailureBlockForReplyBlock:(void (^)(CDOHNetworkClientReply *reply))replyBlock;
+
+@end
+
+
+#pragma mark - 
+@implementation CDOHAFNetworkingClient {
+	NSUInteger _authHeadersBalanceCount;
+}
+
+#pragma mark -
+@synthesize client = _client;
+
+#pragma mark -
+- (instancetype)initWithBaseURL:(NSURL *)baseURL defaultHeaders:(NSDictionary *)defaultHeaders
+{
+	self = [super init];
+	if (self) {
+		_authHeadersBalanceCount = 0;
+		
+		_client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
+		[_client registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+		[_client setParameterEncoding:AFJSONParameterEncoding];
+		
+		for (NSString *headerKey in defaultHeaders) {
+			NSString *headerValue = [defaultHeaders objectForKey:headerKey];
+			[_client setDefaultHeader:headerKey value:headerValue];
+		}
+	}
+	
+	return self;
+}
+
+
+#pragma mark - 
+- (void)setBaseURL:(NSURL *__unused)baseURL
+{
+	NSAssert(NO, @"Setting base URL after init not supported by AFNetworking");
+}
+
+- (NSURL *)baseURL
+{
+	return self.client.baseURL;
+}
+
+
+#pragma mark -
+- (oneway void)suspend
+{
+	[self.client.operationQueue setSuspended:YES];
+}
+
+- (oneway void)resume
+{
+	[self.client.operationQueue setSuspended:NO];
+}
+
+- (oneway void)cancelAll
+{
+	[self.client.operationQueue cancelAllOperations];
+}
+
+
+#pragma mark - 
+- (oneway void)getPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(void (^)(CDOHNetworkClientReply *reply))replyBlock
+{
+	NSParameterAssert(path);
+	NSParameterAssert(replyBlock);
+	
+	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
+	
+	[self.client getPath:path
+			  parameters:parameters
+				 success:[[self class] standardSuccessBlockForReplyBlock:replyBlock]
+				 failure:[[self class] standardFailureBlockForReplyBlock:replyBlock]];
+}
+
+- (oneway void)postPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(void (^)(CDOHNetworkClientReply *))replyBlock
+{
+	NSParameterAssert(path);
+	NSParameterAssert(replyBlock);
+	
+	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
+	
+	[self.client postPath:path
+			   parameters:parameters
+				  success:[[self class] standardSuccessBlockForReplyBlock:replyBlock]
+				  failure:[[self class] standardFailureBlockForReplyBlock:replyBlock]];
+}
+
+- (oneway void)putPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(void (^)(CDOHNetworkClientReply *))replyBlock
+{
+	NSParameterAssert(path);
+	NSParameterAssert(replyBlock);
+	
+	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
+	
+	[self.client putPath:path
+			  parameters:parameters
+				 success:[[self class] standardSuccessBlockForReplyBlock:replyBlock]
+				 failure:[[self class] standardFailureBlockForReplyBlock:replyBlock]];
+}
+
+// TODO: Send pull request to AFNetworking/AFNetworking with patchPath:parameters:success:failure.
+// TODO: Send pull request to AFNetworking/AFNetworking with generic(ish) parameters.
+- (oneway void)patchPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(void (^)(CDOHNetworkClientReply *))replyBlock
+{
+	NSParameterAssert(path);
+	NSParameterAssert(replyBlock);
+	
+	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
+	
+	[self.client patchPath:path
+				parameters:parameters
+				   success:[[self class] standardSuccessBlockForReplyBlock:replyBlock]
+				   failure:[[self class] standardFailureBlockForReplyBlock:replyBlock]];
+}
+
+- (oneway void)deletePath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(void (^)(CDOHNetworkClientReply *))replyBlock
+{
+	NSParameterAssert(path);
+	NSParameterAssert(replyBlock);
+	
+	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
+	
+	[self.client deletePath:path
+			   parameters:parameters
+				  success:[[self class] standardSuccessBlockForReplyBlock:replyBlock]
+				  failure:[[self class] standardFailureBlockForReplyBlock:replyBlock]];
+}
+
+
+#pragma mark - 
+- (void (^)(AFHTTPRequestOperation *, NSError *))standardFailureBlockForReplyBlock:(void (^)(CDOHNetworkClientReply *))replyBlock
+{
+	__weak CDOHAFNetworkingClient *blockSelf = self;
+	return ^(AFHTTPRequestOperation *operation, NSError *__unused unusedError) {
+		[blockSelf decrementAuthHeadersBalanceCount];
+		
+		NSDictionary *httpHeaders = [[operation response] allHeaderFields];
+		CDOHError *error = [[self class] errorFromFailedOperation:operation];
+		
+		CDOHNetworkClientReply *reply = nil;
+		reply = [[CDOHNetworkClientReply alloc] initWithSuccessStatus:NO
+															 response:error
+														  HTTPHeaders:httpHeaders];
+		
+		replyBlock(reply);
+	};
+}
+
+- (void (^)(AFHTTPRequestOperation *, id))standardSuccessBlockForReplyBlock:(void (^)(CDOHNetworkClientReply *))replyBlock
+{
+	__weak CDOHAFNetworkingClient *blockSelf = self;
+	return ^(AFHTTPRequestOperation *operation, id responseObject) {
+		[blockSelf decrementAuthHeadersBalanceCount];
+		
+		NSDictionary *httpHeaders = [[operation response] allHeaderFields];
+		
+		CDOHNetworkClientReply *reply = nil;
+		reply = [[CDOHNetworkClientReply alloc] initWithSuccessStatus:YES
+															 response:responseObject
+														  HTTPHeaders:httpHeaders];
+		
+		replyBlock(reply);
+	};
+}
+
+
+#pragma mark - 
++ (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation
+{
+	NSDictionary *httpHeaders = [operation.response allHeaderFields];
+	NSInteger httpStatus = [operation.response statusCode];
+	NSData *responseData = [operation responseData];
+	
+	CDOHError *ohError = [[CDOHError alloc] initWithHTTPHeaders:httpHeaders HTTPStatus:httpStatus responseBody:responseData];
+	
+	return ohError;
+}
+
+
+#pragma mark - 
+- (void)setAuthHeaderAndIncrementCounterWithUsername:(NSString *)username password:(NSString *)password
+{
+	[self incrementAuthHeadersBalanceCount];
+	if ([username length] > 0 && [password length] > 0) {
+		[self.client setAuthorizationHeaderWithUsername:username password:password];
+	}
+}
+
+- (void)incrementAuthHeadersBalanceCount
+{
+	@synchronized(self) {
+		_authHeadersBalanceCount++;
+	}
+}
+
+- (void)decrementAuthHeadersBalanceCount
+{
+	@synchronized(self) {
+		if (_authHeadersBalanceCount > 0) {
+			_authHeadersBalanceCount--;
+			
+			if (_authHeadersBalanceCount == 0) {
+				[self.client clearAuthorizationHeader];
+			}
+		} else {
+			_authHeadersBalanceCount = 0;
+			
+			NSAssert(NO, @"Unbalanced auth headers balance count, already 0 but decremented (i.e. over-decremented).");
+		}
+	}
+}
+
+
+@end
