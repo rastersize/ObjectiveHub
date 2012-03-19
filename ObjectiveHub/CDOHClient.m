@@ -576,7 +576,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 							  parameters:paramDict
 								username:blockSelf.username
 								password:blockSelf.password
-						  withReplyBlock:[blockSelf standardRepositoryReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:CDOHArrayOfArguments(path, params)]];
+						  withReplyBlock:[blockSelf standardRepositoryArrayReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:CDOHArrayOfArguments(path, params)]];
 	}];
 }
 
