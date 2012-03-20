@@ -32,5 +32,10 @@
 
 #import <ObjectiveHub/_CDOHPLan.h>
 
+
+/**
+ * The `CDOHPlan` class models a GitHub user (as represented by
+ * `CDOHAbstractUser`) plan. For example, the "free" and the "small" plans.
+ */
 @interface CDOHPLan : _CDOHPLan
 @end
