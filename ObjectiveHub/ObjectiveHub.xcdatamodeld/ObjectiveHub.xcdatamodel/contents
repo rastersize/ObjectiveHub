@@ -49,7 +49,7 @@
                 <entry key="jsonKey" value="blog"/>
             </userInfo>
         </attribute>
-        <attribute name="p_userHTMLProfileURL" optional="YES" attributeType="Transformable" syncable="YES">
+        <attribute name="p_profileURL" optional="YES" attributeType="Transformable" syncable="YES">
             <userInfo>
                 <entry key="class" value="NSURL"/>
                 <entry key="jsonKey" value="html_url"/>
@@ -252,7 +252,7 @@
         <relationship name="watchedRepositories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDOHRepository" inverseName="watchers" inverseEntity="CDOHRepository" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CDOHAbstractUser" positionX="54" positionY="-405" width="128" height="405"/>
+        <element name="CDOHAbstractUser" positionX="54" positionY="-405" width="128" height="390"/>
         <element name="CDOHOrganization" positionX="369" positionY="-450" width="128" height="60"/>
         <element name="CDOHOrganizationTeam" positionX="369" positionY="-177" width="137" height="150"/>
         <element name="CDOHPLan" positionX="261" positionY="45" width="128" height="120"/>

@@ -54,14 +54,4 @@ NSString *const kCDOHUserBioKey				= @"bio";
 			self.privateGistsCountValue != 0);
 }
 
-- (void)setAvatarURL:(NSURL *)avatarURL
-{
-	[self setP_avatarURL:avatarURL];
-}
-
-- (NSURL *)avatarURL
-{
-	return [self p_avatarURL];
-}
-
 @end

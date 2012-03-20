@@ -135,7 +135,7 @@ NSString *const kCDOHResourceResourceURLAttributeNameKey		= @"p_resourceURL";
 }
 
 
-#pragma mark - Resource Attributes
+#pragma mark - Resource API URL
 - (NSURL *)resourceURL
 {
 	return self.p_resourceURL;

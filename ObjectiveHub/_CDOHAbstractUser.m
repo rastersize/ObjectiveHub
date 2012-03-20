@@ -18,7 +18,7 @@ const struct CDOHAbstractUserAttributes CDOHAbstractUserAttributes = {
 	.name = @"name",
 	.p_avatarURL = @"p_avatarURL",
 	.p_blogURL = @"p_blogURL",
-	.p_userHTMLProfileURL = @"p_userHTMLProfileURL",
+	.p_profileURL = @"p_profileURL",
 	.privateGistsCount = @"privateGistsCount",
 	.privateRepositoriesCount = @"privateRepositoriesCount",
 	.privateRepositoriesOwnedCount = @"privateRepositoriesOwnedCount",
@@ -301,7 +301,7 @@ const struct CDOHAbstractUserFetchedProperties CDOHAbstractUserFetchedProperties
 
 
 
-@dynamic p_userHTMLProfileURL;
+@dynamic p_profileURL;
 
 
 

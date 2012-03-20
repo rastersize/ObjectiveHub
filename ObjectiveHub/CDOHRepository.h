@@ -105,7 +105,54 @@ extern NSString *const kCDOHRepositoryLanguageCharactersKey;
 
 
 #pragma mark - CDOHRepository Interface
+/**
+ *
+ */
 @interface CDOHRepository : _CDOHRepository
+
+#pragma mark - Cloning URLs
+/** @name Cloning URLs */
+/**
+ * Standard clone URL.
+ */
+@property (strong) NSURL *cloneURL;
+
+/**
+ * Clone URL for cloning over the git protocol.
+ */
+@property (strong) NSURL *gitURL;
+
+/**
+ * Clone URL for cloning over the SSH protocol.
+ */
+@property (strong) NSURL *sshURL;
+
+/**
+ * Clone URL for checkingout over the Subversion protocol.
+ */
+@property (strong) NSURL *svnURL;
+
+
+#pragma mark - Repository Mirroring
+/** @name Repository Mirroring */
+/**
+ * The URL of the original repository which this repository mirrors.
+ */
+@property (strong) NSURL *mirrorURL;
+
+
+#pragma mark - Project URLs
+/** @name Project URLs */
+/**
+ * The URL of the GitHub (HTML) repository page.
+ */
+@property (strong) NSURL *repositoryHTMLURL;
+
+/**
+ * The URL of the project homepage.
+ */
+@property (strong) NSURL *homepageURL;
+
 
 #pragma mark - Formatted Name
 /** @name Formatted Name */

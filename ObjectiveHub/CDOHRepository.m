@@ -77,6 +77,82 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 #pragma mark - CDOHRepository Implementation
 @implementation CDOHRepository
 
+#pragma mark - Cloning URLs
+- (NSURL *)cloneURL
+{
+	return self.p_cloneURL;
+}
+
+- (void)setCloneURL:(NSURL *)cloneURL
+{
+	self.p_cloneURL = cloneURL;
+}
+
+- (NSURL *)gitURL
+{
+	return self.p_gitURL;
+}
+
+- (void)setGitURL:(NSURL *)gitURL
+{
+	self.p_gitURL = gitURL;
+}
+
+- (NSURL *)sshURL
+{
+	return self.p_sshURL;
+}
+
+- (void)setSshURL:(NSURL *)sshURL
+{
+	self.p_sshURL = sshURL;
+}
+
+- (NSURL *)svnURL
+{
+	return self.p_svnURL;
+}
+
+- (void)setSvnURL:(NSURL *)svnURL
+{
+	self.p_svnURL = svnURL;
+}
+
+
+#pragma mark - Repository Mirroring
+- (NSURL *)mirrorURL
+{
+	return self.p_mirrorURL;
+}
+
+- (void)setMirrorURL:(NSURL *)mirrorURL
+{
+	self.p_mirrorURL = mirrorURL;
+}
+
+
+#pragma mark - Project URLs
+- (NSURL *)repositoryHTMLURL
+{
+	return self.p_repositoryHTMLURL;
+}
+
+- (void)setRepositoryHTMLURL:(NSURL *)repositoryHTMLURL
+{
+	self.p_repositoryHTMLURL = repositoryHTMLURL;
+}
+
+- (NSURL *)homepageURL
+{
+	return self.p_homepageURL;
+}
+
+- (void)setHomepageURL:(NSURL *)homepageURL
+{
+	self.p_homepageURL = homepageURL;
+}
+
+
 #pragma mark - Formatted Name
 - (NSString *)formattedName
 {

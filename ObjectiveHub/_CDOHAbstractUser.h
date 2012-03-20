@@ -19,7 +19,7 @@ extern const struct CDOHAbstractUserAttributes {
 	__unsafe_unretained NSString *name;
 	__unsafe_unretained NSString *p_avatarURL;
 	__unsafe_unretained NSString *p_blogURL;
-	__unsafe_unretained NSString *p_userHTMLProfileURL;
+	__unsafe_unretained NSString *p_profileURL;
 	__unsafe_unretained NSString *privateGistsCount;
 	__unsafe_unretained NSString *privateRepositoriesCount;
 	__unsafe_unretained NSString *privateRepositoriesOwnedCount;
@@ -205,10 +205,10 @@ extern const struct CDOHAbstractUserFetchedProperties {
 
 
 
-@property (nonatomic, strong) id p_userHTMLProfileURL;
+@property (nonatomic, strong) id p_profileURL;
 
 
-//- (BOOL)validateP_userHTMLProfileURL:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateP_profileURL:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -410,8 +410,8 @@ extern const struct CDOHAbstractUserFetchedProperties {
 
 
 
-- (id)primitiveP_userHTMLProfileURL;
-- (void)setPrimitiveP_userHTMLProfileURL:(id)value;
+- (id)primitiveP_profileURL;
+- (void)setPrimitiveP_profileURL:(id)value;
 
 
 

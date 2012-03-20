@@ -54,7 +54,11 @@
 + (instancetype)resourceWithJSONDictionary:(NSDictionary *)jsonDictionary inManagedObjectContex:(NSManagedObjectContext *)managedObjectContext;
 
 
-#pragma mark - Resource Attributes
+#pragma mark - Resource API URL
+/** @name Resource API URL */
+/**
+ * The API URL of the resource.
+ */
 @property (strong) NSURL *resourceURL;
 
 @end

@@ -99,19 +99,30 @@ extern NSString *const kCDOHUserTypeOrganizationKey;
  * find a suitable concrete class it will assert.
  *
  * You will probably *not* want to use this class, instead please have a look
- * at the CDOHUser and CDOHOrganization classes which both extend this class and
- * provides more specific behaviour.
- *
- * If the instance represents an authenticated (see the `authenticated`
- * property) user the following extra information is available (else it is
- * "zeroed" out; i.e. `nil`, 0 or whatever makes sense in each specific case):
- *
- * - privateRepositoriesOwnedCount
- * - privateRepositoriesCount
- * - privateGistsCount
- * - collaborators
- * - diskUsage
- * - plan
+ * at the `CDOHUser` and `CDOHOrganization` classes which both extend this class
+ * and provides more specific behaviour.
  */
 @interface CDOHAbstractUser : _CDOHAbstractUser
+
+#pragma mark - Personal Information
+/** @name Avatar Information */
+/**
+ * The URL of the users avatar.
+ */
+@property (strong) NSURL *avatarURL;
+
+/**
+ * The URL of the users blog or website.
+ */
+@property (strong) NSURL *blogURL;
+
+
+#pragma mark - System Information
+/** @name GitHub Profile */
+/**
+ * The URL of the users GitHub profile page (HTML version).
+ */
+@property (strong) NSURL *profileURL;
+
+
 @end

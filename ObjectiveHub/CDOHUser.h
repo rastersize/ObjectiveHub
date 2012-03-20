@@ -43,17 +43,27 @@ extern NSString *const kCDOHUserHireableKey;
 
 #pragma mark - CDOHUser Interface
 /**
- * The `CDOHUser` class contains information about a single "normal" GitHub
- * user, i.e. not an organization.
+ * The `CDOHUser` class is a concrete subclass of `CDOHAbstractUser` and
+ * models a single "normal" (i.e. not an organization) GitHub user.
+ *
+ * If the instance represents an authenticated (see the `authenticated`
+ * property) user the following extra information is available (else it is
+ * "zeroed" out; i.e. `nil`, 0 or whatever makes sense in each specific case):
+ *
+ * - privateRepositoriesOwnedCount
+ * - privateRepositoriesCount
+ * - privateGistsCount
+ * - collaborators
+ * - diskUsage
+ * - plan
  */
 @interface CDOHUser : _CDOHUser
 
-@property (assign, readonly, getter = isAuthenticated) BOOL authenticated;
-
-
+#pragma mark - User Metadata
+/** @name User Metadata */
 /**
- *
+ * Whether the user is authenticated or not.
  */
-@property (strong) NSURL *avatarURL;
+@property (assign, readonly, getter = isAuthenticated) BOOL authenticated;
 
 @end

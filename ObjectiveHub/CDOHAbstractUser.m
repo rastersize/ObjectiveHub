@@ -69,6 +69,7 @@ NSString *const kCDOHUserTypeOrganizationKey	= @"Organization";
 #pragma mark - CDOHAbstractUser Implemenation
 @implementation CDOHAbstractUser
 
+#pragma mark - Creating Instances of Abstract Users
 + (instancetype)resourceWithJSONDictionary:(NSDictionary *)jsonDictionary inManagedObjectContex:(NSManagedObjectContext *)managedObjectContext
 {
 	CDOHAbstractUser *user = nil;
@@ -88,5 +89,40 @@ NSString *const kCDOHUserTypeOrganizationKey	= @"Organization";
 	
 	return user;
 }
+
+
+#pragma mark - Personal Information
+- (NSURL *)blogURL
+{
+	return self.p_blogURL;
+}
+
+- (void)setBlogURL:(NSURL *)blogURL
+{
+	self.p_blogURL = blogURL;
+}
+
+- (void)setAvatarURL:(NSURL *)avatarURL
+{
+	[self setP_avatarURL:avatarURL];
+}
+
+- (NSURL *)avatarURL
+{
+	return [self p_avatarURL];
+}
+
+
+#pragma mark - System Information
+- (NSURL *)profileURL
+{
+	return self.p_profileURL;
+}
+
+- (void)setProfileURL:(NSURL *)profileURL
+{
+	self.p_profileURL = profileURL;
+}
+
 
 @end
