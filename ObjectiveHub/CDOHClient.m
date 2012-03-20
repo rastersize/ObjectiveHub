@@ -481,7 +481,6 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 {
 	__weak CDOHClient *blockSelf = self;
 	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
-		NSLog(@"create user block, parsedResponseObject: %@", parsedResponseObject);
 		CDOHUser *user = nil;
 		if ([parsedResponseObject isKindOfClass:[NSDictionary class]]) {
 			user = [CDOHUser resourceWithJSONDictionary:parsedResponseObject inManagedObjectContex:blockSelf.managedObjectContext];
@@ -652,7 +651,9 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 		}
 		// Unkown classes
 		else {
-			NSLog(@"Invalid type of class '%@' for key '%@' skipping.", [obj class], [key class]);
+#if DEBUG
+			NSLog(@"+++ Invalid type of class '%@' for key '%@' skipping.", [obj class], [key class]);
+#endif
 		}
 	}
 	
