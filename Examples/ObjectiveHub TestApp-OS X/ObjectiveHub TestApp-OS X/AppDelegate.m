@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "../../Shared/CDOHTestAppUserCredentials.h"
 
 #import <ObjectiveHub/ObjectiveHub.h>
 
@@ -23,14 +24,16 @@
 {
 	[[[NSFileManager alloc] init] removeItemAtURL:[self applicationFilesDirectory] error:NULL];
 	
-	
+	CDOHTestAppUserCredentials *credentials = [[CDOHTestAppUserCredentials alloc] init];
 	self.client = [[CDOHClient alloc] initWithManagedObjectContext:[self managedObjectContext]];
+	self.client.username = credentials.username;
+	self.client.password = credentials.password;
 	
-	[self.client userWithLogin:@"rastersize" success:^(CDOHResponse *response) {
+	[self.client user:^(CDOHResponse *response) {
 		CDOHUser *user = response.resource;
 		NSLog(@"response: %@", response);
 		NSLog(@"plan: %@", user.plan);
-		NSLog(@"avatarURL of class '%@': %@", [user.avatarURL class], user.avatarURL);
+		NSLog(@"authed: %@", user.authenticated ? @"YES" : @"NO");
 	} failure:^(CDOHError *error) {
 		NSLog(@"|- error: %@", error);
 		NSLog(@"|-|- responseBody: %@", [[NSString alloc] initWithData:error.responseBody encoding:NSUTF8StringEncoding]);

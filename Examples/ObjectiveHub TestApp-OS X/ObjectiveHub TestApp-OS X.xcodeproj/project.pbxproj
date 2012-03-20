@@ -16,6 +16,8 @@
 		9CB1D3E01517F9D0004FD579 /* ObjectiveHub_TestApp_OS_X.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9CB1D3DE1517F9D0004FD579 /* ObjectiveHub_TestApp_OS_X.xcdatamodeld */; };
 		9CB1D4091517FB0A004FD579 /* ObjectiveHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB1D3FE1517FAFA004FD579 /* ObjectiveHub.framework */; };
 		9CB1D40C1517FD8D004FD579 /* ObjectiveHub.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9CB1D3FE1517FAFA004FD579 /* ObjectiveHub.framework */; };
+		9CB1D4231518E35D004FD579 /* account.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9CB1D4221518E35D004FD579 /* account.plist */; };
+		9CB1D4271518E420004FD579 /* CDOHTestAppUserCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB1D4261518E420004FD579 /* CDOHTestAppUserCredentials.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,9 @@
 		9CB1D3DC1517F9D0004FD579 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		9CB1D3DF1517F9D0004FD579 /* ObjectiveHub_TestApp_OS_X.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ObjectiveHub_TestApp_OS_X.xcdatamodel; sourceTree = "<group>"; };
 		9CB1D3F21517FAF9004FD579 /* ObjectiveHub.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectiveHub.xcodeproj; path = ../../ObjectiveHub.xcodeproj; sourceTree = "<group>"; };
+		9CB1D4221518E35D004FD579 /* account.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = account.plist; path = ../account.plist; sourceTree = "<group>"; };
+		9CB1D4251518E420004FD579 /* CDOHTestAppUserCredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHTestAppUserCredentials.h; sourceTree = "<group>"; };
+		9CB1D4261518E420004FD579 /* CDOHTestAppUserCredentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHTestAppUserCredentials.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +115,8 @@
 		9CB1D3B71517F9D0004FD579 = {
 			isa = PBXGroup;
 			children = (
+				9CB1D4221518E35D004FD579 /* account.plist */,
+				9CB1D4241518E420004FD579 /* Shared */,
 				9CB1D3CC1517F9D0004FD579 /* ObjectiveHub TestApp-OS X */,
 				9CB1D3F11517FAE8004FD579 /* Vendor */,
 				9CB1D3C51517F9D0004FD579 /* Frameworks */,
@@ -186,6 +193,16 @@
 				9CB1D4061517FAFA004FD579 /* ObjectiveHub Test App.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9CB1D4241518E420004FD579 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				9CB1D4251518E420004FD579 /* CDOHTestAppUserCredentials.h */,
+				9CB1D4261518E420004FD579 /* CDOHTestAppUserCredentials.m */,
+			);
+			name = Shared;
+			path = ../Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,6 +305,7 @@
 				9CB1D3D11517F9D0004FD579 /* InfoPlist.strings in Resources */,
 				9CB1D3D71517F9D0004FD579 /* Credits.rtf in Resources */,
 				9CB1D3DD1517F9D0004FD579 /* MainMenu.xib in Resources */,
+				9CB1D4231518E35D004FD579 /* account.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +319,7 @@
 				9CB1D3D31517F9D0004FD579 /* main.m in Sources */,
 				9CB1D3DA1517F9D0004FD579 /* AppDelegate.m in Sources */,
 				9CB1D3E01517F9D0004FD579 /* ObjectiveHub_TestApp_OS_X.xcdatamodeld in Sources */,
+				9CB1D4271518E420004FD579 /* CDOHTestAppUserCredentials.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
