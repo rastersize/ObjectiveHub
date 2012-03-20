@@ -13,6 +13,7 @@
 			buildPhases = (
 			);
 			dependencies = (
+				9CB1D40E1518DF9A004FD579 /* PBXTargetDependency */,
 				9C99909E14AE7A0600DFDD3B /* PBXTargetDependency */,
 				9C9990A014AE7A0600DFDD3B /* PBXTargetDependency */,
 				9C9990A214AE7A0600DFDD3B /* PBXTargetDependency */,
@@ -350,6 +351,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 9C26F974146B207A001A5385;
 			remoteInfo = "ObjectiveHub-iOSTests";
+		};
+		9CB1D40D1518DF9A004FD579 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9C26F929146B1B74001A5385 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C2FD4EE1517A6B60058E3E7;
+			remoteInfo = Mogenerator;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -1518,6 +1526,11 @@
 			isa = PBXTargetDependency;
 			target = 9C26F974146B207A001A5385 /* ObjectiveHub-iOSTests */;
 			targetProxy = 9C9990A114AE7A0600DFDD3B /* PBXContainerItemProxy */;
+		};
+		9CB1D40E1518DF9A004FD579 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9C2FD4EE1517A6B60058E3E7 /* Mogenerator */;
+			targetProxy = 9CB1D40D1518DF9A004FD579 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
