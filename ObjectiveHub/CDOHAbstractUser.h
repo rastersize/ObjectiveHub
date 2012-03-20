@@ -92,6 +92,12 @@ extern NSString *const kCDOHUserTypeOrganizationKey;
  * An abstract class containing information about a single GitHub user of any
  * type.
  *
+ * If you use send the `+resourceWithJSONDictionary:inManagedObjectContex:`
+ * message to this class it will try to figure out which concrete class you
+ * actually wanted to use. It does this by looking at the value for the key
+ * `kCDOHUserTypeKey` and comparing it against the known types. If it does not
+ * find a suitable concrete class it will assert.
+ *
  * You will probably *not* want to use this class, instead please have a look
  * at the CDOHUser and CDOHOrganization classes which both extend this class and
  * provides more specific behaviour.

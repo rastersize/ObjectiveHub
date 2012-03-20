@@ -31,9 +31,9 @@
 //
 
 #import "CDOHAbstractUser.h"
+#import "CDOHUser.h"
+#import "CDOHOrganization.h"
 #import "CDOHResourcePrivate.h"
-
-#import "CDOHPlan.h"
 
 
 #pragma mark NSCoding and GitHub JSON Keys
@@ -71,13 +71,20 @@ NSString *const kCDOHUserTypeOrganizationKey	= @"Organization";
 
 + (instancetype)resourceWithJSONDictionary:(NSDictionary *)jsonDictionary inManagedObjectContex:(NSManagedObjectContext *)managedObjectContext
 {
-	CDOHAbstractUser *user = [super resourceWithJSONDictionary:jsonDictionary inManagedObjectContex:managedObjectContext];
+	CDOHAbstractUser *user = nil;
+	Class userTypeClass = nil;
 	
-	NSDictionary *planDict = [jsonDictionary objectForKey:kCDOHUserPlanKey];
-	CDOHPLan *plan = [CDOHPLan resourceWithJSONDictionary:planDict inManagedObjectContex:managedObjectContext];
-	[user setPlan:plan];
-	
+	NSString *type = [jsonDictionary objectForKey:kCDOHUserTypeKey];
+	if ([type isEqual:KCDOHUserTypeUserKey]) {
+		userTypeClass = [CDOHUser class];
+	} else if ([type isEqual:kCDOHUserTypeOrganizationKey]) {
+		userTypeClass = [CDOHOrganization class];
 	}
+	NSAssert(userTypeClass != nil, @"Unkown user type '%@'", type);
+	
+	user = [userTypeClass insertInManagedObjectContext:managedObjectContext];
+	[user setValuesForAttributesWithJSONDictionary:jsonDictionary];
+	[user setValuesForRelationshipsWithJSONDictionary:jsonDictionary];
 	
 	return user;
 }
