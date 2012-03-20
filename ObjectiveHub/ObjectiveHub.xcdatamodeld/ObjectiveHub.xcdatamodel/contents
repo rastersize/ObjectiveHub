@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="CDOHAbstractUser" representedClassName="CDOHAbstractUser" isAbstract="YES" parentEntity="CDOHResource" syncable="YES">
-        <attribute name="authenticated" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="collaborators" optional="YES" attributeType="Integer 64" minValueString="0" defaultValueString="0" syncable="YES"/>
         <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES">
@@ -259,6 +258,6 @@
         <element name="CDOHPLan" positionX="261" positionY="45" width="128" height="120"/>
         <element name="CDOHRepository" positionX="-227" positionY="-288" width="128" height="495"/>
         <element name="CDOHResource" positionX="52" positionY="-513" width="128" height="60"/>
-        <element name="CDOHUser" positionX="369" positionY="-300" width="128" height="90"/>
+        <element name="CDOHUser" positionX="369" positionY="-300" width="128" height="105"/>
     </elements>
 </model>

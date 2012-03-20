@@ -5,7 +5,6 @@
 #import "CDOHResource.h"
 
 extern const struct CDOHAbstractUserAttributes {
-	__unsafe_unretained NSString *authenticated;
 	__unsafe_unretained NSString *collaborators;
 	__unsafe_unretained NSString *company;
 	__unsafe_unretained NSString *createdAt;
@@ -52,7 +51,6 @@ extern const struct CDOHAbstractUserFetchedProperties {
 
 
 
-
 @class NSObject;
 @class NSObject;
 @class NSObject;
@@ -71,18 +69,6 @@ extern const struct CDOHAbstractUserFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (CDOHAbstractUserID*)objectID;
-
-
-
-
-@property (nonatomic, strong) NSNumber * authenticated;
-
-
-@property BOOL authenticatedValue;
-- (BOOL)authenticatedValue;
-- (void)setAuthenticatedValue:(BOOL)value_;
-
-//- (BOOL)validateAuthenticated:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -323,15 +309,6 @@ extern const struct CDOHAbstractUserFetchedProperties {
 @end
 
 @interface _CDOHAbstractUser (CoreDataGeneratedPrimitiveAccessors)
-
-
-- (NSNumber *)primitiveAuthenticated;
-- (void)setPrimitiveAuthenticated:(NSNumber *)value;
-
-- (BOOL)primitiveAuthenticatedValue;
-- (void)setPrimitiveAuthenticatedValue:(BOOL)value_;
-
-
 
 
 - (NSNumber *)primitiveCollaborators;

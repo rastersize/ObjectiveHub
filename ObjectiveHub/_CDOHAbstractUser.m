@@ -4,7 +4,6 @@
 #import "_CDOHAbstractUser.h"
 
 const struct CDOHAbstractUserAttributes CDOHAbstractUserAttributes = {
-	.authenticated = @"authenticated",
 	.collaborators = @"collaborators",
 	.company = @"company",
 	.createdAt = @"createdAt",
@@ -62,10 +61,6 @@ const struct CDOHAbstractUserFetchedProperties CDOHAbstractUserFetchedProperties
 + (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
 	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 	
-	if ([key isEqualToString:@"authenticatedValue"]) {
-		NSSet *affectingKey = [NSSet setWithObject:@"authenticated"];
-		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
-	}
 	if ([key isEqualToString:@"collaboratorsValue"]) {
 		NSSet *affectingKey = [NSSet setWithObject:@"collaborators"];
 		keyPaths = [keyPaths setByAddingObjectsFromSet:affectingKey];
@@ -109,32 +104,6 @@ const struct CDOHAbstractUserFetchedProperties CDOHAbstractUserFetchedProperties
 
 	return keyPaths;
 }
-
-
-
-
-@dynamic authenticated;
-
-
-
-- (BOOL)authenticatedValue {
-	NSNumber *result = [self authenticated];
-	return [result boolValue];
-}
-
-- (void)setAuthenticatedValue:(BOOL)value_ {
-	[self setAuthenticated:[NSNumber numberWithBool:value_]];
-}
-
-- (BOOL)primitiveAuthenticatedValue {
-	NSNumber *result = [self primitiveAuthenticated];
-	return [result boolValue];
-}
-
-- (void)setPrimitiveAuthenticatedValue:(BOOL)value_ {
-	[self setPrimitiveAuthenticated:[NSNumber numberWithBool:value_]];
-}
-
 
 
 

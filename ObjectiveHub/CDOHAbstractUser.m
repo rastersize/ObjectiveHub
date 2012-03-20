@@ -77,14 +77,6 @@ NSString *const kCDOHUserTypeOrganizationKey	= @"Organization";
 	CDOHPLan *plan = [CDOHPLan resourceWithJSONDictionary:planDict inManagedObjectContex:managedObjectContext];
 	[user setPlan:plan];
 	
-	if (user.plan != nil ||
-		user.diskUsageValue != 0 ||
-		user.collaboratorsValue != 0 ||
-		user.privateRepositoriesCountValue != 0 ||
-		user.privateRepositoriesOwnedCountValue != 0 ||
-		user.privateGistsCountValue != 0) {
-		
-		user.authenticatedValue = YES;
 	}
 	
 	return user;

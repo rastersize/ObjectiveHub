@@ -48,6 +48,9 @@ extern NSString *const kCDOHUserHireableKey;
  */
 @interface CDOHUser : _CDOHUser
 
+@property (assign, readonly, getter = isAuthenticated) BOOL authenticated;
+
+
 /**
  *
  */

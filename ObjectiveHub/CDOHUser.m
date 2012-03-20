@@ -33,6 +33,8 @@
 #import "CDOHUser.h"
 #import "CDOHResourcePrivate.h"
 
+#import "CDOHPlan.h"
+
 
 #pragma mark GitHub JSON Keys
 NSString *const kCDOHUserHireableKey		= @"hireable";
@@ -41,6 +43,16 @@ NSString *const kCDOHUserBioKey				= @"bio";
 
 #pragma mark - CDOHUser Implementation
 @implementation CDOHUser
+
+- (BOOL)isAuthenticated
+{
+	return (self.plan.name != nil ||
+			self.diskUsageValue != 0 ||
+			self.collaboratorsValue != 0 ||
+			self.privateRepositoriesCountValue != 0 ||
+			self.privateRepositoriesOwnedCountValue != 0 ||
+			self.privateGistsCountValue != 0);
+}
 
 - (void)setAvatarURL:(NSURL *)avatarURL
 {
