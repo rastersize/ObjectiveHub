@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'ObjectiveHub TestApp-OS X' target in the 'ObjectiveHub TestApp-OS X' project
+//
+
+#ifdef __OBJC__
+	#import <Cocoa/Cocoa.h>
+#endif

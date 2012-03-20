@@ -1,0 +1,451 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		9CB1D3C71517F9D0004FD579 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB1D3C61517F9D0004FD579 /* Cocoa.framework */; };
+		9CB1D3D11517F9D0004FD579 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9CB1D3CF1517F9D0004FD579 /* InfoPlist.strings */; };
+		9CB1D3D31517F9D0004FD579 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB1D3D21517F9D0004FD579 /* main.m */; };
+		9CB1D3D71517F9D0004FD579 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 9CB1D3D51517F9D0004FD579 /* Credits.rtf */; };
+		9CB1D3DA1517F9D0004FD579 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB1D3D91517F9D0004FD579 /* AppDelegate.m */; };
+		9CB1D3DD1517F9D0004FD579 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9CB1D3DB1517F9D0004FD579 /* MainMenu.xib */; };
+		9CB1D3E01517F9D0004FD579 /* ObjectiveHub_TestApp_OS_X.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9CB1D3DE1517F9D0004FD579 /* ObjectiveHub_TestApp_OS_X.xcdatamodeld */; };
+		9CB1D4091517FB0A004FD579 /* ObjectiveHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB1D3FE1517FAFA004FD579 /* ObjectiveHub.framework */; };
+		9CB1D40C1517FD8D004FD579 /* ObjectiveHub.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9CB1D3FE1517FAFA004FD579 /* ObjectiveHub.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9CB1D3FD1517FAFA004FD579 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CB1D3F21517FAF9004FD579 /* ObjectiveHub.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C26F935146B2069001A5385;
+			remoteInfo = "ObjectiveHub-Mac";
+		};
+		9CB1D3FF1517FAFA004FD579 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CB1D3F21517FAF9004FD579 /* ObjectiveHub.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C26F94D146B2069001A5385;
+			remoteInfo = "ObjectiveHub-MacTests";
+		};
+		9CB1D4011517FAFA004FD579 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CB1D3F21517FAF9004FD579 /* ObjectiveHub.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C26F967146B207A001A5385;
+			remoteInfo = "ObjectiveHub-iOS";
+		};
+		9CB1D4031517FAFA004FD579 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CB1D3F21517FAF9004FD579 /* ObjectiveHub.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C26F975146B207A001A5385;
+			remoteInfo = "ObjectiveHub-iOSTests";
+		};
+		9CB1D4051517FAFA004FD579 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CB1D3F21517FAF9004FD579 /* ObjectiveHub.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9C5D2D521470281A0064F02A;
+			remoteInfo = "ObjectiveHub Test App";
+		};
+		9CB1D4071517FB02004FD579 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9CB1D3F21517FAF9004FD579 /* ObjectiveHub.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9C26F934146B2069001A5385;
+			remoteInfo = "ObjectiveHub-Mac";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9CB1D40B1517FD82004FD579 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9CB1D40C1517FD8D004FD579 /* ObjectiveHub.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		9CB1D3C21517F9D0004FD579 /* ObjectiveHub TestApp-OS X.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ObjectiveHub TestApp-OS X.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9CB1D3C61517F9D0004FD579 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		9CB1D3C91517F9D0004FD579 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		9CB1D3CA1517F9D0004FD579 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9CB1D3CB1517F9D0004FD579 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		9CB1D3CE1517F9D0004FD579 /* ObjectiveHub TestApp-OS X-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectiveHub TestApp-OS X-Info.plist"; sourceTree = "<group>"; };
+		9CB1D3D01517F9D0004FD579 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9CB1D3D21517F9D0004FD579 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9CB1D3D41517F9D0004FD579 /* ObjectiveHub TestApp-OS X-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectiveHub TestApp-OS X-Prefix.pch"; sourceTree = "<group>"; };
+		9CB1D3D61517F9D0004FD579 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		9CB1D3D81517F9D0004FD579 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9CB1D3D91517F9D0004FD579 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9CB1D3DC1517F9D0004FD579 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		9CB1D3DF1517F9D0004FD579 /* ObjectiveHub_TestApp_OS_X.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ObjectiveHub_TestApp_OS_X.xcdatamodel; sourceTree = "<group>"; };
+		9CB1D3F21517FAF9004FD579 /* ObjectiveHub.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectiveHub.xcodeproj; path = ../../ObjectiveHub.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9CB1D3BF1517F9D0004FD579 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CB1D4091517FB0A004FD579 /* ObjectiveHub.framework in Frameworks */,
+				9CB1D3C71517F9D0004FD579 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9CB1D3B71517F9D0004FD579 = {
+			isa = PBXGroup;
+			children = (
+				9CB1D3CC1517F9D0004FD579 /* ObjectiveHub TestApp-OS X */,
+				9CB1D3F11517FAE8004FD579 /* Vendor */,
+				9CB1D3C51517F9D0004FD579 /* Frameworks */,
+				9CB1D3C31517F9D0004FD579 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9CB1D3C31517F9D0004FD579 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9CB1D3C21517F9D0004FD579 /* ObjectiveHub TestApp-OS X.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9CB1D3C51517F9D0004FD579 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9CB1D3C61517F9D0004FD579 /* Cocoa.framework */,
+				9CB1D3C81517F9D0004FD579 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9CB1D3C81517F9D0004FD579 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9CB1D3C91517F9D0004FD579 /* AppKit.framework */,
+				9CB1D3CA1517F9D0004FD579 /* CoreData.framework */,
+				9CB1D3CB1517F9D0004FD579 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		9CB1D3CC1517F9D0004FD579 /* ObjectiveHub TestApp-OS X */ = {
+			isa = PBXGroup;
+			children = (
+				9CB1D3D81517F9D0004FD579 /* AppDelegate.h */,
+				9CB1D3D91517F9D0004FD579 /* AppDelegate.m */,
+				9CB1D3DB1517F9D0004FD579 /* MainMenu.xib */,
+				9CB1D3DE1517F9D0004FD579 /* ObjectiveHub_TestApp_OS_X.xcdatamodeld */,
+				9CB1D3CD1517F9D0004FD579 /* Supporting Files */,
+			);
+			path = "ObjectiveHub TestApp-OS X";
+			sourceTree = "<group>";
+		};
+		9CB1D3CD1517F9D0004FD579 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				9CB1D3CE1517F9D0004FD579 /* ObjectiveHub TestApp-OS X-Info.plist */,
+				9CB1D3CF1517F9D0004FD579 /* InfoPlist.strings */,
+				9CB1D3D21517F9D0004FD579 /* main.m */,
+				9CB1D3D41517F9D0004FD579 /* ObjectiveHub TestApp-OS X-Prefix.pch */,
+				9CB1D3D51517F9D0004FD579 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9CB1D3F11517FAE8004FD579 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				9CB1D3F21517FAF9004FD579 /* ObjectiveHub.xcodeproj */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		9CB1D3F31517FAF9004FD579 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9CB1D3FE1517FAFA004FD579 /* ObjectiveHub.framework */,
+				9CB1D4001517FAFA004FD579 /* ObjectiveHub-MacTests.octest */,
+				9CB1D4021517FAFA004FD579 /* libObjectiveHub.a */,
+				9CB1D4041517FAFA004FD579 /* ObjectiveHub-iOSTests.octest */,
+				9CB1D4061517FAFA004FD579 /* ObjectiveHub Test App.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9CB1D3C11517F9D0004FD579 /* ObjectiveHub TestApp-OS X */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9CB1D3E31517F9D0004FD579 /* Build configuration list for PBXNativeTarget "ObjectiveHub TestApp-OS X" */;
+			buildPhases = (
+				9CB1D3BE1517F9D0004FD579 /* Sources */,
+				9CB1D3BF1517F9D0004FD579 /* Frameworks */,
+				9CB1D3C01517F9D0004FD579 /* Resources */,
+				9CB1D40B1517FD82004FD579 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9CB1D4081517FB02004FD579 /* PBXTargetDependency */,
+			);
+			name = "ObjectiveHub TestApp-OS X";
+			productName = "ObjectiveHub TestApp-OS X";
+			productReference = 9CB1D3C21517F9D0004FD579 /* ObjectiveHub TestApp-OS X.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9CB1D3B91517F9D0004FD579 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Aron Cedercrantz";
+			};
+			buildConfigurationList = 9CB1D3BC1517F9D0004FD579 /* Build configuration list for PBXProject "ObjectiveHub TestApp-OS X" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 9CB1D3B71517F9D0004FD579;
+			productRefGroup = 9CB1D3C31517F9D0004FD579 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 9CB1D3F31517FAF9004FD579 /* Products */;
+					ProjectRef = 9CB1D3F21517FAF9004FD579 /* ObjectiveHub.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				9CB1D3C11517F9D0004FD579 /* ObjectiveHub TestApp-OS X */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		9CB1D3FE1517FAFA004FD579 /* ObjectiveHub.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ObjectiveHub.framework;
+			remoteRef = 9CB1D3FD1517FAFA004FD579 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CB1D4001517FAFA004FD579 /* ObjectiveHub-MacTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "ObjectiveHub-MacTests.octest";
+			remoteRef = 9CB1D3FF1517FAFA004FD579 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CB1D4021517FAFA004FD579 /* libObjectiveHub.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libObjectiveHub.a;
+			remoteRef = 9CB1D4011517FAFA004FD579 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CB1D4041517FAFA004FD579 /* ObjectiveHub-iOSTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "ObjectiveHub-iOSTests.octest";
+			remoteRef = 9CB1D4031517FAFA004FD579 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9CB1D4061517FAFA004FD579 /* ObjectiveHub Test App.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "ObjectiveHub Test App.app";
+			remoteRef = 9CB1D4051517FAFA004FD579 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9CB1D3C01517F9D0004FD579 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CB1D3D11517F9D0004FD579 /* InfoPlist.strings in Resources */,
+				9CB1D3D71517F9D0004FD579 /* Credits.rtf in Resources */,
+				9CB1D3DD1517F9D0004FD579 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9CB1D3BE1517F9D0004FD579 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9CB1D3D31517F9D0004FD579 /* main.m in Sources */,
+				9CB1D3DA1517F9D0004FD579 /* AppDelegate.m in Sources */,
+				9CB1D3E01517F9D0004FD579 /* ObjectiveHub_TestApp_OS_X.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9CB1D4081517FB02004FD579 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ObjectiveHub-Mac";
+			targetProxy = 9CB1D4071517FB02004FD579 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9CB1D3CF1517F9D0004FD579 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9CB1D3D01517F9D0004FD579 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		9CB1D3D51517F9D0004FD579 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9CB1D3D61517F9D0004FD579 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		9CB1D3DB1517F9D0004FD579 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9CB1D3DC1517F9D0004FD579 /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9CB1D3E11517F9D0004FD579 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		9CB1D3E21517F9D0004FD579 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9CB1D3E41517F9D0004FD579 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectiveHub TestApp-OS X/ObjectiveHub TestApp-OS X-Prefix.pch";
+				INFOPLIST_FILE = "ObjectiveHub TestApp-OS X/ObjectiveHub TestApp-OS X-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		9CB1D3E51517F9D0004FD579 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectiveHub TestApp-OS X/ObjectiveHub TestApp-OS X-Prefix.pch";
+				INFOPLIST_FILE = "ObjectiveHub TestApp-OS X/ObjectiveHub TestApp-OS X-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9CB1D3BC1517F9D0004FD579 /* Build configuration list for PBXProject "ObjectiveHub TestApp-OS X" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9CB1D3E11517F9D0004FD579 /* Debug */,
+				9CB1D3E21517F9D0004FD579 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9CB1D3E31517F9D0004FD579 /* Build configuration list for PBXNativeTarget "ObjectiveHub TestApp-OS X" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9CB1D3E41517F9D0004FD579 /* Debug */,
+				9CB1D3E51517F9D0004FD579 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9CB1D3DE1517F9D0004FD579 /* ObjectiveHub_TestApp_OS_X.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9CB1D3DF1517F9D0004FD579 /* ObjectiveHub_TestApp_OS_X.xcdatamodel */,
+			);
+			currentVersion = 9CB1D3DF1517F9D0004FD579 /* ObjectiveHub_TestApp_OS_X.xcdatamodel */;
+			path = ObjectiveHub_TestApp_OS_X.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 9CB1D3B91517F9D0004FD579 /* Project object */;
+}
