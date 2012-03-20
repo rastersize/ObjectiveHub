@@ -98,6 +98,7 @@ enum {
 	/// The respone object was empty.
 	kCDOHErrorCodeResponseObjectEmpty				= 10500,
 	kCDOHErrorCodeResponseObjectNotOfExpectedType	= 10501,
+	kCDOHErrorCodeCouldNotCreateResource			= 10502,
 };
 /// The error code type for ObjectiveHub error codes.
 typedef NSInteger CDOHErrorCodeType;

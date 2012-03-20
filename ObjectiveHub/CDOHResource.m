@@ -1,5 +1,5 @@
 //
-//  CDOHResource.m
+//  CDOHResource.h
 //  ObjectiveHub
 //
 //  Copyright 2011-2012 Aron Cedercrantz. All rights reserved.
@@ -33,99 +33,118 @@
 #import "CDOHResource.h"
 #import "CDOHResourcePrivate.h"
 
-#import "NSObject+ObjectiveHub.h"
 #import "NSString+ObjectiveHub.h"
 
-#import <objc/runtime.h>
+
+#pragma mark GitHub JSON Keys
+NSString *const kCDOHResourceJSONURLKey							=  @"url";
 
 
-#pragma mark NSCoding and GitHub JSON Keys
-NSString *const kCDOHResourceAPIResourceURLKey			=  @"url";
+#pragma mark - Mapped Attribute Name Keys
+NSString *const kCDOHResourceResourceURLAttributeNameKey		= @"p_resourceURL";
 
 
-#pragma mark - CDOHResource Implementation
+#pragma mark - 
 @implementation CDOHResource
 
-#pragma mark - API Resource URL
-@synthesize _APIResourceURL = _apiResourceUrl;
-
-
-#pragma mark - Initializing an CDOHPlan Instance
-- (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary
+#pragma mark - Creating and Initializing CDOHResources
++ (instancetype)resourceWithJSONDictionary:(NSDictionary *)jsonDictionary inManagedObjectContex:(NSManagedObjectContext *)managedObjectContext
 {
-	self = [super init];
-	if (self) {
-		_apiResourceUrl = [jsonDictionary cdoh_URLForKey:kCDOHResourceAPIResourceURLKey];
-	}
+	CDOHResource *resource = [self insertInManagedObjectContext:managedObjectContext];
 	
-	return self;
-}
-
-
-#pragma mark - Handling Resource Encoding and Decoding
-- (id)initWithCoder:(NSCoder *)coder
-{
-	NSAssert([coder allowsKeyedCoding], @"Coder must support keyed coding");
+	[resource setValuesForAttributesWithJSONDictionary:jsonDictionary];
+	[resource setValuesForRelationshipsWithJSONDictionary:jsonDictionary];
 	
-	self = [super init];
-	if (self) {		
-		_apiResourceUrl = [coder decodeObjectForKey:kCDOHResourceAPIResourceURLKey];
-	}
-	
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)coder
-{	
-	NSAssert([coder allowsKeyedCoding], @"Coder must support keyed coding");	
-	
-	[coder encodeObject:_apiResourceUrl forKey:kCDOHResourceAPIResourceURLKey];
+	return resource;
 }
 
 
-#pragma mark - Identifying and Comparing Users
-- (BOOL)isEqual:(id)other
+#pragma mark - Handling JSON
+- (void)setValuesForAttributesWithJSONDictionary:(NSDictionary *)keyedValues
 {
-	if (other == self) {
-		return YES;
-	}
-	if (!other || ![other isKindOfClass:[self class]]) {
-		return NO;
-	}
-	return [self isEqualToResource:other];
+	NSDictionary *attributes = [[self entity] attributesByName];
+    for (NSString *attribute in attributes) {
+		NSAttributeDescription *description = [attributes objectForKey:attribute];
+		NSString *classString = [[description userInfo] objectForKey:@"class"];
+		
+		NSString *jsonKey = [[description userInfo] objectForKey:@"jsonKey"];
+		jsonKey = jsonKey != nil ? jsonKey : attribute;
+		
+        id value = [keyedValues objectForKey:jsonKey];
+        if (value == nil || [value isKindOfClass:[NSNull class]]) {
+            continue;
+        }
+		
+        NSAttributeType attributeType = [description attributeType];
+        if (attributeType == NSStringAttributeType && [value isKindOfClass:[NSNumber class]]) {
+            value = [value stringValue];
+        } else if ((attributeType == NSInteger16AttributeType ||
+					attributeType == NSInteger32AttributeType ||
+					attributeType == NSInteger64AttributeType ||
+					attributeType == NSBooleanAttributeType) &&
+				   [value isKindOfClass:[NSString class]]) {
+			
+            value = [NSNumber numberWithInteger:[value integerValue]];
+        } else if (attributeType == NSFloatAttributeType && [value isKindOfClass:[NSString class]]) {
+            value = [NSNumber numberWithDouble:[value doubleValue]];
+        } else if (attributeType == NSDateAttributeType && [value isKindOfClass:[NSString class]]) {
+            value = [value cdoh_dateUsingRFC3339Format];
+        } else if (attributeType == NSTransformableAttributeType && [classString length] > 0) {
+			if ([classString isEqualToString:@"NSURL"] && [value isKindOfClass:[NSString class]]) {
+				value = [NSURL URLWithString:value];
+			}
+		}
+        [self setValue:value forKey:attribute];
+    } 
 }
 
-- (BOOL)isEqualToResource:(CDOHResource *)aResource
+- (void)setValuesForRelationshipsWithJSONDictionary:(NSDictionary *)keyedValues
 {
-	if (aResource == self) {
-		return YES;
+	NSDictionary *relationships = [[self entity] relationshipsByName];
+	for (NSString *relationship in relationships) {
+		NSRelationshipDescription *description = [relationships objectForKey:relationship];
+		
+		NSString *jsonKey = [[description userInfo] objectForKey:@"jsonKey"];
+		jsonKey = jsonKey != nil ? jsonKey : relationship;
+		
+		id value = [keyedValues objectForKey:jsonKey];
+		if (value == nil || [value isKindOfClass:[NSNull class]]) {
+			continue;
+		}
+		
+		if ([description isToMany]) {
+			if ([value isKindOfClass:[NSArray class]]) {
+				NSMutableSet *resources = [self valueForKey:relationship];
+				
+				for (NSDictionary *dict in value) {
+					if ([dict isKindOfClass:[NSDictionary class]]) {
+						Class resourceClass = NSClassFromString([[description destinationEntity] managedObjectClassName]);
+						CDOHResource *resource = [resourceClass resourceWithJSONDictionary:value inManagedObjectContex:[self managedObjectContext]];
+						
+						[resources addObject:resource];
+					}
+				}
+			}
+		} else if ([value isKindOfClass:[NSDictionary class]]) {
+			Class resourceClass = NSClassFromString([[description destinationEntity] managedObjectClassName]);
+			CDOHResource *resource = [resourceClass resourceWithJSONDictionary:value inManagedObjectContex:[self managedObjectContext]];
+			
+			[self setValue:resource forKey:relationship];
+		}
 	}
-	
-	return ([self._APIResourceURL isEqual:aResource._APIResourceURL]);
 }
 
-- (NSUInteger)hash
+
+#pragma mark - Resource API URL
+- (NSURL *)resourceURL
 {
-	// We add "137" so that we do not have the same hash as just the URL.
-	return [self._APIResourceURL hash] + 137;
+	return self.p_resourceURL;
 }
 
-
-#pragma mark - NSCopyingMethods
-- (id)copyWithZone:(NSZone *)__unused zone
+- (void)setResourceURL:(NSURL *)resourceURL
 {
-	return self;
-}
-
-
-#pragma mark - Describing a Resource Object
-- (NSString *)description
-{	
-	return [NSString stringWithFormat:@"<%@: %p>",
-			[self class],
-			self];
+	self.p_resourceURL = resourceURL;
 }
 
 
 @end
-

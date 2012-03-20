@@ -1,5 +1,5 @@
 //
-//  CDOHRepositoryPrivate.h
+//  CDOHTestAppUserCredentials.h
 //  ObjectiveHub
 //
 //  Copyright 2011-2012 Aron Cedercrantz. All rights reserved.
@@ -32,3 +32,10 @@
 
 #import <Foundation/Foundation.h>
 
+
+@interface CDOHTestAppUserCredentials : NSObject
+
+@property (readonly, strong) NSString *username;
+@property (readonly, strong) NSString *password;
+
+@end

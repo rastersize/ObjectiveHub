@@ -1,5 +1,5 @@
 //
-//  CDOHOrganization.m
+//  CDOHOrganization.h
 //  ObjectiveHub
 //
 //  Copyright 2011-2012 Aron Cedercrantz. All rights reserved.
@@ -31,15 +31,9 @@
 //
 
 #import "CDOHOrganization.h"
+#import "CDOHResourcePrivate.h"
 
 
-#pragma mark CDOHOrganization Implementation
+#pragma mark - CDOHOrganization Implementation
 @implementation CDOHOrganization
-
-#pragma mark - Identifying and Comparing Users
-- (BOOL)isEqualToOrganization:(CDOHOrganization *)anOrganization
-{
-	return [self isEqualToAbstractUser:anOrganization];
-}
-
 @end

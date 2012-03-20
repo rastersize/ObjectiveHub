@@ -1,5 +1,5 @@
 //
-//  CDOHUser.m
+//  CDOHUser.h
 //  ObjectiveHub
 //
 //  Copyright 2011-2012 Aron Cedercrantz. All rights reserved.
@@ -31,90 +31,27 @@
 //
 
 #import "CDOHUser.h"
-#import "CDOHUserPrivate.h"
 #import "CDOHResourcePrivate.h"
 
+#import "CDOHPlan.h"
 
-#pragma mark NSCoding and GitHub JSON Keys
+
+#pragma mark GitHub JSON Keys
 NSString *const kCDOHUserHireableKey		= @"hireable";
 NSString *const kCDOHUserBioKey				= @"bio";
-NSString *const kCDOHUserContributionsKey	= @"contributions";
 
 
 #pragma mark - CDOHUser Implementation
 @implementation CDOHUser
 
-#pragma mark - Synthesization
-@synthesize biography = _biography;
-@synthesize hireable = _hireable;
-@synthesize contributions = _contributions;
-
-
-#pragma mark - Initializing an CDOHUser Instance
-- (id)initWithJSONDictionary:(NSDictionary *)dictionary
+- (BOOL)isAuthenticated
 {
-	self = [super initWithJSONDictionary:dictionary];
-	if (self) {
-		_biography = [[dictionary objectForKey:kCDOHUserBioKey] copy];
-		_hireable = [[dictionary objectForKey:kCDOHUserHireableKey] boolValue];
-		_contributions = [[dictionary objectForKey:kCDOHUserContributionsKey] unsignedIntegerValue];
-	}
-	
-	return self;
+	return (self.plan.name != nil ||
+			self.diskUsageValue != 0 ||
+			self.collaboratorsValue != 0 ||
+			self.privateRepositoriesCountValue != 0 ||
+			self.privateRepositoriesOwnedCountValue != 0 ||
+			self.privateGistsCountValue != 0);
 }
-
-
-#pragma mark - Encoding Resources
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-	self = [super initWithCoder:aDecoder];
-	if (self) {
-		_biography = [[aDecoder decodeObjectForKey:kCDOHUserBioKey] copy];
-		_hireable = [aDecoder decodeBoolForKey:kCDOHUserHireableKey];
-		_contributions = [[aDecoder decodeObjectForKey:kCDOHUserContributionsKey] unsignedIntegerValue];
-	}
-	
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
-	[super encodeWithCoder:aCoder];
-	
-	[aCoder encodeObject:_biography forKey:kCDOHUserBioKey];
-	[aCoder encodeBool:_hireable forKey:kCDOHUserHireableKey];
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_contributions] forKey:kCDOHUserContributionsKey];
-}
-
-
-#pragma mark - Identifying and Comparing Users
-- (BOOL)isEqual:(id)other
-{
-	if (other == self) {
-		return YES;
-	}
-	if (!other || ![other isKindOfClass:[self class]]) {
-		return NO;
-	}
-	return [self isEqualToUser:other];
-}
-
-- (BOOL)isEqualToUser:(CDOHUser *)aUser
-{
-	return [self isEqualToAbstractUser:aUser];
-}
-
-
-#pragma mark - Describing a User Object
-- (NSString *)description
-{	
-	return [NSString stringWithFormat:@"<%@: %p { id = %d, login = %@, is authed = %@ }>",
-			[self class],
-			self,
-			self.identifier,
-			self.login,
-			(self.isAuthenticated ? @"YES" : @"NO")];
-}
-
 
 @end

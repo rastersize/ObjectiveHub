@@ -1,5 +1,5 @@
 //
-//  CDOHPlanPrivate.h
+//  CDOHTestAppUserCredentials.m
 //  ObjectiveHub
 //
 //  Copyright 2011-2012 Aron Cedercrantz. All rights reserved.
@@ -30,6 +30,25 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-#import <Foundation/Foundation.h>
 
+#import "CDOHTestAppUserCredentials.h"
 
+@implementation CDOHTestAppUserCredentials
+
+@synthesize username;
+@synthesize password;
+
+- (id)init
+{
+	self = [super init];
+	if (self) {
+		NSURL *accountPlistURL = [[NSBundle mainBundle] URLForResource:@"account" withExtension:@"plist"];
+		NSDictionary *account = [NSDictionary dictionaryWithContentsOfURL:accountPlistURL];
+		username = [account objectForKey:@"username"];
+		password = [account objectForKey:@"password"];
+	}
+	
+	return self;
+}
+
+@end

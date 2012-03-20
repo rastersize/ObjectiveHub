@@ -17,6 +17,10 @@ build
 *.tm_build_errors
 *.xcodeproj/xcuserdata
 *.xcodeproj/project.xcworkspace
+*/*/*.xcodeproj/xcuserdata
+*/*/*.xcodeproj/project.xcworkspace
+*.xcworkspace/xcuserdata
+
 !default.pbxuser
 !default.perspectivev3
 !default.mode1v3

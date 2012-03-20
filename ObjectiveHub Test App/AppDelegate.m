@@ -36,7 +36,6 @@
 
 #pragma mark - Private Imports
 #import "CDOHResourcePrivate.h"
-#import "CDOHUserPrivate.h"
 #import "CDOHTestAppUserCredentials.h"
 
 

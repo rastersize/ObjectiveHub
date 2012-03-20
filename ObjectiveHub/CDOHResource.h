@@ -31,19 +31,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <ObjectiveHub/_CDOHResource.h>
 
 
 #pragma mark CDOHResource Interface
 /**
  * `CDOHResource` models a GitHub resource. It is intended to be subclassed and
- * as such is not very useful by itself.
- *
- * Instances of `CDOHResource` are immutable.
+ * as such is not very useful by itself. Furthermore, in the Core Data model it
+ * is set to be an abstract entity.
  */
-@interface CDOHResource : NSObject <NSCoding, NSCopying>
+@interface CDOHResource : _CDOHResource
 
-#pragma mark - Initializing a CDOHResource Instance
-/** @name Initializing an CDOHResource Instance */
+#pragma mark - Creating and Initializing CDOHResources
+/** @name Creating and Initializing CDOHResource’s */
 /**
  * Initializes and returns an `CDOHResource` instance intialized with the
  * values of the given dictionary.
@@ -51,28 +51,14 @@
  * @param dictionary A dictionary containing user information.
  * @return A `CDOHResource` instance initialized with the given dictionary.
  */
-- (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
++ (instancetype)resourceWithJSONDictionary:(NSDictionary *)jsonDictionary inManagedObjectContex:(NSManagedObjectContext *)managedObjectContext;
 
 
-#pragma mark - Identifying and Comparing Resources
-/** @name Identifying and Comparing Resources */
+#pragma mark - Resource API URL
+/** @name Resource API URL */
 /**
- * Returns a Boolean value that indicates whether a given resource is equal to
- * the receiver.
- *
- * @param aResource The resource with which to compare the reciever.
- * @return `YES` if _aResource_ is equivalent to the reciever, otherwise `NO`.
+ * The API URL of the resource.
  */
-- (BOOL)isEqualToResource:(CDOHResource *)aResource;
-
-/**
- * Returns an unsigned integer that can be used as a has table address.
- *
- * If two resource objects are equal (as determined by the `isEqualToResource:`
- * method), they will have the same hash value.
- *
- * @return An unsigned integer that can be used as a has table address.
- */
-- (NSUInteger)hash;
+@property (strong) NSURL *resourceURL;
 
 @end

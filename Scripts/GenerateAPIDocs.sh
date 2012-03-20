@@ -17,7 +17,7 @@ rm -r $API_DOCS_DIR/docset 2> /dev/null
 HEADER_DIRECTORIES="${2}"
 echo "Finding header files in:"
 echo ${HEADER_DIRECTORIES}
-HEADER_FILES=`find ${HEADER_DIRECTORIES} -name '*.h' | grep -v Private`
+HEADER_FILES=`find ${HEADER_DIRECTORIES} -name '*.h' | grep -v Private | grep -v _`
 echo "Will generate API documentation based on:"
 echo ${HEADER_FILES}
 

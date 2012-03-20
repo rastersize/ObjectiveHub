@@ -1,5 +1,5 @@
 //
-//  CDOHAbstractUser.m
+//  CDOHAbstractUser.h
 //  ObjectiveHub
 //
 //  Copyright 2011-2012 Aron Cedercrantz. All rights reserved.
@@ -31,9 +31,9 @@
 //
 
 #import "CDOHAbstractUser.h"
-#import "CDOHAbstractUserPrivate.h"
+#import "CDOHUser.h"
+#import "CDOHOrganization.h"
 #import "CDOHResourcePrivate.h"
-#import "CDOHPlan.h"
 
 
 #pragma mark NSCoding and GitHub JSON Keys
@@ -60,208 +60,69 @@ NSString *const kCDOHUserDiskUsageKey			= @"disk_usage";
 NSString *const kCDOHUserCollaboratorsKey		= @"collaborators";
 NSString *const kCDOHUserPlanKey				= @"plan";
 
-NSString *const kCDOHUserAuthenticatedKey		= @"internal_authed";
+
+#pragma mark - User Type Keys
+NSString *const KCDOHUserTypeUserKey			= @"User";
+NSString *const kCDOHUserTypeOrganizationKey	= @"Organization";
 
 
-#pragma mark - CDOHAbstractUser Implementation
+#pragma mark - CDOHAbstractUser Implemenation
 @implementation CDOHAbstractUser
 
-#pragma mark - Synthesization
-@synthesize name = _name;
-@synthesize company = _company;
-@synthesize email = _email;
-@synthesize location = _location;
-@synthesize blogURL = _blogUrl;
-@synthesize authenticated = _authenticated;
-@synthesize identifier = _identifier;
-@synthesize login = _login;
-@synthesize avatarURL = _avatarUrl;
-@synthesize gravatarID = _gravatarId;
-@synthesize HTMLURL = _htmlUrl;
-@synthesize numberOfPublicRepositories = _numberOfPublicRepositories;
-@synthesize numberOfPrivateRepositories = _numberOfPrivateRepositories;
-@synthesize numberOfOwnedPrivateRepositories = _numberOfOwnedPrivateRepositories;
-@synthesize numberOfPublicGists = _numberOfPublicGists;
-@synthesize numberOfPrivateGists = _numberOfPrivateGists;
-@synthesize followers = _followers;
-@synthesize following = _following;
-@synthesize collaborators = _collaborators;
-@synthesize createdAt = _createdAt;
-@synthesize type = _type;
-@synthesize diskUsage = _diskUsage;
-@synthesize plan = _plan;
-
-
-#pragma mark - Initializing an CDOHUser Instance
-- (id)initWithJSONDictionary:(NSDictionary *)dictionary
+#pragma mark - Creating Instances of Abstract Users
++ (instancetype)resourceWithJSONDictionary:(NSDictionary *)jsonDictionary inManagedObjectContex:(NSManagedObjectContext *)managedObjectContext
 {
-	self = [super initWithJSONDictionary:dictionary];
-	if (self) {
-		// Custom logic
-		// A user is considerred authenticated if any of the following keys are
-		// set:
-		// - kCDOHUserAuthenticatedKey and is `YES`
-		// - kCDOHUserTotalPrivateReposKey
-		// - kCDOHUserOwnedPrivateReposKey
-		// - kCDOHUserPrivateGistsKey
-		// - kCDOHUserDiskUsageKey
-		// - kCDOHUserCollaboratorsKey
-		// - kCDOHUserPlanKey
-		NSNumber *authenticated = [dictionary objectForKey:kCDOHUserAuthenticatedKey];
-		_authenticated = ([authenticated boolValue] ||
-						  ([dictionary objectForKey:kCDOHUserTotalPrivateReposKey] != nil) ||
-						  ([dictionary objectForKey:kCDOHUserOwnedPrivateReposKey] != nil) ||
-						  ([dictionary objectForKey:kCDOHUserPrivateGistsKey] != nil) ||
-						  ([dictionary objectForKey:kCDOHUserDiskUsageKey] != nil) ||
-						  ([dictionary objectForKey:kCDOHUserCollaboratorsKey] != nil) ||
-						  ([dictionary objectForKey:kCDOHUserPlanKey] != nil));
-		
-		// Strings
-		_login		= [[dictionary objectForKey:kCDOHUserLoginKey] copy];
-		_name		= [[dictionary objectForKey:kCDOHUserNameKey] copy];
-		_company	= [[dictionary objectForKey:kCDOHUserCompanyKey] copy];
-		_email		= [[dictionary objectForKey:kCDOHUserEmailKey] copy];
-		_location	= [[dictionary objectForKey:kCDOHUserLocationKey] copy];
-		_type		= [[dictionary objectForKey:kCDOHUserTypeKey] copy];
-		_gravatarId	= [[dictionary objectForKey:kCDOHUserGravatarIDKey] copy];
-		
-		// URLs
-		_blogUrl		= [dictionary cdoh_URLForKey:kCDOHUserBlogKey];
-		_avatarUrl		= [dictionary cdoh_URLForKey:kCDOHUserAvatarURLKey];
-		_htmlUrl		= [dictionary cdoh_URLForKey:kCDOHUserHTMLURLKey];
-		
-		// Dates
-		_createdAt = [dictionary cdoh_dateForKey:kCDOHUserCreatedAtKey];
-		
-		// Unsigned integers
-		_identifier							= [[dictionary objectForKey:kCDOHUserIdentifierKey] unsignedIntegerValue];
-		_numberOfPublicRepositories			= [[dictionary objectForKey:kCDOHUserPublicReposKey] unsignedIntegerValue];		
-		_numberOfPrivateRepositories		= [[dictionary objectForKey:kCDOHUserTotalPrivateReposKey] unsignedIntegerValue];
-		_numberOfOwnedPrivateRepositories	= [[dictionary objectForKey:kCDOHUserOwnedPrivateReposKey] unsignedIntegerValue];
-		_numberOfPublicGists				= [[dictionary objectForKey:kCDOHUserPublicGistsKey] unsignedIntegerValue];
-		_numberOfPrivateGists				= [[dictionary objectForKey:kCDOHUserPrivateGistsKey] unsignedIntegerValue];
-		_followers							= [[dictionary objectForKey:kCDOHUserFollowersKey] unsignedIntegerValue];
-		_following							= [[dictionary objectForKey:kCDOHUserFollowingKey] unsignedIntegerValue];
-		_collaborators						= [[dictionary objectForKey:kCDOHUserCollaboratorsKey] unsignedIntegerValue];
-		_diskUsage							= [[dictionary objectForKey:kCDOHUserDiskUsageKey] unsignedIntegerValue];
-		
-		// Resources
-		_plan = [dictionary cdoh_resourceForKey:kCDOHUserPlanKey ofClass:[CDOHPlan class]];
+	CDOHAbstractUser *user = nil;
+	Class userTypeClass = nil;
+	
+	NSString *type = [jsonDictionary objectForKey:kCDOHUserTypeKey];
+	if ([type isEqual:KCDOHUserTypeUserKey]) {
+		userTypeClass = [CDOHUser class];
+	} else if ([type isEqual:kCDOHUserTypeOrganizationKey]) {
+		userTypeClass = [CDOHOrganization class];
 	}
+	NSAssert(userTypeClass != nil, @"Unkown user type '%@'", type);
 	
-	return self;
+	user = [userTypeClass insertInManagedObjectContext:managedObjectContext];
+	[user setValuesForAttributesWithJSONDictionary:jsonDictionary];
+	[user setValuesForRelationshipsWithJSONDictionary:jsonDictionary];
+	
+	return user;
 }
 
 
-#pragma mark - Encoding Resources
-- (id)initWithCoder:(NSCoder *)aDecoder
+#pragma mark - Personal Information
+- (NSURL *)blogURL
 {
-	self = [super initWithCoder:aDecoder];
-	if (self) {
-		// Copy relation
-		_login								= [[aDecoder decodeObjectForKey:kCDOHUserLoginKey] copy];
-		_name								= [[aDecoder decodeObjectForKey:kCDOHUserNameKey] copy];
-		_company							= [[aDecoder decodeObjectForKey:kCDOHUserCompanyKey] copy];
-		_email								= [[aDecoder decodeObjectForKey:kCDOHUserEmailKey] copy];
-		_location							= [[aDecoder decodeObjectForKey:kCDOHUserLocationKey] copy];
-		_type								= [[aDecoder decodeObjectForKey:kCDOHUserTypeKey] copy];
-		_gravatarId							= [[aDecoder decodeObjectForKey:kCDOHUserGravatarIDKey] copy];
-		
-		// Strong relation
-		_blogUrl							= [aDecoder decodeObjectForKey:kCDOHUserBlogKey];
-		_htmlUrl							= [aDecoder decodeObjectForKey:kCDOHUserHTMLURLKey];
-		_avatarUrl							= [aDecoder decodeObjectForKey:kCDOHUserAvatarURLKey];
-		_createdAt							= [aDecoder decodeObjectForKey:kCDOHUserCreatedAtKey];
-		_plan								= [aDecoder decodeObjectForKey:kCDOHUserPlanKey];
-		
-		// Booleans
-		_authenticated						= [aDecoder decodeBoolForKey:kCDOHUserAuthenticatedKey];
-		
-		// Unsigned integers
-		_identifier							= [[aDecoder decodeObjectForKey:kCDOHUserIdentifierKey] unsignedIntegerValue];
-		_numberOfPublicRepositories			= [[aDecoder decodeObjectForKey:kCDOHUserPublicReposKey] unsignedIntegerValue];
-		_numberOfPublicGists				= [[aDecoder decodeObjectForKey:kCDOHUserPublicGistsKey] unsignedIntegerValue];
-		_numberOfPrivateRepositories		= [[aDecoder decodeObjectForKey:kCDOHUserTotalPrivateReposKey] unsignedIntegerValue];
-		_numberOfOwnedPrivateRepositories	= [[aDecoder decodeObjectForKey:kCDOHUserOwnedPrivateReposKey] unsignedIntegerValue];
-		_numberOfPrivateGists				= [[aDecoder decodeObjectForKey:kCDOHUserPrivateGistsKey] unsignedIntegerValue];
-		_followers							= [[aDecoder decodeObjectForKey:kCDOHUserFollowersKey] unsignedIntegerValue];
-		_following							= [[aDecoder decodeObjectForKey:kCDOHUserFollowingKey] unsignedIntegerValue];
-		_collaborators						= [[aDecoder decodeObjectForKey:kCDOHUserCollaboratorsKey] unsignedIntegerValue];
-		_diskUsage							= [[aDecoder decodeObjectForKey:kCDOHUserDiskUsageKey] unsignedIntegerValue];
-	}
-	
-	return self;
+	return self.p_blogURL;
 }
 
-- (void)encodeWithCoder:(NSCoder *)aCoder
+- (void)setBlogURL:(NSURL *)blogURL
 {
-	[super encodeWithCoder:aCoder];
-	
-	[aCoder encodeObject:_login forKey:kCDOHUserLoginKey];
-	[aCoder encodeObject:_name forKey:kCDOHUserNameKey];
-	[aCoder encodeObject:_company forKey:kCDOHUserCompanyKey];
-	[aCoder encodeObject:_email forKey:kCDOHUserEmailKey];
-	[aCoder encodeObject:_location forKey:kCDOHUserLocationKey];
-	[aCoder encodeObject:_type forKey:kCDOHUserTypeKey];
-	[aCoder encodeObject:_gravatarId forKey:kCDOHUserGravatarIDKey];
-	[aCoder encodeObject:_blogUrl forKey:kCDOHUserBlogKey];
-	[aCoder encodeObject:_htmlUrl forKey:kCDOHUserHTMLURLKey];
-	[aCoder encodeObject:_avatarUrl forKey:kCDOHUserAvatarURLKey];
-	[aCoder encodeObject:_createdAt forKey:kCDOHUserCreatedAtKey];
-	[aCoder encodeObject:_plan forKey:kCDOHUserPlanKey];
-	
-	[aCoder encodeBool:_authenticated forKey:kCDOHUserAuthenticatedKey];
-	
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_identifier] forKey:kCDOHUserIdentifierKey];
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_numberOfPublicRepositories] forKey:kCDOHUserPublicReposKey];
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_numberOfPublicGists] forKey:kCDOHUserPublicGistsKey];
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_numberOfPrivateRepositories] forKey:kCDOHUserTotalPrivateReposKey];
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_numberOfOwnedPrivateRepositories] forKey:kCDOHUserOwnedPrivateReposKey];
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_numberOfPrivateGists] forKey:kCDOHUserPrivateGistsKey];
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_followers] forKey:kCDOHUserFollowersKey];
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_following] forKey:kCDOHUserFollowingKey];
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_collaborators] forKey:kCDOHUserCollaboratorsKey];
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_diskUsage] forKey:kCDOHUserDiskUsageKey];
+	self.p_blogURL = blogURL;
 }
 
-
-#pragma mark - Describing an Abstract User Object
-- (NSString *)description
-{	
-	return [NSString stringWithFormat:@"<%@: %p { id = %lu, login = %@, type = %@, is authed = %@ }>",
-			[self class],
-			self,
-			_identifier,
-			_login,
-			_type,
-			(_authenticated ? @"YES" : @"NO")];
-}
-
-
-#pragma mark - Identifying and Comparing Users
-- (BOOL)isEqual:(id)other
+- (void)setAvatarURL:(NSURL *)avatarURL
 {
-	if (other == self) {
-		return YES;
-	}
-	if (!other || ![other isKindOfClass:[self class]]) {
-		return NO;
-	}
-	return [self isEqualToAbstractUser:other];
+	[self setP_avatarURL:avatarURL];
 }
 
-- (BOOL)isEqualToAbstractUser:(CDOHAbstractUser *)aUser
+- (NSURL *)avatarURL
 {
-	if (aUser == self) {
-		return YES;
-	}
-	
-	return (aUser.identifier == self.identifier);
+	return [self p_avatarURL];
 }
 
-- (NSUInteger)hash
+
+#pragma mark - System Information
+- (NSURL *)profileURL
 {
-	return _identifier;
+	return self.p_profileURL;
 }
+
+- (void)setProfileURL:(NSURL *)profileURL
+{
+	self.p_profileURL = profileURL;
+}
+
 
 @end

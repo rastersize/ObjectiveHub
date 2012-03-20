@@ -30,30 +30,12 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-#import <Foundation/Foundation.h>
-#import "CDOHAbstractUser.h"
+#import <ObjectiveHub/_CDOHOrganization.h>
 
 
-#pragma mark CDOHOrganization Interface
+#pragma mark - CDOHOrganization Interface
 /**
- * An immutable class containing information about a single GitHub organization.
+ * Instances of `CDOHOrganization` represent a specific organization on GitHub.
  */
-@interface CDOHOrganization : CDOHAbstractUser
-
-#pragma mark - Identifying and Comparing Organizations
-/** @name Identifying and Comparing Organizations */
-/**
- * Returns a Boolean value that indicates whether a given organization is equal
- * to the receiver.
- *
- * As the organization identifier integer uniquely identifies a GitHub the
- * receiver and _anOrganization_ is determined to be equal if their identifiers
- * are equal. They are also equal if the receiver and the _anOrganization_
- * instances are the same instance.
- *
- * @param anOrganization The user with which to compare the reciever.
- * @return `YES` if _aUser_ is equivalent to the reciever, otherwise `NO`.
- */
-- (BOOL)isEqualToOrganization:(CDOHOrganization *)anOrganization;
-
+@interface CDOHOrganization : _CDOHOrganization
 @end

@@ -73,7 +73,18 @@
 
 
 #pragma mark - 
+/**
+ * The invocation used for subsquent page requests.
+ *
+ * @see arguments
+ */
 @property (strong, readonly) NSInvocation *invocation;
+
+/**
+ * The arguments that should be used on subsequent requests.
+ *
+ * @see invocation
+ */
 @property (copy, readonly) NSArray *arguments;
 
 @end

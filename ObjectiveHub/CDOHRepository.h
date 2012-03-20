@@ -30,16 +30,9 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-#import <Foundation/Foundation.h>
-#import "CDOHResource.h"
+#import <ObjectiveHub/_CDOHRepository.h>
 
-
-#pragma mark Forward Class Declarations
-@class CDOHUser;
-@class CDOHOrganization;
-
-
-#pragma mark - Dictionary Representation Keys
+#pragma mark GitHub JSON Keys
 /// Repository dictionary key for the HTML URL.
 extern NSString *const kCDOHRepositoryHTMLURLKey;
 /// Repository dictionary key for the default clone URL.
@@ -113,234 +106,61 @@ extern NSString *const kCDOHRepositoryLanguageCharactersKey;
 
 #pragma mark - CDOHRepository Interface
 /**
- * An immutable class containing information about a single GitHub repository.
- */
-@interface CDOHRepository : CDOHResource
-
-#pragma mark - Repository URLs
-/** @name Repository URLs */
-/**
- * The URL to the GitHub repository HTML page.
- */
-@property (strong, readonly) NSURL *HTMLURL;
-
-/**
- * The URL which to clone the repository with.
- */
-@property (strong, readonly) NSURL *cloneURL;
-
-/**
- * The `git:` URL to the project.
- */
-@property (strong, readonly) NSURL *gitURL;
-
-/**
- * The SSH URL to the project.
  *
- * @warning Only available if the user has permission to push to the repository.
  */
-@property (strong, readonly) NSURL *SSHURL;
+@interface CDOHRepository : _CDOHRepository
+
+#pragma mark - Cloning URLs
+/** @name Cloning URLs */
+/**
+ * Standard clone URL.
+ */
+@property (strong) NSURL *cloneURL;
 
 /**
- * The Subversion (SVN) URL to the project.
+ * Clone URL for cloning over the git protocol.
  */
-@property (strong, readonly) NSURL *SVNURL;
+@property (strong) NSURL *gitURL;
 
 /**
- * The URL to the repository this repository mirrors.
+ * Clone URL for cloning over the SSH protocol.
+ */
+@property (strong) NSURL *sshURL;
+
+/**
+ * Clone URL for checkingout over the Subversion protocol.
+ */
+@property (strong) NSURL *svnURL;
+
+
+#pragma mark - Repository Mirroring
+/** @name Repository Mirroring */
+/**
+ * The URL of the original repository which this repository mirrors.
+ */
+@property (strong) NSURL *mirrorURL;
+
+
+#pragma mark - Project URLs
+/** @name Project URLs */
+/**
+ * The URL of the GitHub (HTML) repository page.
+ */
+@property (strong) NSURL *repositoryHTMLURL;
+
+/**
+ * The URL of the project homepage.
+ */
+@property (strong) NSURL *homepageURL;
+
+
+#pragma mark - Formatted Name
+/** @name Formatted Name */
+/**
+ * The formatted name of the repository (i.e. "owner_login/repo_name").
  *
- * If this repository does not mirror some other repository then this will be
- * `nil`.
+ * @return A string containing the formatted repository name.
  */
-@property (strong, readonly) NSURL *mirrorURL;
-
-
-
-#pragma mark - General Information
-/** @name General Information */
-/**
- * The unique identifier of the repository.
- */
-@property (assign, readonly) NSUInteger identifier;
-
-/**
- * The owner of the repository.
- *
- * @see CDOHUser
- */
-@property (strong, readonly) CDOHUser *owner;
-
-/**
- * The organization which the repository belongs to.
- *
- * Will be `nil` if no organization owns the repository.
- *
- * @see CDOHOrganization
- */
-@property (strong, readonly) CDOHOrganization *organization;
-
-/**
- * The name of the repository.
- */
-@property (copy, readonly) NSString *name;
-
-/**
- * The name of the repository formatted to match GitHub nameing.
- *
- * This means that if the repository owner is "github"
- * (`self.owner.name`) and the repository name is "example" (`self.name`) then
- * the formatted name will be "github/example".
- */
-@property (copy, readonly) NSString *formattedName;
-
-/**
- * The repository description.
- */
-@property (copy, readonly) NSString *repositoryDescription;
-
-/**
- * The homepage of the repository.
- *
- * @warning This is the homepage given by the owner of the repository, that is
- * not the URL to the GitHub repository (i.e. https://github.com/_owner_/_name_
- * ). If what you want is the latter please see HTMLURL instead.
- *
- * @see HTMLURL
- */
-@property (strong, readonly) NSURL *homepage;
-
-/**
- * Whether the repository is private or not.
- */
-@property (assign, readonly, getter = isPrivate) BOOL private;
-
-
-#pragma mark - Statistics
-/** @name Statistics */
-/**
- * The primary language used in the project.
- */
-@property (strong, readonly) NSString *language;
-
-/**
- * The number of watchers of the project.
- */
-@property (assign, readonly) NSUInteger watchers;
-
-/**
- * The total size of the project in bytes.
- */
-@property (assign, readonly) NSUInteger size;
-
-/**
- * The date and time of the latest push to the repository.
- */
-@property (strong, readonly) NSDate *updatedAt;
-
-/**
- * The date and time of the latest push to the repository.
- */
-@property (strong, readonly) NSDate *pushedAt;
-
-/**
- * The date and time when the repository was created.
- */
-@property (strong, readonly) NSDate *createdAt;
-
-
-#pragma mark - Branches
-/** @name Branches */
-/**
- * The master branch of the repository.
- */
-@property (copy, readonly) NSString *defaultBranch;
-
-
-#pragma mark - Issues
-/** @name Issues */
-/**
- * The total number of open issues.
- */
-@property (assign, readonly) NSUInteger openIssues;
-/**
- * Whether the repository have issues enabled or not.
- */
-@property (assign, readonly) BOOL hasIssues;
-
-
-#pragma mark - Fork Information
-/**
- * Whether the repository is a fork or not.
- */
-@property (assign, readonly, getter = isFork) BOOL fork;
-
-/**
- * Total number of forks.
- */
-@property (assign, readonly) NSUInteger forks;
-
-/**
- * The parent repository.
- *
- * Will be `nil` if repository is not a fork, i.e. fork returns `NO`.
- *
- * @see parentRepository
- * @see fork
- */
-@property (strong, readonly) CDOHRepository *parentRepository;
-
-/**
- * The source repository.
- *
- * The source repository is the repository this repository, all its sibling
- * forks and parent repository originate from. Will be `nil` if fork returns
- * `NO`, i.e. this is the source repository.
- *
- * @see parentRepository
- * @see fork
- */
-@property (strong, readonly) CDOHRepository *sourceRepository;
-
-
-#pragma mark - Wiki
-/** @name Wiki */
-/**
- * Whether the repository have the wiki enabled.
- */
-@property (assign, readonly) BOOL hasWiki;
-
-
-#pragma mark - Downloads
-/** @name Downloads */
-/**
- * Whether the repository have downloads enabled.
- */
-@property (assign, readonly) BOOL hasDownloads;
-
-
-#pragma mark - Identifying and Comparing Repositories
-/** @name Identifying and Comparing Repositories */
-/**
- * Returns a Boolean value that indicates whether a given repository is equal to
- * the receiver.
- *
- * The receiver and _aRepository_ is determined to be equal if their identifiers
- * are equal.
- *
- * @param aRepository The repository with which to compare the reciever.
- * @return `YES` if _aRepository_ is equivalent to the reciever, otherwise `NO`.
- */
-- (BOOL)isEqualToRepository:(CDOHRepository *)aRepository;
-
-/**
- * Returns an unsigned integer that can be used as a has table address.
- *
- * If two resource objects are equal (as determined by the
- * `isEqualToRepository:` method), they will have the same hash value.
- *
- * @return An unsigned integer that can be used as a hash table address.
- */
-- (NSUInteger)hash;
-
+- (NSString *)formattedName;
 
 @end
