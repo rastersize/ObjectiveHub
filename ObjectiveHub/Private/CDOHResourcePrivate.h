@@ -32,9 +32,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "NSDictionary+ObjectiveHub.h"
-#import "NSMutableDictionary+ObjectiveHub.h"
-
 
 #pragma mark NSCoding and GitHub JSON Keys
 /// The API resource URL NSCoding and GitHub JSON key.
@@ -50,17 +47,13 @@ extern NSString *const kCDOHResourcePropertiesDictionaryKey;
 /**
  * Private CDOHResource methods and properties.
  */
-@interface CDOHResource () {
-	@package
-	NSURL *_apiResourceUrl;
-}
+@interface CDOHResource (/*Private*/)
 
-#pragma mark - API Resource URL
-/** @name API Resource URL  */
+#pragma mark - Handling JSON
 /**
- * The URL of the API resource represented.
+ * Safely set the values for the keys in the JSON dictionary.
  */
-@property (strong, readwrite) NSURL *_APIResourceURL;
-
+- (void)setValuesForAttributesWithJSONDictionary:(NSDictionary *)keyedValues;
+- (void)setValuesForRelationshipsWithJSONDictionary:(NSDictionary *)keyedValues;
 
 @end

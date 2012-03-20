@@ -1,5 +1,5 @@
 //
-//  CDOHPlan.h
+//  CDOHPLan.h
 //  ObjectiveHub
 //
 //  Copyright 2011-2012 Aron Cedercrantz. All rights reserved.
@@ -30,77 +30,7 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-#import <Foundation/Foundation.h>
-#import "CDOHResource.h"
+#import <ObjectiveHub/_CDOHPLan.h>
 
-
-#pragma mark Dictionary Representation Keys
-/// Dictionary key for the name value.
-extern NSString *const kCDOHPlanNameKey;
-/// Dictionary key for the name value.
-extern NSString *const kCDOHPlanSpaceKey;
-/// Dictionary key for the name value.
-extern NSString *const kCDOHPlanCollaboratorsKey;
-/// Dictionary key for the name value.
-extern NSString *const kCDOHPlanPrivateRepositoriesKey;
-
-
-#pragma mark - CDOHPlan Interface
-/**
- * A GitHub plan and the restrictions it impose on the user.
- */
-@interface CDOHPlan : CDOHResource
-
-#pragma mark - Metadata
-/** @name Plan Metadata */
-/**
- * The name of the plan.
- */
-@property (readonly, copy) NSString *name;
-
-
-#pragma mark - Limitations
-/** @name Limitations */
-/**
- * The maximum number of space a user may use with this plan.
- */
-@property (readonly) NSUInteger space;
-
-/**
- * The maximum number of collaborators a user may have with this plan.
- */
-@property (readonly) NSUInteger collaborators;
-
-/**
- * The maximum number of repositories a user may have with this plan.
- */
-@property (readonly) NSUInteger privateRepositories;
-
-
-#pragma mark - Identifying and Comparing Plans
-/** @name Identifying and Comparing Plans */
-/**
- * Returns a Boolean value that indicates whether a given plan is equal to the
- * receiver.
- *
- * The receiver and _aPlan_ is determined to be equal if their names, maximum
- * space, number of maximum collaborators and maximum number of private
- * repositories are equal.
- *
- * @param aPlan The plan with which to compare the reciever.
- * @return `YES` if _aPlan_ is equivalent to the reciever, otherwise `NO`.
- */
-- (BOOL)isEqualToPlan:(CDOHPlan *)aPlan;
-
-/**
- * Returns an unsigned integer that can be used as a has table address.
- *
- * If two user objects are equal (as determined by the `isEqualToPlan:` method),
- * they will have the same hash value.
- *
- * @return An unsigned integer that can be used as a has table address.
- */
-- (NSUInteger)hash;
-
-
+@interface CDOHPLan : _CDOHPLan
 @end

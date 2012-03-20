@@ -104,14 +104,38 @@
 		9C2F3E7C146F3F2000C44A82 /* CDOHUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E79146F3F2000C44A82 /* CDOHUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C2F3E7D146F3F2000C44A82 /* CDOHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F3E7A146F3F2000C44A82 /* CDOHUser.m */; };
 		9C2F3E7E146F3F2000C44A82 /* CDOHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F3E7A146F3F2000C44A82 /* CDOHUser.m */; };
-		9C2F3E84146F464200C44A82 /* CDOHUserPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E83146F464200C44A82 /* CDOHUserPrivate.h */; };
-		9C2F3E85146F464200C44A82 /* CDOHUserPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E83146F464200C44A82 /* CDOHUserPrivate.h */; };
 		9C2F3E88146F5F7D00C44A82 /* CDOHPlan.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E86146F5F7D00C44A82 /* CDOHPlan.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C2F3E89146F5F7D00C44A82 /* CDOHPlan.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E86146F5F7D00C44A82 /* CDOHPlan.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C2F3E8A146F5F7D00C44A82 /* CDOHPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */; };
 		9C2F3E8B146F5F7D00C44A82 /* CDOHPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */; };
-		9C2F3E8D146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */; };
-		9C2F3E8E146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */; };
+		9C2FD4CE15179A140058E3E7 /* _CDOHAbstractUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2FD4C015179A140058E3E7 /* _CDOHAbstractUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2FD4CF15179A140058E3E7 /* _CDOHAbstractUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2FD4C015179A140058E3E7 /* _CDOHAbstractUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2FD4D015179A140058E3E7 /* _CDOHAbstractUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4C115179A140058E3E7 /* _CDOHAbstractUser.m */; };
+		9C2FD4D115179A140058E3E7 /* _CDOHAbstractUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4C115179A140058E3E7 /* _CDOHAbstractUser.m */; };
+		9C2FD4D215179A140058E3E7 /* _CDOHOrganization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2FD4C215179A140058E3E7 /* _CDOHOrganization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2FD4D315179A140058E3E7 /* _CDOHOrganization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2FD4C215179A140058E3E7 /* _CDOHOrganization.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2FD4D415179A140058E3E7 /* _CDOHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4C315179A140058E3E7 /* _CDOHOrganization.m */; };
+		9C2FD4D515179A140058E3E7 /* _CDOHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4C315179A140058E3E7 /* _CDOHOrganization.m */; };
+		9C2FD4D615179A140058E3E7 /* _CDOHOrganizationTeam.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2FD4C415179A140058E3E7 /* _CDOHOrganizationTeam.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2FD4D715179A140058E3E7 /* _CDOHOrganizationTeam.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2FD4C415179A140058E3E7 /* _CDOHOrganizationTeam.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2FD4D815179A140058E3E7 /* _CDOHOrganizationTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4C515179A140058E3E7 /* _CDOHOrganizationTeam.m */; };
+		9C2FD4D915179A140058E3E7 /* _CDOHOrganizationTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4C515179A140058E3E7 /* _CDOHOrganizationTeam.m */; };
+		9C2FD4DA15179A140058E3E7 /* _CDOHPLan.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2FD4C615179A140058E3E7 /* _CDOHPLan.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2FD4DB15179A140058E3E7 /* _CDOHPLan.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2FD4C615179A140058E3E7 /* _CDOHPLan.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2FD4DC15179A140058E3E7 /* _CDOHPLan.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4C715179A140058E3E7 /* _CDOHPLan.m */; };
+		9C2FD4DD15179A140058E3E7 /* _CDOHPLan.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4C715179A140058E3E7 /* _CDOHPLan.m */; };
+		9C2FD4DE15179A140058E3E7 /* _CDOHRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2FD4C815179A140058E3E7 /* _CDOHRepository.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2FD4DF15179A140058E3E7 /* _CDOHRepository.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2FD4C815179A140058E3E7 /* _CDOHRepository.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2FD4E015179A140058E3E7 /* _CDOHRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4C915179A140058E3E7 /* _CDOHRepository.m */; };
+		9C2FD4E115179A140058E3E7 /* _CDOHRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4C915179A140058E3E7 /* _CDOHRepository.m */; };
+		9C2FD4E215179A140058E3E7 /* _CDOHResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2FD4CA15179A140058E3E7 /* _CDOHResource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2FD4E315179A140058E3E7 /* _CDOHResource.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2FD4CA15179A140058E3E7 /* _CDOHResource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2FD4E415179A140058E3E7 /* _CDOHResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4CB15179A140058E3E7 /* _CDOHResource.m */; };
+		9C2FD4E515179A140058E3E7 /* _CDOHResource.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4CB15179A140058E3E7 /* _CDOHResource.m */; };
+		9C2FD4E615179A140058E3E7 /* _CDOHUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2FD4CC15179A140058E3E7 /* _CDOHUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2FD4E715179A140058E3E7 /* _CDOHUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C2FD4CC15179A140058E3E7 /* _CDOHUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C2FD4E815179A140058E3E7 /* _CDOHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4CD15179A140058E3E7 /* _CDOHUser.m */; };
+		9C2FD4E915179A140058E3E7 /* _CDOHUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4CD15179A140058E3E7 /* _CDOHUser.m */; };
 		9C2FD4EC15179AF50058E3E7 /* ObjectiveHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4EA15179AF50058E3E7 /* ObjectiveHub.xcdatamodeld */; };
 		9C2FD4ED15179AF50058E3E7 /* ObjectiveHub.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9C2FD4EA15179AF50058E3E7 /* ObjectiveHub.xcdatamodeld */; };
 		9C34C4A91516A06600B423B4 /* CDOHNetworkClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C34C4A81516A06600B423B4 /* CDOHNetworkClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -187,12 +211,8 @@
 		9C92316314E2EA3A00287DD9 /* CDOHResponseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92315314E2EA3A00287DD9 /* CDOHResponseTests.m */; };
 		9C92316414E2EA3A00287DD9 /* CDOHUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92315514E2EA3A00287DD9 /* CDOHUserTests.m */; };
 		9C92316514E2EA3A00287DD9 /* CDOHUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92315514E2EA3A00287DD9 /* CDOHUserTests.m */; };
-		9C99909714AE70F100DFDD3B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C99909614AE70F100DFDD3B /* Foundation.framework */; };
 		9C99909A14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */; };
 		9C99909B14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */; };
-		9C9990A514AE7B0900DFDD3B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9990A314AE7AEE00DFDD3B /* Cocoa.framework */; };
-		9C9990A714AE7B1600DFDD3B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9990A614AE7B1600DFDD3B /* UIKit.framework */; };
-		9C9990A814AE7B4A00DFDD3B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C9990A314AE7AEE00DFDD3B /* Cocoa.framework */; };
 		9C9DFA5514E9B51D0061D08C /* CDOHRepositoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9DFA5414E9B51D0061D08C /* CDOHRepositoryTests.m */; };
 		9C9DFA5614E9B51D0061D08C /* CDOHRepositoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9DFA5414E9B51D0061D08C /* CDOHRepositoryTests.m */; };
 		9C9DFA7814E9EEF50061D08C /* NSDictionary+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C9DFA7614E9EEF50061D08C /* NSDictionary+ObjectiveHub.h */; };
@@ -217,14 +237,10 @@
 		9CA5FAA614B6320000F2CD13 /* NSDate+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAA314B6320000F2CD13 /* NSDate+ObjectiveHub.h */; };
 		9CA5FAA714B6320000F2CD13 /* NSDate+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FAA414B6320000F2CD13 /* NSDate+ObjectiveHub.m */; };
 		9CA5FAA814B6320000F2CD13 /* NSDate+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FAA414B6320000F2CD13 /* NSDate+ObjectiveHub.m */; };
-		9CA5FAAA14B6382C00F2CD13 /* CDOHRepositoryPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAA914B6382C00F2CD13 /* CDOHRepositoryPrivate.h */; };
-		9CA5FAAB14B6382C00F2CD13 /* CDOHRepositoryPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAA914B6382C00F2CD13 /* CDOHRepositoryPrivate.h */; };
 		9CA5FAAE14B6607300F2CD13 /* CDOHAbstractUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAAC14B6607300F2CD13 /* CDOHAbstractUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CA5FAAF14B6607300F2CD13 /* CDOHAbstractUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAAC14B6607300F2CD13 /* CDOHAbstractUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CA5FAB014B6607300F2CD13 /* CDOHAbstractUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FAAD14B6607300F2CD13 /* CDOHAbstractUser.m */; };
 		9CA5FAB114B6607400F2CD13 /* CDOHAbstractUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FAAD14B6607300F2CD13 /* CDOHAbstractUser.m */; };
-		9CA5FAB314B6653200F2CD13 /* CDOHAbstractUserPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAB214B6653200F2CD13 /* CDOHAbstractUserPrivate.h */; };
-		9CA5FAB414B6653200F2CD13 /* CDOHAbstractUserPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAB214B6653200F2CD13 /* CDOHAbstractUserPrivate.h */; };
 		9CA5FAB714B668DB00F2CD13 /* CDOHOrganization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAB514B668DB00F2CD13 /* CDOHOrganization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CA5FAB814B668DB00F2CD13 /* CDOHOrganization.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FAB514B668DB00F2CD13 /* CDOHOrganization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CA5FAB914B668DB00F2CD13 /* CDOHOrganization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FAB614B668DB00F2CD13 /* CDOHOrganization.m */; };
@@ -247,6 +263,9 @@
 		9CABD7AB14F84BD400EFF010 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F957146B2069001A5385 /* InfoPlist.strings */; };
 		9CB196AC15042D4000619E99 /* CDOHClientPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CB196AA15042D4000619E99 /* CDOHClientPrivate.h */; };
 		9CB196AD15042D4000619E99 /* CDOHClientPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CB196AA15042D4000619E99 /* CDOHClientPrivate.h */; };
+		9CB1D3B21517E7CD004FD579 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB1D3AE1517E79F004FD579 /* CoreData.framework */; };
+		9CB1D3B31517E7CD004FD579 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB1D3AC1517E799004FD579 /* Foundation.framework */; };
+		9CB1D3B61517E829004FD579 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB1D3B41517E807004FD579 /* Cocoa.framework */; };
 		9CB2C44314F7CD0500E9FC91 /* NSObject+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CB2C44114F7CD0500E9FC91 /* NSObject+ObjectiveHub.h */; };
 		9CB2C44414F7CD0500E9FC91 /* NSObject+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CB2C44114F7CD0500E9FC91 /* NSObject+ObjectiveHub.h */; };
 		9CB2C44514F7CD0500E9FC91 /* NSObject+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2C44214F7CD0500E9FC91 /* NSObject+ObjectiveHub.m */; };
@@ -391,10 +410,22 @@
 		9C26FA02146B2DEF001A5385 /* CDOHClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CDOHClient.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9C2F3E79146F3F2000C44A82 /* CDOHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHUser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9C2F3E7A146F3F2000C44A82 /* CDOHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CDOHUser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		9C2F3E83146F464200C44A82 /* CDOHUserPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CDOHUserPrivate.h; path = Private/CDOHUserPrivate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9C2F3E86146F5F7D00C44A82 /* CDOHPlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHPlan.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9C2F3E87146F5F7D00C44A82 /* CDOHPlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CDOHPlan.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CDOHPlanPrivate.h; path = Private/CDOHPlanPrivate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		9C2FD4C015179A140058E3E7 /* _CDOHAbstractUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CDOHAbstractUser.h; sourceTree = "<group>"; };
+		9C2FD4C115179A140058E3E7 /* _CDOHAbstractUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CDOHAbstractUser.m; sourceTree = "<group>"; };
+		9C2FD4C215179A140058E3E7 /* _CDOHOrganization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CDOHOrganization.h; sourceTree = "<group>"; };
+		9C2FD4C315179A140058E3E7 /* _CDOHOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CDOHOrganization.m; sourceTree = "<group>"; };
+		9C2FD4C415179A140058E3E7 /* _CDOHOrganizationTeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CDOHOrganizationTeam.h; sourceTree = "<group>"; };
+		9C2FD4C515179A140058E3E7 /* _CDOHOrganizationTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CDOHOrganizationTeam.m; sourceTree = "<group>"; };
+		9C2FD4C615179A140058E3E7 /* _CDOHPLan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CDOHPLan.h; sourceTree = "<group>"; };
+		9C2FD4C715179A140058E3E7 /* _CDOHPLan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CDOHPLan.m; sourceTree = "<group>"; };
+		9C2FD4C815179A140058E3E7 /* _CDOHRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CDOHRepository.h; sourceTree = "<group>"; };
+		9C2FD4C915179A140058E3E7 /* _CDOHRepository.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CDOHRepository.m; sourceTree = "<group>"; };
+		9C2FD4CA15179A140058E3E7 /* _CDOHResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CDOHResource.h; sourceTree = "<group>"; };
+		9C2FD4CB15179A140058E3E7 /* _CDOHResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CDOHResource.m; sourceTree = "<group>"; };
+		9C2FD4CC15179A140058E3E7 /* _CDOHUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CDOHUser.h; sourceTree = "<group>"; };
+		9C2FD4CD15179A140058E3E7 /* _CDOHUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _CDOHUser.m; sourceTree = "<group>"; };
 		9C2FD4EB15179AF50058E3E7 /* ObjectiveHub.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ObjectiveHub.xcdatamodel; sourceTree = "<group>"; };
 		9C34C4A81516A06600B423B4 /* CDOHNetworkClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHNetworkClient.h; sourceTree = "<group>"; };
 		9C34C4AB1516A6BA00B423B4 /* CDOHAFNetworkingClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHAFNetworkingClient.h; sourceTree = "<group>"; };
@@ -454,10 +485,7 @@
 		9C92315314E2EA3A00287DD9 /* CDOHResponseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHResponseTests.m; sourceTree = "<group>"; };
 		9C92315414E2EA3A00287DD9 /* CDOHUserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHUserTests.h; sourceTree = "<group>"; };
 		9C92315514E2EA3A00287DD9 /* CDOHUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHUserTests.m; sourceTree = "<group>"; };
-		9C99909614AE70F100DFDD3B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONUtilities.h; sourceTree = "<group>"; };
-		9C9990A314AE7AEE00DFDD3B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		9C9990A614AE7B1600DFDD3B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		9C9DFA5314E9B51D0061D08C /* CDOHRepositoryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHRepositoryTests.h; sourceTree = "<group>"; };
 		9C9DFA5414E9B51D0061D08C /* CDOHRepositoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHRepositoryTests.m; sourceTree = "<group>"; };
 		9C9DFA7614E9EEF50061D08C /* NSDictionary+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ObjectiveHub.h"; sourceTree = "<group>"; };
@@ -471,10 +499,8 @@
 		9CA5FAA014B6304600F2CD13 /* CDOHCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHCommon.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9CA5FAA314B6320000F2CD13 /* NSDate+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSDate+ObjectiveHub.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9CA5FAA414B6320000F2CD13 /* NSDate+ObjectiveHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSDate+ObjectiveHub.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		9CA5FAA914B6382C00F2CD13 /* CDOHRepositoryPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CDOHRepositoryPrivate.h; path = Private/CDOHRepositoryPrivate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9CA5FAAC14B6607300F2CD13 /* CDOHAbstractUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHAbstractUser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9CA5FAAD14B6607300F2CD13 /* CDOHAbstractUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CDOHAbstractUser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		9CA5FAB214B6653200F2CD13 /* CDOHAbstractUserPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CDOHAbstractUserPrivate.h; path = Private/CDOHAbstractUserPrivate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9CA5FAB514B668DB00F2CD13 /* CDOHOrganization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHOrganization.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9CA5FAB614B668DB00F2CD13 /* CDOHOrganization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CDOHOrganization.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9CA5FABF14B6720F00F2CD13 /* CDOHResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHResponse.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -486,6 +512,9 @@
 		9CABD7A414F846D700EFF010 /* UIApplication+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+ObjectiveHub.h"; sourceTree = "<group>"; };
 		9CABD7A514F846D700EFF010 /* UIApplication+ObjectiveHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+ObjectiveHub.m"; sourceTree = "<group>"; };
 		9CB196AA15042D4000619E99 /* CDOHClientPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHClientPrivate.h; sourceTree = "<group>"; };
+		9CB1D3AC1517E799004FD579 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		9CB1D3AE1517E79F004FD579 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
+		9CB1D3B41517E807004FD579 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		9CB2C44114F7CD0500E9FC91 /* NSObject+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ObjectiveHub.h"; sourceTree = "<group>"; };
 		9CB2C44214F7CD0500E9FC91 /* NSObject+ObjectiveHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ObjectiveHub.m"; sourceTree = "<group>"; };
 		9CE6633F1470929500D8A95F /* CDOHError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHError.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -499,7 +528,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C9990A514AE7B0900DFDD3B /* Cocoa.framework in Frameworks */,
+				9CB1D3B61517E829004FD579 /* Cocoa.framework in Frameworks */,
+				9CB1D3B21517E7CD004FD579 /* CoreData.framework in Frameworks */,
+				9CB1D3B31517E7CD004FD579 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,7 +538,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C99909714AE70F100DFDD3B /* Foundation.framework in Frameworks */,
 				9C26F94F146B2069001A5385 /* SenTestingKit.framework in Frameworks */,
 				9C26F953146B2069001A5385 /* ObjectiveHub.framework in Frameworks */,
 			);
@@ -517,7 +547,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C9990A714AE7B1600DFDD3B /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,7 +564,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C9990A814AE7B4A00DFDD3B /* Cocoa.framework in Frameworks */,
 				9C5D2D6D147028290064F02A /* ObjectiveHub.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,9 +600,8 @@
 		9C26F937146B2069001A5385 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9C9990A614AE7B1600DFDD3B /* UIKit.framework */,
-				9C9990A314AE7AEE00DFDD3B /* Cocoa.framework */,
-				9C99909614AE70F100DFDD3B /* Foundation.framework */,
+				9CB1D3B11517E7B0004FD579 /* iOS */,
+				9CB1D3B01517E7A5004FD579 /* OS X */,
 				9C26F94E146B2069001A5385 /* SenTestingKit.framework */,
 				9C26F968146B207A001A5385 /* Foundation.framework */,
 				9C26F93A146B2069001A5385 /* Other Frameworks */,
@@ -719,6 +746,7 @@
 			isa = PBXGroup;
 			children = (
 				9C2FD4EA15179AF50058E3E7 /* ObjectiveHub.xcdatamodeld */,
+				9C2FD4BE151799F80058E3E7 /* Core Data Machine Files */,
 				9C2F3E82146F44E000C44A82 /* Private Models */,
 				9C613AA214B60DF10067B6B6 /* Resources */,
 				9CE6633F1470929500D8A95F /* CDOHError.h */,
@@ -740,6 +768,27 @@
 			);
 			name = "Private Models";
 			path = Private;
+			sourceTree = "<group>";
+		};
+		9C2FD4BE151799F80058E3E7 /* Core Data Machine Files */ = {
+			isa = PBXGroup;
+			children = (
+				9C2FD4C015179A140058E3E7 /* _CDOHAbstractUser.h */,
+				9C2FD4C115179A140058E3E7 /* _CDOHAbstractUser.m */,
+				9C2FD4C215179A140058E3E7 /* _CDOHOrganization.h */,
+				9C2FD4C315179A140058E3E7 /* _CDOHOrganization.m */,
+				9C2FD4C415179A140058E3E7 /* _CDOHOrganizationTeam.h */,
+				9C2FD4C515179A140058E3E7 /* _CDOHOrganizationTeam.m */,
+				9C2FD4C615179A140058E3E7 /* _CDOHPLan.h */,
+				9C2FD4C715179A140058E3E7 /* _CDOHPLan.m */,
+				9C2FD4C815179A140058E3E7 /* _CDOHRepository.h */,
+				9C2FD4C915179A140058E3E7 /* _CDOHRepository.m */,
+				9C2FD4CA15179A140058E3E7 /* _CDOHResource.h */,
+				9C2FD4CB15179A140058E3E7 /* _CDOHResource.m */,
+				9C2FD4CC15179A140058E3E7 /* _CDOHUser.h */,
+				9C2FD4CD15179A140058E3E7 /* _CDOHUser.m */,
+			);
+			name = "Core Data Machine Files";
 			sourceTree = "<group>";
 		};
 		9C34C4A71516A02F00B423B4 /* Network Clients */ = {
@@ -901,14 +950,27 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		9CB1D3B01517E7A5004FD579 /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				9CB1D3B41517E807004FD579 /* Cocoa.framework */,
+				9CB1D3AE1517E79F004FD579 /* CoreData.framework */,
+				9CB1D3AC1517E799004FD579 /* Foundation.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		9CB1D3B11517E7B0004FD579 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		9CB2C44814F7CF5700E9FC91 /* Private */ = {
 			isa = PBXGroup;
 			children = (
 				9C613A9F14B60CEC0067B6B6 /* CDOHResourcePrivate.h */,
-				9CA5FAB214B6653200F2CD13 /* CDOHAbstractUserPrivate.h */,
-				9C2F3E83146F464200C44A82 /* CDOHUserPrivate.h */,
-				9C2F3E8C146F5FC000C44A82 /* CDOHPlanPrivate.h */,
-				9CA5FAA914B6382C00F2CD13 /* CDOHRepositoryPrivate.h */,
 			);
 			name = Private;
 			sourceTree = "<group>";
@@ -948,13 +1010,9 @@
 				9C26F9F3146B2979001A5385 /* AFURLConnectionOperation.h in Headers */,
 				9C26F9F7146B2979001A5385 /* AFXMLRequestOperation.h in Headers */,
 				9C26F9FB146B2979001A5385 /* UIImageView+AFNetworking.h in Headers */,
-				9C2F3E84146F464200C44A82 /* CDOHUserPrivate.h in Headers */,
-				9C2F3E8D146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */,
 				9C47C5511473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
 				9C99909A14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */,
 				9C613AA014B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */,
-				9CA5FAAA14B6382C00F2CD13 /* CDOHRepositoryPrivate.h in Headers */,
-				9CA5FAB314B6653200F2CD13 /* CDOHAbstractUserPrivate.h in Headers */,
 				9CA5FAC614B6727400F2CD13 /* CDOHResponsePrivate.h in Headers */,
 				9CA5FACA14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.h in Headers */,
 				9C64163B14C32C1300478E39 /* CDOHClientProtocol.h in Headers */,
@@ -965,6 +1023,13 @@
 				9C34C4A91516A06600B423B4 /* CDOHNetworkClient.h in Headers */,
 				9C34C4AD1516A6BA00B423B4 /* CDOHAFNetworkingClient.h in Headers */,
 				9C34C4BD151746B400B423B4 /* CDOHNetworkClientReply.h in Headers */,
+				9C2FD4CE15179A140058E3E7 /* _CDOHAbstractUser.h in Headers */,
+				9C2FD4D215179A140058E3E7 /* _CDOHOrganization.h in Headers */,
+				9C2FD4D615179A140058E3E7 /* _CDOHOrganizationTeam.h in Headers */,
+				9C2FD4DA15179A140058E3E7 /* _CDOHPLan.h in Headers */,
+				9C2FD4DE15179A140058E3E7 /* _CDOHRepository.h in Headers */,
+				9C2FD4E215179A140058E3E7 /* _CDOHResource.h in Headers */,
+				9C2FD4E615179A140058E3E7 /* _CDOHUser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -997,16 +1062,12 @@
 				9C26F9F4146B2979001A5385 /* AFURLConnectionOperation.h in Headers */,
 				9C26F9F8146B2979001A5385 /* AFXMLRequestOperation.h in Headers */,
 				9C26F9FC146B2979001A5385 /* UIImageView+AFNetworking.h in Headers */,
-				9C2F3E85146F464200C44A82 /* CDOHUserPrivate.h in Headers */,
-				9C2F3E8E146F5FC000C44A82 /* CDOHPlanPrivate.h in Headers */,
 				9C47C5521473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
 				9C99909B14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */,
 				9C613AA114B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */,
 				9CA5FA9714B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */,
 				9CA5FA9D14B62EC300F2CD13 /* NSDateFormatter+ObjectiveHub.h in Headers */,
 				9CA5FAA614B6320000F2CD13 /* NSDate+ObjectiveHub.h in Headers */,
-				9CA5FAAB14B6382C00F2CD13 /* CDOHRepositoryPrivate.h in Headers */,
-				9CA5FAB414B6653200F2CD13 /* CDOHAbstractUserPrivate.h in Headers */,
 				9CA5FAC714B6727400F2CD13 /* CDOHResponsePrivate.h in Headers */,
 				9CA5FACB14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.h in Headers */,
 				9C64163C14C32C1300478E39 /* CDOHClientProtocol.h in Headers */,
@@ -1018,6 +1079,13 @@
 				9C34C4AA1516A06600B423B4 /* CDOHNetworkClient.h in Headers */,
 				9C34C4AE1516A6BA00B423B4 /* CDOHAFNetworkingClient.h in Headers */,
 				9C34C4BE151746B400B423B4 /* CDOHNetworkClientReply.h in Headers */,
+				9C2FD4CF15179A140058E3E7 /* _CDOHAbstractUser.h in Headers */,
+				9C2FD4D315179A140058E3E7 /* _CDOHOrganization.h in Headers */,
+				9C2FD4D715179A140058E3E7 /* _CDOHOrganizationTeam.h in Headers */,
+				9C2FD4DB15179A140058E3E7 /* _CDOHPLan.h in Headers */,
+				9C2FD4DF15179A140058E3E7 /* _CDOHRepository.h in Headers */,
+				9C2FD4E315179A140058E3E7 /* _CDOHResource.h in Headers */,
+				9C2FD4E715179A140058E3E7 /* _CDOHUser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1285,6 +1353,13 @@
 				9CABD7AA14F8493700EFF010 /* UIApplication+ObjectiveHub.m in Sources */,
 				9C34C4AF1516A6BA00B423B4 /* CDOHAFNetworkingClient.m in Sources */,
 				9C34C4BF151746B400B423B4 /* CDOHNetworkClientReply.m in Sources */,
+				9C2FD4D015179A140058E3E7 /* _CDOHAbstractUser.m in Sources */,
+				9C2FD4D415179A140058E3E7 /* _CDOHOrganization.m in Sources */,
+				9C2FD4D815179A140058E3E7 /* _CDOHOrganizationTeam.m in Sources */,
+				9C2FD4DC15179A140058E3E7 /* _CDOHPLan.m in Sources */,
+				9C2FD4E015179A140058E3E7 /* _CDOHRepository.m in Sources */,
+				9C2FD4E415179A140058E3E7 /* _CDOHResource.m in Sources */,
+				9C2FD4E815179A140058E3E7 /* _CDOHUser.m in Sources */,
 				9C2FD4EC15179AF50058E3E7 /* ObjectiveHub.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1348,6 +1423,13 @@
 				9CABD7A914F846D700EFF010 /* UIApplication+ObjectiveHub.m in Sources */,
 				9C34C4B01516A6BA00B423B4 /* CDOHAFNetworkingClient.m in Sources */,
 				9C34C4C0151746B400B423B4 /* CDOHNetworkClientReply.m in Sources */,
+				9C2FD4D115179A140058E3E7 /* _CDOHAbstractUser.m in Sources */,
+				9C2FD4D515179A140058E3E7 /* _CDOHOrganization.m in Sources */,
+				9C2FD4D915179A140058E3E7 /* _CDOHOrganizationTeam.m in Sources */,
+				9C2FD4DD15179A140058E3E7 /* _CDOHPLan.m in Sources */,
+				9C2FD4E115179A140058E3E7 /* _CDOHRepository.m in Sources */,
+				9C2FD4E515179A140058E3E7 /* _CDOHResource.m in Sources */,
+				9C2FD4E915179A140058E3E7 /* _CDOHUser.m in Sources */,
 				9C2FD4ED15179AF50058E3E7 /* ObjectiveHub.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1561,6 +1643,7 @@
 				PRODUCT_NAME = ObjectiveHub;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
 				WARNING_CFLAGS = "-Wextra";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -1599,6 +1682,7 @@
 				PRODUCT_NAME = ObjectiveHub;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = macosx;
+				VALID_ARCHS = x86_64;
 				WARNING_CFLAGS = "-Wextra";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -1959,6 +2043,7 @@
 				9C2FD4F11517A6B60058E3E7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9C5D2D691470281B0064F02A /* Build configuration list for PBXNativeTarget "ObjectiveHub Test App" */ = {
 			isa = XCConfigurationList;

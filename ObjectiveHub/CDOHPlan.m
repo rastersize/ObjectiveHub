@@ -1,5 +1,5 @@
 //
-//  CDOHPlan.m
+//  CDOHPLan.h
 //  ObjectiveHub
 //
 //  Copyright 2011-2012 Aron Cedercrantz. All rights reserved.
@@ -30,113 +30,8 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-#import "CDOHPlan.h"
-#import "CDOHPlanPrivate.h"
+#import "CDOHPLan.h"
 #import "CDOHResourcePrivate.h"
 
-
-#pragma mark Dictionary Keys
-NSString *const kCDOHPlanNameKey					= @"name";
-NSString *const kCDOHPlanSpaceKey					= @"space";
-NSString *const kCDOHPlanCollaboratorsKey			= @"collaborators";
-NSString *const kCDOHPlanPrivateRepositoriesKey		= @"private_repos";
-
-
-#pragma mark - CDOHPlan Implementation
-@implementation CDOHPlan
-
-#pragma mark - Synthesizing
-@synthesize name = _name;
-@synthesize space = _space;
-@synthesize collaborators = _collaborators;
-@synthesize privateRepositories = _privateRepositories;
-
-
-#pragma mark - Initializing an CDOHPlan Instance
-- (id)initWithJSONDictionary:(NSDictionary *)jsonDictionary
-{
-	self = [super initWithJSONDictionary:jsonDictionary];
-	if (self) {
-		_name = [[jsonDictionary objectForKey:kCDOHPlanNameKey] copy];
-		
-		_space = [[jsonDictionary objectForKey:kCDOHPlanSpaceKey] unsignedIntegerValue];
-		_collaborators = [[jsonDictionary objectForKey:kCDOHPlanCollaboratorsKey] unsignedIntegerValue];
-		_privateRepositories = [[jsonDictionary objectForKey:kCDOHPlanPrivateRepositoriesKey] unsignedIntegerValue];
-	}
-	
-	return self;
-}
-
-
-#pragma mark - Encoding Resources
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-	self = [super initWithCoder:aDecoder];
-	if (self) {
-		_name					= [[aDecoder decodeObjectForKey:kCDOHPlanNameKey] copy];
-		_space					= [[aDecoder decodeObjectForKey:kCDOHPlanSpaceKey] unsignedIntegerValue];
-		_collaborators			= [[aDecoder decodeObjectForKey:kCDOHPlanCollaboratorsKey] unsignedIntegerValue];
-		_privateRepositories	= [[aDecoder decodeObjectForKey:kCDOHPlanPrivateRepositoriesKey] unsignedIntegerValue];
-	}
-	
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
-	[super encodeWithCoder:aCoder];
-	
-	[aCoder encodeObject:_name forKey:kCDOHPlanNameKey];
-	
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_space] forKey:kCDOHPlanSpaceKey];
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_collaborators] forKey:kCDOHPlanCollaboratorsKey];
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_privateRepositories] forKey:kCDOHPlanPrivateRepositoriesKey];
-}
-
-
-#pragma mark - Identifying and Comparing Plans
-- (BOOL)isEqual:(id)other
-{
-	if (other == self) {
-		return YES;
-	}
-	if (!other || ![other isKindOfClass:[self class]]) {
-		return NO;
-	}
-	return [self isEqualToPlan:other];
-}
-
-- (BOOL)isEqualToPlan:(CDOHPlan *)aPlan
-{
-	if (aPlan == self) {
-		return YES;
-	}
-	
-	return ([aPlan.name isEqualToString:self.name] &&
-			aPlan.space == self.space &&
-			aPlan.collaborators == self.collaborators &&
-			aPlan.privateRepositories == self.privateRepositories);
-}
-
-- (NSUInteger)hash
-{
-	NSUInteger prime = 31;
-	NSUInteger hash = 1;
-	
-	hash = [self.name hash];
-	hash = prime * hash + self.space;
-	hash = prime * hash + self.collaborators;
-	hash = prime * hash + self.privateRepositories;
-	
-	return hash;
-}
-
-
-#pragma mark - Describing a Plan Object
-- (NSString *)description
-{
-	return [NSString stringWithFormat:@"<%@: %p { name = %@ }>", [self class], self, self.name];
-}
-
-
+@implementation CDOHPLan
 @end

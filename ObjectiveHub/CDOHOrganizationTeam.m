@@ -1,5 +1,5 @@
 //
-//  CDOHOrganizationTeam.m
+//  CDOHOrganizationTeam.h
 //  ObjectiveHub
 //
 //  Copyright 2011-2012 Aron Cedercrantz. All rights reserved.
@@ -34,14 +34,6 @@
 #import "CDOHResourcePrivate.h"
 
 
-#pragma mark Dictionary Representation Keys
-NSString *const kCDOHOrganizationTeamIdentifierKey		= @"id";
-NSString *const kCDOHOrganizationTeamNameKey			= @"name";
-NSString *const kCDOHOrganizationTeamPermissionKey		= @"permission";
-NSString *const kCDOHOrganizationTeamMembersKey			= @"members_count";
-NSString *const kCDOHOrganizationTeamRepositoriesKey	= @"repos_count";
-
-
 #pragma mark - Team Permission String Constants
 NSString *const kCDOHOrganizationTeamPermissionPull			= @"pull";
 NSString *const kCDOHOrganizationTeamPermissionPush			= @"push";
@@ -51,100 +43,6 @@ NSString *const kCDOHOrganizationTeamPermissionAdminister	= @"admin";
 #pragma mark - CDOHOrganizationTeam Implementation
 @implementation CDOHOrganizationTeam
 
-#pragma mark - Synthesization
-@synthesize identifier = _identifier;
-@synthesize name = _name;
-@synthesize permission = _permission;
-@synthesize members = _members;
-@synthesize repositories = _repositories;
-
-
-#pragma mark - Initializing a CDOHOrganizationTeam Instance
-- (id)initWithJSONDictionary:(NSDictionary *)dictionary
-{
-	self = [super initWithJSONDictionary:dictionary];
-	if (self) {
-		// Unsigned integers
-		_identifier		= [[dictionary objectForKey:kCDOHOrganizationTeamIdentifierKey] unsignedIntegerValue];
-		_members		= [[dictionary objectForKey:kCDOHOrganizationTeamMembersKey] unsignedIntegerValue];
-		_repositories	= [[dictionary objectForKey:kCDOHOrganizationTeamRepositoriesKey] unsignedIntegerValue];
-		
-		// Strings
-		_name		= [[dictionary objectForKey:kCDOHOrganizationTeamNameKey] copy];
-		_permission	= [[dictionary objectForKey:kCDOHOrganizationTeamPermissionKey] copy];
-	}
-	
-	return self;
-}
-
-
-#pragma mark - Encoding Resources
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-	self = [super initWithCoder:aDecoder];
-	if (self) {
-		_name			= [[aDecoder decodeObjectForKey:kCDOHOrganizationTeamNameKey] copy];
-		_permission		= [[aDecoder decodeObjectForKey:kCDOHOrganizationTeamPermissionKey] copy];
-		
-		_identifier		= [[aDecoder decodeObjectForKey:kCDOHOrganizationTeamIdentifierKey] unsignedIntegerValue];
-		_members		= [[aDecoder decodeObjectForKey:kCDOHOrganizationTeamMembersKey] unsignedIntegerValue];
-		_repositories	= [[aDecoder decodeObjectForKey:kCDOHOrganizationTeamRepositoriesKey] unsignedIntegerValue];
-	}
-	
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder
-{
-	[super encodeWithCoder:aCoder];
-	
-	[aCoder encodeObject:_name forKey:kCDOHOrganizationTeamNameKey];
-	[aCoder encodeObject:_permission forKey:kCDOHOrganizationTeamPermissionKey];
-	
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_identifier] forKey:kCDOHOrganizationTeamIdentifierKey];
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_members] forKey:kCDOHOrganizationTeamMembersKey];
-	[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:_repositories] forKey:kCDOHOrganizationTeamRepositoriesKey];
-}
-
-
-#pragma mark - Describing an Organization Team Object
-- (NSString *)description
-{
-	return [NSString stringWithFormat:@"<%@: %p { id = %lu, name = %@ }>",
-			[self class],
-			self,
-			_identifier,
-			_name];
-}
-
-
-#pragma mark - Identifying and Comparing Organization Teams
-- (BOOL)isEqual:(id)object
-{
-	if (object == self) {
-		return YES;
-	}
-	if (!object || ![object isKindOfClass:[self class]]) {
-		return NO;
-	}
-	
-	return [self isEqualToOrganizationTeam:object];
-}
-
-- (BOOL)isEqualToOrganizationTeam:(CDOHOrganizationTeam *)aTeam
-{
-	if (aTeam == self) {
-		return YES;
-	}
-	
-	return (_identifier == aTeam.identifier);
-}
-
-- (NSUInteger)hash
-{
-	return _identifier;
-}
-
-
+// Custom logic goes here.
 
 @end
