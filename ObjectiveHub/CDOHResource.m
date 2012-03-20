@@ -108,7 +108,7 @@ NSString *const kCDOHResourceResourceURLAttributeNameKey		= @"p_resourceURL";
 		jsonKey = jsonKey != nil ? jsonKey : relationship;
 		
 		id value = [keyedValues objectForKey:jsonKey];
-		if (value == nil) {
+		if (value == nil || [value isKindOfClass:[NSNull class]]) {
 			continue;
 		}
 		
