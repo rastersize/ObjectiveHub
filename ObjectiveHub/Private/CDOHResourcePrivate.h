@@ -50,10 +50,16 @@ extern NSString *const kCDOHResourcePropertiesDictionaryKey;
 @interface CDOHResource (/*Private*/)
 
 #pragma mark - Handling JSON
+/** @name Handling JSON */
 /**
- * Safely set the values for the keys in the JSON dictionary.
+ * Safely set resource’s attributes to the values in the (JSON) dictionary.
  */
 - (void)setValuesForAttributesWithJSONDictionary:(NSDictionary *)keyedValues;
+
+/**
+ * Safely add to, or set, the resource’s relationships using/to the values in
+ * the (JSON) dictionary.
+ */
 - (void)setValuesForRelationshipsWithJSONDictionary:(NSDictionary *)keyedValues;
 
 @end
