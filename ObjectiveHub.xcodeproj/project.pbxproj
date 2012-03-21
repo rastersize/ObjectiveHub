@@ -48,6 +48,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		9C0793321519EECB007DB18B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB1D3AC1517E799004FD579 /* Foundation.framework */; };
 		9C26F943146B2069001A5385 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9C26F941146B2069001A5385 /* InfoPlist.strings */; };
 		9C26F94F146B2069001A5385 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F94E146B2069001A5385 /* SenTestingKit.framework */; };
 		9C26F953146B2069001A5385 /* ObjectiveHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F935146B2069001A5385 /* ObjectiveHub.framework */; };
@@ -188,42 +189,20 @@
 		9C64163C14C32C1300478E39 /* CDOHClientProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C64163A14C32C1300478E39 /* CDOHClientProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C76A25E14E0680700CA444C /* CDOHTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C76A25D14E0680700CA444C /* CDOHTypes.m */; };
 		9C76A25F14E0680700CA444C /* CDOHTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C76A25D14E0680700CA444C /* CDOHTypes.m */; };
-		9C89DC2314E447EC0057AB17 /* CDOHResourceBaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C89DC2214E447EC0057AB17 /* CDOHResourceBaseTests.m */; };
-		9C89DC2414E447EC0057AB17 /* CDOHResourceBaseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C89DC2214E447EC0057AB17 /* CDOHResourceBaseTests.m */; };
 		9C92313A14E2DCC300287DD9 /* CDOHOrganizationTeam.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C92313814E2DCC300287DD9 /* CDOHOrganizationTeam.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C92313B14E2DCC400287DD9 /* CDOHOrganizationTeam.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C92313814E2DCC300287DD9 /* CDOHOrganizationTeam.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C92313C14E2DCC400287DD9 /* CDOHOrganizationTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92313914E2DCC300287DD9 /* CDOHOrganizationTeam.m */; };
 		9C92313D14E2DCC400287DD9 /* CDOHOrganizationTeam.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92313914E2DCC300287DD9 /* CDOHOrganizationTeam.m */; };
-		9C92314414E2E80300287DD9 /* CDOHOrganizationTeamTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314314E2E80300287DD9 /* CDOHOrganizationTeamTests.m */; };
-		9C92314514E2E80300287DD9 /* CDOHOrganizationTeamTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314314E2E80300287DD9 /* CDOHOrganizationTeamTests.m */; };
-		9C92315614E2EA3A00287DD9 /* CDOHAbstractUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314714E2EA3900287DD9 /* CDOHAbstractUserTests.m */; };
-		9C92315714E2EA3A00287DD9 /* CDOHAbstractUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314714E2EA3900287DD9 /* CDOHAbstractUserTests.m */; };
 		9C92315814E2EA3A00287DD9 /* CDOHErrorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314914E2EA3900287DD9 /* CDOHErrorTests.m */; };
 		9C92315914E2EA3A00287DD9 /* CDOHErrorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314914E2EA3900287DD9 /* CDOHErrorTests.m */; };
 		9C92315A14E2EA3A00287DD9 /* CDOHLinkRelationshipHeaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314B14E2EA3900287DD9 /* CDOHLinkRelationshipHeaderTests.m */; };
 		9C92315B14E2EA3A00287DD9 /* CDOHLinkRelationshipHeaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314B14E2EA3900287DD9 /* CDOHLinkRelationshipHeaderTests.m */; };
-		9C92315C14E2EA3A00287DD9 /* CDOHOrganizationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314D14E2EA3900287DD9 /* CDOHOrganizationTests.m */; };
-		9C92315D14E2EA3A00287DD9 /* CDOHOrganizationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314D14E2EA3900287DD9 /* CDOHOrganizationTests.m */; };
-		9C92315E14E2EA3A00287DD9 /* CDOHPlanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314F14E2EA3900287DD9 /* CDOHPlanTests.m */; };
-		9C92315F14E2EA3A00287DD9 /* CDOHPlanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92314F14E2EA3900287DD9 /* CDOHPlanTests.m */; };
-		9C92316014E2EA3A00287DD9 /* CDOHResourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92315114E2EA3A00287DD9 /* CDOHResourceTests.m */; };
-		9C92316114E2EA3A00287DD9 /* CDOHResourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92315114E2EA3A00287DD9 /* CDOHResourceTests.m */; };
 		9C92316214E2EA3A00287DD9 /* CDOHResponseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92315314E2EA3A00287DD9 /* CDOHResponseTests.m */; };
 		9C92316314E2EA3A00287DD9 /* CDOHResponseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92315314E2EA3A00287DD9 /* CDOHResponseTests.m */; };
 		9C92316414E2EA3A00287DD9 /* CDOHUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92315514E2EA3A00287DD9 /* CDOHUserTests.m */; };
 		9C92316514E2EA3A00287DD9 /* CDOHUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92315514E2EA3A00287DD9 /* CDOHUserTests.m */; };
 		9C99909A14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */; };
 		9C99909B14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */; };
-		9C9DFA5514E9B51D0061D08C /* CDOHRepositoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9DFA5414E9B51D0061D08C /* CDOHRepositoryTests.m */; };
-		9C9DFA5614E9B51D0061D08C /* CDOHRepositoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9DFA5414E9B51D0061D08C /* CDOHRepositoryTests.m */; };
-		9C9DFA7814E9EEF50061D08C /* NSDictionary+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C9DFA7614E9EEF50061D08C /* NSDictionary+ObjectiveHub.h */; };
-		9C9DFA7914E9EEF50061D08C /* NSDictionary+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C9DFA7614E9EEF50061D08C /* NSDictionary+ObjectiveHub.h */; };
-		9C9DFA7A14E9EEF50061D08C /* NSDictionary+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9DFA7714E9EEF50061D08C /* NSDictionary+ObjectiveHub.m */; };
-		9C9DFA7B14E9EEF50061D08C /* NSDictionary+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9DFA7714E9EEF50061D08C /* NSDictionary+ObjectiveHub.m */; };
-		9C9DFA8214EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C9DFA8014EA873D0061D08C /* NSMutableDictionary+ObjectiveHub.h */; };
-		9C9DFA8314EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C9DFA8014EA873D0061D08C /* NSMutableDictionary+ObjectiveHub.h */; };
-		9C9DFA8414EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9DFA8114EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m */; };
-		9C9DFA8514EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C9DFA8114EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m */; };
 		9CA5FA9614B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FA9414B62E3700F2CD13 /* NSString+ObjectiveHub.h */; settings = {ATTRIBUTES = (); }; };
 		9CA5FA9714B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FA9414B62E3700F2CD13 /* NSString+ObjectiveHub.h */; };
 		9CA5FA9814B62E3700F2CD13 /* NSString+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FA9514B62E3700F2CD13 /* NSString+ObjectiveHub.m */; };
@@ -267,10 +246,6 @@
 		9CB1D3B21517E7CD004FD579 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB1D3AE1517E79F004FD579 /* CoreData.framework */; };
 		9CB1D3B31517E7CD004FD579 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB1D3AC1517E799004FD579 /* Foundation.framework */; };
 		9CB1D3B61517E829004FD579 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CB1D3B41517E807004FD579 /* Cocoa.framework */; };
-		9CB2C44314F7CD0500E9FC91 /* NSObject+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CB2C44114F7CD0500E9FC91 /* NSObject+ObjectiveHub.h */; };
-		9CB2C44414F7CD0500E9FC91 /* NSObject+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CB2C44114F7CD0500E9FC91 /* NSObject+ObjectiveHub.h */; };
-		9CB2C44514F7CD0500E9FC91 /* NSObject+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2C44214F7CD0500E9FC91 /* NSObject+ObjectiveHub.m */; };
-		9CB2C44614F7CD0500E9FC91 /* NSObject+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CB2C44214F7CD0500E9FC91 /* NSObject+ObjectiveHub.m */; };
 		9CE663411470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663421470929500D8A95F /* CDOHError.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CE6633F1470929500D8A95F /* CDOHError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CE663431470929500D8A95F /* CDOHError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE663401470929500D8A95F /* CDOHError.m */; };
@@ -471,35 +446,17 @@
 		9C613A9F14B60CEC0067B6B6 /* CDOHResourcePrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = CDOHResourcePrivate.h; path = Private/CDOHResourcePrivate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9C64163A14C32C1300478E39 /* CDOHClientProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHClientProtocol.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9C76A25D14E0680700CA444C /* CDOHTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHTypes.m; sourceTree = "<group>"; };
-		9C89DC2114E447EC0057AB17 /* CDOHResourceBaseTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHResourceBaseTests.h; sourceTree = "<group>"; };
-		9C89DC2214E447EC0057AB17 /* CDOHResourceBaseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHResourceBaseTests.m; sourceTree = "<group>"; };
 		9C92313814E2DCC300287DD9 /* CDOHOrganizationTeam.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHOrganizationTeam.h; sourceTree = "<group>"; };
 		9C92313914E2DCC300287DD9 /* CDOHOrganizationTeam.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHOrganizationTeam.m; sourceTree = "<group>"; };
-		9C92314214E2E80300287DD9 /* CDOHOrganizationTeamTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHOrganizationTeamTests.h; sourceTree = "<group>"; };
-		9C92314314E2E80300287DD9 /* CDOHOrganizationTeamTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHOrganizationTeamTests.m; sourceTree = "<group>"; };
-		9C92314614E2EA3900287DD9 /* CDOHAbstractUserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHAbstractUserTests.h; sourceTree = "<group>"; };
-		9C92314714E2EA3900287DD9 /* CDOHAbstractUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHAbstractUserTests.m; sourceTree = "<group>"; };
 		9C92314814E2EA3900287DD9 /* CDOHErrorTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHErrorTests.h; sourceTree = "<group>"; };
 		9C92314914E2EA3900287DD9 /* CDOHErrorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHErrorTests.m; sourceTree = "<group>"; };
 		9C92314A14E2EA3900287DD9 /* CDOHLinkRelationshipHeaderTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHLinkRelationshipHeaderTests.h; sourceTree = "<group>"; };
 		9C92314B14E2EA3900287DD9 /* CDOHLinkRelationshipHeaderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHLinkRelationshipHeaderTests.m; sourceTree = "<group>"; };
-		9C92314C14E2EA3900287DD9 /* CDOHOrganizationTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHOrganizationTests.h; sourceTree = "<group>"; };
-		9C92314D14E2EA3900287DD9 /* CDOHOrganizationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHOrganizationTests.m; sourceTree = "<group>"; };
-		9C92314E14E2EA3900287DD9 /* CDOHPlanTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHPlanTests.h; sourceTree = "<group>"; };
-		9C92314F14E2EA3900287DD9 /* CDOHPlanTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHPlanTests.m; sourceTree = "<group>"; };
-		9C92315014E2EA3A00287DD9 /* CDOHResourceTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHResourceTests.h; sourceTree = "<group>"; };
-		9C92315114E2EA3A00287DD9 /* CDOHResourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHResourceTests.m; sourceTree = "<group>"; };
 		9C92315214E2EA3A00287DD9 /* CDOHResponseTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHResponseTests.h; sourceTree = "<group>"; };
 		9C92315314E2EA3A00287DD9 /* CDOHResponseTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHResponseTests.m; sourceTree = "<group>"; };
 		9C92315414E2EA3A00287DD9 /* CDOHUserTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHUserTests.h; sourceTree = "<group>"; };
 		9C92315514E2EA3A00287DD9 /* CDOHUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHUserTests.m; sourceTree = "<group>"; };
 		9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONUtilities.h; sourceTree = "<group>"; };
-		9C9DFA5314E9B51D0061D08C /* CDOHRepositoryTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDOHRepositoryTests.h; sourceTree = "<group>"; };
-		9C9DFA5414E9B51D0061D08C /* CDOHRepositoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDOHRepositoryTests.m; sourceTree = "<group>"; };
-		9C9DFA7614E9EEF50061D08C /* NSDictionary+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ObjectiveHub.h"; sourceTree = "<group>"; };
-		9C9DFA7714E9EEF50061D08C /* NSDictionary+ObjectiveHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ObjectiveHub.m"; sourceTree = "<group>"; };
-		9C9DFA8014EA873D0061D08C /* NSMutableDictionary+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+ObjectiveHub.h"; sourceTree = "<group>"; };
-		9C9DFA8114EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+ObjectiveHub.m"; sourceTree = "<group>"; };
 		9CA5FA9414B62E3700F2CD13 /* NSString+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSString+ObjectiveHub.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9CA5FA9514B62E3700F2CD13 /* NSString+ObjectiveHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = "NSString+ObjectiveHub.m"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9CA5FA9A14B62EC300F2CD13 /* NSDateFormatter+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "NSDateFormatter+ObjectiveHub.h"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -523,8 +480,6 @@
 		9CB1D3AC1517E799004FD579 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		9CB1D3AE1517E79F004FD579 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
 		9CB1D3B41517E807004FD579 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
-		9CB2C44114F7CD0500E9FC91 /* NSObject+ObjectiveHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+ObjectiveHub.h"; sourceTree = "<group>"; };
-		9CB2C44214F7CD0500E9FC91 /* NSObject+ObjectiveHub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+ObjectiveHub.m"; sourceTree = "<group>"; };
 		9CE6633F1470929500D8A95F /* CDOHError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHError.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		9CE663401470929500D8A95F /* CDOHError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CDOHError.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9CF962AC147FC01B00F52A98 /* CDOHRepository.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CDOHRepository.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -546,6 +501,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C0793321519EECB007DB18B /* Foundation.framework in Frameworks */,
 				9C26F94F146B2069001A5385 /* SenTestingKit.framework in Frameworks */,
 				9C26F953146B2069001A5385 /* ObjectiveHub.framework in Frameworks */,
 			);
@@ -895,22 +851,8 @@
 		9C92313F14E2E7AE00287DD9 /* Resource Tests */ = {
 			isa = PBXGroup;
 			children = (
-				9C89DC2114E447EC0057AB17 /* CDOHResourceBaseTests.h */,
-				9C89DC2214E447EC0057AB17 /* CDOHResourceBaseTests.m */,
-				9C92315014E2EA3A00287DD9 /* CDOHResourceTests.h */,
-				9C92315114E2EA3A00287DD9 /* CDOHResourceTests.m */,
-				9C92314614E2EA3900287DD9 /* CDOHAbstractUserTests.h */,
-				9C92314714E2EA3900287DD9 /* CDOHAbstractUserTests.m */,
 				9C92315414E2EA3A00287DD9 /* CDOHUserTests.h */,
 				9C92315514E2EA3A00287DD9 /* CDOHUserTests.m */,
-				9C92314C14E2EA3900287DD9 /* CDOHOrganizationTests.h */,
-				9C92314D14E2EA3900287DD9 /* CDOHOrganizationTests.m */,
-				9C92314214E2E80300287DD9 /* CDOHOrganizationTeamTests.h */,
-				9C92314314E2E80300287DD9 /* CDOHOrganizationTeamTests.m */,
-				9C92314E14E2EA3900287DD9 /* CDOHPlanTests.h */,
-				9C92314F14E2EA3900287DD9 /* CDOHPlanTests.m */,
-				9C9DFA5314E9B51D0061D08C /* CDOHRepositoryTests.h */,
-				9C9DFA5414E9B51D0061D08C /* CDOHRepositoryTests.m */,
 			);
 			name = "Resource Tests";
 			sourceTree = "<group>";
@@ -938,8 +880,6 @@
 		9CA5FA8A14B6276B00F2CD13 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				9CB2C44114F7CD0500E9FC91 /* NSObject+ObjectiveHub.h */,
-				9CB2C44214F7CD0500E9FC91 /* NSObject+ObjectiveHub.m */,
 				9CA5FA9A14B62EC300F2CD13 /* NSDateFormatter+ObjectiveHub.h */,
 				9CA5FA9B14B62EC300F2CD13 /* NSDateFormatter+ObjectiveHub.m */,
 				9CA5FA9414B62E3700F2CD13 /* NSString+ObjectiveHub.h */,
@@ -948,10 +888,6 @@
 				9CA5FAA414B6320000F2CD13 /* NSDate+ObjectiveHub.m */,
 				9C6018DD14B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.h */,
 				9C6018DE14B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.m */,
-				9C9DFA7614E9EEF50061D08C /* NSDictionary+ObjectiveHub.h */,
-				9C9DFA7714E9EEF50061D08C /* NSDictionary+ObjectiveHub.m */,
-				9C9DFA8014EA873D0061D08C /* NSMutableDictionary+ObjectiveHub.h */,
-				9C9DFA8114EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m */,
 				9CABD7A414F846D700EFF010 /* UIApplication+ObjectiveHub.h */,
 				9CABD7A514F846D700EFF010 /* UIApplication+ObjectiveHub.m */,
 			);
@@ -1024,9 +960,6 @@
 				9CA5FAC614B6727400F2CD13 /* CDOHResponsePrivate.h in Headers */,
 				9CA5FACA14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.h in Headers */,
 				9C64163B14C32C1300478E39 /* CDOHClientProtocol.h in Headers */,
-				9C9DFA7814E9EEF50061D08C /* NSDictionary+ObjectiveHub.h in Headers */,
-				9C9DFA8214EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.h in Headers */,
-				9CB2C44314F7CD0500E9FC91 /* NSObject+ObjectiveHub.h in Headers */,
 				9CB196AC15042D4000619E99 /* CDOHClientPrivate.h in Headers */,
 				9C34C4A91516A06600B423B4 /* CDOHNetworkClient.h in Headers */,
 				9C34C4AD1516A6BA00B423B4 /* CDOHAFNetworkingClient.h in Headers */,
@@ -1079,9 +1012,6 @@
 				9CA5FAC714B6727400F2CD13 /* CDOHResponsePrivate.h in Headers */,
 				9CA5FACB14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.h in Headers */,
 				9C64163C14C32C1300478E39 /* CDOHClientProtocol.h in Headers */,
-				9C9DFA7914E9EEF50061D08C /* NSDictionary+ObjectiveHub.h in Headers */,
-				9C9DFA8314EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.h in Headers */,
-				9CB2C44414F7CD0500E9FC91 /* NSObject+ObjectiveHub.h in Headers */,
 				9CABD7A714F846D700EFF010 /* UIApplication+ObjectiveHub.h in Headers */,
 				9CB196AD15042D4000619E99 /* CDOHClientPrivate.h in Headers */,
 				9C34C4AA1516A06600B423B4 /* CDOHNetworkClient.h in Headers */,
@@ -1355,9 +1285,6 @@
 				9C6018E114B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.m in Sources */,
 				9C76A25E14E0680700CA444C /* CDOHTypes.m in Sources */,
 				9C92313C14E2DCC400287DD9 /* CDOHOrganizationTeam.m in Sources */,
-				9C9DFA7A14E9EEF50061D08C /* NSDictionary+ObjectiveHub.m in Sources */,
-				9C9DFA8414EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m in Sources */,
-				9CB2C44514F7CD0500E9FC91 /* NSObject+ObjectiveHub.m in Sources */,
 				9CABD7AA14F8493700EFF010 /* UIApplication+ObjectiveHub.m in Sources */,
 				9C34C4AF1516A6BA00B423B4 /* CDOHAFNetworkingClient.m in Sources */,
 				9C34C4BF151746B400B423B4 /* CDOHNetworkClientReply.m in Sources */,
@@ -1380,17 +1307,10 @@
 				9C3ADD9514E10F7800C454F8 /* CDOHTestsUserCredentials.m in Sources */,
 				9C3ADDB914E13A5300C454F8 /* CDOHRFC3339Tests.m in Sources */,
 				9C3ADDBD14E13C8600C454F8 /* NSURL+ObjectiveHubTests.m in Sources */,
-				9C92314414E2E80300287DD9 /* CDOHOrganizationTeamTests.m in Sources */,
-				9C92315614E2EA3A00287DD9 /* CDOHAbstractUserTests.m in Sources */,
 				9C92315814E2EA3A00287DD9 /* CDOHErrorTests.m in Sources */,
 				9C92315A14E2EA3A00287DD9 /* CDOHLinkRelationshipHeaderTests.m in Sources */,
-				9C92315C14E2EA3A00287DD9 /* CDOHOrganizationTests.m in Sources */,
-				9C92315E14E2EA3A00287DD9 /* CDOHPlanTests.m in Sources */,
-				9C92316014E2EA3A00287DD9 /* CDOHResourceTests.m in Sources */,
 				9C92316214E2EA3A00287DD9 /* CDOHResponseTests.m in Sources */,
 				9C92316414E2EA3A00287DD9 /* CDOHUserTests.m in Sources */,
-				9C89DC2314E447EC0057AB17 /* CDOHResourceBaseTests.m in Sources */,
-				9C9DFA5514E9B51D0061D08C /* CDOHRepositoryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1425,9 +1345,6 @@
 				9C6018E214B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.m in Sources */,
 				9C76A25F14E0680700CA444C /* CDOHTypes.m in Sources */,
 				9C92313D14E2DCC400287DD9 /* CDOHOrganizationTeam.m in Sources */,
-				9C9DFA7B14E9EEF50061D08C /* NSDictionary+ObjectiveHub.m in Sources */,
-				9C9DFA8514EA873E0061D08C /* NSMutableDictionary+ObjectiveHub.m in Sources */,
-				9CB2C44614F7CD0500E9FC91 /* NSObject+ObjectiveHub.m in Sources */,
 				9CABD7A914F846D700EFF010 /* UIApplication+ObjectiveHub.m in Sources */,
 				9C34C4B01516A6BA00B423B4 /* CDOHAFNetworkingClient.m in Sources */,
 				9C34C4C0151746B400B423B4 /* CDOHNetworkClientReply.m in Sources */,
@@ -1450,17 +1367,10 @@
 				9C3ADD9614E10F7800C454F8 /* CDOHTestsUserCredentials.m in Sources */,
 				9C3ADDBA14E13A5300C454F8 /* CDOHRFC3339Tests.m in Sources */,
 				9C3ADDBE14E13C8600C454F8 /* NSURL+ObjectiveHubTests.m in Sources */,
-				9C92314514E2E80300287DD9 /* CDOHOrganizationTeamTests.m in Sources */,
-				9C92315714E2EA3A00287DD9 /* CDOHAbstractUserTests.m in Sources */,
 				9C92315914E2EA3A00287DD9 /* CDOHErrorTests.m in Sources */,
 				9C92315B14E2EA3A00287DD9 /* CDOHLinkRelationshipHeaderTests.m in Sources */,
-				9C92315D14E2EA3A00287DD9 /* CDOHOrganizationTests.m in Sources */,
-				9C92315F14E2EA3A00287DD9 /* CDOHPlanTests.m in Sources */,
-				9C92316114E2EA3A00287DD9 /* CDOHResourceTests.m in Sources */,
 				9C92316314E2EA3A00287DD9 /* CDOHResponseTests.m in Sources */,
 				9C92316514E2EA3A00287DD9 /* CDOHUserTests.m in Sources */,
-				9C89DC2414E447EC0057AB17 /* CDOHResourceBaseTests.m in Sources */,
-				9C9DFA5614E9B51D0061D08C /* CDOHRepositoryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

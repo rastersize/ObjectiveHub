@@ -41,22 +41,13 @@
 #import "CDOHPlan.h"
 
 
-@implementation CDOHClientTests {
-	dispatch_queue_t _queue;
-}
+@implementation CDOHClientTests
 
 @synthesize client = _client;
 
 #pragma mark - Test Life Cycle
 - (void)setUp
 {
-	_queue = dispatch_get_main_queue(); //dispatch_queue_create("com.libobjectivehub.tests.CDOHClientTests", DISPATCH_QUEUE_SERIAL);
-	
-	CDOHTestsUserCredentials *cred = [[CDOHTestsUserCredentials alloc] init];
-	STAssertNotNil(cred.username, @"Did you create an accounts.plist file in the unit tests root? Please refer to the documentation for more information (username is nil)");
-	STAssertNotNil(cred.password, @"Did you create an accounts.plist file in the unit tests root? Please refer to the documentation for more information (password is nil)");
-	
-	_client = [[CDOHClient alloc] initWithUsername:cred.username password:cred.password];
 }
 
 - (void)tearDown
@@ -66,35 +57,10 @@
 
 
 #pragma mark - CDOHPagesArrayForPageIndexes Tests
-- (void)testCDOHPagesArrayForPageIndexesMacro
-{
-	NSArray *controlArray = [[NSArray alloc] initWithObjects:
-							 [NSNumber numberWithUnsignedInteger:9],
-							 [NSNumber numberWithUnsignedInteger:2],
-							 [NSNumber numberWithUnsignedInteger:123124],
-							 [NSNumber numberWithUnsignedInteger:84239847392],
-							 [NSNumber numberWithUnsignedInteger:0],
-							 [NSNumber numberWithUnsignedInteger:1],
-							 nil];
-	
-	NSArray *pages = CDOHPagesArrayForPageIndexes(9, 2, 123124, 84239847392, 0, 1);
-	
-	STAssertTrue([pages isEqual:controlArray], @"Pages array should be equal to control array");
-}
 
 
 #pragma mark - CDOHClient Class Tests
-- (void)testInitWithUsernameAndPassword
-{
-	NSString *username = @"testUser";
-	NSString *password = @"testPassword";
-	
-	CDOHClient *objHub = [[CDOHClient alloc] initWithUsername:username password:password];
-	
-	STAssertNotNil(objHub, @"ObjectiveHub instance objHub should not return nil");
-	STAssertEqualObjects(objHub.username, username, @"objHub.username should be equal to username");
-	STAssertEqualObjects(objHub.password, password, @"objHub.password should be equal to password");
-}
+
 
 
 #pragma mark - GitHub Communication Tests
