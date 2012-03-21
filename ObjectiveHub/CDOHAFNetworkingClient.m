@@ -44,7 +44,7 @@
 @interface CDOHAFNetworkingClient (/*Private*/)
 
 #pragma mark - AFNetworking Client Instance
-@property (strong) AFHTTPClient *client;
+@property (strong) id client;
 
 
 #pragma mark - Authorization Header
@@ -88,8 +88,11 @@
 	if (self) {
 		_authHeadersBalanceCount = 0;
 		
-		_client = [[AFHTTPClient alloc] initWithBaseURL:baseURL];
-		[_client registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+		Class clientClass = NSClassFromString(@"AFHTTPClient");
+		Class requestClass = NSClassFromString(@"AFHTTPRequestOperation");
+		
+		_client = [[clientClass alloc] initWithBaseURL:baseURL];
+		[_client registerHTTPOperationClass:requestClass];
 		[_client setParameterEncoding:AFJSONParameterEncoding];
 		
 		for (NSString *headerKey in defaultHeaders) {
@@ -105,24 +108,24 @@
 #pragma mark - Remote Host Information
 - (NSURL *)baseURL
 {
-	return self.client.baseURL;
+	return ((AFHTTPClient *)self.client).baseURL;
 }
 
 
 #pragma mark - Request Controls
 - (oneway void)suspend
 {
-	[self.client.operationQueue setSuspended:YES];
+	[((AFHTTPClient *)self.client).operationQueue setSuspended:YES];
 }
 
 - (oneway void)resume
 {
-	[self.client.operationQueue setSuspended:NO];
+	[((AFHTTPClient *)self.client).operationQueue setSuspended:NO];
 }
 
 - (oneway void)cancelAll
 {
-	[self.client.operationQueue cancelAllOperations];
+	[((AFHTTPClient *)self.client).operationQueue cancelAllOperations];
 }
 
 

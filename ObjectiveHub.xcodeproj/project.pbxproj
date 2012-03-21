@@ -58,44 +58,6 @@
 		9C26F976146B207A001A5385 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F94E146B2069001A5385 /* SenTestingKit.framework */; };
 		9C26F979146B207A001A5385 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F968146B207A001A5385 /* Foundation.framework */; };
 		9C26F97C146B207A001A5385 /* libObjectiveHub.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C26F967146B207A001A5385 /* libObjectiveHub.a */; };
-		9C26F9D5146B2979001A5385 /* AFHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C0146B2979001A5385 /* AFHTTPClient.h */; };
-		9C26F9D6146B2979001A5385 /* AFHTTPClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C0146B2979001A5385 /* AFHTTPClient.h */; };
-		9C26F9D7146B2979001A5385 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C1146B2979001A5385 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9C26F9D8146B2979001A5385 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C1146B2979001A5385 /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9C26F9D9146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C2146B2979001A5385 /* AFHTTPRequestOperation.h */; };
-		9C26F9DA146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C2146B2979001A5385 /* AFHTTPRequestOperation.h */; };
-		9C26F9DB146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unused-parameter -Wno-sign-conversion"; }; };
-		9C26F9DC146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C3146B2979001A5385 /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unused-parameter -Wno-sign-conversion"; }; };
-		9C26F9E1146B2979001A5385 /* AFImageRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C6146B2979001A5385 /* AFImageRequestOperation.h */; };
-		9C26F9E2146B2979001A5385 /* AFImageRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C6146B2979001A5385 /* AFImageRequestOperation.h */; };
-		9C26F9E3146B2979001A5385 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unused-parameter"; }; };
-		9C26F9E4146B2979001A5385 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C7146B2979001A5385 /* AFImageRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unused-parameter"; }; };
-		9C26F9E5146B2979001A5385 /* AFJSONRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C8146B2979001A5385 /* AFJSONRequestOperation.h */; };
-		9C26F9E6146B2979001A5385 /* AFJSONRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9C8146B2979001A5385 /* AFJSONRequestOperation.h */; };
-		9C26F9E7146B2979001A5385 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C9146B2979001A5385 /* AFJSONRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9C26F9E8146B2979001A5385 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9C9146B2979001A5385 /* AFJSONRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9C26F9E9146B2979001A5385 /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CA146B2979001A5385 /* AFNetworkActivityIndicatorManager.h */; };
-		9C26F9EA146B2979001A5385 /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CA146B2979001A5385 /* AFNetworkActivityIndicatorManager.h */; };
-		9C26F9EB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9C26F9EC146B2979001A5385 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9C26F9ED146B2979001A5385 /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CC146B2979001A5385 /* AFNetworking.h */; };
-		9C26F9EE146B2979001A5385 /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CC146B2979001A5385 /* AFNetworking.h */; };
-		9C26F9EF146B2979001A5385 /* AFPropertyListRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CD146B2979001A5385 /* AFPropertyListRequestOperation.h */; };
-		9C26F9F0146B2979001A5385 /* AFPropertyListRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CD146B2979001A5385 /* AFPropertyListRequestOperation.h */; };
-		9C26F9F1146B2979001A5385 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CE146B2979001A5385 /* AFPropertyListRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9C26F9F2146B2979001A5385 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9CE146B2979001A5385 /* AFPropertyListRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9C26F9F3146B2979001A5385 /* AFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CF146B2979001A5385 /* AFURLConnectionOperation.h */; };
-		9C26F9F4146B2979001A5385 /* AFURLConnectionOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9CF146B2979001A5385 /* AFURLConnectionOperation.h */; };
-		9C26F9F5146B2979001A5385 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D0146B2979001A5385 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-sign-conversion"; }; };
-		9C26F9F6146B2979001A5385 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D0146B2979001A5385 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-sign-conversion"; }; };
-		9C26F9F7146B2979001A5385 /* AFXMLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9D1146B2979001A5385 /* AFXMLRequestOperation.h */; };
-		9C26F9F8146B2979001A5385 /* AFXMLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9D1146B2979001A5385 /* AFXMLRequestOperation.h */; };
-		9C26F9F9146B2979001A5385 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D2146B2979001A5385 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9C26F9FA146B2979001A5385 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D2146B2979001A5385 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9C26F9FB146B2979001A5385 /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9D3146B2979001A5385 /* UIImageView+AFNetworking.h */; };
-		9C26F9FC146B2979001A5385 /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26F9D3146B2979001A5385 /* UIImageView+AFNetworking.h */; };
-		9C26F9FD146B2979001A5385 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D4146B2979001A5385 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9C26F9FE146B2979001A5385 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26F9D4146B2979001A5385 /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C26FA03146B2DEF001A5385 /* CDOHClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26FA01146B2DEF001A5385 /* CDOHClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C26FA04146B2DEF001A5385 /* CDOHClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C26FA01146B2DEF001A5385 /* CDOHClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9C26FA05146B2DEF001A5385 /* CDOHClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C26FA02146B2DEF001A5385 /* CDOHClient.m */; };
@@ -154,8 +116,6 @@
 		9C3ADD9614E10F7800C454F8 /* CDOHTestsUserCredentials.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADD9414E10F7800C454F8 /* CDOHTestsUserCredentials.m */; };
 		9C3ADD9914E110D800C454F8 /* account.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C3ADD9814E110D800C454F8 /* account.plist */; };
 		9C3ADD9A14E110D800C454F8 /* account.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9C3ADD9814E110D800C454F8 /* account.plist */; };
-		9C3ADDB114E1389400C454F8 /* AFJSONUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADDB014E1389400C454F8 /* AFJSONUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		9C3ADDB214E1389400C454F8 /* AFJSONUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADDB014E1389400C454F8 /* AFJSONUtilities.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		9C3ADDB914E13A5300C454F8 /* CDOHRFC3339Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADDB814E13A5300C454F8 /* CDOHRFC3339Tests.m */; };
 		9C3ADDBA14E13A5300C454F8 /* CDOHRFC3339Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADDB814E13A5300C454F8 /* CDOHRFC3339Tests.m */; };
 		9C3ADDBD14E13C8600C454F8 /* NSURL+ObjectiveHubTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C3ADDBC14E13C8600C454F8 /* NSURL+ObjectiveHubTests.m */; };
@@ -199,8 +159,6 @@
 		9C92316314E2EA3A00287DD9 /* CDOHResponseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92315314E2EA3A00287DD9 /* CDOHResponseTests.m */; };
 		9C92316414E2EA3A00287DD9 /* CDOHUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92315514E2EA3A00287DD9 /* CDOHUserTests.m */; };
 		9C92316514E2EA3A00287DD9 /* CDOHUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C92315514E2EA3A00287DD9 /* CDOHUserTests.m */; };
-		9C99909A14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */; };
-		9C99909B14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C99909914AE794F00DFDD3B /* AFJSONUtilities.h */; };
 		9CA5FA9614B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FA9414B62E3700F2CD13 /* NSString+ObjectiveHub.h */; settings = {ATTRIBUTES = (); }; };
 		9CA5FA9714B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CA5FA9414B62E3700F2CD13 /* NSString+ObjectiveHub.h */; };
 		9CA5FA9814B62E3700F2CD13 /* NSString+ObjectiveHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CA5FA9514B62E3700F2CD13 /* NSString+ObjectiveHub.m */; };
@@ -963,18 +921,7 @@
 				9CA5FA9614B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */,
 				9CA5FA9C14B62EC300F2CD13 /* NSDateFormatter+ObjectiveHub.h in Headers */,
 				9CA5FAA514B6320000F2CD13 /* NSDate+ObjectiveHub.h in Headers */,
-				9C26F9D5146B2979001A5385 /* AFHTTPClient.h in Headers */,
-				9C26F9D9146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */,
-				9C26F9E1146B2979001A5385 /* AFImageRequestOperation.h in Headers */,
-				9C26F9E5146B2979001A5385 /* AFJSONRequestOperation.h in Headers */,
-				9C26F9E9146B2979001A5385 /* AFNetworkActivityIndicatorManager.h in Headers */,
-				9C26F9ED146B2979001A5385 /* AFNetworking.h in Headers */,
-				9C26F9EF146B2979001A5385 /* AFPropertyListRequestOperation.h in Headers */,
-				9C26F9F3146B2979001A5385 /* AFURLConnectionOperation.h in Headers */,
-				9C26F9F7146B2979001A5385 /* AFXMLRequestOperation.h in Headers */,
-				9C26F9FB146B2979001A5385 /* UIImageView+AFNetworking.h in Headers */,
 				9C47C5511473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
-				9C99909A14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */,
 				9C613AA014B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */,
 				9CA5FAC614B6727400F2CD13 /* CDOHResponsePrivate.h in Headers */,
 				9CA5FACA14B67B8C00F2CD13 /* CDOHLinkRelationshipHeader.h in Headers */,
@@ -1011,18 +958,7 @@
 				9CA5FAA214B6304600F2CD13 /* CDOHCommon.h in Headers */,
 				9C6018E014B9CA9B00DAB6E2 /* NSURL+ObjectiveHub.h in Headers */,
 				9C92313B14E2DCC400287DD9 /* CDOHOrganizationTeam.h in Headers */,
-				9C26F9D6146B2979001A5385 /* AFHTTPClient.h in Headers */,
-				9C26F9DA146B2979001A5385 /* AFHTTPRequestOperation.h in Headers */,
-				9C26F9E2146B2979001A5385 /* AFImageRequestOperation.h in Headers */,
-				9C26F9E6146B2979001A5385 /* AFJSONRequestOperation.h in Headers */,
-				9C26F9EA146B2979001A5385 /* AFNetworkActivityIndicatorManager.h in Headers */,
-				9C26F9EE146B2979001A5385 /* AFNetworking.h in Headers */,
-				9C26F9F0146B2979001A5385 /* AFPropertyListRequestOperation.h in Headers */,
-				9C26F9F4146B2979001A5385 /* AFURLConnectionOperation.h in Headers */,
-				9C26F9F8146B2979001A5385 /* AFXMLRequestOperation.h in Headers */,
-				9C26F9FC146B2979001A5385 /* UIImageView+AFNetworking.h in Headers */,
 				9C47C5521473E9C90026BD6D /* CDOHLibraryVersion.h in Headers */,
-				9C99909B14AE794F00DFDD3B /* AFJSONUtilities.h in Headers */,
 				9C613AA114B60CEC0067B6B6 /* CDOHResourcePrivate.h in Headers */,
 				9CA5FA9714B62E3700F2CD13 /* NSString+ObjectiveHub.h in Headers */,
 				9CA5FA9D14B62EC300F2CD13 /* NSDateFormatter+ObjectiveHub.h in Headers */,
@@ -1312,16 +1248,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C26F9D7146B2979001A5385 /* AFHTTPClient.m in Sources */,
-				9C26F9DB146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */,
-				9C26F9E3146B2979001A5385 /* AFImageRequestOperation.m in Sources */,
-				9C26F9E7146B2979001A5385 /* AFJSONRequestOperation.m in Sources */,
-				9C26F9EB146B2979001A5385 /* AFNetworkActivityIndicatorManager.m in Sources */,
-				9C26F9F1146B2979001A5385 /* AFPropertyListRequestOperation.m in Sources */,
-				9C26F9F5146B2979001A5385 /* AFURLConnectionOperation.m in Sources */,
-				9C26F9F9146B2979001A5385 /* AFXMLRequestOperation.m in Sources */,
-				9C3ADDB114E1389400C454F8 /* AFJSONUtilities.m in Sources */,
-				9C26F9FD146B2979001A5385 /* UIImageView+AFNetworking.m in Sources */,
 				9C26FA05146B2DEF001A5385 /* CDOHClient.m in Sources */,
 				9C2F3E7D146F3F2000C44A82 /* CDOHUser.m in Sources */,
 				9C2F3E8A146F5F7D00C44A82 /* CDOHPlan.m in Sources */,
@@ -1371,16 +1297,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C26F9D8146B2979001A5385 /* AFHTTPClient.m in Sources */,
-				9C26F9DC146B2979001A5385 /* AFHTTPRequestOperation.m in Sources */,
-				9C26F9E4146B2979001A5385 /* AFImageRequestOperation.m in Sources */,
-				9C26F9E8146B2979001A5385 /* AFJSONRequestOperation.m in Sources */,
-				9C26F9EC146B2979001A5385 /* AFNetworkActivityIndicatorManager.m in Sources */,
-				9C26F9F2146B2979001A5385 /* AFPropertyListRequestOperation.m in Sources */,
-				9C26F9F6146B2979001A5385 /* AFURLConnectionOperation.m in Sources */,
-				9C26F9FA146B2979001A5385 /* AFXMLRequestOperation.m in Sources */,
-				9C3ADDB214E1389400C454F8 /* AFJSONUtilities.m in Sources */,
-				9C26F9FE146B2979001A5385 /* UIImageView+AFNetworking.m in Sources */,
 				9C26FA07146B2DEF001A5385 /* CDOHClient.m in Sources */,
 				9C2F3E7E146F3F2000C44A82 /* CDOHUser.m in Sources */,
 				9C2F3E8B146F5F7D00C44A82 /* CDOHPlan.m in Sources */,
