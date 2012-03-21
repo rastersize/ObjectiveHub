@@ -367,6 +367,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 			id responseObject = reply.response;
 			
 			if ([responseObject length] > 0) {
+				__autoreleasing NSError *jsonDecodingError = nil;
 				id parsedResponseObject = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&jsonDecodingError];
 				id resource = resourceCreationBlock(parsedResponseObject);
 				
@@ -380,7 +381,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 																		  arguments:arguments];
 					successBlock(response);
 				} else if (failureBlock) {
-					CDOHError *error = [[CDOHError alloc] initWithHTTPHeaders:reply.HTTPHeaders HTTPStatus:kCDOHErrorCodeCouldNotCreateResource responseBody:responseObject];
+					CDOHError *error = [[CDOHError alloc] initWithHTTPHeaders:reply.HTTPHeaders HTTPStatus:kCDOHErrorCodeCouldNotCreateResource responseBody:responseObject originalError:jsonDecodingError];
 					failureBlock(error);
 				}
 			} else if (failureBlock) {

@@ -38,6 +38,8 @@
 extern NSString *const kCDOHErrorUserInfoHTTPHeadersKey;
 /// User info dictionary key to get the response data.
 extern NSString *const kCDOHErrorUserInfoResponseDataKey;
+/// User info dictionary key to get the original error.
+extern NSString *const kCDOHErrorUserInfoOriginalErrorKey;
 
 
 #pragma mark - ObjectiveHub Error Domain
@@ -52,7 +54,7 @@ extern NSString *const kCDOHErrorDomain;
 /// on Wikipedia as well as GitHubs developer site.
 enum {
 	/// Unkown error.
-	kCDOHErrorCodeUnknown							= -1,
+	kCDOHErrorCodeUnknown							= 0,
 	
 	#pragma mark |- Client Errors
 	/** @name Client Errors */
@@ -118,7 +120,8 @@ typedef NSInteger CDOHErrorCodeType;
  * the given _httpHeaders_ dictionary, the status code specified by _httpStatus_
  * as well as the _body_ data.
  *
- * The code property is set to the HTTP status code.
+ * The error `code` is set to the HTTP status code and the original error
+ * property (`originalError`) will be `nil`.
  *
  * @param httpHeaders A dictionary containing the HTTP response headers.
  * @param httpStatus An integer which containing the HTTP status code.
@@ -127,6 +130,22 @@ typedef NSInteger CDOHErrorCodeType;
  * status and response body.
  */
 - (id)initWithHTTPHeaders:(NSDictionary *)httpHeaders HTTPStatus:(NSInteger)httpStatus responseBody:(NSData *)responseBody;
+
+/**
+ * Initializes and returns an `CDOHError` instance intialized with the values of
+ * the given _httpHeaders_ dictionary, the status code specified by _httpStatus_
+ * as well as the _body_ data. Furthermore sets the original error property.
+ *
+ * The error `code` is set to the HTTP status code.
+ *
+ * @param httpHeaders A dictionary containing the HTTP response headers.
+ * @param httpStatus An integer which containing the HTTP status code.
+ * @param responseBody The response body data.
+ * @param originalError The original error which lead to this error.
+ * @return An `CDOHError` instance initialized with the given http headers,
+ * status and response body.
+ */
+- (id)initWithHTTPHeaders:(NSDictionary *)httpHeaders HTTPStatus:(NSInteger)httpStatus responseBody:(NSData *)responseBody originalError:(NSError *)error;
 
 
 #pragma mark - HTTP Headers
@@ -167,6 +186,14 @@ typedef NSInteger CDOHErrorCodeType;
  * @see responseBody
  */
 @property (readonly, strong) id parsedResponseBody;
+
+
+#pragma mark - Original Error
+/** @name Original Error */
+/**
+ * The original error which lead to this error. Might be `nil`.
+ */
+@property (readonly, strong) NSError *originalError;
 
 
 @end
