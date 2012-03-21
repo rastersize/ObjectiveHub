@@ -356,7 +356,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 {
 	return ^(CDOHNetworkClientReply *reply) {
 		if (reply.success == YES && successBlock) {
-				successBlock(nil);
+			successBlock(nil);
 		} else if (reply.success == NO && failureBlock) {
 			failureBlock(reply.error);
 		}
