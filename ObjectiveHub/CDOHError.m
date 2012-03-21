@@ -31,7 +31,6 @@
 //
 
 #import "CDOHError.h"
-#import "JSONKit.h"
 
 
 #pragma mark CDOHError User Info Dictionary Default Keys
@@ -74,10 +73,9 @@ NSString *const kCDOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
 
 - (id)parsedResponseBody
 {
-	// TODO: Verify that JSONKit returns nil if the NSData object couldn't be converted from JSON.
 	id parsed = nil;
 	if (self.responseBody && [self.responseBody length] > 0) {
-		parsed = [self.responseBody objectFromJSONData];
+		parsed = [NSJSONSerialization JSONObjectWithData:self.responseBody options:0 error:NULL];
 	}
 	
 	return parsed;
