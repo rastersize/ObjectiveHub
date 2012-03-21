@@ -57,8 +57,6 @@
 #import "UIApplication+ObjectiveHub.h"
 
 #import <objc/runtime.h>
-
-#import "AFNetworking.h"
 #import "JSONKit.h"
 
 
@@ -93,86 +91,6 @@ NSString *const kCDOHResponseHeaderXRateLimitLimitKey		= @"X-RateLimit-Limit";
 NSString *const kCDOHResponseHeaderXRateLimitRemainingKey	= @"X-RateLimit-Remaining";
 NSString *const kCDOHResponseHeaderLocationKey				= @"Location";
 NSString *const kCDOHResponseHeaderLinkKey					= @"Link";
-
-
-#pragma mark - Relative API Path
-NSDictionary *_CDOHDictionaryOfVariableBindings(NSString *commaSeparatedKeysString, id firstValue, ...)
-{
-	NSDictionary *dictionary = nil;
-	NSMutableArray *keys = nil;
-	NSMutableArray *objects = nil;
-	
-	NSArray *tmpKeys = [commaSeparatedKeysString componentsSeparatedByString:@","];
-	keys = [[NSMutableArray alloc] initWithCapacity:[tmpKeys count]];
-	for (NSString *tmpKey in tmpKeys) {
-		NSString *key = [tmpKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-		[keys addObject:key];
-	}
-	
-	objects = [[NSMutableArray alloc] initWithCapacity:[keys count]];
-	id obj = firstValue;
-	
-	va_list args;
-	va_start(args, firstValue);
-	while (obj != nil) {
-		[objects addObject:obj];
-		obj = va_arg(args, id);
-	}
-	va_end(args);
-	
-	dictionary = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
-	return dictionary;
-}
-
-NSString *CDOHRelativeAPIPath(NSString *pathFormat, NSDictionary *options)
-{
-	// No need to do anything if options is empty or even nil, the end result
-	// would have been to return the pathFormat anyway.
-	if ([options count] == 0) { return pathFormat; }
-	
-	NSMutableString *path = [[NSMutableString alloc] init];
-	NSArray *pathComponents = [pathFormat pathComponents];
-	
-	for (NSString *component in pathComponents) {
-		NSString *pathComponent = nil;
-		if ([component isEqualToString:@"/"]) {
-			continue;
-		} else if ([[component substringToIndex:1] isEqualToString:@":"]) {
-			NSString *key = [component substringFromIndex:1];
-			pathComponent = [options objectForKey:key];
-		}
-		
-		if (pathComponent == nil) {
-			pathComponent = component;
-#if DEBUG
-			NSLog(@"=== %s: No option for '%@'", __PRETTY_FUNCTION__, component);
-#endif
-		}
-		
-		[path appendFormat:@"/%@", pathComponent];
-	}
-	
-	return path;
-}
-
-NSString *CDOHConcatenatedRelativeAPIPaths(NSArray *pathFormats, NSArray *optionDicts)
-{
-	NSMutableString *path = [[NSMutableString alloc] init];
-	
-	[pathFormats enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL __unused *stop) {
-		NSString *pathFormat = obj;
-		
-		NSDictionary *options = nil;
-		if (idx < [optionDicts count]) {
-			options = [optionDicts objectAtIndex:idx];
-		}
-		
-		NSString *relativeApiPath = CDOHRelativeAPIPath(pathFormat, options);
-		[path appendString:relativeApiPath];
-	}];
-	
-	return path;
-}
 
 
 #pragma mark - GitHub Relative API Path (Formats)
@@ -263,7 +181,11 @@ NSString *const kCDOHResourcePropertyWatched				= @"watched";
 NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 
 
+
+// ---------------------------------------------------------------------------//
+#pragma mark -
 #pragma mark - ObjectiveHub Implementation
+// ---------------------------------------------------------------------------//
 @implementation CDOHClient
 
 #pragma mark - Synthesizing
@@ -672,19 +594,6 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	}
 	
 	return hasAuthenticatedUser;
-}
-
-
-#pragma mark - Response Helpers
-- (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation
-{
-	NSDictionary *httpHeaders = [operation.response allHeaderFields];
-	NSInteger httpStatus = [operation.response statusCode];
-	NSData *responseData = [operation responseData];
-	
-	CDOHError *ohError = [[CDOHError alloc] initWithHTTPHeaders:httpHeaders HTTPStatus:httpStatus responseBody:responseData];
-	
-	return ohError;
 }
 
 
@@ -1168,3 +1077,87 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 
 
 @end
+
+
+
+// ---------------------------------------------------------------------------//
+#pragma mark - Helper Functions
+#pragma mark - Relative API Path
+NSDictionary *_CDOHDictionaryOfVariableBindings(NSString *commaSeparatedKeysString, id firstValue, ...)
+{
+	NSDictionary *dictionary = nil;
+	NSMutableArray *keys = nil;
+	NSMutableArray *objects = nil;
+	
+	NSArray *tmpKeys = [commaSeparatedKeysString componentsSeparatedByString:@","];
+	keys = [[NSMutableArray alloc] initWithCapacity:[tmpKeys count]];
+	for (NSString *tmpKey in tmpKeys) {
+		NSString *key = [tmpKey stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+		[keys addObject:key];
+	}
+	
+	objects = [[NSMutableArray alloc] initWithCapacity:[keys count]];
+	id obj = firstValue;
+	
+	va_list args;
+	va_start(args, firstValue);
+	while (obj != nil) {
+		[objects addObject:obj];
+		obj = va_arg(args, id);
+	}
+	va_end(args);
+	
+	dictionary = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
+	return dictionary;
+}
+
+NSString *CDOHRelativeAPIPath(NSString *pathFormat, NSDictionary *options)
+{
+	// No need to do anything if options is empty or even nil, the end result
+	// would have been to return the pathFormat anyway.
+	if ([options count] == 0) { return pathFormat; }
+	
+	NSMutableString *path = [[NSMutableString alloc] init];
+	NSArray *pathComponents = [pathFormat pathComponents];
+	
+	for (NSString *component in pathComponents) {
+		NSString *pathComponent = nil;
+		if ([component isEqualToString:@"/"]) {
+			continue;
+		} else if ([[component substringToIndex:1] isEqualToString:@":"]) {
+			NSString *key = [component substringFromIndex:1];
+			pathComponent = [options objectForKey:key];
+		}
+		
+		if (pathComponent == nil) {
+			pathComponent = component;
+#if DEBUG
+			NSLog(@"=== %s: No option for '%@'", __PRETTY_FUNCTION__, component);
+#endif
+		}
+		
+		[path appendFormat:@"/%@", pathComponent];
+	}
+	
+	return path;
+}
+
+NSString *CDOHConcatenatedRelativeAPIPaths(NSArray *pathFormats, NSArray *optionDicts)
+{
+	NSMutableString *path = [[NSMutableString alloc] init];
+	
+	[pathFormats enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL __unused *stop) {
+		NSString *pathFormat = obj;
+		
+		NSDictionary *options = nil;
+		if (idx < [optionDicts count]) {
+			options = [optionDicts objectAtIndex:idx];
+		}
+		
+		NSString *relativeApiPath = CDOHRelativeAPIPath(pathFormat, options);
+		[path appendString:relativeApiPath];
+	}];
+	
+	return path;
+}
+
