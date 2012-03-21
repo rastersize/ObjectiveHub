@@ -120,13 +120,6 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
 + (NSMutableArray *)registeredNetworkClientAdapters;
 
 
-#pragma mark - JSON Decoder
-/**
- * The JSON decoder object used for decoding JSON strings.
- */
-@property (readonly, strong) JSONDecoder *JSONDecoder;
-
-
 #pragma mark - Request Helpers
 /**
  * Creates the standard request parameter dictionary.

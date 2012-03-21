@@ -57,7 +57,6 @@
 #import "UIApplication+ObjectiveHub.h"
 
 #import <objc/runtime.h>
-#import "JSONKit.h"
 
 
 #pragma mark GitHub API Base URI
@@ -197,7 +196,6 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 
 @synthesize managedObjectContext =_managedObjectContext;
 @synthesize networkClient = _networkClient;
-@synthesize JSONDecoder = _jsonDecoder;
 
 
 #pragma mark - Network Client Adapters
@@ -262,8 +260,6 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 		NSDictionary *defaultHeaders = [[self class] defaultNetworkClientHTTPHeaders];
 		Class networkClientClass = [[self class] networkClientAdapaterClass];
 		_networkClient = [[networkClientClass alloc] initWithBaseURL:_baseUrl defaultHeaders:defaultHeaders];
-
-		_jsonDecoder = [[JSONDecoder alloc] initWithParseOptions:JKParseOptionStrict];
 	}
 	
 	return self;
@@ -371,7 +367,8 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 			id responseObject = reply.response;
 			
 			if ([responseObject length] > 0) {
-				id parsedResponseObject = [blockSelf.JSONDecoder objectWithData:responseObject];
+				__autoreleasing NSError *jsonDecodingError = nil;
+				id parsedResponseObject = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&jsonDecodingError];
 				id resource = resourceCreationBlock(parsedResponseObject);
 				
 				if (resource != nil) {
@@ -384,7 +381,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 																		  arguments:arguments];
 					successBlock(response);
 				} else if (failureBlock) {
-					CDOHError *error = [[CDOHError alloc] initWithHTTPHeaders:reply.HTTPHeaders HTTPStatus:kCDOHErrorCodeCouldNotCreateResource responseBody:responseObject];
+					CDOHError *error = [[CDOHError alloc] initWithHTTPHeaders:reply.HTTPHeaders HTTPStatus:kCDOHErrorCodeCouldNotCreateResource responseBody:responseObject originalError:jsonDecodingError];
 					failureBlock(error);
 				}
 			} else if (failureBlock) {

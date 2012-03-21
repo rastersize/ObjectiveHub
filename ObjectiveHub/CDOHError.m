@@ -31,12 +31,12 @@
 //
 
 #import "CDOHError.h"
-#import "JSONKit.h"
 
 
 #pragma mark CDOHError User Info Dictionary Default Keys
 NSString *const kCDOHErrorUserInfoHTTPHeadersKey			= @"httpHeaders";
 NSString *const kCDOHErrorUserInfoResponseDataKey			= @"responseData";
+NSString *const kCDOHErrorUserInfoOriginalErrorKey			= @"originalError";
 
 
 #pragma mark - ObjectiveHub Error Domain
@@ -49,10 +49,22 @@ NSString *const kCDOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
 #pragma mark - Initializing an CDOHError Instance
 - (id)initWithHTTPHeaders:(NSDictionary *)httpHeaders HTTPStatus:(NSInteger)httpStatus responseBody:(NSData *)responseBody
 {
-	NSDictionary *userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
-							  httpHeaders,	kCDOHErrorUserInfoHTTPHeadersKey,
-							  responseBody,	kCDOHErrorUserInfoResponseDataKey,
-							  nil];
+	self = [self initWithHTTPHeaders:httpHeaders HTTPStatus:httpStatus responseBody:responseBody originalError:nil];
+	return self;
+}
+
+- (id)initWithHTTPHeaders:(NSDictionary *)httpHeaders HTTPStatus:(NSInteger)httpStatus responseBody:(NSData *)responseBody originalError:(NSError *)error
+{
+	NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithCapacity:3];
+	if (httpHeaders) {
+		[userInfo setObject:httpHeaders forKey:kCDOHErrorUserInfoHTTPHeadersKey];
+	}
+	if (responseBody) {
+		[userInfo setObject:responseBody forKey:kCDOHErrorUserInfoResponseDataKey];
+	}
+	if (error) {
+		[userInfo setObject:error forKey:kCDOHErrorUserInfoOriginalErrorKey];
+	}
 	
 	self = [self initWithDomain:kCDOHErrorDomain code:httpStatus userInfo:userInfo];
 	return self;
@@ -74,13 +86,19 @@ NSString *const kCDOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
 
 - (id)parsedResponseBody
 {
-	// TODO: Verify that JSONKit returns nil if the NSData object couldn't be converted from JSON.
 	id parsed = nil;
 	if (self.responseBody && [self.responseBody length] > 0) {
-		parsed = [self.responseBody objectFromJSONData];
+		parsed = [NSJSONSerialization JSONObjectWithData:self.responseBody options:0 error:NULL];
 	}
 	
 	return parsed;
+}
+
+
+#pragma mark - Original Error
+- (NSError *)originalError
+{
+	return [[self userInfo] objectForKey:kCDOHErrorUserInfoOriginalErrorKey];
 }
 
 
