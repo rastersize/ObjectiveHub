@@ -72,19 +72,30 @@
  *	#import <ObjectiveHub/ObjectiveHub.h>
  *	...
  *	
+ *	- (id)init {
+ *		self = [super init];
+ *		if (self) {
+ *			// Asume we have an ivar/property "_client".
+ *			_client = [[CDOHClient alloc] init];
+ *		}
+ *		return self;
+ *	}
+ *	
  *	- (void)loadData {
  *		NSString *username = ...
- *		CDOHClient *client = [[CDOHClient alloc] init];
  *		
- *		[client repositoriesWatchedByUser:username pages:nil success:^(CDOHResponse *response) {
+ *		__weak MyClass *blockSelf = self;
+ *		[_client repositoriesWatchedByUser:username pages:nil success:^(CDOHResponse *response) {
  *			// Handle the response (you will probably want to do something
- *			// smarter than the row below).
- *			[self.watchedRepos addObjectsFromArray:response.resource];
+ *			// smarter than the row below). Assumes we have a property for a
+ *			// mutable collection (e.g. NSMutableArray).
+ *			[blockSelf.watchedRepos addObjectsFromArray:response.resource];
  *			
  *			// Make sure we load all repositories watched by the user. The
  *			// success and failure blocks used in the first request will be re-
  *			// used. Just take care if the user is watching thousands of
- *			// repositories.
+ *			// repositories. As such you would probably want to do something a
+ *			// bit more inteligent.
  *			if (response.hasNextPage) {
  *				[response loadNextPage];
  *			}
