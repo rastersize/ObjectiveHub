@@ -30,7 +30,7 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-#if TARGET_OS_IPHONE
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
 #import <UIKit/UIKit.h>
 
 /**
@@ -66,4 +66,4 @@
 
 @end
 
-#endif // TARGET_OS_IPHONE
+#endif // __IPHONE_OS_VERSION_MIN_REQUIRED

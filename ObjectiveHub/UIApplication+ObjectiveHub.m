@@ -34,7 +34,7 @@
 #import "CDOHCommon.h"
 
 
-#if TARGET_OS_IPHONE
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
 @interface UIApplication (ObjectiveHub_Private)
 
 @property (nonatomic, assign, readonly) NSInteger cdoh_networkActivityCount;
@@ -103,4 +103,4 @@ static NSInteger _networkActivityCount;
 
 @end
 
-#endif // TARGET_OS_IPHONE
+#endif // __IPHONE_OS_VERSION_MIN_REQUIRED
