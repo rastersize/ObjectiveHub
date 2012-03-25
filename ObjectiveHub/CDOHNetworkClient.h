@@ -127,13 +127,8 @@
  * Perform a HTTP `GET` request for the resource at the given relative path.
  *
  * @param path The relative, to the base URL, path of the resource.
- * @param parameters The parameters which should be used.
- *
- * The following classes are supported:
- * 
- * - `NSString`,
- * - `NSArray` and
- * - `NSDictionary`.
+ * @param parameters The parameters which should be used in the request. Will be
+ * converted into an URL query string.
  * @param username The username used to authenticate the user with. May be `nil`
  * in which case no authentication header will be set for this request.
  * @param password The password used to authenticate the user with. May be `nil`
@@ -151,13 +146,8 @@
  * Perform a HTTP `POST` request for the resource at the given relative path.
  *
  * @param path The relative, to the base URL, path of the resource.
- * @param parameters The parameters which should be used.
- *
- * The following classes are supported:
- * 
- * - `NSString`,
- * - `NSArray` and
- * - `NSDictionary`.
+ * @param parameters The parameters which should be used in the request. The
+ * parameters object may be an instance of the `NSDictionary` or `NSArray`.
  * @param username The username used to authenticate the user with. May be `nil`
  * in which case no authentication header will be set for this request.
  * @param password The password used to authenticate the user with. May be `nil`
@@ -175,13 +165,8 @@
  * Perform a HTTP `PUT` request for the resource at the given relative path.
  *
  * @param path The relative, to the base URL, path of the resource.
- * @param parameters The parameters which should be used.
- *
- * The following classes are supported:
- * 
- * - `NSString`,
- * - `NSArray` and
- * - `NSDictionary`.
+ * @param parameters The parameters which should be used in the request. The
+ * parameters object may be an instance of the `NSDictionary` or `NSArray`.
  * @param username The username used to authenticate the user with. May be `nil`
  * in which case no authentication header will be set for this request.
  * @param password The password used to authenticate the user with. May be `nil`
@@ -199,13 +184,8 @@
  * Perform a HTTP `PATCH` request for the resource at the given relative path.
  *
  * @param path The relative, to the base URL, path of the resource.
- * @param parameters The parameters which should be used.
- *
- * The following classes are supported:
- * 
- * - `NSString`,
- * - `NSArray` and
- * - `NSDictionary`.
+ * @param parameters The parameters which should be used in the request. The
+ * parameters object may be an instance of the `NSDictionary` or `NSArray`.
  * @param username The username used to authenticate the user with. May be `nil`
  * in which case no authentication header will be set for this request.
  * @param password The password used to authenticate the user with. May be `nil`
@@ -223,13 +203,8 @@
  * Perform a HTTP `DELETE` request for the resource at the given relative path.
  *
  * @param path The relative, to the base URL, path of the resource.
- * @param parameters The parameters which should be used.
- *
- * The following classes are supported:
- * 
- * - `NSString`,
- * - `NSArray` and
- * - `NSDictionary`.
+ * @param parameters The parameters which should be used in the request. The
+ * parameters object may be an instance of the `NSDictionary` or `NSArray`.
  * @param username The username used to authenticate the user with. May be `nil`
  * in which case no authentication header will be set for this request.
  * @param password The password used to authenticate the user with. May be `nil`

@@ -57,6 +57,14 @@
 + (CDOHError *)errorFromFailedOperation:(AFHTTPRequestOperation *)operation;
 
 
+#pragma mark - Object To Dictionary
++ (NSDictionary *)queryDictionaryFromObject:(id)object;
+
+
+#pragma mark - 
+- (NSMutableURLRequest *)requestWithMethod:(NSString *)method path:(NSString *)path parameters:(id)parameters;
+
+
 #pragma mark - Standard Blocks
 - (void (^)(AFHTTPRequestOperation *, id))standardSuccessBlockForReplyBlock:(void (^)(CDOHNetworkClientReply *reply))replyBlock;
 - (void (^)(AFHTTPRequestOperation *, NSError *))standardFailureBlockForReplyBlock:(void (^)(CDOHNetworkClientReply *reply))replyBlock;
@@ -137,6 +145,7 @@
 	
 	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
 	
+	parameters = [[self class] queryDictionaryFromObject:parameters];
 	[self.client getPath:path
 			  parameters:parameters
 				 success:[self standardSuccessBlockForReplyBlock:replyBlock]
@@ -147,13 +156,15 @@
 {
 	NSParameterAssert(path);
 	NSParameterAssert(replyBlock);
+	NSAssert(([parameters isKindOfClass:[NSDictionary class]] || [parameters isKindOfClass:[NSArray class]]), @"The parameters argument may only be of the type NSArray or NSDictionary");
 	
 	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
 	
-	[self.client postPath:path
-			   parameters:parameters
-				  success:[self standardSuccessBlockForReplyBlock:replyBlock]
-				  failure:[self standardFailureBlockForReplyBlock:replyBlock]];
+	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:path parameters:parameters];
+	AFHTTPRequestOperation *operation = [self.client HTTPRequestOperationWithRequest:request
+																			 success:[self standardSuccessBlockForReplyBlock:replyBlock]
+																			 failure:[self standardFailureBlockForReplyBlock:replyBlock]];
+	[self.client enqueueHTTPRequestOperation:operation];
 }
 
 - (oneway void)putPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
@@ -163,14 +174,13 @@
 	
 	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
 	
-	[self.client putPath:path
-			  parameters:parameters
-				 success:[self standardSuccessBlockForReplyBlock:replyBlock]
-				 failure:[self standardFailureBlockForReplyBlock:replyBlock]];
+	NSMutableURLRequest *request = [self requestWithMethod:@"PUT" path:path parameters:parameters];
+	AFHTTPRequestOperation *operation = [self.client HTTPRequestOperationWithRequest:request
+																			 success:[self standardSuccessBlockForReplyBlock:replyBlock]
+																			 failure:[self standardFailureBlockForReplyBlock:replyBlock]];
+	[self.client enqueueHTTPRequestOperation:operation];
 }
 
-// TODO: Send pull request to AFNetworking/AFNetworking with patchPath:parameters:success:failure.
-// TODO: Send pull request to AFNetworking/AFNetworking with generic(ish) parameters.
 - (oneway void)patchPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
 {
 	NSParameterAssert(path);
@@ -178,10 +188,11 @@
 	
 	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
 	
-	[self.client patchPath:path
-				parameters:parameters
-				   success:[self standardSuccessBlockForReplyBlock:replyBlock]
-				   failure:[self standardFailureBlockForReplyBlock:replyBlock]];
+	NSMutableURLRequest *request = [self requestWithMethod:@"PATCH" path:path parameters:parameters];
+	AFHTTPRequestOperation *operation = [self.client HTTPRequestOperationWithRequest:request
+																			 success:[self standardSuccessBlockForReplyBlock:replyBlock]
+																			 failure:[self standardFailureBlockForReplyBlock:replyBlock]];
+	[self.client enqueueHTTPRequestOperation:operation];
 }
 
 - (oneway void)deletePath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(void (^)(CDOHNetworkClientReply *))replyBlock
@@ -191,10 +202,11 @@
 	
 	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
 	
-	[self.client deletePath:path
-			   parameters:parameters
-				  success:[self standardSuccessBlockForReplyBlock:replyBlock]
-				  failure:[self standardFailureBlockForReplyBlock:replyBlock]];
+	NSMutableURLRequest *request = [self requestWithMethod:@"DELETE" path:path parameters:parameters];
+	AFHTTPRequestOperation *operation = [self.client HTTPRequestOperationWithRequest:request
+																			 success:[self standardSuccessBlockForReplyBlock:replyBlock]
+																			 failure:[self standardFailureBlockForReplyBlock:replyBlock]];
+	[self.client enqueueHTTPRequestOperation:operation];
 }
 
 
@@ -234,6 +246,41 @@
 		
 		replyBlock(reply);
 	};
+}
+
+
+#pragma mark - Object To Dictionary
++ (NSDictionary *)queryDictionaryFromObject:(id)object
+{
+	NSDictionary *queryDictionary = object;
+	
+	if ([object isKindOfClass:[NSArray class]]) {
+		NSMutableArray *strings = [NSMutableArray arrayWithCapacity:[object count]];
+		for (NSUInteger i = 0; i < [object count]; ++i) {
+			[strings addObject:@""];
+		}
+		queryDictionary = [NSDictionary dictionaryWithObjects:strings forKeys:object];
+	} else if ([object isKindOfClass:[NSString class]]) {
+		queryDictionary = [NSDictionary dictionaryWithObject:@"" forKey:object];
+	}
+	
+	return queryDictionary;
+}
+
+
+#pragma mark - 
+- (NSMutableURLRequest *)requestWithMethod:(NSString *)method path:(NSString *)path parameters:(id)parameters
+{
+	NSMutableURLRequest *request = [self.client requestWithMethod:method path:path parameters:nil];
+	
+	NSString *charset = (__bridge NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(((AFHTTPClient *)self.client).stringEncoding));
+	[request setValue:[NSString stringWithFormat:@"application/json; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
+	
+	NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:NULL];
+	[request setHTTPBody:jsonData];
+	
+	
+	return request;
 }
 
 

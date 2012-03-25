@@ -638,7 +638,7 @@
 			isa = PBXGroup;
 			children = (
 				9C26FA09146B2E1E001A5385 /* Models */,
-				9C34C4A71516A02F00B423B4 /* Network Clients */,
+				9C34C4A71516A02F00B423B4 /* Network Client Adapters */,
 				9C613A9014B601930067B6B6 /* Client */,
 				9CA5FA8A14B6276B00F2CD13 /* Categories */,
 				9C613A9114B601A30067B6B6 /* Misc */,
@@ -733,14 +733,14 @@
 			name = "Core Data Machine Files";
 			sourceTree = "<group>";
 		};
-		9C34C4A71516A02F00B423B4 /* Network Clients */ = {
+		9C34C4A71516A02F00B423B4 /* Network Client Adapters */ = {
 			isa = PBXGroup;
 			children = (
 				9C34C4A81516A06600B423B4 /* CDOHNetworkClient.h */,
 				9C34C4AB1516A6BA00B423B4 /* CDOHAFNetworkingClient.h */,
 				9C34C4AC1516A6BA00B423B4 /* CDOHAFNetworkingClient.m */,
 			);
-			name = "Network Clients";
+			name = "Network Client Adapters";
 			sourceTree = "<group>";
 		};
 		9C5D2D551470281A0064F02A /* ObjectiveHub Test App */ = {
