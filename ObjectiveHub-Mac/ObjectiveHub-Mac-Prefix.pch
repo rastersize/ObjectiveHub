@@ -2,6 +2,12 @@
 // Prefix header for all source files of the 'ObjectiveHub-Mac' target in the 'ObjectiveHub-Mac' project
 //
 
+#import <Availability.h>
+
+#ifndef __MAC_10_7
+#warning "This project uses features only available in Mac OS X SDK 10.7 and later."
+#endif
+
 #ifdef __OBJC__
 	#import <Cocoa/Cocoa.h>
 #endif
