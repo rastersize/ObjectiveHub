@@ -193,7 +193,6 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 @synthesize baseURL = _baseUrl;
 @synthesize showNetworkActivityStatusAutomatically = _showNetworkActivityStatusAutomatically;
 
-@synthesize managedObjectContext =_managedObjectContext;
 @synthesize networkClient = _networkClient;
 
 
@@ -248,12 +247,11 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 
 
 #pragma mark - Initializing ObjectiveHub
-- (id)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+- (id)init
 {
 	self = [super init];
 	if (self) {
 		_itemsPerPage = kCDOHDefaultItemsPerPage;
-		_managedObjectContext = managedObjectContext;
 		
 		_baseUrl = [NSURL URLWithString:kCDOHGitHubBaseAPIURIString];
 		NSDictionary *defaultHeaders = [[self class] defaultNetworkClientHTTPHeaders];
@@ -264,9 +262,9 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	return self;
 }
 
-- (id)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext username:(NSString *)username password:(NSString *)password
+- (id)initWithUsername:(NSString *)username password:(NSString *)password
 {
-	self = [self initWithManagedObjectContext:managedObjectContext];
+	self = [self init];
 	if (self) {
 		_username = [username copy];
 		_password = [password copy];

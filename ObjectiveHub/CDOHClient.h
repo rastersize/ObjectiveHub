@@ -148,7 +148,7 @@
  *
  * @return An `ObjectiveHub` instance initialized with the default values.
  */
-- (id)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+- (id)init;
 
 /**
  * Initializes and returns an `ObjectiveHub` instance that uses the given
@@ -163,7 +163,7 @@
  * @return An `ObjectiveHub` instance initialized with the given username and 
  * password.
  */
-- (id)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext username:(NSString *)username password:(NSString *)password;
+- (id)initWithUsername:(NSString *)username password:(NSString *)password;
 
 
 #pragma mark - User Credentials
@@ -223,14 +223,6 @@
  * which implement the `CDOHNetworkClient` protocol and use it if you want to. 
  */
 @property (strong) id<CDOHNetworkClient>networkClient;
-
-
-#pragma mark - Core Data
-/** @name Core Data */
-/**
- * The managed object context which new resources should be created.
- */
-@property (strong) NSManagedObjectContext *managedObjectContext;
 
 
 #pragma mark - Network Activity
