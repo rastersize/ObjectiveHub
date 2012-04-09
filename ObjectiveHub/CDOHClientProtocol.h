@@ -134,7 +134,7 @@
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Change blog URL:</th>
- *     <td><code>kCDOHUserBlogKey</code></td>
+ *     <td><code>kCDOHUserBlogURLKey</code></td>
  *     <td><code>NSURL</code></td>
  *   </tr>
  *   <tr>
@@ -154,7 +154,7 @@
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Change biography text:</th>
- *     <td><code>kCDOHUserBioKey</code></td>
+ *     <td><code>kCDOHUserBiographyKey</code></td>
  *     <td><code>NSString</code></td>
  *   </tr>
  * </table>
@@ -329,7 +329,7 @@
  *   </tr>
  *   <tr>
  *     <th style="text-align: right">Homepage URL:</th>
- *     <td><code>kCDOHRepositoryHomepageKey</code></td>
+ *     <td><code>kCDOHRepositoryHomepageURLKey</code></td>
  *     <td><code>NSURL</code></td>
  *     <td>Default is no homepage URL.</td>
  *   </tr>

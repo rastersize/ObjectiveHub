@@ -34,6 +34,14 @@
 #import "CDOHResourcePrivate.h"
 
 
+#pragma mark JSON Dictionary Keys
+NSString *const kCDOHOrganizationTeamIdentifierKey		= @"id";
+NSString *const kCDOHOrganizationTeamNameKey			= @"name";
+NSString *const kCDOHOrganizationTeamPermissionKey		= @"permission";
+NSString *const kCDOHOrganizationTeamMembersKey			= @"members_count";
+NSString *const kCDOHOrganizationTeamRepositoriesKey	= @"repos_count";
+
+
 #pragma mark - Team Permission String Constants
 NSString *const kCDOHOrganizationTeamPermissionPull			= @"pull";
 NSString *const kCDOHOrganizationTeamPermissionPush			= @"push";
@@ -43,6 +51,84 @@ NSString *const kCDOHOrganizationTeamPermissionAdminister	= @"admin";
 #pragma mark - CDOHOrganizationTeam Implementation
 @implementation CDOHOrganizationTeam
 
-// Custom logic goes here.
+#pragma mark - Properties
+@synthesize identifier = _identifier;
+@synthesize name = _name;
+@synthesize permission = _permission;
+@synthesize membersCount = _membersCount;
+@synthesize repositoriesCount = _repositoriesCount;
+
+
+#pragma mark - Creating and Initializing Resources
+- (id)initWithJSONDictionary:(NSDictionary *)dictionary
+{
+	self = [super initWithJSONDictionary:dictionary];
+	if (self) {
+		// Unsigned integers
+		_identifier			= [dictionary cdoh_unsignedIntegerForKey:kCDOHOrganizationTeamIdentifierKey];
+		_membersCount		= [dictionary cdoh_unsignedIntegerForKey:kCDOHOrganizationTeamMembersKey];
+		_repositoriesCount	= [dictionary cdoh_unsignedIntegerForKey:kCDOHOrganizationTeamRepositoriesKey];
+		
+		// Strings
+		_name		= [[dictionary cdoh_objectOrNilForKey:kCDOHOrganizationTeamNameKey] copy];
+		_permission	= [[dictionary cdoh_objectOrNilForKey:kCDOHOrganizationTeamPermissionKey] copy];
+	}
+	
+	return self;
+}
+
+
+#pragma mark - Encoding
+- (void)encodeWithJSONDictionary:(NSMutableDictionary *)jsonDictionary
+{
+	[super encodeWithJSONDictionary:jsonDictionary];
+	
+	[jsonDictionary cdoh_setObject:_name forKey:kCDOHOrganizationTeamNameKey];
+	[jsonDictionary cdoh_setObject:_permission forKey:kCDOHOrganizationTeamPermissionKey];
+	
+	[jsonDictionary cdoh_setUnsignedInteger:_identifier forKey:kCDOHOrganizationTeamIdentifierKey];
+	[jsonDictionary cdoh_setUnsignedInteger:_membersCount forKey:kCDOHOrganizationTeamMembersKey];
+	[jsonDictionary cdoh_setUnsignedInteger:_repositoriesCount forKey:kCDOHOrganizationTeamRepositoriesKey];
+}
+
+
+#pragma mark - Describing an Organization Team Object
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"<%@: %p { id = %lu, name = %@ }>",
+			[self class],
+			self,
+			self.identifier,
+			self.name];
+}
+
+
+#pragma mark - Identifying and Comparing Organization Teams
+- (BOOL)isEqual:(id)object
+{
+	if (object == self) {
+		return YES;
+	}
+	if (!object || ![object isKindOfClass:[self class]]) {
+		return NO;
+	}
+	
+	return [self isEqualToOrganizationTeam:object];
+}
+
+- (BOOL)isEqualToOrganizationTeam:(CDOHOrganizationTeam *)aTeam
+{
+	if (aTeam == self) {
+		return YES;
+	}
+	
+	return (self.identifier == aTeam.identifier);
+}
+
+- (NSUInteger)hash
+{
+	return self.identifier;
+}
+
 
 @end

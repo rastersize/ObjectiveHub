@@ -32,6 +32,11 @@
 
 #import <Foundation/Foundation.h>
 
+#import "CDOHResource.h"
+
+#import "NSDictionary+ObjectiveHub.h"
+#import "NSMutableDictionary+ObjectiveHub.h"
+
 
 #pragma mark NSCoding and GitHub JSON Keys
 /// The API resource URL NSCoding and GitHub JSON key.
@@ -40,7 +45,7 @@ extern NSString *const kCDOHResourceAPIResourceURLKey;
 
 #pragma mark - NSCoding Keys
 /// The properties dictionary key.
-extern NSString *const kCDOHResourcePropertiesDictionaryKey;
+extern NSString *const kCDOHResourceJSONRepresentationKey;
 
 
 #pragma mark - CDOHResource Private Interface
@@ -49,17 +54,19 @@ extern NSString *const kCDOHResourcePropertiesDictionaryKey;
  */
 @interface CDOHResource (/*Private*/)
 
-#pragma mark - Handling JSON
-/** @name Handling JSON */
+#pragma mark - Encoding Resources
+/** @name Encoding Resources */
 /**
- * Safely set resource’s attributes to the values in the (JSON) dictionary.
+ * Encode the reciever as a JSON dictionary.
+ *
+ * Behaves much like the `NSCoding` method `encodeWithCoder:`. Subclasses
+ * overriding this method must call the super implementation.
+ * 
+ *
+ * @param jsonDictionary A mutable dictionary which the resource should be
+ * encoded to as a JSON compliant dictionary.
  */
-- (void)setValuesForAttributesWithJSONDictionary:(NSDictionary *)keyedValues;
+- (void)encodeWithJSONDictionary:(NSMutableDictionary *)jsonDictionary;
 
-/**
- * Safely add to, or set, the resource’s relationships using/to the values in
- * the (JSON) dictionary.
- */
-- (void)setValuesForRelationshipsWithJSONDictionary:(NSDictionary *)keyedValues;
 
 @end

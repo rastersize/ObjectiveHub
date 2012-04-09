@@ -31,7 +31,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <ObjectiveHub/_CDOHResource.h>
 
 
 #pragma mark CDOHResource Interface
@@ -40,10 +39,19 @@
  * as such is not very useful by itself. Furthermore, in the Core Data model it
  * is set to be an abstract entity.
  */
-@interface CDOHResource : _CDOHResource
+@interface CDOHResource : NSObject <NSCoding, NSCopying>
 
-#pragma mark - Creating and Initializing CDOHResources
-/** @name Creating and Initializing CDOHResource’s */
+#pragma mark - Creating and Initializing Resources
+/** @name Creating and Initializing Resources */
+/**
+ * Creates and initializes and returns an `CDOHResource` instance intialized
+ * with the values of the given dictionary.
+ *
+ * @param dictionary A dictionary containing the resource information.
+ * @return A `CDOHResource` instance initialized with the given dictionary.
+ */
++ (instancetype)resourceWithJSONDictionary:(NSDictionary *)jsonDictionary;
+
 /**
  * Initializes and returns an `CDOHResource` instance intialized with the
  * values of the given dictionary.
@@ -51,7 +59,29 @@
  * @param dictionary A dictionary containing user information.
  * @return A `CDOHResource` instance initialized with the given dictionary.
  */
-+ (instancetype)resourceWithJSONDictionary:(NSDictionary *)jsonDictionary inManagedObjectContex:(NSManagedObjectContext *)managedObjectContext;
+- (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
+
+
+#pragma mark - Identifying and Comparing Resources
+/** @name Identifying and Comparing Resources */
+/**
+ * Returns a Boolean value that indicates whether a given resource is equal to
+ * the receiver.
+ *
+ * @param aResource The resource with which to compare the reciever.
+ * @return `YES` if _aResource_ is equivalent to the reciever, otherwise `NO`.
+ */
+- (BOOL)isEqualToResource:(CDOHResource *)aResource;
+
+/**
+ * Returns an unsigned integer that can be used as a has table address.
+ *
+ * If two resource objects are equal (as determined by the `isEqualToResource:`
+ * method), they will have the same hash value.
+ *
+ * @return An unsigned integer that can be used as a has table address.
+ */
+- (NSUInteger)hash;
 
 
 #pragma mark - Resource API URL
@@ -60,5 +90,6 @@
  * The API URL of the resource.
  */
 @property (strong) NSURL *resourceURL;
+
 
 @end

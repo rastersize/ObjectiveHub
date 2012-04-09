@@ -31,39 +31,246 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <ObjectiveHub/_CDOHUser.h>
+#import <ObjectiveHub/CDOHResource.h>
 
 
-#pragma mark - GitHub JSON Keys
-/// User dictionary representation key for the user biography.
-extern NSString *const kCDOHUserBioKey;
+#pragma mark Forward Class Declarations
+@class CDOHPlan;
+
+
+#pragma mark - Update User Dictionary Keys
+/// Abstract user dictionary key for the name of the user.
+extern NSString *const kCDOHUserNameKey;
+/// Abstract user dictionary key for the email value.
+extern NSString *const kCDOHUserEmailKey;
+/// Abstract user dictionary key for the name value.
+extern NSString *const kCDOHUserBlogURLKey;
+/// Abstract user dictionary key for the company name.
+extern NSString *const kCDOHUserCompanyKey;
+/// Abstract user dictionary key for the location value.
+extern NSString *const kCDOHUserLocationKey;
 /// User dictionary representation key for the user hireable status.
 extern NSString *const kCDOHUserHireableKey;
+/// User dictionary representation key for the user biography.
+extern NSString *const kCDOHUserBiographyKey;
+
+
+#pragma mark - User Type
+/// The type of user.
+typedef enum _CDOHUserType
+#if __has_feature(objc_fixed_enum)
+ : NSInteger
+#endif
+{
+	/// Unknown type of user.
+	kCDOHUserTypeUnkown			= -1,
+	/// The user is an ordinary person.
+	kCDOHUserTypePerson			= 0,
+	/// The "user" is an organization.
+	kCDOHUserTypeOrganization	= 1
+} CDOHUserType;
 
 
 #pragma mark - CDOHUser Interface
 /**
- * The `CDOHUser` class is a concrete subclass of `CDOHAbstractUser` and
- * models a single "normal" (i.e. not an organization) GitHub user.
+ * A class containing information about a single GitHub user of any type.
  *
- * If the instance represents an authenticated (see the `authenticated`
- * property) user the following extra information is available (else it is
+ * If no user type is specified the class will asume that the represented user
+ * is a person and not an organization.
+ *
+ * If the instance represents an authenticated user (see the `isAuthenticated`
+ * method) the following extra information is available (else it is
  * "zeroed" out; i.e. `nil`, 0 or whatever makes sense in each specific case):
  *
- * - privateRepositoriesOwnedCount
- * - privateRepositoriesCount
- * - privateGistsCount
- * - collaborators
- * - diskUsage
- * - plan
+ * - `privateRepositoriesOwnedCount`
+ * - `privateRepositoriesCount`
+ * - `privateGistsCount`
+ * - `collaborators`
+ * - `diskUsage`
+ * - `plan`
  */
-@interface CDOHUser : _CDOHUser
+@interface CDOHUser : CDOHResource
 
-#pragma mark - User Metadata
-/** @name User Metadata */
+#pragma mark - System Information
+/** @name System Information */
 /**
- * Whether the user is authenticated or not.
+ * Whether the reciever represent an authenticated user.
+ *
+ * This means more information will be available, such as the users GitHub plan,
+ * number of private repositories owned and so on.
  */
-@property (assign, readonly, getter = isAuthenticated) BOOL authenticated;
+- (BOOL)isAuthenticated;
+
+/**
+ * The internal identifier of the user at GitHub.
+ */
+@property (readonly) NSUInteger identifier;
+
+/**
+ * The type of user.
+ *
+ * See the `CDOHUserType` for possible values.
+ */
+@property (assign, readonly) CDOHUserType type;
+
+/**
+ * The login handle (or username) used by the user.
+ */
+@property (readonly, copy) NSString *login;
+
+/**
+ * The URL of the users GitHub profile page (HTML version).
+ */
+@property (strong, readonly) NSURL *profileURL;
+
+/**
+ * The number of public repositories of the user.
+ */
+@property (readonly) NSUInteger publicRepositoriesCount;
+
+/**
+ * The total number of private repositories the user is a member of.
+ *
+ * @warning **Important:** If the instance does not represent an authenticated
+ * user this will be zero (`0`). 
+ */
+@property (readonly) NSUInteger privateRepositoriesCount;
+
+/**
+ * The total number of private repositories owned by the user.
+ *
+ * @warning **Important:** If the instance does not represent an authenticated
+ * user this will be zero (`0`). 
+ */
+@property (readonly) NSUInteger privateRepositoriesOwnedCount;
+
+/**
+ * The number of public gists by the user.
+ */
+@property (readonly) NSUInteger publicGistsCount;
+
+/**
+ * The number of private gists by the user.
+ *
+ * @warning **Important:** If the instance does not represent an authenticated
+ * user this will be zero (`0`). 
+ */
+@property (readonly) NSUInteger privateGistsCount;
+
+/**
+ * The number people following the user.
+ */
+@property (readonly) NSUInteger followersCount;
+
+/**
+ * The number of people the user is following.
+ */
+@property (readonly) NSUInteger followingCount;
+
+/**
+ * The number of people the user is collaborating with.
+ *
+ * @warning **Important:** If the instance does not represent an authenticated
+ * user this will be zero (`0`).
+ */
+@property (readonly) NSUInteger collaboratorsCount;
+
+/**
+ * The time and date when the user created his or her account.
+ */
+@property (readonly, strong) NSDate *createdAt;
+
+/**
+ * The amount of disk space the user have used up. 
+ *
+ * @warning **Important:** If the instance does not represent an authenticated
+ * user this will be zero (`0`).
+ */
+@property (readonly) NSUInteger diskUsage;
+
+/**
+ * The users plan.
+ *
+ * @warning **Important:** If the instance does not represent an authenticated
+ * user this will be `nil`.
+ */
+@property (readonly, strong) CDOHPlan *plan;
+
+
+#pragma mark - Personal Information
+/** @name Personal Information */
+/**
+ * The name of the user.
+ */
+@property (readonly, copy) NSString *name;
+
+/**
+ * The company the user is associated with.
+ */
+@property (readonly, copy) NSString *company;
+
+/**
+ * The email address of the user.
+ */
+@property (readonly, copy) NSString *email;
+
+/**
+ * The location of the user.
+ */
+@property (readonly, copy) NSString *location;
+
+/**
+ * The URL of the users blog or website.
+ */
+@property (readonly, strong) NSURL *blogURL;
+
+/**
+ * The biography of the user.
+ *
+ * In case the user type of the reciever is an organization
+ * (`kCDOHUserTypeOrganization`) this will be `nil`.
+ */
+@property (readonly, copy) NSString *biography;
+
+/**
+ * Wheter the user is hireable or not.
+ *
+ * In case the user type of the reciever is an organization
+ * (`kCDOHUserTypeOrganization`) this will always be `NO`
+ */
+@property (readonly, getter = isHireable) BOOL hireable;
+
+
+#pragma mark - Avatar Information
+/** @name Avatar Information */
+/**
+ * The avatar URL of the user.
+ */
+@property (readonly, strong) NSURL *avatarURL;
+
+/**
+ * The gravatar identifier of the user.
+ *
+ * @see [Gravatar](http://gravatar.com/)
+ */
+@property (readonly, copy) NSString *gravatarIdentifier;
+
+
+#pragma mark - Identifying and Comparing Abstract Users
+/** @name Identifying and Comparing Abstract Users */
+/**
+ * Returns a Boolean value that indicates whether a given user is equal to the
+ * receiver.
+ *
+ * As the user identifier integer uniquely identifies a GitHub the receiver and
+ * _aUser_ is determined to be equal if their identifiers are equal.
+ * They are also equal if the receiver and the _aUser_ instances are the same
+ * instance.
+ *
+ * @param aUser The user with which to compare the reciever.
+ * @return `YES` if _aUser_ is equivalent to the reciever, otherwise `NO`.
+ */
+- (BOOL)isEqualToUser:(CDOHUser *)aUser;
+
 
 @end

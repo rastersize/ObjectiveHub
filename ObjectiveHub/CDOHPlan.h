@@ -30,12 +30,58 @@
 //  policies, either expressed or implied, of Aron Cedercrantz.
 //
 
-#import <ObjectiveHub/_CDOHPLan.h>
+#import <Foundation/Foundation.h>
+#import <ObjectiveHub/CDOHResource.h>
 
 
 /**
- * The `CDOHPlan` class models a GitHub user (as represented by
- * `CDOHAbstractUser`) plan. For example, the "free" and the "small" plans.
+ * The `CDOHPlan` class models a GitHub user (as represented by `CDOHUser`)
+ * plan. For example, the "free" and the "small" plans.
  */
-@interface CDOHPLan : _CDOHPLan
+@interface CDOHPlan : CDOHResource
+
+#pragma mark - Plan Name
+/** @name Plan Name */
+/**
+ * Name of the plan.
+ *
+ * The name uniquely identifies a plan. 
+ */
+@property (copy, readonly) NSString *name;
+
+
+#pragma mark - Plan Details
+/** @name Plan Details */
+/**
+ * The maximum amount of space a user may use with this plan.
+ */
+@property (assign, readonly) NSUInteger space;
+
+/**
+ * The maximum number of collaborators a user may have with this plan.
+ */
+@property (assign, readonly) NSUInteger collaboratorsCount;
+
+/**
+ * The maximum number of repositories a user may have with this plan.
+ */
+@property (assign, readonly) NSUInteger privateRepositoriesCount;
+
+
+#pragma mark - Identifying and Comparing Plans
+/** @name Identifying and Comparing Plans */
+/**
+ * Returns a Boolean value that indicates whether a given plan is equal to the
+ * receiver.
+ *
+ * The receiver and _aPlan_ is determined to be equal if their names, maximum
+ * space, number of maximum collaborators and maximum number of private
+ * repositories are equal.
+ *
+ * @param aPlan The plan with which to compare the reciever.
+ * @return `YES` if _aPlan_ is equivalent to the reciever, otherwise `NO`.
+ */
+- (BOOL)isEqualToPlan:(CDOHPlan *)aPlan;
+
+
 @end

@@ -47,9 +47,8 @@
 
 #import "CDOHResource.h"
 #import "CDOHResourcePrivate.h"
-#import "CDOHAbstractUser.h"
 #import "CDOHUser.h"
-#import "CDOHOrganization.h"
+#import "CDOHUser.h"
 #import "CDOHOrganizationTeam.h"
 #import "CDOHPlan.h"
 #import "CDOHRepository.h"
@@ -329,6 +328,21 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 }
 
 
+#pragma mark - Performing Authenticated Requests
+- (void)performWithUsername:(NSString *)username password:(NSString *)password block:(void (^)())block
+{
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		NSString *tempUsername = self.username;
+		NSString *tempPassword = self.password;
+		[self setUsername:username];
+		[self setPassword:password];
+		dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block);
+		[self setUsername:tempUsername];
+		[self setPassword:tempPassword];
+	});
+}
+
+
 #pragma mark - Controlling Requests
 - (void)suspendAllRequests
 {
@@ -367,7 +381,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 			id responseObject = reply.response;
 			
 			if ([responseObject length] > 0) {
-				__autoreleasing NSError *jsonDecodingError = nil;
+				NSError *jsonDecodingError = nil;
 				id parsedResponseObject = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:&jsonDecodingError];
 				id resource = resourceCreationBlock(parsedResponseObject);
 				
@@ -398,11 +412,10 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 #pragma mark - Concrete Standard Reply Blocks
 - (CDOHNetworkClientReplyBlock)standardUserReplyBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock selector:(SEL)selector arguments:(NSArray *)arguments
 {
-	__weak CDOHClient *blockSelf = self;
 	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
 		CDOHUser *user = nil;
 		if ([parsedResponseObject isKindOfClass:[NSDictionary class]]) {
-			user = [CDOHUser resourceWithJSONDictionary:parsedResponseObject inManagedObjectContex:blockSelf.managedObjectContext];
+			user = [CDOHUser resourceWithJSONDictionary:parsedResponseObject];
 		}
 		
 		return user;
@@ -413,7 +426,6 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 
 - (CDOHNetworkClientReplyBlock)standardUserArrayReplyBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock selector:(SEL)selector arguments:(NSArray *)arguments
 {
-	__weak CDOHClient *blockSelf = self;
 	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
 		NSMutableArray *users = nil;
 		if ([parsedResponseObject isKindOfClass:[NSArray class]]) {
@@ -421,7 +433,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 			
 			for (id userDict in parsedResponseObject) {
 				if ([userDict isKindOfClass:[NSDictionary class]]) {
-					CDOHUser *user = [CDOHUser resourceWithJSONDictionary:userDict inManagedObjectContex:blockSelf.managedObjectContext];
+					CDOHUser *user = [CDOHUser resourceWithJSONDictionary:userDict];
 					[users addObject:user];
 				}
 			}
@@ -448,11 +460,10 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 
 - (CDOHNetworkClientReplyBlock)standardRepositoryReplyBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock selector:(SEL)selector arguments:(NSArray *)arguments
 {
-	__weak CDOHClient *blockSelf = self;
 	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
 		CDOHRepository *repo = nil;
 		if ([parsedResponseObject isKindOfClass:[NSDictionary class]]) {
-			repo = [CDOHRepository resourceWithJSONDictionary:parsedResponseObject inManagedObjectContex:blockSelf.managedObjectContext];
+			repo = [CDOHRepository resourceWithJSONDictionary:parsedResponseObject];
 		}
 		
 		return repo;
@@ -463,7 +474,6 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 
 - (CDOHNetworkClientReplyBlock)standardRepositoryArrayReplyBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock selector:(SEL)selector arguments:(NSArray *)arguments
 {
-	__weak CDOHClient *blockSelf = self;
 	CDOHInternalResponseCreationBlock block = ^id (id parsedResponseObject) {
 		NSMutableArray *reposArray = nil;
 		if ([parsedResponseObject isKindOfClass:[NSArray class]]) {
@@ -471,7 +481,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 			
 			for (id repoDict in parsedResponseObject) {
 				if ([repoDict isKindOfClass:[NSDictionary class]]) {
-					CDOHRepository *repo = [CDOHRepository resourceWithJSONDictionary:repoDict inManagedObjectContex:blockSelf.managedObjectContext];
+					CDOHRepository *repo = [CDOHRepository resourceWithJSONDictionary:parsedResponseObject];
 					[reposArray addObject:repo];
 				}
 			}
@@ -633,11 +643,11 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	NSArray *keys = [[NSArray alloc] initWithObjects:
 					 kCDOHUserNameKey,
 					 kCDOHUserEmailKey,
-					 kCDOHUserBlogKey,
+					 kCDOHUserBlogURLKey,
 					 kCDOHUserCompanyKey,
 					 kCDOHUserLocationKey,
 					 kCDOHUserHireableKey,
-					 kCDOHUserBioKey,
+					 kCDOHUserBiographyKey,
 					 nil];
 	params = [self requestParameterDictionaryForDictionary:dictionary validKeys:keys];
 	
@@ -726,7 +736,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	if ([dictionary count] > 0) {
 		NSArray *keys = [[NSArray alloc] initWithObjects:
 						 kCDOHRepositoryDescriptionKey,
-						 kCDOHRepositoryHomepageKey,
+						 kCDOHRepositoryHomepageURLKey,
 						 kCDOHRepositoryPrivateKey,
 						 kCDOHRepositoryHasIssuesKey,
 						 kCDOHRepositoryHasWikiKey,
@@ -758,12 +768,12 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	if ([dictionary count] > 0) {
 		NSArray *keys = [[NSArray alloc] initWithObjects:
 						 kCDOHRepositoryDescriptionKey,
-						 kCDOHRepositoryHomepageKey,
+						 kCDOHRepositoryHomepageURLKey,
 						 kCDOHRepositoryPrivateKey,
 						 kCDOHRepositoryHasIssuesKey,
 						 kCDOHRepositoryHasWikiKey,
 						 kCDOHRepositoryHasDownloadsKey,
-						 kCDOHRepositoryTeamIDKey,
+						 kCDOHRepositoryTeamIdentifierKey,
 						 nil];
 		NSDictionary *optionalDictionary = [self requestParameterDictionaryForDictionary:dictionary validKeys:keys];
 		[params addEntriesFromDictionary:optionalDictionary];
@@ -793,7 +803,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	NSArray *keys = [[NSArray alloc] initWithObjects:
 					 kCDOHRepositoryNameKey,
 					 kCDOHRepositoryDescriptionKey,
-					 kCDOHRepositoryHomepageKey,
+					 kCDOHRepositoryHomepageURLKey,
 					 kCDOHRepositoryPrivateKey,
 					 kCDOHRepositoryHasIssuesKey,
 					 kCDOHRepositoryHasWikiKey,

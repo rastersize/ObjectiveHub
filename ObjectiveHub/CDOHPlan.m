@@ -33,5 +33,87 @@
 #import "CDOHPLan.h"
 #import "CDOHResourcePrivate.h"
 
-@implementation CDOHPLan
+
+#pragma mark JSON Dictionary Keys
+NSString *const kCDOHPlanNameKey					= @"name";
+NSString *const kCDOHPlanSpaceKey					= @"space";
+NSString *const kCDOHPlanCollaboratorsKey			= @"collaborators";
+NSString *const kCDOHPlanPrivateRepositoriesKey		= @"private_repos";
+
+
+@implementation CDOHPlan
+
+#pragma mark - Properties
+@synthesize name = _name;
+@synthesize space = _space;
+@synthesize collaboratorsCount = _collaboratorsCount;
+@synthesize privateRepositoriesCount = _privateRepositoriesCount;
+
+
+#pragma mark - Creating and Initializing Resources
+- (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary
+{
+	self = [super initWithJSONDictionary:jsonDictionary];
+	if (self) {
+		_name = [[jsonDictionary cdoh_objectOrNilForKey:kCDOHPlanNameKey] copy];
+		
+		_space = [jsonDictionary cdoh_unsignedIntegerForKey:kCDOHPlanSpaceKey];
+		_collaboratorsCount = [jsonDictionary cdoh_unsignedIntegerForKey:kCDOHPlanCollaboratorsKey];
+		_privateRepositoriesCount = [jsonDictionary cdoh_unsignedIntegerForKey:kCDOHPlanPrivateRepositoriesKey];
+	}
+	
+	return self;
+}
+
+
+#pragma mark - Encoding Resources
+- (void)encodeWithJSONDictionary:(NSMutableDictionary *)jsonDictionary
+{
+	[super encodeWithJSONDictionary:jsonDictionary];
+	
+	[jsonDictionary cdoh_setObject:_name forKey:kCDOHPlanNameKey];
+	
+	[jsonDictionary cdoh_setUnsignedInteger:_space forKey:kCDOHPlanSpaceKey];
+	[jsonDictionary cdoh_setUnsignedInteger:_collaboratorsCount forKey:kCDOHPlanCollaboratorsKey];
+	[jsonDictionary cdoh_setUnsignedInteger:_privateRepositoriesCount forKey:kCDOHPlanPrivateRepositoriesKey];
+}
+
+
+#pragma mark - Identifying and Comparing Plans
+- (BOOL)isEqual:(id)other
+{
+	if (other == self) {
+		return YES;
+	}
+	if (!other || ![other isKindOfClass:[self class]]) {
+		return NO;
+	}
+	return [self isEqualToPlan:other];
+}
+
+- (BOOL)isEqualToPlan:(CDOHPlan *)aPlan
+{
+	if (aPlan == self) {
+		return YES;
+	}
+	
+	return ([aPlan.name isEqualToString:self.name] &&
+			aPlan.space == self.space &&
+			aPlan.collaboratorsCount == self.collaboratorsCount &&
+			aPlan.privateRepositoriesCount == self.privateRepositoriesCount);
+}
+
+- (NSUInteger)hash
+{
+	NSUInteger prime = 31;
+	NSUInteger hash = 1;
+	
+	hash = [self.name hash];
+	hash = prime * hash + self.space;
+	hash = prime * hash + self.collaboratorsCount;
+	hash = prime * hash + self.privateRepositoriesCount;
+	
+	return hash;
+}
+
 @end
