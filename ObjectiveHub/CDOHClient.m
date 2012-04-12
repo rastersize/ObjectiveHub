@@ -479,7 +479,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 			
 			for (id repoDict in parsedResponseObject) {
 				if ([repoDict isKindOfClass:[NSDictionary class]]) {
-					CDOHRepository *repo = [CDOHRepository resourceWithJSONDictionary:parsedResponseObject];
+					CDOHRepository *repo = [CDOHRepository resourceWithJSONDictionary:repoDict];
 					[reposArray addObject:repo];
 				}
 			}
