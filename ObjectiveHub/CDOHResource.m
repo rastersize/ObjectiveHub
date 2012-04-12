@@ -55,7 +55,7 @@ NSString *const kCDOHResourceJSONRepresentationKey				= @"CDOHResourceJSONRepres
 {
 	NSParameterAssert(jsonDictionary != nil);
 	
-	CDOHResource *resource = [[CDOHResource alloc] initWithJSONDictionary:jsonDictionary];
+	CDOHResource *resource = [[[self class] alloc] initWithJSONDictionary:jsonDictionary];
 	return resource;
 }
 
