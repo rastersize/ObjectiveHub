@@ -71,14 +71,13 @@ CDOH_FIX_CATEGORY_BUG(NSDictionary_ObjectiveHub)
 #pragma mark - Accessing Encoded Values
 - (id)cdoh_resourceForKey:(id __unused)key ofClass:(Class __unused)ofClass
 {
-	NSAssert(NO, @"remove me");
-	return nil;/*[self cdoh_decodeObjectForKey:key block:^(id __unused objFromDict, __autoreleasing id *__unused retObj) {
+	return [self cdoh_decodeObjectForKey:key block:^(id __unused objFromDict, __autoreleasing id *__unused retObj) {
 		if ([objFromDict isKindOfClass:ofClass]) {
 			*retObj = [objFromDict copy];
 		} else if ([objFromDict isKindOfClass:[NSDictionary class]]) {
 			*retObj = [[ofClass alloc] initWithJSONDictionary:objFromDict];
 		}
-	}];*/
+	}];
 }
 
 - (NSDate *)cdoh_dateForKey:(id)key
