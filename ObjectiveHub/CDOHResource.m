@@ -46,7 +46,9 @@ NSString *const kCDOHResourceJSONRepresentationKey				= @"CDOHResourceJSONRepres
 
 
 #pragma mark - 
-@implementation CDOHResource
+@implementation CDOHResource {
+	BOOL _isComplete;
+}
 
 @synthesize propertiesWithValue = _propertiesWithValue;
 @synthesize resourceURL = _resourceURL;
@@ -75,6 +77,7 @@ NSString *const kCDOHResourceJSONRepresentationKey				= @"CDOHResourceJSONRepres
 			[valuesSetForKeys addObject:propertyName];
 		}
 		_propertiesWithValue = [valuesSetForKeys copy];
+		_isComplete = [_propertiesWithValue isEqualToArray:[jsonKeyToPropertyName allKeys]];
 	}
 	
 	return self;
@@ -134,9 +137,7 @@ NSString *const kCDOHResourceJSONRepresentationKey				= @"CDOHResourceJSONRepres
 
 - (BOOL)isComplete
 {
-	NSArray *keys = [[[self class] JSONKeyToPropertyName] allKeys];
-	BOOL isComplete = [self.propertiesWithValue isEqualToArray:keys];
-	return isComplete;
+	return _isComplete;
 }
 
 
