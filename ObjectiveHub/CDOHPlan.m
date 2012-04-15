@@ -82,8 +82,6 @@ NSString *const kCDOHPlanPrivateRepositoriesKey		= @"private_repos";
 #pragma mark - 
 + (void)JSONKeyToPropertyNameDictionary:(NSMutableDictionary *)dictionary
 {
-	[super JSONKeyToPropertyNameDictionary:dictionary];
-	
 	CDOHSetPropertyForJSONKey(name,						kCDOHPlanNameKey, dictionary);
 	CDOHSetPropertyForJSONKey(space,					kCDOHPlanSpaceKey, dictionary);
 	CDOHSetPropertyForJSONKey(collaboratorsCount,		kCDOHPlanCollaboratorsKey, dictionary);
