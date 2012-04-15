@@ -67,9 +67,22 @@ extern NSString *const kCDOHRepositoryLanguageNameKey;
 extern NSString *const kCDOHRepositoryLanguageCharactersKey;
 
 
+#pragma mark - Repository User Permission
+enum _CDOHRepositoryPermission {
+	///
+	kCDOHRepositoryPermissionAdmin			= (1 << 0),
+	/// 
+	kCDOHRepositoryPermissionPull			= (1 << 1),
+	/// 
+	kCDOHRepositoryPermissionPush			= (1 << 2),
+};
+///
+typedef NSInteger CDOHRepositoryPermission;
+
+
 #pragma mark - CDOHRepository Interface
 /**
- *
+ * A repository.
  */
 @interface CDOHRepository : CDOHResource
 
@@ -197,6 +210,34 @@ extern NSString *const kCDOHRepositoryLanguageCharactersKey;
  * The date and time when the repository was created.
  */
 @property (strong, readonly) NSDate *createdAt;
+
+
+#pragma mark - User Permissions
+/** @name User Permissions */
+/**
+ * The permissions the authenticated user have on the repository.
+ *
+ * @see CDOHRepositoryPermission
+ */
+@property (assign, readonly) CDOHRepositoryPermission permissions;
+
+/**
+ * Returns whether the authenticated user have permission to administrate the
+ * repository.
+ */
+@property (assign, readonly) BOOL hasAdminPermission;
+
+/**
+ * Returns whether the authenticated user have permission to push to the
+ * repository. 
+ */
+@property (assign, readonly) BOOL hasPushPermission;
+
+/**
+ * Returns whether the authenticated user have permission to pull from the
+ * repository.
+ */
+@property (assign, readonly) BOOL hasPullPermission;
 
 
 #pragma mark - Branches

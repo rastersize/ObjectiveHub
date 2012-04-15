@@ -67,11 +67,18 @@ NSString *const kCDOHRepositorySourceRepositoryKey	= @"source";
 NSString *const kCDOHRepositoryHasWikiKey			= @"has_wiki";
 NSString *const kCDOHRepositoryHasDownloadsKey		= @"has_downloads";
 NSString *const kCDOHRepositoryTeamIdentifierKey	= @"team_id";
+NSString *const kCDOHRepositoryPermissionsKey		= @"permissions";
 
 
 #pragma mark - Repository Language Dictionary Keys
 NSString *const kCDOHRepositoryLanguageNameKey			= @"name";
 NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
+
+
+#pragma mark - Repository Permission Keys
+NSString *const kCDOHRepositoryPermissionAdminKey	= @"admin";
+NSString *const kCDOHRepositoryPermissionPushKey	= @"push";
+NSString *const kCDOHRepositoryPermissionPullKey	= @"pull";
 
 
 #pragma mark - CDOHRepository Implementation
@@ -107,6 +114,8 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 @synthesize parentRepository = _parentRepository;
 @synthesize sourceRepository = _sourceRepository;
 @synthesize formattedName = _formattedName;
+@synthesize permissions = _permissions;
+
 
 #pragma mark - Creating and Initializing CDOHRepository Objects
 - (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary
@@ -155,6 +164,18 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 		
 		// Special logic
 		_formattedName			= [_owner.login stringByAppendingFormat:@"/%@", _name];
+		
+		NSArray *permissions	= [jsonDictionary cdoh_objectOrNilForKey:kCDOHRepositoryPermissionsKey];
+		_permissions			= 0;
+		if ([permissions containsObject:kCDOHRepositoryPermissionAdminKey]) {
+			_permissions |= kCDOHRepositoryPermissionAdmin;
+		}
+		if ([permissions containsObject:kCDOHRepositoryPermissionPullKey]) {
+			_permissions |= kCDOHRepositoryPermissionPull;
+		}
+		if ([permissions containsObject:kCDOHRepositoryPermissionPushKey]) {
+			_permissions |= kCDOHRepositoryPermissionPush;
+		}
 	}
 	
 	return self;
@@ -205,6 +226,18 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 	[jsonDictionary cdoh_setBool:_hasWiki forKey:kCDOHRepositoryHasWikiKey];
 	[jsonDictionary cdoh_setBool:_hasIssues forKey:kCDOHRepositoryHasIssuesKey];
 	[jsonDictionary cdoh_setBool:_hasDownloads forKey:kCDOHRepositoryHasDownloadsKey];
+	
+	// Special logic
+	NSMutableArray *permissions = [NSMutableArray arrayWithCapacity:3];
+	if ([self hasAdminPermission]) {
+		[permissions addObject:kCDOHRepositoryPermissionAdminKey];
+	}
+	if ([self hasPushPermission]) {
+		[permissions addObject:kCDOHRepositoryPermissionPushKey];
+	}
+	if ([self hasPullPermission]) {
+		[permissions addObject:kCDOHRepositoryPermissionPullKey];
+	}
 }
 
 
@@ -214,7 +247,7 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 	[super JSONKeyToPropertyNameDictionary:dictionary];
 	
 	CDOHSetPropertyForJSONKey(identifier,				kCDOHRepositoryIdentifierKey, dictionary);
-	CDOHSetPropertyForJSONKey(isPrivate,					kCDOHRepositoryPrivateKey, dictionary);
+	CDOHSetPropertyForJSONKey(isPrivate,				kCDOHRepositoryPrivateKey, dictionary);
 	CDOHSetPropertyForJSONKey(owner,					kCDOHRepositoryOwnerKey, dictionary);
 	CDOHSetPropertyForJSONKey(organization,				kCDOHRepositoryOrganizationKey, dictionary);
 	CDOHSetPropertyForJSONKey(name,						kCDOHRepositoryNameKey, dictionary);
@@ -235,12 +268,13 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 	CDOHSetPropertyForJSONKey(defaultBranch,			kCDOHRepositoryDefaultBranchKey, dictionary);
 	CDOHSetPropertyForJSONKey(openIssuesCount,			kCDOHRepositoryOpenIssuesKey, dictionary);
 	CDOHSetPropertyForJSONKey(hasIssues,				kCDOHRepositoryHasIssuesKey, dictionary);
-	CDOHSetPropertyForJSONKey(isFork,						kCDOHRepositoryForkKey, dictionary);
+	CDOHSetPropertyForJSONKey(isFork,					kCDOHRepositoryForkKey, dictionary);
 	CDOHSetPropertyForJSONKey(forksCount,				kCDOHRepositoryForksKey, dictionary);
 	CDOHSetPropertyForJSONKey(parentRepository,			kCDOHRepositoryParentRepositoryKey, dictionary);
 	CDOHSetPropertyForJSONKey(sourceRepository,			kCDOHRepositorySourceRepositoryKey, dictionary);
 	CDOHSetPropertyForJSONKey(hasWiki,					kCDOHRepositoryHasWikiKey, dictionary);
 	CDOHSetPropertyForJSONKey(hasDownloads,				kCDOHRepositoryHasDownloadsKey, dictionary);
+	CDOHSetPropertyForJSONKey(permissions,				kCDOHRepositoryPermissionsKey, dictionary);
 }
 
 + (NSDictionary *)JSONKeyToPropertyName
@@ -255,6 +289,22 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 	return JSONKeyToPropertyName;
 }
 
+
+#pragma mark - Repository Permissions
+- (BOOL)hasAdminPermission
+{
+	return self.permissions & kCDOHRepositoryPermissionAdmin;
+}
+
+- (BOOL)hasPushPermission
+{
+	return self.permissions & kCDOHRepositoryPermissionPush;
+}
+
+- (BOOL)hasPullPermission
+{
+	return self.permissions & kCDOHRepositoryPermissionPull;
+}
 
 
 #pragma mark - Identifying and Comparing Repositories
