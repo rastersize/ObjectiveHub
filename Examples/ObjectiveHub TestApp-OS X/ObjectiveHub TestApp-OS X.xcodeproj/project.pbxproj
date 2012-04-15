@@ -31,13 +31,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9C567455151A583800E17CAD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9CB1D3F21517FAF9004FD579 /* ObjectiveHub.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9C07938E1519FA16007DB18B;
-			remoteInfo = ObjectiveHubResources;
-		};
 		9CB1D3FD1517FAFA004FD579 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9CB1D3F21517FAF9004FD579 /* ObjectiveHub.xcodeproj */;
@@ -259,7 +252,6 @@
 				9CB1D4021517FAFA004FD579 /* libObjectiveHub.a */,
 				9CB1D4041517FAFA004FD579 /* ObjectiveHub-iOSTests.octest */,
 				9CB1D4061517FAFA004FD579 /* ObjectiveHub Test App.app */,
-				9C567456151A583800E17CAD /* ObjectiveHubResources.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -329,13 +321,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		9C567456151A583800E17CAD /* ObjectiveHubResources.bundle */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = ObjectiveHubResources.bundle;
-			remoteRef = 9C567455151A583800E17CAD /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		9CB1D3FE1517FAFA004FD579 /* ObjectiveHub.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
