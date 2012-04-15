@@ -62,6 +62,32 @@
 - (instancetype)initWithJSONDictionary:(NSDictionary *)jsonDictionary;
 
 
+#pragma mark - Checking Which Values Has Been Set
+/** @name Checking Which Values Has Been Set */
+/**
+ * An array of all the keys, i.e. properties, which have been set during
+ * initialization.
+ */
+@property (copy, readonly) NSArray *propertiesWithValue;
+
+/**
+ * Returns a boolean indicating whether all values have been set.
+ *
+ * @return `YES` if all keys have been associated with a real value, otherwise
+ * `NO`.
+ */
+- (BOOL)isComplete;
+
+/**
+ * Returns a boolean indicating whether the value for the given _key_ has been
+ * set.
+ *
+ * @param key The key which should be checked if its value has been set.
+ * @return `YES` if the value has been set for the given _key_, otherwise `NO`.
+ */
+- (BOOL)isValueSetForProperty:(NSString *)propertyName;
+
+
 #pragma mark - Identifying and Comparing Resources
 /** @name Identifying and Comparing Resources */
 /**

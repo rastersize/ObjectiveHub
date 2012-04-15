@@ -79,6 +79,30 @@ NSString *const kCDOHPlanPrivateRepositoriesKey		= @"private_repos";
 }
 
 
+#pragma mark - 
++ (void)JSONKeyToPropertyNameDictionary:(NSMutableDictionary *)dictionary
+{
+	[super JSONKeyToPropertyNameDictionary:dictionary];
+	
+	CDOHSetPropertyForJSONKey(name,						kCDOHPlanNameKey, dictionary);
+	CDOHSetPropertyForJSONKey(space,					kCDOHPlanSpaceKey, dictionary);
+	CDOHSetPropertyForJSONKey(collaboratorsCount,		kCDOHPlanCollaboratorsKey, dictionary);
+	CDOHSetPropertyForJSONKey(privateRepositoriesCount,	kCDOHPlanPrivateRepositoriesKey, dictionary);
+}
+
++ (NSDictionary *)JSONKeyToPropertyName
+{
+	static NSDictionary *JSONKeyToPropertyName = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+		[CDOHPlan JSONKeyToPropertyNameDictionary:dictionary];
+		JSONKeyToPropertyName = [dictionary copy];
+	});
+	return JSONKeyToPropertyName;
+}
+
+
 #pragma mark - Identifying and Comparing Plans
 - (BOOL)isEqual:(id)other
 {

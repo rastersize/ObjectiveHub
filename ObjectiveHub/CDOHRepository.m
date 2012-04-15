@@ -208,6 +208,55 @@ NSString *const kCDOHRepositoryLanguageCharactersKey	= @"characters";
 }
 
 
+#pragma mark -
++ (void)JSONKeyToPropertyNameDictionary:(NSMutableDictionary *)dictionary
+{
+	[super JSONKeyToPropertyNameDictionary:dictionary];
+	
+	CDOHSetPropertyForJSONKey(identifier,				kCDOHRepositoryIdentifierKey, dictionary);
+	CDOHSetPropertyForJSONKey(isPrivate,					kCDOHRepositoryPrivateKey, dictionary);
+	CDOHSetPropertyForJSONKey(owner,					kCDOHRepositoryOwnerKey, dictionary);
+	CDOHSetPropertyForJSONKey(organization,				kCDOHRepositoryOrganizationKey, dictionary);
+	CDOHSetPropertyForJSONKey(name,						kCDOHRepositoryNameKey, dictionary);
+	CDOHSetPropertyForJSONKey(repositoryDescription,	kCDOHRepositoryDescriptionKey, dictionary);
+	CDOHSetPropertyForJSONKey(cloneURL,					kCDOHRepositoryCloneURLKey, dictionary);
+	CDOHSetPropertyForJSONKey(gitURL,					kCDOHRepositoryGitURLKey, dictionary);
+	CDOHSetPropertyForJSONKey(sshURL,					kCDOHRepositorySSHURLKey, dictionary);
+	CDOHSetPropertyForJSONKey(svnURL,					kCDOHRepositorySVNURLKey, dictionary);
+	CDOHSetPropertyForJSONKey(mirrorURL,				kCDOHRepositoryMirrorURLKey, dictionary);
+	CDOHSetPropertyForJSONKey(repositoryHTMLURL,		kCDOHRepositoryHTMLURLKey, dictionary);
+	CDOHSetPropertyForJSONKey(homepageURL,				kCDOHRepositoryHomepageURLKey, dictionary);
+	CDOHSetPropertyForJSONKey(language,					kCDOHRepositoryLanguageKey, dictionary);
+	CDOHSetPropertyForJSONKey(watchersCount,			kCDOHRepositoryWatchersKey, dictionary);
+	CDOHSetPropertyForJSONKey(size,						kCDOHRepositorySizeKey, dictionary);
+	CDOHSetPropertyForJSONKey(updatedAt,				kCDOHRepositoryUpdatedAtKey, dictionary);
+	CDOHSetPropertyForJSONKey(pushedAt,					kCDOHRepositoryPushedAtKey, dictionary);
+	CDOHSetPropertyForJSONKey(createdAt,				kCDOHRepositoryCreatedAtKey, dictionary);
+	CDOHSetPropertyForJSONKey(defaultBranch,			kCDOHRepositoryDefaultBranchKey, dictionary);
+	CDOHSetPropertyForJSONKey(openIssuesCount,			kCDOHRepositoryOpenIssuesKey, dictionary);
+	CDOHSetPropertyForJSONKey(hasIssues,				kCDOHRepositoryHasIssuesKey, dictionary);
+	CDOHSetPropertyForJSONKey(isFork,						kCDOHRepositoryForkKey, dictionary);
+	CDOHSetPropertyForJSONKey(forksCount,				kCDOHRepositoryForksKey, dictionary);
+	CDOHSetPropertyForJSONKey(parentRepository,			kCDOHRepositoryParentRepositoryKey, dictionary);
+	CDOHSetPropertyForJSONKey(sourceRepository,			kCDOHRepositorySourceRepositoryKey, dictionary);
+	CDOHSetPropertyForJSONKey(hasWiki,					kCDOHRepositoryHasWikiKey, dictionary);
+	CDOHSetPropertyForJSONKey(hasDownloads,				kCDOHRepositoryHasDownloadsKey, dictionary);
+}
+
++ (NSDictionary *)JSONKeyToPropertyName
+{
+	static NSDictionary *JSONKeyToPropertyName = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+		[CDOHRepository JSONKeyToPropertyNameDictionary:dictionary];
+		JSONKeyToPropertyName = [dictionary copy];
+	});
+	return JSONKeyToPropertyName;
+}
+
+
+
 #pragma mark - Identifying and Comparing Repositories
 - (BOOL)isEqual:(id)object
 {

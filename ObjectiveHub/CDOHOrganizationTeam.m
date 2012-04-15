@@ -92,6 +92,31 @@ NSString *const kCDOHOrganizationTeamPermissionAdminister	= @"admin";
 }
 
 
+#pragma mark -
++ (void)JSONKeyToPropertyNameDictionary:(NSMutableDictionary *)dictionary
+{
+	[super JSONKeyToPropertyNameDictionary:dictionary];
+	
+	CDOHSetPropertyForJSONKey(name,					kCDOHOrganizationTeamNameKey, dictionary);
+	CDOHSetPropertyForJSONKey(identifier,			kCDOHOrganizationTeamIdentifierKey, dictionary);
+	CDOHSetPropertyForJSONKey(permission,			kCDOHOrganizationTeamPermissionKey, dictionary);
+	CDOHSetPropertyForJSONKey(membersCount,			kCDOHOrganizationTeamMembersKey, dictionary);
+	CDOHSetPropertyForJSONKey(repositoriesCount,	kCDOHOrganizationTeamRepositoriesKey, dictionary);
+}
+
++ (NSDictionary *)JSONKeyToPropertyName
+{
+	static NSDictionary *JSONKeyToPropertyName = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+		[CDOHOrganizationTeam JSONKeyToPropertyNameDictionary:dictionary];
+		JSONKeyToPropertyName = [dictionary copy];
+	});
+	return JSONKeyToPropertyName;
+}
+
+
 #pragma mark - Describing an Organization Team Object
 - (NSString *)description
 {

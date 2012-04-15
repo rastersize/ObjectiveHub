@@ -237,6 +237,50 @@ NSString *const kCDOHUserTypeOrganizationKey	= @"Organization";
 }
 
 
+#pragma mark - 
++ (void)JSONKeyToPropertyNameDictionary:(NSMutableDictionary *)dictionary
+{
+	[super JSONKeyToPropertyNameDictionary:dictionary];
+	
+	CDOHSetPropertyForJSONKey(login,							kCDOHUserLoginKey, dictionary);
+	CDOHSetPropertyForJSONKey(identifier,						kCDOHUserIdentifierKey, dictionary);
+	CDOHSetPropertyForJSONKey(type,								kCDOHUserTypeKey, dictionary);
+	CDOHSetPropertyForJSONKey(profileURL,						kCDOHUserProfileURLKey, dictionary);
+	CDOHSetPropertyForJSONKey(publicRepositoriesCount,			kCDOHUserPublicReposKey, dictionary);
+	CDOHSetPropertyForJSONKey(publicGistsCount,					kCDOHUserPublicGistsKey, dictionary);
+	CDOHSetPropertyForJSONKey(privateRepositoriesCount,			kCDOHUserPrivateReposKey, dictionary);
+	CDOHSetPropertyForJSONKey(privateRepositoriesOwnedCount,	kCDOHUserPrivateReposOwnedKey, dictionary);
+	CDOHSetPropertyForJSONKey(privateGistsCount,				kCDOHUserPrivateGistsKey, dictionary);
+	CDOHSetPropertyForJSONKey(followersCount,					kCDOHUserFollowersKey, dictionary);
+	CDOHSetPropertyForJSONKey(followingCount,					kCDOHUserFollowingKey, dictionary);
+	CDOHSetPropertyForJSONKey(collaboratorsCount,				kCDOHUserCollaboratorsKey, dictionary);
+	CDOHSetPropertyForJSONKey(createdAt,						kCDOHUserCreatedAtKey, dictionary);
+	CDOHSetPropertyForJSONKey(diskUsage,						kCDOHUserDiskUsageKey, dictionary);
+	CDOHSetPropertyForJSONKey(plan,								kCDOHUserPlanKey, dictionary);
+	CDOHSetPropertyForJSONKey(name,								kCDOHUserNameKey, dictionary);
+	CDOHSetPropertyForJSONKey(company,							kCDOHUserCompanyKey, dictionary);
+	CDOHSetPropertyForJSONKey(email,							kCDOHUserEmailKey, dictionary);
+	CDOHSetPropertyForJSONKey(location,							kCDOHUserLocationKey, dictionary);
+	CDOHSetPropertyForJSONKey(blogURL,							kCDOHUserBlogURLKey, dictionary);
+	CDOHSetPropertyForJSONKey(biography,						kCDOHUserBiographyKey, dictionary);
+	CDOHSetPropertyForJSONKey(isHireable,						kCDOHUserHireableKey, dictionary);
+	CDOHSetPropertyForJSONKey(avatarURL,						kCDOHUserAvatarURLKey, dictionary);
+	CDOHSetPropertyForJSONKey(gravatarIdentifier,				kCDOHUserGravatarIdentifierKey, dictionary);
+}
+
++ (NSDictionary *)JSONKeyToPropertyName
+{
+	static NSDictionary *JSONKeyToPropertyName = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+		[CDOHUser JSONKeyToPropertyNameDictionary:dictionary];
+		JSONKeyToPropertyName = [dictionary copy];
+	});
+	return JSONKeyToPropertyName;
+}
+
+
 #pragma mark - System Information
 - (BOOL)isAuthenticated
 {

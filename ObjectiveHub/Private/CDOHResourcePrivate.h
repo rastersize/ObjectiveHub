@@ -38,14 +38,18 @@
 #import "NSMutableDictionary+ObjectiveHub.h"
 
 
-#pragma mark NSCoding and GitHub JSON Keys
-/// The API resource URL NSCoding and GitHub JSON key.
-extern NSString *const kCDOHResourceAPIResourceURLKey;
-
-
 #pragma mark - NSCoding Keys
 /// The properties dictionary key.
 extern NSString *const kCDOHResourceJSONRepresentationKey;
+
+
+#pragma mark - JSON To Property Name Mapping
+/// Map the given property _prop_ to the given JSON key _jsonKey_.
+#if DEBUG
+#	define CDOHSetPropertyForJSONKey(prop, jsonKey, dict)	[(dict) setObject:NSStringFromSelector(@selector(prop)) forKey:(jsonKey)]
+#else
+#	define CDOHSetPropertyForJSONKey(prop, jsonKey, dict)	[(dict) setObject:(@"" # prop) forKey:(jsonKey)]
+#endif
 
 
 #pragma mark - CDOHResource Private Interface
@@ -67,6 +71,23 @@ extern NSString *const kCDOHResourceJSONRepresentationKey;
  * encoded to as a JSON compliant dictionary.
  */
 - (void)encodeWithJSONDictionary:(NSMutableDictionary *)jsonDictionary;
+
+
+#pragma mark - JSON To Property Name Mapping
+/** @name JSON To Property Name Mapping */
+/**
+ * Fills in the given dictionary with a mapping from JSON key to property name
+ * for each property.
+ */
++ (void)JSONKeyToPropertyNameDictionary:(NSMutableDictionary *)dictionary;
+
+/**
+ * Dictionary of JSON key to property name.
+ *
+ * Every subclass of `CDOHResource` should implement their own version of this
+ * method.
+ */
++ (NSDictionary *)JSONKeyToPropertyName;
 
 
 @end

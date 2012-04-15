@@ -47,6 +47,8 @@ NSString *const kCDOHResourceJSONRepresentationKey				= @"CDOHResourceJSONRepres
 
 #pragma mark - 
 @implementation CDOHResource
+
+@synthesize propertiesWithValue = _propertiesWithValue;
 @synthesize resourceURL = _resourceURL;
 
 
@@ -64,6 +66,15 @@ NSString *const kCDOHResourceJSONRepresentationKey				= @"CDOHResourceJSONRepres
 	self = [super init];
 	if (self) {
 		_resourceURL = [jsonDictionary cdoh_URLForKey:kCDOHResourceJSONResourceURLKey];
+		
+		NSDictionary *jsonKeyToPropertyName = [[self class] JSONKeyToPropertyName];
+		NSMutableArray *valuesSetForKeys = [[NSMutableArray alloc] initWithCapacity:[jsonDictionary count]];
+		for (NSString *jsonKey in jsonDictionary) {
+			NSString *propertyName = [jsonKeyToPropertyName objectForKey:jsonKey];
+			NSAssert(propertyName != nil, @"JSON to property name dictionary is missing property name for JSON key %@", jsonKey);
+			[valuesSetForKeys addObject:propertyName];
+		}
+		_propertiesWithValue = [valuesSetForKeys copy];
 	}
 	
 	return self;
@@ -93,6 +104,39 @@ NSString *const kCDOHResourceJSONRepresentationKey				= @"CDOHResourceJSONRepres
 - (void)encodeWithJSONDictionary:(NSMutableDictionary *)jsonDictionary
 {
 	[jsonDictionary cdoh_encodeAndSetURL:_resourceURL forKey:kCDOHResourceJSONResourceURLKey];
+}
+
+
+#pragma mark - 
++ (void)JSONKeyToPropertyNameDictionary:(NSMutableDictionary *)dictionary
+{
+	CDOHSetPropertyForJSONKey(resourceURL, kCDOHResourceJSONResourceURLKey, dictionary);
+}
+
++ (NSDictionary *)JSONKeyToPropertyName
+{
+	static NSDictionary *jsonKeyToPropertyName = nil;
+	static dispatch_once_t jsonKeyToPropertyNameOnceToken;
+	dispatch_once(&jsonKeyToPropertyNameOnceToken, ^{
+		NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+		[CDOHResource JSONKeyToPropertyNameDictionary:dictionary];
+		jsonKeyToPropertyName = [dictionary copy];
+	});
+	return jsonKeyToPropertyName;
+}
+
+
+#pragma mark - Checking Which Values Has Been Set
+- (BOOL)isValueSetForProperty:(NSString *)propertyName
+{
+	return [self.propertiesWithValue containsObject:propertyName];
+}
+
+- (BOOL)isComplete
+{
+	NSArray *keys = [[[self class] JSONKeyToPropertyName] allKeys];
+	BOOL isComplete = [self.propertiesWithValue isEqualToArray:keys];
+	return isComplete;
 }
 
 
