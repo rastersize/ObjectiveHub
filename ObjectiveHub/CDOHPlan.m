@@ -101,6 +101,13 @@ NSString *const kCDOHPlanPrivateRepositoriesKey		= @"private_repos";
 }
 
 
+#pragma mark - Describing an Object
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"<%@: %p { name = %@ }>", [self class], self, _name];
+}
+
+
 #pragma mark - Identifying and Comparing Plans
 - (BOOL)isEqual:(id)other
 {
