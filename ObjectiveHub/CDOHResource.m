@@ -77,7 +77,7 @@ NSString *const kCDOHResourceJSONRepresentationKey				= @"CDOHResourceJSONRepres
 			[valuesSetForKeys addObject:propertyName];
 		}
 		_propertiesWithValue = [valuesSetForKeys copy];
-		_isComplete = [_propertiesWithValue isEqualToArray:[jsonKeyToPropertyName allKeys]];
+		_isComplete = [_propertiesWithValue isEqualToArray:[jsonKeyToPropertyName allValues]];
 	}
 	
 	return self;
