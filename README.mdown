@@ -24,7 +24,7 @@ You can help improve the documentation, code quality and feature list. Either by
 
 ### Source code contributors (alphabetically by last name) ###
 
-- **Aron Cedercrantz** &mdash; [GitHub](https://github.com/rastersize) | [Website](https://aron.cedercrantz.com/)<br>
+- **Aron Cedercrantz** &mdash; [GitHub](https://github.com/rastersize) | [Website](http://aron.cedercrantz.com/)<br>
   ![Image of Aron Cedercrantz (rastersize)s](https://secure.gravatar.com/avatar/2f21aac393665a85428eab10c2bdbe79?s=140)
 
 
