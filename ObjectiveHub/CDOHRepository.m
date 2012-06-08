@@ -46,6 +46,7 @@ NSString *const kCDOHRepositoryMirrorURLKey			= @"mirror_url";
 NSString *const kCDOHRepositoryIdentifierKey		= @"id";
 NSString *const kCDOHRepositoryOwnerKey				= @"owner";
 NSString *const kCDOHRepositoryNameKey				= @"name";
+NSString *const kCDOHRepositoryFullNameKey			= @"full_name";
 NSString *const kCDOHRepositoryDescriptionKey		= @"description";
 NSString *const kCDOHRepositoryHomepageURLKey		= @"homepage";
 NSString *const kCDOHRepositoryLanguageKey			= @"language";
@@ -124,6 +125,7 @@ NSString *const kCDOHRepositoryPermissionPullKey	= @"pull";
 	if (self) {
 		// Strings
 		_name					= [[jsonDictionary cdoh_objectOrNilForKey:kCDOHRepositoryNameKey] copy];
+		_formattedName			= [[jsonDictionary cdoh_objectOrNilForKey:kCDOHRepositoryFullNameKey] copy];
 		_repositoryDescription	= [[jsonDictionary cdoh_objectOrNilForKey:kCDOHRepositoryDescriptionKey] copy];
 		_language				= [[jsonDictionary cdoh_objectOrNilForKey:kCDOHRepositoryLanguageKey] copy];
 		_defaultBranch			= [[jsonDictionary cdoh_objectOrNilForKey:kCDOHRepositoryDefaultBranchKey] copy];
@@ -163,8 +165,6 @@ NSString *const kCDOHRepositoryPermissionPullKey	= @"pull";
 		_hasDownloads			= [jsonDictionary cdoh_boolForKey:kCDOHRepositoryHasDownloadsKey];
 		
 		// Special logic
-		_formattedName			= [_owner.login stringByAppendingFormat:@"/%@", _name];
-		
 		NSArray *permissions	= [jsonDictionary cdoh_objectOrNilForKey:kCDOHRepositoryPermissionsKey];
 		_permissions			= 0;
 		if ([permissions containsObject:kCDOHRepositoryPermissionAdminKey]) {
@@ -192,6 +192,7 @@ NSString *const kCDOHRepositoryPermissionPullKey	= @"pull";
 	[jsonDictionary cdoh_setObject:_repositoryDescription forKey:kCDOHRepositoryDescriptionKey];
 	[jsonDictionary cdoh_setObject:_language forKey:kCDOHRepositoryLanguageKey];
 	[jsonDictionary cdoh_setObject:_defaultBranch forKey:kCDOHRepositoryDefaultBranchKey];
+	[jsonDictionary cdoh_setObject:_formattedName forKey:kCDOHRepositoryFullNameKey];
 	
 	// URLs
 	[jsonDictionary cdoh_encodeAndSetURL:_repositoryHTMLURL forKey:kCDOHRepositoryHTMLURLKey];
@@ -275,6 +276,7 @@ NSString *const kCDOHRepositoryPermissionPullKey	= @"pull";
 	CDOHSetPropertyForJSONKey(hasWiki,					kCDOHRepositoryHasWikiKey, dictionary);
 	CDOHSetPropertyForJSONKey(hasDownloads,				kCDOHRepositoryHasDownloadsKey, dictionary);
 	CDOHSetPropertyForJSONKey(permissions,				kCDOHRepositoryPermissionsKey, dictionary);
+	CDOHSetPropertyForJSONKey(formattedName,			kCDOHRepositoryFullNameKey, dictionary);
 }
 
 + (NSDictionary *)JSONKeyToPropertyName
