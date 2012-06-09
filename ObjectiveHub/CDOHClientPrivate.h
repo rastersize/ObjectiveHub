@@ -197,6 +197,16 @@ typedef id (^CDOHInternalResponseCreationBlock)(id parsedResponseData);
  */
 - (CDOHNetworkClientReplyBlock)standardRepositoryArrayReplyBlock:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock selector:(SEL)selector arguments:(NSArray *)arguments;
 
+
+#pragma mark - Block Execution
+/** @name Block Execution */
+/**
+ * Perform the given block on the current queue and if set using the
+ * blocks group.
+ */
+- (void)cdoh_performBlock:(void (^)(id))block withObject:(id)object;
+
+
 @end
 
 

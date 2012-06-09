@@ -224,6 +224,40 @@
  */
 @property (strong) id<CDOHNetworkClient>networkClient;
 
+/**
+ * The grand central dispatch queue on which supplied blocks will be executed.
+ *
+ * A queue may be supplied onto which (success and failure) blocks will be
+ * schedueled when it is time for them to execute. If no queue is supplied the
+ * blocks will be schedueled on a global queue with the priority
+ * `DISPATCH_QUEUE_PRIORITY_DEFAULT`.
+ *
+ * The queue must not be `NULL`.
+ *
+ * The queue is retained by the receiver.
+ *
+ * @warning **Note:** Chaning this property while a request is running is
+ * considered undefined behavior and might result in a crash. Please only change
+ * the value while no requests are running, such as when setting up the client.
+ */
+@property (assign) dispatch_queue_t queue CF_RETURNS_RETAINED;
+
+/**
+ * The grand central dispatch group which the supplied success and failure
+ * blocks belong to.
+ *
+ * May be `NULL` in which case the blocks will be schedueled onto the `queue`
+ * without any grouping.
+ *
+ * The group is retained by the receiver.
+ *
+ * @warning **Note:** Chaning this property while a request is running is
+ * considered undefined behavior and might result in a crash. Please only change
+ * the value while no requests are running, such as when setting up the client.
+ */
+@property (assign) dispatch_group_t blocksGroup CF_RETURNS_RETAINED;
+
+
 
 #pragma mark - Network Activity
 /** @name Network Activity */

@@ -192,6 +192,8 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 @synthesize itemsPerPage = _itemsPerPage;
 @synthesize baseURL = _baseUrl;
 @synthesize showNetworkActivityStatusAutomatically = _showNetworkActivityStatusAutomatically;
+@synthesize queue = _queue;
+@synthesize blocksGroup = _blocksGroup;
 
 @synthesize networkClient = _networkClient;
 
@@ -257,6 +259,9 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 		NSDictionary *defaultHeaders = [[self class] defaultNetworkClientHTTPHeaders];
 		Class networkClientClass = [[self class] networkClientAdapaterClass];
 		_networkClient = [[networkClientClass alloc] initWithBaseURL:_baseUrl defaultHeaders:defaultHeaders];
+		
+		_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+		_blocksGroup = NULL;
 	}
 	
 	return self;
@@ -271,6 +276,16 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	}
 	
 	return self;
+}
+
+- (void)dealloc
+{
+	if (_queue != NULL) {
+		dispatch_release(_queue);
+	}
+	if (_blocksGroup != NULL) {
+		dispatch_release(_blocksGroup);
+	}
 }
 
 
@@ -313,6 +328,64 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	return defaultNetworkClientHTTPHeaders;
 }
 
+- (dispatch_queue_t)queue
+{
+	dispatch_queue_t queue = NULL;
+	@synchronized(self) {
+		queue = _queue;
+	}
+	return queue;
+}
+
+- (void)setQueue:(dispatch_queue_t)queue
+{
+	@synchronized(self) {
+		if (queue != _queue) {
+			dispatch_retain(queue);
+			dispatch_queue_t oldQueue = _queue;
+			_queue = queue;
+			if (oldQueue != NULL) {
+				dispatch_release(oldQueue);
+			}
+		}
+	}
+}
+
+- (dispatch_group_t)blocksGroup
+{
+	dispatch_group_t group = NULL;
+	@synchronized(self) {
+		group = _blocksGroup;
+	}
+	return group;
+}
+
+- (void)setBlocksGroup:(dispatch_group_t)blocksGroup
+{
+	@synchronized(self) {
+		if (blocksGroup != _blocksGroup) {
+			dispatch_retain(blocksGroup);
+			dispatch_group_t oldGroup = _blocksGroup;
+			_blocksGroup = blocksGroup;
+			if (oldGroup != NULL) {
+				dispatch_release(oldGroup);
+			}
+		}
+	}
+}
+
+
+#pragma mark - Block Execution
+- (void)cdoh_performBlock:(void (^)(id))block withObject:(id)object
+{
+	dispatch_group_t group = self.blocksGroup;
+	if (group != NULL) {
+		dispatch_group_async(group, self.queue, ^{ block(object); });
+	} else {
+		dispatch_async(self.queue, ^{ block(object); });
+	}
+}
+
 
 #pragma mark - Network Activity
 - (void)setShowNetworkActivityStatusAutomatically:(BOOL)flag
@@ -329,14 +402,17 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 #pragma mark - Performing Authenticated Requests
 - (void)performWithUsername:(NSString *)username password:(NSString *)password block:(void (^)())block
 {
+	__weak CDOHClient *blockSelf = self;
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		NSString *tempUsername = self.username;
-		NSString *tempPassword = self.password;
-		[self setUsername:username];
-		[self setPassword:password];
+		NSString *tempUsername = blockSelf.username;
+		NSString *tempPassword = blockSelf.password;
+		[blockSelf setUsername:username];
+		[blockSelf setPassword:password];
+		// The block will be executed concurrently, we should therefor not block
+		// ourself.
 		dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block);
-		[self setUsername:tempUsername];
-		[self setPassword:tempPassword];
+		[blockSelf setUsername:tempUsername];
+		[blockSelf setPassword:tempPassword];
 	});
 }
 
@@ -355,7 +431,6 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 - (void)cancelAllRequests
 {
 	[self.networkClient cancelAll];
-
 }
 
 
@@ -364,9 +439,9 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 {
 	return ^(CDOHNetworkClientReply *reply) {
 		if (reply.success == YES && successBlock) {
-			successBlock(nil);
+			[self cdoh_performBlock:successBlock withObject:nil];
 		} else if (reply.success == NO && failureBlock) {
-			failureBlock(reply.error);
+			[self cdoh_performBlock:failureBlock withObject:reply.error];
 		}
 	};
 }
@@ -391,17 +466,18 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 																	   failureBlock:failureBlock
 																		HTTPHeaders:reply.HTTPHeaders
 																		  arguments:arguments];
-					successBlock(response);
+					
+					[self cdoh_performBlock:successBlock withObject:response];
 				} else if (failureBlock) {
 					CDOHError *error = [[CDOHError alloc] initWithHTTPHeaders:reply.HTTPHeaders HTTPStatus:kCDOHErrorCodeCouldNotCreateResource responseBody:responseObject originalError:jsonDecodingError];
-					failureBlock(error);
+					[self cdoh_performBlock:failureBlock withObject:error];
 				}
 			} else if (failureBlock) {
 				CDOHError *error = [[CDOHError alloc] initWithHTTPHeaders:reply.HTTPHeaders HTTPStatus:kCDOHErrorCodeResponseObjectEmpty responseBody:responseObject];
-				failureBlock(error);
+				 [self cdoh_performBlock:failureBlock withObject:error];
 			}
 		} else if (reply.success == NO && failureBlock) {
-			failureBlock(reply.error);
+			[self cdoh_performBlock:failureBlock withObject:reply.error];
 		}
 	};
 }
@@ -593,7 +669,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 
 	if (!hasAuthenticatedUser && failureBlock != NULL) {
 		CDOHError *error = [[CDOHError alloc] initWithDomain:kCDOHErrorDomain code:kCDOHErrorCodeNoAuthenticatedUser userInfo:nil];
-		failureBlock(error);
+		[self cdoh_performBlock:failureBlock withObject:error];
 	} else if (!hasAuthenticatedUser) {
 		[NSException raise:NSInternalInconsistencyException format:@"No authenticated user set."];
 	}
