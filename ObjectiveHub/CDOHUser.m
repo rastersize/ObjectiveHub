@@ -323,7 +323,7 @@ NSString *const kCDOHUserTypeOrganizationKey	= @"Organization";
 #pragma mark - Describing an Abstract User Object
 - (NSString *)description
 {	
-	return [NSString stringWithFormat:@"<%@: %p { id = %lu, login = %@, type = %@, is authed = %@ }>",
+	return [NSString stringWithFormat:@"<%@: %p { id = %lu, login = %@, type = %ld, is authed = %@ }>",
 			[self class],
 			self,
 			self.identifier,

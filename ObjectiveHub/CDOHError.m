@@ -105,7 +105,7 @@ NSString *const kCDOHErrorDomain							= @"com.fruitisgood.objectivehub.error";
 #pragma mark - Describing a User Object
 - (NSString *)description
 {
-	NSString *descriptionFormat = [NSString stringWithFormat:@"<%@: %p { code = %d, %s }>", [self class], self, self.code, "%@"];
+	NSString *descriptionFormat = [NSString stringWithFormat:@"<%@: %p { code = %ld, %s }>", [self class], self, self.code, "%@"];
 	NSString *varDescs = nil;
 	
 	if (self.code >= kCDOHErrorCodeFrameworkErrors) {
