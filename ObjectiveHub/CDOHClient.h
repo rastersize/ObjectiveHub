@@ -240,7 +240,7 @@
  * considered undefined behavior and might result in a crash. Please only change
  * the value while no requests are running, such as when setting up the client.
  */
-@property (assign) dispatch_queue_t queue CF_RETURNS_RETAINED;
+@property (assign) dispatch_queue_t queue DISPATCH_RETURNS_RETAINED;
 
 /**
  * The grand central dispatch group which the supplied success and failure
@@ -255,7 +255,7 @@
  * considered undefined behavior and might result in a crash. Please only change
  * the value while no requests are running, such as when setting up the client.
  */
-@property (assign) dispatch_group_t blocksGroup CF_RETURNS_RETAINED;
+@property (assign) dispatch_group_t blocksGroup DISPATCH_RETURNS_RETAINED;
 
 
 
