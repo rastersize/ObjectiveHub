@@ -53,8 +53,6 @@
 #import "CDOHPlan.h"
 #import "CDOHRepository.h"
 
-#import "UIApplication+ObjectiveHub.h"
-
 #import <objc/runtime.h>
 
 
@@ -321,18 +319,6 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	} else {
 		dispatch_async(self.queue, ^{ block(object); });
 	}
-}
-
-
-#pragma mark - Network Activity
-- (void)setShowNetworkActivityStatusAutomatically:(BOOL)flag
-{
-	_showNetworkActivityStatusAutomatically = flag;
-#if TARGET_OS_IPHONE
-	if (flag == NO) {
-		[[UIApplication sharedApplication] cdoh_resetNetworkActivity];
-	}
-#endif // TARGET_OS_IPHONE
 }
 
 
