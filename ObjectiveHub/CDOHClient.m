@@ -187,15 +187,8 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 @implementation CDOHClient
 
 #pragma mark - Synthesizing
-@synthesize username = _username;
-@synthesize password = _password;
 @synthesize itemsPerPage = _itemsPerPage;
 @synthesize baseURL = _baseUrl;
-@synthesize showNetworkActivityStatusAutomatically = _showNetworkActivityStatusAutomatically;
-@synthesize queue = _queue;
-@synthesize blocksGroup = _blocksGroup;
-
-@synthesize networkClient = _networkClient;
 
 
 #pragma mark - Network Client Adapters
@@ -278,16 +271,6 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	return self;
 }
 
-- (void)dealloc
-{
-	if (_queue != NULL) {
-		dispatch_release(_queue);
-	}
-	if (_blocksGroup != NULL) {
-		dispatch_release(_blocksGroup);
-	}
-}
-
 
 #pragma mark - Describing a User Object
 - (NSString *)description
@@ -326,52 +309,6 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	});
 	
 	return defaultNetworkClientHTTPHeaders;
-}
-
-- (dispatch_queue_t)queue
-{
-	dispatch_queue_t queue = NULL;
-	@synchronized(self) {
-		queue = _queue;
-	}
-	return queue;
-}
-
-- (void)setQueue:(dispatch_queue_t)queue
-{
-	@synchronized(self) {
-		if (queue != _queue) {
-			dispatch_retain(queue);
-			dispatch_queue_t oldQueue = _queue;
-			_queue = queue;
-			if (oldQueue != NULL) {
-				dispatch_release(oldQueue);
-			}
-		}
-	}
-}
-
-- (dispatch_group_t)blocksGroup
-{
-	dispatch_group_t group = NULL;
-	@synchronized(self) {
-		group = _blocksGroup;
-	}
-	return group;
-}
-
-- (void)setBlocksGroup:(dispatch_group_t)blocksGroup
-{
-	@synchronized(self) {
-		if (blocksGroup != _blocksGroup) {
-			dispatch_retain(blocksGroup);
-			dispatch_group_t oldGroup = _blocksGroup;
-			_blocksGroup = blocksGroup;
-			if (oldGroup != NULL) {
-				dispatch_release(oldGroup);
-			}
-		}
-	}
 }
 
 
