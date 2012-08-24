@@ -799,10 +799,10 @@
 - (void)repositoryLanguages:(NSString *)repository owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
-#pragma mark - Watched and Watching Repositories
-/** @name Watched and Watching Repositories */
+#pragma mark - Starred Repositories
+/** @name Starred Repositories */
 /**
- * Get all users watching a specific repository.
+ * Get all users which have starred the given _repository_ owned by _owner_.
  *
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
@@ -816,8 +816,8 @@
  * case nothing will be done upon success.
  *
  * The `resource` property of the response will be set to a `NSArray` of
- * `CDOHUser` objects representing all the watchers of the given repository
- * (for one page).
+ * `CDOHUser` objects representing all the user who have starred the given
+ * repository (for one page).
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
@@ -825,10 +825,10 @@
  * @see CDOHResponse
  * @see CDOHUser
  */
-- (void)repositoryWatchers:(NSString *)repository owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositoryStargazers:(NSString *)repository owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
- * Get all repositories watched by a specific user.
+ * Get all repositories starred by a specific user.
  *
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
@@ -842,7 +842,7 @@
  * case nothing will be done upon success.
  *
  * The `resource` property of the response will be set to a `NSArray` of
- * `CDOHRepository` objects representing all the repositories watched by the
+ * `CDOHRepository` objects representing all the repositories starred by the
  * given user (for one page).
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
@@ -851,10 +851,10 @@
  * @see repositoriesWatchedForPages:success:failure:
  * @see CDOHRepository
  */
-- (void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositoriesStarredByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
- * Get all repositories watched by the authenticated user.
+ * Get all repositories starred by the authenticated user.
  *
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
@@ -866,7 +866,7 @@
  * case nothing will be done upon success.
  *
  * The `[CDOHResponse resource]` property of the response will be set to an
- * `NSArray` object containing one `CDOHRespository` object per watched
+ * `NSArray` object containing one `CDOHRespository` object per starred
  * repository, up to the maximum items per page.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. May be `NULL` in which case nothing will be done upon failure.
@@ -877,11 +877,11 @@
  * @see repositoriesWatchedByUser:pages:success:failure:
  * @see CDOHRepository
  */
-- (void)repositoriesWatchedForPages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)repositoriesStarredForPages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
- * Check whether the currently authenticated user is watching the given
- * repository owned by the given owner.
+ * Check whether the currently authenticated user has starred the given
+ * _repository_ owned by the given _owner_.
  *
  * The success and failure blocks are both optional but if neither is given no
  * request will be performed.
@@ -893,7 +893,7 @@
  *
  * @param repository The name of the repository.
  * @param owner The login of the owner of the given _repository_.
- * @param successBlock The block which is called if the user is watching the
+ * @param successBlock The block which is called if the user has starred the
  * given repository. The response object **will** be `nil`.
  * @param failureBlock The block which is called if the user is not watching the
  * given repository. In which case the error code will be
@@ -907,10 +907,10 @@
  * @see [CDOHClient username]
  * @see [CDOHClient password]
  */
-- (void)isUserWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)hasUserStarredRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
- * Watch a repository using the currently authenticated user.
+ * Star a repository for the currently authenticated user.
  *
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
@@ -922,8 +922,8 @@
  *
  * @param repository The name of the repository.
  * @param owner The login of the owner of the given _repository_.
- * @param successBlock The block which is called if the user is watching the
- * given repository. The response object **will** be `nil`.
+ * @param successBlock The block which is called if the all went OK and the user
+ * now has starred the given repository. The response object **will** be `nil`.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
@@ -934,10 +934,10 @@
  * @see [CDOHClient username]
  * @see [CDOHClient password]
  */
-- (void)watchRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)starRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 /**
- * Stop watching a repository using the currently authenticated user.
+ * Unstar a repository for the currently authenticated user.
  *
  * The success and failure blocks are both optional and the task **will** be
  * carried out even if you set both to `NULL`.
@@ -949,8 +949,8 @@
  *
  * @param repository The name of the repository.
  * @param owner The login of the owner of the given _repository_.
- * @param successBlock The block which is called if the request to stop watching
- * the specified repository succeeded. The response object **will** be `nil`.
+ * @param successBlock The block which is called if the request to unstar the
+ * specified repository succeeded. The response object **will** be `nil`.
  * @param failureBlock The block which is called upon failure with the error
  * encountered. The parameter may be set to `NULL` in which case nothing will be
  * done upon failure.
@@ -961,7 +961,7 @@
  * @see [CDOHClient username]
  * @see [CDOHClient password]
  */
-- (void)stopWatchingRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+- (void)unstarRepository:(NSString *)repository owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
 
 
 #pragma mark - Repository Forks

@@ -1010,8 +1010,8 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 }
 
 
-#pragma mark - Watched and Watching Repositories
-- (void)repositoryWatchers:(NSString *)repo owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+#pragma mark - Starred Repositories
+- (void)repositoryStargazers:(NSString *)repo owner:(NSString *)owner pages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);
@@ -1027,7 +1027,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	[self usersAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
 }
 
-- (void)repositoriesWatchedByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)repositoriesStarredByUser:(NSString *)login pages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(login);
 	if (!successBlock && !failureBlock) { return; }
@@ -1040,7 +1040,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	[self repositoriesAtPath:path params:nil pages:pages success:successBlock failure:failureBlock];
 }
 
-- (void)repositoriesWatchedForPages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)repositoriesStarredForPages:(NSIndexSet *)pages success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	if (!successBlock && !failureBlock) { return; }
 	if (![self verifyAuthenticatedUserIsSetOrFail:failureBlock]) { return; }
@@ -1053,7 +1053,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 }
 
 
-- (void)isUserWatchingRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)hasUserStarredRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);
@@ -1073,7 +1073,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 				 withReplyBlock:[self standardReplyBlockForNoDataResponse:successBlock failure:failureBlock]];
 }
 
-- (void)watchRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)starRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);
@@ -1092,7 +1092,7 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 				 withReplyBlock:[self standardReplyBlockForNoDataResponse:successBlock failure:failureBlock]];
 }
 
-- (void)stopWatchingRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+- (void)unstarRepository:(NSString *)repo owner:(NSString *)owner success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(repo);
 	NSParameterAssert(owner);
