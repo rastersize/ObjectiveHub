@@ -39,6 +39,9 @@
 /// The default default items per page.
 #define kCDOHDefaultItemsPerPage			0
 
+/// The default API URL, pointing to GitHub’s API (version 3).
+extern NSString *const kCDOHGitHubBaseAPIURIString;
+
 
 #pragma mark - ObjectiveHub Interface
 /**
