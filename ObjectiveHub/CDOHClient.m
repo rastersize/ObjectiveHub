@@ -242,17 +242,19 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 #pragma mark - Initializing ObjectiveHub
 - (id)init
 {
+	NSParameterAssert([[self class] networkClientAdapaterClass] != nil);
+	
 	self = [super init];
 	if (self) {
-		_itemsPerPage = kCDOHDefaultItemsPerPage;
-		
-		_baseUrl = [NSURL URLWithString:kCDOHGitHubBaseAPIURIString];
-		NSDictionary *defaultHeaders = [[self class] defaultNetworkClientHTTPHeaders];
-		Class networkClientClass = [[self class] networkClientAdapaterClass];
-		_networkClient = [[networkClientClass alloc] initWithBaseURL:_baseUrl defaultHeaders:defaultHeaders];
-		
 		_queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 		_blocksGroup = NULL;
+		
+		_itemsPerPage = kCDOHDefaultItemsPerPage;
+		_baseUrl = [NSURL URLWithString:kCDOHGitHubBaseAPIURIString];
+		
+		Class networkClientClass = [[self class] networkClientAdapaterClass];
+		NSDictionary *defaultHeaders = [[self class] defaultNetworkClientHTTPHeaders];
+		_networkClient = [[networkClientClass alloc] initWithBaseURL:_baseUrl defaultHeaders:defaultHeaders];
 	}
 	
 	return self;

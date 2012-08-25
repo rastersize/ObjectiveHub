@@ -44,7 +44,9 @@
 @interface CDOHAFNetworkingClient (/*Private*/)
 
 #pragma mark - AFNetworking Client Instance
-@property (strong) id client;
+//@property (strong) id client;
+- (void)configureClient;
+@property (copy) NSDictionary *defaultHeaders;
 
 
 #pragma mark - Authorization Header
@@ -80,6 +82,7 @@
 
 #pragma mark - AFNetworking Client Instance
 @synthesize client = _client;
+@synthesize defaultHeaders = _defaultHeaders;
 
 
 #pragma mark - Adapter Dependencies
@@ -96,20 +99,40 @@
 	if (self) {
 		_authHeadersBalanceCount = 0;
 		
+		_defaultHeaders = [defaultHeaders copy];
+		
 		Class clientClass = NSClassFromString(@"AFHTTPClient");
-		Class requestClass = NSClassFromString(@"AFHTTPRequestOperation");
-		
 		_client = [[clientClass alloc] initWithBaseURL:baseURL];
-		[_client registerHTTPOperationClass:requestClass];
-		[_client setParameterEncoding:AFJSONParameterEncoding];
-		
-		for (NSString *headerKey in defaultHeaders) {
-			NSString *headerValue = [defaultHeaders objectForKey:headerKey];
-			[_client setDefaultHeader:headerKey value:headerValue];
-		}
 	}
 	
 	return self;
+}
+
+
+- (AFHTTPClient *)client
+{
+	return _client;
+}
+
+- (void)setClient:(AFHTTPClient *)client
+{
+	if (_client != client) {
+		_client = client;
+		[self configureClient];
+	}
+}
+
+- (void)configureClient
+{
+	Class requestClass = NSClassFromString(@"AFHTTPRequestOperation");
+	
+	[_client registerHTTPOperationClass:requestClass];
+	[_client setParameterEncoding:AFJSONParameterEncoding];
+	
+	for (NSString *headerKey in self.defaultHeaders) {
+		NSString *headerValue = [self.defaultHeaders objectForKey:headerKey];
+		[_client setDefaultHeader:headerKey value:headerValue];
+	}
 }
 
 

@@ -34,14 +34,33 @@
 #import <ObjectiveHub/CDOHNetworkClient.h>
 
 
-#pragma mark CDOHAFNetworkingClient Interface
+#pragma mark Forward Declarations
+@class AFHTTPClient;
+
+
+#pragma mark - CDOHAFNetworkingClient Interface
 /**
  * The `CDOHAFNetworkingClient` class makes the `AFNetworking` library available
  * to the ObjectiveHub client (`CDOHClient`).
- *
- * This adapter supports being used in conjunction with XPC services. For more
- * information how please see the guide _Offloading network access to an XPC
- * service_.
  */
 @interface CDOHAFNetworkingClient : NSObject <CDOHNetworkClient>
+
+#pragma mark - AFNetworking HTTP Client
+/** @name AFNetworking HTTP Client */
+/**
+ * The _AFNetworking_ HTTP client instance used for the acctual network
+ * communication.
+ *
+ * At the time of initialization this property gets set with an automatically
+ * created client. If you want to use your own client object then you can set
+ * this property. Please note that the client will be configured by the adapter.
+ *
+ * More precisely, a few default headers will be set as well as the HTTP
+ * operations class and the parameter encoding which should be used.
+ *
+ * @see [AFNetworking’s website](http://afnetworking.com)
+ * @see [AFNetworking’s documentation](https://github.com/AFNetworking/AFNetworking/blob/master/README.md)
+ */
+@property (strong) AFHTTPClient *client;
+
 @end

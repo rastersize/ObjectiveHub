@@ -48,8 +48,11 @@
  * ### Available adapter classes ###
  *
  * ObjectiveHub ships with one concrete adapter class, `CDOHAFNetworkingClient`,
- * which is an (XPC service ready) adapter for the
+ * which is an adapter for the
  * [AFNetworking](https://github.com/AFNetworking/AFNetworking) library.
+ *
+ * The plan is to also ship it with an adapter for vanilla networking, but then
+ * without all the bells and whistles in, for example, AFNetworking.
  */
 @protocol CDOHNetworkClient <NSObject>
 @required
