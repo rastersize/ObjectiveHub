@@ -33,10 +33,6 @@
 #import <Foundation/Foundation.h>
 
 
-#pragma mark Forward Class Declarations
-@class JSONDecoder;
-
-
 #pragma mark - Relative API Path
 /// Creates a dictionary wherein the keys are string representations of the
 /// corresponding values’ variable names.
