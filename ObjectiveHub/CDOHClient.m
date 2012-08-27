@@ -79,7 +79,7 @@ NSString *const kCDOHGitHubMimeRaw			= @"application/vnd.github.v3.raw";
 
 #pragma mark - ObjectiveHub User Agent
 /// ObjectiveHub User Agent Format String
-NSString *const kCDOHUserAgentFormat						= @"ObjectiveHub/%@";
+NSString *const kCDOHUserAgentFormat						= @"%@/%@ (ObjectiveHub/%@)";
 
 
 #pragma mark - HTTP Header Response Keys
@@ -301,7 +301,9 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	static NSDictionary *defaultNetworkClientHTTPHeaders = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		NSString *userAgent = [NSString stringWithFormat:kCDOHUserAgentFormat, kCDOHLibraryVersion];
+		NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
+		NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+		NSString *userAgent = [NSString stringWithFormat:kCDOHUserAgentFormat, appName, appVersion, kCDOHLibraryVersion];
 		defaultNetworkClientHTTPHeaders = [NSDictionary dictionaryWithObjectsAndKeys:
 										   kCDOHGitHubMimeGenericJSON,	@"Accept",
 										   userAgent,					@"User-Agent",
@@ -610,9 +612,8 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 	NSParameterAssert(password != nil);
 	if (!successBlock && !failureBlock) { return; }
 	
-	NSDictionary *options = CDOHMakeDict(kCDOHResourceUsers,	kCDOHResourceKey,
-										 login,					kCDOHIdentifierKey);
-	NSString *path = CDOHRelativeAPIPath(kCDOHIdentifiedResourcePathFormat, options);
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceAuthenticatedUser, kCDOHResourceKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHResourcePathFormat, options);
 	[self.networkClient getPath:path
 					 parameters:nil
 					   username:login

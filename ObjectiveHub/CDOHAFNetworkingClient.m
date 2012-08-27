@@ -35,6 +35,7 @@
 
 #import "CDOHNetworkClientReply.h"
 #import "CDOHError.h"
+#import "NSString+ObjectiveHub.h"
 
 #import "AFHTTPClient.h"
 #import "AFHTTPRequestOperation.h"
@@ -44,15 +45,8 @@
 @interface CDOHAFNetworkingClient (/*Private*/)
 
 #pragma mark - AFNetworking Client Instance
-//@property (strong) id client;
 - (void)configureClient;
 @property (copy) NSDictionary *defaultHeaders;
-
-
-#pragma mark - Authorization Header
-- (void)setAuthHeaderAndIncrementCounterWithUsername:(NSString *)username password:(NSString *)password;
-- (void)incrementAuthHeadersBalanceCount;
-- (void)decrementAuthHeadersBalanceCount;
 
 
 #pragma mark - Creating Errors From AFHTTPRequestOperations
@@ -64,7 +58,7 @@
 
 
 #pragma mark - 
-- (NSMutableURLRequest *)requestWithMethod:(NSString *)method path:(NSString *)path parameters:(id)parameters;
+- (NSMutableURLRequest *)requestWithMethod:(NSString *)method path:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password;
 
 
 #pragma mark - Standard Blocks
@@ -161,85 +155,53 @@
 
 
 #pragma mark - Performing Requests
-- (oneway void)getPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
+- (oneway void)requestPath:(NSString *)path parameters:(id)parameters method:(NSString *)method username:(NSString *)username password:(NSString *)password withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
 {
 	NSParameterAssert(path);
 	NSParameterAssert(replyBlock);
 	
-	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
-	
-	parameters = [[self class] queryDictionaryFromObject:parameters];
-	[self.client getPath:path
-			  parameters:parameters
-				 success:[self standardSuccessBlockForReplyBlock:replyBlock]
-				 failure:[self standardFailureBlockForReplyBlock:replyBlock]];
+	NSMutableURLRequest *request = [self requestWithMethod:method path:path parameters:parameters username:username password:password];
+	AFHTTPRequestOperation *operation = [self.client HTTPRequestOperationWithRequest:request success:[self standardSuccessBlockForReplyBlock:replyBlock] failure:[self standardFailureBlockForReplyBlock:replyBlock]];
+	[self.client enqueueHTTPRequestOperation:operation];
+}
+
+- (oneway void)getPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
+{
+	[self requestPath:path parameters:parameters method:@"GET" username:username password:password withReplyBlock:replyBlock];
 }
 
 - (oneway void)postPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
 {
-	NSParameterAssert(path);
-	NSParameterAssert(replyBlock);
 	NSAssert(([parameters isKindOfClass:[NSDictionary class]] || [parameters isKindOfClass:[NSArray class]]), @"The parameters argument may only be of the type NSArray or NSDictionary");
-	
-	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
-	
-	NSMutableURLRequest *request = [self requestWithMethod:@"POST" path:path parameters:parameters];
-	AFHTTPRequestOperation *operation = [self.client HTTPRequestOperationWithRequest:request
-																			 success:[self standardSuccessBlockForReplyBlock:replyBlock]
-																			 failure:[self standardFailureBlockForReplyBlock:replyBlock]];
-	[self.client enqueueHTTPRequestOperation:operation];
+	[self requestPath:path parameters:parameters method:@"POST" username:username password:password withReplyBlock:replyBlock];
 }
 
 - (oneway void)putPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
 {
 	NSParameterAssert(path);
 	NSParameterAssert(replyBlock);
-	
-	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
-	
-	NSMutableURLRequest *request = [self requestWithMethod:@"PUT" path:path parameters:parameters];
-	AFHTTPRequestOperation *operation = [self.client HTTPRequestOperationWithRequest:request
-																			 success:[self standardSuccessBlockForReplyBlock:replyBlock]
-																			 failure:[self standardFailureBlockForReplyBlock:replyBlock]];
-	[self.client enqueueHTTPRequestOperation:operation];
+	[self requestPath:path parameters:parameters method:@"PUT" username:username password:password withReplyBlock:replyBlock];
 }
 
 - (oneway void)patchPath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
 {
 	NSParameterAssert(path);
 	NSParameterAssert(replyBlock);
-	
-	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
-	
-	NSMutableURLRequest *request = [self requestWithMethod:@"PATCH" path:path parameters:parameters];
-	AFHTTPRequestOperation *operation = [self.client HTTPRequestOperationWithRequest:request
-																			 success:[self standardSuccessBlockForReplyBlock:replyBlock]
-																			 failure:[self standardFailureBlockForReplyBlock:replyBlock]];
-	[self.client enqueueHTTPRequestOperation:operation];
+	[self requestPath:path parameters:parameters method:@"PATCH" username:username password:password withReplyBlock:replyBlock];
 }
 
 - (oneway void)deletePath:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password withReplyBlock:(void (^)(CDOHNetworkClientReply *))replyBlock
 {
 	NSParameterAssert(path);
 	NSParameterAssert(replyBlock);
-	
-	[self setAuthHeaderAndIncrementCounterWithUsername:username password:password];
-	
-	NSMutableURLRequest *request = [self requestWithMethod:@"DELETE" path:path parameters:parameters];
-	AFHTTPRequestOperation *operation = [self.client HTTPRequestOperationWithRequest:request
-																			 success:[self standardSuccessBlockForReplyBlock:replyBlock]
-																			 failure:[self standardFailureBlockForReplyBlock:replyBlock]];
-	[self.client enqueueHTTPRequestOperation:operation];
+	[self requestPath:path parameters:parameters method:@"DELETE" username:username password:password withReplyBlock:replyBlock];
 }
 
 
 #pragma mark - Standard Blocks
 - (void (^)(AFHTTPRequestOperation *, NSError *))standardFailureBlockForReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
 {
-	__weak CDOHAFNetworkingClient *blockSelf = self;
 	return ^(AFHTTPRequestOperation *operation, NSError *__unused unusedError) {
-		[blockSelf decrementAuthHeadersBalanceCount];
-		
 		NSDictionary *httpHeaders = [[operation response] allHeaderFields];
 		CDOHError *error = [[self class] errorFromFailedOperation:operation];
 		
@@ -248,25 +210,19 @@
 															 response:nil
 																error:error
 														  HTTPHeaders:httpHeaders];
-		
 		replyBlock(reply);
 	};
 }
 
 - (void (^)(AFHTTPRequestOperation *, id))standardSuccessBlockForReplyBlock:(CDOHNetworkClientReplyBlock)replyBlock
 {
-	__weak CDOHAFNetworkingClient *blockSelf = self;
 	return ^(AFHTTPRequestOperation *operation, id responseObject) {
-		[blockSelf decrementAuthHeadersBalanceCount];
-		
 		NSDictionary *httpHeaders = [[operation response] allHeaderFields];
-		
 		CDOHNetworkClientReply *reply = nil;
 		reply = [[CDOHNetworkClientReply alloc] initWithSuccessStatus:YES
 															 response:responseObject
 																error:nil
 														  HTTPHeaders:httpHeaders];
-		
 		replyBlock(reply);
 	};
 }
@@ -292,16 +248,25 @@
 
 
 #pragma mark - 
-- (NSMutableURLRequest *)requestWithMethod:(NSString *)method path:(NSString *)path parameters:(id)parameters
+- (NSMutableURLRequest *)requestWithMethod:(NSString *)method path:(NSString *)path parameters:(id)parameters username:(NSString *)username password:(NSString *)password
 {
 	NSMutableURLRequest *request = [self.client requestWithMethod:method path:path parameters:nil];
 	
-	NSString *charset = (__bridge NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(((AFHTTPClient *)self.client).stringEncoding));
-	[request setValue:[NSString stringWithFormat:@"application/json; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
+	if (![method isEqualToString:@"GET"] && ![method isEqualToString:@"HEAD"] && ![method isEqualToString:@"DELETE"]) {
+		NSString *charset = (__bridge NSString *)CFStringConvertEncodingToIANACharSetName(CFStringConvertNSStringEncodingToEncoding(((AFHTTPClient *)self.client).stringEncoding));
+		[request setValue:[NSString stringWithFormat:@"application/json; charset=%@", charset] forHTTPHeaderField:@"Content-Type"];
+		
+		if (parameters) {
+			NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:NULL];
+			[request setHTTPBody:jsonData];
+		}
+	}
 	
-	NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:0 error:NULL];
-	[request setHTTPBody:jsonData];
-	
+	if ([username length] != 0 && [password length] != 0) {
+		NSString *basicAuthCredentials = [NSString stringWithFormat:@"%@:%@", username, password];
+		NSString *base64EncodedCredentials = [basicAuthCredentials cdoh_base64String];
+		[request setValue:[@"Basic " stringByAppendingString:base64EncodedCredentials] forHTTPHeaderField:@"Authorization"];
+	}
 	
 	return request;
 }
@@ -317,40 +282,6 @@
 	CDOHError *ohError = [[CDOHError alloc] initWithHTTPHeaders:httpHeaders HTTPStatus:httpStatus responseBody:responseData];
 	
 	return ohError;
-}
-
-
-#pragma mark - Authorization Header
-- (void)setAuthHeaderAndIncrementCounterWithUsername:(NSString *)username password:(NSString *)password
-{
-	[self incrementAuthHeadersBalanceCount];
-	if ([username length] > 0 && [password length] > 0) {
-		[self.client setAuthorizationHeaderWithUsername:username password:password];
-	}
-}
-
-- (void)incrementAuthHeadersBalanceCount
-{
-	@synchronized(self) {
-		_authHeadersBalanceCount++;
-	}
-}
-
-- (void)decrementAuthHeadersBalanceCount
-{
-	@synchronized(self) {
-		if (_authHeadersBalanceCount > 0) {
-			_authHeadersBalanceCount--;
-			
-			if (_authHeadersBalanceCount == 0) {
-				[self.client clearAuthorizationHeader];
-			}
-		} else {
-			_authHeadersBalanceCount = 0;
-			
-			NSAssert(NO, @"Unbalanced auth headers balance count, already 0 but decremented (i.e. over-decremented).");
-		}
-	}
 }
 
 
