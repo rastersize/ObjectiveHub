@@ -603,7 +603,25 @@ NSString *const kCDOHParameterRepositoriesTypeKey			= @"type";
 }
 
 
-#pragma mark - Users
+#pragma mark - User Authentication and Credentials
+- (void)validateLogin:(NSString *)login password:(NSString *)password success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
+{
+	NSParameterAssert(login != nil);
+	NSParameterAssert(password != nil);
+	if (!successBlock && !failureBlock) { return; }
+	
+	NSDictionary *options = CDOHMakeDict(kCDOHResourceUsers,	kCDOHResourceKey,
+										 login,					kCDOHIdentifierKey);
+	NSString *path = CDOHRelativeAPIPath(kCDOHIdentifiedResourcePathFormat, options);
+	[self.networkClient getPath:path
+					 parameters:nil
+					   username:login
+					   password:password
+				 withReplyBlock:[self standardUserReplyBlock:successBlock failure:failureBlock selector:_cmd arguments:CDOHArrayOfArguments(login, password)]];
+}
+
+
+#pragma mark - Managing Users
 - (void)userWithLogin:(NSString *)login success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock
 {
 	NSParameterAssert(login);

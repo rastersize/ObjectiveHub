@@ -50,6 +50,28 @@
 @protocol CDOHClientProtocol <NSObject>
 @required
 
+#pragma mark - User Authentication and Credentials
+/** @name User Authentication and Credentials */
+/**
+ * Validate the given _login_ together with the given _password_.
+ *
+ * The success and failure blocks are both optional but if neither is given no
+ * request will be performed.
+ *
+ * @param login The login of the user.
+ * @param password The password for the given _login_ of the user.
+ * @param successBlock The block which is called upon success with a
+ * (CDOHResponse) response object. The parameter may be set to `NULL` in which
+ * case nothing will be done upon success.
+ *
+ * The `resource` property of the response will be set to a `CDOHUser` object
+ * representing the user with the given login.
+ * @param failureBlock The block which is called upon failure with the error
+ * encountered. The parameter may be set to `NULL` in which case nothing will be
+ * done upon failure.
+ */
+- (void)validateLogin:(NSString *)login password:(NSString *)password success:(CDOHSuccessBlock)successBlock failure:(CDOHFailureBlock)failureBlock;
+
 #pragma mark - Managing Users
 /** @name Managing Users */
 /**
