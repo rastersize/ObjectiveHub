@@ -326,9 +326,9 @@ NSString *const kCDOHUserTypeOrganizationKey	= @"Organization";
 	return [NSString stringWithFormat:@"<%@: %p { id = %lu, login = %@, type = %ld, is authed = %@ }>",
 			[self class],
 			self,
-			self.identifier,
+			(unsigned long)self.identifier,
 			self.login,
-			self.type,
+			(long)self.type,
 			([self isAuthenticated] ? @"YES" : @"NO")];
 }
 

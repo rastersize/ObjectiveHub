@@ -123,7 +123,7 @@ NSString *const kCDOHOrganizationTeamPermissionAdminister	= @"admin";
 	return [NSString stringWithFormat:@"<%@: %p { id = %lu, name = %@ }>",
 			[self class],
 			self,
-			self.identifier,
+			(unsigned long)self.identifier,
 			self.name];
 }
 
